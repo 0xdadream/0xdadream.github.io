@@ -1,92 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>寄存器</title>
-      <link href="2021/01/01/%E5%AF%84%E5%AD%98%E5%99%A8/"/>
-      <url>2021/01/01/%E5%AF%84%E5%AD%98%E5%99%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="32位CPU所含有的寄存器有："><a href="#32位CPU所含有的寄存器有：" class="headerlink" title="32位CPU所含有的寄存器有："></a>32位CPU所含有的寄存器有：</h1><ol><li>4个数据寄存器(EAX、EBX、ECX和EDX) </li><li>2个变址和指针寄存器(ESI和EDI) </li><li>2个指针寄存器(ESP和EBP)  </li><li>6个段寄存器(ES、CS、SS、DS、FS和GS) </li><li>1个指令指针寄存器(EIP) 1个标志寄存器(EFlags)  </li></ol><h1 id="1、数据寄存器"><a href="#1、数据寄存器" class="headerlink" title="1、数据寄存器"></a>1、数据寄存器</h1><p>数据寄存器主要用来保存操作数和运算结果等信息，从而节省读取操作数所需占用总线和访问存储器的时间。 </p><ul><li><p>32位CPU有4个32位的通用寄存器EAX、EBX、ECX和EDX。 </p></li><li><p>对低16位数据的存取，不会影响高16位的数据。 这些低16位寄存器分别命名为：AX、BX、CX和DX，它和先前的CPU中的寄存器相一致。 </p></li><li><p>4个16位寄存器又可分割成8个独立的8位寄存器(AX：AH-AL、BX：BH-BL、CX：CH-CL、DX：DH-DL)，每个寄存器都有自己的名称，可独立存取。 程序员可利用数据寄存器的这种“可分可合”的特性，灵活地处理字/字节的信息。  </p></li><li><p>寄存器EAX通常称为累加器(Accumulator)，用累加器进行的操作可能需要更少时间。可用于乘、 除、输入/输出等操作，使用频率很高；  </p></li><li><p>寄存器EBX称为基地址寄存器(Base Register)。它可作为存储器指针来使用；  </p></li><li><p>寄存器ECX称为计数寄存器(Count Register)。 在循环和字符串操作时，要用它来控制循环次数；在位操作中，当移多位时，要用CL来指明移位的位数；  </p></li><li><p>寄存器EDX称为数据寄存器(Data Register)。在进行乘、除运算时，它可作为默认的操作数参与运算，也可用于存放I/O的端口地址。  </p></li></ul><p>在16位CPU中，AX、BX、CX和DX不能作为基址和变址寄存器来存放存储单元的地址， </p><p>在32位CPU中，其32位寄存器EAX、EBX、ECX和EDX不仅可传送数据、暂存数据保存算术逻辑运算结果， 而且也可作为指针寄存器，所以，这些32位寄存器更具有通用性。 </p><h1 id="2、变址寄存器"><a href="#2、变址寄存器" class="headerlink" title="2、变址寄存器"></a>2、变址寄存器</h1><p>32位CPU有2个32位通用寄存器ESI和EDI。 </p><p>其低16位对应先前CPU中的SI和DI，对低16位数据的存取，不影响高16位的数据。 </p><p>寄存器ESI、EDI、SI和DI称为变址寄存器(Index Register)，它们主要用于存放存储单元在段内的偏移量， 用它们可实现多种存储器操作数的寻址方式，为以不同的地址形式访问存储单元提供方便。 </p><p>变址寄存器不可分割成8位寄存器。作为通用寄存器，也可存储算术逻辑运算的操作数和运算结果。 </p><p>它们可作一般的存储器指针使用。在字符串操作指令的执行过程中，对它们有特定的要求，而且还具有特殊的功能。 </p><h1 id="3、指针寄存器"><a href="#3、指针寄存器" class="headerlink" title="3、指针寄存器"></a>3、指针寄存器</h1><p>其低16位对应先前CPU中的BP和SP，对低16位数据的存取，不影响高16位的数据。 </p><p>32位CPU有2个32位通用寄存器EBP和ESP。 </p><p>它们主要用于访问堆栈内的存储单元，并且规定： </p><ul><li>EBP为基指针(Base Pointer)寄存器，用它可直接存取堆栈中的数据；  </li><li>ESP为堆栈指针(Stack Pointer)寄存器，用它只可访问栈顶。 </li></ul><p>寄存器EBP、ESP、BP和SP称为指针寄存器(Pointer Register)，主要用于存放堆栈内存储单元的偏移量， 用它们可实现多种存储器操作数的寻址方式，为以不同的地址形式访问存储单元提供方便。 </p><p>指针寄存器不可分割成8位寄存器。作为通用寄存器，也可存储算术逻辑运算的操作数和运算结果。 </p><h1 id="4、段寄存器"><a href="#4、段寄存器" class="headerlink" title="4、段寄存器"></a>4、段寄存器</h1><p>段寄存器是根据内存分段的管理模式而设置的。内存单元的物理地址由段寄存器的值和一个偏移量组合而成的，这样可用两个较少位数的值组合成一个可访问较大物理空间的内存地址。 </p><p>CPU内部的段寄存器： </p><ol><li>ECS——代码段寄存器(Code Segment Register)，其值为代码段的段值；  </li><li>EDS——数据段寄存器(Data Segment Register)，其值为数据段的段值；  </li><li>EES——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值；  </li><li>ESS——堆栈段寄存器(Stack Segment Register)，其值为堆栈段的段值；  </li><li>EFS——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值；  </li><li>EGS——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值。  </li><li></li></ol><ul><li>在16位CPU系统中，它只有4个段寄存器，所以，程序在任何时刻至多有4个正在使用的段可直接访问；</li><li>在32位微机系统中，它有6个段寄存器，所以，在此环境下开发的程序最多可同时访问6个段。 </li></ul><p>32位CPU有两个不同的工作方式：实方式和保护方式。在每种方式下，段寄存器的作用是不同的。有关规定简 单描述如下： </p><ul><li><p>实方式： 前4个段寄存器CS、DS、ES和SS与先前CPU中的所对应的段寄存器的含义完全一致，内存单元的逻辑地址仍为“段值：偏移量”的形式。为访问某内存段内的数据，必须使用该段寄存器和存储单元的偏移量。  </p></li><li><p>保护方式： 在此方式下，情况要复杂得多，装入段寄存器的不再是段值，而是称为“选择子”(Selector)的某个值。</p></li></ul><h1 id="5、指令指针寄存器"><a href="#5、指令指针寄存器" class="headerlink" title="5、指令指针寄存器"></a>5、指令指针寄存器</h1><p>32位CPU把指令指针扩展到32位，并记作EIP，EIP的低16位与先前CPU中的IP作用相同。 </p><p>指令指针EIP、IP(Instruction Pointer)是存放下次将要执行的指令在代码段的偏移量。 </p><p>在具有预取指令功能的系统中，下次要执行的指令通常已被预取到指令队列中，除非发生转移情况。 </p><p>所以，在理解它们的功能时，不考虑存在指令队列的情况。 </p><h1 id="6、标志寄存器"><a href="#6、标志寄存器" class="headerlink" title="6、标志寄存器"></a>6、标志寄存器</h1><h2 id="一、运算结果标志位"><a href="#一、运算结果标志位" class="headerlink" title="一、运算结果标志位"></a>一、运算结果标志位</h2><h3 id="1、进位标志CF-Carry-Flag"><a href="#1、进位标志CF-Carry-Flag" class="headerlink" title="1、进位标志CF(Carry Flag)"></a>1、进位标志CF(Carry Flag)</h3><p>进位标志CF主要用来反映运算是否产生进位或借位。如果运算结果的最高位产生了一个进位或借位，那么，其值为1，否则其值为0。 </p><p>使用该标志位的情况有：多字(字节)数的加减运算，无符号数的大小比较运算，移位操作，字(字节)之间移位，专门改变CF值的指令等。 </p><h3 id="2、奇偶标志PF-Parity-Flag"><a href="#2、奇偶标志PF-Parity-Flag" class="headerlink" title="2、奇偶标志PF(Parity Flag)"></a>2、奇偶标志PF(Parity Flag)</h3><p>奇偶标志PF用于反映运算结果中“1”的个数的奇偶性。如果“1”的个数为偶数，则PF的值为1，否则其值为0。 </p><p>利用PF可进行奇偶校验检查，或产生奇偶校验位。在数据传送过程中，为了提供传送的可靠性，如果采用奇偶校验的方法，就可使用该标志位。 </p><h3 id="3、辅助进位标志AF-Auxiliary-Carry-Flag"><a href="#3、辅助进位标志AF-Auxiliary-Carry-Flag" class="headerlink" title="3、辅助进位标志AF(Auxiliary Carry Flag)"></a>3、辅助进位标志AF(Auxiliary Carry Flag)</h3><p>在发生下列情况时，辅助进位标志AF的值被置为1，否则其值为0： </p><ol><li>在字操作时，发生低字节向高字节进位或借位时； </li><li>在字节操作时，发生低4位向高4位进位或借位时。 </li></ol><p>对以上6个运算结果标志位，在一般编程情况下，标志位CF、ZF、SF和OF的使用频率较高，而标志位PF和AF的使用频率较低。 </p><h3 id="4、零标志ZF-Zero-Flag"><a href="#4、零标志ZF-Zero-Flag" class="headerlink" title="4、零标志ZF(Zero Flag)"></a>4、零标志ZF(Zero Flag)</h3><p>零标志ZF用来反映运算结果是否为0。如果运算结果为0，则其值为1，否则其值为0。在判断运算结果是否为0时，可使用此标志位。 </p><h3 id="5、符号标志SF-Sign-Flag"><a href="#5、符号标志SF-Sign-Flag" class="headerlink" title="5、符号标志SF(Sign Flag)"></a>5、符号标志SF(Sign Flag)</h3><p>符号标志SF用来反映运算结果的符号位，它与运算结果的最高位相同。在微机系统中，有符号数采用码表示法，所以，SF也就反映运算结果的正负号。运算结果为正数时，SF的值为0，否则其值为1。 </p><h3 id="6、溢出标志OF-Overflow-Flag"><a href="#6、溢出标志OF-Overflow-Flag" class="headerlink" title="6、溢出标志OF(Overflow Flag)"></a>6、溢出标志OF(Overflow Flag)</h3><p>溢出标志OF用于反映有符号数加减运算所得结果是否溢出。如果运算结果超过当前运算位数所能表示的范围，则称为溢出，OF的值被置为1，否则，OF的值被清为0。 “</p><p>溢出”和“进位”是两个不同含义的概念，不要混淆。</p><h2 id="二、状态控制标志位"><a href="#二、状态控制标志位" class="headerlink" title="二、状态控制标志位"></a>二、状态控制标志位</h2><p>状态控制标志位是用来控制CPU操作的，它们要通过专门的指令才能使之发生改变。 </p><h2 id="1、追踪标志TF-Trap-Flag"><a href="#1、追踪标志TF-Trap-Flag" class="headerlink" title="1、追踪标志TF(Trap Flag)"></a>1、追踪标志TF(Trap Flag)</h2><p>当追踪标志TF被置为1时，CPU进入单步执行方式，即每执行一条指令，产生一个单步中断请求。这种方式主要用于程序的调试。 指令系统中没有专门的指令来改变标志位TF的值，但程序员可用其它办法来改变其值。 </p><h3 id="2、中断允许标志IF-Interrupt-enable-Flag"><a href="#2、中断允许标志IF-Interrupt-enable-Flag" class="headerlink" title="2、中断允许标志IF(Interrupt-enable Flag)"></a>2、中断允许标志IF(Interrupt-enable Flag)</h3><p>中断允许标志IF是用来决定CPU是否响应CPU外部的可屏蔽中断发出的中断请求。 但不管该标志为何值，CPU都必须响应CPU外部的不可屏蔽中断所发出的中断请求，以及CPU内部产生的中断请求。 具体规定如下： </p><ol><li>当IF=1时，CPU可以响应CPU外部的可屏蔽中断发出的中断请求； </li><li>当IF=0时，CPU不响应CPU外部的可屏蔽中断发出的中断请求。 CPU的指令系统中也有专门的指令来改变标志位IF的值。 </li></ol><h3 id="3、方向标志DF-Direction-Flag"><a href="#3、方向标志DF-Direction-Flag" class="headerlink" title="3、方向标志DF(Direction Flag)"></a>3、方向标志DF(Direction Flag)</h3><p>方向标志DF用来决定在串操作指令执行时有关指针寄存器发生调整的方向。 在微机的指令系统中，还提供了专门的指令来改变标志位DF的值。 </p><h2 id="三、32位标志寄存器增加的标志位"><a href="#三、32位标志寄存器增加的标志位" class="headerlink" title="三、32位标志寄存器增加的标志位"></a>三、32位标志寄存器增加的标志位</h2><h3 id="1、I-O特权标志IOPL-I-O-Privilege-Level"><a href="#1、I-O特权标志IOPL-I-O-Privilege-Level" class="headerlink" title="1、I/O特权标志IOPL(I/O Privilege Level)"></a>1、I/O特权标志IOPL(I/O Privilege Level)</h3><p>I/O特权标志用两位二进制位来表示，也称为I/O特权级字段。该字段指定了要求执行I/O指令的特权级。 如果当前的特权级别在数值上小于等于IOPL的值，那么，该I/O指令可执行，否则将发生一个保护异常。 </p><h3 id="2、嵌套任务标志NT-Nested-Task"><a href="#2、嵌套任务标志NT-Nested-Task" class="headerlink" title="2、嵌套任务标志NT(Nested Task)"></a>2、嵌套任务标志NT(Nested Task)</h3><p>嵌套任务标志NT用来控制中断返回指令IRET的执行。具体规定如下： </p><ol><li>当NT=0，用堆栈中保存的值恢复EFLAGS、CS和EIP，执行常规的中断返回操作； </li><li>当NT=1，通过任务转换实现中断返回。 </li></ol><h3 id="3、重启动标志RF-Restart-Flag"><a href="#3、重启动标志RF-Restart-Flag" class="headerlink" title="3、重启动标志RF(Restart Flag)"></a>3、重启动标志RF(Restart Flag)</h3><p>重启动标志RF用来控制是否接受调试故障。规定：RF=0时，表示“接受”调试故障，否则拒绝之。 在成功执行完一条指令后，处理机把RF置为0，当接受到一个非调试故障时，处理机就把它置为1。 </p><h3 id="4、虚拟8086方式标志VM-Virtual-8086-Mode"><a href="#4、虚拟8086方式标志VM-Virtual-8086-Mode" class="headerlink" title="4、虚拟8086方式标志VM(Virtual 8086 Mode)"></a>4、虚拟8086方式标志VM(Virtual 8086 Mode)</h3><p>如果该标志的值为1，则表示处理机处于虚拟的8086方式下的工作状态，否则，处理机处于一般保护方式下的工作状态。 </p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>逐梦</title>
+    <url>/2020/08/15/%E9%80%90%E6%A2%A6/</url>
+    <content><![CDATA[]]></content>
       <categories>
-          
-          <category> 汇编 </category>
-          
+        <category>嘻嘻</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 汇编 </tag>
-            
-            <tag> 学习 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>逐梦</title>
-      <link href="2020/08/15/%E9%80%90%E6%A2%A6/"/>
-      <url>2020/08/15/%E9%80%90%E6%A2%A6/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
+      <tags>
+        <tag>web</tag>
+        <tag>渗透</tag>
+        <tag>嘻嘻</tag>
+        <tag>CTF</tag>
+        <tag>漏洞分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sqlmap</title>
+    <url>/2020/08/15/sqlmap_tamper/</url>
+    <content><![CDATA[<h1 id="sqlmap-tamper"><a href="#sqlmap-tamper" class="headerlink" title="sqlmap_tamper"></a>sqlmap_tamper</h1><ol>
+<li><p>apostrophemask.py    用UTF-8全角字符替换单引号字符</p>
+</li>
+<li><p>apostrophenullencode.py     用非法双字节unicode字符替换单引号字符</p>
+</li>
+<li><p>appendnullbyte.py    在payload末尾添加空字符编码</p>
+</li>
+<li><p>base64encode.py    对给定的payload全部字符使用Base64编码</p>
+</li>
+<li><p>between.py    分别用“NOT BETWEEN 0 AND #”替换大于号“&gt;”，“BETWEEN # AND #”替换等于号“=”</p>
+</li>
+<li><p>bluecoat.py    在SQL语句之后用有效的随机空白符替换空格符，随后用“LIKE”替换等于号“=”</p>
+</li>
+<li><p>chardoubleencode.py    对给定的payload全部字符使用双重URL编码（不处理已经编码的字符）</p>
+</li>
+<li><p>charencode.py    对给定的payload全部字符使用URL编码（不处理已经编码的字符）</p>
+</li>
+<li><p>charunicodeencode.py    对给定的payload的非编码字符使用Unicode URL编码（不处理已经编码的字符）</p>
+</li>
+<li><p>concat2concatws.py    用“CONCAT_WS(MID(CHAR(0), 0, 0), A, B)”替换像“CONCAT(A, B)”的实例</p>
+</li>
+<li><p>equaltolike.py    用“LIKE”运算符替换全部等于号“=”</p>
+</li>
+<li><p>greatest.py    用“GREATEST”函数替换大于号“&gt;”</p>
+</li>
+<li><p>halfversionedmorekeywords.py     在每个关键字之前添加MySQL注释</p>
+</li>
+<li><p>ifnull2ifisnull.py    用“IF(ISNULL(A), B, A)”替换像“IFNULL(A, B)”的实例</p>
+</li>
+<li><p>lowercase.py    用小写值替换每个关键字字符</p>
+</li>
+<li><p>modsecurityversioned.py     用注释包围完整的查询</p>
+</li>
+<li><p>modsecurityzeroversioned.py     用当中带有数字零的注释包围完整的查询</p>
+</li>
+<li><p>multiplespaces.py    在SQL关键字周围添加多个空格</p>
+</li>
+<li><p>nonrecursivereplacement.py     用representations替换预定义SQL关键字，适用于过滤器</p>
+</li>
+<li><p>overlongutf8.py    转换给定的payload当中的所有字符</p>
+</li>
+<li><p>percentage.py    在每个字符之前添加一个百分号</p>
+</li>
+<li><p>randomcase.py    随机转换每个关键字字符的大小写</p>
+</li>
+<li><p>randomcomments.py    向SQL关键字中插入随机注释</p>
+</li>
+<li><p>securesphere.py    添加经过特殊构造的字符串</p>
+</li>
+<li><p>sp_password.py    向payload末尾添加“sp_password” for automatic obfuscation from DBMS logs</p>
+</li>
+<li><p>space2comment.py    用“/**/”替换空格符</p>
+</li>
+<li><p>space2dash.py    用破折号注释符“–”其次是一个随机字符串和一个换行符替换空格符</p>
+</li>
+<li><p>space2hash.py    用磅注释符“#”其次是一个随机字符串和一个换行符替换空格符</p>
+</li>
+<li><p>space2morehash.py    用磅注释符“#”其次是一个随机字符串和一个换行符替换空格符</p>
+</li>
+<li><p>space2mssqlblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p>
+</li>
+<li><p>space2mssqlhash.py    用磅注释符“#”其次是一个换行符替换空格符</p>
+</li>
+<li><p>space2mysqlblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p>
+</li>
+<li><p>space2mysqldash.py    用破折号注释符“–”其次是一个换行符替换空格符</p>
+</li>
+<li><p>space2plus.py    用加号“+”替换空格符</p>
+</li>
+<li><p>space2randomblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p>
+</li>
+<li><p>unionalltounion.py    用“UNION SELECT”替换“UNION ALL SELECT”</p>
+</li>
+<li><p>unmagicquotes.py    用一个多字节组合%bf%27和末尾通用注释一起替换空格符</p>
+</li>
+<li><p>varnish.py    添加一个HTTP头“X-originating-IP”来绕过WAF</p>
+</li>
+<li><p>versionedkeywords.py    用MySQL注释包围每个非函数关键字</p>
+</li>
+<li><p>versionedmorekeywords.py     用MySQL注释包围每个关键字</p>
+</li>
+<li><p>xforwardedfor.py    添加一个伪造的HTTP头“X-Forwarded-For”来绕过WAF</p>
+</li>
+</ol>
+<ol>
+<li><h3 id="apostrophemask-py"><a href="#apostrophemask-py" class="headerlink" title="apostrophemask.py"></a>apostrophemask.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：将引号替换为utf-8，用于过滤单引号<br> 使用脚本前：tamper(“1 AND ‘1’=’1”)<br> 使用脚本后：1 AND %EF%BC%871%EF%BC%87=%EF%BC%871</p>
+<ol start="2">
+<li><h3 id="base64encode-py"><a href="#base64encode-py" class="headerlink" title="base64encode.py"></a>base64encode.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：替换为base64编码<br> 使用脚本前：tamper(“1’ AND SLEEP(5)#”)<br> 使用脚本后：MScgQU5EIFNMRUVQKDUpIw==</p>
+<ol start="3">
+<li><h3 id="multiplespaces-py"><a href="#multiplespaces-py" class="headerlink" title="multiplespaces.py"></a>multiplespaces.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：围绕sql关键字添加多个空格<br> 使用脚本前：tamper(‘1 UNION SELECT foobar’)<br> 使用脚本后：1 UNION SELECT foobar</p>
+<ol start="4">
+<li><h3 id="space2plus-py"><a href="#space2plus-py" class="headerlink" title="space2plus.py"></a>space2plus.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：用加号替换空格<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT+id+FROM+users</p>
+<ol start="5">
+<li><h3 id="nonrecursivereplacement-py"><a href="#nonrecursivereplacement-py" class="headerlink" title="nonrecursivereplacement.py"></a>nonrecursivereplacement.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：作为双重查询语句，用双重语句替代预定义的sql关键字（适用于非常弱的自定义过滤器，例如将select替换为空）<br> 使用脚本前：tamper(‘1 UNION SELECT 2–’)<br> 使用脚本后：1 UNIOUNIONN SELESELECTCT 2–</p>
+<ol start="6">
+<li><h3 id="space2randomblank-py"><a href="#space2randomblank-py" class="headerlink" title="space2randomblank.py"></a>space2randomblank.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：将空格替换为其他有效字符<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Did%0DFROM%0Ausers</p>
+<ol start="7">
+<li><h3 id="unionalltounion-py"><a href="#unionalltounion-py" class="headerlink" title="unionalltounion.py"></a>unionalltounion.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：将union allselect 替换为unionselect<br> 使用脚本前：tamper(‘-1 UNION ALL SELECT’)<br> 使用脚本后：-1 UNION SELECT</p>
+<ol start="8">
+<li><h3 id="securesphere-py"><a href="#securesphere-py" class="headerlink" title="securesphere.py"></a>securesphere.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：追加特定的字符串<br> 使用脚本前：tamper(‘1 AND 1=1’)<br> 使用脚本后：1 AND 1=1 and ‘0having’=’0having’</p>
+<ol start="9">
+<li><h3 id="space2dash-py"><a href="#space2dash-py" class="headerlink" title="space2dash.py"></a>space2dash.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：将空格替换为–，并添加一个随机字符串和换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：1–nVNaVoPYeva%0AAND–ngNvzqu%0A9227=9227</p>
+<ol start="10">
+<li><h3 id="space2mssqlblank-py"><a href="#space2mssqlblank-py" class="headerlink" title="space2mssqlblank.py"></a>space2mssqlblank.py</h3></li>
+</ol>
+<p>适用数据库：Microsoft SQL Server<br> 测试通过数据库：Microsoft SQL Server 2000、Microsoft SQL Server 2005<br> 作用：将空格随机替换为其他空格符号(‘%01’, ‘%02’, ‘%03’, ‘%04’, ‘%05’, ‘%06’, ‘%07’, ‘%08’, ‘%09’, ‘%0B’, ‘%0C’, ‘%0D’, ‘%0E’, ‘%0F’, ‘%0A’)<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Eid%0DFROM%07users</p>
+<ol start="11">
+<li><h3 id="between-py"><a href="#between-py" class="headerlink" title="between.py"></a>between.py</h3></li>
+</ol>
+<p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：用NOT BETWEEN 0 AND #替换&gt;<br> 使用脚本前：tamper(‘1 AND A &gt; B–’)<br> 使用脚本后：1 AND A NOT BETWEEN 0 AND B–</p>
+<ol start="12">
+<li><h3 id="percentage-py"><a href="#percentage-py" class="headerlink" title="percentage.py"></a>percentage.py</h3></li>
+</ol>
+<p>适用数据库：ASP<br> 测试通过数据库：Microsoft SQL Server 2000, 2005、MySQL 5.1.56, 5.5.11、PostgreSQL 9.0<br> 作用：在每个字符前添加一个%<br> 使用脚本前：tamper(‘SELECT FIELD FROM TABLE’)<br> 使用脚本</p>
+<p>后：%S%E%L%E%C%T %F%I%E%L%D %F%R%O%M %T%A%B%L%E</p>
+<ol start="13">
+<li><h3 id="sp-password-py"><a href="#sp-password-py" class="headerlink" title="sp_password.py"></a>sp_password.py</h3></li>
+</ol>
+<p>适用数据库：MSSQL<br> 作用：从T-SQL日志的自动迷糊处理的有效载荷中追加sp_password<br> 使用脚本前：tamper(‘1 AND 9227=9227– ‘)<br> 使用脚本后：1 AND 9227=9227– sp_password</p>
+<ol start="14">
+<li><h3 id="charencode-py"><a href="#charencode-py" class="headerlink" title="charencode.py"></a>charencode.py</h3></li>
+</ol>
+<p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：对给定的payload全部字符使用url编码（不处理已经编码的字符）<br> 使用脚本前：tamper(‘SELECT FIELD FROM%20TABLE’)<br> 使用脚本</p>
+<p>后：%53%45%4C%45%43%54%20%46%49%45%4C%44%20%46%52%4F%4D%20%54%41%42%4C%45</p>
+<ol start="15">
+<li><h3 id="randomcase-py"><a href="#randomcase-py" class="headerlink" title="randomcase.py"></a>randomcase.py</h3></li>
+</ol>
+<p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：随机大小写<br> 使用脚本前：tamper(‘INSERT’)<br> 使用脚本后：INseRt</p>
+<ol start="16">
+<li><h3 id="charunicodeencode-py"><a href="#charunicodeencode-py" class="headerlink" title="charunicodeencode.py"></a>charunicodeencode.py</h3></li>
+</ol>
+<p>适用数据库：ASP、ASP.NET<br> 测试通过数据库：Microsoft SQL Server 2000/2005、MySQL 5.1.56、PostgreSQL 9.0.3<br> 作用：适用字符串的unicode编码<br> 使用脚本前：tamper(‘SELECT FIELD%20FROM TABLE’)<br> 使用脚本</p>
+<p>后：%u0053%u0045%u004C%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004C%u0044%u0020%u0046%u0052%u004F%u004D%u0020%u0054%u0041%u0042%u004C%u0045</p>
+<ol start="17">
+<li><h3 id="space2comment-py"><a href="#space2comment-py" class="headerlink" title="space2comment.py"></a>space2comment.py</h3></li>
+</ol>
+<p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：将空格替换为/<strong>/<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT/</strong>/id/<strong>/FROM/</strong>/users</p>
+<ol start="18">
+<li><h3 id="equaltolike-py"><a href="#equaltolike-py" class="headerlink" title="equaltolike.py"></a>equaltolike.py</h3></li>
+</ol>
+<p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5<br> 作用：将=替换为LIKE<br> 使用脚本前：tamper(‘SELECT * FROM users WHERE id=1’)<br> 使用脚本后：SELECT * FROM users WHERE id LIKE 1</p>
+<ol start="19">
+<li><h3 id="equaltolike-py-1"><a href="#equaltolike-py-1" class="headerlink" title="equaltolike.py"></a>equaltolike.py</h3></li>
+</ol>
+<p>测试通过数据库：MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：将&gt;替换为GREATEST，绕过对&gt;的过滤<br> 使用脚本前：tamper(‘1 AND A &gt; B’)<br> 使用脚本后：1 AND GREATEST(A,B+1)=A</p>
+<ol start="20">
+<li><h3 id="ifnull2ifisnull-py"><a href="#ifnull2ifisnull-py" class="headerlink" title="ifnull2ifisnull.py"></a>ifnull2ifisnull.py</h3></li>
+</ol>
+<p>适用数据库：MySQL、SQLite (possibly)、SAP MaxDB (possibly)<br> 测试通过数据库：MySQL 5.0 and 5.5<br> 作用：将类似于IFNULL(A, B)替换为IF(ISNULL(A), B, A)，绕过对IFNULL的过滤<br> 使用脚本前：tamper(‘IFNULL(1, 2)’)<br> 使用脚本后：IF(ISNULL(1),2,1)</p>
+<ol start="21">
+<li><h3 id="modsecurityversioned-py"><a href="#modsecurityversioned-py" class="headerlink" title="modsecurityversioned.py"></a>modsecurityversioned.py</h3></li>
+</ol>
+<p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.0<br> 作用：过滤空格，使用mysql内联注释的方式进行注入<br> 使用脚本前：tamper(‘1 AND 2&gt;1–’)<br> 使用脚本后：1 /<em>!30874AND 2&gt;1</em>/–</p>
+<ol start="22">
+<li><h3 id="space2mysqlblank-py"><a href="#space2mysqlblank-py" class="headerlink" title="space2mysqlblank.py"></a>space2mysqlblank.py</h3></li>
+</ol>
+<p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.1<br> 作用：将空格替换为其他空格符号(‘%09’, ‘%0A’, ‘%0C’, ‘%0D’, ‘%0B’)<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Bid%0DFROM%0Cusers</p>
+<ol start="23">
+<li><h3 id="modsecurityzeroversioned-py"><a href="#modsecurityzeroversioned-py" class="headerlink" title="modsecurityzeroversioned.py"></a>modsecurityzeroversioned.py</h3></li>
+</ol>
+<p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.0<br> 作用：使用内联注释方式（/<em>!00000</em>/）进行注入<br> 使用脚本前：tamper(‘1 AND 2&gt;1–’)<br> 使用脚本后：1 /<em>!00000AND 2&gt;1</em>/–</p>
+<ol start="24">
+<li><h3 id="space2mysqldash-py"><a href="#space2mysqldash-py" class="headerlink" title="space2mysqldash.py"></a>space2mysqldash.py</h3></li>
+</ol>
+<p>适用数据库：MySQL、MSSQL<br> 作用：将空格替换为 – ，并追随一个换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：1–%0AAND–%0A9227=9227</p>
+<ol start="25">
+<li><h3 id="bluecoat-py"><a href="#bluecoat-py" class="headerlink" title="bluecoat.py"></a>bluecoat.py</h3></li>
+</ol>
+<p>适用数据库：Blue Coat SGOS<br> 测试通过数据库：MySQL 5.1,、SGOS<br> 作用：在sql语句之后用有效的随机空白字符替换空格符，随后用LIKE替换=<br> 使用脚本前：tamper(‘SELECT id FROM users where id = 1’)<br> 使用脚本后：SELECT%09id FROM users where id LIKE 1</p>
+<ol start="26">
+<li><h3 id="versionedkeywords-py"><a href="#versionedkeywords-py" class="headerlink" title="versionedkeywords.py"></a>versionedkeywords.py</h3></li>
+</ol>
+<p>适用数据库：MySQL<br> 测试通过数据库：MySQL 4.0.18, 5.1.56, 5.5.11<br> 作用：注释绕过<br> 使用脚本前：tamper(‘1 UNION ALL SELECT NULL, NULL, </p>
+<p>CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,100,114,117,58))#’)<br> 使用脚本后：1/<em>!UNION</em>//<em>!ALL</em>//<em>!SELECT</em>//<em>!NULL</em>/,/<em>!NULL</em>/,</p>
+<p>CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER()/<em>!AS</em>//<em>!CHAR</em>/),CHAR(32)),CHAR(58,100,114,117,58))#</p>
+<ol start="27">
+<li><h3 id="halfversionedmorekeywords-py"><a href="#halfversionedmorekeywords-py" class="headerlink" title="halfversionedmorekeywords.py"></a>halfversionedmorekeywords.py</h3></li>
+</ol>
+<p>适用数据库：MySQL &lt; 5.1<br> 测试通过数据库：MySQL 4.0.18/5.0.22<br> 作用：在每个关键字前添加mysql版本注释<br> 使用脚本前：tamper(“value’ UNION ALL SELECT </p>
+<p>CONCAT(CHAR(58,107,112,113,58),IFNULL(CAST(CURRENT_USER() AS </p>
+<p>CHAR),CHAR(32)),CHAR(58,97,110,121,58)), NULL, NULL# AND </p>
+<p>‘QDWa’=’QDWa”)<br> 使用脚本后：</p>
+<p>value’/<em>!0UNION/</em>!0ALL/<em>!0SELECT/</em>!0CONCAT(/<em>!0CHAR(58,107,112,113,58),/</em>!0IFNULL(CAST(/<em>!0CURRENT_USER()/</em>!0AS/<em>!0CHAR),/</em>!0CHAR(32)),/<em>!0CHAR(58,97,110,121,58)),/</em>!0NULL,/<em>!0NULL#/</em>!0AND ‘QDWa’=’QDWa</p>
+<ol start="28">
+<li><h3 id="space2morehash-py"><a href="#space2morehash-py" class="headerlink" title="space2morehash.py"></a>space2morehash.py</h3></li>
+</ol>
+<p>适用数据库：MySQL &gt;= 5.1.13<br> 测试通过数据库：MySQL 5.1.41<br> 作用：将空格替换为#，并添加一个随机字符串和换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：</p>
+<p>1%23ngNvzqu%0AAND%23nVNaVoPYeva%0A%23lujYFWfv%0A9227=9227</p>
+<ol start="29">
+<li><h3 id="apostrophenullencode-py"><a href="#apostrophenullencode-py" class="headerlink" title="apostrophenullencode.py"></a>apostrophenullencode.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：用非法双字节Unicode字符替换单引号<br> 使用脚本前：tamper(“1 AND ‘1’=’1”)<br> 使用脚本后：1 AND %00%271%00%27=%00%271</p>
+<ol start="30">
+<li><h3 id="appendnullbyte-py"><a href="#appendnullbyte-py" class="headerlink" title="appendnullbyte.py"></a>appendnullbyte.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：在有效载荷的结束位置加载null字节字符编码<br> 使用脚本前：tamper(‘1 AND 1=1’)<br> 使用脚本后：1 AND 1=1%00</p>
+<ol start="31">
+<li><h3 id="chardoubleencode-py"><a href="#chardoubleencode-py" class="headerlink" title="chardoubleencode.py"></a>chardoubleencode.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：对给定的payload全部字符使用双重url编码（不处理已经编码的字符）<br> 使用脚本前：tamper(‘SELECT FIELD FROM%20TABLE’)<br> 使用脚本</p>
+<p>后：%2553%2545%254C%2545%2543%2554%2520%2546%2549%2545%254C%2544%2520%2546%2552%254F%254D%2520%2554%2541%2542%254C%2545</p>
+<ol start="32">
+<li><h3 id="unmagicquotes-py"><a href="#unmagicquotes-py" class="headerlink" title="unmagicquotes.py"></a>unmagicquotes.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：用一个多字节组合%bf%27和末尾通用注释一起替换空格<br> 使用脚本前：tamper(“1’ AND 1=1”)<br> 使用脚本后：1%bf%27 AND 1=1–</p>
+<ol start="33">
+<li><h3 id="randomcomments-py"><a href="#randomcomments-py" class="headerlink" title="randomcomments.py"></a>randomcomments.py</h3></li>
+</ol>
+<p>适用数据库：ALL<br> 作用：用注释符分割sql关键字<br> 使用脚本前：tamper(‘INSERT’)<br> 使用脚本后：I/<strong>/N/</strong>/SERT</p>
+]]></content>
       <categories>
-          
-          <category> 嘻嘻 </category>
-          
+        <category>web</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> web </tag>
-            
-            <tag> 渗透 </tag>
-            
-            <tag> 嘻嘻 </tag>
-            
-            <tag> CTF </tag>
-            
-            <tag> 漏洞分析 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>sqlmap</title>
-      <link href="2020/08/15/sqlmap_tamper/"/>
-      <url>2020/08/15/sqlmap_tamper/</url>
-      
-        <content type="html"><![CDATA[<h1 id="sqlmap-tamper"><a href="#sqlmap-tamper" class="headerlink" title="sqlmap_tamper"></a>sqlmap_tamper</h1><ol><li><p>apostrophemask.py    用UTF-8全角字符替换单引号字符</p></li><li><p>apostrophenullencode.py     用非法双字节unicode字符替换单引号字符</p></li><li><p>appendnullbyte.py    在payload末尾添加空字符编码</p></li><li><p>base64encode.py    对给定的payload全部字符使用Base64编码</p></li><li><p>between.py    分别用“NOT BETWEEN 0 AND #”替换大于号“&gt;”，“BETWEEN # AND #”替换等于号“=”</p></li><li><p>bluecoat.py    在SQL语句之后用有效的随机空白符替换空格符，随后用“LIKE”替换等于号“=”</p></li><li><p>chardoubleencode.py    对给定的payload全部字符使用双重URL编码（不处理已经编码的字符）</p></li><li><p>charencode.py    对给定的payload全部字符使用URL编码（不处理已经编码的字符）</p></li><li><p>charunicodeencode.py    对给定的payload的非编码字符使用Unicode URL编码（不处理已经编码的字符）</p></li><li><p>concat2concatws.py    用“CONCAT_WS(MID(CHAR(0), 0, 0), A, B)”替换像“CONCAT(A, B)”的实例</p></li><li><p>equaltolike.py    用“LIKE”运算符替换全部等于号“=”</p></li><li><p>greatest.py    用“GREATEST”函数替换大于号“&gt;”</p></li><li><p>halfversionedmorekeywords.py     在每个关键字之前添加MySQL注释</p></li><li><p>ifnull2ifisnull.py    用“IF(ISNULL(A), B, A)”替换像“IFNULL(A, B)”的实例</p></li><li><p>lowercase.py    用小写值替换每个关键字字符</p></li><li><p>modsecurityversioned.py     用注释包围完整的查询</p></li><li><p>modsecurityzeroversioned.py     用当中带有数字零的注释包围完整的查询</p></li><li><p>multiplespaces.py    在SQL关键字周围添加多个空格</p></li><li><p>nonrecursivereplacement.py     用representations替换预定义SQL关键字，适用于过滤器</p></li><li><p>overlongutf8.py    转换给定的payload当中的所有字符</p></li><li><p>percentage.py    在每个字符之前添加一个百分号</p></li><li><p>randomcase.py    随机转换每个关键字字符的大小写</p></li><li><p>randomcomments.py    向SQL关键字中插入随机注释</p></li><li><p>securesphere.py    添加经过特殊构造的字符串</p></li><li><p>sp_password.py    向payload末尾添加“sp_password” for automatic obfuscation from DBMS logs</p></li><li><p>space2comment.py    用“/**/”替换空格符</p></li><li><p>space2dash.py    用破折号注释符“–”其次是一个随机字符串和一个换行符替换空格符</p></li><li><p>space2hash.py    用磅注释符“#”其次是一个随机字符串和一个换行符替换空格符</p></li><li><p>space2morehash.py    用磅注释符“#”其次是一个随机字符串和一个换行符替换空格符</p></li><li><p>space2mssqlblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p></li><li><p>space2mssqlhash.py    用磅注释符“#”其次是一个换行符替换空格符</p></li><li><p>space2mysqlblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p></li><li><p>space2mysqldash.py    用破折号注释符“–”其次是一个换行符替换空格符</p></li><li><p>space2plus.py    用加号“+”替换空格符</p></li><li><p>space2randomblank.py    用一组有效的备选字符集当中的随机空白符替换空格符</p></li><li><p>unionalltounion.py    用“UNION SELECT”替换“UNION ALL SELECT”</p></li><li><p>unmagicquotes.py    用一个多字节组合%bf%27和末尾通用注释一起替换空格符</p></li><li><p>varnish.py    添加一个HTTP头“X-originating-IP”来绕过WAF</p></li><li><p>versionedkeywords.py    用MySQL注释包围每个非函数关键字</p></li><li><p>versionedmorekeywords.py     用MySQL注释包围每个关键字</p></li><li><p>xforwardedfor.py    添加一个伪造的HTTP头“X-Forwarded-For”来绕过WAF</p></li></ol><ol><li><h3 id="apostrophemask-py"><a href="#apostrophemask-py" class="headerlink" title="apostrophemask.py"></a>apostrophemask.py</h3></li></ol><p>适用数据库：ALL<br> 作用：将引号替换为utf-8，用于过滤单引号<br> 使用脚本前：tamper(“1 AND ‘1’=’1”)<br> 使用脚本后：1 AND %EF%BC%871%EF%BC%87=%EF%BC%871</p><ol start="2"><li><h3 id="base64encode-py"><a href="#base64encode-py" class="headerlink" title="base64encode.py"></a>base64encode.py</h3></li></ol><p>适用数据库：ALL<br> 作用：替换为base64编码<br> 使用脚本前：tamper(“1’ AND SLEEP(5)#”)<br> 使用脚本后：MScgQU5EIFNMRUVQKDUpIw==</p><ol start="3"><li><h3 id="multiplespaces-py"><a href="#multiplespaces-py" class="headerlink" title="multiplespaces.py"></a>multiplespaces.py</h3></li></ol><p>适用数据库：ALL<br> 作用：围绕sql关键字添加多个空格<br> 使用脚本前：tamper(‘1 UNION SELECT foobar’)<br> 使用脚本后：1 UNION SELECT foobar</p><ol start="4"><li><h3 id="space2plus-py"><a href="#space2plus-py" class="headerlink" title="space2plus.py"></a>space2plus.py</h3></li></ol><p>适用数据库：ALL<br> 作用：用加号替换空格<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT+id+FROM+users</p><ol start="5"><li><h3 id="nonrecursivereplacement-py"><a href="#nonrecursivereplacement-py" class="headerlink" title="nonrecursivereplacement.py"></a>nonrecursivereplacement.py</h3></li></ol><p>适用数据库：ALL<br> 作用：作为双重查询语句，用双重语句替代预定义的sql关键字（适用于非常弱的自定义过滤器，例如将select替换为空）<br> 使用脚本前：tamper(‘1 UNION SELECT 2–’)<br> 使用脚本后：1 UNIOUNIONN SELESELECTCT 2–</p><ol start="6"><li><h3 id="space2randomblank-py"><a href="#space2randomblank-py" class="headerlink" title="space2randomblank.py"></a>space2randomblank.py</h3></li></ol><p>适用数据库：ALL<br> 作用：将空格替换为其他有效字符<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Did%0DFROM%0Ausers</p><ol start="7"><li><h3 id="unionalltounion-py"><a href="#unionalltounion-py" class="headerlink" title="unionalltounion.py"></a>unionalltounion.py</h3></li></ol><p>适用数据库：ALL<br> 作用：将union allselect 替换为unionselect<br> 使用脚本前：tamper(‘-1 UNION ALL SELECT’)<br> 使用脚本后：-1 UNION SELECT</p><ol start="8"><li><h3 id="securesphere-py"><a href="#securesphere-py" class="headerlink" title="securesphere.py"></a>securesphere.py</h3></li></ol><p>适用数据库：ALL<br> 作用：追加特定的字符串<br> 使用脚本前：tamper(‘1 AND 1=1’)<br> 使用脚本后：1 AND 1=1 and ‘0having’=’0having’</p><ol start="9"><li><h3 id="space2dash-py"><a href="#space2dash-py" class="headerlink" title="space2dash.py"></a>space2dash.py</h3></li></ol><p>适用数据库：ALL<br> 作用：将空格替换为–，并添加一个随机字符串和换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：1–nVNaVoPYeva%0AAND–ngNvzqu%0A9227=9227</p><ol start="10"><li><h3 id="space2mssqlblank-py"><a href="#space2mssqlblank-py" class="headerlink" title="space2mssqlblank.py"></a>space2mssqlblank.py</h3></li></ol><p>适用数据库：Microsoft SQL Server<br> 测试通过数据库：Microsoft SQL Server 2000、Microsoft SQL Server 2005<br> 作用：将空格随机替换为其他空格符号(‘%01’, ‘%02’, ‘%03’, ‘%04’, ‘%05’, ‘%06’, ‘%07’, ‘%08’, ‘%09’, ‘%0B’, ‘%0C’, ‘%0D’, ‘%0E’, ‘%0F’, ‘%0A’)<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Eid%0DFROM%07users</p><ol start="11"><li><h3 id="between-py"><a href="#between-py" class="headerlink" title="between.py"></a>between.py</h3></li></ol><p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：用NOT BETWEEN 0 AND #替换&gt;<br> 使用脚本前：tamper(‘1 AND A &gt; B–’)<br> 使用脚本后：1 AND A NOT BETWEEN 0 AND B–</p><ol start="12"><li><h3 id="percentage-py"><a href="#percentage-py" class="headerlink" title="percentage.py"></a>percentage.py</h3></li></ol><p>适用数据库：ASP<br> 测试通过数据库：Microsoft SQL Server 2000, 2005、MySQL 5.1.56, 5.5.11、PostgreSQL 9.0<br> 作用：在每个字符前添加一个%<br> 使用脚本前：tamper(‘SELECT FIELD FROM TABLE’)<br> 使用脚本</p><p>后：%S%E%L%E%C%T %F%I%E%L%D %F%R%O%M %T%A%B%L%E</p><ol start="13"><li><h3 id="sp-password-py"><a href="#sp-password-py" class="headerlink" title="sp_password.py"></a>sp_password.py</h3></li></ol><p>适用数据库：MSSQL<br> 作用：从T-SQL日志的自动迷糊处理的有效载荷中追加sp_password<br> 使用脚本前：tamper(‘1 AND 9227=9227– ‘)<br> 使用脚本后：1 AND 9227=9227– sp_password</p><ol start="14"><li><h3 id="charencode-py"><a href="#charencode-py" class="headerlink" title="charencode.py"></a>charencode.py</h3></li></ol><p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：对给定的payload全部字符使用url编码（不处理已经编码的字符）<br> 使用脚本前：tamper(‘SELECT FIELD FROM%20TABLE’)<br> 使用脚本</p><p>后：%53%45%4C%45%43%54%20%46%49%45%4C%44%20%46%52%4F%4D%20%54%41%42%4C%45</p><ol start="15"><li><h3 id="randomcase-py"><a href="#randomcase-py" class="headerlink" title="randomcase.py"></a>randomcase.py</h3></li></ol><p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：随机大小写<br> 使用脚本前：tamper(‘INSERT’)<br> 使用脚本后：INseRt</p><ol start="16"><li><h3 id="charunicodeencode-py"><a href="#charunicodeencode-py" class="headerlink" title="charunicodeencode.py"></a>charunicodeencode.py</h3></li></ol><p>适用数据库：ASP、ASP.NET<br> 测试通过数据库：Microsoft SQL Server 2000/2005、MySQL 5.1.56、PostgreSQL 9.0.3<br> 作用：适用字符串的unicode编码<br> 使用脚本前：tamper(‘SELECT FIELD%20FROM TABLE’)<br> 使用脚本</p><p>后：%u0053%u0045%u004C%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004C%u0044%u0020%u0046%u0052%u004F%u004D%u0020%u0054%u0041%u0042%u004C%u0045</p><ol start="17"><li><h3 id="space2comment-py"><a href="#space2comment-py" class="headerlink" title="space2comment.py"></a>space2comment.py</h3></li></ol><p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：将空格替换为/<strong>/<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT/</strong>/id/<strong>/FROM/</strong>/users</p><ol start="18"><li><h3 id="equaltolike-py"><a href="#equaltolike-py" class="headerlink" title="equaltolike.py"></a>equaltolike.py</h3></li></ol><p>测试通过数据库：Microsoft SQL Server 2005、MySQL 4, 5.0 and 5.5<br> 作用：将=替换为LIKE<br> 使用脚本前：tamper(‘SELECT * FROM users WHERE id=1’)<br> 使用脚本后：SELECT * FROM users WHERE id LIKE 1</p><ol start="19"><li><h3 id="equaltolike-py-1"><a href="#equaltolike-py-1" class="headerlink" title="equaltolike.py"></a>equaltolike.py</h3></li></ol><p>测试通过数据库：MySQL 4, 5.0 and 5.5、Oracle 10g、PostgreSQL 8.3, 8.4, 9.0<br> 作用：将&gt;替换为GREATEST，绕过对&gt;的过滤<br> 使用脚本前：tamper(‘1 AND A &gt; B’)<br> 使用脚本后：1 AND GREATEST(A,B+1)=A</p><ol start="20"><li><h3 id="ifnull2ifisnull-py"><a href="#ifnull2ifisnull-py" class="headerlink" title="ifnull2ifisnull.py"></a>ifnull2ifisnull.py</h3></li></ol><p>适用数据库：MySQL、SQLite (possibly)、SAP MaxDB (possibly)<br> 测试通过数据库：MySQL 5.0 and 5.5<br> 作用：将类似于IFNULL(A, B)替换为IF(ISNULL(A), B, A)，绕过对IFNULL的过滤<br> 使用脚本前：tamper(‘IFNULL(1, 2)’)<br> 使用脚本后：IF(ISNULL(1),2,1)</p><ol start="21"><li><h3 id="modsecurityversioned-py"><a href="#modsecurityversioned-py" class="headerlink" title="modsecurityversioned.py"></a>modsecurityversioned.py</h3></li></ol><p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.0<br> 作用：过滤空格，使用mysql内联注释的方式进行注入<br> 使用脚本前：tamper(‘1 AND 2&gt;1–’)<br> 使用脚本后：1 /<em>!30874AND 2&gt;1</em>/–</p><ol start="22"><li><h3 id="space2mysqlblank-py"><a href="#space2mysqlblank-py" class="headerlink" title="space2mysqlblank.py"></a>space2mysqlblank.py</h3></li></ol><p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.1<br> 作用：将空格替换为其他空格符号(‘%09’, ‘%0A’, ‘%0C’, ‘%0D’, ‘%0B’)<br> 使用脚本前：tamper(‘SELECT id FROM users’)<br> 使用脚本后：SELECT%0Bid%0DFROM%0Cusers</p><ol start="23"><li><h3 id="modsecurityzeroversioned-py"><a href="#modsecurityzeroversioned-py" class="headerlink" title="modsecurityzeroversioned.py"></a>modsecurityzeroversioned.py</h3></li></ol><p>适用数据库：MySQL<br> 测试通过数据库：MySQL 5.0<br> 作用：使用内联注释方式（/<em>!00000</em>/）进行注入<br> 使用脚本前：tamper(‘1 AND 2&gt;1–’)<br> 使用脚本后：1 /<em>!00000AND 2&gt;1</em>/–</p><ol start="24"><li><h3 id="space2mysqldash-py"><a href="#space2mysqldash-py" class="headerlink" title="space2mysqldash.py"></a>space2mysqldash.py</h3></li></ol><p>适用数据库：MySQL、MSSQL<br> 作用：将空格替换为 – ，并追随一个换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：1–%0AAND–%0A9227=9227</p><ol start="25"><li><h3 id="bluecoat-py"><a href="#bluecoat-py" class="headerlink" title="bluecoat.py"></a>bluecoat.py</h3></li></ol><p>适用数据库：Blue Coat SGOS<br> 测试通过数据库：MySQL 5.1,、SGOS<br> 作用：在sql语句之后用有效的随机空白字符替换空格符，随后用LIKE替换=<br> 使用脚本前：tamper(‘SELECT id FROM users where id = 1’)<br> 使用脚本后：SELECT%09id FROM users where id LIKE 1</p><ol start="26"><li><h3 id="versionedkeywords-py"><a href="#versionedkeywords-py" class="headerlink" title="versionedkeywords.py"></a>versionedkeywords.py</h3></li></ol><p>适用数据库：MySQL<br> 测试通过数据库：MySQL 4.0.18, 5.1.56, 5.5.11<br> 作用：注释绕过<br> 使用脚本前：tamper(‘1 UNION ALL SELECT NULL, NULL, </p><p>CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,100,114,117,58))#’)<br> 使用脚本后：1/<em>!UNION</em>//<em>!ALL</em>//<em>!SELECT</em>//<em>!NULL</em>/,/<em>!NULL</em>/,</p><p>CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER()/<em>!AS</em>//<em>!CHAR</em>/),CHAR(32)),CHAR(58,100,114,117,58))#</p><ol start="27"><li><h3 id="halfversionedmorekeywords-py"><a href="#halfversionedmorekeywords-py" class="headerlink" title="halfversionedmorekeywords.py"></a>halfversionedmorekeywords.py</h3></li></ol><p>适用数据库：MySQL &lt; 5.1<br> 测试通过数据库：MySQL 4.0.18/5.0.22<br> 作用：在每个关键字前添加mysql版本注释<br> 使用脚本前：tamper(“value’ UNION ALL SELECT </p><p>CONCAT(CHAR(58,107,112,113,58),IFNULL(CAST(CURRENT_USER() AS </p><p>CHAR),CHAR(32)),CHAR(58,97,110,121,58)), NULL, NULL# AND </p><p>‘QDWa’=’QDWa”)<br> 使用脚本后：</p><p>value’/<em>!0UNION/</em>!0ALL/<em>!0SELECT/</em>!0CONCAT(/<em>!0CHAR(58,107,112,113,58),/</em>!0IFNULL(CAST(/<em>!0CURRENT_USER()/</em>!0AS/<em>!0CHAR),/</em>!0CHAR(32)),/<em>!0CHAR(58,97,110,121,58)),/</em>!0NULL,/<em>!0NULL#/</em>!0AND ‘QDWa’=’QDWa</p><ol start="28"><li><h3 id="space2morehash-py"><a href="#space2morehash-py" class="headerlink" title="space2morehash.py"></a>space2morehash.py</h3></li></ol><p>适用数据库：MySQL &gt;= 5.1.13<br> 测试通过数据库：MySQL 5.1.41<br> 作用：将空格替换为#，并添加一个随机字符串和换行符<br> 使用脚本前：tamper(‘1 AND 9227=9227’)<br> 使用脚本后：</p><p>1%23ngNvzqu%0AAND%23nVNaVoPYeva%0A%23lujYFWfv%0A9227=9227</p><ol start="29"><li><h3 id="apostrophenullencode-py"><a href="#apostrophenullencode-py" class="headerlink" title="apostrophenullencode.py"></a>apostrophenullencode.py</h3></li></ol><p>适用数据库：ALL<br> 作用：用非法双字节Unicode字符替换单引号<br> 使用脚本前：tamper(“1 AND ‘1’=’1”)<br> 使用脚本后：1 AND %00%271%00%27=%00%271</p><ol start="30"><li><h3 id="appendnullbyte-py"><a href="#appendnullbyte-py" class="headerlink" title="appendnullbyte.py"></a>appendnullbyte.py</h3></li></ol><p>适用数据库：ALL<br> 作用：在有效载荷的结束位置加载null字节字符编码<br> 使用脚本前：tamper(‘1 AND 1=1’)<br> 使用脚本后：1 AND 1=1%00</p><ol start="31"><li><h3 id="chardoubleencode-py"><a href="#chardoubleencode-py" class="headerlink" title="chardoubleencode.py"></a>chardoubleencode.py</h3></li></ol><p>适用数据库：ALL<br> 作用：对给定的payload全部字符使用双重url编码（不处理已经编码的字符）<br> 使用脚本前：tamper(‘SELECT FIELD FROM%20TABLE’)<br> 使用脚本</p><p>后：%2553%2545%254C%2545%2543%2554%2520%2546%2549%2545%254C%2544%2520%2546%2552%254F%254D%2520%2554%2541%2542%254C%2545</p><ol start="32"><li><h3 id="unmagicquotes-py"><a href="#unmagicquotes-py" class="headerlink" title="unmagicquotes.py"></a>unmagicquotes.py</h3></li></ol><p>适用数据库：ALL<br> 作用：用一个多字节组合%bf%27和末尾通用注释一起替换空格<br> 使用脚本前：tamper(“1’ AND 1=1”)<br> 使用脚本后：1%bf%27 AND 1=1–</p><ol start="33"><li><h3 id="randomcomments-py"><a href="#randomcomments-py" class="headerlink" title="randomcomments.py"></a>randomcomments.py</h3></li></ol><p>适用数据库：ALL<br> 作用：用注释符分割sql关键字<br> 使用脚本前：tamper(‘INSERT’)<br> 使用脚本后：I/<strong>/N/</strong>/SERT</p>]]></content>
-      
-      
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>寄存器</title>
+    <url>/2021/01/01/%E5%AF%84%E5%AD%98%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="32位CPU所含有的寄存器有："><a href="#32位CPU所含有的寄存器有：" class="headerlink" title="32位CPU所含有的寄存器有："></a>32位CPU所含有的寄存器有：</h2><ol>
+<li>4个数据寄存器(EAX、EBX、ECX和EDX) </li>
+<li>2个变址和指针寄存器(ESI和EDI) </li>
+<li>2个指针寄存器(ESP和EBP)  </li>
+<li>6个段寄存器(ES、CS、SS、DS、FS和GS) </li>
+<li>1个指令指针寄存器(EIP) 1个标志寄存器(EFlags)  </li>
+</ol>
+<h1 id="1、数据寄存器"><a href="#1、数据寄存器" class="headerlink" title="1、数据寄存器"></a>1、数据寄存器</h1><p>数据寄存器主要用来保存操作数和运算结果等信息，从而节省读取操作数所需占用总线和访问存储器的时间。 </p>
+<ul>
+<li><p>32位CPU有4个32位的通用寄存器EAX、EBX、ECX和EDX。 </p>
+</li>
+<li><p>对低16位数据的存取，不会影响高16位的数据。 这些低16位寄存器分别命名为：AX、BX、CX和DX，它和先前的CPU中的寄存器相一致。 </p>
+</li>
+<li><p>4个16位寄存器又可分割成8个独立的8位寄存器(AX：AH-AL、BX：BH-BL、CX：CH-CL、DX：DH-DL)，每个寄存器都有自己的名称，可独立存取。 程序员可利用数据寄存器的这种“可分可合”的特性，灵活地处理字/字节的信息。  </p>
+</li>
+<li><p>寄存器EAX通常称为累加器(Accumulator)，用累加器进行的操作可能需要更少时间。可用于乘、 除、输入/输出等操作，使用频率很高；  </p>
+</li>
+<li><p>寄存器EBX称为基地址寄存器(Base Register)。它可作为存储器指针来使用；  </p>
+</li>
+<li><p>寄存器ECX称为计数寄存器(Count Register)。 在循环和字符串操作时，要用它来控制循环次数；在位操作中，当移多位时，要用CL来指明移位的位数；  </p>
+</li>
+<li><p>寄存器EDX称为数据寄存器(Data Register)。在进行乘、除运算时，它可作为默认的操作数参与运算，也可用于存放I/O的端口地址。  </p>
+</li>
+</ul>
+<p>在16位CPU中，AX、BX、CX和DX不能作为基址和变址寄存器来存放存储单元的地址， </p>
+<p>在32位CPU中，其32位寄存器EAX、EBX、ECX和EDX不仅可传送数据、暂存数据保存算术逻辑运算结果， 而且也可作为指针寄存器，所以，这些32位寄存器更具有通用性。 </p>
+<h1 id="2、变址寄存器"><a href="#2、变址寄存器" class="headerlink" title="2、变址寄存器"></a>2、变址寄存器</h1><p>32位CPU有2个32位通用寄存器ESI和EDI。 </p>
+<p>其低16位对应先前CPU中的SI和DI，对低16位数据的存取，不影响高16位的数据。 </p>
+<p>寄存器ESI、EDI、SI和DI称为变址寄存器(Index Register)，它们主要用于存放存储单元在段内的偏移量， 用它们可实现多种存储器操作数的寻址方式，为以不同的地址形式访问存储单元提供方便。 </p>
+<p>变址寄存器不可分割成8位寄存器。作为通用寄存器，也可存储算术逻辑运算的操作数和运算结果。 </p>
+<p>它们可作一般的存储器指针使用。在字符串操作指令的执行过程中，对它们有特定的要求，而且还具有特殊的功能。 </p>
+<h1 id="3、指针寄存器"><a href="#3、指针寄存器" class="headerlink" title="3、指针寄存器"></a>3、指针寄存器</h1><p>其低16位对应先前CPU中的BP和SP，对低16位数据的存取，不影响高16位的数据。 </p>
+<p>32位CPU有2个32位通用寄存器EBP和ESP。 </p>
+<p>它们主要用于访问堆栈内的存储单元，并且规定： </p>
+<ul>
+<li>EBP为基指针(Base Pointer)寄存器，用它可直接存取堆栈中的数据；  </li>
+<li>ESP为堆栈指针(Stack Pointer)寄存器，用它只可访问栈顶。 </li>
+</ul>
+<p>寄存器EBP、ESP、BP和SP称为指针寄存器(Pointer Register)，主要用于存放堆栈内存储单元的偏移量， 用它们可实现多种存储器操作数的寻址方式，为以不同的地址形式访问存储单元提供方便。 </p>
+<p>指针寄存器不可分割成8位寄存器。作为通用寄存器，也可存储算术逻辑运算的操作数和运算结果。 </p>
+<h1 id="4、段寄存器"><a href="#4、段寄存器" class="headerlink" title="4、段寄存器"></a>4、段寄存器</h1><p>段寄存器是根据内存分段的管理模式而设置的。内存单元的物理地址由段寄存器的值和一个偏移量组合而成的，这样可用两个较少位数的值组合成一个可访问较大物理空间的内存地址。 </p>
+<p>CPU内部的段寄存器： </p>
+<ol>
+<li>ECS——代码段寄存器(Code Segment Register)，其值为代码段的段值；  </li>
+<li>EDS——数据段寄存器(Data Segment Register)，其值为数据段的段值；  </li>
+<li>EES——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值；  </li>
+<li>ESS——堆栈段寄存器(Stack Segment Register)，其值为堆栈段的段值；  </li>
+<li>EFS——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值；  </li>
+<li>EGS——附加段寄存器(Extra Segment Register)，其值为附加数据段的段值。  </li>
+<li></li>
+</ol>
+<ul>
+<li>在16位CPU系统中，它只有4个段寄存器，所以，程序在任何时刻至多有4个正在使用的段可直接访问；</li>
+<li>在32位微机系统中，它有6个段寄存器，所以，在此环境下开发的程序最多可同时访问6个段。 </li>
+</ul>
+<p>32位CPU有两个不同的工作方式：实方式和保护方式。在每种方式下，段寄存器的作用是不同的。有关规定简 单描述如下： </p>
+<ul>
+<li><p>实方式： 前4个段寄存器CS、DS、ES和SS与先前CPU中的所对应的段寄存器的含义完全一致，内存单元的逻辑地址仍为“段值：偏移量”的形式。为访问某内存段内的数据，必须使用该段寄存器和存储单元的偏移量。  </p>
+</li>
+<li><p>保护方式： 在此方式下，情况要复杂得多，装入段寄存器的不再是段值，而是称为“选择子”(Selector)的某个值。</p>
+</li>
+</ul>
+<h1 id="5、指令指针寄存器"><a href="#5、指令指针寄存器" class="headerlink" title="5、指令指针寄存器"></a>5、指令指针寄存器</h1><p>32位CPU把指令指针扩展到32位，并记作EIP，EIP的低16位与先前CPU中的IP作用相同。 </p>
+<p>指令指针EIP、IP(Instruction Pointer)是存放下次将要执行的指令在代码段的偏移量。 </p>
+<p>在具有预取指令功能的系统中，下次要执行的指令通常已被预取到指令队列中，除非发生转移情况。 </p>
+<p>所以，在理解它们的功能时，不考虑存在指令队列的情况。 </p>
+<h1 id="6、标志寄存器"><a href="#6、标志寄存器" class="headerlink" title="6、标志寄存器"></a>6、标志寄存器</h1><h2 id="一、运算结果标志位"><a href="#一、运算结果标志位" class="headerlink" title="一、运算结果标志位"></a>一、运算结果标志位</h2><h3 id="1、进位标志CF-Carry-Flag"><a href="#1、进位标志CF-Carry-Flag" class="headerlink" title="1、进位标志CF(Carry Flag)"></a>1、进位标志CF(Carry Flag)</h3><p>进位标志CF主要用来反映运算是否产生进位或借位。如果运算结果的最高位产生了一个进位或借位，那么，其值为1，否则其值为0。 </p>
+<p>使用该标志位的情况有：多字(字节)数的加减运算，无符号数的大小比较运算，移位操作，字(字节)之间移位，专门改变CF值的指令等。 </p>
+<h3 id="2、奇偶标志PF-Parity-Flag"><a href="#2、奇偶标志PF-Parity-Flag" class="headerlink" title="2、奇偶标志PF(Parity Flag)"></a>2、奇偶标志PF(Parity Flag)</h3><p>奇偶标志PF用于反映运算结果中“1”的个数的奇偶性。如果“1”的个数为偶数，则PF的值为1，否则其值为0。 </p>
+<p>利用PF可进行奇偶校验检查，或产生奇偶校验位。在数据传送过程中，为了提供传送的可靠性，如果采用奇偶校验的方法，就可使用该标志位。 </p>
+<h3 id="3、辅助进位标志AF-Auxiliary-Carry-Flag"><a href="#3、辅助进位标志AF-Auxiliary-Carry-Flag" class="headerlink" title="3、辅助进位标志AF(Auxiliary Carry Flag)"></a>3、辅助进位标志AF(Auxiliary Carry Flag)</h3><p>在发生下列情况时，辅助进位标志AF的值被置为1，否则其值为0： </p>
+<ol>
+<li>在字操作时，发生低字节向高字节进位或借位时； </li>
+<li>在字节操作时，发生低4位向高4位进位或借位时。 </li>
+</ol>
+<p>对以上6个运算结果标志位，在一般编程情况下，标志位CF、ZF、SF和OF的使用频率较高，而标志位PF和AF的使用频率较低。 </p>
+<h3 id="4、零标志ZF-Zero-Flag"><a href="#4、零标志ZF-Zero-Flag" class="headerlink" title="4、零标志ZF(Zero Flag)"></a>4、零标志ZF(Zero Flag)</h3><p>零标志ZF用来反映运算结果是否为0。如果运算结果为0，则其值为1，否则其值为0。在判断运算结果是否为0时，可使用此标志位。 </p>
+<h3 id="5、符号标志SF-Sign-Flag"><a href="#5、符号标志SF-Sign-Flag" class="headerlink" title="5、符号标志SF(Sign Flag)"></a>5、符号标志SF(Sign Flag)</h3><p>符号标志SF用来反映运算结果的符号位，它与运算结果的最高位相同。在微机系统中，有符号数采用码表示法，所以，SF也就反映运算结果的正负号。运算结果为正数时，SF的值为0，否则其值为1。 </p>
+<h3 id="6、溢出标志OF-Overflow-Flag"><a href="#6、溢出标志OF-Overflow-Flag" class="headerlink" title="6、溢出标志OF(Overflow Flag)"></a>6、溢出标志OF(Overflow Flag)</h3><p>溢出标志OF用于反映有符号数加减运算所得结果是否溢出。如果运算结果超过当前运算位数所能表示的范围，则称为溢出，OF的值被置为1，否则，OF的值被清为0。 “</p>
+<p>溢出”和“进位”是两个不同含义的概念，不要混淆。</p>
+<h2 id="二、状态控制标志位"><a href="#二、状态控制标志位" class="headerlink" title="二、状态控制标志位"></a>二、状态控制标志位</h2><p>状态控制标志位是用来控制CPU操作的，它们要通过专门的指令才能使之发生改变。 </p>
+<h2 id="1、追踪标志TF-Trap-Flag"><a href="#1、追踪标志TF-Trap-Flag" class="headerlink" title="1、追踪标志TF(Trap Flag)"></a>1、追踪标志TF(Trap Flag)</h2><p>当追踪标志TF被置为1时，CPU进入单步执行方式，即每执行一条指令，产生一个单步中断请求。这种方式主要用于程序的调试。 指令系统中没有专门的指令来改变标志位TF的值，但程序员可用其它办法来改变其值。 </p>
+<h3 id="2、中断允许标志IF-Interrupt-enable-Flag"><a href="#2、中断允许标志IF-Interrupt-enable-Flag" class="headerlink" title="2、中断允许标志IF(Interrupt-enable Flag)"></a>2、中断允许标志IF(Interrupt-enable Flag)</h3><p>中断允许标志IF是用来决定CPU是否响应CPU外部的可屏蔽中断发出的中断请求。 但不管该标志为何值，CPU都必须响应CPU外部的不可屏蔽中断所发出的中断请求，以及CPU内部产生的中断请求。 具体规定如下： </p>
+<ol>
+<li>当IF=1时，CPU可以响应CPU外部的可屏蔽中断发出的中断请求； </li>
+<li>当IF=0时，CPU不响应CPU外部的可屏蔽中断发出的中断请求。 CPU的指令系统中也有专门的指令来改变标志位IF的值。 </li>
+</ol>
+<h3 id="3、方向标志DF-Direction-Flag"><a href="#3、方向标志DF-Direction-Flag" class="headerlink" title="3、方向标志DF(Direction Flag)"></a>3、方向标志DF(Direction Flag)</h3><p>方向标志DF用来决定在串操作指令执行时有关指针寄存器发生调整的方向。 在微机的指令系统中，还提供了专门的指令来改变标志位DF的值。 </p>
+<h2 id="三、32位标志寄存器增加的标志位"><a href="#三、32位标志寄存器增加的标志位" class="headerlink" title="三、32位标志寄存器增加的标志位"></a>三、32位标志寄存器增加的标志位</h2><h3 id="1、I-O特权标志IOPL-I-O-Privilege-Level"><a href="#1、I-O特权标志IOPL-I-O-Privilege-Level" class="headerlink" title="1、I/O特权标志IOPL(I/O Privilege Level)"></a>1、I/O特权标志IOPL(I/O Privilege Level)</h3><p>I/O特权标志用两位二进制位来表示，也称为I/O特权级字段。该字段指定了要求执行I/O指令的特权级。 如果当前的特权级别在数值上小于等于IOPL的值，那么，该I/O指令可执行，否则将发生一个保护异常。 </p>
+<h3 id="2、嵌套任务标志NT-Nested-Task"><a href="#2、嵌套任务标志NT-Nested-Task" class="headerlink" title="2、嵌套任务标志NT(Nested Task)"></a>2、嵌套任务标志NT(Nested Task)</h3><p>嵌套任务标志NT用来控制中断返回指令IRET的执行。具体规定如下： </p>
+<ol>
+<li>当NT=0，用堆栈中保存的值恢复EFLAGS、CS和EIP，执行常规的中断返回操作； </li>
+<li>当NT=1，通过任务转换实现中断返回。 </li>
+</ol>
+<h3 id="3、重启动标志RF-Restart-Flag"><a href="#3、重启动标志RF-Restart-Flag" class="headerlink" title="3、重启动标志RF(Restart Flag)"></a>3、重启动标志RF(Restart Flag)</h3><p>重启动标志RF用来控制是否接受调试故障。规定：RF=0时，表示“接受”调试故障，否则拒绝之。 在成功执行完一条指令后，处理机把RF置为0，当接受到一个非调试故障时，处理机就把它置为1。 </p>
+<h3 id="4、虚拟8086方式标志VM-Virtual-8086-Mode"><a href="#4、虚拟8086方式标志VM-Virtual-8086-Mode" class="headerlink" title="4、虚拟8086方式标志VM(Virtual 8086 Mode)"></a>4、虚拟8086方式标志VM(Virtual 8086 Mode)</h3><p>如果该标志的值为1，则表示处理机处于虚拟的8086方式下的工作状态，否则，处理机处于一般保护方式下的工作状态。 </p>
+]]></content>
       <categories>
-          
-          <category> web </category>
-          
+        <category>汇编</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 工具 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>汇编</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
 </search>
