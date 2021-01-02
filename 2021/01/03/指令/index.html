@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"0xdadream.github.io","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="32位汇编指令的总结和代码实例，可能还有一些没总结到……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="32位汇编指令总结(代码示例)">
+<meta property="og:url" content="https://0xdadream.github.io/2021/01/03/%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="逐梦">
+<meta property="og:description" content="32位汇编指令的总结和代码实例，可能还有一些没总结到……">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-02T18:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-02T18:01:36.748Z">
+<meta property="article:author" content="逐梦">
+<meta property="article:tag" content="汇编">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://0xdadream.github.io/2021/01/03/%E6%8C%87%E4%BB%A4/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>32位汇编指令总结(代码示例) | 逐梦</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">逐梦</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Dream after dream</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">通用数据传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOV-%E4%BC%A0%E9%80%81%E5%AD%97%E6%88%96%E5%AD%97%E8%8A%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">MOV 传送字或字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOVSX-%E5%85%88%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95-%E5%86%8D%E4%BC%A0%E9%80%81"><span class="nav-number">1.0.2.</span> <span class="nav-text">MOVSX 先符号扩展,再传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOVZX-%E5%85%88%E9%9B%B6%E6%89%A9%E5%B1%95-%E5%86%8D%E4%BC%A0%E9%80%81"><span class="nav-number">1.0.3.</span> <span class="nav-text">MOVZX 先零扩展,再传送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSH-%E6%8A%8A%E5%AD%97%E5%8E%8B%E5%85%A5%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.4.</span> <span class="nav-text">PUSH 把字压入堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POP-%E6%8A%8A%E5%AD%97%E5%BC%B9%E5%87%BA%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.5.</span> <span class="nav-text">POP 把字弹出堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSHFD-%E6%8A%8A32EFLAGS%E5%AF%84%E5%AD%98%E5%99%A8%E5%86%85%E5%AE%B9%E5%8E%8B%E5%85%A5%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.6.</span> <span class="nav-text">PUSHFD 把32EFLAGS寄存器内容压入堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POPFD-%E6%8A%8A32EFLAGS%E5%AF%84%E5%AD%98%E5%99%A8%E5%86%85%E5%AE%B9%E5%BC%B9%E5%87%BA%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.7.</span> <span class="nav-text">POPFD 把32EFLAGS寄存器内容弹出堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSHA-%E6%8A%8AAX-CX-DX-BX-SP-BP-SI-DI%E4%BE%9D%E6%AC%A1%E5%8E%8B%E5%85%A5%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.8.</span> <span class="nav-text">PUSHA 把AX,CX,DX,BX,SP,BP,SI,DI依次压入堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POPA-%E6%8A%8ADI-SI-BP-SP-BX-DX-CX-AX%E4%BE%9D%E6%AC%A1%E5%BC%B9%E5%87%BA%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.9.</span> <span class="nav-text">POPA 把DI,SI,BP,SP,BX,DX,CX,AX依次弹出堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSHAD-%E6%8A%8AEAX-ECX-EDX-EBX-ESP-EBP-ESI-EDI%E4%BE%9D%E6%AC%A1%E5%8E%8B%E5%85%A5%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.10.</span> <span class="nav-text">PUSHAD 把EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI依次压入堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POPAD-%E6%8A%8AEDI-ESI-EBP-ESP-EBX-EDX-ECX-EAX%E4%BE%9D%E6%AC%A1%E5%BC%B9%E5%87%BA%E5%A0%86%E6%A0%88"><span class="nav-number">1.0.11.</span> <span class="nav-text">POPAD 把EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX依次弹出堆栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSWAP-%E4%BA%A4%E6%8D%A232%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8%E9%87%8C%E5%AD%97%E8%8A%82%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.0.12.</span> <span class="nav-text">BSWAP 交换32位寄存器里字节的顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XCHG-%E4%BA%A4%E6%8D%A2%E5%AD%97%E6%88%96%E5%AD%97%E8%8A%82-%E8%87%B3%E5%B0%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E6%95%B0%E4%B8%BA%E5%AF%84%E5%AD%98%E5%99%A8-%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8D%E5%8F%AF%E4%BD%9C%E4%B8%BA%E6%93%8D%E4%BD%9C%E6%95%B0"><span class="nav-number">1.0.13.</span> <span class="nav-text">XCHG 交换字或字节( 至少有一个操作数为寄存器,段寄存器不可作为操作数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMPXCHG-%E6%AF%94%E8%BE%83%E5%B9%B6%E4%BA%A4%E6%8D%A2%E6%93%8D%E4%BD%9C%E6%95%B0-%E7%AC%AC%E4%BA%8C%E4%B8%AA%E6%93%8D%E4%BD%9C%E6%95%B0%E5%BF%85%E9%A1%BB%E4%B8%BA%E7%B4%AF%E5%8A%A0%E5%99%A8AL-AX-EAX"><span class="nav-number">1.0.14.</span> <span class="nav-text">CMPXCHG 比较并交换操作数( 第二个操作数必须为累加器AL&#x2F;AX&#x2F;EAX )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XADD-%E5%85%88%E4%BA%A4%E6%8D%A2%E5%86%8D%E7%B4%AF%E5%8A%A0-%E7%BB%93%E6%9E%9C%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E6%95%B0%E9%87%8C"><span class="nav-number">1.0.15.</span> <span class="nav-text">XADD 先交换再累加( 结果在第一个操作数里 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XLAT-%E5%AD%97%E8%8A%82%E6%9F%A5%E8%A1%A8%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.0.16.</span> <span class="nav-text">XLAT 字节查表转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">输入输出端口传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IN-I-O%E7%AB%AF%E5%8F%A3%E8%BE%93%E5%85%A5"><span class="nav-number">2.0.1.</span> <span class="nav-text">IN I&#x2F;O端口输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OUT-I-O%E7%AB%AF%E5%8F%A3%E8%BE%93%E5%87%BA"><span class="nav-number">2.0.2.</span> <span class="nav-text">OUT I&#x2F;O端口输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E7%94%B1%E7%AB%8B%E5%8D%B3%E6%96%B9%E5%BC%8F%E6%8C%87%E5%AE%9A%E6%97%B6-%E5%85%B6%E8%8C%83%E5%9B%B4%E6%98%AF-0-255-%E7%94%B1%E5%AF%84%E5%AD%98%E5%99%A8-DX-%E6%8C%87%E5%AE%9A%E6%97%B6-%E5%85%B6%E8%8C%83%E5%9B%B4%E6%98%AF-0-65535"><span class="nav-number">2.0.3.</span> <span class="nav-text">输入输出端口由立即方式指定时, 其范围是 0-255; 由寄存器 DX 指定时,其范围是 0-65535</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">目的地址传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LEA-%E8%A3%85%E5%85%A5%E6%9C%89%E6%95%88%E5%9C%B0%E5%9D%80"><span class="nav-number">3.0.1.</span> <span class="nav-text">LEA 装入有效地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDS-%E4%BC%A0%E9%80%81%E7%9B%AE%E6%A0%87%E6%8C%87%E9%92%88-%E6%8A%8A%E6%8C%87%E9%92%88%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5DS"><span class="nav-number">3.0.2.</span> <span class="nav-text">LDS 传送目标指针,把指针内容装入DS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LES-%E4%BC%A0%E9%80%81%E7%9B%AE%E6%A0%87%E6%8C%87%E9%92%88-%E6%8A%8A%E6%8C%87%E9%92%88%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5ES"><span class="nav-number">3.0.3.</span> <span class="nav-text">LES 传送目标指针,把指针内容装入ES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LFS-%E4%BC%A0%E9%80%81%E7%9B%AE%E6%A0%87%E6%8C%87%E9%92%88-%E6%8A%8A%E6%8C%87%E9%92%88%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5FS"><span class="nav-number">3.0.4.</span> <span class="nav-text">LFS 传送目标指针,把指针内容装入FS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LGS-%E4%BC%A0%E9%80%81%E7%9B%AE%E6%A0%87%E6%8C%87%E9%92%88-%E6%8A%8A%E6%8C%87%E9%92%88%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5GS"><span class="nav-number">3.0.5.</span> <span class="nav-text">LGS 传送目标指针,把指针内容装入GS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSS-%E4%BC%A0%E9%80%81%E7%9B%AE%E6%A0%87%E6%8C%87%E9%92%88-%E6%8A%8A%E6%8C%87%E9%92%88%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5SS"><span class="nav-number">3.0.6.</span> <span class="nav-text">LSS 传送目标指针,把指针内容装入SS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">标志传送指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LAHF-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E4%BC%A0%E9%80%81-%E6%8A%8A%E6%A0%87%E5%BF%97%E8%A3%85%E5%85%A5AH"><span class="nav-number">4.0.1.</span> <span class="nav-text">LAHF 标志寄存器传送,把标志装入AH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAHF-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E4%BC%A0%E9%80%81-%E6%8A%8AAH%E5%86%85%E5%AE%B9%E8%A3%85%E5%85%A5%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">4.0.2.</span> <span class="nav-text">SAHF 标志寄存器传送,把AH内容装入标志寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSHF-%E6%A0%87%E5%BF%97%E5%85%A5%E6%A0%88"><span class="nav-number">4.0.3.</span> <span class="nav-text">PUSHF 标志入栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POPF-%E6%A0%87%E5%BF%97%E5%87%BA%E6%A0%88"><span class="nav-number">4.0.4.</span> <span class="nav-text">POPF 标志出栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUSHD-32%E4%BD%8D%E6%A0%87%E5%BF%97%E5%85%A5%E6%A0%88"><span class="nav-number">4.0.5.</span> <span class="nav-text">PUSHD 32位标志入栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POPD-32%E4%BD%8D%E6%A0%87%E5%BF%97%E5%87%BA%E6%A0%88"><span class="nav-number">4.0.6.</span> <span class="nav-text">POPD 32位标志出栈</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">算术运算指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD-%E5%8A%A0%E6%B3%95"><span class="nav-number">5.0.1.</span> <span class="nav-text">ADD 加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADC-%E5%B8%A6%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95"><span class="nav-number">5.0.2.</span> <span class="nav-text">ADC 带进位加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INC-%E5%8A%A0-1"><span class="nav-number">5.0.3.</span> <span class="nav-text">INC 加 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AAA-%E5%8A%A0%E6%B3%95%E7%9A%84ASCII%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.4.</span> <span class="nav-text">AAA 加法的ASCII码调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAA-%E5%8A%A0%E6%B3%95%E7%9A%84%E5%8D%81%E8%BF%9B%E5%88%B6%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.5.</span> <span class="nav-text">DAA 加法的十进制调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUB-%E5%87%8F%E6%B3%95"><span class="nav-number">5.0.6.</span> <span class="nav-text">SUB 减法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SBB-%E5%B8%A6%E5%80%9F%E4%BD%8D%E5%87%8F%E6%B3%95"><span class="nav-number">5.0.7.</span> <span class="nav-text">SBB 带借位减法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEC-%E5%87%8F-1"><span class="nav-number">5.0.8.</span> <span class="nav-text">DEC 减 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NEC-%E6%B1%82%E5%8F%8D-%E4%BB%A5-0-%E5%87%8F%E4%B9%8B"><span class="nav-number">5.0.9.</span> <span class="nav-text">NEC 求反(以 0 减之)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMP-%E6%AF%94%E8%BE%83-%E4%B8%A4%E6%93%8D%E4%BD%9C%E6%95%B0%E4%BD%9C%E5%87%8F%E6%B3%95-%E4%BB%85%E4%BF%AE%E6%94%B9%E6%A0%87%E5%BF%97%E4%BD%8D-%E4%B8%8D%E5%9B%9E%E9%80%81%E7%BB%93%E6%9E%9C"><span class="nav-number">5.0.10.</span> <span class="nav-text">CMP 比较.(两操作数作减法,仅修改标志位,不回送结果)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AAS-%E5%87%8F%E6%B3%95%E7%9A%84ASCII%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.11.</span> <span class="nav-text">AAS 减法的ASCII码调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAS-%E5%87%8F%E6%B3%95%E7%9A%84%E5%8D%81%E8%BF%9B%E5%88%B6%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.12.</span> <span class="nav-text">DAS 减法的十进制调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MUL-%E6%97%A0%E7%AC%A6%E5%8F%B7%E4%B9%98%E6%B3%95"><span class="nav-number">5.0.13.</span> <span class="nav-text">MUL 无符号乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMUL-%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95"><span class="nav-number">5.0.14.</span> <span class="nav-text">IMUL 整数乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8A%E4%B8%A4%E6%9D%A1-%E7%BB%93%E6%9E%9C%E5%9B%9E%E9%80%81AH%E5%92%8CAL-%E5%AD%97%E8%8A%82%E8%BF%90%E7%AE%97-%E6%88%96DX%E5%92%8CAX-%E5%AD%97%E8%BF%90%E7%AE%97"><span class="nav-number">5.0.15.</span> <span class="nav-text">以上两条,结果回送AH和AL(字节运算),或DX和AX(字运算)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AAM-%E4%B9%98%E6%B3%95%E7%9A%84ASCII%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.16.</span> <span class="nav-text">AAM 乘法的ASCII码调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DIV-%E6%97%A0%E7%AC%A6%E5%8F%B7%E9%99%A4%E6%B3%95"><span class="nav-number">5.0.17.</span> <span class="nav-text">DIV 无符号除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDIV-%E6%95%B4%E6%95%B0%E9%99%A4%E6%B3%95"><span class="nav-number">5.0.18.</span> <span class="nav-text">IDIV 整数除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8A%E4%B8%A4%E6%9D%A1-%E7%BB%93%E6%9E%9C%E5%9B%9E%E9%80%81"><span class="nav-number">5.0.19.</span> <span class="nav-text">以上两条,结果回送:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%86%E5%9B%9E%E9%80%81AL-%E4%BD%99%E6%95%B0%E5%9B%9E%E9%80%81AH-%E5%AD%97%E8%8A%82%E8%BF%90%E7%AE%97-%E6%88%96%E5%95%86%E5%9B%9E%E9%80%81AX-%E4%BD%99%E6%95%B0%E5%9B%9E%E9%80%81DX-%E5%AD%97%E8%BF%90%E7%AE%97"><span class="nav-number">5.0.20.</span> <span class="nav-text">商回送AL,余数回送AH, (字节运算);或商回送AX,余数回送DX, (字运算)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AAD-%E9%99%A4%E6%B3%95%E7%9A%84ASCII%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">5.0.21.</span> <span class="nav-text">AAD 除法的ASCII码调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CBW-%E5%AD%97%E8%8A%82%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AD%97-%E6%8A%8AAL%E4%B8%AD%E5%AD%97%E8%8A%82%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E5%88%B0AH%E4%B8%AD%E5%8E%BB"><span class="nav-number">5.0.22.</span> <span class="nav-text">CBW 字节转换为字. (把AL中字节的符号扩展到AH中去)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CWD-%E5%AD%97%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%8C%E5%AD%97-%E6%8A%8AAX%E4%B8%AD%E7%9A%84%E5%AD%97%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E5%88%B0DX%E4%B8%AD%E5%8E%BB"><span class="nav-number">5.0.23.</span> <span class="nav-text">CWD 字转换为双字. (把AX中的字的符号扩展到DX中去)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CWDE-%E5%AD%97%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%8F%8C%E5%AD%97-%E6%8A%8AAX%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E5%88%B0EAX%E4%B8%AD%E5%8E%BB"><span class="nav-number">5.0.24.</span> <span class="nav-text">CWDE 字转换为双字. (把AX中的字符号扩展到EAX中去)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDQ-%E5%8F%8C%E5%AD%97%E6%89%A9%E5%B1%95-%E6%8A%8AEAX%E4%B8%AD%E7%9A%84%E5%AD%97%E7%9A%84%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E5%88%B0EDX%E4%B8%AD%E5%8E%BB"><span class="nav-number">5.0.25.</span> <span class="nav-text">CDQ 双字扩展. (把EAX中的字的符号扩展到EDX中去)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">逻辑运算指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AND-%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="nav-number">6.0.1.</span> <span class="nav-text">AND 与运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OR-%E6%88%96%E8%BF%90%E7%AE%97"><span class="nav-number">6.0.2.</span> <span class="nav-text">OR 或运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR-%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97"><span class="nav-number">6.0.3.</span> <span class="nav-text">XOR 异或运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NOT-%E5%8F%96%E5%8F%8D"><span class="nav-number">6.0.4.</span> <span class="nav-text">NOT 取反</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TEST-%E6%B5%8B%E8%AF%95-%E4%B8%A4%E6%93%8D%E4%BD%9C%E6%95%B0%E4%BD%9C%E4%B8%8E%E8%BF%90%E7%AE%97-%E4%BB%85%E4%BF%AE%E6%94%B9%E6%A0%87%E5%BF%97%E4%BD%8D-%E4%B8%8D%E5%9B%9E%E9%80%81%E7%BB%93%E6%9E%9C"><span class="nav-number">6.0.5.</span> <span class="nav-text">TEST 测试(两操作数作与运算,仅修改标志位,不回送结果)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHL-%E9%80%BB%E8%BE%91%E5%B7%A6%E7%A7%BB-%E4%BD%8D%E5%85%83%E4%B9%98%E6%B3%95"><span class="nav-number">6.0.6.</span> <span class="nav-text">SHL 逻辑左移,位元乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAL-%E7%AE%97%E6%9C%AF%E5%B7%A6%E7%A7%BB-SHL"><span class="nav-number">6.0.7.</span> <span class="nav-text">SAL 算术左移(&#x3D;SHL)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHR-%E9%80%BB%E8%BE%91%E5%8F%B3%E7%A7%BB%EF%BC%8C%E4%BD%8D%E5%85%83%E9%99%A4%E6%B3%95"><span class="nav-number">6.0.8.</span> <span class="nav-text">SHR 逻辑右移，位元除法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAR-%E7%AE%97%E6%9C%AF%E5%8F%B3%E7%A7%BB-SHR"><span class="nav-number">6.0.9.</span> <span class="nav-text">SAR 算术右移(&#x3D;SHR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROL-%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB"><span class="nav-number">6.0.10.</span> <span class="nav-text">ROL 循环左移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROR-%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB"><span class="nav-number">6.0.11.</span> <span class="nav-text">ROR 循环右移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCL-%E9%80%9A%E8%BF%87%E8%BF%9B%E4%BD%8D%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%B7%A6%E7%A7%BB"><span class="nav-number">6.0.12.</span> <span class="nav-text">RCL 通过进位的循环左移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RCR-%E9%80%9A%E8%BF%87%E8%BF%9B%E4%BD%8D%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%8F%B3%E7%A7%BB"><span class="nav-number">6.0.13.</span> <span class="nav-text">RCR 通过进位的循环右移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHLD-%E5%8F%8C%E7%B2%BE%E5%BA%A6%E5%B7%A6%E7%A7%BB"><span class="nav-number">6.0.14.</span> <span class="nav-text">SHLD 双精度左移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHRD-%E5%8F%8C%E7%B2%BE%E5%BA%A6%E5%8F%B3%E7%A7%BB"><span class="nav-number">6.0.15.</span> <span class="nav-text">SHRD 双精度右移</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E6%8C%87%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">串指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DS-SI-%E6%BA%90%E4%B8%B2%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8-%E6%BA%90%E4%B8%B2%E5%8F%98%E5%9D%80"><span class="nav-number">7.0.1.</span> <span class="nav-text">DS:SI 源串段寄存器 :源串变址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESI-%E7%9B%AE%E6%A0%87%E4%B8%B2%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8-%E7%9B%AE%E6%A0%87%E4%B8%B2%E5%8F%98%E5%9D%80"><span class="nav-number">7.0.2.</span> <span class="nav-text">ESI 目标串段寄存器:目标串变址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CX-%E9%87%8D%E5%A4%8D%E6%AC%A1%E6%95%B0%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">7.0.3.</span> <span class="nav-text">CX 重复次数计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AL-AX-%E6%89%AB%E6%8F%8F%E5%80%BC"><span class="nav-number">7.0.4.</span> <span class="nav-text">AL&#x2F;AX 扫描值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D%E6%A0%87%E5%BF%97-0%E8%A1%A8%E7%A4%BA%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9C%E4%B8%ADSI%E5%92%8CDI%E5%BA%94%E8%87%AA%E5%8A%A8%E5%A2%9E%E9%87%8F-1%E8%A1%A8%E7%A4%BA%E5%BA%94%E8%87%AA%E5%8A%A8%E5%87%8F%E9%87%8F"><span class="nav-number">7.0.5.</span> <span class="nav-text">D标志 0表示重复操作中SI和DI应自动增量; 1表示应自动减量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Z%E6%A0%87%E5%BF%97-%E7%94%A8%E6%9D%A5%E6%8E%A7%E5%88%B6%E6%89%AB%E6%8F%8F%E6%88%96%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9D%9F"><span class="nav-number">7.0.6.</span> <span class="nav-text">Z标志 用来控制扫描或比较操作的结束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOVS-%E4%B8%B2%E4%BC%A0%E9%80%81-MOVSB-%E4%BC%A0%E9%80%81%E5%AD%97%E7%AC%A6-MOVSW-%E4%BC%A0%E9%80%81%E5%AD%97-MOVSD-%E4%BC%A0%E9%80%81%E5%8F%8C%E5%AD%97"><span class="nav-number">7.0.7.</span> <span class="nav-text">MOVS 串传送   ( MOVSB 传送字符 MOVSW 传送字 MOVSD 传送双字 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMPS-%E4%B8%B2%E6%AF%94%E8%BE%83-CMPSB-%E6%AF%94%E8%BE%83%E5%AD%97%E7%AC%A6-CMPSW-%E6%AF%94%E8%BE%83%E5%AD%97"><span class="nav-number">7.0.8.</span> <span class="nav-text">CMPS 串比较   ( CMPSB 比较字符 CMPSW 比较字 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCAS-%E4%B8%B2%E6%89%AB%E6%8F%8F-%E6%8A%8AAL%E6%88%96AX%E7%9A%84%E5%86%85%E5%AE%B9%E4%B8%8E%E7%9B%AE%E6%A0%87%E4%B8%B2%E4%BD%9C%E6%AF%94%E8%BE%83-%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E5%8F%8D%E6%98%A0%E5%9C%A8%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="nav-number">7.0.9.</span> <span class="nav-text">SCAS 串扫描    把AL或AX的内容与目标串作比较,比较结果反映在标志位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LODS-%E8%A3%85%E5%85%A5%E4%B8%B2-%E6%8A%8A%E6%BA%90%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0-%E5%AD%97%E6%88%96%E5%AD%97%E8%8A%82-%E9%80%90%E4%B8%80%E8%A3%85%E5%85%A5AL%E6%88%96AX%E4%B8%AD-LODSB-%E4%BC%A0%E9%80%81%E5%AD%97%E7%AC%A6-LODSW-%E4%BC%A0%E9%80%81%E5%AD%97-LODSD-%E4%BC%A0%E9%80%81%E5%8F%8C%E5%AD%97"><span class="nav-number">7.0.10.</span> <span class="nav-text">LODS 装入串    把源串中的元素(字或字节)逐一装入AL或AX中( LODSB 传送字符 LODSW 传送字 LODSD 传送双字 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STOS-%E4%BF%9D%E5%AD%98%E4%B8%B2-%E6%98%AFLODS%E7%9A%84%E9%80%86%E8%BF%87%E7%A8%8B"><span class="nav-number">7.0.11.</span> <span class="nav-text">STOS 保存串   是LODS的逆过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REP-%E5%BD%93CX-ECX-lt-gt-0%E6%97%B6%E9%87%8D%E5%A4%8D-%E5%8D%95%E4%B8%AA%E6%8C%87%E4%BB%A4%E5%A4%84%E7%90%86%E6%95%B4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.0.12.</span> <span class="nav-text">REP 当CX&#x2F;ECX&lt;&gt;0时重复(单个指令处理整个字符串)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPE-REPZ-%E5%BD%93ZF-1%E6%88%96%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E7%9B%B8%E7%AD%89-%E4%B8%94CX-ECX-lt-gt-0%E6%97%B6%E9%87%8D%E5%A4%8D"><span class="nav-number">7.0.13.</span> <span class="nav-text">REPE&#x2F;REPZ 当ZF&#x3D;1或比较结果相等,且CX&#x2F;ECX&lt;&gt;0时重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPNE-REPNZ-%E5%BD%93ZF-0%E6%88%96%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E4%B8%8D%E7%9B%B8%E7%AD%89-%E4%B8%94CX-ECX-lt-gt-0%E6%97%B6%E9%87%8D%E5%A4%8D"><span class="nav-number">7.0.14.</span> <span class="nav-text">REPNE&#x2F;REPNZ 当ZF&#x3D;0或比较结果不相等,且CX&#x2F;ECX&lt;&gt;0时重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPC-%E5%BD%93CF-1%E4%B8%94CX-ECX-lt-gt-0%E6%97%B6%E9%87%8D%E5%A4%8D"><span class="nav-number">7.0.15.</span> <span class="nav-text">REPC 当CF&#x3D;1且CX&#x2F;ECX&lt;&gt;0时重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPNC-%E5%BD%93CF-0%E4%B8%94CX-ECX-lt-gt-0%E6%97%B6%E9%87%8D%E5%A4%8D"><span class="nav-number">7.0.16.</span> <span class="nav-text">REPNC 当CF&#x3D;0且CX&#x2F;ECX&lt;&gt;0时重复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">程序转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">8.1.</span> <span class="nav-text">简单的条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JZ-%E6%88%96jE-OPR%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E7%BB%93%E6%9E%9C%E4%B8%BA%E9%9B%B6%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6ZF-1%EF%BC%9B%E7%9B%B8%E7%AD%89%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.1.1.</span> <span class="nav-text">JZ(或jE)  OPR—————结果为零转移, 测试条件ZF&#x3D;1；相等跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNZ-%E6%88%96jNE-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E7%BB%93%E6%9E%9C%E4%B8%8D%E4%B8%BA%E9%9B%B6%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6ZF-0%EF%BC%9B%E4%B8%8D%E7%AD%89%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.1.2.</span> <span class="nav-text">JNZ(或jNE) OPR ————–结果不为零转移,测试条件ZF&#x3D;0；不等跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-OPR%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E7%BB%93%E6%9E%9C%E4%B8%BA%E8%B4%9F%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6SF-1"><span class="nav-number">8.1.3.</span> <span class="nav-text">JS OPR———————-结果为负转移, 测试条件SF&#x3D;1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNS-OPR%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E7%BB%93%E6%9E%9C%E4%B8%BA%E6%AD%A3%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6SF-0"><span class="nav-number">8.1.4.</span> <span class="nav-text">JNS OPR———————结果为正转移, 测试条件SF&#x3D;0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JO-OPR%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%BA%A2%E5%87%BA%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6OF-1"><span class="nav-number">8.1.5.</span> <span class="nav-text">JO OPR——————— 溢出转移,   测试条件OF&#x3D;1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNO-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E4%B8%8D%E6%BA%A2%E5%87%BA%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6OF-0"><span class="nav-number">8.1.6.</span> <span class="nav-text">JNO OPR ——————–不溢出转移 , 测试条件OF&#x3D;0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JP-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E7%BB%93%E6%9E%9C%E4%B8%BA%E5%81%B6%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6PF-1"><span class="nav-number">8.1.7.</span> <span class="nav-text">JP OPR ———————结果为偶转移, 测试条件PF&#x3D;1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNP-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E7%BB%93%E6%9E%9C%E4%B8%BA%E5%A5%87%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6PF-0"><span class="nav-number">8.1.8.</span> <span class="nav-text">JNP OPR ——————–结果为奇转移 , 测试条件PF&#x3D;0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JC-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E6%9C%89%E8%BF%9B%E4%BD%8D%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6CF-1"><span class="nav-number">8.1.9.</span> <span class="nav-text">JC OPR ——————– 有进位转移 , 测试条件CF&#x3D;1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNC-OPR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E6%97%A0%E8%BF%9B%E4%BD%8D%E8%BD%AC%E7%A7%BB-%E6%B5%8B%E8%AF%95%E6%9D%A1%E4%BB%B6CF-0"><span class="nav-number">8.1.10.</span> <span class="nav-text">JNC OPR ——————–无进位转移,  测试条件CF&#x3D;0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%AF%94%E8%BE%83%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4-%E4%BB%A5%E4%B8%8B%E6%8C%87%E4%BB%A4%E7%BB%8F%E5%B8%B8%E6%98%AFCMP-OPD-OPS%E5%90%8E%E9%9D%A2%E7%9A%84%E6%8C%87%E4%BB%A4%E6%A0%B9%E6%8D%AE%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E6%9D%A5%E5%AE%9E%E7%8E%B0%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.11.</span> <span class="nav-text">无符号比较条件转移指令(以下指令经常是CMP OPD,OPS后面的指令根据比较结果来实现转移)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JB-%E6%88%96JNAE-opd-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E5%B0%8F%E4%BA%8E%E6%88%96%E8%80%85%E4%B8%8D%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.12.</span> <span class="nav-text">JB(或JNAE) opd ————–小于或者不大于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNB-%E6%88%96JAE-opd%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%B8%8D%E5%B0%8F%E4%BA%8E%E6%88%96%E8%80%85%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.13.</span> <span class="nav-text">JNB(或JAE) opd—————不小于或者大于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JA-%E6%88%96NJBE-OPD%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%A4%A7%E4%BA%8E%E6%88%96%E8%80%85%E4%B8%8D%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.14.</span> <span class="nav-text">JA(或NJBE) OPD—————大于或者不小于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNA-%E6%88%96JBE-OPD%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%B8%8D%E5%A4%A7%E4%BA%8E%E6%88%96%E8%80%85%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.15.</span> <span class="nav-text">JNA(或JBE) OPD—————不大于或者小于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E7%AC%A6%E5%8F%B7%E6%AF%94%E8%BE%83%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">8.1.16.</span> <span class="nav-text">带符号比较条件转移指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JL-%E6%88%96JNGE-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E5%B0%8F%E4%BA%8E%E6%88%96%E8%80%85%E4%B8%8D%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.17.</span> <span class="nav-text">JL(或JNGE) ————–小于或者不大于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNL-%E6%88%96JGE-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E4%B8%8D%E5%B0%8F%E4%BA%8E%E6%88%96%E8%80%85%E5%A4%A7%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.18.</span> <span class="nav-text">JNL(或JGE)————–不小于或者大于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JG-%E6%88%96NJLE-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%A4%A7%E4%BA%8E%E6%88%96%E8%80%85%E4%B8%8D%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.19.</span> <span class="nav-text">JG(或NJLE)—————大于或者不小于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNG-%E6%88%96JLE-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%B8%8D%E5%A4%A7%E4%BA%8E%E6%88%96%E8%80%85%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8E%E5%88%99%E8%BD%AC%E7%A7%BB"><span class="nav-number">8.1.20.</span> <span class="nav-text">JNG(或JLE)—————不大于或者小于等于则转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JCXZ"><span class="nav-number">8.1.21.</span> <span class="nav-text">JCXZ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JECXZ"><span class="nav-number">8.1.22.</span> <span class="nav-text">JECXZ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JRCXZ"><span class="nav-number">8.1.23.</span> <span class="nav-text">JRCXZ</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%AD%90%E7%A8%8B%E5%BA%8F%E4%B8%8E%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">8.2.</span> <span class="nav-text">调用子程序与返回指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CALL-%E5%AD%90%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">8.2.1.</span> <span class="nav-text">CALL  子程序调用指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RET-%E5%AD%90%E7%A8%8B%E5%BA%8F%E8%BF%94%E5%9B%9E%E6%8C%87%E4%BB%A4"><span class="nav-number">8.2.2.</span> <span class="nav-text">RET 子程序返回指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%8C%87%E4%BB%A4"><span class="nav-number">8.3.</span> <span class="nav-text">条件循环指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOP%E2%80%94%E2%80%94%E2%80%94-%E6%8C%89ECX%E8%AE%A1%E7%AE%97%E5%99%A8%E5%BE%AA%E7%8E%AF"><span class="nav-number">8.3.1.</span> <span class="nav-text">LOOP———-按ECX计算器循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOPZ%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%B8%BA%E9%9B%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.3.2.</span> <span class="nav-text">LOOPZ————为零跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOPNZ%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E9%9D%9E%E9%9B%B6%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.3.3.</span> <span class="nav-text">LOOPNZ————–非零跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOPE%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E7%9B%B8%E7%AD%89%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.3.4.</span> <span class="nav-text">LOOPE——————-相等跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOOPNE%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%B8%8D%E7%AD%89%E8%B7%B3%E8%BD%AC"><span class="nav-number">8.3.5.</span> <span class="nav-text">LOOPNE——————-不等跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IF-ELSE-ELSEIF-ENDIF"><span class="nav-number">8.3.6.</span> <span class="nav-text">.IF .ELSE .ELSEIF .ENDIF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPEAT-WHILE"><span class="nav-number">8.3.7.</span> <span class="nav-text">.REPEAT .WHILE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.</span> <span class="nav-text">其它指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OFFSET-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E8%BF%94%E5%9B%9E%E5%81%8F%E7%A7%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">8.4.1.</span> <span class="nav-text">OFFSET ——————– 返回偏移地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEG-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E8%BF%94%E5%9B%9E%E6%AE%B5%E5%9C%B0%E5%9D%80"><span class="nav-number">8.4.2.</span> <span class="nav-text">SEG  ——————– 返回段地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EQU-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E7%AD%89%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.4.3.</span> <span class="nav-text">EQU(&#x3D;) ——————– 等值语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PURGE-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E8%A7%A3%E9%99%A4%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.4.4.</span> <span class="nav-text">PURGE ——————– 解除语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DUP-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E6%93%8D%E4%BD%9C%E6%95%B0%E5%AD%97%E6%AE%B5%E7%94%A8%E5%A4%8D%E5%88%B6%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">8.4.5.</span> <span class="nav-text">DUP  ——————– 操作数字段用复制操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEGMENT-ENDS-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E6%AE%B5%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.6.</span> <span class="nav-text">SEGMENT,ENDS ——————– 段定义指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ASSUME-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E6%AE%B5%E5%9C%B0%E5%9D%80%E5%88%86%E9%85%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.7.</span> <span class="nav-text">ASSUME ——————– 段地址分配指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORG-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E8%B5%B7%E5%A7%8B%E5%81%8F%E7%A7%BB%E5%9C%B0%E5%9D%80%E8%AE%BE%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.8.</span> <span class="nav-text">ORG  ——————– 起始偏移地址设置指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E5%9C%B0%E5%9D%80%E8%AE%A1%E6%95%B0%E5%99%A8%E7%9A%84%E5%BD%93%E5%89%8D%E5%80%BC"><span class="nav-number">8.4.9.</span> <span class="nav-text">$   ——————–地址计数器的当前值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PROC%EF%BC%8CENDP-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E8%BF%87%E7%A8%8B%E5%AE%9A%E4%B9%89%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.4.10.</span> <span class="nav-text">PROC，ENDP ——————– 过程定义语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAME%EF%BC%8CTITLE%EF%BC%8CEND-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%A7%8B%E7%BB%93%E6%9D%9F%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.4.11.</span> <span class="nav-text">NAME，TITLE，END ——————– 程序开始结束语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MACRO%EF%BC%8CENDM-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.12.</span> <span class="nav-text">MACRO，ENDM  ——————–宏定义指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XLAT-%EF%BC%88TRANSLATE%EF%BC%89-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93-%E6%8D%A2%E7%A0%81%E6%8C%87%E4%BB%A4%E2%80%94"><span class="nav-number">8.4.13.</span> <span class="nav-text">XLAT  （TRANSLATE） ——————– 换码指令—-</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALIGN-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%BC%AA%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.14.</span> <span class="nav-text">ALIGN ———————伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PTR-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.4.15.</span> <span class="nav-text">PTR ———————-运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TYPE"><span class="nav-number">8.4.16.</span> <span class="nav-text">TYPE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LENGTHOF-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.4.17.</span> <span class="nav-text">LENGTHOF ————–运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIZFEOF%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.4.18.</span> <span class="nav-text">SIZFEOF————-运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LABEL-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E4%BC%AA%E6%8C%87%E4%BB%A4"><span class="nav-number">8.4.19.</span> <span class="nav-text">LABEL —————伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TYPEDEF%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.4.20.</span> <span class="nav-text">TYPEDEF————–运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JMP-%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9D%80"><span class="nav-number">8.4.21.</span> <span class="nav-text">JMP ————无条件跳转到目标地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#USES%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E7%AD%89%E4%BA%8E-push-pop"><span class="nav-number">8.4.22.</span> <span class="nav-text">USES—————等于 push+pop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLC"><span class="nav-number">8.4.23.</span> <span class="nav-text">CLC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STC"><span class="nav-number">8.4.24.</span> <span class="nav-text">STC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTER%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E8%A2%AB%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%A0%86%E6%A0%88%E5%B8%A7"><span class="nav-number">8.4.25.</span> <span class="nav-text">ENTER——————-被调用过程自动创建堆栈帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEAVE%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%8C%87%E4%BB%A4%E7%BB%93%E6%9D%9F%E4%B8%80%E4%B8%AA%E8%BF%87%E7%A8%8B%E7%9A%84%E5%A0%86%E6%A0%88%E5%B8%A7"><span class="nav-number">8.4.26.</span> <span class="nav-text">LEAVE——————指令结束一个过程的堆栈帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOCAL%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">8.4.27.</span> <span class="nav-text">LOCAL—————局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INVOKE%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%93CALL%E6%9B%BF%E4%BB%A3%E5%93%81%EF%BC%8C%E4%B8%80%E8%A1%8C%E8%B0%83%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">8.4.28.</span> <span class="nav-text">INVOKE—————–CALL替代品，一行调用多个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADDR%E2%80%94%E2%80%94%E2%80%93%E5%8F%AA%E8%83%BD%E5%92%8CINVOKE%E4%B8%80%E8%B5%B7"><span class="nav-number">8.4.29.</span> <span class="nav-text">ADDR——–只能和INVOKE一起</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.</span> <span class="nav-text">条件标志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ZF-%E9%9B%B6%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.1.</span> <span class="nav-text">ZF 零标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AF-%E8%BE%85%E5%8A%A9%E8%BF%9B%E4%BD%8D%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.2.</span> <span class="nav-text">AF 辅助进位标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PF-%E5%A5%87%E5%81%B6%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.3.</span> <span class="nav-text">PF 奇偶标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SF-%E7%AC%A6%E5%8F%B7%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.4.</span> <span class="nav-text">SF 符号标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CF-%E8%BF%9B%E4%BD%8D%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.5.</span> <span class="nav-text">CF 进位标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OF-%E6%BA%A2%E5%87%BA%E6%A0%87%E5%BF%97"><span class="nav-number">8.5.6.</span> <span class="nav-text">OF 溢出标志</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">逐梦</p>
+  <div class="site-description" itemprop="description">Welcome to my blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://0xdadream.github.io/2021/01/03/%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="逐梦">
+      <meta itemprop="description" content="Welcome to my blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="逐梦">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          32位汇编指令总结(代码示例)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-03 02:00:00 / 修改时间：02:01:36" itemprop="dateCreated datePublished" datetime="2021-01-03T02:00:00+08:00">2021-01-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">32位汇编指令的总结和代码实例，可能还有一些没总结到……</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="通用数据传送指令"><a href="#通用数据传送指令" class="headerlink" title="通用数据传送指令"></a>通用数据传送指令</h1><h3 id="MOV-传送字或字节"><a href="#MOV-传送字或字节" class="headerlink" title="MOV 传送字或字节"></a>MOV 传送字或字节</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">10</span>h</span><br></pre></td></tr></table></figure>
+
+<h3 id="MOVSX-先符号扩展-再传送"><a href="#MOVSX-先符号扩展-再传送" class="headerlink" title="MOVSX 先符号扩展,再传送"></a>MOVSX 先符号扩展,再传送</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movsx eax,ax;先进行全零扩展,前<span class="number">16</span>位为F</span><br></pre></td></tr></table></figure>
+
+<h3 id="MOVZX-先零扩展-再传送"><a href="#MOVZX-先零扩展-再传送" class="headerlink" title="MOVZX 先零扩展,再传送"></a>MOVZX 先零扩展,再传送</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">movzx eax,ax;先进行全零扩展,前<span class="number">16</span>位为<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSH-把字压入堆栈"><a href="#PUSH-把字压入堆栈" class="headerlink" title="PUSH 把字压入堆栈"></a>PUSH 把字压入堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push reg/nem16   <span class="number">32</span></span><br><span class="line">push imm32</span><br></pre></td></tr></table></figure>
+
+<h3 id="POP-把字弹出堆栈"><a href="#POP-把字弹出堆栈" class="headerlink" title="POP 把字弹出堆栈"></a>POP 把字弹出堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pop reg/nem16  <span class="number">32</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHFD-把32EFLAGS寄存器内容压入堆栈"><a href="#PUSHFD-把32EFLAGS寄存器内容压入堆栈" class="headerlink" title="PUSHFD 把32EFLAGS寄存器内容压入堆栈"></a>PUSHFD 把32EFLAGS寄存器内容压入堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushfd;保存标志寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="POPFD-把32EFLAGS寄存器内容弹出堆栈"><a href="#POPFD-把32EFLAGS寄存器内容弹出堆栈" class="headerlink" title="POPFD 把32EFLAGS寄存器内容弹出堆栈"></a>POPFD 把32EFLAGS寄存器内容弹出堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popfd;恢复标志寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHA-把AX-CX-DX-BX-SP-BP-SI-DI依次压入堆栈"><a href="#PUSHA-把AX-CX-DX-BX-SP-BP-SI-DI依次压入堆栈" class="headerlink" title="PUSHA 把AX,CX,DX,BX,SP,BP,SI,DI依次压入堆栈"></a>PUSHA 把AX,CX,DX,BX,SP,BP,SI,DI依次压入堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pusha;保存<span class="number">16</span>通用寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="POPA-把DI-SI-BP-SP-BX-DX-CX-AX依次弹出堆栈"><a href="#POPA-把DI-SI-BP-SP-BX-DX-CX-AX依次弹出堆栈" class="headerlink" title="POPA 把DI,SI,BP,SP,BX,DX,CX,AX依次弹出堆栈"></a>POPA 把DI,SI,BP,SP,BX,DX,CX,AX依次弹出堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popa;恢复<span class="number">16</span>通用寄存器内存</span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHAD-把EAX-ECX-EDX-EBX-ESP-EBP-ESI-EDI依次压入堆栈"><a href="#PUSHAD-把EAX-ECX-EDX-EBX-ESP-EBP-ESI-EDI依次压入堆栈" class="headerlink" title="PUSHAD 把EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI依次压入堆栈"></a>PUSHAD 把EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI依次压入堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushad;保存<span class="number">32</span>通用寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="POPAD-把EDI-ESI-EBP-ESP-EBX-EDX-ECX-EAX依次弹出堆栈"><a href="#POPAD-把EDI-ESI-EBP-ESP-EBX-EDX-ECX-EAX依次弹出堆栈" class="headerlink" title="POPAD 把EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX依次弹出堆栈"></a>POPAD 把EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX依次弹出堆栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popad;恢复<span class="number">32</span>通用寄存器内存</span><br></pre></td></tr></table></figure>
+
+<h3 id="BSWAP-交换32位寄存器里字节的顺序"><a href="#BSWAP-交换32位寄存器里字节的顺序" class="headerlink" title="BSWAP 交换32位寄存器里字节的顺序"></a>BSWAP 交换32位寄存器里字节的顺序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;EAX=<span class="number">96688368</span>H</span><br><span class="line">BSWAP EAX;EAX=<span class="number">68836896</span>H</span><br></pre></td></tr></table></figure>
+
+<h3 id="XCHG-交换字或字节-至少有一个操作数为寄存器-段寄存器不可作为操作数"><a href="#XCHG-交换字或字节-至少有一个操作数为寄存器-段寄存器不可作为操作数" class="headerlink" title="XCHG 交换字或字节( 至少有一个操作数为寄存器,段寄存器不可作为操作数)"></a>XCHG 交换字或字节( 至少有一个操作数为寄存器,段寄存器不可作为操作数)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xchg ax,hx</span><br><span class="line">xchg ah,al</span><br><span class="line">xchg eax,ebx</span><br><span class="line">xchg var,ax;var16位</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMPXCHG-比较并交换操作数-第二个操作数必须为累加器AL-AX-EAX"><a href="#CMPXCHG-比较并交换操作数-第二个操作数必须为累加器AL-AX-EAX" class="headerlink" title="CMPXCHG 比较并交换操作数( 第二个操作数必须为累加器AL/AX/EAX )"></a>CMPXCHG 比较并交换操作数( 第二个操作数必须为累加器AL/AX/EAX )</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CMPXCHG CX,DX</span><br><span class="line">;如果指令执行前 (AX)=<span class="number">2300</span>H,(CX)=<span class="number">2300</span>H.(DX)=<span class="number">2400</span>H</span><br><span class="line">;则指令执行后 因（CX）=(AX),故(CX)=<span class="number">2400</span>H,ZF=<span class="number">1</span></span><br><span class="line">;如果指令执行前（AX）=<span class="number">2500</span>H,(CX)=<span class="number">2300</span>H,(DX)=<span class="number">2400</span>H</span><br><span class="line">;则指令执行后因（CX）!=(AX)，故(AX)=<span class="number">2300</span>H，ZF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="XADD-先交换再累加-结果在第一个操作数里"><a href="#XADD-先交换再累加-结果在第一个操作数里" class="headerlink" title="XADD 先交换再累加( 结果在第一个操作数里 )"></a>XADD 先交换再累加( 结果在第一个操作数里 )</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xadd eax，ecx</span><br><span class="line">;相当于：</span><br><span class="line">	先执行：</span><br><span class="line">		xchg eax,ecx</span><br><span class="line">	然后执行：</span><br><span class="line">		add eax,ecx</span><br></pre></td></tr></table></figure>
+
+<h3 id="XLAT-字节查表转换"><a href="#XLAT-字节查表转换" class="headerlink" title="XLAT 字节查表转换"></a>XLAT 字节查表转换</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X DW <span class="number">1122</span>h,<span class="number">3344</span>h,<span class="number">5566</span>h,<span class="number">7788</span>h</span><br><span class="line">lea bx,X</span><br><span class="line">mov al,<span class="number">03</span>h</span><br><span class="line">xlat</span><br></pre></td></tr></table></figure>
+
+<p>BX 指向一张 256 字节的表的起点, AL 为表的索引值 (0-255,即 0-FFH); 返回 AL 为查表结果 ( [BX+AL]-&gt;AL )</p>
+<h1 id="输入输出端口传送指令"><a href="#输入输出端口传送指令" class="headerlink" title="输入输出端口传送指令"></a>输入输出端口传送指令</h1><h3 id="IN-I-O端口输入"><a href="#IN-I-O端口输入" class="headerlink" title="IN I/O端口输入"></a>IN I/O端口输入</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法: IN 累加器, &#123;端口号│DX&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="OUT-I-O端口输出"><a href="#OUT-I-O端口输出" class="headerlink" title="OUT I/O端口输出"></a>OUT I/O端口输出</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法: OUT &#123;端口号│DX&#125;,累加器</span><br></pre></td></tr></table></figure>
+
+<h3 id="输入输出端口由立即方式指定时-其范围是-0-255-由寄存器-DX-指定时-其范围是-0-65535"><a href="#输入输出端口由立即方式指定时-其范围是-0-255-由寄存器-DX-指定时-其范围是-0-65535" class="headerlink" title="输入输出端口由立即方式指定时, 其范围是 0-255; 由寄存器 DX 指定时,其范围是 0-65535"></a>输入输出端口由立即方式指定时, 其范围是 0-255; 由寄存器 DX 指定时,其范围是 0-65535</h3><h1 id="目的地址传送指令"><a href="#目的地址传送指令" class="headerlink" title="目的地址传送指令"></a>目的地址传送指令</h1><h3 id="LEA-装入有效地址"><a href="#LEA-装入有效地址" class="headerlink" title="LEA 装入有效地址"></a>LEA 装入有效地址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LEA DX,<span class="built_in">string</span> ;把偏移地址存到DX</span><br></pre></td></tr></table></figure>
+
+<h3 id="LDS-传送目标指针-把指针内容装入DS"><a href="#LDS-传送目标指针-把指针内容装入DS" class="headerlink" title="LDS 传送目标指针,把指针内容装入DS"></a>LDS 传送目标指针,把指针内容装入DS</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LDS SI,<span class="built_in">string</span> ;把段地址:偏移地址存到DS:SI</span><br></pre></td></tr></table></figure>
+
+<h3 id="LES-传送目标指针-把指针内容装入ES"><a href="#LES-传送目标指针-把指针内容装入ES" class="headerlink" title="LES 传送目标指针,把指针内容装入ES"></a>LES 传送目标指针,把指针内容装入ES</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LES DI,<span class="built_in">string</span> ;把段地址:偏移地址存到ESDI</span><br></pre></td></tr></table></figure>
+
+<h3 id="LFS-传送目标指针-把指针内容装入FS"><a href="#LFS-传送目标指针-把指针内容装入FS" class="headerlink" title="LFS 传送目标指针,把指针内容装入FS"></a>LFS 传送目标指针,把指针内容装入FS</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LFS DI,<span class="built_in">string</span> ;把段地址:偏移地址存到FSD</span><br></pre></td></tr></table></figure>
+
+<h3 id="LGS-传送目标指针-把指针内容装入GS"><a href="#LGS-传送目标指针-把指针内容装入GS" class="headerlink" title="LGS 传送目标指针,把指针内容装入GS"></a>LGS 传送目标指针,把指针内容装入GS</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LGS DI,<span class="built_in">string</span> ;把段地址:偏移地址存到GSDI </span><br></pre></td></tr></table></figure>
+
+<h3 id="LSS-传送目标指针-把指针内容装入SS"><a href="#LSS-传送目标指针-把指针内容装入SS" class="headerlink" title="LSS 传送目标指针,把指针内容装入SS"></a>LSS 传送目标指针,把指针内容装入SS</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LSS DI,<span class="built_in">string</span> ;把段地址:偏移地址存到SSDI</span><br></pre></td></tr></table></figure>
+
+<h1 id="标志传送指令"><a href="#标志传送指令" class="headerlink" title="标志传送指令"></a>标志传送指令</h1><h3 id="LAHF-标志寄存器传送-把标志装入AH"><a href="#LAHF-标志寄存器传送-把标志装入AH" class="headerlink" title="LAHF 标志寄存器传送,把标志装入AH"></a>LAHF 标志寄存器传送,把标志装入AH</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">    saveflags byte ?</span><br><span class="line">.code</span><br><span class="line">    lahf</span><br><span class="line">    mov saveflags,ah</span><br></pre></td></tr></table></figure>
+
+<h3 id="SAHF-标志寄存器传送-把AH内容装入标志寄存器"><a href="#SAHF-标志寄存器传送-把AH内容装入标志寄存器" class="headerlink" title="SAHF 标志寄存器传送,把AH内容装入标志寄存器"></a>SAHF 标志寄存器传送,把AH内容装入标志寄存器</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ah,saveflags</span><br><span class="line">    sahf</span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHF-标志入栈"><a href="#PUSHF-标志入栈" class="headerlink" title="PUSHF 标志入栈"></a>PUSHF 标志入栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushf;保存标志寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="POPF-标志出栈"><a href="#POPF-标志出栈" class="headerlink" title="POPF 标志出栈"></a>POPF 标志出栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popf;恢复标志寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="PUSHD-32位标志入栈"><a href="#PUSHD-32位标志入栈" class="headerlink" title="PUSHD 32位标志入栈"></a>PUSHD 32位标志入栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushd;保存<span class="number">32</span>通用寄存器内容</span><br></pre></td></tr></table></figure>
+
+<h3 id="POPD-32位标志出栈"><a href="#POPD-32位标志出栈" class="headerlink" title="POPD 32位标志出栈"></a>POPD 32位标志出栈</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popd;恢复<span class="number">32</span>通用寄存器内存</span><br></pre></td></tr></table></figure>
+
+<h1 id="算术运算指令"><a href="#算术运算指令" class="headerlink" title="算术运算指令"></a>算术运算指令</h1><h3 id="ADD-加法"><a href="#ADD-加法" class="headerlink" title="ADD 加法"></a>ADD 加法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov eax,<span class="number">1</span></span><br><span class="line">add eax,<span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ADC-带进位加法"><a href="#ADC-带进位加法" class="headerlink" title="ADC 带进位加法"></a>ADC 带进位加法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov dl,<span class="number">0</span></span><br><span class="line">mov al,<span class="number">0F</span>Fh</span><br><span class="line">add al,<span class="number">0F</span>Fh;AL=FEh</span><br><span class="line">adc dl,<span class="number">0</span>;DL/AL=<span class="number">01F</span>Eh</span><br></pre></td></tr></table></figure>
+
+<h3 id="INC-加-1"><a href="#INC-加-1" class="headerlink" title="INC 加 1"></a>INC 加 1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">1</span></span><br><span class="line">inc ax</span><br></pre></td></tr></table></figure>
+
+<h3 id="AAA-加法的ASCII码调整"><a href="#AAA-加法的ASCII码调整" class="headerlink" title="AAA 加法的ASCII码调整"></a>AAA 加法的ASCII码调整</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ah,<span class="number">0</span></span><br><span class="line">mov al,<span class="string">&#x27;8&#x27;</span>;AX=<span class="number">0038</span>h</span><br><span class="line">add al,<span class="string">&#x27;2&#x27;</span>;AX=<span class="number">006</span>Ah</span><br><span class="line">aaa;AX=<span class="number">0100</span>h(结果进行ASCII转换)</span><br><span class="line">or ax,3030h;AX=3130h=&#x27;10&#x27;(转换为ASCII码)</span><br></pre></td></tr></table></figure>
+
+<h3 id="DAA-加法的十进制调整"><a href="#DAA-加法的十进制调整" class="headerlink" title="DAA 加法的十进制调整"></a>DAA 加法的十进制调整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">35</span>h</span><br><span class="line">add al,<span class="number">48</span>h;AL=<span class="number">7</span>Dh</span><br><span class="line">daa;AL=<span class="number">83</span>h(调整后结果)</span><br></pre></td></tr></table></figure>
+
+<h3 id="SUB-减法"><a href="#SUB-减法" class="headerlink" title="SUB 减法"></a>SUB 减法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">23</span></span><br><span class="line">sub al,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SBB-带借位减法"><a href="#SBB-带借位减法" class="headerlink" title="SBB 带借位减法"></a>SBB 带借位减法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov edx,<span class="number">7</span>;高<span class="number">32</span>位</span><br><span class="line">mov eax,<span class="number">1</span>;低<span class="number">32</span>位</span><br><span class="line">sub eax，<span class="number">2</span></span><br><span class="line">sbb edx，<span class="number">0</span>;高<span class="number">32</span>位减法</span><br></pre></td></tr></table></figure>
+
+<h3 id="DEC-减-1"><a href="#DEC-减-1" class="headerlink" title="DEC 减 1"></a>DEC 减 1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dec al</span><br></pre></td></tr></table></figure>
+
+<h3 id="NEC-求反-以-0-减之"><a href="#NEC-求反-以-0-减之" class="headerlink" title="NEC 求反(以 0 减之)"></a>NEC 求反(以 0 减之)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nec al</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMP-比较-两操作数作减法-仅修改标志位-不回送结果"><a href="#CMP-比较-两操作数作减法-仅修改标志位-不回送结果" class="headerlink" title="CMP 比较.(两操作数作减法,仅修改标志位,不回送结果)"></a>CMP 比较.(两操作数作减法,仅修改标志位,不回送结果)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">5</span></span><br><span class="line">cmp ax,<span class="number">10</span>;ZF=<span class="number">0</span> <span class="keyword">and</span> CF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="AAS-减法的ASCII码调整"><a href="#AAS-减法的ASCII码调整" class="headerlink" title="AAS 减法的ASCII码调整"></a>AAS 减法的ASCII码调整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov ah,<span class="number">0</span></span><br><span class="line">mov al,<span class="string">&#x27;8&#x27;</span>;AX=<span class="number">0038</span>h</span><br><span class="line">sub al,<span class="string">&#x27;9&#x27;</span>;AX=<span class="number">00F</span>Fh</span><br><span class="line">aas;AX=FF09h</span><br><span class="line">pushf</span><br><span class="line"><span class="keyword">or</span> al,<span class="number">30</span>h;AX=FF39h</span><br><span class="line">popf</span><br></pre></td></tr></table></figure>
+
+<h3 id="DAS-减法的十进制调整"><a href="#DAS-减法的十进制调整" class="headerlink" title="DAS 减法的十进制调整"></a>DAS 减法的十进制调整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov bl,<span class="number">48</span>h</span><br><span class="line">mov al,<span class="number">85</span>h</span><br><span class="line">sub al,bl;AL=<span class="number">3</span>Dh</span><br><span class="line">das;AL=<span class="number">37</span>h(调整后结果)</span><br></pre></td></tr></table></figure>
+
+<h3 id="MUL-无符号乘法"><a href="#MUL-无符号乘法" class="headerlink" title="MUL 无符号乘法"></a>MUL 无符号乘法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var word <span class="number">0100</span>h</span><br><span class="line">mov ax,<span class="number">2000</span>h;AX=<span class="number">2000</span>h;AX存储结果</span><br><span class="line">mul <span class="number">0100</span>h/var;DX:AX=<span class="number">00200000</span>h,CF=<span class="number">1</span>;<span class="number">32</span>位EDX:EAX</span><br></pre></td></tr></table></figure>
+
+<h3 id="IMUL-整数乘法"><a href="#IMUL-整数乘法" class="headerlink" title="IMUL 整数乘法"></a>IMUL 整数乘法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">48</span></span><br><span class="line">mov bx,<span class="number">4</span></span><br><span class="line">imul bx;DX:AX=<span class="number">000000</span>C0h,OF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="以上两条-结果回送AH和AL-字节运算-或DX和AX-字运算"><a href="#以上两条-结果回送AH和AL-字节运算-或DX和AX-字运算" class="headerlink" title="以上两条,结果回送AH和AL(字节运算),或DX和AX(字运算)"></a>以上两条,结果回送AH和AL(字节运算),或DX和AX(字运算)</h3><h3 id="AAM-乘法的ASCII码调整"><a href="#AAM-乘法的ASCII码调整" class="headerlink" title="AAM 乘法的ASCII码调整"></a>AAM 乘法的ASCII码调整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var byte <span class="number">05</span>h,<span class="number">06</span>h</span><br><span class="line">mov bl,var;第一个操作数</span><br><span class="line">mov bl,[var+<span class="number">1</span>];第二个操作数</span><br><span class="line">mul bl;AX=<span class="number">001</span>Eh</span><br><span class="line">aam;AX=<span class="number">0300</span>h</span><br></pre></td></tr></table></figure>
+
+<h3 id="DIV-无符号除法"><a href="#DIV-无符号除法" class="headerlink" title="DIV 无符号除法"></a>DIV 无符号除法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">0083</span>h;被除数</span><br><span class="line">mov bl,<span class="number">2</span>;除数</span><br><span class="line">div bl;AL=<span class="number">41</span>h,AH=<span class="number">01</span>h</span><br></pre></td></tr></table></figure>
+
+<h3 id="IDIV-整数除法"><a href="#IDIV-整数除法" class="headerlink" title="IDIV 整数除法"></a>IDIV 整数除法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var sword <span class="number">-101</span>;<span class="number">009B</span>h</span><br><span class="line">mov dx,<span class="number">0</span></span><br><span class="line">mov ax,var;DX:AX=<span class="number">0000009B</span>h(+<span class="number">155</span>)</span><br><span class="line">mov bx,<span class="number">2</span>;BX是除数</span><br><span class="line">idiv bx;DX:AX除以BX</span><br><span class="line">    </span><br><span class="line">var sword <span class="number">-48</span></span><br><span class="line">mov al,var;被除数低字节</span><br><span class="line">cbw；AL扩展到AH</span><br><span class="line">mov bl,+<span class="number">5</span>;除数</span><br><span class="line">idiv bl;AL=<span class="number">-9</span>,AH=<span class="number">-3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="以上两条-结果回送"><a href="#以上两条-结果回送" class="headerlink" title="以上两条,结果回送:"></a>以上两条,结果回送:</h3><h3 id="商回送AL-余数回送AH-字节运算-或商回送AX-余数回送DX-字运算"><a href="#商回送AL-余数回送AH-字节运算-或商回送AX-余数回送DX-字运算" class="headerlink" title="商回送AL,余数回送AH, (字节运算);或商回送AX,余数回送DX, (字运算)"></a>商回送AL,余数回送AH, (字节运算);或商回送AX,余数回送DX, (字运算)</h3><h3 id="AAD-除法的ASCII码调整"><a href="#AAD-除法的ASCII码调整" class="headerlink" title="AAD 除法的ASCII码调整"></a>AAD 除法的ASCII码调整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var byte ?</span><br><span class="line">var2 byte ?</span><br><span class="line">mov ax,<span class="number">0307</span>h;被除数</span><br><span class="line">aad;AX=<span class="number">0025</span>h</span><br><span class="line">mov bl,<span class="number">5</span>;除数</span><br><span class="line">div bl;AX=<span class="number">0207</span>h</span><br><span class="line">mov var,al</span><br><span class="line">mov var2,ah</span><br></pre></td></tr></table></figure>
+
+<h3 id="CBW-字节转换为字-把AL中字节的符号扩展到AH中去"><a href="#CBW-字节转换为字-把AL中字节的符号扩展到AH中去" class="headerlink" title="CBW 字节转换为字. (把AL中字节的符号扩展到AH中去)"></a>CBW 字节转换为字. (把AL中字节的符号扩展到AH中去)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var sword <span class="number">-101</span>;<span class="number">9B</span>h</span><br><span class="line">mov al,var;AL=<span class="number">9B</span>h</span><br><span class="line">cbw;AL=FF9Bh</span><br></pre></td></tr></table></figure>
+
+<h3 id="CWD-字转换为双字-把AX中的字的符号扩展到DX中去"><a href="#CWD-字转换为双字-把AX中的字的符号扩展到DX中去" class="headerlink" title="CWD 字转换为双字. (把AX中的字的符号扩展到DX中去)"></a>CWD 字转换为双字. (把AX中的字的符号扩展到DX中去)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var sword <span class="number">-101</span>;FF9Bh</span><br><span class="line">mov ax,var;AX=FF9Bh</span><br><span class="line">cwd;DX:AX=FFFFFF9Bh</span><br></pre></td></tr></table></figure>
+
+<h3 id="CWDE-字转换为双字-把AX中的字符号扩展到EAX中去"><a href="#CWDE-字转换为双字-把AX中的字符号扩展到EAX中去" class="headerlink" title="CWDE 字转换为双字. (把AX中的字符号扩展到EAX中去)"></a>CWDE 字转换为双字. (把AX中的字符号扩展到EAX中去)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CDQ-双字扩展-把EAX中的字的符号扩展到EDX中去"><a href="#CDQ-双字扩展-把EAX中的字的符号扩展到EDX中去" class="headerlink" title="CDQ 双字扩展. (把EAX中的字的符号扩展到EDX中去)"></a>CDQ 双字扩展. (把EAX中的字的符号扩展到EDX中去)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var sword <span class="number">-101</span>;FFFFFF9Bh</span><br><span class="line">mov eax,var;EDX:EAX=FFFFFFFFFFFFFF9Bh</span><br><span class="line">cdq</span><br></pre></td></tr></table></figure>
+
+<h1 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h1><h3 id="AND-与运算"><a href="#AND-与运算" class="headerlink" title="AND 与运算"></a>AND 与运算</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">10101110b</span></span><br><span class="line"><span class="keyword">and</span> al,<span class="number">11110110b</span>;消除位<span class="number">0</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="OR-或运算"><a href="#OR-或运算" class="headerlink" title="OR 或运算"></a>OR 或运算</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">11100011b</span></span><br><span class="line"><span class="keyword">or</span> al,<span class="number">00000100b</span>;位<span class="number">2</span>置<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="XOR-异或运算"><a href="#XOR-异或运算" class="headerlink" title="XOR 异或运算"></a>XOR 异或运算</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">10110101b</span></span><br><span class="line"><span class="keyword">xor</span> al,<span class="number">0</span>;异或</span><br></pre></td></tr></table></figure>
+
+<h3 id="NOT-取反"><a href="#NOT-取反" class="headerlink" title="NOT 取反"></a>NOT 取反</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">10101110b</span></span><br><span class="line"><span class="keyword">not</span> al;补集</span><br></pre></td></tr></table></figure>
+
+<h3 id="TEST-测试-两操作数作与运算-仅修改标志位-不回送结果"><a href="#TEST-测试-两操作数作与运算-仅修改标志位-不回送结果" class="headerlink" title="TEST 测试(两操作数作与运算,仅修改标志位,不回送结果)"></a>TEST 测试(两操作数作与运算,仅修改标志位,不回送结果)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test al,<span class="number">00001001b</span>;测试<span class="number">0</span>,<span class="number">3</span>位</span><br></pre></td></tr></table></figure>
+
+<h3 id="SHL-逻辑左移-位元乘法"><a href="#SHL-逻辑左移-位元乘法" class="headerlink" title="SHL 逻辑左移,位元乘法"></a>SHL 逻辑左移,位元乘法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov bl,<span class="number">8F</span>h;BL=<span class="number">10001111b</span></span><br><span class="line">shl bl,<span class="number">1</span>;CF=<span class="number">1</span>,BL=<span class="number">00011110b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SAL-算术左移-SHL"><a href="#SAL-算术左移-SHL" class="headerlink" title="SAL 算术左移(=SHL)"></a>SAL 算术左移(=SHL)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sal/shl</span><br></pre></td></tr></table></figure>
+
+<h3 id="SHR-逻辑右移，位元除法"><a href="#SHR-逻辑右移，位元除法" class="headerlink" title="SHR 逻辑右移，位元除法"></a>SHR 逻辑右移，位元除法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">0</span>D0h;AL=<span class="number">11010000b</span></span><br><span class="line">shr al,<span class="number">1</span>;AL=<span class="number">01101000b</span>,CF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SAR-算术右移-SHR"><a href="#SAR-算术右移-SHR" class="headerlink" title="SAR 算术右移(=SHR)"></a>SAR 算术右移(=SHR)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sar/shr</span><br></pre></td></tr></table></figure>
+
+<h3 id="ROL-循环左移"><a href="#ROL-循环左移" class="headerlink" title="ROL 循环左移"></a>ROL 循环左移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">40</span>h;AL=<span class="number">01000000b</span></span><br><span class="line">rol al,<span class="number">1</span>;AL=<span class="number">10000000b</span></span><br><span class="line">rol al,<span class="number">3</span>;AL=<span class="number">00000100b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ROR-循环右移"><a href="#ROR-循环右移" class="headerlink" title="ROR 循环右移"></a>ROR 循环右移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,<span class="number">01</span>h;AL=<span class="number">00000001b</span></span><br><span class="line">ror al,<span class="number">1</span>;AL=<span class="number">10000000b</span></span><br><span class="line">ror al,<span class="number">3</span>;AL=<span class="number">00010000b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RCL-通过进位的循环左移"><a href="#RCL-通过进位的循环左移" class="headerlink" title="RCL 通过进位的循环左移"></a>RCL 通过进位的循环左移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">clc;CF=<span class="number">0</span></span><br><span class="line">mov bl,<span class="number">88</span>h;CF,BL=<span class="number">0</span> <span class="number">10001000b</span></span><br><span class="line">rcl bl,<span class="number">1</span>;CF,BL=<span class="number">1</span> <span class="number">00010000b</span></span><br><span class="line">rcl bl,<span class="number">1</span>;CF,BL=<span class="number">0</span> <span class="number">00100010b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RCR-通过进位的循环右移"><a href="#RCR-通过进位的循环右移" class="headerlink" title="RCR 通过进位的循环右移"></a>RCR 通过进位的循环右移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stc ;CF=<span class="number">1</span></span><br><span class="line">mov ah,<span class="number">10</span>h;AH,CF=<span class="number">00010000</span> <span class="number">1</span></span><br><span class="line">rcr ah,<span class="number">1</span>;AH,CF=<span class="number">10001000</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>以上八种移位指令,其移位次数可达255次</p>
+<p>移位一次时, 可直接用操作码. 如 SHL AX,1</p>
+<p>移位&gt;1次时, 则由寄存器CL给出移位次数</p>
+<p>如 MOV CL,04 SHL AX,CL</p>
+<h3 id="SHLD-双精度左移"><a href="#SHLD-双精度左移" class="headerlink" title="SHLD 双精度左移"></a>SHLD 双精度左移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wval word <span class="number">9B</span>A6h</span><br><span class="line">mov ax,<span class="number">0</span>AC36h</span><br><span class="line">shld wval,ax,<span class="number">4</span>;wval=BA6Ah,将wval左移<span class="number">4</span>位，并把AX的高<span class="number">4</span>位插入wval的低<span class="number">4</span>位</span><br></pre></td></tr></table></figure>
+
+<h3 id="SHRD-双精度右移"><a href="#SHRD-双精度右移" class="headerlink" title="SHRD 双精度右移"></a>SHRD 双精度右移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">234B</span>h</span><br><span class="line">mov dx,<span class="number">7654</span>h</span><br><span class="line">shrd ax,dx,<span class="number">4</span>;AX右移<span class="number">4</span>位，并把DX的低<span class="number">4</span>位插入AX的高<span class="number">4</span>位</span><br></pre></td></tr></table></figure>
+
+<h1 id="串指令"><a href="#串指令" class="headerlink" title="串指令"></a>串指令</h1><h3 id="DS-SI-源串段寄存器-源串变址"><a href="#DS-SI-源串段寄存器-源串变址" class="headerlink" title="DS:SI 源串段寄存器 :源串变址"></a>DS:SI 源串段寄存器 :源串变址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ESI-目标串段寄存器-目标串变址"><a href="#ESI-目标串段寄存器-目标串变址" class="headerlink" title="ESI 目标串段寄存器:目标串变址"></a>ESI 目标串段寄存器:目标串变址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CX-重复次数计数器"><a href="#CX-重复次数计数器" class="headerlink" title="CX 重复次数计数器"></a>CX 重复次数计数器</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="AL-AX-扫描值"><a href="#AL-AX-扫描值" class="headerlink" title="AL/AX 扫描值"></a>AL/AX 扫描值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="D标志-0表示重复操作中SI和DI应自动增量-1表示应自动减量"><a href="#D标志-0表示重复操作中SI和DI应自动增量-1表示应自动减量" class="headerlink" title="D标志 0表示重复操作中SI和DI应自动增量; 1表示应自动减量"></a>D标志 0表示重复操作中SI和DI应自动增量; 1表示应自动减量</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Z标志-用来控制扫描或比较操作的结束"><a href="#Z标志-用来控制扫描或比较操作的结束" class="headerlink" title="Z标志 用来控制扫描或比较操作的结束"></a>Z标志 用来控制扫描或比较操作的结束</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="MOVS-串传送-MOVSB-传送字符-MOVSW-传送字-MOVSD-传送双字"><a href="#MOVS-串传送-MOVSB-传送字符-MOVSW-传送字-MOVSD-传送双字" class="headerlink" title="MOVS 串传送   ( MOVSB 传送字符 MOVSW 传送字 MOVSD 传送双字 )"></a>MOVS 串传送   ( MOVSB 传送字符 MOVSW 传送字 MOVSD 传送双字 )</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">;传送字符串数据：将ESI寻址的内存数据复制到EDI寻址的内存位置</span><br><span class="line">;复制双字数值</span><br><span class="line">source dword <span class="number">20</span> dup(<span class="number">0F</span>FFFFFFh)</span><br><span class="line">target dword <span class="number">20</span> dup(?)</span><br><span class="line">.code</span><br><span class="line">cld;方向为正</span><br><span class="line">mov ecx,lengthof source;设置REP计数器</span><br><span class="line">mov esi,offset source;ESI指向source</span><br><span class="line">mov edi,offset target;EDI指向target</span><br><span class="line">rep movsd;复制双字</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMPS-串比较-CMPSB-比较字符-CMPSW-比较字"><a href="#CMPS-串比较-CMPSB-比较字符-CMPSW-比较字" class="headerlink" title="CMPS 串比较   ( CMPSB 比较字符 CMPSW 比较字 )"></a>CMPS 串比较   ( CMPSB 比较字符 CMPSW 比较字 )</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">;比较字符串：比较分别由ESI和EDI寻址的内存数据</span><br><span class="line">;比较双字</span><br><span class="line">mov esi OFFSET source</span><br><span class="line">mov edi ,OFFSET target</span><br><span class="line">cld;方向为正向</span><br><span class="line">mov ecx, LENGTHOF source;设置重复计数器</span><br><span class="line">repe cmpsd;相等则重复</span><br></pre></td></tr></table></figure>
+
+<h3 id="SCAS-串扫描-把AL或AX的内容与目标串作比较-比较结果反映在标志位"><a href="#SCAS-串扫描-把AL或AX的内容与目标串作比较-比较结果反映在标志位" class="headerlink" title="SCAS 串扫描    把AL或AX的内容与目标串作比较,比较结果反映在标志位"></a>SCAS 串扫描    把AL或AX的内容与目标串作比较,比较结果反映在标志位</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">;扫描字符串：比较累加器（AL、AX和EAX）与EDI寻址的内存数据</span><br><span class="line">;扫描是否有匹配字符</span><br><span class="line">alpha BYTE <span class="string">&quot;ABCDEFGH&quot;</span>,<span class="number">0</span></span><br><span class="line">.code</span><br><span class="line">mov edi,OFFSET alpha;EDI指向字符串</span><br><span class="line">mov al,<span class="string">&#x27;F&#x27;</span>;检索字符F</span><br><span class="line">mov ecx,LENGTHOF alpha;设置检索计数器</span><br><span class="line">cld;方向为正向</span><br><span class="line">repne scasb;不相等则重复</span><br><span class="line">jnz quit;若未发现字符则退出</span><br><span class="line">dec edi;发现字符: EDI减<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LODS-装入串-把源串中的元素-字或字节-逐一装入AL或AX中-LODSB-传送字符-LODSW-传送字-LODSD-传送双字"><a href="#LODS-装入串-把源串中的元素-字或字节-逐一装入AL或AX中-LODSB-传送字符-LODSW-传送字-LODSD-传送双字" class="headerlink" title="LODS 装入串    把源串中的元素(字或字节)逐一装入AL或AX中( LODSB 传送字符 LODSW 传送字 LODSD 传送双字 )"></a>LODS 装入串    把源串中的元素(字或字节)逐一装入AL或AX中( LODSB 传送字符 LODSW 传送字 LODSD 传送双字 )</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;从字符串加载到累加器：将ESI寻址的内存数据加载到累加器</span><br><span class="line">;数组乘法</span><br><span class="line">:本程序将一个<span class="number">32</span>位整数数组中的每个元素都乘以一个常数。</span><br><span class="line">INCLUDE Irvine32. inc</span><br><span class="line">.data</span><br><span class="line"><span class="built_in">array</span> DWORD <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>;测试数据</span><br><span class="line">multiplier DWORD <span class="number">10</span>;测试数据</span><br><span class="line">.code</span><br><span class="line">main PROC</span><br><span class="line">    cld;方向为正向</span><br><span class="line">    mov esi,OFFSET <span class="built_in">array</span>;源数组索引</span><br><span class="line">    mov edi,esi;目标数组索引</span><br><span class="line">    mov ecx,LENGTHOF <span class="built_in">array</span>;循环计数器</span><br><span class="line">Ll: lodsd;将[ESI]加载到EAX</span><br><span class="line">    mul multiplier;与常数相乘</span><br><span class="line">    stosd;将EAX保存到[EDI]</span><br><span class="line">    loop Ll</span><br><span class="line">    <span class="built_in">exit</span></span><br><span class="line">main ENDP</span><br><span class="line">END main</span><br></pre></td></tr></table></figure>
+
+<h3 id="STOS-保存串-是LODS的逆过程"><a href="#STOS-保存串-是LODS的逆过程" class="headerlink" title="STOS 保存串   是LODS的逆过程"></a>STOS 保存串   是LODS的逆过程</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">;保存字符串数据L：将累加器内容保存到EDI寻址的内存位置</span><br><span class="line">.data</span><br><span class="line">Count = <span class="number">100</span></span><br><span class="line">string1 BYTE Count DUP(?)</span><br><span class="line">.code</span><br><span class="line">mov al,OFFh;要保存的数值</span><br><span class="line">mov edi,OFFSET string1;EDI指向目标字符串</span><br><span class="line">mov ecx,Count;字符计数器</span><br><span class="line">cld;方向为正向</span><br><span class="line">rep stosb;用AL的内容实现填充</span><br></pre></td></tr></table></figure>
+
+<h3 id="REP-当CX-ECX-lt-gt-0时重复-单个指令处理整个字符串"><a href="#REP-当CX-ECX-lt-gt-0时重复-单个指令处理整个字符串" class="headerlink" title="REP 当CX/ECX&lt;&gt;0时重复(单个指令处理整个字符串)"></a>REP 当CX/ECX&lt;&gt;0时重复(单个指令处理整个字符串)</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rep movsb</span><br></pre></td></tr></table></figure>
+
+<h3 id="REPE-REPZ-当ZF-1或比较结果相等-且CX-ECX-lt-gt-0时重复"><a href="#REPE-REPZ-当ZF-1或比较结果相等-且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPE/REPZ 当ZF=1或比较结果相等,且CX/ECX&lt;&gt;0时重复"></a>REPE/REPZ 当ZF=1或比较结果相等,且CX/ECX&lt;&gt;0时重复</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repe cmpsd</span><br></pre></td></tr></table></figure>
+
+<h3 id="REPNE-REPNZ-当ZF-0或比较结果不相等-且CX-ECX-lt-gt-0时重复"><a href="#REPNE-REPNZ-当ZF-0或比较结果不相等-且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPNE/REPNZ 当ZF=0或比较结果不相等,且CX/ECX&lt;&gt;0时重复"></a>REPNE/REPNZ 当ZF=0或比较结果不相等,且CX/ECX&lt;&gt;0时重复</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repne scasb</span><br></pre></td></tr></table></figure>
+
+<h3 id="REPC-当CF-1且CX-ECX-lt-gt-0时重复"><a href="#REPC-当CF-1且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPC 当CF=1且CX/ECX&lt;&gt;0时重复"></a>REPC 当CF=1且CX/ECX&lt;&gt;0时重复</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repc movsb</span><br></pre></td></tr></table></figure>
+
+<h3 id="REPNC-当CF-0且CX-ECX-lt-gt-0时重复"><a href="#REPNC-当CF-0且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPNC 当CF=0且CX/ECX&lt;&gt;0时重复"></a>REPNC 当CF=0且CX/ECX&lt;&gt;0时重复</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repnc movsb</span><br></pre></td></tr></table></figure>
+
+<h1 id="程序转移指令"><a href="#程序转移指令" class="headerlink" title="程序转移指令"></a>程序转移指令</h1><h2 id="简单的条件转移指令"><a href="#简单的条件转移指令" class="headerlink" title="简单的条件转移指令"></a>简单的条件转移指令</h2><h3 id="JZ-或jE-OPR—————结果为零转移-测试条件ZF-1；相等跳转"><a href="#JZ-或jE-OPR—————结果为零转移-测试条件ZF-1；相等跳转" class="headerlink" title="JZ(或jE)  OPR—————结果为零转移, 测试条件ZF=1；相等跳转"></a>JZ(或jE)  OPR—————结果为零转移, 测试条件ZF=1；相等跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp eax,<span class="number">0</span></span><br><span class="line">jz/je L1;如果ZF=<span class="number">1</span>则跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JNZ-或jNE-OPR-————–结果不为零转移-测试条件ZF-0；不等跳转"><a href="#JNZ-或jNE-OPR-————–结果不为零转移-测试条件ZF-0；不等跳转" class="headerlink" title="JNZ(或jNE) OPR ————–结果不为零转移,测试条件ZF=0；不等跳转"></a>JNZ(或jNE) OPR ————–结果不为零转移,测试条件ZF=0；不等跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> dl,<span class="number">10110000b</span></span><br><span class="line">jnz/jne L2;ZF=<span class="number">0</span>跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JS-OPR———————-结果为负转移-测试条件SF-1"><a href="#JS-OPR———————-结果为负转移-测试条件SF-1" class="headerlink" title="JS OPR———————-结果为负转移, 测试条件SF=1"></a>JS OPR———————-结果为负转移, 测试条件SF=1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JNS-OPR———————结果为正转移-测试条件SF-0"><a href="#JNS-OPR———————结果为正转移-测试条件SF-0" class="headerlink" title="JNS OPR———————结果为正转移, 测试条件SF=0"></a>JNS OPR———————结果为正转移, 测试条件SF=0</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JO-OPR———————-溢出转移-测试条件OF-1"><a href="#JO-OPR———————-溢出转移-测试条件OF-1" class="headerlink" title="JO OPR——————— 溢出转移,   测试条件OF=1"></a>JO OPR——————— 溢出转移,   测试条件OF=1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JNO-OPR-——————–不溢出转移-测试条件OF-0"><a href="#JNO-OPR-——————–不溢出转移-测试条件OF-0" class="headerlink" title="JNO OPR ——————–不溢出转移 , 测试条件OF=0"></a>JNO OPR ——————–不溢出转移 , 测试条件OF=0</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JP-OPR-———————结果为偶转移-测试条件PF-1"><a href="#JP-OPR-———————结果为偶转移-测试条件PF-1" class="headerlink" title="JP OPR ———————结果为偶转移, 测试条件PF=1"></a>JP OPR ———————结果为偶转移, 测试条件PF=1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JNP-OPR-——————–结果为奇转移-测试条件PF-0"><a href="#JNP-OPR-——————–结果为奇转移-测试条件PF-0" class="headerlink" title="JNP OPR ——————–结果为奇转移 , 测试条件PF=0"></a>JNP OPR ——————–结果为奇转移 , 测试条件PF=0</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JC-OPR-——————–-有进位转移-测试条件CF-1"><a href="#JC-OPR-——————–-有进位转移-测试条件CF-1" class="headerlink" title="JC OPR ——————– 有进位转移 , 测试条件CF=1"></a>JC OPR ——————– 有进位转移 , 测试条件CF=1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="JNC-OPR-——————–无进位转移-测试条件CF-0"><a href="#JNC-OPR-——————–无进位转移-测试条件CF-0" class="headerlink" title="JNC OPR ——————–无进位转移,  测试条件CF=0"></a>JNC OPR ——————–无进位转移,  测试条件CF=0</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="无符号比较条件转移指令-以下指令经常是CMP-OPD-OPS后面的指令根据比较结果来实现转移"><a href="#无符号比较条件转移指令-以下指令经常是CMP-OPD-OPS后面的指令根据比较结果来实现转移" class="headerlink" title="无符号比较条件转移指令(以下指令经常是CMP OPD,OPS后面的指令根据比较结果来实现转移)"></a>无符号比较条件转移指令(以下指令经常是CMP OPD,OPS后面的指令根据比较结果来实现转移)</h3><h3 id="JB-或JNAE-opd-————–小于或者不大于等于则转移"><a href="#JB-或JNAE-opd-————–小于或者不大于等于则转移" class="headerlink" title="JB(或JNAE) opd ————–小于或者不大于等于则转移"></a>JB(或JNAE) opd ————–小于或者不大于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小于跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JNB-或JAE-opd—————不小于或者大于等于则转移"><a href="#JNB-或JAE-opd—————不小于或者大于等于则转移" class="headerlink" title="JNB(或JAE) opd—————不小于或者大于等于则转移"></a>JNB(或JAE) opd—————不小于或者大于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不小于跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JA-或NJBE-OPD—————大于或者不小于等于则转移"><a href="#JA-或NJBE-OPD—————大于或者不小于等于则转移" class="headerlink" title="JA(或NJBE) OPD—————大于或者不小于等于则转移"></a>JA(或NJBE) OPD—————大于或者不小于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,+<span class="number">127</span></span><br><span class="line">cmp al,<span class="number">-128</span></span><br><span class="line">    ja/njbe L1;不跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JNA-或JBE-OPD—————不大于或者小于等于则转移"><a href="#JNA-或JBE-OPD—————不大于或者小于等于则转移" class="headerlink" title="JNA(或JBE) OPD—————不大于或者小于等于则转移"></a>JNA(或JBE) OPD—————不大于或者小于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov al,+<span class="number">127</span></span><br><span class="line">cmp al,<span class="number">-128</span></span><br><span class="line">    jna/jbe L1;跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="带符号比较条件转移指令"><a href="#带符号比较条件转移指令" class="headerlink" title="带符号比较条件转移指令"></a>带符号比较条件转移指令</h3><h3 id="JL-或JNGE-————–小于或者不大于等于则转移"><a href="#JL-或JNGE-————–小于或者不大于等于则转移" class="headerlink" title="JL(或JNGE) ————–小于或者不大于等于则转移"></a>JL(或JNGE) ————–小于或者不大于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">5</span></span><br><span class="line">mov ax,<span class="number">6</span></span><br><span class="line">	jl/jnge L1;跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JNL-或JGE-————–不小于或者大于等于则转移"><a href="#JNL-或JGE-————–不小于或者大于等于则转移" class="headerlink" title="JNL(或JGE)————–不小于或者大于等于则转移"></a>JNL(或JGE)————–不小于或者大于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov edx,<span class="number">-1</span></span><br><span class="line">cmp edx,<span class="number">0</span></span><br><span class="line">    jnl/jge L1;不跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JG-或NJLE-—————大于或者不小于等于则转移"><a href="#JG-或NJLE-—————大于或者不小于等于则转移" class="headerlink" title="JG(或NJLE)—————大于或者不小于等于则转移"></a>JG(或NJLE)—————大于或者不小于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">5</span></span><br><span class="line">cmp ax,<span class="number">4</span></span><br><span class="line">	jp/njle L1;大于则跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JNG-或JLE-—————不大于或者小于等于则转移"><a href="#JNG-或JLE-—————不大于或者小于等于则转移" class="headerlink" title="JNG(或JLE)—————不大于或者小于等于则转移"></a>JNG(或JLE)—————不大于或者小于等于则转移</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ecx,<span class="number">0</span></span><br><span class="line">cmp ecx,<span class="number">0</span></span><br><span class="line">    jng/jle;跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JCXZ"><a href="#JCXZ" class="headerlink" title="JCXZ"></a>JCXZ</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CX=<span class="number">0</span>跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JECXZ"><a href="#JECXZ" class="headerlink" title="JECXZ"></a>JECXZ</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECX=<span class="number">0</span>跳转</span><br></pre></td></tr></table></figure>
+
+<h3 id="JRCXZ"><a href="#JRCXZ" class="headerlink" title="JRCXZ"></a>JRCXZ</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RCX=<span class="number">0</span>跳转</span><br></pre></td></tr></table></figure>
+
+<h2 id="调用子程序与返回指令"><a href="#调用子程序与返回指令" class="headerlink" title="调用子程序与返回指令"></a>调用子程序与返回指令</h2><h3 id="CALL-子程序调用指令"><a href="#CALL-子程序调用指令" class="headerlink" title="CALL  子程序调用指令"></a>CALL  子程序调用指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call SumOf;调用SumOf过程</span><br></pre></td></tr></table></figure>
+
+<h3 id="RET-子程序返回指令"><a href="#RET-子程序返回指令" class="headerlink" title="RET 子程序返回指令"></a>RET 子程序返回指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SumOf proc</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    ret</span><br><span class="line">SumOf endp</span><br></pre></td></tr></table></figure>
+
+<h2 id="条件循环指令"><a href="#条件循环指令" class="headerlink" title="条件循环指令"></a>条件循环指令</h2><h3 id="LOOP———-按ECX计算器循环"><a href="#LOOP———-按ECX计算器循环" class="headerlink" title="LOOP———-按ECX计算器循环"></a>LOOP———-按ECX计算器循环</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    mov ax,<span class="number">0</span></span><br><span class="line">    mov ecx,<span class="number">5</span></span><br><span class="line">L1:</span><br><span class="line">    inc ax</span><br><span class="line">    loop L1;每次循环ax加一，循环<span class="number">5</span>次</span><br></pre></td></tr></table></figure>
+
+<h3 id="LOOPZ————为零跳转"><a href="#LOOPZ————为零跳转" class="headerlink" title="LOOPZ————为零跳转"></a>LOOPZ————为零跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loopz L1</span><br></pre></td></tr></table></figure>
+
+<h3 id="LOOPNZ————–非零跳转"><a href="#LOOPNZ————–非零跳转" class="headerlink" title="LOOPNZ————–非零跳转"></a>LOOPNZ————–非零跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loopnz L1</span><br></pre></td></tr></table></figure>
+
+<h3 id="LOOPE——————-相等跳转"><a href="#LOOPE——————-相等跳转" class="headerlink" title="LOOPE——————-相等跳转"></a>LOOPE——————-相等跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loope L1</span><br></pre></td></tr></table></figure>
+
+<h3 id="LOOPNE——————-不等跳转"><a href="#LOOPNE——————-不等跳转" class="headerlink" title="LOOPNE——————-不等跳转"></a>LOOPNE——————-不等跳转</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loopne L1</span><br></pre></td></tr></table></figure>
+
+<h3 id="IF-ELSE-ELSEIF-ENDIF"><a href="#IF-ELSE-ELSEIF-ENDIF" class="headerlink" title=".IF .ELSE .ELSEIF .ENDIF"></a>.IF .ELSE .ELSEIF .ENDIF</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.IF conditionl</span><br><span class="line">    statements</span><br><span class="line">[.ELSELF condition2</span><br><span class="line">	statements]</span><br><span class="line">[ELSE </span><br><span class="line">	statements]</span><br><span class="line">.ENDIF</span><br></pre></td></tr></table></figure>
+
+<h3 id="REPEAT-WHILE"><a href="#REPEAT-WHILE" class="headerlink" title=".REPEAT .WHILE"></a>.REPEAT .WHILE</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.REPEAT </span><br><span class="line">    statements</span><br><span class="line">.UNTIL condition</span><br><span class="line">    </span><br><span class="line">.WHILE condition</span><br><span class="line">    statements</span><br><span class="line">.ENDW</span><br></pre></td></tr></table></figure>
+
+<h2 id="其它指令"><a href="#其它指令" class="headerlink" title="其它指令"></a>其它指令</h2><h3 id="OFFSET-——————–-返回偏移地址"><a href="#OFFSET-——————–-返回偏移地址" class="headerlink" title="OFFSET ——————– 返回偏移地址"></a>OFFSET ——————– 返回偏移地址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov esi,offset var1;  esi=<span class="number">00404000</span>h</span><br><span class="line">mov esi,offset var2;  esi=<span class="number">00404000</span>h</span><br></pre></td></tr></table></figure>
+
+<h3 id="SEG-——————–-返回段地址"><a href="#SEG-——————–-返回段地址" class="headerlink" title="SEG  ——————– 返回段地址"></a>SEG  ——————– 返回段地址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov esi,seg var1</span><br><span class="line">mov esi,seg var2</span><br></pre></td></tr></table></figure>
+
+<h3 id="EQU-——————–-等值语句"><a href="#EQU-——————–-等值语句" class="headerlink" title="EQU(=) ——————– 等值语句"></a>EQU(=) ——————– 等值语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name EQU expression</span><br><span class="line">name EQU symbol</span><br><span class="line">name EQU &lt;text&gt;</span><br><span class="line">    </span><br><span class="line">pressKey EQU &lt;<span class="string">&quot;Press any key to continue...&quot;</span>, <span class="number">0</span>&gt;</span><br><span class="line">matrix1 EQU <span class="number">10</span> * <span class="number">10</span></span><br><span class="line">matrix2 EQU &lt;<span class="number">10</span> * <span class="number">10</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="PURGE-——————–-解除语句"><a href="#PURGE-——————–-解除语句" class="headerlink" title="PURGE ——————– 解除语句"></a>PURGE ——————– 解除语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PURGE，标识符<span class="number">1</span>，标识符<span class="number">2</span>，...，标识符n</span><br></pre></td></tr></table></figure>
+
+<h3 id="DUP-——————–-操作数字段用复制操作符"><a href="#DUP-——————–-操作数字段用复制操作符" class="headerlink" title="DUP  ——————– 操作数字段用复制操作符"></a>DUP  ——————– 操作数字段用复制操作符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">db x <span class="title">dup</span><span class="params">()</span></span>;x是重复的次数，（）里是要重复的数逗号分隔</span><br><span class="line">str1 db 10 dup (&#x27;!@#&#x27;) ;这就是十个！@#</span><br><span class="line">格式：db 重复的次数 dup (重复的内容)</span><br><span class="line">buf1 db <span class="number">100</span> dup(?);开辟<span class="number">100</span>个字节的内存区</span><br></pre></td></tr></table></figure>
+
+<h3 id="SEGMENT-ENDS-——————–-段定义指令"><a href="#SEGMENT-ENDS-——————–-段定义指令" class="headerlink" title="SEGMENT,ENDS ——————– 段定义指令"></a>SEGMENT,ENDS ——————– 段定义指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">segment_name SEGMENT 【定位类型】 【组合类型】 【类别名】</span><br><span class="line">···;here is your code</span><br><span class="line">segment ends</span><br></pre></td></tr></table></figure>
+
+<h3 id="ASSUME-——————–-段地址分配指令"><a href="#ASSUME-——————–-段地址分配指令" class="headerlink" title="ASSUME ——————– 段地址分配指令"></a>ASSUME ——————– 段地址分配指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.data</span><br><span class="line">　　........</span><br><span class="line">.code</span><br><span class="line">　　........</span><br><span class="line">　　assume cs:code,ds:data</span><br><span class="line">start: .......</span><br><span class="line">　　mov ax,data</span><br><span class="line">　　mov ds,ax</span><br><span class="line">　　...</span><br><span class="line">ends</span><br><span class="line">end start</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="ORG-——————–-起始偏移地址设置指令"><a href="#ORG-——————–-起始偏移地址设置指令" class="headerlink" title="ORG  ——————– 起始偏移地址设置指令"></a>ORG  ——————– 起始偏移地址设置指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ORG <span class="number">0000</span>H</span><br><span class="line">AJMP MAIN</span><br><span class="line">ORG <span class="number">0030</span>H</span><br></pre></td></tr></table></figure>
+
+<h3 id="——————–地址计数器的当前值"><a href="#——————–地址计数器的当前值" class="headerlink" title="$   ——————–地址计数器的当前值"></a>$   ——————–地址计数器的当前值</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如JNE+<span class="number">6</span>，能引用地址计数器的值，每次引用会使地址计数器的值发生改变，地址计数器即当前指令的偏移地址。该指令的转向地址即JNE指令的首地址加<span class="number">6</span>。</span><br></pre></td></tr></table></figure>
+
+<h3 id="PROC，ENDP-——————–-过程定义语句"><a href="#PROC，ENDP-——————–-过程定义语句" class="headerlink" title="PROC，ENDP ——————– 过程定义语句"></a>PROC，ENDP ——————– 过程定义语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SumOf proc</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    ret</span><br><span class="line">SumOf endp;这是一个过程</span><br></pre></td></tr></table></figure>
+
+<h3 id="NAME，TITLE，END-——————–-程序开始结束语句"><a href="#NAME，TITLE，END-——————–-程序开始结束语句" class="headerlink" title="NAME，TITLE，END ——————– 程序开始结束语句"></a>NAME，TITLE，END ——————– 程序开始结束语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="MACRO，ENDM-——————–宏定义指令"><a href="#MACRO，ENDM-——————–宏定义指令" class="headerlink" title="MACRO，ENDM  ——————–宏定义指令"></a>MACRO，ENDM  ——————–宏定义指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mPutchar MACRO <span class="keyword">char</span></span><br><span class="line">    push eax</span><br><span class="line">    mov al,<span class="keyword">char</span></span><br><span class="line">    call WriteChar</span><br><span class="line">    pop eax</span><br><span class="line">    ENDM</span><br></pre></td></tr></table></figure>
+
+<h3 id="XLAT-（TRANSLATE）-——————–-换码指令—"><a href="#XLAT-（TRANSLATE）-——————–-换码指令—" class="headerlink" title="XLAT  （TRANSLATE） ——————– 换码指令—-"></a>XLAT  （TRANSLATE） ——————– 换码指令—-</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X DW <span class="number">1122</span>h,<span class="number">3344</span>h,<span class="number">5566</span>h,<span class="number">7788</span>h</span><br><span class="line">lea bx,X</span><br><span class="line">mov al,<span class="number">03</span>h</span><br><span class="line">xlat</span><br></pre></td></tr></table></figure>
+
+<h3 id="ALIGN-———————伪指令"><a href="#ALIGN-———————伪指令" class="headerlink" title="ALIGN ———————伪指令"></a>ALIGN ———————伪指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var byte ?; <span class="number">00404000</span>h</span><br><span class="line">ALIGN <span class="number">2</span></span><br><span class="line">var2 byte ?; <span class="number">00404002</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="PTR-———————-运算符"><a href="#PTR-———————-运算符" class="headerlink" title="PTR ———————-运算符"></a>PTR ———————-运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var dword <span class="number">12345678</span>h</span><br><span class="line">mov ax,word ptr var; 将低<span class="number">16</span>位(<span class="number">5678</span>)送入ax</span><br></pre></td></tr></table></figure>
+
+<h3 id="TYPE"><a href="#TYPE" class="headerlink" title="TYPE"></a>TYPE</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var word ?</span><br><span class="line">var2 byte ?; word,byte都是type,分别代表<span class="number">2</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LENGTHOF-————–运算符"><a href="#LENGTHOF-————–运算符" class="headerlink" title="LENGTHOF ————–运算符"></a>LENGTHOF ————–运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1 byte <span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>;<span class="number">3</span></span><br><span class="line">var2 word <span class="number">30</span> DUP(?),<span class="number">0</span>,<span class="number">0</span>;<span class="number">32</span></span><br><span class="line">var3 word <span class="number">5</span> DUP(<span class="number">3</span> dup(?));<span class="number">3</span>*<span class="number">5</span></span><br><span class="line">var4 byte <span class="string">&quot;1234&quot;</span>,<span class="number">0</span>;<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SIZFEOF————-运算符"><a href="#SIZFEOF————-运算符" class="headerlink" title="SIZFEOF————-运算符"></a>SIZFEOF————-运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var word <span class="number">32</span> dup(<span class="number">0</span>)</span><br><span class="line">mov eax,<span class="keyword">sizeof</span> var;eax=<span class="number">32</span>*<span class="number">2</span>=<span class="number">64</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LABEL-—————伪指令"><a href="#LABEL-—————伪指令" class="headerlink" title="LABEL —————伪指令"></a>LABEL —————伪指令</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1 label word</span><br><span class="line">var2 dword <span class="number">12345678</span>h;公用一个内存位置，var2未分配空间</span><br><span class="line">mov ax,var1;<span class="number">5678</span>h</span><br><span class="line">mov dx,[var+<span class="number">2</span>];<span class="number">1234</span>h</span><br></pre></td></tr></table></figure>
+
+<h3 id="TYPEDEF————–运算符"><a href="#TYPEDEF————–运算符" class="headerlink" title="TYPEDEF————–运算符"></a>TYPEDEF————–运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var <span class="keyword">typedef</span> ptr byte;(指针)</span><br><span class="line">.data</span><br><span class="line">	<span class="built_in">array</span> byte <span class="number">10</span>h,<span class="number">20</span>h,<span class="number">30</span>h</span><br><span class="line">    ptr1 var ?</span><br><span class="line">    ptr2 var <span class="built_in">array</span>;指向一个数组</span><br></pre></td></tr></table></figure>
+
+<h3 id="JMP-————无条件跳转到目标地址"><a href="#JMP-————无条件跳转到目标地址" class="headerlink" title="JMP ————无条件跳转到目标地址"></a>JMP ————无条件跳转到目标地址</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">top:</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">    jmp top;不断循环</span><br></pre></td></tr></table></figure>
+
+<h3 id="USES—————等于-push-pop"><a href="#USES—————等于-push-pop" class="headerlink" title="USES—————等于 push+pop"></a>USES—————等于 push+pop</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArraySum proc uses esi ecx</span><br><span class="line">    mov eax,<span class="number">0</span></span><br><span class="line">L1:</span><br><span class="line">	add eax,[esi]</span><br><span class="line">    add esi,type dword</span><br><span class="line">    loop L1</span><br><span class="line">ArraySum endp</span><br></pre></td></tr></table></figure>
+
+<h3 id="CLC"><a href="#CLC" class="headerlink" title="CLC"></a>CLC</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clc;清除标识位</span><br></pre></td></tr></table></figure>
+
+<h3 id="STC"><a href="#STC" class="headerlink" title="STC"></a>STC</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进位标志置1</span><br></pre></td></tr></table></figure>
+
+<h3 id="ENTER——————-被调用过程自动创建堆栈帧"><a href="#ENTER——————-被调用过程自动创建堆栈帧" class="headerlink" title="ENTER——————-被调用过程自动创建堆栈帧"></a>ENTER——————-被调用过程自动创建堆栈帧</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mysub proc</span><br><span class="line">	enter 8,0</span><br><span class="line">;等效于</span><br><span class="line">Mysub proc</span><br><span class="line">	push ebp</span><br><span class="line">	mov ebp,esp</span><br><span class="line">	sub esp,8</span><br></pre></td></tr></table></figure>
+
+<h3 id="LEAVE——————指令结束一个过程的堆栈帧"><a href="#LEAVE——————指令结束一个过程的堆栈帧" class="headerlink" title="LEAVE——————指令结束一个过程的堆栈帧"></a>LEAVE——————指令结束一个过程的堆栈帧</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Mysub proc</span><br><span class="line">	enter 8,0</span><br><span class="line">	.</span><br><span class="line">	.</span><br><span class="line">	leave</span><br><span class="line">	ret</span><br><span class="line">Mysub endp</span><br><span class="line">;等效于</span><br><span class="line">Mysub proc</span><br><span class="line">	push ebp</span><br><span class="line">	mov ebp,esp</span><br><span class="line">	sub esp,8</span><br><span class="line">	.</span><br><span class="line">	.</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">	ret</span><br><span class="line">Mysub endp</span><br></pre></td></tr></table></figure>
+
+<h3 id="LOCAL—————局部变量"><a href="#LOCAL—————局部变量" class="headerlink" title="LOCAL—————局部变量"></a>LOCAL—————局部变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mysub proc</span><br><span class="line">	local var:dword;这是一个局部变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="INVOKE—————–CALL替代品，一行调用多个参数"><a href="#INVOKE—————–CALL替代品，一行调用多个参数" class="headerlink" title="INVOKE—————–CALL替代品，一行调用多个参数"></a>INVOKE—————–CALL替代品，一行调用多个参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">invoke Dumparray,offset array,lengthof array,type array</span><br></pre></td></tr></table></figure>
+
+<h3 id="ADDR——–只能和INVOKE一起"><a href="#ADDR——–只能和INVOKE一起" class="headerlink" title="ADDR——–只能和INVOKE一起"></a>ADDR——–只能和INVOKE一起</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array dword 20 dup(?)</span><br><span class="line">invoke swap</span><br><span class="line">	addr array</span><br><span class="line">	addr [array+4]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="条件标志"><a href="#条件标志" class="headerlink" title="条件标志"></a>条件标志</h2><h3 id="ZF-零标志"><a href="#ZF-零标志" class="headerlink" title="ZF 零标志"></a>ZF 零标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当结果为负时,SF=<span class="number">1</span>,否则,SF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="AF-辅助进位标志"><a href="#AF-辅助进位标志" class="headerlink" title="AF 辅助进位标志"></a>AF 辅助进位标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运算过程中第三位有进位值,置AF=<span class="number">1</span>,否则,AF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="PF-奇偶标志"><a href="#PF-奇偶标志" class="headerlink" title="PF 奇偶标志"></a>PF 奇偶标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当结果操作数中偶数个<span class="string">&quot;1&quot;</span>,置PF=<span class="number">1</span>,否则,PF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SF-符号标志"><a href="#SF-符号标志" class="headerlink" title="SF 符号标志"></a>SF 符号标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当结果为负时,SF=<span class="number">1</span>;否则,SF=<span class="number">0.</span>溢出时情形例外</span><br></pre></td></tr></table></figure>
+
+<h3 id="CF-进位标志"><a href="#CF-进位标志" class="headerlink" title="CF 进位标志"></a>CF 进位标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最高有效位产生进位值,例如,执行加法指令时,MSB有进位,置CF=<span class="number">1</span>;否则,CF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="OF-溢出标志"><a href="#OF-溢出标志" class="headerlink" title="OF 溢出标志"></a>OF 溢出标志</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">若操作数结果超出了机器能表示的范围,则产生溢出,置OF=<span class="number">1</span>,否则,OF=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"># 汇编</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/01/%E5%AF%84%E5%AD%98%E5%99%A8/" rel="prev" title="寄存器">
+                  <i class="fa fa-chevron-left"></i> 寄存器
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逐梦</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
