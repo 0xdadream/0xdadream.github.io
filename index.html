@@ -423,11 +423,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="Training-WWW-Robots"><a href="#Training-WWW-Robots" class="headerlink" title="Training-WWW-Robots"></a>Training-WWW-Robots</h2><p>进去就有提示</p>
-<p>robots.txt文件是为了告诉爬虫程序或者搜索引擎哪些资源不能爬，你就可以从这些资源中找到你要用的,然后进行你的操作</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6ErLcR.png" alt="6ErLcR.png"></p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6ErvB6.png" alt="6ErvB6.png"></p>
-
+              robots.txt
+          
       
       
     </div>
@@ -445,6 +442,10 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" rel="tag">攻防世界</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/2100/08/15/Training-WWW-Robots/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -489,23 +490,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="爆破-1"><a href="#爆破-1" class="headerlink" title="爆破-1"></a>爆破-1</h2><p>进去后如下代码提示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &quot;flag.php&quot;;</span><br><span class="line">$a &#x3D; @$_REQUEST[&#39;hello&#39;];</span><br><span class="line">if(!preg_match(&#39;&#x2F;^\w*$&#x2F;&#39;,$a ))&#123;</span><br><span class="line">  die(&#39;ERROR&#39;);</span><br><span class="line">&#125;</span><br><span class="line">eval(&quot;var_dump($$a);&quot;);</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>$_REQUEST[‘hello’]</p>
-<p>提交的参数是hello，前面提示在某个6位变量中，想到爆破，但是工作量很大</p>
-<p>/^\w*$/ </p>
-<p>^n   以n开头</p>
-<p>n$  以n结尾</p>
-<p>n*  匹配0个或者多个n</p>
-<p>\w  查找单词字符  A_Z  a_z  0_9  _</p>
-<p>正则过滤后爆破还是很大的工作量</p>
-<p>eval(“var_dump($$a);”)</p>
-<p>eavl()是代码执行函数，</p>
-<p>var_dump() 函数将变量的类型、值、结构等信息打印出来</p>
-<p>这里就可以是用全局变量$GLOBALS将所有变量打印出来</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EyMdK.png" alt="6EyMdK.png"></p>
-
+              全局变量GLOBALS
+          
       
       
     </div>
@@ -523,6 +509,60 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/i%E6%98%A5%E7%A7%8B/" rel="tag">i春秋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/2100/08/15/%E7%88%86%E7%A0%B4-1/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-[极客大挑战 2019]Havefun" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/03/03/%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5DHavefun/" class="article-date">
+      <time datetime="2021-03-03T15:15:45.639Z" itemprop="datePublished">2021-03-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h2><p>审查源代码得到</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cat=$_GET[<span class="string">&#x27;cat&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> $cat;</span><br><span class="line"><span class="keyword">if</span>($cat==<span class="string">&#x27;dog&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;Syc&#123;cat_cat_cat_cat&#125;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传入参数=dog</p>
+<p>payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?cat&#x3D;dog</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
       
       <div class="clearfix"></div>
     </div>
