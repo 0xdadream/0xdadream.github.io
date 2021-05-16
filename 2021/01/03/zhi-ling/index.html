@@ -1,0 +1,2194 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="32位汇编指令总结(代码示例), 逐梦">
+    <meta name="description" content="Welcome to my blog">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>32位汇编指令总结(代码示例) | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">32位汇编指令总结(代码示例)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B1%87%E7%BC%96/">
+                                <span class="chip bg-color">汇编</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AF%AD%E8%A8%80/" class="post-category">
+                                语言
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-01-03
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="通用数据传送指令"><a href="#通用数据传送指令" class="headerlink" title="通用数据传送指令"></a>通用数据传送指令</h1><h3 id="MOV-传送字或字节"><a href="#MOV-传送字或字节" class="headerlink" title="MOV 传送字或字节"></a>MOV 传送字或字节</h3><pre class=" language-c++"><code class="language-c++">mov al,10h
+</code></pre>
+<h3 id="MOVSX-先符号扩展-再传送"><a href="#MOVSX-先符号扩展-再传送" class="headerlink" title="MOVSX 先符号扩展,再传送"></a>MOVSX 先符号扩展,再传送</h3><pre class=" language-c++"><code class="language-c++">movsx eax,ax;先进行全零扩展,前16位为F
+</code></pre>
+<h3 id="MOVZX-先零扩展-再传送"><a href="#MOVZX-先零扩展-再传送" class="headerlink" title="MOVZX 先零扩展,再传送"></a>MOVZX 先零扩展,再传送</h3><pre class=" language-c++"><code class="language-c++">movzx eax,ax;先进行全零扩展,前16位为0
+</code></pre>
+<h3 id="PUSH-把字压入堆栈"><a href="#PUSH-把字压入堆栈" class="headerlink" title="PUSH 把字压入堆栈"></a>PUSH 把字压入堆栈</h3><pre class=" language-c++"><code class="language-c++">push reg/nem16   32
+push imm32
+</code></pre>
+<h3 id="POP-把字弹出堆栈"><a href="#POP-把字弹出堆栈" class="headerlink" title="POP 把字弹出堆栈"></a>POP 把字弹出堆栈</h3><pre class=" language-c++"><code class="language-c++">pop reg/nem16  32
+</code></pre>
+<h3 id="PUSHFD-把32EFLAGS寄存器内容压入堆栈"><a href="#PUSHFD-把32EFLAGS寄存器内容压入堆栈" class="headerlink" title="PUSHFD 把32EFLAGS寄存器内容压入堆栈"></a>PUSHFD 把32EFLAGS寄存器内容压入堆栈</h3><pre class=" language-c++"><code class="language-c++">pushfd;保存标志寄存器内容
+</code></pre>
+<h3 id="POPFD-把32EFLAGS寄存器内容弹出堆栈"><a href="#POPFD-把32EFLAGS寄存器内容弹出堆栈" class="headerlink" title="POPFD 把32EFLAGS寄存器内容弹出堆栈"></a>POPFD 把32EFLAGS寄存器内容弹出堆栈</h3><pre class=" language-c++"><code class="language-c++">popfd;恢复标志寄存器内容
+</code></pre>
+<h3 id="PUSHA-把AX-CX-DX-BX-SP-BP-SI-DI依次压入堆栈"><a href="#PUSHA-把AX-CX-DX-BX-SP-BP-SI-DI依次压入堆栈" class="headerlink" title="PUSHA 把AX,CX,DX,BX,SP,BP,SI,DI依次压入堆栈"></a>PUSHA 把AX,CX,DX,BX,SP,BP,SI,DI依次压入堆栈</h3><pre class=" language-c++"><code class="language-c++">pusha;保存16通用寄存器内容
+</code></pre>
+<h3 id="POPA-把DI-SI-BP-SP-BX-DX-CX-AX依次弹出堆栈"><a href="#POPA-把DI-SI-BP-SP-BX-DX-CX-AX依次弹出堆栈" class="headerlink" title="POPA 把DI,SI,BP,SP,BX,DX,CX,AX依次弹出堆栈"></a>POPA 把DI,SI,BP,SP,BX,DX,CX,AX依次弹出堆栈</h3><pre class=" language-c++"><code class="language-c++">popa;恢复16通用寄存器内存
+</code></pre>
+<h3 id="PUSHAD-把EAX-ECX-EDX-EBX-ESP-EBP-ESI-EDI依次压入堆栈"><a href="#PUSHAD-把EAX-ECX-EDX-EBX-ESP-EBP-ESI-EDI依次压入堆栈" class="headerlink" title="PUSHAD 把EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI依次压入堆栈"></a>PUSHAD 把EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI依次压入堆栈</h3><pre class=" language-c++"><code class="language-c++">pushad;保存32通用寄存器内容
+</code></pre>
+<h3 id="POPAD-把EDI-ESI-EBP-ESP-EBX-EDX-ECX-EAX依次弹出堆栈"><a href="#POPAD-把EDI-ESI-EBP-ESP-EBX-EDX-ECX-EAX依次弹出堆栈" class="headerlink" title="POPAD 把EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX依次弹出堆栈"></a>POPAD 把EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX依次弹出堆栈</h3><pre class=" language-c++"><code class="language-c++">popad;恢复32通用寄存器内存
+</code></pre>
+<h3 id="BSWAP-交换32位寄存器里字节的顺序"><a href="#BSWAP-交换32位寄存器里字节的顺序" class="headerlink" title="BSWAP 交换32位寄存器里字节的顺序"></a>BSWAP 交换32位寄存器里字节的顺序</h3><pre class=" language-c++"><code class="language-c++">;EAX=96688368H
+BSWAP EAX;EAX=68836896H
+</code></pre>
+<h3 id="XCHG-交换字或字节-至少有一个操作数为寄存器-段寄存器不可作为操作数"><a href="#XCHG-交换字或字节-至少有一个操作数为寄存器-段寄存器不可作为操作数" class="headerlink" title="XCHG 交换字或字节( 至少有一个操作数为寄存器,段寄存器不可作为操作数)"></a>XCHG 交换字或字节( 至少有一个操作数为寄存器,段寄存器不可作为操作数)</h3><pre class=" language-c++"><code class="language-c++">xchg ax,hx
+xchg ah,al
+xchg eax,ebx
+xchg var,ax;var16位
+</code></pre>
+<h3 id="CMPXCHG-比较并交换操作数-第二个操作数必须为累加器AL-AX-EAX"><a href="#CMPXCHG-比较并交换操作数-第二个操作数必须为累加器AL-AX-EAX" class="headerlink" title="CMPXCHG 比较并交换操作数( 第二个操作数必须为累加器AL/AX/EAX )"></a>CMPXCHG 比较并交换操作数( 第二个操作数必须为累加器AL/AX/EAX )</h3><pre class=" language-c++"><code class="language-c++">CMPXCHG CX,DX
+;如果指令执行前 (AX)=2300H,(CX)=2300H.(DX)=2400H
+;则指令执行后 因（CX）=(AX),故(CX)=2400H,ZF=1
+;如果指令执行前（AX）=2500H,(CX)=2300H,(DX)=2400H
+;则指令执行后因（CX）!=(AX)，故(AX)=2300H，ZF=0
+</code></pre>
+<h3 id="XADD-先交换再累加-结果在第一个操作数里"><a href="#XADD-先交换再累加-结果在第一个操作数里" class="headerlink" title="XADD 先交换再累加( 结果在第一个操作数里 )"></a>XADD 先交换再累加( 结果在第一个操作数里 )</h3><pre class=" language-c++"><code class="language-c++">xadd eax，ecx
+;相当于：
+    先执行：
+        xchg eax,ecx
+    然后执行：
+        add eax,ecx
+</code></pre>
+<h3 id="XLAT-字节查表转换"><a href="#XLAT-字节查表转换" class="headerlink" title="XLAT 字节查表转换"></a>XLAT 字节查表转换</h3><pre class=" language-c++"><code class="language-c++">X DW 1122h,3344h,5566h,7788h
+lea bx,X
+mov al,03h
+xlat
+</code></pre>
+<p>BX 指向一张 256 字节的表的起点, AL 为表的索引值 (0-255,即 0-FFH); 返回 AL 为查表结果 ( [BX+AL]-&gt;AL )</p>
+<h1 id="输入输出端口传送指令"><a href="#输入输出端口传送指令" class="headerlink" title="输入输出端口传送指令"></a>输入输出端口传送指令</h1><h3 id="IN-I-O端口输入"><a href="#IN-I-O端口输入" class="headerlink" title="IN I/O端口输入"></a>IN I/O端口输入</h3><pre class=" language-c++"><code class="language-c++">语法: IN 累加器, &#123;端口号│DX&#125;
+</code></pre>
+<h3 id="OUT-I-O端口输出"><a href="#OUT-I-O端口输出" class="headerlink" title="OUT I/O端口输出"></a>OUT I/O端口输出</h3><pre class=" language-c++"><code class="language-c++">语法: OUT &#123;端口号│DX&#125;,累加器
+</code></pre>
+<h3 id="输入输出端口由立即方式指定时-其范围是-0-255-由寄存器-DX-指定时-其范围是-0-65535"><a href="#输入输出端口由立即方式指定时-其范围是-0-255-由寄存器-DX-指定时-其范围是-0-65535" class="headerlink" title="输入输出端口由立即方式指定时, 其范围是 0-255; 由寄存器 DX 指定时,其范围是 0-65535"></a>输入输出端口由立即方式指定时, 其范围是 0-255; 由寄存器 DX 指定时,其范围是 0-65535</h3><h1 id="目的地址传送指令"><a href="#目的地址传送指令" class="headerlink" title="目的地址传送指令"></a>目的地址传送指令</h1><h3 id="LEA-装入有效地址"><a href="#LEA-装入有效地址" class="headerlink" title="LEA 装入有效地址"></a>LEA 装入有效地址</h3><pre class=" language-c++"><code class="language-c++">LEA DX,string ;把偏移地址存到DX
+</code></pre>
+<h3 id="LDS-传送目标指针-把指针内容装入DS"><a href="#LDS-传送目标指针-把指针内容装入DS" class="headerlink" title="LDS 传送目标指针,把指针内容装入DS"></a>LDS 传送目标指针,把指针内容装入DS</h3><pre class=" language-c++"><code class="language-c++">LDS SI,string ;把段地址:偏移地址存到DS:SI
+</code></pre>
+<h3 id="LES-传送目标指针-把指针内容装入ES"><a href="#LES-传送目标指针-把指针内容装入ES" class="headerlink" title="LES 传送目标指针,把指针内容装入ES"></a>LES 传送目标指针,把指针内容装入ES</h3><pre class=" language-c++"><code class="language-c++">LES DI,string ;把段地址:偏移地址存到ESDI
+</code></pre>
+<h3 id="LFS-传送目标指针-把指针内容装入FS"><a href="#LFS-传送目标指针-把指针内容装入FS" class="headerlink" title="LFS 传送目标指针,把指针内容装入FS"></a>LFS 传送目标指针,把指针内容装入FS</h3><pre class=" language-c++"><code class="language-c++">LFS DI,string ;把段地址:偏移地址存到FSD
+</code></pre>
+<h3 id="LGS-传送目标指针-把指针内容装入GS"><a href="#LGS-传送目标指针-把指针内容装入GS" class="headerlink" title="LGS 传送目标指针,把指针内容装入GS"></a>LGS 传送目标指针,把指针内容装入GS</h3><pre class=" language-c++"><code class="language-c++">LGS DI,string ;把段地址:偏移地址存到GSDI 
+</code></pre>
+<h3 id="LSS-传送目标指针-把指针内容装入SS"><a href="#LSS-传送目标指针-把指针内容装入SS" class="headerlink" title="LSS 传送目标指针,把指针内容装入SS"></a>LSS 传送目标指针,把指针内容装入SS</h3><pre class=" language-c++"><code class="language-c++">LSS DI,string ;把段地址:偏移地址存到SSDI
+</code></pre>
+<h1 id="标志传送指令"><a href="#标志传送指令" class="headerlink" title="标志传送指令"></a>标志传送指令</h1><h3 id="LAHF-标志寄存器传送-把标志装入AH"><a href="#LAHF-标志寄存器传送-把标志装入AH" class="headerlink" title="LAHF 标志寄存器传送,把标志装入AH"></a>LAHF 标志寄存器传送,把标志装入AH</h3><pre class=" language-c++"><code class="language-c++">.data
+    saveflags byte ?
+.code
+    lahf
+    mov saveflags,ah
+</code></pre>
+<h3 id="SAHF-标志寄存器传送-把AH内容装入标志寄存器"><a href="#SAHF-标志寄存器传送-把AH内容装入标志寄存器" class="headerlink" title="SAHF 标志寄存器传送,把AH内容装入标志寄存器"></a>SAHF 标志寄存器传送,把AH内容装入标志寄存器</h3><pre class=" language-c++"><code class="language-c++">mov ah,saveflags
+    sahf
+</code></pre>
+<h3 id="PUSHF-标志入栈"><a href="#PUSHF-标志入栈" class="headerlink" title="PUSHF 标志入栈"></a>PUSHF 标志入栈</h3><pre class=" language-c++"><code class="language-c++">pushf;保存标志寄存器内容
+</code></pre>
+<h3 id="POPF-标志出栈"><a href="#POPF-标志出栈" class="headerlink" title="POPF 标志出栈"></a>POPF 标志出栈</h3><pre class=" language-c++"><code class="language-c++">popf;恢复标志寄存器内容
+</code></pre>
+<h3 id="PUSHD-32位标志入栈"><a href="#PUSHD-32位标志入栈" class="headerlink" title="PUSHD 32位标志入栈"></a>PUSHD 32位标志入栈</h3><pre class=" language-c++"><code class="language-c++">pushd;保存32通用寄存器内容
+</code></pre>
+<h3 id="POPD-32位标志出栈"><a href="#POPD-32位标志出栈" class="headerlink" title="POPD 32位标志出栈"></a>POPD 32位标志出栈</h3><pre class=" language-c++"><code class="language-c++">popd;恢复32通用寄存器内存
+</code></pre>
+<h1 id="算术运算指令"><a href="#算术运算指令" class="headerlink" title="算术运算指令"></a>算术运算指令</h1><h3 id="ADD-加法"><a href="#ADD-加法" class="headerlink" title="ADD 加法"></a>ADD 加法</h3><pre class=" language-c++"><code class="language-c++">mov eax,1
+add eax,12
+</code></pre>
+<h3 id="ADC-带进位加法"><a href="#ADC-带进位加法" class="headerlink" title="ADC 带进位加法"></a>ADC 带进位加法</h3><pre class=" language-c++"><code class="language-c++">mov dl,0
+mov al,0FFh
+add al,0FFh;AL=FEh
+adc dl,0;DL/AL=01FEh
+</code></pre>
+<h3 id="INC-加-1"><a href="#INC-加-1" class="headerlink" title="INC 加 1"></a>INC 加 1</h3><pre class=" language-c++"><code class="language-c++">mov ax,1
+inc ax
+</code></pre>
+<h3 id="AAA-加法的ASCII码调整"><a href="#AAA-加法的ASCII码调整" class="headerlink" title="AAA 加法的ASCII码调整"></a>AAA 加法的ASCII码调整</h3><pre class=" language-c++"><code class="language-c++">mov ah,0
+mov al,'8';AX=0038h
+add al,'2';AX=006Ah
+aaa;AX=0100h(结果进行ASCII转换)
+or ax,3030h;AX=3130h='10'(转换为ASCII码)
+</code></pre>
+<h3 id="DAA-加法的十进制调整"><a href="#DAA-加法的十进制调整" class="headerlink" title="DAA 加法的十进制调整"></a>DAA 加法的十进制调整</h3><pre class=" language-c++"><code class="language-c++">mov al,35h
+add al,48h;AL=7Dh
+daa;AL=83h(调整后结果)
+</code></pre>
+<h3 id="SUB-减法"><a href="#SUB-减法" class="headerlink" title="SUB 减法"></a>SUB 减法</h3><pre class=" language-c++"><code class="language-c++">mov al,23
+sub al,3
+</code></pre>
+<h3 id="SBB-带借位减法"><a href="#SBB-带借位减法" class="headerlink" title="SBB 带借位减法"></a>SBB 带借位减法</h3><pre class=" language-c++"><code class="language-c++">mov edx,7;高32位
+mov eax,1;低32位
+sub eax，2
+sbb edx，0;高32位减法
+</code></pre>
+<h3 id="DEC-减-1"><a href="#DEC-减-1" class="headerlink" title="DEC 减 1"></a>DEC 减 1</h3><pre class=" language-c++"><code class="language-c++">dec al
+</code></pre>
+<h3 id="NEC-求反-以-0-减之"><a href="#NEC-求反-以-0-减之" class="headerlink" title="NEC 求反(以 0 减之)"></a>NEC 求反(以 0 减之)</h3><pre class=" language-c++"><code class="language-c++">nec al
+</code></pre>
+<h3 id="CMP-比较-两操作数作减法-仅修改标志位-不回送结果"><a href="#CMP-比较-两操作数作减法-仅修改标志位-不回送结果" class="headerlink" title="CMP 比较.(两操作数作减法,仅修改标志位,不回送结果)"></a>CMP 比较.(两操作数作减法,仅修改标志位,不回送结果)</h3><pre class=" language-c++"><code class="language-c++">mov ax,5
+cmp ax,10;ZF=0 and CF=1
+</code></pre>
+<h3 id="AAS-减法的ASCII码调整"><a href="#AAS-减法的ASCII码调整" class="headerlink" title="AAS 减法的ASCII码调整"></a>AAS 减法的ASCII码调整</h3><pre class=" language-c++"><code class="language-c++">mov ah,0
+mov al,'8';AX=0038h
+sub al,'9';AX=00FFh
+aas;AX=FF09h
+pushf
+or al,30h;AX=FF39h
+popf
+</code></pre>
+<h3 id="DAS-减法的十进制调整"><a href="#DAS-减法的十进制调整" class="headerlink" title="DAS 减法的十进制调整"></a>DAS 减法的十进制调整</h3><pre class=" language-c++"><code class="language-c++">mov bl,48h
+mov al,85h
+sub al,bl;AL=3Dh
+das;AL=37h(调整后结果)
+</code></pre>
+<h3 id="MUL-无符号乘法"><a href="#MUL-无符号乘法" class="headerlink" title="MUL 无符号乘法"></a>MUL 无符号乘法</h3><pre class=" language-c++"><code class="language-c++">var word 0100h
+mov ax,2000h;AX=2000h;AX存储结果
+mul 0100h/var;DX:AX=00200000h,CF=1;32位EDX:EAX
+</code></pre>
+<h3 id="IMUL-整数乘法"><a href="#IMUL-整数乘法" class="headerlink" title="IMUL 整数乘法"></a>IMUL 整数乘法</h3><pre class=" language-c++"><code class="language-c++">mov ax,48
+mov bx,4
+imul bx;DX:AX=000000C0h,OF=0
+</code></pre>
+<h3 id="以上两条-结果回送AH和AL-字节运算-或DX和AX-字运算"><a href="#以上两条-结果回送AH和AL-字节运算-或DX和AX-字运算" class="headerlink" title="以上两条,结果回送AH和AL(字节运算),或DX和AX(字运算)"></a>以上两条,结果回送AH和AL(字节运算),或DX和AX(字运算)</h3><h3 id="AAM-乘法的ASCII码调整"><a href="#AAM-乘法的ASCII码调整" class="headerlink" title="AAM 乘法的ASCII码调整"></a>AAM 乘法的ASCII码调整</h3><pre class=" language-c++"><code class="language-c++">var byte 05h,06h
+mov bl,var;第一个操作数
+mov bl,[var+1];第二个操作数
+mul bl;AX=001Eh
+aam;AX=0300h
+</code></pre>
+<h3 id="DIV-无符号除法"><a href="#DIV-无符号除法" class="headerlink" title="DIV 无符号除法"></a>DIV 无符号除法</h3><pre class=" language-c++"><code class="language-c++">mov ax,0083h;被除数
+mov bl,2;除数
+div bl;AL=41h,AH=01h
+</code></pre>
+<h3 id="IDIV-整数除法"><a href="#IDIV-整数除法" class="headerlink" title="IDIV 整数除法"></a>IDIV 整数除法</h3><pre class=" language-c++"><code class="language-c++">var sword -101;009Bh
+mov dx,0
+mov ax,var;DX:AX=0000009Bh(+155)
+mov bx,2;BX是除数
+idiv bx;DX:AX除以BX
+    
+var sword -48
+mov al,var;被除数低字节
+cbw；AL扩展到AH
+mov bl,+5;除数
+idiv bl;AL=-9,AH=-3
+</code></pre>
+<h3 id="以上两条-结果回送"><a href="#以上两条-结果回送" class="headerlink" title="以上两条,结果回送:"></a>以上两条,结果回送:</h3><h3 id="商回送AL-余数回送AH-字节运算-或商回送AX-余数回送DX-字运算"><a href="#商回送AL-余数回送AH-字节运算-或商回送AX-余数回送DX-字运算" class="headerlink" title="商回送AL,余数回送AH, (字节运算);或商回送AX,余数回送DX, (字运算)"></a>商回送AL,余数回送AH, (字节运算);或商回送AX,余数回送DX, (字运算)</h3><h3 id="AAD-除法的ASCII码调整"><a href="#AAD-除法的ASCII码调整" class="headerlink" title="AAD 除法的ASCII码调整"></a>AAD 除法的ASCII码调整</h3><pre class=" language-c++"><code class="language-c++">var byte ?
+var2 byte ?
+mov ax,0307h;被除数
+aad;AX=0025h
+mov bl,5;除数
+div bl;AX=0207h
+mov var,al
+mov var2,ah
+</code></pre>
+<h3 id="CBW-字节转换为字-把AL中字节的符号扩展到AH中去"><a href="#CBW-字节转换为字-把AL中字节的符号扩展到AH中去" class="headerlink" title="CBW 字节转换为字. (把AL中字节的符号扩展到AH中去)"></a>CBW 字节转换为字. (把AL中字节的符号扩展到AH中去)</h3><pre class=" language-c++"><code class="language-c++">var sword -101;9Bh
+mov al,var;AL=9Bh
+cbw;AL=FF9Bh
+</code></pre>
+<h3 id="CWD-字转换为双字-把AX中的字的符号扩展到DX中去"><a href="#CWD-字转换为双字-把AX中的字的符号扩展到DX中去" class="headerlink" title="CWD 字转换为双字. (把AX中的字的符号扩展到DX中去)"></a>CWD 字转换为双字. (把AX中的字的符号扩展到DX中去)</h3><pre class=" language-c++"><code class="language-c++">var sword -101;FF9Bh
+mov ax,var;AX=FF9Bh
+cwd;DX:AX=FFFFFF9Bh
+</code></pre>
+<h3 id="CWDE-字转换为双字-把AX中的字符号扩展到EAX中去"><a href="#CWDE-字转换为双字-把AX中的字符号扩展到EAX中去" class="headerlink" title="CWDE 字转换为双字. (把AX中的字符号扩展到EAX中去)"></a>CWDE 字转换为双字. (把AX中的字符号扩展到EAX中去)</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="CDQ-双字扩展-把EAX中的字的符号扩展到EDX中去"><a href="#CDQ-双字扩展-把EAX中的字的符号扩展到EDX中去" class="headerlink" title="CDQ 双字扩展. (把EAX中的字的符号扩展到EDX中去)"></a>CDQ 双字扩展. (把EAX中的字的符号扩展到EDX中去)</h3><pre class=" language-C++"><code class="language-C++">var sword -101;FFFFFF9Bh
+mov eax,var;EDX:EAX=FFFFFFFFFFFFFF9Bh
+cdq
+</code></pre>
+<h1 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h1><h3 id="AND-与运算"><a href="#AND-与运算" class="headerlink" title="AND 与运算"></a>AND 与运算</h3><pre class=" language-c++"><code class="language-c++">mov al,10101110b
+and al,11110110b;消除位0,3
+</code></pre>
+<h3 id="OR-或运算"><a href="#OR-或运算" class="headerlink" title="OR 或运算"></a>OR 或运算</h3><pre class=" language-c++"><code class="language-c++">mov al,11100011b
+or al,00000100b;位2置1
+</code></pre>
+<h3 id="XOR-异或运算"><a href="#XOR-异或运算" class="headerlink" title="XOR 异或运算"></a>XOR 异或运算</h3><pre class=" language-c++"><code class="language-c++">mov al,10110101b
+xor al,0;异或
+</code></pre>
+<h3 id="NOT-取反"><a href="#NOT-取反" class="headerlink" title="NOT 取反"></a>NOT 取反</h3><pre class=" language-c++"><code class="language-c++">mov al,10101110b
+not al;补集
+</code></pre>
+<h3 id="TEST-测试-两操作数作与运算-仅修改标志位-不回送结果"><a href="#TEST-测试-两操作数作与运算-仅修改标志位-不回送结果" class="headerlink" title="TEST 测试(两操作数作与运算,仅修改标志位,不回送结果)"></a>TEST 测试(两操作数作与运算,仅修改标志位,不回送结果)</h3><pre class=" language-c++"><code class="language-c++">test al,00001001b;测试0,3位
+</code></pre>
+<h3 id="SHL-逻辑左移-位元乘法"><a href="#SHL-逻辑左移-位元乘法" class="headerlink" title="SHL 逻辑左移,位元乘法"></a>SHL 逻辑左移,位元乘法</h3><pre class=" language-c++"><code class="language-c++">mov bl,8Fh;BL=10001111b
+shl bl,1;CF=1,BL=00011110b
+</code></pre>
+<h3 id="SAL-算术左移-SHL"><a href="#SAL-算术左移-SHL" class="headerlink" title="SAL 算术左移(=SHL)"></a>SAL 算术左移(=SHL)</h3><pre class=" language-c++"><code class="language-c++">sal/shl
+</code></pre>
+<h3 id="SHR-逻辑右移，位元除法"><a href="#SHR-逻辑右移，位元除法" class="headerlink" title="SHR 逻辑右移，位元除法"></a>SHR 逻辑右移，位元除法</h3><pre class=" language-c++"><code class="language-c++">mov al,0D0h;AL=11010000b
+shr al,1;AL=01101000b,CF=0
+</code></pre>
+<h3 id="SAR-算术右移-SHR"><a href="#SAR-算术右移-SHR" class="headerlink" title="SAR 算术右移(=SHR)"></a>SAR 算术右移(=SHR)</h3><pre class=" language-c++"><code class="language-c++">sar/shr
+</code></pre>
+<h3 id="ROL-循环左移"><a href="#ROL-循环左移" class="headerlink" title="ROL 循环左移"></a>ROL 循环左移</h3><pre class=" language-C++"><code class="language-C++">mov al,40h;AL=01000000b
+rol al,1;AL=10000000b
+rol al,3;AL=00000100b
+</code></pre>
+<h3 id="ROR-循环右移"><a href="#ROR-循环右移" class="headerlink" title="ROR 循环右移"></a>ROR 循环右移</h3><pre class=" language-c++"><code class="language-c++">mov al,01h;AL=00000001b
+ror al,1;AL=10000000b
+ror al,3;AL=00010000b
+</code></pre>
+<h3 id="RCL-通过进位的循环左移"><a href="#RCL-通过进位的循环左移" class="headerlink" title="RCL 通过进位的循环左移"></a>RCL 通过进位的循环左移</h3><pre class=" language-c++"><code class="language-c++">clc;CF=0
+mov bl,88h;CF,BL=0 10001000b
+rcl bl,1;CF,BL=1 00010000b
+rcl bl,1;CF,BL=0 00100010b
+</code></pre>
+<h3 id="RCR-通过进位的循环右移"><a href="#RCR-通过进位的循环右移" class="headerlink" title="RCR 通过进位的循环右移"></a>RCR 通过进位的循环右移</h3><pre class=" language-c++"><code class="language-c++">stc ;CF=1
+mov ah,10h;AH,CF=00010000 1
+rcr ah,1;AH,CF=10001000 0
+</code></pre>
+<p>以上八种移位指令,其移位次数可达255次</p>
+<p>移位一次时, 可直接用操作码. 如 SHL AX,1</p>
+<p>移位&gt;1次时, 则由寄存器CL给出移位次数</p>
+<p>如 MOV CL,04 SHL AX,CL</p>
+<h3 id="SHLD-双精度左移"><a href="#SHLD-双精度左移" class="headerlink" title="SHLD 双精度左移"></a>SHLD 双精度左移</h3><pre class=" language-c++"><code class="language-c++">wval word 9BA6h
+mov ax,0AC36h
+shld wval,ax,4;wval=BA6Ah,将wval左移4位，并把AX的高4位插入wval的低4位
+</code></pre>
+<h3 id="SHRD-双精度右移"><a href="#SHRD-双精度右移" class="headerlink" title="SHRD 双精度右移"></a>SHRD 双精度右移</h3><pre class=" language-c++"><code class="language-c++">mov ax,234Bh
+mov dx,7654h
+shrd ax,dx,4;AX右移4位，并把DX的低4位插入AX的高4位
+</code></pre>
+<h1 id="串指令"><a href="#串指令" class="headerlink" title="串指令"></a>串指令</h1><h3 id="DS-SI-源串段寄存器-源串变址"><a href="#DS-SI-源串段寄存器-源串变址" class="headerlink" title="DS:SI 源串段寄存器 :源串变址"></a>DS:SI 源串段寄存器 :源串变址</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="ESI-目标串段寄存器-目标串变址"><a href="#ESI-目标串段寄存器-目标串变址" class="headerlink" title="ESI 目标串段寄存器:目标串变址"></a>ESI 目标串段寄存器:目标串变址</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="CX-重复次数计数器"><a href="#CX-重复次数计数器" class="headerlink" title="CX 重复次数计数器"></a>CX 重复次数计数器</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="AL-AX-扫描值"><a href="#AL-AX-扫描值" class="headerlink" title="AL/AX 扫描值"></a>AL/AX 扫描值</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="D标志-0表示重复操作中SI和DI应自动增量-1表示应自动减量"><a href="#D标志-0表示重复操作中SI和DI应自动增量-1表示应自动减量" class="headerlink" title="D标志 0表示重复操作中SI和DI应自动增量; 1表示应自动减量"></a>D标志 0表示重复操作中SI和DI应自动增量; 1表示应自动减量</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="Z标志-用来控制扫描或比较操作的结束"><a href="#Z标志-用来控制扫描或比较操作的结束" class="headerlink" title="Z标志 用来控制扫描或比较操作的结束"></a>Z标志 用来控制扫描或比较操作的结束</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="MOVS-串传送-MOVSB-传送字符-MOVSW-传送字-MOVSD-传送双字"><a href="#MOVS-串传送-MOVSB-传送字符-MOVSW-传送字-MOVSD-传送双字" class="headerlink" title="MOVS 串传送   ( MOVSB 传送字符 MOVSW 传送字 MOVSD 传送双字 )"></a>MOVS 串传送   ( MOVSB 传送字符 MOVSW 传送字 MOVSD 传送双字 )</h3><pre class=" language-c++"><code class="language-c++">;传送字符串数据：将ESI寻址的内存数据复制到EDI寻址的内存位置
+;复制双字数值
+source dword 20 dup(0FFFFFFFh)
+target dword 20 dup(?)
+.code
+cld;方向为正
+mov ecx,lengthof source;设置REP计数器
+mov esi,offset source;ESI指向source
+mov edi,offset target;EDI指向target
+rep movsd;复制双字
+</code></pre>
+<h3 id="CMPS-串比较-CMPSB-比较字符-CMPSW-比较字"><a href="#CMPS-串比较-CMPSB-比较字符-CMPSW-比较字" class="headerlink" title="CMPS 串比较   ( CMPSB 比较字符 CMPSW 比较字 )"></a>CMPS 串比较   ( CMPSB 比较字符 CMPSW 比较字 )</h3><pre class=" language-c++"><code class="language-c++">;比较字符串：比较分别由ESI和EDI寻址的内存数据
+;比较双字
+mov esi OFFSET source
+mov edi ,OFFSET target
+cld;方向为正向
+mov ecx, LENGTHOF source;设置重复计数器
+repe cmpsd;相等则重复
+</code></pre>
+<h3 id="SCAS-串扫描-把AL或AX的内容与目标串作比较-比较结果反映在标志位"><a href="#SCAS-串扫描-把AL或AX的内容与目标串作比较-比较结果反映在标志位" class="headerlink" title="SCAS 串扫描    把AL或AX的内容与目标串作比较,比较结果反映在标志位"></a>SCAS 串扫描    把AL或AX的内容与目标串作比较,比较结果反映在标志位</h3><pre class=" language-c++"><code class="language-c++">;扫描字符串：比较累加器（AL、AX和EAX）与EDI寻址的内存数据
+;扫描是否有匹配字符
+alpha BYTE "ABCDEFGH",0
+.code
+mov edi,OFFSET alpha;EDI指向字符串
+mov al,'F';检索字符F
+mov ecx,LENGTHOF alpha;设置检索计数器
+cld;方向为正向
+repne scasb;不相等则重复
+jnz quit;若未发现字符则退出
+dec edi;发现字符: EDI减1
+</code></pre>
+<h3 id="LODS-装入串-把源串中的元素-字或字节-逐一装入AL或AX中-LODSB-传送字符-LODSW-传送字-LODSD-传送双字"><a href="#LODS-装入串-把源串中的元素-字或字节-逐一装入AL或AX中-LODSB-传送字符-LODSW-传送字-LODSD-传送双字" class="headerlink" title="LODS 装入串    把源串中的元素(字或字节)逐一装入AL或AX中( LODSB 传送字符 LODSW 传送字 LODSD 传送双字 )"></a>LODS 装入串    把源串中的元素(字或字节)逐一装入AL或AX中( LODSB 传送字符 LODSW 传送字 LODSD 传送双字 )</h3><pre class=" language-c++"><code class="language-c++">;从字符串加载到累加器：将ESI寻址的内存数据加载到累加器
+;数组乘法
+:本程序将一个32位整数数组中的每个元素都乘以一个常数。
+INCLUDE Irvine32. inc
+.data
+array DWORD 1,2,3,4,5,6,7,8,9,10;测试数据
+multiplier DWORD 10;测试数据
+.code
+main PROC
+    cld;方向为正向
+    mov esi,OFFSET array;源数组索引
+    mov edi,esi;目标数组索引
+    mov ecx,LENGTHOF array;循环计数器
+Ll: lodsd;将[ESI]加载到EAX
+    mul multiplier;与常数相乘
+    stosd;将EAX保存到[EDI]
+    loop Ll
+    exit
+main ENDP
+END main
+</code></pre>
+<h3 id="STOS-保存串-是LODS的逆过程"><a href="#STOS-保存串-是LODS的逆过程" class="headerlink" title="STOS 保存串   是LODS的逆过程"></a>STOS 保存串   是LODS的逆过程</h3><pre class=" language-c++"><code class="language-c++">;保存字符串数据L：将累加器内容保存到EDI寻址的内存位置
+.data
+Count = 100
+string1 BYTE Count DUP(?)
+.code
+mov al,OFFh;要保存的数值
+mov edi,OFFSET string1;EDI指向目标字符串
+mov ecx,Count;字符计数器
+cld;方向为正向
+rep stosb;用AL的内容实现填充
+</code></pre>
+<h3 id="REP-当CX-ECX-lt-gt-0时重复-单个指令处理整个字符串"><a href="#REP-当CX-ECX-lt-gt-0时重复-单个指令处理整个字符串" class="headerlink" title="REP 当CX/ECX&lt;&gt;0时重复(单个指令处理整个字符串)"></a>REP 当CX/ECX&lt;&gt;0时重复(单个指令处理整个字符串)</h3><pre class=" language-c++"><code class="language-c++">rep movsb
+</code></pre>
+<h3 id="REPE-REPZ-当ZF-1或比较结果相等-且CX-ECX-lt-gt-0时重复"><a href="#REPE-REPZ-当ZF-1或比较结果相等-且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPE/REPZ 当ZF=1或比较结果相等,且CX/ECX&lt;&gt;0时重复"></a>REPE/REPZ 当ZF=1或比较结果相等,且CX/ECX&lt;&gt;0时重复</h3><pre class=" language-c++"><code class="language-c++">repe cmpsd
+</code></pre>
+<h3 id="REPNE-REPNZ-当ZF-0或比较结果不相等-且CX-ECX-lt-gt-0时重复"><a href="#REPNE-REPNZ-当ZF-0或比较结果不相等-且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPNE/REPNZ 当ZF=0或比较结果不相等,且CX/ECX&lt;&gt;0时重复"></a>REPNE/REPNZ 当ZF=0或比较结果不相等,且CX/ECX&lt;&gt;0时重复</h3><pre class=" language-c++"><code class="language-c++">repne scasb
+</code></pre>
+<h3 id="REPC-当CF-1且CX-ECX-lt-gt-0时重复"><a href="#REPC-当CF-1且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPC 当CF=1且CX/ECX&lt;&gt;0时重复"></a>REPC 当CF=1且CX/ECX&lt;&gt;0时重复</h3><pre class=" language-c++"><code class="language-c++">repc movsb
+</code></pre>
+<h3 id="REPNC-当CF-0且CX-ECX-lt-gt-0时重复"><a href="#REPNC-当CF-0且CX-ECX-lt-gt-0时重复" class="headerlink" title="REPNC 当CF=0且CX/ECX&lt;&gt;0时重复"></a>REPNC 当CF=0且CX/ECX&lt;&gt;0时重复</h3><pre class=" language-c++"><code class="language-c++">repnc movsb
+</code></pre>
+<h1 id="程序转移指令"><a href="#程序转移指令" class="headerlink" title="程序转移指令"></a>程序转移指令</h1><h2 id="简单的条件转移指令"><a href="#简单的条件转移指令" class="headerlink" title="简单的条件转移指令"></a>简单的条件转移指令</h2><h3 id="JZ-或jE-OPR—————结果为零转移-测试条件ZF-1；相等跳转"><a href="#JZ-或jE-OPR—————结果为零转移-测试条件ZF-1；相等跳转" class="headerlink" title="JZ(或jE)  OPR—————结果为零转移, 测试条件ZF=1；相等跳转"></a>JZ(或jE)  OPR—————结果为零转移, 测试条件ZF=1；相等跳转</h3><pre class=" language-c++"><code class="language-c++">cmp eax,0
+jz/je L1;如果ZF=1则跳转
+</code></pre>
+<h3 id="JNZ-或jNE-OPR-————–结果不为零转移-测试条件ZF-0；不等跳转"><a href="#JNZ-或jNE-OPR-————–结果不为零转移-测试条件ZF-0；不等跳转" class="headerlink" title="JNZ(或jNE) OPR ————–结果不为零转移,测试条件ZF=0；不等跳转"></a>JNZ(或jNE) OPR ————–结果不为零转移,测试条件ZF=0；不等跳转</h3><pre class=" language-c++"><code class="language-c++">and dl,10110000b
+jnz/jne L2;ZF=0跳转
+</code></pre>
+<h3 id="JS-OPR———————-结果为负转移-测试条件SF-1"><a href="#JS-OPR———————-结果为负转移-测试条件SF-1" class="headerlink" title="JS OPR———————-结果为负转移, 测试条件SF=1"></a>JS OPR———————-结果为负转移, 测试条件SF=1</h3><pre class=" language-c++"><code class="language-c++">SF=1
+</code></pre>
+<h3 id="JNS-OPR———————结果为正转移-测试条件SF-0"><a href="#JNS-OPR———————结果为正转移-测试条件SF-0" class="headerlink" title="JNS OPR———————结果为正转移, 测试条件SF=0"></a>JNS OPR———————结果为正转移, 测试条件SF=0</h3><pre class=" language-c++"><code class="language-c++">SF=0
+</code></pre>
+<h3 id="JO-OPR———————-溢出转移-测试条件OF-1"><a href="#JO-OPR———————-溢出转移-测试条件OF-1" class="headerlink" title="JO OPR——————— 溢出转移,   测试条件OF=1"></a>JO OPR——————— 溢出转移,   测试条件OF=1</h3><pre class=" language-c++"><code class="language-c++">OF=1
+</code></pre>
+<h3 id="JNO-OPR-——————–不溢出转移-测试条件OF-0"><a href="#JNO-OPR-——————–不溢出转移-测试条件OF-0" class="headerlink" title="JNO OPR ——————–不溢出转移 , 测试条件OF=0"></a>JNO OPR ——————–不溢出转移 , 测试条件OF=0</h3><pre class=" language-c++"><code class="language-c++">OF=0
+</code></pre>
+<h3 id="JP-OPR-———————结果为偶转移-测试条件PF-1"><a href="#JP-OPR-———————结果为偶转移-测试条件PF-1" class="headerlink" title="JP OPR ———————结果为偶转移, 测试条件PF=1"></a>JP OPR ———————结果为偶转移, 测试条件PF=1</h3><pre class=" language-c++"><code class="language-c++">PF=1
+</code></pre>
+<h3 id="JNP-OPR-——————–结果为奇转移-测试条件PF-0"><a href="#JNP-OPR-——————–结果为奇转移-测试条件PF-0" class="headerlink" title="JNP OPR ——————–结果为奇转移 , 测试条件PF=0"></a>JNP OPR ——————–结果为奇转移 , 测试条件PF=0</h3><pre class=" language-c++"><code class="language-c++">PF=0
+</code></pre>
+<h3 id="JC-OPR-——————–-有进位转移-测试条件CF-1"><a href="#JC-OPR-——————–-有进位转移-测试条件CF-1" class="headerlink" title="JC OPR ——————– 有进位转移 , 测试条件CF=1"></a>JC OPR ——————– 有进位转移 , 测试条件CF=1</h3><pre class=" language-c++"><code class="language-c++">CF=1
+</code></pre>
+<h3 id="JNC-OPR-——————–无进位转移-测试条件CF-0"><a href="#JNC-OPR-——————–无进位转移-测试条件CF-0" class="headerlink" title="JNC OPR ——————–无进位转移,  测试条件CF=0"></a>JNC OPR ——————–无进位转移,  测试条件CF=0</h3><pre class=" language-c++"><code class="language-c++">CF=0
+</code></pre>
+<h3 id="无符号比较条件转移指令-以下指令经常是CMP-OPD-OPS后面的指令根据比较结果来实现转移"><a href="#无符号比较条件转移指令-以下指令经常是CMP-OPD-OPS后面的指令根据比较结果来实现转移" class="headerlink" title="无符号比较条件转移指令(以下指令经常是CMP OPD,OPS后面的指令根据比较结果来实现转移)"></a>无符号比较条件转移指令(以下指令经常是CMP OPD,OPS后面的指令根据比较结果来实现转移)</h3><h3 id="JB-或JNAE-opd-————–小于或者不大于等于则转移"><a href="#JB-或JNAE-opd-————–小于或者不大于等于则转移" class="headerlink" title="JB(或JNAE) opd ————–小于或者不大于等于则转移"></a>JB(或JNAE) opd ————–小于或者不大于等于则转移</h3><pre class=" language-c++"><code class="language-c++">小于跳转
+</code></pre>
+<h3 id="JNB-或JAE-opd—————不小于或者大于等于则转移"><a href="#JNB-或JAE-opd—————不小于或者大于等于则转移" class="headerlink" title="JNB(或JAE) opd—————不小于或者大于等于则转移"></a>JNB(或JAE) opd—————不小于或者大于等于则转移</h3><pre class=" language-c++"><code class="language-c++">不小于跳转
+</code></pre>
+<h3 id="JA-或NJBE-OPD—————大于或者不小于等于则转移"><a href="#JA-或NJBE-OPD—————大于或者不小于等于则转移" class="headerlink" title="JA(或NJBE) OPD—————大于或者不小于等于则转移"></a>JA(或NJBE) OPD—————大于或者不小于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov al,+127
+cmp al,-128
+    ja/njbe L1;不跳转
+</code></pre>
+<h3 id="JNA-或JBE-OPD—————不大于或者小于等于则转移"><a href="#JNA-或JBE-OPD—————不大于或者小于等于则转移" class="headerlink" title="JNA(或JBE) OPD—————不大于或者小于等于则转移"></a>JNA(或JBE) OPD—————不大于或者小于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov al,+127
+cmp al,-128
+    jna/jbe L1;跳转
+</code></pre>
+<h3 id="带符号比较条件转移指令"><a href="#带符号比较条件转移指令" class="headerlink" title="带符号比较条件转移指令"></a>带符号比较条件转移指令</h3><h3 id="JL-或JNGE-————–小于或者不大于等于则转移"><a href="#JL-或JNGE-————–小于或者不大于等于则转移" class="headerlink" title="JL(或JNGE) ————–小于或者不大于等于则转移"></a>JL(或JNGE) ————–小于或者不大于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov ax,5
+mov ax,6
+    jl/jnge L1;跳转
+</code></pre>
+<h3 id="JNL-或JGE-————–不小于或者大于等于则转移"><a href="#JNL-或JGE-————–不小于或者大于等于则转移" class="headerlink" title="JNL(或JGE)————–不小于或者大于等于则转移"></a>JNL(或JGE)————–不小于或者大于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov edx,-1
+cmp edx,0
+    jnl/jge L1;不跳转
+</code></pre>
+<h3 id="JG-或NJLE-—————大于或者不小于等于则转移"><a href="#JG-或NJLE-—————大于或者不小于等于则转移" class="headerlink" title="JG(或NJLE)—————大于或者不小于等于则转移"></a>JG(或NJLE)—————大于或者不小于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov ax,5
+cmp ax,4
+    jp/njle L1;大于则跳转
+</code></pre>
+<h3 id="JNG-或JLE-—————不大于或者小于等于则转移"><a href="#JNG-或JLE-—————不大于或者小于等于则转移" class="headerlink" title="JNG(或JLE)—————不大于或者小于等于则转移"></a>JNG(或JLE)—————不大于或者小于等于则转移</h3><pre class=" language-c++"><code class="language-c++">mov ecx,0
+cmp ecx,0
+    jng/jle;跳转
+</code></pre>
+<h3 id="JCXZ"><a href="#JCXZ" class="headerlink" title="JCXZ"></a>JCXZ</h3><pre class=" language-c++"><code class="language-c++">CX=0跳转
+</code></pre>
+<h3 id="JECXZ"><a href="#JECXZ" class="headerlink" title="JECXZ"></a>JECXZ</h3><pre class=" language-c++"><code class="language-c++">ECX=0跳转
+</code></pre>
+<h3 id="JRCXZ"><a href="#JRCXZ" class="headerlink" title="JRCXZ"></a>JRCXZ</h3><pre class=" language-c++"><code class="language-c++">RCX=0跳转
+</code></pre>
+<h2 id="调用子程序与返回指令"><a href="#调用子程序与返回指令" class="headerlink" title="调用子程序与返回指令"></a>调用子程序与返回指令</h2><h3 id="CALL-子程序调用指令"><a href="#CALL-子程序调用指令" class="headerlink" title="CALL  子程序调用指令"></a>CALL  子程序调用指令</h3><pre class=" language-c++"><code class="language-c++">call SumOf;调用SumOf过程
+</code></pre>
+<h3 id="RET-子程序返回指令"><a href="#RET-子程序返回指令" class="headerlink" title="RET 子程序返回指令"></a>RET 子程序返回指令</h3><pre class=" language-c++"><code class="language-c++">SumOf proc
+    .
+    .
+    ret
+SumOf endp
+</code></pre>
+<h2 id="条件循环指令"><a href="#条件循环指令" class="headerlink" title="条件循环指令"></a>条件循环指令</h2><h3 id="LOOP———-按ECX计算器循环"><a href="#LOOP———-按ECX计算器循环" class="headerlink" title="LOOP———-按ECX计算器循环"></a>LOOP———-按ECX计算器循环</h3><pre class=" language-c++"><code class="language-c++">    mov ax,0
+    mov ecx,5
+L1:
+    inc ax
+    loop L1;每次循环ax加一，循环5次
+</code></pre>
+<h3 id="LOOPZ————为零跳转"><a href="#LOOPZ————为零跳转" class="headerlink" title="LOOPZ————为零跳转"></a>LOOPZ————为零跳转</h3><pre class=" language-c++"><code class="language-c++">loopz L1
+</code></pre>
+<h3 id="LOOPNZ————–非零跳转"><a href="#LOOPNZ————–非零跳转" class="headerlink" title="LOOPNZ————–非零跳转"></a>LOOPNZ————–非零跳转</h3><pre class=" language-c++"><code class="language-c++">loopnz L1
+</code></pre>
+<h3 id="LOOPE——————-相等跳转"><a href="#LOOPE——————-相等跳转" class="headerlink" title="LOOPE——————-相等跳转"></a>LOOPE——————-相等跳转</h3><pre class=" language-c++"><code class="language-c++">loope L1
+</code></pre>
+<h3 id="LOOPNE——————-不等跳转"><a href="#LOOPNE——————-不等跳转" class="headerlink" title="LOOPNE——————-不等跳转"></a>LOOPNE——————-不等跳转</h3><pre class=" language-c++"><code class="language-c++">loopne L1
+</code></pre>
+<h3 id="IF-ELSE-ELSEIF-ENDIF"><a href="#IF-ELSE-ELSEIF-ENDIF" class="headerlink" title=".IF .ELSE .ELSEIF .ENDIF"></a>.IF .ELSE .ELSEIF .ENDIF</h3><pre class=" language-c++"><code class="language-c++">.IF conditionl
+    statements
+[.ELSELF condition2
+    statements]
+[ELSE 
+    statements]
+.ENDIF
+</code></pre>
+<h3 id="REPEAT-WHILE"><a href="#REPEAT-WHILE" class="headerlink" title=".REPEAT .WHILE"></a>.REPEAT .WHILE</h3><pre class=" language-c++"><code class="language-c++">.REPEAT 
+    statements
+.UNTIL condition
+    
+.WHILE condition
+    statements
+.ENDW
+</code></pre>
+<h2 id="其它指令"><a href="#其它指令" class="headerlink" title="其它指令"></a>其它指令</h2><h3 id="OFFSET-——————–-返回偏移地址"><a href="#OFFSET-——————–-返回偏移地址" class="headerlink" title="OFFSET ——————– 返回偏移地址"></a>OFFSET ——————– 返回偏移地址</h3><pre class=" language-c++"><code class="language-c++">mov esi,offset var1;  esi=00404000h
+mov esi,offset var2;  esi=00404000h
+</code></pre>
+<h3 id="SEG-——————–-返回段地址"><a href="#SEG-——————–-返回段地址" class="headerlink" title="SEG  ——————– 返回段地址"></a>SEG  ——————– 返回段地址</h3><pre class=" language-c++"><code class="language-c++">mov esi,seg var1
+mov esi,seg var2
+</code></pre>
+<h3 id="EQU-——————–-等值语句"><a href="#EQU-——————–-等值语句" class="headerlink" title="EQU(=) ——————– 等值语句"></a>EQU(=) ——————– 等值语句</h3><pre class=" language-c++"><code class="language-c++">name EQU expression
+name EQU symbol
+name EQU <text>
+    
+pressKey EQU <"Press any key to continue...", 0>
+matrix1 EQU 10 * 10
+matrix2 EQU <10 * 10>
+</code></pre>
+<h3 id="PURGE-——————–-解除语句"><a href="#PURGE-——————–-解除语句" class="headerlink" title="PURGE ——————– 解除语句"></a>PURGE ——————– 解除语句</h3><pre class=" language-c++"><code class="language-c++">PURGE，标识符1，标识符2，...，标识符n
+</code></pre>
+<h3 id="DUP-——————–-操作数字段用复制操作符"><a href="#DUP-——————–-操作数字段用复制操作符" class="headerlink" title="DUP  ——————– 操作数字段用复制操作符"></a>DUP  ——————– 操作数字段用复制操作符</h3><pre class=" language-c++"><code class="language-c++">db x dup();x是重复的次数，（）里是要重复的数逗号分隔
+str1 db 10 dup ('!@#') ;这就是十个！@#
+格式：db 重复的次数 dup (重复的内容)
+buf1 db 100 dup(?);开辟100个字节的内存区
+</code></pre>
+<h3 id="SEGMENT-ENDS-——————–-段定义指令"><a href="#SEGMENT-ENDS-——————–-段定义指令" class="headerlink" title="SEGMENT,ENDS ——————– 段定义指令"></a>SEGMENT,ENDS ——————– 段定义指令</h3><pre class=" language-c++"><code class="language-c++">segment_name SEGMENT 【定位类型】 【组合类型】 【类别名】
+···;here is your code
+segment ends
+</code></pre>
+<h3 id="ASSUME-——————–-段地址分配指令"><a href="#ASSUME-——————–-段地址分配指令" class="headerlink" title="ASSUME ——————– 段地址分配指令"></a>ASSUME ——————– 段地址分配指令</h3><pre class=" language-c++"><code class="language-c++">.data
+　　........
+.code
+　　........
+　　assume cs:code,ds:data
+start: .......
+　　mov ax,data
+　　mov ds,ax
+　　...
+ends
+end start
+</code></pre>
+<h3 id="ORG-——————–-起始偏移地址设置指令"><a href="#ORG-——————–-起始偏移地址设置指令" class="headerlink" title="ORG  ——————– 起始偏移地址设置指令"></a>ORG  ——————– 起始偏移地址设置指令</h3><pre class=" language-c++"><code class="language-c++">ORG 0000H
+AJMP MAIN
+ORG 0030H
+</code></pre>
+<h3 id="——————–地址计数器的当前值"><a href="#——————–地址计数器的当前值" class="headerlink" title="$   ——————–地址计数器的当前值"></a>$   ——————–地址计数器的当前值</h3><pre class=" language-c++"><code class="language-c++">例如JNE+6，能引用地址计数器的值，每次引用会使地址计数器的值发生改变，地址计数器即当前指令的偏移地址。该指令的转向地址即JNE指令的首地址加6。
+</code></pre>
+<h3 id="PROC，ENDP-——————–-过程定义语句"><a href="#PROC，ENDP-——————–-过程定义语句" class="headerlink" title="PROC，ENDP ——————– 过程定义语句"></a>PROC，ENDP ——————– 过程定义语句</h3><pre class=" language-c++"><code class="language-c++">SumOf proc
+    .
+    .
+    .
+    ret
+SumOf endp;这是一个过程
+</code></pre>
+<h3 id="NAME，TITLE，END-——————–-程序开始结束语句"><a href="#NAME，TITLE，END-——————–-程序开始结束语句" class="headerlink" title="NAME，TITLE，END ——————– 程序开始结束语句"></a>NAME，TITLE，END ——————– 程序开始结束语句</h3><pre class=" language-c++"><code class="language-c++">NULL
+</code></pre>
+<h3 id="MACRO，ENDM-——————–宏定义指令"><a href="#MACRO，ENDM-——————–宏定义指令" class="headerlink" title="MACRO，ENDM  ——————–宏定义指令"></a>MACRO，ENDM  ——————–宏定义指令</h3><pre class=" language-c++"><code class="language-c++">mPutchar MACRO char
+    push eax
+    mov al,char
+    call WriteChar
+    pop eax
+    ENDM
+</code></pre>
+<h3 id="XLAT-（TRANSLATE）-——————–-换码指令—"><a href="#XLAT-（TRANSLATE）-——————–-换码指令—" class="headerlink" title="XLAT  （TRANSLATE） ——————– 换码指令—-"></a>XLAT  （TRANSLATE） ——————– 换码指令—-</h3><pre class=" language-c++"><code class="language-c++">X DW 1122h,3344h,5566h,7788h
+lea bx,X
+mov al,03h
+xlat
+</code></pre>
+<h3 id="ALIGN-———————伪指令"><a href="#ALIGN-———————伪指令" class="headerlink" title="ALIGN ———————伪指令"></a>ALIGN ———————伪指令</h3><pre class=" language-c++"><code class="language-c++">var byte ?; 00404000h
+ALIGN 2
+var2 byte ?; 00404002
+</code></pre>
+<h3 id="PTR-———————-运算符"><a href="#PTR-———————-运算符" class="headerlink" title="PTR ———————-运算符"></a>PTR ———————-运算符</h3><pre class=" language-c++"><code class="language-c++">var dword 12345678h
+mov ax,word ptr var; 将低16位(5678)送入ax
+</code></pre>
+<h3 id="TYPE"><a href="#TYPE" class="headerlink" title="TYPE"></a>TYPE</h3><pre class=" language-c++"><code class="language-c++">var word ?
+var2 byte ?; word,byte都是type,分别代表2,1
+</code></pre>
+<h3 id="LENGTHOF-————–运算符"><a href="#LENGTHOF-————–运算符" class="headerlink" title="LENGTHOF ————–运算符"></a>LENGTHOF ————–运算符</h3><pre class=" language-c++"><code class="language-c++">var1 byte 10,20,30;3
+var2 word 30 DUP(?),0,0;32
+var3 word 5 DUP(3 dup(?));3*5
+var4 byte "1234",0;5
+</code></pre>
+<h3 id="SIZFEOF————-运算符"><a href="#SIZFEOF————-运算符" class="headerlink" title="SIZFEOF————-运算符"></a>SIZFEOF————-运算符</h3><pre class=" language-c++"><code class="language-c++">var word 32 dup(0)
+mov eax,sizeof var;eax=32*2=64
+</code></pre>
+<h3 id="LABEL-—————伪指令"><a href="#LABEL-—————伪指令" class="headerlink" title="LABEL —————伪指令"></a>LABEL —————伪指令</h3><pre class=" language-c++"><code class="language-c++">var1 label word
+var2 dword 12345678h;公用一个内存位置，var2未分配空间
+mov ax,var1;5678h
+mov dx,[var+2];1234h
+</code></pre>
+<h3 id="TYPEDEF————–运算符"><a href="#TYPEDEF————–运算符" class="headerlink" title="TYPEDEF————–运算符"></a>TYPEDEF————–运算符</h3><pre class=" language-c++"><code class="language-c++">var typedef ptr byte;(指针)
+.data
+    array byte 10h,20h,30h
+    ptr1 var ?
+    ptr2 var array;指向一个数组
+</code></pre>
+<h3 id="JMP-————无条件跳转到目标地址"><a href="#JMP-————无条件跳转到目标地址" class="headerlink" title="JMP ————无条件跳转到目标地址"></a>JMP ————无条件跳转到目标地址</h3><pre class=" language-c++"><code class="language-c++">top:
+.
+.
+    jmp top;不断循环
+</code></pre>
+<h3 id="USES—————等于-push-pop"><a href="#USES—————等于-push-pop" class="headerlink" title="USES—————等于 push+pop"></a>USES—————等于 push+pop</h3><pre class=" language-c++"><code class="language-c++">ArraySum proc uses esi ecx
+    mov eax,0
+L1:
+    add eax,[esi]
+    add esi,type dword
+    loop L1
+ArraySum endp
+</code></pre>
+<h3 id="CLC"><a href="#CLC" class="headerlink" title="CLC"></a>CLC</h3><pre class=" language-c++"><code class="language-c++">clc;清除标识位
+</code></pre>
+<h3 id="STC"><a href="#STC" class="headerlink" title="STC"></a>STC</h3><pre><code>进位标志置1
+</code></pre>
+<h3 id="ENTER——————-被调用过程自动创建堆栈帧"><a href="#ENTER——————-被调用过程自动创建堆栈帧" class="headerlink" title="ENTER——————-被调用过程自动创建堆栈帧"></a>ENTER——————-被调用过程自动创建堆栈帧</h3><pre><code>Mysub proc
+    enter 8,0
+;等效于
+Mysub proc
+    push ebp
+    mov ebp,esp
+    sub esp,8
+</code></pre>
+<h3 id="LEAVE——————指令结束一个过程的堆栈帧"><a href="#LEAVE——————指令结束一个过程的堆栈帧" class="headerlink" title="LEAVE——————指令结束一个过程的堆栈帧"></a>LEAVE——————指令结束一个过程的堆栈帧</h3><pre><code>Mysub proc
+    enter 8,0
+    .
+    .
+    leave
+    ret
+Mysub endp
+;等效于
+Mysub proc
+    push ebp
+    mov ebp,esp
+    sub esp,8
+    .
+    .
+    mov esp,ebp
+    pop ebp
+    ret
+Mysub endp
+</code></pre>
+<h3 id="LOCAL—————局部变量"><a href="#LOCAL—————局部变量" class="headerlink" title="LOCAL—————局部变量"></a>LOCAL—————局部变量</h3><pre><code>Mysub proc
+    local var:dword;这是一个局部变量
+</code></pre>
+<h3 id="INVOKE—————–CALL替代品，一行调用多个参数"><a href="#INVOKE—————–CALL替代品，一行调用多个参数" class="headerlink" title="INVOKE—————–CALL替代品，一行调用多个参数"></a>INVOKE—————–CALL替代品，一行调用多个参数</h3><pre><code>invoke Dumparray,offset array,lengthof array,type array
+</code></pre>
+<h3 id="ADDR——–只能和INVOKE一起"><a href="#ADDR——–只能和INVOKE一起" class="headerlink" title="ADDR——–只能和INVOKE一起"></a>ADDR——–只能和INVOKE一起</h3><pre><code>array dword 20 dup(?)
+invoke swap
+    addr array
+    addr [array+4]
+</code></pre>
+<h2 id="条件标志"><a href="#条件标志" class="headerlink" title="条件标志"></a>条件标志</h2><h3 id="ZF-零标志"><a href="#ZF-零标志" class="headerlink" title="ZF 零标志"></a>ZF 零标志</h3><pre class=" language-c++"><code class="language-c++">当结果为负时,SF=1,否则,SF=0
+</code></pre>
+<h3 id="AF-辅助进位标志"><a href="#AF-辅助进位标志" class="headerlink" title="AF 辅助进位标志"></a>AF 辅助进位标志</h3><pre class=" language-c++"><code class="language-c++">运算过程中第三位有进位值,置AF=1,否则,AF=0
+</code></pre>
+<h3 id="PF-奇偶标志"><a href="#PF-奇偶标志" class="headerlink" title="PF 奇偶标志"></a>PF 奇偶标志</h3><pre class=" language-c++"><code class="language-c++">当结果操作数中偶数个"1",置PF=1,否则,PF=0
+</code></pre>
+<h3 id="SF-符号标志"><a href="#SF-符号标志" class="headerlink" title="SF 符号标志"></a>SF 符号标志</h3><pre class=" language-c++"><code class="language-c++">当结果为负时,SF=1;否则,SF=0.溢出时情形例外
+</code></pre>
+<h3 id="CF-进位标志"><a href="#CF-进位标志" class="headerlink" title="CF 进位标志"></a>CF 进位标志</h3><pre class=" language-c++"><code class="language-c++">最高有效位产生进位值,例如,执行加法指令时,MSB有进位,置CF=1;否则,CF=0
+</code></pre>
+<h3 id="OF-溢出标志"><a href="#OF-溢出标志" class="headerlink" title="OF 溢出标志"></a>OF 溢出标志</h3><pre class=" language-c++"><code class="language-c++">若操作数结果超出了机器能表示的范围,则产生溢出,置OF=1,否则,OF=0
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2021/01/03/zhi-ling/">https://0xdadream.github.io/2021/01/03/zhi-ling/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B1%87%E7%BC%96/">
+                                    <span class="chip bg-color">汇编</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/02/01/bao-po-1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="爆破-1">
+                        
+                        <span class="card-title">爆破-1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            全局变量GLOBALS
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/wp/">
+                        <span class="chip bg-color">wp</span>
+                    </a>
+                    
+                    <a href="/tags/i%E6%98%A5%E7%A7%8B/">
+                        <span class="chip bg-color">i春秋</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/01/01/ji-cun-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/32.jpg" class="responsive-img" alt="寄存器">
+                        
+                        <span class="card-title">寄存器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            寄存器相关的知识点
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B1%87%E7%BC%96/">
+                        <span class="chip bg-color">汇编</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2021</span>
+            
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;0xdadream</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">38.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
