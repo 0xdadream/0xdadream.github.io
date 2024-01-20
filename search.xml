@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>SSH连接报错</title>
+      <link href="/2024/01/20/ssh-lian-jie-bao-cuo/"/>
+      <url>/2024/01/20/ssh-lian-jie-bao-cuo/</url>
+      
+        <content type="html"><![CDATA[<h1 id="SSH连接报错"><a href="#SSH连接报错" class="headerlink" title="SSH连接报错"></a>SSH连接报错</h1><p>当时git提交时出现连接失败等提示，试一试命令<code>ssh -T git@github.com</code>，若报错如下</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh: connect to <span class="token function">host</span> github.com port <span class="token number">22</span>: Connection timed out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>则试一试<code>ssh -T -p 443 git@ssh.github.com</code>，若成功则修改<code>~/.ssh/config</code>文件，添加</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Host github.comHostname ssh.github.comPort <span class="token number">443</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>再次<code>ssh -T git@github.com</code>成功，则可以进行提交，这是由于22端口处于某种原因出现了问题，之后仍然可以修改为原配置。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> tip </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tip </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用主题matery而降级hexo版本</title>
       <link href="/2024/01/20/shi-yong-zhu-ti-matery-jiang-ji-hexo-ban-ben/"/>
       <url>/2024/01/20/shi-yong-zhu-ti-matery-jiang-ji-hexo-ban-ben/</url>
