@@ -424,7 +424,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-27
+                    2024-01-28
                 </div>
                 
 
@@ -987,9 +987,9 @@ ArraySum endp<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 
 <h3 id="CLC"><a href="#CLC" class="headerlink" title="CLC"></a>CLC</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">clc;清除标识位<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="STC"><a href="#STC" class="headerlink" title="STC"></a>STC</h3><pre class="line-numbers language-none"><code class="language-none">进位标志置1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="STC"><a href="#STC" class="headerlink" title="STC"></a>STC</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">进位标志置1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="ENTER——————-被调用过程自动创建堆栈帧"><a href="#ENTER——————-被调用过程自动创建堆栈帧" class="headerlink" title="ENTER——————-被调用过程自动创建堆栈帧"></a>ENTER——————-被调用过程自动创建堆栈帧</h3><pre class="line-numbers language-none"><code class="language-none">Mysub proc
+<h3 id="ENTER——————-被调用过程自动创建堆栈帧"><a href="#ENTER——————-被调用过程自动创建堆栈帧" class="headerlink" title="ENTER——————-被调用过程自动创建堆栈帧"></a>ENTER——————-被调用过程自动创建堆栈帧</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mysub proc
 	enter 8,0
 ;等效于
 Mysub proc
@@ -997,7 +997,7 @@ Mysub proc
 	mov ebp,esp
 	sub esp,8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="LEAVE——————指令结束一个过程的堆栈帧"><a href="#LEAVE——————指令结束一个过程的堆栈帧" class="headerlink" title="LEAVE——————指令结束一个过程的堆栈帧"></a>LEAVE——————指令结束一个过程的堆栈帧</h3><pre class="line-numbers language-none"><code class="language-none">Mysub proc
+<h3 id="LEAVE——————指令结束一个过程的堆栈帧"><a href="#LEAVE——————指令结束一个过程的堆栈帧" class="headerlink" title="LEAVE——————指令结束一个过程的堆栈帧"></a>LEAVE——————指令结束一个过程的堆栈帧</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mysub proc
 	enter 8,0
 	.
 	.
@@ -1016,17 +1016,15 @@ Mysub proc
 	ret
 Mysub endp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="LOCAL—————局部变量"><a href="#LOCAL—————局部变量" class="headerlink" title="LOCAL—————局部变量"></a>LOCAL—————局部变量</h3><pre class="line-numbers language-none"><code class="language-none">Mysub proc
+<h3 id="LOCAL—————局部变量"><a href="#LOCAL—————局部变量" class="headerlink" title="LOCAL—————局部变量"></a>LOCAL—————局部变量</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mysub proc
 	local var:dword;这是一个局部变量<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="INVOKE—————–CALL替代品，一行调用多个参数"><a href="#INVOKE—————–CALL替代品，一行调用多个参数" class="headerlink" title="INVOKE—————–CALL替代品，一行调用多个参数"></a>INVOKE—————–CALL替代品，一行调用多个参数</h3><pre class="line-numbers language-none"><code class="language-none">invoke Dumparray,offset array,lengthof array,type array<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="INVOKE—————–CALL替代品，一行调用多个参数"><a href="#INVOKE—————–CALL替代品，一行调用多个参数" class="headerlink" title="INVOKE—————–CALL替代品，一行调用多个参数"></a>INVOKE—————–CALL替代品，一行调用多个参数</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">invoke Dumparray,offset array,lengthof array,type array<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="ADDR——–只能和INVOKE一起"><a href="#ADDR——–只能和INVOKE一起" class="headerlink" title="ADDR——–只能和INVOKE一起"></a>ADDR——–只能和INVOKE一起</h3><pre class="line-numbers language-none"><code class="language-none">array dword 20 dup(?)
+<h3 id="ADDR——–只能和INVOKE一起"><a href="#ADDR——–只能和INVOKE一起" class="headerlink" title="ADDR——–只能和INVOKE一起"></a>ADDR——–只能和INVOKE一起</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">array dword 20 dup(?)
 invoke swap
 	addr array
 	addr [array+4]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
 
 <h2 id="条件标志"><a href="#条件标志" class="headerlink" title="条件标志"></a>条件标志</h2><h3 id="ZF-零标志"><a href="#ZF-零标志" class="headerlink" title="ZF 零标志"></a>ZF 零标志</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">当结果为负时,SF=1,否则,SF=0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1790,7 +1788,7 @@ invoke swap
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">164.8k</span>
+                        class="white-color">165k</span>
             
             
             

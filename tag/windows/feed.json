@@ -1,0 +1,140 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "逐梦 • All posts by \"windows\" tag",
+    "description": "Welcome to my blog",
+    "home_page_url": "https://0xdadream.github.io",
+    "items": [
+        {
+            "id": "https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/",
+            "url": "https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/",
+            "title": "json.decoder.JSONDecodeError",
+            "date_published": "2023-03-03T20:11:00.000Z",
+            "content_html": "<h1 id=\"json-decoder-JSONDecodeError\"><a href=\"#json-decoder-JSONDecodeError\" class=\"headerlink\" title=\"json.decoder.JSONDecodeError\"></a>json.decoder.JSONDecodeError</h1><p>我是安装<code>stable diffusion</code>出现的错误</p>\n<p>大致截图</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\"> File <span class=\"token string\">\"G:<span class=\"token entity\" title=\"\\r\">\\r</span>uanjian\\stable-diffusion-webui-master<span class=\"token entity\" title=\"\\0\">\\0</span>xdadream\\lib\\site-packages<span class=\"token entity\" title=\"\\t\">\\t</span>ransformers<span class=\"token entity\" title=\"\\t\">\\t</span>okenization_utils_base.py\"</span>, line <span class=\"token number\">1956</span>, <span class=\"token keyword\">in</span> _from_pretrained\n    tokenizer <span class=\"token operator\">=</span> cls<span class=\"token punctuation\">(</span>*init_inputs, **init_kwargs<span class=\"token punctuation\">)</span>\n  File <span class=\"token string\">\"G:<span class=\"token entity\" title=\"\\r\">\\r</span>uanjian\\stable-diffusion-webui-master<span class=\"token entity\" title=\"\\0\">\\0</span>xdadream\\lib\\site-packages<span class=\"token entity\" title=\"\\t\">\\t</span>ransformers\\models<span class=\"token entity\" title=\"\\c\">\\c</span>lip<span class=\"token entity\" title=\"\\t\">\\t</span>okenization_clip.py\"</span>, line <span class=\"token number\">323</span>, <span class=\"token keyword\">in</span> __init__\n    self.encoder <span class=\"token operator\">=</span> json.load<span class=\"token punctuation\">(</span>vocab_handle<span class=\"token punctuation\">)</span>\n …………\njson.decoder.JSONDecodeError: Unterminated string starting at: line <span class=\"token number\">1</span> <span class=\"token function\">column</span> <span class=\"token number\">11370</span> <span class=\"token punctuation\">(</span>char <span class=\"token number\">11369</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>\n\n<p>问题出在这<code>json.load(vocab_handle)</code></p>\n<p>找到这个文件存放目录<code>C:\\Users\\xxx\\.cache\\huggingface\\hub\\models--openai--clip-vit-large-patch14\\blobs\\xxxx</code>，把下面东西全删除</p>\n<p><a href=\"https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json%EF%BC%8C%E4%B8%8B%E8%BD%BD%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E9%87%8D%E6%96%B0%E6%89%A7%E8%A1%8Cbat%E6%96%87%E4%BB%B6%E5%B0%B1%E6%88%90%E5%8A%9F%E4%BA%86\">https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json，下载这个文件放在目录下，重新执行bat文件就成功了</a></p>\n<p>这个问题是因为文件出现了破损</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/",
+            "url": "https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/",
+            "title": "win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者",
+            "date_published": "2022-05-20T14:11:00.000Z",
+            "content_html": "<h1 id=\"win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者\"><a href=\"#win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者\" class=\"headerlink\" title=\"win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者\"></a>win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者</h1><p>下载补丁安装<a href=\"https://www.catalog.update.microsoft.com/Search.aspx?q=kb4474419\">Microsoft Update Catalog</a></p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/",
+            "url": "https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/",
+            "title": "配置WSUS连接时HTTP错误",
+            "date_published": "2022-04-30T15:11:00.000Z",
+            "content_html": "<h1 id=\"配置WSUS连接时HTTP错误\"><a href=\"#配置WSUS连接时HTTP错误\" class=\"headerlink\" title=\"配置WSUS连接时HTTP错误\"></a>配置WSUS连接时HTTP错误</h1><p>我尝试<code>ping microsoft.com</code>，并不能ping通更新服务</p>\n<p>打开自动更新，也更新不了，应该就是网络的原因</p>\n<p>首先关闭防火墙，如果是静态IP要保证能访问外网，不然你可以换成DHCP，自动获取</p>\n<p>然后可以设置代理服务器，或者挂一个代理软件</p>\n<p>注：你可以先把主机的系统先更新了，该打的补丁打了</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/",
+            "url": "https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/",
+            "title": "发生系统错误6118",
+            "date_published": "2022-04-30T14:11:00.000Z",
+            "content_html": "<h1 id=\"发生系统错误6118此工作组的服务器列表当前无法使用\"><a href=\"#发生系统错误6118此工作组的服务器列表当前无法使用\" class=\"headerlink\" title=\"发生系统错误6118此工作组的服务器列表当前无法使用\"></a>发生系统错误6118此工作组的服务器列表当前无法使用</h1><h2 id=\"问题\"><a href=\"#问题\" class=\"headerlink\" title=\"问题\"></a>问题</h2><p>当你在域服务器中运行<code>net view /domain</code>是报错</p>\n<p>发生系统错误6118。此工作组的服务器列表当前无法使用</p>\n<h2 id=\"解决方法\"><a href=\"#解决方法\" class=\"headerlink\" title=\"解决方法\"></a>解决方法</h2><p>首先检查静态IP是否在设置的域环境，没有就改回来</p>\n<p>win+R打开运行框输入<code>services.msc</code>运行</p>\n<p>找到<code>computer browser</code> 服务</p>\n<p>启动类型设置为自动</p>\n<p>未启动则手动启动</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/",
+            "url": "https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/",
+            "title": "windows监听端口失败",
+            "date_published": "2022-02-08T14:11:00.000Z",
+            "content_html": "<h1 id=\"windows监听端口失败\"><a href=\"#windows监听端口失败\" class=\"headerlink\" title=\"windows监听端口失败\"></a>windows监听端口失败</h1><p>当你在某些情况需要用到监听端口时，会出现端口监听失败，获得类似信息<code>An attempt was made to access a socket in a way forbidden by its access permissions.</code>，这时你通过命令查看端口信息</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\"><span class=\"token function\">netstat</span> -ano<span class=\"token operator\">|</span><span class=\"token function\">grep</span> 端口号<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>发现这个端口并没有被占用，这时这些端口可能被系统保留了，查看保留端口</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">netsh int ipv4 show excludedportrange <span class=\"token assign-left variable\">protocol</span><span class=\"token operator\">=</span>tcp<span class=\"token operator\">|</span>udp<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>然后你可以避开这些端口，或者</p>\n<h2 id=\"解决方法\"><a href=\"#解决方法\" class=\"headerlink\" title=\"解决方法\"></a>解决方法</h2><p>关闭占用程序，我这里默认hyper-v，大多数都是，关闭后<strong>重启</strong></p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">dism.exe /Online /Disable-Feature:Microsoft-Hyper-V <span class=\"token comment\"># 关闭</span>\ndism.exe /Online /Enable-Feature:Microsoft-Hyper-V <span class=\"token comment\"># 打开</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span></span></code></pre>\n\n<ol>\n<li><p>配置动态端口，动态端口不能被保留，用完即释放</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">netsh int ipv4 <span class=\"token builtin class-name\">set</span> dynamicportrange <span class=\"token assign-left variable\">protocol</span><span class=\"token operator\">=</span>tcp <span class=\"token assign-left variable\">startport</span><span class=\"token operator\">=</span><span class=\"token number\">10000</span> <span class=\"token assign-left variable\">numberofports</span><span class=\"token operator\">=</span><span class=\"token number\">254</span> <span class=\"token assign-left variable\">store</span><span class=\"token operator\">=</span>active<span class=\"token operator\">|</span>persistent\n<span class=\"token comment\"># start为起始端口，num为往后多少个端口，最小254，store为生效状态</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span></span></code></pre>\n</li>\n<li><p>将使用的端口移除保留端口</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">netsh int ipv4 delete excludedportrange <span class=\"token assign-left variable\">protocol</span><span class=\"token operator\">=</span>tcp <span class=\"token assign-left variable\">startport</span><span class=\"token operator\">=</span><span class=\"token number\">10000</span> <span class=\"token assign-left variable\">numberofports</span><span class=\"token operator\">=</span><span class=\"token number\">10</span>\n<span class=\"token comment\"># startport为起始端口，numberofports为往后多少个端口</span>\nnetsh int ipv4 <span class=\"token function\">add</span> excludedportrange <span class=\"token assign-left variable\">protocol</span><span class=\"token operator\">=</span>tcp <span class=\"token assign-left variable\">startport</span><span class=\"token operator\">=</span><span class=\"token number\">10000</span> <span class=\"token assign-left variable\">numberofports</span><span class=\"token operator\">=</span><span class=\"token number\">10</span>\n<span class=\"token comment\"># 这是添加</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span></span></code></pre></li>\n</ol>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/02/08/windows-zhong-netstat-ming-ling/",
+            "url": "https://0xdadream.github.io/2022/02/08/windows-zhong-netstat-ming-ling/",
+            "title": "windows中netstat命令",
+            "date_published": "2022-02-07T18:11:00.000Z",
+            "content_html": "<h1 id=\"windows中netstat命令\"><a href=\"#windows中netstat命令\" class=\"headerlink\" title=\"windows中netstat命令\"></a>windows中netstat命令</h1><h2 id=\"netstat-查看Linux中网络系统状态信息\"><a href=\"#netstat-查看Linux中网络系统状态信息\" class=\"headerlink\" title=\"netstat-查看Linux中网络系统状态信息\"></a>netstat-查看Linux中网络系统状态信息</h2><p><code>NETSTAT [-a] [-b] [-e] [-f] [-i] [-n] [-o] [-p proto] [-r] [-s] [-t] [-x] [-y] [interval]</code></p>\n<p>选项</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\"><span class=\"token parameter variable\">-a</span> 显示所有连接和监听端口\n<span class=\"token parameter variable\">-b</span> 显示创建每个连接所涉及的可执行文件或监听端口。在某些情况下，众所周知的可执行文件宿主多个独立的组件，在这些情况下创建连接所涉及的组件序列或显示监听端口。在这种情况下，可执行文件名称在底部的 <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> 中，顶部是它调用的组件，以此类推，直到达到 TCP/IP\n<span class=\"token parameter variable\">-e</span> 显示以太网统计信息，这可以与 <span class=\"token parameter variable\">-s</span> 结合使用选项\n<span class=\"token parameter variable\">-f</span> 显示外国的完全限定域名<span class=\"token punctuation\">(</span>FQDN<span class=\"token punctuation\">)</span>地址\n<span class=\"token parameter variable\">-i</span> 显示 TCP 连接在其当前状态下花费的时间\n<span class=\"token parameter variable\">-n</span> 以数字形式显示地址和端口号\n<span class=\"token parameter variable\">-o</span> 显示与每个连接关联的拥有进程 ID\n<span class=\"token parameter variable\">-p</span> proto 显示由 proto 指定的协议的连接；原型可以是以下任何一种：TCP、UDP、TCPv6 或 UDPv6。如果与 <span class=\"token parameter variable\">-s</span> 一起使用显示每个协议统计信息的选项，proto 可以是以下任何一种：IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 或 UDPv6\n<span class=\"token parameter variable\">-q</span> 显示所有连接、监听端口和绑定非侦听 TCP 端口。绑定的非侦听端口可能会也可能不会与活动连接相关联\n<span class=\"token parameter variable\">-r</span> 显示路由表\n<span class=\"token parameter variable\">-s</span> 显示每个协议的统计信息。默认情况下，统计信息是针对 IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 和 UDPv6 显示；-p 选项可用于指定默认值的子集\n<span class=\"token parameter variable\">-t</span> 显示当前连接卸载状态\n<span class=\"token parameter variable\">-x</span> 显示 NetworkDirect 连接、侦听器和共享端点\n<span class=\"token parameter variable\">-y</span> 显示所有连接的 TCP 连接模板不能与其他选项结合使用\ninterval 重新显示选定的统计信息，暂停间隔秒每个显示器之间。按 CTRL+C 停止重新显示统计数据。如果省略，netstat 将打印当前配置信息一次<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>\n\n<p>常用</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\"><span class=\"token function\">netstat</span> <span class=\"token parameter variable\">-ano</span> <span class=\"token comment\"># 显示所有连接和监听端口和ID号</span>\n<span class=\"token function\">netstat</span> -ano<span class=\"token operator\">|</span><span class=\"token function\">grep</span> yourfind grep也可以是findstr<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span></span></code></pre>\n\n<p>Proto\tLocal Address\tForeign Address\tState\tPID<br>协议\t 本地地址\t\t\t远程地址\t\t\t\t状态\t进程号</p>\n<p>State分为<br>LISTEN  ：监听状态<br>ESTABLISHED ：已建立联机<br>TIME_WAIT ：等待联机</p>\n",
+            "tags": [
+                "windows",
+                "命令"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/",
+            "url": "https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/",
+            "title": "自定义鼠标右键新建文件",
+            "date_published": "2022-01-14T18:25:00.000Z",
+            "content_html": "<h1 id=\"自定义鼠标右键新建文件\"><a href=\"#自定义鼠标右键新建文件\" class=\"headerlink\" title=\"自定义鼠标右键新建文件\"></a>自定义鼠标右键新建文件</h1><ol>\n<li><p>win+R 打开运行窗口，输入regedit进入注册表</p>\n</li>\n<li><p>进入<code>计算机\\HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Discardable\\PostSetup\\ShellNew</code>目录下</p>\n</li>\n<li><p><img src=\"https://s4.ax1x.com/2022/01/15/7GtjiT.png\" alt=\"7GtjiT.png\"></p>\n<p>按这样修改，修改时可能你会遇到问题，看下文解决方法</p>\n</li>\n<li><p>进入<code>计算机\\HKEY_CLASSES_ROOT\\.md</code></p>\n<p>将默认值修改为<code>Typora.md</code></p>\n<p><img src=\"https://s4.ax1x.com/2022/01/15/7GtvJU.png\" alt=\"7GtvJU.png\"></p>\n</li>\n<li><p><img src=\"https://s4.ax1x.com/2022/01/15/7GtxWF.png\" alt=\"7GtxWF.png\"></p>\n<p>如图，如果没有就这样修改</p>\n</li>\n</ol>\n<h2 id=\"解决方法\"><a href=\"#解决方法\" class=\"headerlink\" title=\"解决方法\"></a>解决方法</h2><p>还是到<code>计算机\\HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Discardable\\PostSetup\\ShellNew</code></p>\n<p><img src=\"https://s4.ax1x.com/2022/01/15/7GNFdx.png\" alt=\"7GNFdx.png\"></p>\n<p>右击ShellNew，点击权限，然后点击高级-&gt;禁用继承</p>\n<p>双击你登陆的用户（就是一个小人儿那个），取消勾选完全控制，然后应用，确定，刷新</p>\n<h2 id=\"注意\"><a href=\"#注意\" class=\"headerlink\" title=\"注意\"></a>注意</h2><p>添加其他的也类似</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/",
+            "url": "https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/",
+            "title": "powershell导入一个自己写的模块",
+            "date_published": "2022-01-02T19:11:00.000Z",
+            "content_html": "<h1 id=\"powershell导入一个自己写的模块\"><a href=\"#powershell导入一个自己写的模块\" class=\"headerlink\" title=\"powershell导入一个自己写的模块\"></a>powershell导入一个自己写的模块</h1><ol>\n<li><p>想把你写的模块<code>name.psm1</code>放在<code>C:\\Users\\yourname\\Documents\\PowerShell\\Modules\\name</code>目录下</p>\n<p>name为你的模块名</p>\n</li>\n<li><p>编辑文件<code>‪C:\\Users\\yourname\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1</code>，添加<code>Import-Module name</code></p>\n</li>\n<li><p>重新启动就ok了</p>\n</li>\n<li><p>name.psm1其实放哪都可以，你只需要把第二步的name换为绝对路径，我放在那个目录是为了和其他模块一起方便管理</p>\n</li>\n</ol>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/",
+            "url": "https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/",
+            "title": "windows terminal使用",
+            "date_published": "2021-12-29T15:11:00.000Z",
+            "content_html": "<h1 id=\"windows-terminal使用\"><a href=\"#windows-terminal使用\" class=\"headerlink\" title=\"windows terminal使用\"></a>windows terminal使用</h1><p>本文将介绍一些windows terminal的基本使用</p>\n<p>首先是这个新建一个配置文件</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23kad.png\" alt=\"T23kad.png\"></p>\n<p>可以建一个空的，也可以复制</p>\n<p>我们新建一个配置文件，如图</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23AIA.png\" alt=\"T23AIA.png\"></p>\n<p>这个配置文件就像一个按钮，命令行就相当于按钮的链接，点击就运行命令</p>\n<p>名称，命令行，图标可以稍微设置一下，其他的没啥可修改的</p>\n<p>图标可以使用网络链接，也可以是本地路径</p>\n<p>这里主要讲一下命令行</p>\n<h2 id=\"命令行\"><a href=\"#命令行\" class=\"headerlink\" title=\"命令行\"></a>命令行</h2><p>主要的几个使用小技巧</p>\n<ol>\n<li><p>如果你定义了环境变量，直接写环境变量，就能直接运行，例如python</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23VPI.png\" alt=\"T23VPI.png\"></p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23ZGt.png\" alt=\"T23ZGt.png\"></p>\n</li>\n<li><p>没有定义环境变量，直接使用绝对路径</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23KsS.png\" alt=\"T23KsS.png\"></p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23Mqg.png\" alt=\"T23Mqg.png\"></p>\n</li>\n<li><p>可以当作快速启动程序的一个方式</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23uM8.png\" alt=\"T23uM8.png\"></p>\n</li>\n<li><p>以管理员方式启动</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T231aj.png\" alt=\"T231aj.png\"></p>\n<p>wt为环境变量或者绝对路径</p>\n</li>\n</ol>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2021/12/29/windows-terminal-she-zhi-guan-li-yuan/",
+            "url": "https://0xdadream.github.io/2021/12/29/windows-terminal-she-zhi-guan-li-yuan/",
+            "title": "windows terminal设置管理员",
+            "date_published": "2021-12-29T13:11:00.000Z",
+            "content_html": "<h1 id=\"windows-terminal设置管理员\"><a href=\"#windows-terminal设置管理员\" class=\"headerlink\" title=\"windows terminal设置管理员\"></a>windows terminal设置管理员</h1><p>现在windows基本上都内置了，没有就去下载</p>\n<h2 id=\"通用方法\"><a href=\"#通用方法\" class=\"headerlink\" title=\"通用方法\"></a>通用方法</h2><ol>\n<li><p>添加一个配置文件</p>\n<p>设置-&gt;添加一个新的配置文件，内容如图</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T233Is.png\" alt=\"T233Is.png\"></p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">powershell.exe <span class=\"token parameter variable\">-command</span> Start-Process <span class=\"token parameter variable\">-Verb</span> RunAs <span class=\"token punctuation\">\\</span>\"wt<span class=\"token punctuation\">\\</span>\"<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>原理就是通过在powershell中以管理员方式再次打开Windows PowerShell，上面的命令行的作用就是这个，所以不能把这个配置文件设置为默认，不然会无限重启，手贱试了的就重启电脑，下次打开wt，点否，然后把配置改回来，所以这个有点小鸡肋，其中命令行<strong>wt</strong>可以换成加过环境变量的其他程序，当然你也可以写绝对路径</p>\n</li>\n<li><p>利用其他程序来实现</p>\n<p>这个安全性不得而知，因为这个程序能获取你的管理员权限，当然自己人用用还是没啥问题，它类似linux的sudo</p>\n<p>安装，运行命令</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">PowerShell <span class=\"token parameter variable\">-Command</span> <span class=\"token string\">\"Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex\"</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>询问是否使用别名，看自己的意向</p>\n<p>然后添加如下配置</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/30/T23Gin.png\" alt=\"T23Gin.png\"></p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">gsudo.exe powershell.exe<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>和上面一样意思</p>\n</li>\n<li><p>运行框启动</p>\n<p>win+x打开运行窗口，输入wt（你想要运行的程序），确认同时按着ctrl+shift时，点击确定，便能以管理员方式运行</p>\n<p>这个可以说最简单</p>\n</li>\n<li><p>写批处理文件</p>\n<p>先一个bat文件，命名随意</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">powershell.exe Start-Process <span class=\"token parameter variable\">-Verb</span> RunAs <span class=\"token punctuation\">\\</span>\"wt<span class=\"token punctuation\">\\</span>\"<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>在写一个vbs文件，命名随意</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">Set ws <span class=\"token operator\">=</span> CreateObject<span class=\"token punctuation\">(</span><span class=\"token string\">\"Wscript.Shell\"</span><span class=\"token punctuation\">)</span>   \nws.run <span class=\"token string\">\"cmd /c wta.bat\"</span>,vbhide<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span></span></code></pre>\n\n<p>wta.bat是我的bat文件名，放在同一个目录，使用时打开vbs文件，我感觉这样最奈斯</p>\n</li>\n</ol>\n<h2 id=\"win11\"><a href=\"#win11\" class=\"headerlink\" title=\"win11\"></a>win11</h2><p>右击开始-&gt;Windows终端（管理员）</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2021/12/04/vmwareworkstation-zai-ci-zhu-ji-shang-bu-zhi-chi-qian-tao-xu-ni-hua/",
+            "url": "https://0xdadream.github.io/2021/12/04/vmwareworkstation-zai-ci-zhu-ji-shang-bu-zhi-chi-qian-tao-xu-ni-hua/",
+            "title": "VMware Workstation 在此主机上不支持嵌套虚拟化",
+            "date_published": "2021-12-04T13:11:00.000Z",
+            "content_html": "<h1 id=\"VMware-Workstation-在此主机上不支持嵌套虚拟化\"><a href=\"#VMware-Workstation-在此主机上不支持嵌套虚拟化\" class=\"headerlink\" title=\"VMware Workstation 在此主机上不支持嵌套虚拟化\"></a>VMware Workstation 在此主机上不支持嵌套虚拟化</h1><p>当想要使用vmware的虚拟化引擎，遇到了以下问题</p>\n<ul>\n<li><p>此主机支持AMD-V，但AMD-V处于禁用状态</p>\n<p>这是因为物理机没有打开虚拟化，参照<a href=\"https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/\">开启虚拟化 | 逐梦 (0xdadream.github.io)</a></p>\n</li>\n<li><p>此平台不支持AMD-V</p>\n</li>\n<li><p>VMware Workstation 在此主机上不支持嵌套虚拟化</p>\n<p>这时你需要打开控制面板-》程序与应用-》启用或关闭windows功能，取消勾选Hyper-V</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/08/oWtgOJ.png\" alt=\"oWtgOJ.png\"></p>\n<p>不用管下面那个虚拟化</p>\n<p>然后右键开始菜单-》计算机管理-》服务和应用程序-》服务，找到HV主机服务，禁用</p>\n<p><img src=\"https://s4.ax1x.com/2021/12/08/oWtIfK.png\" alt=\"oWtIfK.png\"></p>\n<p>这样还没有完全禁用，管理员权限运行</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">bcdedit /set hypervisorlaunchtype off<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>这样就能完全禁用了，重启便可使用镶嵌虚拟化</p>\n<p>想要再启用hyper，关闭禁用，运行</p>\n<pre class=\"line-numbers language-bash\" data-language=\"bash\"><code class=\"language-bash\">bcdedit /set hypervisorlaunchtype auto<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>\n\n<p>这主要是由于hyper和vmware的兼容性问题导致的，退回低版本可能也可以解决，我没试过哈</p>\n</li>\n</ul>\n<p>上述的是专业版的Windows，家庭版好像程序和应用里没有Hyper-V，就不用去去掉复选框，其他解决方法和上面一样</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        },
+        {
+            "id": "https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/",
+            "url": "https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/",
+            "title": "开启虚拟化",
+            "date_published": "2021-11-27T13:11:00.000Z",
+            "content_html": "<h1 id=\"开启虚拟化\"><a href=\"#开启虚拟化\" class=\"headerlink\" title=\"开启虚拟化\"></a>开启虚拟化</h1><p>我的CPU是AMD，Intel也差不多</p>\n<p>在vmware创建虚拟机时，开启了AMD-V，如图</p>\n<p><img src=\"https://z3.ax1x.com/2021/11/30/o3oLvt.png\" alt=\"o3oLvt.png\"></p>\n<p>可能会遇到这种情况</p>\n<p><img src=\"https://z3.ax1x.com/2021/11/30/o3ojDf.png\" alt=\"o3ojDf.png\"></p>\n<p>这时我们需要进入BIOS，开启虚拟化AMD-V</p>\n<p>开机或重启（进入系统之前）按下F2或者Delete（各品牌电脑电脑有差别，自行查阅）</p>\n<p><img src=\"https://z3.ax1x.com/2021/11/30/o3Ti2n.jpg\" alt=\"o3Ti2n.jpg\"></p>\n<p>进入这个页面Configuration，选择AMD SVM Technology，改为Enable，F10保存退出</p>\n",
+            "tags": [
+                "tip",
+                "windows"
+            ]
+        }
+    ]
+}
