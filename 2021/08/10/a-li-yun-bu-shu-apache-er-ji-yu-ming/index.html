@@ -420,14 +420,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-08-10
+                    2024-02-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    176
+                    172
                 </div>
                 
 
@@ -466,27 +466,27 @@
 <p>注释掉虚拟目录外的<code>DocumentRoot</code></p>
 <p>添加</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">NameVirtualHost *:80
-<span class="token operator">&amp;</span>ltVirtualHost *:8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+<span class="token operator">&lt;</span>VirtualHost *:8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
 	ServerAdmin root@localhost
 	DocumentRoot <span class="token string">"/var/www/your1"</span>
 	ServerName two1.yourname
-	<span class="token operator">&amp;</span>ltDirectory <span class="token string">"/var/www/your1"</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>Directory <span class="token string">"/var/www/your1"</span><span class="token operator">&gt;</span>
 		Options Indexes FollowSymLinks
 		AllowOverride None
 		Require all granted
-	<span class="token operator">&amp;</span>lt/Directory<span class="token operator">&gt;</span>
-<span class="token operator">&amp;</span>lt/VirtualHost<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>/Directory<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>/VirtualHost<span class="token operator">&gt;</span>
 
-<span class="token operator">&amp;</span>ltVirtualHost *:8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
+<span class="token operator">&lt;</span>VirtualHost *:8<span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>
 	ServerAdmin root@localhost
 	DocumentRoot <span class="token string">"/var/www/your2"</span>
 	ServerName two2.yourname
-	<span class="token operator">&amp;</span>ltDirectory <span class="token string">"/var/www/your2"</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>Directory <span class="token string">"/var/www/your2"</span><span class="token operator">&gt;</span>
 		Options Indexes FollowSymLinks
 		AllowOverride None
 		Require all granted
-	<span class="token operator">&amp;</span>lt/Directory<span class="token operator">&gt;</span>
-<span class="token operator">&amp;</span>lt/VirtualHost<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token operator">&lt;</span>/Directory<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>/VirtualHost<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">service</span> httpd restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 

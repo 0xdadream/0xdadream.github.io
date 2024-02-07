@@ -9,14 +9,14 @@
         <lastBuildDate>Thu, 12 Aug 2021 20:11:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
-        <category>linux</category>
         <category>re</category>
         <category>工具</category>
+        <category>linux</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>BUUCTF</category>
         <category>windows</category>
+        <category>BUUCTF</category>
         <category>server</category>
         <category>sql</category>
         <category>代码审计</category>
@@ -25,9 +25,9 @@
         <category>学习</category>
         <category>命令</category>
         <category>tools</category>
-        <category>php</category>
         <category>文件上传</category>
         <category>bug</category>
+        <category>php</category>
         <category>python</category>
         <category>汇编</category>
         <category>i春秋</category>
@@ -97,7 +97,7 @@ LoadModule ssl_module modules/mod_ssl.so&lt;span aria-hidden=&#34;true&#34; clas
 &lt;h2 id=&#34;加载配置文件&#34;&gt;&lt;a href=&#34;#加载配置文件&#34; class=&#34;headerlink&#34; title=&#34;加载配置文件&#34;&gt;&lt;/a&gt;加载配置文件&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;includeOptionalconf.d/*.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;保存证书&#34;&gt;&lt;a href=&#34;#保存证书&#34; class=&#34;headerlink&#34; title=&#34;保存证书&#34;&gt;&lt;/a&gt;保存证书&lt;/h2&gt;&lt;p&gt;在apache安装目录中新建cert目录，将证书解压至此&lt;/p&gt;
-&lt;h2 id=&#34;修改ssl-conf配置文件&#34;&gt;&lt;a href=&#34;#修改ssl-conf配置文件&#34; class=&#34;headerlink&#34; title=&#34;修改ssl.conf配置文件&#34;&gt;&lt;/a&gt;修改ssl.conf配置文件&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltVirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
+&lt;h2 id=&#34;修改ssl-conf配置文件&#34;&gt;&lt;a href=&#34;#修改ssl-conf配置文件&#34; class=&#34;headerlink&#34; title=&#34;修改ssl.conf配置文件&#34;&gt;&lt;/a&gt;修改ssl.conf配置文件&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
     ServerName   &lt;span class=&#34;token comment&#34;&gt;#修改为申请证书时绑定的域名www.YourDomainName1.com。                    &lt;/span&gt;
     DocumentRoot  /data/www/hbappserver/public          
     SSLEngine on   
@@ -107,10 +107,10 @@ LoadModule ssl_module modules/mod_ssl.so&lt;span aria-hidden=&#34;true&#34; clas
     SSLCertificateFile cert/domain name1_public.crt   &lt;span class=&#34;token comment&#34;&gt;# 将domain name1_public.crt替换成您证书文件名。&lt;/span&gt;
     SSLCertificateKeyFile cert/domain name1.key   &lt;span class=&#34;token comment&#34;&gt;# 将domain name1.key替换成您证书的密钥文件名。&lt;/span&gt;
     SSLCertificateChainFile cert/domain name1_chain.crt  &lt;span class=&#34;token comment&#34;&gt;# 将domain name1_chain.crt替换成您证书的密钥文件名；证书链开头如果有#字符，请删除。&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
 
 &lt;span class=&#34;token comment&#34;&gt;#如果证书包含多个域名，复制以上参数，并将ServerName替换成第二个域名。 &lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltVirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
     ServerName   &lt;span class=&#34;token comment&#34;&gt;#修改为申请证书时绑定的第二个域名www.YourDomainName2.com。                    &lt;/span&gt;
     DocumentRoot  /data/www/hbappserver/public          
     SSLEngine on   
@@ -120,7 +120,7 @@ LoadModule ssl_module modules/mod_ssl.so&lt;span aria-hidden=&#34;true&#34; clas
     SSLCertificateFile cert/domain name2_public.crt   &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名。&lt;/span&gt;
     SSLCertificateKeyFile cert/domain name2.key   &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名。&lt;/span&gt;
     SSLCertificateChainFile cert/domain name2_chain.crt  &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名；证书链开头如果有#字符，请删除。&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;重启生效&#34;&gt;&lt;a href=&#34;#重启生效&#34; class=&#34;headerlink&#34; title=&#34;重启生效&#34;&gt;&lt;/a&gt;重启生效&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -191,27 +191,27 @@ RewriteRule ^&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;.*&lt;s
 &lt;p&gt;注释掉虚拟目录外的&lt;code&gt;DocumentRoot&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;添加&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;NameVirtualHost *:80
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltVirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
 	ServerAdmin root@localhost
 	DocumentRoot &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your1&#34;&lt;/span&gt;
 	ServerName two1.yourname
-	&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltDirectory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your1&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;Directory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your1&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
 		Options Indexes FollowSymLinks
 		AllowOverride None
 		Require all granted
-	&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
 
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltVirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
 	ServerAdmin root@localhost
 	DocumentRoot &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your2&#34;&lt;/span&gt;
 	ServerName two2.yourname
-	&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;ltDirectory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your2&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;Directory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your2&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
 		Options Indexes FollowSymLinks
 		AllowOverride None
 		Require all granted
-	&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;lt/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;重启&#34;&gt;&lt;a href=&#34;#重启&#34; class=&#34;headerlink&#34; title=&#34;重启&#34;&gt;&lt;/a&gt;重启&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 

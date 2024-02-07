@@ -424,14 +424,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-08-11
+                    2024-02-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    432
+                    430
                 </div>
                 
 
@@ -467,7 +467,7 @@ LoadModule ssl_module modules/mod_ssl.so<span aria-hidden="true" class="line-num
 <h2 id="加载配置文件"><a href="#加载配置文件" class="headerlink" title="加载配置文件"></a>加载配置文件</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">includeOptionalconf.d/*.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="保存证书"><a href="#保存证书" class="headerlink" title="保存证书"></a>保存证书</h2><p>在apache安装目录中新建cert目录，将证书解压至此</p>
-<h2 id="修改ssl-conf配置文件"><a href="#修改ssl-conf配置文件" class="headerlink" title="修改ssl.conf配置文件"></a>修改ssl.conf配置文件</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&amp;</span>ltVirtualHost *:44<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span>     
+<h2 id="修改ssl-conf配置文件"><a href="#修改ssl-conf配置文件" class="headerlink" title="修改ssl.conf配置文件"></a>修改ssl.conf配置文件</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>VirtualHost *:44<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span>     
     ServerName   <span class="token comment">#修改为申请证书时绑定的域名www.YourDomainName1.com。                    </span>
     DocumentRoot  /data/www/hbappserver/public          
     SSLEngine on   
@@ -477,10 +477,10 @@ LoadModule ssl_module modules/mod_ssl.so<span aria-hidden="true" class="line-num
     SSLCertificateFile cert/domain name1_public.crt   <span class="token comment"># 将domain name1_public.crt替换成您证书文件名。</span>
     SSLCertificateKeyFile cert/domain name1.key   <span class="token comment"># 将domain name1.key替换成您证书的密钥文件名。</span>
     SSLCertificateChainFile cert/domain name1_chain.crt  <span class="token comment"># 将domain name1_chain.crt替换成您证书的密钥文件名；证书链开头如果有#字符，请删除。</span>
-<span class="token operator">&amp;</span>lt/VirtualHost<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>/VirtualHost<span class="token operator">&gt;</span>
 
 <span class="token comment">#如果证书包含多个域名，复制以上参数，并将ServerName替换成第二个域名。 </span>
-<span class="token operator">&amp;</span>ltVirtualHost *:44<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span>     
+<span class="token operator">&lt;</span>VirtualHost *:44<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span>     
     ServerName   <span class="token comment">#修改为申请证书时绑定的第二个域名www.YourDomainName2.com。                    </span>
     DocumentRoot  /data/www/hbappserver/public          
     SSLEngine on   
@@ -490,7 +490,7 @@ LoadModule ssl_module modules/mod_ssl.so<span aria-hidden="true" class="line-num
     SSLCertificateFile cert/domain name2_public.crt   <span class="token comment"># 将domain name2替换成您申请证书时的第二个域名。</span>
     SSLCertificateKeyFile cert/domain name2.key   <span class="token comment"># 将domain name2替换成您申请证书时的第二个域名。</span>
     SSLCertificateChainFile cert/domain name2_chain.crt  <span class="token comment"># 将domain name2替换成您申请证书时的第二个域名；证书链开头如果有#字符，请删除。</span>
-<span class="token operator">&amp;</span>lt/VirtualHost<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&lt;</span>/VirtualHost<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="重启生效"><a href="#重启生效" class="headerlink" title="重启生效"></a>重启生效</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">service</span> httpd restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
