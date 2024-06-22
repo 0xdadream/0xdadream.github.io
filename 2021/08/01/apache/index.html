@@ -1,0 +1,3736 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Apache教程, 逐梦">
+    <meta name="description" content="Apache教程">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Apache教程 | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/38.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Apache教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/server/">
+                                <span class="chip bg-color">server</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web/" class="post-category">
+                                web
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-08-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-08-09
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    38 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Apache教程"><a href="#Apache教程" class="headerlink" title="Apache教程"></a>Apache教程</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#安装Apache及其扩展包</span>
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> httpd httpd-manual mod_ssl mod_perl mod_auth_mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="启动、停止、重启"><a href="#启动、停止、重启" class="headerlink" title="启动、停止、重启"></a>启动、停止、重启</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#centos</span>
+<span class="token function">service</span> httpd start
+<span class="token function">service</span> httpd stop
+<span class="token function">service</span> httpd restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="主要的配置文件"><a href="#主要的配置文件" class="headerlink" title="主要的配置文件"></a>主要的配置文件</h2><p>配置文件在<code>\etc\httpd</code>下面，主要的配置文件<code>\etc\httpd\conf\httpd.conf</code></p>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><table>
+<thead>
+<tr>
+<th>属性名+值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ServerRoot "/your/index"</code></td>
+<td>Apache安装的目录</td>
+</tr>
+<tr>
+<td><code>Listen 80</code></td>
+<td>监听的端口，可以开启多个端口</td>
+</tr>
+<tr>
+<td><code>Include conf.modules.d/*.conf</code></td>
+<td>加载文件中的所有模块</td>
+</tr>
+<tr>
+<td><code>LoadModule foo_module modules/mod_foo.so</code></td>
+<td>加载单独模块</td>
+</tr>
+<tr>
+<td><code>LoadFile</code></td>
+<td>和<code>LoadModule</code>类似，但使用绝对路径</td>
+</tr>
+<tr>
+<td><code>User username</code></td>
+<td>运行时的用户名</td>
+</tr>
+<tr>
+<td><code>Group groupname</code></td>
+<td>运行时的用户组</td>
+</tr>
+<tr>
+<td><code>ServerAdmin root@localhost</code></td>
+<td>管理员的邮件地址</td>
+</tr>
+<tr>
+<td><code>ServerName www.example.com:80</code></td>
+<td>主站点名称，可以是域名也能是IP，不写时自动配置</td>
+</tr>
+<tr>
+<td><code>DocumentRoot "/var/www/html"</code></td>
+<td>主站点的网页存储位置</td>
+</tr>
+<tr>
+<td><code>DirectoryIndex index</code></td>
+<td>默认索引目录</td>
+</tr>
+<tr>
+<td><code>RequestReadTimeout</code></td>
+<td>允许限制客户端发送请求所花费的时间</td>
+</tr>
+<tr>
+<td><code>TimeOut</code></td>
+<td>传输或接收的延时，大于这个时间SERVER 会断开这个链接</td>
+</tr>
+<tr>
+<td><code>KeepAliveTimeout</code></td>
+<td>等待下一个请求的时间</td>
+</tr>
+<tr>
+<td><code>MaxClients</code></td>
+<td>允许的最大客户个数</td>
+</tr>
+<tr>
+<td><code>KeepAlive</code></td>
+<td>是否允许一个链接同时发出多的请求</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="目录访问权限控制"><a href="#目录访问权限控制" class="headerlink" title="目录访问权限控制"></a>目录访问权限控制</h3><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/yourindex"&gt; 
+&amp;ltFiles "private.html"&gt;
+        Require all denied
+    &amp;lt/Files&gt;
+Options FollowSymLinks 
+AllowOverride None 
+Order allow,deny 
+Allow from all 
+#Require all granted #Apache2.2后替换Order
+&amp;lt/Directory&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Directory</code></td>
+<td>权限配置的容器名（文件系统容器），路径能正则匹配</td>
+</tr>
+<tr>
+<td><code>/yourindex</code></td>
+<td>需要配置权限的目录</td>
+</tr>
+<tr>
+<td><code>Files</code></td>
+<td>指定文件权限，路径能正则匹配</td>
+</tr>
+<tr>
+<td><code>Options</code></td>
+<td>配置在特定目录使用的特性</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>不启用任何额外功能</td>
+</tr>
+<tr>
+<td><code>ExecCGI</code></td>
+<td>在该目录下允许执行CGI脚本</td>
+</tr>
+<tr>
+<td><code>FollowSymlinks</code></td>
+<td>允许指定目录下的文件连接到目录外的文件或目录（在该目录下允许文件系统使用符号连接）</td>
+</tr>
+<tr>
+<td><code>Indexes</code></td>
+<td>当用户访问该目录时，如果用户找不到<code>DirectoryIndex</code>指定的主页文件(例如<code>index.html</code>)，则返回该目录下的文件列表给用户</td>
+</tr>
+<tr>
+<td><code>SymLinksIfOwnerMatch</code></td>
+<td>当使用符号连接时，只有当符号连接的文件拥有者与实际文件的拥有者相同时才可以访问。</td>
+</tr>
+<tr>
+<td><code>All</code></td>
+<td>开启除 <code>MultiViews</code> 之外的所有选项</td>
+</tr>
+<tr>
+<td><code>AllowOverride</code></td>
+<td>允许存在于<code>.htaccess</code>文件中的指令类型</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>不搜索该目录下的<code>.htaccess</code>文件</td>
+</tr>
+<tr>
+<td><code>All</code></td>
+<td>在<code>.htaccess</code>文件中可以使用所有的指令</td>
+</tr>
+<tr>
+<td><code>Order</code></td>
+<td>控制在访问时<code>Allow</code>和<code>Deny</code>两个访问规则哪个优先</td>
+</tr>
+<tr>
+<td><code>Allow</code></td>
+<td>允许访问的主机列表(可用域名或子网，例如：<code>Allow from 192.168.0.0/16</code>)</td>
+</tr>
+<tr>
+<td><code>Deny</code></td>
+<td>拒绝访问的主机列表</td>
+</tr>
+<tr>
+<td><code>Order deny,allow</code></td>
+<td>先检查拒绝，再检查允许，当拒绝与允许有冲突时，允许优先，默认规则为允许</td>
+</tr>
+<tr>
+<td><code>Order allow,deny</code></td>
+<td>先检查允许，再检查拒绝，当允许与拒绝有冲突时，拒绝优先。默认规则为拒绝</td>
+</tr>
+<tr>
+<td><code>Require</code></td>
+<td>测试经过身份验证的用户是否由授权提供者授权，Apache2.2后替换Order</td>
+</tr>
+<tr>
+<td><code>Require all granted</code></td>
+<td>允许所有访问请求</td>
+</tr>
+<tr>
+<td><code>Require all denied</code></td>
+<td>拒绝所有访问请求</td>
+</tr>
+<tr>
+<td><code>Require ip ip1 ip2</code></td>
+<td>只允许来自特定IP或IP段的访问请求，其他请求将被拒绝</td>
+</tr>
+<tr>
+<td><code>Require host x.com</code></td>
+<td>只允许来自特定域名主机的访问请求，其他请求将被拒绝</td>
+</tr>
+<tr>
+<td><code>Require not ip ip1</code></td>
+<td>拒绝ip1</td>
+</tr>
+<tr>
+<td><code>Require not host gov</code></td>
+<td>拒绝gov</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="虚拟主机容器"><a href="#虚拟主机容器" class="headerlink" title="虚拟主机容器"></a>虚拟主机容器</h3><h4 id="VirtualHost"><a href="#VirtualHost" class="headerlink" title="VirtualHost"></a>VirtualHost</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 10.1.2.3:80&gt;
+  ServerAdmin webmaster@host.example.com
+  DocumentRoot "/www/docs/host.example.com"
+  ServerName host.example.com
+  ServerAlias server server2.example.com server2
+  ServerAlias *.example.com
+  UseCanonicalName Off
+  ErrorLog "logs/host.example.com-error_log"
+  TransferLog "logs/host.example.com-access_log"
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>VirtualHost</code></td>
+<td>包含一组仅适用于特定虚拟主机的指令</td>
+</tr>
+<tr>
+<td><code>ServerAlias</code></td>
+<td>为主机名创建一个别名</td>
+</tr>
+<tr>
+<td><code>ProxyPreserveHost On     </code></td>
+<td>使用传入的主机 HTTP 请求标头进行代理请求</td>
+</tr>
+<tr>
+<td><code> ProxyPass "/" "http://192.168.111.2/"</code></td>
+<td>将远程服务器映射到本地服务器 URL 空间</td>
+</tr>
+<tr>
+<td><code>ProxyPassReverse "/" "http://192.168.111.2/"</code></td>
+<td>调整从反向代理服务器发送的 HTTP 响应标头中的 URL</td>
+</tr>
+<tr>
+<td><code>ServerPath</code></td>
+<td>由不兼容的浏览器访问的基于名称的虚拟主机的旧 URL 路径名</td>
+</tr>
+<tr>
+<td><code>RewriteRule</code></td>
+<td>定义重写引擎的规则</td>
+</tr>
+<tr>
+<td>….</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="在单个-IP-地址上运行多个基于名称的网站"><a href="#在单个-IP-地址上运行多个基于名称的网站" class="headerlink" title="在单个 IP 地址上运行多个基于名称的网站"></a>在单个 IP 地址上运行多个基于名称的网站</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config"># Ensure that Apache listens on port 80
+Listen 80
+&amp;ltVirtualHost *:80&gt;
+    DocumentRoot "/www/example1"
+    ServerName www.example.com
+
+    # Other directives here
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost *:80&gt;
+    DocumentRoot "/www/example2"
+    ServerName www.example.org
+
+    # Other directives here
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="多个-IP-地址上的基于名称的主机"><a href="#多个-IP-地址上的基于名称的主机" class="headerlink" title="多个 IP 地址上的基于名称的主机"></a>多个 IP 地址上的基于名称的主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
+
+# This is the "main" server running on 172.20.30.40
+ServerName server.example.com
+DocumentRoot "/www/mainserver"
+
+&amp;ltVirtualHost 172.20.30.50&gt;
+    DocumentRoot "/www/example1"
+    ServerName www.example.com
+
+    # Other directives here ...
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.50&gt;
+    DocumentRoot "/www/example2"
+    ServerName www.example.org
+
+    # Other directives here ...
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="在不同的-IP-地址（例如内部和外部地址）上提供相同的内容"><a href="#在不同的-IP-地址（例如内部和外部地址）上提供相同的内容" class="headerlink" title="在不同的 IP 地址（例如内部和外部地址）上提供相同的内容"></a>在不同的 IP 地址（例如内部和外部地址）上提供相同的内容</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 192.168.1.1 172.20.30.40&gt;
+    DocumentRoot "/www/server1"
+    ServerName server.example.com
+    ServerAlias server
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="在不同的端口上运行不同的站点"><a href="#在不同的端口上运行不同的站点" class="headerlink" title="在不同的端口上运行不同的站点"></a>在不同的端口上运行不同的站点</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
+Listen 8080
+
+&amp;ltVirtualHost 172.20.30.40:80&gt;
+    ServerName www.example.com
+    DocumentRoot "/www/domain-80"
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40:8080&gt;
+    ServerName www.example.com
+    DocumentRoot "/www/domain-8080"
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40:80&gt;
+    ServerName www.example.org
+    DocumentRoot "/www/otherdomain-80"
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40:8080&gt;
+    ServerName www.example.org
+    DocumentRoot "/www/otherdomain-8080"
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="基于IP的虚拟主机"><a href="#基于IP的虚拟主机" class="headerlink" title="基于IP的虚拟主机"></a>基于IP的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/example1"
+    ServerName www.example.com
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.50&gt;
+    DocumentRoot "/www/example2"
+    ServerName www.example.org
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="基于端口和基于-ip-的混合虚拟主机"><a href="#基于端口和基于-ip-的混合虚拟主机" class="headerlink" title="基于端口和基于 ip 的混合虚拟主机"></a>基于端口和基于 ip 的混合虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 172.20.30.40:80
+Listen 172.20.30.40:8080
+Listen 172.20.30.50:80
+Listen 172.20.30.50:8080
+
+&amp;ltVirtualHost 172.20.30.40:80&gt;
+    DocumentRoot "/www/example1-80"
+    ServerName www.example.com
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40:8080&gt;
+    DocumentRoot "/www/example1-8080"
+    ServerName www.example.com
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.50:80&gt;
+    DocumentRoot "/www/example2-80"
+    ServerName www.example.org
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.50:8080&gt;
+    DocumentRoot "/www/example2-8080"
+    ServerName www.example.org
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="混合基于名称和基于-IP-的虚拟主机"><a href="#混合基于名称和基于-IP-的虚拟主机" class="headerlink" title="混合基于名称和基于 IP 的虚拟主机"></a>混合基于名称和基于 IP 的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/example1"
+    ServerName www.example.com
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/example2"
+    ServerName www.example.org
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/example3"
+    ServerName www.example.net
+&amp;lt/VirtualHost&gt;
+
+# IP-based
+&amp;ltVirtualHost 172.20.30.50&gt;
+    DocumentRoot "/www/example4"
+    ServerName www.example.edu
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.60&gt;
+    DocumentRoot "/www/example5"
+    ServerName www.example.gov
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="一起使用-Virtual-host-和-mod-proxy"><a href="#一起使用-Virtual-host-和-mod-proxy" class="headerlink" title="一起使用 Virtual_host 和 mod_proxy"></a>一起使用 Virtual_host 和 mod_proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost *:*&gt;
+    ProxyPreserveHost On
+    ProxyPass        "/" "http://192.168.111.2/"
+    ProxyPassReverse "/" "http://192.168.111.2/"
+    ServerName hostname.example.com
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="使用-default-vhosts"><a href="#使用-default-vhosts" class="headerlink" title="使用_default_vhosts"></a>使用<code>_default_</code>vhosts</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost _default_:80&gt;
+    DocumentRoot "/www/default80"
+    # ...
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost _default_:*&gt;
+    DocumentRoot "/www/default"
+    # ...
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="将基于名称的虚拟主机迁移到基于-IP-的虚拟主机"><a href="#将基于名称的虚拟主机迁移到基于-IP-的虚拟主机" class="headerlink" title="将基于名称的虚拟主机迁移到基于 IP 的虚拟主机"></a>将基于名称的虚拟主机迁移到基于 IP 的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
+ServerName www.example.com
+DocumentRoot "/www/example1"
+
+&amp;ltVirtualHost 172.20.30.40 172.20.30.50&gt;
+    DocumentRoot "/www/example2"
+    ServerName www.example.org
+    # ...
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/example3"
+    ServerName www.example.net
+    ServerAlias *.example.net
+    # ...
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="使用-ServerPath-指令"><a href="#使用-ServerPath-指令" class="headerlink" title="使用 ServerPath 指令"></a>使用 ServerPath 指令</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 172.20.30.40&gt;
+    # primary vhost
+    DocumentRoot "/www/subdomain"
+    RewriteEngine On
+    RewriteRule "." "/www/subdomain/index.html"
+    # ...
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/subdomain/sub1"
+    ServerName www.sub1.domain.tld
+    ServerPath "/sub1/"
+    RewriteEngine On
+    RewriteRule "^(/sub1/.*)" "/www/subdomain$1"
+    # ...
+&amp;lt/VirtualHost&gt;
+
+&amp;ltVirtualHost 172.20.30.40&gt;
+    DocumentRoot "/www/subdomain/sub2"
+    ServerName www.sub2.domain.tld
+    ServerPath "/sub2/"
+    RewriteEngine On
+    RewriteRule "^(/sub2/.*)" "/www/subdomain$1"
+    # ...
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="条件判断容器"><a href="#条件判断容器" class="headerlink" title="条件判断容器"></a>条件判断容器</h3><h4 id="If"><a href="#If" class="headerlink" title="If"></a>If</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIf "!(%{HTTP_REFERER} -strmatch 'http://www.example.com/*')"&gt;
+    Require all denied
+&amp;lt/If&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>If</code></td>
+<td>条件满足则执行内部语句</td>
+</tr>
+<tr>
+<td><code>!(%{HTTP_REFERER} -strmatch 'http://www.example.com/*')</code></td>
+<td>条件</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="IfDefine"><a href="#IfDefine" class="headerlink" title="IfDefine"></a>IfDefine</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfDefine ClosedForNow&gt;
+    Redirect / http://otherserver.example.com/
+&amp;lt/IfDefine&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IfDefine</code></td>
+<td>若使用<code>httpd -D ClosedForNow</code>指令执行的操作就会执行里面的内容（可镶嵌）</td>
+</tr>
+<tr>
+<td><code>ClosedForNow</code></td>
+<td>使用<code>httpd -D ClosedForNow</code>指令执行，前面加！表示相反</td>
+</tr>
+<tr>
+<td><code>Redirect</code></td>
+<td>跳转到另一站点</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="IfModule"><a href="#IfModule" class="headerlink" title="IfModule"></a>IfModule</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfModule mod_mime_magic.c&gt;
+    MimeMagicFile conf/magic
+&amp;lt/IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IfModule</code></td>
+<td>若使用了<code>mod_mime_magic</code>模块就执行里面内容（可镶嵌）</td>
+</tr>
+<tr>
+<td><code>mod_mime_magic.c</code></td>
+<td>模块名</td>
+</tr>
+<tr>
+<td><code>MimeMagicFile</code></td>
+<td>执行的指令</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="IfVersion"><a href="#IfVersion" class="headerlink" title="IfVersion"></a>IfVersion</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfVersion &gt;= 2.1&gt;
+    # this happens only in versions greater or
+    # equal 2.1.0.
+&amp;lt/IfVersion&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IfVersion</code></td>
+<td>版本满足就会执行</td>
+</tr>
+<tr>
+<td>….</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="网站空间容器"><a href="#网站空间容器" class="headerlink" title="网站空间容器"></a>网站空间容器</h3><h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocation "/status"&gt;
+  SetHandler server-status
+  Require host example.com
+&amp;lt/Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Location</code></td>
+<td>Location 容器内定义的指令仅对特定的 URL 有效</td>
+</tr>
+<tr>
+<td><code>/status</code></td>
+<td>将特定URL映射到<code>mod_status</code>提供的内部<code>Apache HTTP Server</code>处理程序</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="Proxy容器"><a href="#Proxy容器" class="headerlink" title="Proxy容器"></a>Proxy容器</h3><h4 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy "http://example.com/foo/*"&gt;
+  SetOutputFilter INCLUDES
+&amp;lt/Proxy&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="更灵活的匹配容器"><a href="#更灵活的匹配容器" class="headerlink" title="更灵活的匹配容器"></a>更灵活的匹配容器</h3><h4 id="DirectoryMatch"><a href="#DirectoryMatch" class="headerlink" title="DirectoryMatch"></a>DirectoryMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectoryMatch "^/www/(.+/)?[0-9]{3}/"&gt;
+    # ...
+&amp;lt/DirectoryMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="FilesMatch"><a href="#FilesMatch" class="headerlink" title="FilesMatch"></a>FilesMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltFilesMatch ".+\.(gif|jpe?g|png)$"&gt;
+    # ...
+&amp;lt/FilesMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="LocationMatch"><a href="#LocationMatch" class="headerlink" title="LocationMatch"></a>LocationMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocationMatch "^/combined/(?&amp;ltsitename&gt;[^/]+)"&gt;
+    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
+&amp;lt/LocationMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="ProxyMatch"><a href="#ProxyMatch" class="headerlink" title="ProxyMatch"></a>ProxyMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxyMatch "^http://(?&amp;ltsitename&gt;[^/]+)"&gt;
+    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
+&amp;lt/ProxyMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="日志模块"><a href="#日志模块" class="headerlink" title="日志模块"></a>日志模块</h3><h4 id="通用日志格式"><a href="#通用日志格式" class="headerlink" title="通用日志格式"></a>通用日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%h %l %u %t \"%r\" %&gt;s %b" common
+CustomLog logs/access_log.log common<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="组合日志格式"><a href="#组合日志格式" class="headerlink" title="组合日志格式"></a>组合日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%h %l %u %t \"%r\" %&gt;s %b \"%{Referer}i\" \"%{User-agent}i\"" combined
+CustomLog log/access_log.log combined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>%h</code>是远程主机</li>
+<li><code>%l</code>是由identd确定的用户的身份</li>
+<li><code>%u</code>是HTTP身份验证确定的用户名</li>
+<li><code>%t</code>是服务器处理完请求的时间</li>
+<li><code>%r</code>是来自客户端的请求行GET、HTTP</li>
+<li><code>%&gt; s</code>是从服务器发送到客户端的状态代码</li>
+<li><code>%b</code>是客户端响应的大小(以字节为单位)</li>
+<li><code>"%{Referer}i</code>是链接到此URL的页面</li>
+<li><code>%{User-Agent}i</code> 是客户浏览器提供的浏览器识别信息</li>
+</ul>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%400,501{User-agent}i" browserlog
+LogFormat "%!200,304,302{Referer}i" refererlog
+#前面的状态码是用来判断的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ErrorLog</code> “xxx”</td>
+<td>定位服务器错误日志的位置，默认使用相对路径</td>
+</tr>
+<tr>
+<td><code>LogLevel warn</code></td>
+<td>日志级别</td>
+</tr>
+<tr>
+<td><code>ErrorLogFormat</code></td>
+<td>设置错误日志的格式</td>
+</tr>
+<tr>
+<td><code>CustomLog logs/access_log common</code></td>
+<td>创建和格式化日志文件<code>common</code></td>
+</tr>
+<tr>
+<td><code>LogFormat "%h %l %u %t "%r" %&gt;s %b "%{Referer}i" "%{User-agent}i"" common</code></td>
+<td><code>common</code>为用户日志别名，中间为具体格式</td>
+</tr>
+<tr>
+<td><code>TransferLog "logs/host.example.com-access_log"</code></td>
+<td>创建日志文件</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="附加的配置文件"><a href="#附加的配置文件" class="headerlink" title="附加的配置文件"></a>附加的配置文件</h2><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>unique_id_module</code></td>
+<td>为每个请求提供一个具有唯一标识符的环境变量</td>
+</tr>
+<tr>
+<td><code>PassEnv LD_LIBRARY_PATH</code></td>
+<td>从 shell 传递环境变量</td>
+</tr>
+<tr>
+<td><code>SetEnv SPECIAL_PATH /foo/bin</code></td>
+<td>设置环境变量</td>
+</tr>
+<tr>
+<td><code>UnsetEnv LD_LIBRARY_PATH</code></td>
+<td>从环境中删除变量</td>
+</tr>
+<tr>
+<td><code>SetEnvIf Request_URI "\.(.*)$" EXTENSION=$1</code></td>
+<td>根据请求的属性设置环境变量</td>
+</tr>
+<tr>
+<td><code>SetEnvIfExpr expr [!]env-variable[=value] [[!]env-variable[=value]] ...</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>BrowserMatch Robot is_a_robot </code>&amp;ltbr&gt;<code>SetEnvIf User-Agent Robot is_a_robot</code></td>
+<td>以 HTTP 用户代理为条件设置环境变量</td>
+</tr>
+<tr>
+<td><code>SetEnvIfNoCase</code></td>
+<td>根据请求的属性设置环境变量而不考虑大小写</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="使用环境变量"><a href="#使用环境变量" class="headerlink" title="使用环境变量"></a>使用环境变量</h4><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Require all granted</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CustomLog</code></td>
+<td>设置日志文件的文件名和格式</td>
+</tr>
+<tr>
+<td><code>Allow</code></td>
+<td>控制哪些主机可以访问服务器的某个区域</td>
+</tr>
+<tr>
+<td><code>Deny</code></td>
+<td>控制哪些主机被拒绝访问服务器</td>
+</tr>
+<tr>
+<td><code>ExtFilterDefine</code></td>
+<td>定义外部过滤器</td>
+</tr>
+<tr>
+<td>`Header [condition] add</td>
+<td>append</td>
+</tr>
+<tr>
+<td><code>Header set Content-Type "text/plain" "expr=-z %{CONTENT_TYPE}"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RewriteCond TestString CondPattern [flags]</code></td>
+<td>定义重写发生的条件</td>
+</tr>
+<tr>
+<td><code>RewriteRule Pattern Substitution [flags]</code></td>
+<td>定义重写引擎的规则</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="缓存指南"><a href="#缓存指南" class="headerlink" title="缓存指南"></a>缓存指南</h3><pre class="line-numbers language-config" data-language="config"><code class="language-config">Sample httpd.conf
+#
+# Sample Cache Configuration
+#
+LoadModule cache_module modules/mod_cache.so
+&amp;ltIfModule mod_cache.c&gt;
+    LoadModule cache_disk_module modules/mod_cache_disk.so
+    &amp;ltIfModule mod_cache_disk.c&gt;
+        CacheRoot "c:/cacheroot"
+        CacheEnable disk  "/"
+        CacheDirLevels 5
+        CacheDirLength 3
+    &amp;lt/IfModule&gt;
+
+    # When acting as a proxy, don't cache the list of security updates
+    CacheDisable "http://security.update.server/update-list/"
+&amp;lt/IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CacheRoot</code></td>
+<td>存放缓存文件的根目录</td>
+</tr>
+<tr>
+<td><code>CacheDirLength</code></td>
+<td>子目录名称中的字符数</td>
+</tr>
+<tr>
+<td><code>CacheDirLevels</code></td>
+<td>缓存中子目录的级别数</td>
+</tr>
+<tr>
+<td><code>CacheMaxFileSize</code></td>
+<td>要放置在缓存中的文档的最大大小（以字节为单位）</td>
+</tr>
+<tr>
+<td><code>CacheReadSize</code></td>
+<td>在向下游发送数据之前要读取和缓存的文档的最小大小（以字节为单位）</td>
+</tr>
+<tr>
+<td><code>CacheReadTime</code></td>
+<td>在向下游发送数据之前读取时应经过的最短时间（以毫秒为单位）</td>
+</tr>
+<tr>
+<td><code>CacheEnable cache_type [url-string]</code></td>
+<td>使用指定的存储管理器启用指定 URL 的缓存</td>
+</tr>
+<tr>
+<td><code>CacheSocache type[:args]</code></td>
+<td>要使用的共享对象缓存实现</td>
+</tr>
+<tr>
+<td><code>CacheDisable</code></td>
+<td>禁用指定 URL 的缓存</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="内容协商"><a href="#内容协商" class="headerlink" title="内容协商"></a>内容协商</h3><h4 id="使用类型映射文件"><a href="#使用类型映射文件" class="headerlink" title="使用类型映射文件"></a>使用类型映射文件</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">AddHandler type-map .var<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>类型映射文件应与其描述的资源具有相同的名称，后跟扩展名<code>.var</code>.在下面显示的示例中，资源名为<code>foo</code>，因此类型映射文件名为<code>foo.var</code></p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: foo
+
+URI: foo.en.html
+Content-type: text/html
+Content-language: en
+
+URI: foo.fr.de.html
+Content-type: text/html;charset=iso-8859-2
+Content-language: fr, de<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: foo
+
+URI: foo.jpeg
+Content-type: image/jpeg; qs=0.8
+
+URI: foo.gif
+Content-type: image/gif; qs=0.5
+
+URI: foo.txt
+Content-type: text/plain; qs=0.01<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: document.html
+
+Content-language: en
+Content-type: text/html
+URI: document.html.en
+
+Content-language: fr
+Content-type: text/html
+URI: document.html.fr
+
+Content-language: de
+Content-type: text/html
+URI: document.html.de<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这三段代码都是<code>type-map</code></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>URI: document.html</code></td>
+<td>资源名</td>
+</tr>
+<tr>
+<td><code>Content-type</code></td>
+<td>资源类型</td>
+</tr>
+<tr>
+<td><code>Content-language</code></td>
+<td>资源语言</td>
+</tr>
+<tr>
+<td><code>qs</code></td>
+<td>权重</td>
+</tr>
+<tr>
+<td><code>AddHandler type-map .var</code></td>
+<td>与名为<code>type-map</code>的处理程序关联</td>
+</tr>
+<tr>
+<td><code>.var</code></td>
+<td>相当<code>*</code>的匹配值</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="Multiviews"><a href="#Multiviews" class="headerlink" title="Multiviews"></a>Multiviews</h4><p>如果服务器收到<code>/some/dir/foo</code>的请求，如果<code>/some/dir</code>启用了MultiViews，并且<code>/some/dir/foo</code>不存在，那么服务器会读取寻找的目录名为<code>foo.*</code>的文件</p>
+<h3 id="从-URL-映射到文件系统"><a href="#从-URL-映射到文件系统" class="headerlink" title="从 URL 映射到文件系统"></a>从 URL 映射到文件系统</h3><p>Apache HTTP Server 使用请求的 URL 来确定提供文件的文件系统位置</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass         "/mirror/foo/" "http://backend.example.com/"
+ProxyPassReverse  "/mirror/foo/" "http://backend.example.com/"
+ProxyPassReverseCookieDomain  "backend.example.com"  "public.example.com"
+ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`Alias [URL-path] file-path</td>
+<td>directory-path`</td>
+</tr>
+<tr>
+<td><code>Alias "/docs" "/var/web"</code></td>
+<td>网址 <code>http://www.example.com/docs/dir/file.html</code> 将从<code>/var/web/dir/file.html</code>提供</td>
+</tr>
+<tr>
+<td>`AliasMatch regex file-path</td>
+<td>directory-path`</td>
+</tr>
+<tr>
+<td><code>AliasMatch "^/icons(/$)(.*)" "/usr/local/apache/icons$1$2"</code></td>
+<td></td>
+</tr>
+<tr>
+<td>`CheckSpelling on</td>
+<td>off`</td>
+</tr>
+<tr>
+<td><code>DirectoryIndex disabled local-url [local-url] ...</code></td>
+<td>客户端请求目录时要查找的资源列表</td>
+</tr>
+<tr>
+<td><code>DocumentRoot </code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ErrorDocument 404 /errors/bad_urls.php</code></td>
+<td>发生错误时服务器将返回给客户端的内容</td>
+</tr>
+<tr>
+<td><code>Options</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ProxyPass "/mirror/foo/" "http://backend.example.com/"</code></td>
+<td>将远程服务器映射到本地服务器 URL 空间</td>
+</tr>
+<tr>
+<td><code>ProxyPassReverse [path] url [interpolate]</code></td>
+<td>调整从反向代理服务器发送的 HTTP 响应标头中的 URL</td>
+</tr>
+<tr>
+<td><code>ProxyPassReverseCookieDomain internal-domain public-domain [interpolate]</code></td>
+<td>从反向代理服务器调整 Set-Cookie 标头中的域字符串</td>
+</tr>
+<tr>
+<td><code>ProxyPassReverseCookiePath internal-path public-path [interpolate]</code></td>
+<td>调整来自反向代理服务器的 Set-Cookie 标头中的 Path 字符串</td>
+</tr>
+<tr>
+<td><code>Redirect [status] [URL-path] URL</code></td>
+<td>发送外部重定向请求客户端获取不同的 URL</td>
+</tr>
+<tr>
+<td><code>Redirect 303 "/three" "http://example.com/other"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RedirectMatch [status] regex URL</code></td>
+<td>根据当前 URL 的正则表达式匹配发送外部重定向</td>
+</tr>
+<tr>
+<td><code>RewriteCond TestString CondPattern [flags]</code></td>
+<td>定义重写发生的条件</td>
+</tr>
+<tr>
+<td><code>RewriteRule Pattern Substitution [flags]</code></td>
+<td>定义重写引擎的规则</td>
+</tr>
+<tr>
+<td>`ScriptAlias [URL-path] file-path</td>
+<td>directory-path`</td>
+</tr>
+<tr>
+<td>`ScriptAliasMatch regex file-path</td>
+<td>directory-path`</td>
+</tr>
+<tr>
+<td><code>UserDir directory-filename [directory-filename] ...</code></td>
+<td>用户特定目录的位置</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`ServerName [scheme://]domain-name</td>
+<td>ip-address[:port]`</td>
+</tr>
+<tr>
+<td>`ServerAdmin email-address</td>
+<td>URL`</td>
+</tr>
+<tr>
+<td>`ServerSignature On</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>`ServerTokens Major</td>
+<td>Minor</td>
+</tr>
+<tr>
+<td>`UseCanonicalName On</td>
+<td>Off</td>
+</tr>
+<tr>
+<td>`UseCanonicalPhysicalPort On</td>
+<td>Off`</td>
+</tr>
+<tr>
+<td><code>CoreDumpDirectory directory</code></td>
+<td>Apache HTTP Server 在转储核心之前尝试切换的目录</td>
+</tr>
+<tr>
+<td><code>DocumentRoot directory-path</code></td>
+<td>构成 Web 上可见的主文档树的目录</td>
+</tr>
+<tr>
+<td>`ErrorLog file-path</td>
+<td>syslog[:[facility]`</td>
+</tr>
+<tr>
+<td>`Mutex mechanism [default</td>
+<td>mutex-name] … [OmitPID]`</td>
+</tr>
+<tr>
+<td><code>PidFile filename</code></td>
+<td>服务器记录守护进程进程ID的文件</td>
+</tr>
+<tr>
+<td><code>ScoreBoardFile file-path</code></td>
+<td>用于存储子进程的协调数据的文件的位置</td>
+</tr>
+<tr>
+<td><code>ServerRoot directory-path</code></td>
+<td>服务器安装的基本目录</td>
+</tr>
+<tr>
+<td><code>LimitRequestBody bytes</code></td>
+<td>限制客户端发送的 HTTP 请求正文的总大小</td>
+</tr>
+<tr>
+<td><code>LimitRequestFields number</code></td>
+<td>限制将从客户端接受的 HTTP 请求头字段的数量</td>
+</tr>
+<tr>
+<td><code>LimitRequestFieldSize bytes</code></td>
+<td>限制客户端允许的 HTTP 请求头的大小</td>
+</tr>
+<tr>
+<td><code>LimitRequestLine bytes</code></td>
+<td>限制将从客户端接受的 HTTP 请求行的大小</td>
+</tr>
+<tr>
+<td>`RLimitCPU seconds</td>
+<td>max [seconds</td>
+</tr>
+<tr>
+<td>`RLimitMEM bytes</td>
+<td>max [bytes</td>
+</tr>
+<tr>
+<td>`RLimitNPROC number</td>
+<td>max [number</td>
+</tr>
+<tr>
+<td><code>ThreadStackSize size</code></td>
+<td>处理客户端连接的线程使用的堆栈大小（以字节为单位）</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="SSL-TLS-加密"><a href="#SSL-TLS-加密" class="headerlink" title="SSL/TLS 加密"></a>SSL/TLS 加密</h3><p>an example</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">LoadModule ssl_module modules/mod_ssl.so
+
+Listen 443
+&amp;ltVirtualHost *:443&gt;
+    ServerName www.example.com
+    SSLEngine on
+    SSLCertificateFile "/path/to/www.example.com.cert"
+    SSLCertificateKeyFile "/path/to/www.example.com.key"
+&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SSLEngine on</code></td>
+<td>SSL 引擎操作开关</td>
+</tr>
+<tr>
+<td>`SSLCertificateFile file-path</td>
+<td>certid`</td>
+</tr>
+<tr>
+<td>`SSLCertificateKeyFile file-path</td>
+<td>keyid`</td>
+</tr>
+<tr>
+<td><code>SSLCipherSuite [protocol] cipher-spec</code></td>
+<td>密码套件可用于 SSL 握手中的协商</td>
+</tr>
+<tr>
+<td><code>SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!MD5</code></td>
+<td></td>
+</tr>
+<tr>
+<td>`SSLHonorCipherOrder on</td>
+<td>off`</td>
+</tr>
+<tr>
+<td><code>SSLUseStapling off</code></td>
+<td>在 TLS 握手中启用 OCSP 响应的装订</td>
+</tr>
+<tr>
+<td><code>SSLStaplingCache "shmcb:logs/ssl_stapling(32768)"</code></td>
+<td>配置 OCSP 装订缓存</td>
+</tr>
+<tr>
+<td><code>SSLVerifyClient level</code></td>
+<td>客户端证书验证类型</td>
+</tr>
+<tr>
+<td><code>SSLVerifyDepth number</code></td>
+<td>客户端证书验证中 CA 证书的最大深度</td>
+</tr>
+<tr>
+<td><code>SSLCACertificateFile file-path</code></td>
+<td>用于客户端身份验证的串联 PEM 编码 CA 证书文件</td>
+</tr>
+<tr>
+<td>`SSLOptions [+</td>
+<td>-]option …`</td>
+</tr>
+<tr>
+<td><code>SSLRequire expression</code></td>
+<td>仅当任意复杂的布尔表达式为真时才允许访问</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="URL重写"><a href="#URL重写" class="headerlink" title="URL重写"></a>URL重写</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>RewriteBase URL-path</code></td>
+<td>设置每个目录重写的基本 URL</td>
+</tr>
+<tr>
+<td><code>RewriteCond TestString CondPattern [flags]</code></td>
+<td>定义重写发生的条件</td>
+</tr>
+<tr>
+<td><code>RewriteRule Pattern Substitution [flags]</code></td>
+<td>定义重写引擎的规则</td>
+</tr>
+<tr>
+<td>RewriteEngine on|off</td>
+<td>启用或禁用运行时重写引擎</td>
+</tr>
+<tr>
+<td>RewriteMap <em>MapName</em> <em>MapType</em>:MapSource [MapTypeOptions]</td>
+<td>定义键查找的映射函数</td>
+</tr>
+<tr>
+<td>RewriteOptions Options</td>
+<td>为重写引擎设置一些特殊选项</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="认证和授权"><a href="#认证和授权" class="headerlink" title="认证和授权"></a>认证和授权</h3><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>AllowOverride AuthConfig</code></td>
+<td>.htaccess 文件中允许的指令类型</td>
+</tr>
+<tr>
+<td>`AuthType None</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><code>AuthBasicProvider provider-name [provider-name] ...</code></td>
+<td>设置此位置的身份验证提供程序</td>
+</tr>
+<tr>
+<td><code>AuthDigestProvider provider-name [provider-name] ...</code></td>
+<td>设置此位置的身份验证提供程序</td>
+</tr>
+<tr>
+<td><code>Require [not] entity-name [entity-name] ...</code></td>
+<td>测试经过身份验证的用户是否由授权提供者授权</td>
+</tr>
+<tr>
+<td><code>AuthName auth-domain</code></td>
+<td>用于 HTTP 身份验证的授权领域</td>
+</tr>
+<tr>
+<td><code>AuthUserFile file-path</code></td>
+<td>设置包含用于身份验证的用户和密码列表的文本文件的名称</td>
+</tr>
+<tr>
+<td><code>AuthDBMUserFile file-path</code></td>
+<td>设置包含用于身份验证的用户和密码列表的数据库文件的名称</td>
+</tr>
+<tr>
+<td><code>AuthGroupFile file-path</code></td>
+<td>设置包含授权用户组列表的文本文件的名称</td>
+</tr>
+<tr>
+<td>`AuthLDAPURL url [NONE</td>
+<td>SSL</td>
+</tr>
+<tr>
+<td><code>AuthGroupFile file-path</code></td>
+<td>设置包含授权用户组列表的文本文件的名称</td>
+</tr>
+<tr>
+<td><code>Require valid-user</code></td>
+<td>所有有效用户都可以访问该资源</td>
+</tr>
+<tr>
+<td><code>Require user userid [userid] ...</code></td>
+<td>只有指定用户才能访问资源</td>
+</tr>
+<tr>
+<td><code>Require group group-name [group-name] ...</code></td>
+<td>只有命名组中的用户才能访问资源</td>
+</tr>
+<tr>
+<td><code>&amp;ltRequireAll&gt; ... &amp;lt/RequireAll&gt;</code></td>
+<td>附上一组授权指令，其中没有一个必须失败，并且至少一个必须成功才能使封闭指令成功</td>
+</tr>
+<tr>
+<td><code>&amp;ltRequireAny&gt; ... &amp;lt/RequireAny&gt;</code></td>
+<td>附上一组授权指令，其中一个必须成功才能使封闭指令成功</td>
+</tr>
+<tr>
+<td><code>&amp;ltRequireNone&gt; ... &amp;lt/RequireNone&gt;</code></td>
+<td>包含一组授权指令，其中没有一个必须成功才能使封闭指令不失败</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="如何工作"><a href="#如何工作" class="headerlink" title="如何工作"></a>如何工作</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">htpasswd <span class="token parameter variable">-c</span> /usr/local/apache/passwd/passwords rbowen
+<span class="token comment">#创建文件</span>
+
+GroupName: rbowen dpitts sungo rshersey
+<span class="token comment">#创建一个将组名与该组中的用户列表关联的组文件</span>
+
+htpasswd /usr/local/apache/passwd/passwords dpitts
+<span class="token comment">#将用户添加到您已存在的密码文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h4><p>能放在<code>.htaccess</code>中或者<code>Directory</code>中</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">AuthType Basic
+AuthName "Restricted Files"
+# (Following line optional)
+AuthBasicProvider file
+AuthUserFile "/usr/local/apache/passwd/passwords"
+Require user rbowen<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="让不止一个人进来"><a href="#让不止一个人进来" class="headerlink" title="让不止一个人进来"></a>让不止一个人进来</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">AuthType Basic
+AuthName "By Invitation Only"
+# Optional line:
+AuthBasicProvider file
+AuthUserFile "/usr/local/apache/passwd/passwords"
+AuthGroupFile "/usr/local/apache/passwd/groups"
+Require group GroupName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="备用密码存储"><a href="#备用密码存储" class="headerlink" title="备用密码存储"></a>备用密码存储</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/www/docs/private"&gt;
+    AuthName "Private"
+    AuthType Basic
+    AuthBasicProvider dbm
+    AuthDBMUserFile "/www/passwords/passwd.dbm"
+    Require valid-user
+&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="使用多个提供商"><a href="#使用多个提供商" class="headerlink" title="使用多个提供商"></a>使用多个提供商</h4><p>使用文件组授权和 LDAP 组授权</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/www/docs/private"&gt;
+    AuthName "Private"
+    AuthType Basic
+    AuthBasicProvider file
+    AuthUserFile "/usr/local/apache/passwd/passwords"
+    AuthLDAPURL ldap://ldaphost/o=yourorg
+    AuthGroupFile "/usr/local/apache/passwd/groups"
+    Require group GroupName
+    Require ldap-group cn=mygroup,o=yourorg
+&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="CGI与动态内容"><a href="#CGI与动态内容" class="headerlink" title="CGI与动态内容"></a>CGI与动态内容</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>AddHandler cgi-script .cgi</code></td>
+<td>将文件扩展名映射到指定的处理程序（指定拓展名.cgi为CGI文件）</td>
+</tr>
+<tr>
+<td><code>Options ExecCGI</code></td>
+<td></td>
+</tr>
+<tr>
+<td>`ScriptAlias [URL-path] file-path</td>
+<td>directory-path`</td>
+</tr>
+<tr>
+<td><code>LoadModule cgi_module modules/mod_cgi.so</code></td>
+<td>配置 Apache 以允许 CGI 执行</td>
+</tr>
+<tr>
+<td>`SetHandler handler-name</td>
+<td>none</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>要允许CGI程序执行用户目录中结束的任何文件。<code>.cgi</code></p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/home/*/public_html"&gt;
+    Options +ExecCGI
+    AddHandler cgi-script .cgi
+&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果您希望指定用户目录的子目录，其中所有内容都将被视为 CGI 程序。cgi-bin`</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/home/*/public_html/cgi-bin"&gt;
+    Options ExecCGI
+    SetHandler cgi-script
+&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="编写CGI"><a href="#编写CGI" class="headerlink" title="编写CGI"></a>编写CGI</h4><p>保存到名为<code>first.pl</code>的文件中，并将其放在<code>cgi-bin</code>目录中</p>
+<pre class="line-numbers language-none"><code class="language-none">#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+print "Hello, World.";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>浏览器输入URL地址</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">http://www.example.com/cgi-bin/first.pl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><h4 id="简单的反向代理"><a href="#简单的反向代理" class="headerlink" title="简单的反向代理"></a>简单的反向代理</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass "/images"  "http://www.example.com/"
+ProxyPassReverse "/images"  "http://www.example.com/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>任何以<code>/images</code>路径开头的请求都被代理到指定的后端，否则它将在本地处理</p>
+<h4 id="集群和均衡器"><a href="#集群和均衡器" class="headerlink" title="集群和均衡器"></a>集群和均衡器</h4><p>负载均衡和故障转移</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080
+    ProxySet lbmethod=bytraffic
+&amp;lt/Proxy&gt;
+
+ProxyPass "/images/"  "balancer://myset/"
+ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="均衡器和均衡器成员配置"><a href="#均衡器和均衡器成员配置" class="headerlink" title="均衡器和均衡器成员配置"></a>均衡器和均衡器成员配置</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
+    ProxySet lbmethod=bytraffic
+&amp;lt/Proxy&gt;
+
+ProxyPass "/images"  "balancer://myset/"
+ProxyPassReverse "/images"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
+    BalancerMember http://spare1.example.com:8080 status=+R
+    BalancerMember http://spare2.example.com:8080 status=+R
+    BalancerMember http://hstandby.example.com:8080 status=+H
+    BalancerMember http://bkup1.example.com:8080 lbset=1
+    BalancerMember http://bkup2.example.com:8080 lbset=1
+    ProxySet lbmethod=byrequests
+&amp;lt/Proxy&gt;
+
+ProxyPass "/images/"  "balancer://myset/"
+ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="均衡器启用"><a href="#均衡器启用" class="headerlink" title="均衡器启用"></a>均衡器启用</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocation "/balancer-manager"&gt;
+    SetHandler balancer-manager
+    Require host localhost
+&amp;lt/Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`ProxyPass [path] !</td>
+<td>url [key=value [key=value …]] [nocanon] [interpolate] [noquery]`</td>
+</tr>
+<tr>
+<td><code>BalancerMember [balancerurl] url [key=value [key=value ...]]</code></td>
+<td>向负载均衡组添加成员</td>
+</tr>
+<tr>
+<td><code>ProxyPassReverse [path] url [interpolate]</code></td>
+<td>调整从反向代理服务器发送的 HTTP 响应标头中的 URL</td>
+</tr>
+<tr>
+<td><code>BalancerMember [balancerurl] url [key=value [key=value ...]]</code></td>
+<td>向负载均衡组添加成员</td>
+</tr>
+<tr>
+<td><code>ProxySet url key=value [key=value ...]</code></td>
+<td>设置各种代理平衡器或成员参数</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="htaccess文件"><a href="#htaccess文件" class="headerlink" title=".htaccess文件"></a>.htaccess文件</h3><p>和<code>httpd.conf</code>的语法一样，作用于当前目录，一般用来设置单个功能</p>
+<h3 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Action action-type cgi-script [virtual]</code></td>
+<td>为特定处理程序或内容类型激活 CGI 脚本</td>
+</tr>
+<tr>
+<td><code>AddHandler handler-name extension [extension] ...</code></td>
+<td>将文件扩展名映射到指定的处理程序</td>
+</tr>
+<tr>
+<td><code>RemoveHandler extension [extension] ...</code></td>
+<td>删除一组文件扩展名的任何处理程序关联</td>
+</tr>
+<tr>
+<td><code>SetHandler handler-name</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>FilterChain [+=-@!]filter-name ...</code></td>
+<td>配置过滤器链</td>
+</tr>
+<tr>
+<td><code>FilterDeclare filter-name [type]</code></td>
+<td>声明一个智能过滤器</td>
+</tr>
+<tr>
+<td><code>FilterProtocol filter-name [provider-name] proto-flags</code></td>
+<td>声明一个智能过滤器</td>
+</tr>
+<tr>
+<td><code>FilterProvider filter-name provider-name expression</code></td>
+<td>注册内容过滤器</td>
+</tr>
+<tr>
+<td><code>AddInputFilter filter[;filter...] extension [extension] ...</code></td>
+<td>将文件扩展名映射到将处理客户端请求的过滤器</td>
+</tr>
+<tr>
+<td><code>AddOutputFilter filter[;filter...] extension [extension] ...</code></td>
+<td>将文件扩展名映射到将处理来自服务器的响应的过滤器</td>
+</tr>
+<tr>
+<td><code>RemoveInputFilter extension [extension] ...</code></td>
+<td>删除一组文件扩展名的任何输入过滤器关联</td>
+</tr>
+<tr>
+<td><code>RemoveOutputFilter extension [extension] ...</code></td>
+<td>删除一组文件扩展名的任何输出过滤器关联</td>
+</tr>
+<tr>
+<td><code>ReflectorHeader inputheader [outputheader]</code></td>
+<td>将输入标题反映到输出标题</td>
+</tr>
+<tr>
+<td><code>ExtFilterDefine filtername parameters</code></td>
+<td>定义外部过滤器</td>
+</tr>
+<tr>
+<td><code>ExtFilterOptions option [option] ...</code></td>
+<td>配置 <code>mod_ext_filter </code>选项</td>
+</tr>
+<tr>
+<td><code>SetInputFilter filter[;filter...]</code></td>
+<td>设置将处理客户端请求和 POST 输入的过滤器</td>
+</tr>
+<tr>
+<td><code>SetOutputFilter filter[;filter...]</code></td>
+<td>设置将处理来自服务器的响应的过滤器</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><table>
+<thead>
+<tr>
+<th>HTTP变量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HTTP_ACCEPT</code></td>
+</tr>
+<tr>
+<td><code>HTTP_COOKIE</code></td>
+</tr>
+<tr>
+<td><code>HTTP_FORWARDED</code></td>
+</tr>
+<tr>
+<td><code>HTTP_HOST</code></td>
+</tr>
+<tr>
+<td><code>HTTP_PROXY_CONNECTION</code></td>
+</tr>
+<tr>
+<td><code>HTTP_REFERER</code></td>
+</tr>
+<tr>
+<td><code>HTTP_USER_AGENT</code></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>REQUEST_METHOD</code></td>
+<td>传入请求的 HTTP 方法（例如<code>GET</code>)</td>
+</tr>
+<tr>
+<td><code>REQUEST_SCHEME</code></td>
+<td>该计划是请求URI的一部分</td>
+</tr>
+<tr>
+<td><code>REQUEST_URI</code></td>
+<td>请求URI的路径部分</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_URI</code></td>
+<td>和<code>REQUEST_URI</code>一样</td>
+</tr>
+<tr>
+<td><code>REQUEST_FILENAME</code></td>
+<td>如果当时服务器已经确定了该路径，与请求匹配的文件或脚本的完整本地文件系统路径。否则，例如在虚拟主机上下文中使用时，与 <code>REQUEST_FILENAME REQUEST_URI </code>相同的值</td>
+</tr>
+<tr>
+<td><code>SCRIPT_FILENAME</code></td>
+<td>和<code>REQUEST_FILENAME</code>一样</td>
+</tr>
+<tr>
+<td><code>LAST_MODIFIED</code></td>
+<td>如果此时服务器已经确定该格式中文件上次修改的日期和时间，则参照该日期和时间进行引用。<code>20101231235959</code> <code>LAST_MODIFIED</code></td>
+</tr>
+<tr>
+<td><code>SCRIPT_USER</code></td>
+<td>脚本所有者的用户名。</td>
+</tr>
+<tr>
+<td><code>SCRIPT_GROUP</code></td>
+<td>脚本组的组名。</td>
+</tr>
+<tr>
+<td><code>PATH_INFO</code></td>
+<td>尾随路径名称信息，请参阅<code>AcceptPathInfo</code></td>
+</tr>
+<tr>
+<td><code>QUERY_STRING</code></td>
+<td>当前请求的查询字符串</td>
+</tr>
+<tr>
+<td><code>IS_SUBREQ</code></td>
+<td>如果当前请求是次要请求<code>true</code>，否则<code>false</code></td>
+</tr>
+<tr>
+<td><code>THE_REQUEST</code></td>
+<td>完整的请求行（例如”<code>GET /index.html HTTP/1.1</code>“)</td>
+</tr>
+<tr>
+<td><code>REMOTE_ADDR</code></td>
+<td>远程主机的 IP 地址</td>
+</tr>
+<tr>
+<td><code>REMOTE_PORT</code></td>
+<td>远程主机的端口（2.4.26 及以后）</td>
+</tr>
+<tr>
+<td><code>REMOTE_HOST</code></td>
+<td>远程主机的主机名称</td>
+</tr>
+<tr>
+<td><code>REMOTE_USER</code></td>
+<td>已验证用户的名称（在<code>&amp;ltIF&gt;</code>不可用）</td>
+</tr>
+<tr>
+<td><code>REMOTE_IDENT</code></td>
+<td><code>mod_ident</code> 设置的用户名</td>
+</tr>
+<tr>
+<td><code>SERVER_NAME</code></td>
+<td>当前的虚拟<code>ServerName</code></td>
+</tr>
+<tr>
+<td><code>SERVER_PORT</code></td>
+<td>当前vhost的服务器端口，请参阅<code>ServerName</code></td>
+</tr>
+<tr>
+<td><code>SERVER_ADMIN</code></td>
+<td>当前的虚拟<code>ServerAdmin</code></td>
+</tr>
+<tr>
+<td><code>SERVER_PROTOCOL</code></td>
+<td>请求所使用的协议</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_ROOT</code></td>
+<td>当前的虚拟<code>DocumentRoot</code></td>
+</tr>
+<tr>
+<td><code>AUTH_TYPE</code></td>
+<td>配置（例如<code>AuthType basic</code>)</td>
+</tr>
+<tr>
+<td><code>CONTENT_TYPE</code></td>
+<td>响应的内容类型（在 <code>&amp;ltIf&gt;</code> 间不可用）</td>
+</tr>
+<tr>
+<td><code>HANDLER</code></td>
+<td>创建响应的<a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/handler.html">处理程序</a>的名称</td>
+</tr>
+<tr>
+<td><code>HTTP2</code></td>
+<td>如果请求使用http/2<code>on</code>，否则<code>off</code></td>
+</tr>
+<tr>
+<td><code>HTTPS</code></td>
+<td>如果请求使用https<code>on</code>，否则<code>off</code></td>
+</tr>
+<tr>
+<td><code>IPV6</code></td>
+<td>如果连接使用IPv6<code>on</code>，否则<code>off</code></td>
+</tr>
+<tr>
+<td><code>REQUEST_STATUS</code></td>
+<td>请求的 HTTP 错误状态（在<code>&amp;ltIf&gt;</code>间不可用）)</td>
+</tr>
+<tr>
+<td><code>REQUEST_LOG_ID</code></td>
+<td>请求的错误日志ID（参见<code>ErrorLogFormat</code>)</td>
+</tr>
+<tr>
+<td><code>CONN_LOG_ID</code></td>
+<td>连接的错误日志ID（参见<code>ErrorLogFormat</code>)</td>
+</tr>
+<tr>
+<td><code>CONN_REMOTE_ADDR</code></td>
+<td>连接的同侪 IP 地址（参见模块）<code>mod_remoteip</code></td>
+</tr>
+<tr>
+<td><code>CONTEXT_PREFIX</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CONTEXT_DOCUMENT_ROOT</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TIME_YEAR</code></td>
+<td>本年度（例如<code>2010</code>)</td>
+</tr>
+<tr>
+<td><code>TIME_MON</code></td>
+<td>当月（，…，<code>0112</code>)</td>
+</tr>
+<tr>
+<td><code>TIME_DAY</code></td>
+<td>本月的当前日期（，…）<code>01</code></td>
+</tr>
+<tr>
+<td><code>TIME_HOUR</code></td>
+<td>当前时间的小时部分（，…，<code>0023</code>)</td>
+</tr>
+<tr>
+<td><code>TIME_MIN</code></td>
+<td>当前时间的分钟部分</td>
+</tr>
+<tr>
+<td><code>TIME_SEC</code></td>
+<td>当前时间的秒钟部分</td>
+</tr>
+<tr>
+<td><code>TIME_WDAY</code></td>
+<td>一周的一天（从周日开始）<code>0</code></td>
+</tr>
+<tr>
+<td><code>TIME</code></td>
+<td>格式中的日期和时间<code>20101231235959</code></td>
+</tr>
+<tr>
+<td><code>SERVER_SOFTWARE</code></td>
+<td>服务器版本字符串</td>
+</tr>
+<tr>
+<td><code>API_VERSION</code></td>
+<td>API 版本的日期（模块魔法数字）</td>
+</tr>
+</tbody></table>
+<h4 id="二进制变量"><a href="#二进制变量" class="headerlink" title="二进制变量"></a>二进制变量</h4><table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">其他形式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>==</code></td>
+<td align="left"><code>=</code></td>
+<td align="left">字符串均等</td>
+</tr>
+<tr>
+<td align="left"><code>!=</code></td>
+<td align="left"></td>
+<td align="left">字符串不平等</td>
+</tr>
+<tr>
+<td align="left"><code>&amp;lt</code></td>
+<td align="left"></td>
+<td align="left">字符串少于</td>
+</tr>
+<tr>
+<td align="left"><code>&amp;lt=</code></td>
+<td align="left"></td>
+<td align="left">字符串小于或等于</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;</code></td>
+<td align="left"></td>
+<td align="left">字符串大于</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;=</code></td>
+<td align="left"></td>
+<td align="left">字符串大于或等于</td>
+</tr>
+<tr>
+<td align="left"><code>=~</code></td>
+<td align="left"></td>
+<td align="left">字符串与常规表达方式匹配</td>
+</tr>
+<tr>
+<td align="left"><code>!~</code></td>
+<td align="left"></td>
+<td align="left">字符串与常规表达不匹配</td>
+</tr>
+<tr>
+<td align="left"><code>-eq</code></td>
+<td align="left"><code>eq</code></td>
+<td align="left">整数平等</td>
+</tr>
+<tr>
+<td align="left"><code>-ne</code></td>
+<td align="left"><code>ne</code></td>
+<td align="left">整数不平等</td>
+</tr>
+<tr>
+<td align="left"><code>-lt</code></td>
+<td align="left"><code>lt</code></td>
+<td align="left">整数小于</td>
+</tr>
+<tr>
+<td align="left"><code>-le</code></td>
+<td align="left"><code>le</code></td>
+<td align="left">整数小于或相等</td>
+</tr>
+<tr>
+<td align="left"><code>-gt</code></td>
+<td align="left"><code>gt</code></td>
+<td align="left">整数大于</td>
+</tr>
+<tr>
+<td align="left"><code>-ge</code></td>
+<td align="left"><code>ge</code></td>
+<td align="left">整数大于或相等</td>
+</tr>
+</tbody></table>
+<h4 id="统一变量"><a href="#统一变量" class="headerlink" title="统一变量"></a>统一变量</h4><table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>-d</code></td>
+<td align="left">参数被视为文件名。如果文件存在并且是目录，则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-e</code></td>
+<td align="left">参数被视为文件名。如果存在文件（或目录和特殊文件），则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-f</code></td>
+<td align="left">参数被视为文件名。如果文件存在并且是常规文件，则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-s</code></td>
+<td align="left">参数被视为文件名。如果文件存在且不是空的，则正确</td>
+</tr>
+<tr>
+<td align="left"><code>-L</code></td>
+<td align="left">参数被视为文件名。如果文件存在并且是符号链接，则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-h</code></td>
+<td align="left">参数被视为文件名。真实的，如果文件存在，是符号链接（与<code>-L</code>相似)</td>
+</tr>
+<tr>
+<td align="left"><code>-F</code></td>
+<td align="left">如果字符串是一个有效的文件，则可以通过该路径的所有服务器当前配置的访问控制进行访问。</td>
+</tr>
+<tr>
+<td align="left"><code>-U</code></td>
+<td align="left">如果字符串是一个有效的URL，则可以通过该路径的所有服务器当前配置的访问控制进行访问。</td>
+</tr>
+<tr>
+<td align="left"><code>-A</code></td>
+<td align="left">别名<code>-U</code></td>
+</tr>
+<tr>
+<td align="left"><code>-n</code></td>
+<td align="left">如果字符串不是空的，则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-z</code></td>
+<td align="left">如果字符串是空的，则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-T</code></td>
+<td align="left">如果字符串为空,””,””,”” 或 “”（不区分大小写），则为 False，否则为真</td>
+</tr>
+<tr>
+<td align="left"><code>-R</code></td>
+<td align="left">与<code>%{REMOTE_ADDR} -ipmatch ...</code>相同，但效率更高</td>
+</tr>
+</tbody></table>
+<h4 id="功能变量"><a href="#功能变量" class="headerlink" title="功能变量"></a>功能变量</h4><table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>req</code>,<code>http</code></td>
+<td align="left">获取 HTTP 请求标题；标头名称可以添加到 Vary 标头</td>
+</tr>
+<tr>
+<td align="left"><code>req_novary</code></td>
+<td align="left">与 相同，但不会将标头名称添加到 Vary 标头中</td>
+</tr>
+<tr>
+<td align="left"><code>resp</code></td>
+<td align="left">获取 HTTP 响应头（大多数响应标题在<code>&amp;ltIf&gt;</code>间尚未设置）</td>
+</tr>
+<tr>
+<td align="left"><code>reqenv</code></td>
+<td align="left">查找请求环境变量（作为快捷方式，也可用于访问变量）</td>
+</tr>
+<tr>
+<td align="left"><code>osenv</code></td>
+<td align="left">查找操作系统环境变量</td>
+</tr>
+<tr>
+<td align="left"><code>note</code></td>
+<td align="left">查找请求说明</td>
+</tr>
+<tr>
+<td align="left"><code>env</code></td>
+<td align="left">返回第一个匹配</td>
+</tr>
+<tr>
+<td align="left"><code>tolower</code></td>
+<td align="left">将字符串转换为小写</td>
+</tr>
+<tr>
+<td align="left"><code>toupper</code></td>
+<td align="left">将字符串转换为大写</td>
+</tr>
+<tr>
+<td align="left"><code>escape</code></td>
+<td align="left">在 %hex 编码中转义特殊字符</td>
+</tr>
+<tr>
+<td align="left"><code>unescape</code></td>
+<td align="left">Unescape %hex 编码的字符串，单独留下编码的斜杠；如果找到 %00，则返回空字符串</td>
+</tr>
+<tr>
+<td align="left"><code>base64</code></td>
+<td align="left">使用 base64 编码对字符串进行编码</td>
+</tr>
+<tr>
+<td align="left"><code>unbase64</code></td>
+<td align="left">解码base64编码的字符串，如果找到0x00则返回截断的字符串</td>
+</tr>
+<tr>
+<td align="left"><code>md5</code></td>
+<td align="left">使用 MD5 对字符串进行散列，然后使用十六进制编码对散列进行编码</td>
+</tr>
+<tr>
+<td align="left"><code>sha1</code></td>
+<td align="left">使用 SHA1 对字符串进行散列，然后使用十六进制编码对散列进行编码</td>
+</tr>
+<tr>
+<td align="left"><code>file</code></td>
+<td align="left">从文件中读取内容（包括行尾，如果存在）</td>
+</tr>
+<tr>
+<td align="left"><code>filemod</code></td>
+<td align="left">返回文件的最后修改时间（如果文件不存在或不是常规文件，则返回 0）</td>
+</tr>
+<tr>
+<td align="left"><code>filesize</code></td>
+<td align="left">返回文件的大小（如果文件不存在或不是常规文件，则返回 0）</td>
+</tr>
+</tbody></table>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/">模块索引 - Apache HTTP 服务器 版本 2.4</a></p>
+<h4 id="核心与多处理模块-MPM"><a href="#核心与多处理模块-MPM" class="headerlink" title="核心与多处理模块(MPM)"></a>核心与多处理模块(MPM)</h4><p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/core.html">core</a></p>
+<p>始终可用的核心 Apache HTTP Server 功能</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpm_common.html">mpm_common</a></p>
+<p>由多个多处理模块 (MPM) 实现的一组指令</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/event.html">event</a></p>
+<p>MPM 的一种变体，其目标是仅为与活动处理工作者的连接消耗线程</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpm_netware.html">mpm_netware</a></p>
+<p>实现专为 Novell NetWare 优化的线程 Web 服务器的多处理模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpmt_os2.html">mpmt_os2</a></p>
+<p>用于 OS/2 的混合多进程、多线程 MPM</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/prefork.html">prefork</a></p>
+<p>实现一个非线程的、预分叉的 Web 服务器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpm_winnt.html">mpm_winnt</a></p>
+<p>为 Windows NT 优化的多处理模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/worker.html">worker</a></p>
+<p>实现混合多线程多进程 Web 服务器的多处理模块</p>
+<h4 id="其他模块"><a href="#其他模块" class="headerlink" title="其他模块"></a>其他模块</h4><p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_access_compat.html">mod_access_compat</a></p>
+<p>基于主机（名称或 IP 地址）的组授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_actions.html">mod_actions</a></p>
+<p>根据媒体类型或请求方法执行 CGI 脚本</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_alias.html">mod_alias</a></p>
+<p>提供在文档树中映射主机文件系统的不同部分和 URL 重定向</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_allowmethods.html">mod_allowmethods</a></p>
+<p>轻松限制可以在服务器上使用的 HTTP 方法</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_asis.html">mod_asis</a></p>
+<p>发送包含自己的 HTTP 标头的文件</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_auth_basic.html">mod_auth_basic</a></p>
+<p>基本 HTTP 身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_auth_digest.html">mod_auth_digest</a></p>
+<p>使用 MD5 摘要身份验证的用户身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_auth_form.html">mod_auth_form</a></p>
+<p>表单认证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_anon.html">mod_authn_anon</a></p>
+<p>允许“匿名”用户访问经过身份验证的区域</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_core.html">mod_authn_core</a></p>
+<p>核心身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_dbd.html">mod_authn_dbd</a></p>
+<p>使用 SQL 数据库进行用户身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_dbm.html">mod_authn_dbm</a></p>
+<p>使用 DBM 文件进行用户身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_file.html">mod_authn_file</a></p>
+<p>使用文本文件进行用户身份验证</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authn_socache.html">mod_authn_socache</a></p>
+<p>管理身份验证凭据缓存以减轻后端的负载</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authnz_fcgi.html">mod_authnz_fcgi</a></p>
+<p>允许 FastCGI 授权器应用程序处理 Apache httpd 身份验证和授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html">mod_authnz_ldap</a></p>
+<p>允许使用 LDAP 目录来存储用于 HTTP 基本身份验证的数据库</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_core.html">mod_authz_core</a></p>
+<p>核心授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_dbd.html">mod_authz_dbd</a></p>
+<p>使用 SQL 进行组授权和登录</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_dbm.html">mod_authz_dbm</a></p>
+<p>使用 DBM 文件的组授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_groupfile.html">mod_authz_groupfile</a></p>
+<p>使用纯文本文件的组授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_host.html">mod_authz_host</a></p>
+<p>基于主机（名称或 IP 地址）的组授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_owner.html">mod_authz_owner</a></p>
+<p>基于文件所有权的授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_authz_user.html">mod_authz_user</a></p>
+<p>用户授权</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_autoindex.html">mod_autoindex</a></p>
+<p>自动生成目录索引，类似于 Unix 命令或 Win32 shell commandlsdir</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_brotli.html">mod_brotli</a></p>
+<p>在将内容交付给客户端之前通过 Brotli 压缩内容</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_buffer.html">mod_buffer</a></p>
+<p>支持请求缓冲</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cache.html">mod_cache</a></p>
+<p>符合 RFC 2616 的 HTTP 缓存过滤器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cache_disk.html">mod_cache_disk</a></p>
+<p>用于 HTTP 缓存过滤器的基于磁盘的存储模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cache_socache.html">mod_cache_socache</a></p>
+<p>基于共享对象缓存 (socache) 的存储模块，用于 HTTP 缓存过滤器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cern_meta.html">mod_cern_meta</a></p>
+<p>CERN httpd 元文件语义</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cgi.html">mod_cgi</a></p>
+<p>CGI脚本的执行</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_cgid.html">mod_cgid</a></p>
+<p>使用外部 CGI 守护程序执行 CGI 脚本</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_charset_lite.html">mod_charset_lite</a></p>
+<p>指定字符集转换或重新编码</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_data.html">mod_data</a></p>
+<p>将响应正文转换为 RFC2397 数据 URL</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dav.html">mod_dav</a></p>
+<p>分布式创作和版本控制<a target="_blank" rel="noopener" href="http://www.webdav.org/">WebDAV</a> 功能</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dav_fs.html">mod_dav_fs</a></p>
+<p><code>mod_dav</code> 的文件系统提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dav_lock.html">mod_dav_lock</a></p>
+<p><code>mod_dav</code> 的通用锁定模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dbd.html">mod_dbd</a></p>
+<p>管理 SQL 数据库连接</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_deflate.html">mod_deflate</a></p>
+<p>在将内容交付给客户端之前对其进行压缩</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dialup.html">mod_dialup</a></p>
+<p>以各种旧调制解调器标准定义的带宽速率限制发送静态内容</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dir.html">mod_dir</a></p>
+<p>提供”跟踪斜线”重定向和服务目录索引文件</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dumpio.html">mod_dumpio</a></p>
+<p>根据需要将所有 I/O 转储到错误日志</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_echo.html">mod_echo</a></p>
+<p>一个简单的回显服务器来说明协议模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_env.html">mod_env</a></p>
+<p>修改传递给 CGI 脚本和 SSI 页面的环境</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_example_hooks.html">mod_example_hooks</a></p>
+<p>说明 Apache 模块 API</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_expires.html">mod_expires</a></p>
+<p>根据用户指定的标准生成和 HTTP 标头<code>ExpiresCache-Control</code></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ext_filter.html">mod_ext_filter</a></p>
+<p>在传递给客户端之前通过外部程序传递响应正文</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_file_cache.html">mod_file_cache</a></p>
+<p>在内存中缓存静态文件列表</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_filter.html">mod_filter</a></p>
+<p>上下文敏感的智能过滤器配置模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_headers.html">mod_headers</a></p>
+<p>HTTP 请求和响应标题的自定义</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_heartbeat.html">mod_heartbeat</a></p>
+<p>将带有服务器状态的消息发送到前端代理</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_heartmonitor.html">mod_heartmonitor</a></p>
+<p>mod_heartbeat源服务器的集中监视器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_http2.html">mod_http2</a></p>
+<p>支持 HTTP/2 运输层</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ident.html">mod_ident</a></p>
+<p>RFC 1413 标识查找</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_imagemap.html">mod_imagemap</a></p>
+<p>服务器侧图像映像处理</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_include.html">mod_include</a></p>
+<p>服务器解析 html 文档（服务器侧包含）</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_info.html">mod_info</a></p>
+<p>提供服务器配置的全面概述</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_isapi.html">mod_isapi</a></p>
+<p>Apache for Windows 中的 ISAPI 扩展</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_bybusyness.html">mod_lbmethod_bybusyness</a></p>
+<p>待定请求计数负载平衡器调度器算法<code>mod_proxy_balancer</code></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_byrequests.html">mod_lbmethod_byrequests</a></p>
+<p>请求计算负载平衡器调度器算法<code>mod_proxy_balancer</code></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_bytraffic.html">mod_lbmethod_bytraffic</a></p>
+<p>加权流量计数负载平衡器调度器算法<code>mod_proxy_balancer</code></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_heartbeat.html">mod_lbmethod_heartbeat</a></p>
+<p>心跳流量计数负载平衡器调度器算法<code>mod_proxy_balancer</code></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ldap.html">mod_ldap</a></p>
+<p>供其他 LDAP 模块使用的 LDAP 连接池和结果缓存服务</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_log_config.html">mod_log_config</a></p>
+<p>记录向服务器提出的请求</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_log_debug.html">mod_log_debug</a></p>
+<p>额外的可配置调试日志记录</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_log_forensic.html">mod_log_forensic</a></p>
+<p>对服务器发出的请求进行取证记录</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_logio.html">mod_logio</a></p>
+<p>记录每个请求的输入和输出字节</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_lua.html">mod_lua</a></p>
+<p>将 Lua 挂钩提供到 httpd 请求处理的各个部分</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_macro.html">mod_macro</a></p>
+<p>在 apache httpd 运行时配置文件中提供宏</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_md.html">mod_md</a></p>
+<p>跨虚拟主机管理域，通过 ACME 协议提供证书</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_mime.html">mod_mime</a></p>
+<p>将请求的文件名的扩展名与文件的行为（处理程序和过滤器）和内容（mime 类型、语言、字符集和编码）相关联 </p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_mime_magic.html">mod_mime_magic</a></p>
+<p>通过查看文件内容的几个字节来确定文件的 MIME 类型</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_negotiation.html">mod_negotiation</a></p>
+<p>提供<a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/content-negotiation.html">内容协商</a></p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_nw_ssl.html">mod_nw_ssl</a></p>
+<p>为 NetWare 启用 SSL 加密</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_privileges.html">mod_privileges</a></p>
+<p>支持 Solaris 特权和在不同用户 ID 下运行虚拟主机</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy.html">mod_proxy</a></p>
+<p>多协议代理/网关服务器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_ajp.html">mod_proxy_ajp</a></p>
+<p>mod_proxy 的 AJP 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html">mod_proxy_balancer</a></p>
+<p><code>mod_proxy</code>负载平衡的扩展</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_connect.html">mod_proxy_connect</a></p>
+<p>用于请求处理的 mod_proxy 扩展CONNECT</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_express.html">mod_proxy_express</a></p>
+<p>mod_proxy 的动态大规模反向代理扩展</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html">mod_proxy_fcgi</a></p>
+<p>用于 mod_proxy 的 FastCGI 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_fdpass.html">mod_proxy_fdpass</a></p>
+<p>用于 mod_proxy 的 fdpass 外部进程支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_ftp.html">mod_proxy_ftp</a></p>
+<p>mod_proxy 的 FTP 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_hcheck.html">mod_proxy_hcheck</a></p>
+<p>对 mod_proxy 的 Balancer 成员（工作人员）进行动态健康检查</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_html.html">mod_proxy_html</a></p>
+<p>重写 HTML 链接以确保它们可以从代理上下文中的客户端网络寻址</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html">mod_proxy_http</a></p>
+<p>mod_proxy 的 HTTP 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_http2.html">mod_proxy_http2</a></p>
+<p>mod_proxy 的 HTTP/2 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html">mod_proxy_scgi</a></p>
+<p>用于 mod_proxy 的 SCGI 网关模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html">mod_proxy_uwsgi</a></p>
+<p>用于 mod_proxy 的 UWSGI 网关模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html">mod_proxy_wstunnel</a></p>
+<p>用于 mod_proxy 的 Websockets 支持模块</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html">mod_ratelimit</a></p>
+<p>客户端带宽速率限制</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_reflector.html">mod_reflector</a></p>
+<p>通过输出过滤器堆栈将请求正文反映为响应</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_remoteip.html">mod_remoteip</a></p>
+<p>将连接的原始客户端 IP 地址替换为代理或负载均衡器通过请求标头提供的用户代理 IP 地址列表</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_reqtimeout.html">mod_reqtimeout</a></p>
+<p>设置接收请求的超时和最小数据速率</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_request.html">mod_request</a></p>
+<p>用于处理和提供可用 HTTP 请求正文的过滤器</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_rewrite.html">mod_rewrite</a></p>
+<p>提供基于规则的重写引擎来即时重写请求的 URL</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_sed.html">mod_sed</a></p>
+<p>使用语法过滤输入（请求）和输出（响应）内容</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session.html">mod_session</a></p>
+<p>会话支持</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session_cookie.html">mod_session_cookie</a></p>
+<p>基于 Cookie 的会话支持</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session_crypto.html">mod_session_crypto</a></p>
+<p>会话加密支持</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session_dbd.html">mod_session_dbd</a></p>
+<p>基于 DBD/SQL 的会话支持</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_setenvif.html">mod_setenvif</a></p>
+<p>允许根据请求的特征设置环境变量</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_slotmem_plain.html">mod_slotmem_plain</a></p>
+<p>基于插槽的共享内存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_slotmem_shm.html">mod_slotmem_shm</a></p>
+<p>基于插槽的共享内存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_so.html">mod_so</a></p>
+<p>在启动或重新启动时将可执行代码和模块加载到服务器中</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_socache_dbm.html">mod_socache_dbm</a></p>
+<p>基于 DBM 的共享对象缓存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_socache_dc.html">mod_socache_dc</a></p>
+<p>基于 Distcache 的共享对象缓存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_socache_memcache.html">mod_socache_memcache</a></p>
+<p>基于 Memcache 的共享对象缓存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_socache_redis.html">mod_socache_redis</a></p>
+<p>基于 Redis 的共享对象缓存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_socache_shmcb.html">mod_socache_shmcb</a></p>
+<p>基于 shmcb 的共享对象缓存提供程序</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_speling.html">mod_speling</a></p>
+<p>尝试通过忽略大小写或尝试更正各种小拼写错误来更正错误的 URL</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ssl.html">mod_ssl</a></p>
+<p>使用安全套接字层 (SSL) 和传输层安全 (TLS) 协议的强密码术</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_status.html">mod_status</a></p>
+<p>提供有关服务器活动和性能的信息</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_substitute.html">mod_substitute</a></p>
+<p>对响应体执行搜索和替换操作</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_suexec.html">mod_suexec</a></p>
+<p>允许 CGI 脚本作为指定的用户和组运行</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_systemd.html">mod_systemd</a></p>
+<p>为系统集成提供更好的支持</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_unique_id.html">mod_unique_id</a></p>
+<p>为每个请求提供一个具有唯一标识符的环境变量</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_unixd.html">mod_unixd</a></p>
+<p>Unix 系列平台的基本（必需）安全性</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_userdir.html">mod_userdir</a></p>
+<p>特定于用户的目录</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_usertrack.html">mod_usertrack</a></p>
+<p>站点上用户活动的点击流日志记录</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_version.html">mod_version</a></p>
+<p>版本相关配置</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_vhost_alias.html">mod_vhost_alias</a></p>
+<p>提供动态配置的海量虚拟主机</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_watchdog.html">mod_watchdog</a></p>
+<p>为其他模块提供基础设施以定期运行任务</p>
+<p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_xml2enc.html">mod_xml2enc</a></p>
+<p>增强了对基于 libxml2 的过滤器模块的字符集/国际化支持</p>
+<p>[^更多请参考]: <a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/zh-cn/">Apache HTTP 服务器 2.4 文档 - Apache HTTP 服务器 版本 2.4</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2021/08/01/apache/">https://0xdadream.github.io/2021/08/01/apache/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/server/">
+                                    <span class="chip bg-color">server</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/08/02/guo-nei-jing-xiang-yuan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/53.jpg" class="responsive-img" alt="国内镜像源">
+                        
+                        <span class="card-title">国内镜像源</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            国内镜像源
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tip/">
+                        <span class="chip bg-color">tip</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/21/vulhub-an-zhuang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/38.jpg" class="responsive-img" alt="vulhub安装">
+                        
+                        <span class="card-title">vulhub安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            vulhub安装
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tip/">
+                        <span class="chip bg-color">tip</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">166.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

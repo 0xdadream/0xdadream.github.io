@@ -1,0 +1,691 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;tip&#34; category</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 23 Jun 2024 04:11:00 +0800</pubDate>
+        <lastBuildDate>Sun, 23 Jun 2024 04:11:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>安装</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>linux</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>java</category>
+        <category>学习</category>
+        <category>tools</category>
+        <category>文件上传</category>
+        <category>命令</category>
+        <category>bug</category>
+        <category>php</category>
+        <category>python</category>
+        <category>汇编</category>
+        <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/06/23/hexo-qian-yi/</guid>
+            <title>hexo迁移</title>
+            <link>https://0xdadream.github.io/2024/06/23/hexo-qian-yi/</link>
+            <category>tip</category>
+            <pubDate>Sun, 23 Jun 2024 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;hexo迁移&#34;&gt;&lt;a href=&#34;#hexo迁移&#34; class=&#34;headerlink&#34; title=&#34;hexo迁移&#34;&gt;&lt;/a&gt;hexo迁移&lt;/h1&gt;&lt;h2 id=&#34;直接更换电脑&#34;&gt;&lt;a href=&#34;#直接更换电脑&#34; class=&#34;headerlink&#34; title=&#34;直接更换电脑&#34;&gt;&lt;/a&gt;直接更换电脑&lt;/h2&gt;&lt;h3 id=&#34;安装环境&#34;&gt;&lt;a href=&#34;#安装环境&#34; class=&#34;headerlink&#34; title=&#34;安装环境&#34;&gt;&lt;/a&gt;安装环境&lt;/h3&gt;&lt;p&gt;安装git和node，自行搜索安装，node推荐安装在github上的nvm，方便切换版本&lt;/p&gt;
+&lt;h3 id=&#34;本机与github建立连接&#34;&gt;&lt;a href=&#34;#本机与github建立连接&#34; class=&#34;headerlink&#34; title=&#34;本机与github建立连接&#34;&gt;&lt;/a&gt;本机与github建立连接&lt;/h3&gt;&lt;p&gt;设置git配置信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.name &lt;span class=&#34;token string&#34;&gt;&#34;你的GitHub用户名&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.email &lt;span class=&#34;token string&#34;&gt;&#34;你的GitHub注册邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成ssh密钥文件&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; rsa &lt;span class=&#34;token parameter variable&#34;&gt;-C&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;你的GitHub注册邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后连续三次回车&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;c/Users/youuser/.ssh/id_rsa.pub&lt;/code&gt;里面的内容即是双方通信的密钥&lt;/p&gt;
+&lt;p&gt;将密钥复制到github-&amp;gt;右上角头像-&amp;gt;settings-&amp;gt;SSH and GPG keys，保存&lt;/p&gt;
+&lt;p&gt;本机测试连接&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-T&lt;/span&gt; git@github.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;安装hexo&#34;&gt;&lt;a href=&#34;#安装hexo&#34; class=&#34;headerlink&#34; title=&#34;安装hexo&#34;&gt;&lt;/a&gt;安装hexo&lt;/h3&gt;&lt;p&gt;创建一个文件夹用于存放博客文件，cd 进入该目录，执行命令&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; hexo-cli &lt;span class=&#34;token comment&#34;&gt;#安装hexo&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; update hexo &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#升级hexo&lt;/span&gt;
+hexo init  --no-install &lt;span class=&#34;token comment&#34;&gt;#初始化blog，需要先创建一个博客主文件夹，在文件夹里执行，就是上面创建的，或者&lt;/span&gt;
+hexo init blog&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;文件夹名&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; --no-install &lt;span class=&#34;token comment&#34;&gt;#--no-install是阻止项目克隆下来后，自动安装依赖，不使用会自动安装最新版本hexo，具体自己影响实测&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; hexo@5.4.0 &lt;span class=&#34;token comment&#34;&gt;#安装想要的hexo版本，我的这个主题这个版本合适&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;安装插件&#34;&gt;&lt;a href=&#34;#安装插件&#34; class=&#34;headerlink&#34; title=&#34;安装插件&#34;&gt;&lt;/a&gt;安装插件&lt;/h3&gt;&lt;p&gt;旧电脑在博客主目录执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; list &lt;span class=&#34;token comment&#34;&gt;# 查看安装过的插件&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;新电脑执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; hexo-deployer-git &lt;span class=&#34;token comment&#34;&gt;#安装包名字，不加版本默认最新 &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;移植文件&#34;&gt;&lt;a href=&#34;#移植文件&#34; class=&#34;headerlink&#34; title=&#34;移植文件&#34;&gt;&lt;/a&gt;移植文件&lt;/h3&gt;&lt;p&gt;将&lt;code&gt;source&lt;/code&gt; &lt;code&gt;themes&lt;/code&gt; &lt;code&gt;_config.yml&lt;/code&gt;从旧电脑复制过来&lt;/p&gt;
+&lt;h3 id=&#34;部署&#34;&gt;&lt;a href=&#34;#部署&#34; class=&#34;headerlink&#34; title=&#34;部署&#34;&gt;&lt;/a&gt;部署&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;hexo g &lt;span class=&#34;token comment&#34;&gt;#生成静态文件&lt;/span&gt;
+hexo s &lt;span class=&#34;token comment&#34;&gt;#测试网页&lt;/span&gt;
+hexo d &lt;span class=&#34;token comment&#34;&gt;#没问题部署&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/28/v2rayn-lu-you-gui-ze/</guid>
+            <title>v2rayn路由规则</title>
+            <link>https://0xdadream.github.io/2024/01/28/v2rayn-lu-you-gui-ze/</link>
+            <category>tip</category>
+            <pubDate>Sun, 28 Jan 2024 23:41:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;v2rayn路由规则&#34;&gt;&lt;a href=&#34;#v2rayn路由规则&#34; class=&#34;headerlink&#34; title=&#34;v2rayn路由规则&#34;&gt;&lt;/a&gt;v2rayn路由规则&lt;/h1&gt;&lt;p&gt;大体可以看这篇文章&lt;a href=&#34;https://www.v2fly.org/config/routing.html&#34;&gt;Routing 路由 | V2Fly.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本次测试所用版本为6.33&lt;/p&gt;
+&lt;p&gt;设置-&amp;gt;路由设置-&amp;gt;启用高级功能-&amp;gt;高级功能-&amp;gt;添加规则集-&amp;gt;(随便写个别名)添加规则&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;proxy  &lt;span class=&#34;token comment&#34;&gt;# 代理的domain和IP&lt;/span&gt;
+direct &lt;span class=&#34;token comment&#34;&gt;# 直连的&lt;/span&gt;
+block &lt;span class=&#34;token comment&#34;&gt;# 阻塞的，一般为屏蔽广告IP&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;假如我想代理一些domain和IP，选择proxy，端口不写应该就是全部，写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token number&#34;&gt;80&lt;/span&gt;
+&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;-1234&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;enabled启用，勾选保存时Domain，IP，进程名自动排序&lt;/p&gt;
+&lt;p&gt;domain写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;domain:完整域名
+keyword:域名关键字
+regexp:正则表达式
+full:完全匹配字符串
+geosite:域名集 &lt;span class=&#34;token comment&#34;&gt;# 官方网站查看&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Loyalsoldier/v2ray-rules-dat&#34;&gt;Loyalsoldier/v2ray-rules-dat: 🦄 🎃 👻 V2Ray 路由规则文件加强版，可代替 V2Ray 官方 geoip.dat 和 geosite.dat，兼容 Shadowsocks-windows、Xray-core、Trojan-Go、leaf 和 hysteria。Enhanced edition of V2Ray rules dat files, compatible with Xray-core, Shadowsocks-windows, Trojan-Go, leaf and hysteria. (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IP写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;geoip:IP集 &lt;span class=&#34;token comment&#34;&gt;# 官方网站查看&lt;/span&gt;
+单个IP
+IP段,如:192.166.23.22/23&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/28/x-ui-mian-ban-bu-shu-jie-dian-tao-cf/</guid>
+            <title>x-ui面板部署代理+套CF</title>
+            <link>https://0xdadream.github.io/2024/01/28/x-ui-mian-ban-bu-shu-jie-dian-tao-cf/</link>
+            <category>tip</category>
+            <pubDate>Sun, 28 Jan 2024 23:41:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;x-ui面板部署代理-套CF&#34;&gt;&lt;a href=&#34;#x-ui面板部署代理-套CF&#34; class=&#34;headerlink&#34; title=&#34;x-ui面板部署代理+套CF&#34;&gt;&lt;/a&gt;x-ui面板部署代理+套CF&lt;/h1&gt;&lt;p&gt;项目链接&lt;a href=&#34;https://github.com/vaxilu/x-ui&#34;&gt;vaxilu/x-ui: 支持多协议多用户的 xray 面板 (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-准备工作&#34;&gt;&lt;a href=&#34;#1-准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 准备工作&#34;&gt;&lt;/a&gt;1. 准备工作&lt;/h2&gt;&lt;p&gt;确定防火墙是否关闭，或者手动开放端口，不能不能登录面板&lt;/p&gt;
+&lt;p&gt;更新系统依赖&lt;/p&gt;
+&lt;p&gt;Ubuntu：&lt;code&gt;apt update -y&lt;/code&gt;    centos  ：&lt;code&gt;yum update -y&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-安装&#34;&gt;&lt;a href=&#34;#2-安装&#34; class=&#34;headerlink&#34; title=&#34;2. 安装&#34;&gt;&lt;/a&gt;2. 安装&lt;/h2&gt;&lt;p&gt;执行命令运行脚本&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-Ls&lt;/span&gt; https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装/更新完成后需要强制修改端口与账户密码——输入&lt;code&gt;y&lt;/code&gt;按照提示输出信息&lt;/p&gt;
+&lt;p&gt;完成后进入网址&lt;code&gt;主机IP:你输入的端口号&lt;/code&gt;，输入账号密码&lt;/p&gt;
+&lt;p&gt;进入主页面，选择面板设置，更改面板url根路径，更改后重启，再次进入时使用地址&lt;code&gt;主机IP:你输入的端口号/更改的根路径&lt;/code&gt;，其他根据自身更改&lt;/p&gt;
+&lt;h2 id=&#34;3-SSL证书申请&#34;&gt;&lt;a href=&#34;#3-SSL证书申请&#34; class=&#34;headerlink&#34; title=&#34;3. SSL证书申请&#34;&gt;&lt;/a&gt;3. SSL证书申请&lt;/h2&gt;&lt;p&gt;输入&lt;code&gt;x-ui&lt;/code&gt;进入面板管理，选择16回车&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;******使用说明******
+该脚本将使用Acme脚本申请证书,使用时需保证:
+&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;.知晓Cloudflare 注册邮箱
+&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;.知晓Cloudflare Global API Key
+&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;.域名已通过Cloudflare进行解析到当前服务器
+&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;.该脚本申请证书默认安装路径为/root/cert目录&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;准备好这些东西，cloudflare直接邮箱注册&lt;a href=&#34;https://cloudflare.com/%EF%BC%8CAPI&#34;&gt;https://cloudflare.com/，API&lt;/a&gt; KEY&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054345145.png&#34; alt=&#34;image-20240307054345145&#34;&gt;&lt;/p&gt;
+&lt;p&gt;之后依次输入&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054521404.png&#34; alt=&#34;image-20240307054521404&#34;&gt;&lt;/p&gt;
+&lt;p&gt;注意输入的域名为你解析到CF上的域名，不是A记录的域名，如下图1的位置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055228662.png&#34; alt=&#34;image-20240307055228662&#34;&gt;&lt;/p&gt;
+&lt;p&gt;之后进入面板设置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055410275.png&#34; alt=&#34;image-20240307055410275&#34;&gt;&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;/root/cert/xxx&lt;/code&gt;填入框中，上面是cer，下面是key，之后进入cloudflare，改成这样，打开上面图2标记的小云朵，这样流量就被cf代理了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055729883.png&#34; alt=&#34;image-20240307055729883&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4-创建代理&#34;&gt;&lt;a href=&#34;#4-创建代理&#34; class=&#34;headerlink&#34; title=&#34;4. 创建代理&#34;&gt;&lt;/a&gt;4. 创建代理&lt;/h2&gt;&lt;p&gt;接上面标记的那张图，将你的主机IP解析到这个域名的A记录下，名称随意填写，相当于得到了一个三级域名——&lt;code&gt;名称.域名&lt;/code&gt;，例如&lt;code&gt;test.example.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进入x-ui 面板入站列表-添加入站&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060728590.png&#34; alt=&#34;image-20240307060728590&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060941380.png&#34; alt=&#34;image-20240307060941380&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的域名就是你自己解析到的域名，名称+域名，添加，分享二维码就可以使用了&lt;/p&gt;
+&lt;h2 id=&#34;5-套CF优选IP&#34;&gt;&lt;a href=&#34;#5-套CF优选IP&#34; class=&#34;headerlink&#34; title=&#34;5. 套CF优选IP&#34;&gt;&lt;/a&gt;5. 套CF优选IP&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/badafans/better-cloudflare-ip&#34;&gt;badafans/better-cloudflare-ip: 查找适合自己当前网络环境的优选cloudflare anycast IP (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/XIU2/CloudflareSpeedTest&#34;&gt;XIU2/CloudflareSpeedTest: 🌩「自选优选 IP」测试 Cloudflare CDN 延迟和速度，获取最快 IP ！当然也支持其他 CDN / 网站 IP ~ (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;两款工具&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307061731515.png&#34; alt=&#34;image-20240307061731515&#34;&gt;&lt;/p&gt;
+&lt;p&gt;将优选得到的地址填写上去，将原来的地址写到伪装域名，需要优选443这个端口的地址&lt;/p&gt;
+&lt;h2 id=&#34;6-其他类型的代理&#34;&gt;&lt;a href=&#34;#6-其他类型的代理&#34; class=&#34;headerlink&#34; title=&#34;6.其他类型的代理&#34;&gt;&lt;/a&gt;6.其他类型的代理&lt;/h2&gt;&lt;p&gt;上面也可以不用443端口，这要添加一条规则&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307062711360.png&#34; alt=&#34;image-20240307062711360&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后就可以优选443的地址，端口改写443&lt;/p&gt;
+&lt;p&gt;也能直接使用其他的端口，下面就不需要打开tls&lt;/p&gt;
+&lt;p&gt;也可以网络直接选择tcp，选择reality，这种是直连，要看你的服务器网络质量&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/20/ssh-lian-jie-bao-cuo/</guid>
+            <title>SSH连接报错</title>
+            <link>https://0xdadream.github.io/2024/01/20/ssh-lian-jie-bao-cuo/</link>
+            <category>tip</category>
+            <pubDate>Sat, 20 Jan 2024 11:37:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;SSH连接报错&#34;&gt;&lt;a href=&#34;#SSH连接报错&#34; class=&#34;headerlink&#34; title=&#34;SSH连接报错&#34;&gt;&lt;/a&gt;SSH连接报错&lt;/h1&gt;&lt;p&gt;当时git提交时出现连接失败等提示，试一试命令&lt;code&gt;ssh -T git@github.com&lt;/code&gt;，若报错如下&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh: connect to &lt;span class=&#34;token function&#34;&gt;host&lt;/span&gt; github.com port &lt;span class=&#34;token number&#34;&gt;22&lt;/span&gt;: Connection timed out&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则试一试&lt;code&gt;ssh -T -p 443 git@ssh.github.com&lt;/code&gt;，若成功则修改&lt;code&gt;~/.ssh/config&lt;/code&gt;文件，添加&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Host github.com
+Hostname ssh.github.com
+Port &lt;span class=&#34;token number&#34;&gt;443&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次&lt;code&gt;ssh -T git@github.com&lt;/code&gt;成功，则可以进行提交，这是由于22端口处于某种原因出现了问题，之后仍然可以修改为原配置。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/20/shi-yong-zhu-ti-matery-jiang-ji-hexo-ban-ben/</guid>
+            <title>使用主题matery而降级hexo版本</title>
+            <link>https://0xdadream.github.io/2024/01/20/shi-yong-zhu-ti-matery-jiang-ji-hexo-ban-ben/</link>
+            <category>tip</category>
+            <pubDate>Sat, 20 Jan 2024 09:41:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;使用主题matery而降级hexo版本&#34;&gt;&lt;a href=&#34;#使用主题matery而降级hexo版本&#34; class=&#34;headerlink&#34; title=&#34;使用主题matery而降级hexo版本&#34;&gt;&lt;/a&gt;使用主题matery而降级hexo版本&lt;/h1&gt;&lt;p&gt;遇到问题按时间顺序&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;升级hexo到7.0.0后代码块显示异常&lt;/p&gt;
+&lt;p&gt;考虑hexo切换版本和升级matery版本，matery更新到创作者最新版本，hexo降级出现问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;hexo降级失败，因为node.js版本过高&lt;/p&gt;
+&lt;p&gt;降级node.js版本，使用工具nvm管理node.js版本，我使用的node.js版本为16….&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;hexo降级的具体过程&lt;/p&gt;
+&lt;p&gt;先删除原博客文件夹，或者改名，依次执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; hexo-cli &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#安装hexo大框架，用来初始化，这里全局安装是为了后面初始化使用hexo&lt;/span&gt;
+
+hexo init  --no-install &lt;span class=&#34;token comment&#34;&gt;#初始化blog，需要先创建一个博客主文件夹，在文件夹里执行，或者&lt;/span&gt;
+hexo init blog&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;文件夹名&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; --no-install &lt;span class=&#34;token comment&#34;&gt;#--no-install是阻止项目克隆下来后，自动安装依赖，不使用会自动安装最新版本hexo，具体自己影响实测&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; hexo@5.4.0 &lt;span class=&#34;token comment&#34;&gt;#安装想要的hexo版本，我的这个主题这个版本合适&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;hexo s后代码仍然异常&lt;/p&gt;
+&lt;p&gt;修改主目录_config.yml中的代码为&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;highlight:
+  enable: &lt;span class=&#34;token boolean&#34;&gt;false&lt;/span&gt;
+  line_number: &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+  auto_detect: &lt;span class=&#34;token boolean&#34;&gt;false&lt;/span&gt;
+  tab_replace: &lt;span class=&#34;token string&#34;&gt;&#39;&#39;&lt;/span&gt;
+  wrap: &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+  hljs: &lt;span class=&#34;token boolean&#34;&gt;false&lt;/span&gt;
+prismjs:
+  enable: &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+  preprocess: &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+  line_number: &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+  tab_replace: &lt;span class=&#34;token string&#34;&gt;&#39;&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;hexo s再次执行可见已经正常，再安装以前安装的插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注：因为主题版本更新，我直接全删了重建的，不删修改版本的可以先卸载原来的组件如hexo，主目录下的_config.yml有点不同，需要自己注意。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/20/npm-jian-jie/</guid>
+            <title>NPM简介</title>
+            <link>https://0xdadream.github.io/2024/01/20/npm-jian-jie/</link>
+            <category>tip</category>
+            <category>tools</category>
+            <pubDate>Sat, 20 Jan 2024 09:15:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;NPM简介&#34;&gt;&lt;a href=&#34;#NPM简介&#34; class=&#34;headerlink&#34; title=&#34;NPM简介&#34;&gt;&lt;/a&gt;NPM简介&lt;/h1&gt;&lt;p&gt;NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题&lt;/p&gt;
+&lt;h2 id=&#34;NPM命令&#34;&gt;&lt;a href=&#34;#NPM命令&#34; class=&#34;headerlink&#34; title=&#34;NPM命令&#34;&gt;&lt;/a&gt;NPM命令&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; 模块名 &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#全局安装，相当于加了一个环境变量，能全局调用&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; 模块名 &lt;span class=&#34;token comment&#34;&gt;#普通安装，一般安装在当前文件夹&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; list &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#列出已安装全局模块&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; list
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; list 模块 &lt;span class=&#34;token comment&#34;&gt;#显示模块版本号&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; uninstall 模块名 &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#全局卸载&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; uninstall 模块名 &lt;span class=&#34;token comment&#34;&gt;#普通卸载&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; search 关键字 &lt;span class=&#34;token comment&#34;&gt;#搜索模块&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; view 模块名 versions  &lt;span class=&#34;token comment&#34;&gt;#列出该模块所有版本&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; 模块名@版本号 &lt;span class=&#34;token comment&#34;&gt;#安装具体版本，一般只能安装一个版本&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/20/node.js-ban-ben-wen-ti/</guid>
+            <title>node.js版本问题</title>
+            <link>https://0xdadream.github.io/2024/01/20/node.js-ban-ben-wen-ti/</link>
+            <category>tip</category>
+            <category>tools</category>
+            <pubDate>Sat, 20 Jan 2024 08:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;node-js版本问题&#34;&gt;&lt;a href=&#34;#node-js版本问题&#34; class=&#34;headerlink&#34; title=&#34;node.js版本问题&#34;&gt;&lt;/a&gt;node.js版本问题&lt;/h1&gt;&lt;p&gt;起因是我想给node.js版本降级，卸载了新版，安装旧版后发现npm仍然是最新版本&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;安装nvm(&lt;a href=&#34;https://github.com/coreybutler/nvm-windows&#34;&gt;coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go. (github.com)&lt;/a&gt;)，这是一款管理node.js版本的工具&lt;/p&gt;
+&lt;h2 id=&#34;安装流程&#34;&gt;&lt;a href=&#34;#安装流程&#34; class=&#34;headerlink&#34; title=&#34;安装流程&#34;&gt;&lt;/a&gt;安装流程&lt;/h2&gt;&lt;p&gt;进入github选择nvm-setup下载，然后傻瓜式安装&lt;/p&gt;
+&lt;h2 id=&#34;部分命令&#34;&gt;&lt;a href=&#34;#部分命令&#34; class=&#34;headerlink&#34; title=&#34;部分命令&#34;&gt;&lt;/a&gt;部分命令&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;nvm  &lt;span class=&#34;token comment&#34;&gt;#查看命令面板&lt;/span&gt;
+nvm &lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; available &lt;span class=&#34;token comment&#34;&gt;#列出可用的最新的部分node.js版本&lt;/span&gt;
+nvm &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; 版本号 &lt;span class=&#34;token comment&#34;&gt;# 安装想要的版本&lt;/span&gt;
+nvm uninstall 版本号 &lt;span class=&#34;token comment&#34;&gt;# 卸载想要的版本&lt;/span&gt;
+nvm list &lt;span class=&#34;token comment&#34;&gt;#列出已经安装的版本&lt;/span&gt;
+nvm use 版本号 &lt;span class=&#34;token comment&#34;&gt;#启用版本&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#查看版本号&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/14/hexo-sheng-ji/</guid>
+            <title>hexo升级及升级后的问题</title>
+            <link>https://0xdadream.github.io/2024/01/14/hexo-sheng-ji/</link>
+            <category>tip</category>
+            <pubDate>Sun, 14 Jan 2024 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;hexo升级及升级后的问题&#34;&gt;&lt;a href=&#34;#hexo升级及升级后的问题&#34; class=&#34;headerlink&#34; title=&#34;hexo升级及升级后的问题&#34;&gt;&lt;/a&gt;hexo升级及升级后的问题&lt;/h1&gt;&lt;h2 id=&#34;hexo升级&#34;&gt;&lt;a href=&#34;#hexo升级&#34; class=&#34;headerlink&#34; title=&#34;hexo升级&#34;&gt;&lt;/a&gt;hexo升级&lt;/h2&gt;&lt;p&gt;首先升级node.js，去官网下载最新安装包，接着执行以下命令升级hexo&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; npm-check-updates &lt;span class=&#34;token comment&#34;&gt;# 安装更新工具&lt;/span&gt;
+ncu &lt;span class=&#34;token comment&#34;&gt;# 检查npm软件包更新，需在项目根目录下执行&lt;/span&gt;
+ncu &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 更新package.json配置&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 安装package.json配置的版本&lt;/span&gt;
+hexo version &lt;span class=&#34;token comment&#34;&gt;# 更新后检查hexo版本&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;升级后的问题&#34;&gt;&lt;a href=&#34;#升级后的问题&#34; class=&#34;headerlink&#34; title=&#34;升级后的问题&#34;&gt;&lt;/a&gt;升级后的问题&lt;/h2&gt;&lt;p&gt;升级后执行hexo d部署提交时报错&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;at ChildProcess.&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;anonymous&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;D:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;blog&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;node_modules&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;_hexo-util@1.9.0@hexo-util&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;spawn.js:51:21&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    at ChildProcess.emit &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;events.js:310:20&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    at ChildProcess.cp.emit &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;D:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;blog&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;node_modules&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;_cross-spawn@7.0.2@cross-spawn&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;enoent.js:34:29&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    at Process.ChildProcess._handle.onexit &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;internal/child_process.js:275:12&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时候你需要执行&lt;code&gt;ssh -T git@github.com&lt;/code&gt;测试是否连接正常，若失败报错&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; Someone could be
+eavesdropping on you right now &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;man-in-the-middle attack&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; It is also
+possible that a &lt;span class=&#34;token function&#34;&gt;host&lt;/span&gt; key has just been changed. The fingerprint &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; the RSA
+key sent by the remote &lt;span class=&#34;token function&#34;&gt;host&lt;/span&gt; is &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;truncated&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;. Please contact your system
+administrator. Add correct &lt;span class=&#34;token function&#34;&gt;host&lt;/span&gt; key &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; /home/username/.ssh/known_hosts to
+get rid of this message. Offending RSA key &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt;
+/home/username/.ssh/known_hosts:24 Password authentication is disabled to
+avoid man-in-the-middle attacks. Keyboard-interactive authentication is
+disabled to avoid man-in-the-middle attacks. Agent forwarding is disabled to
+avoid man-in-the-middle attacks.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则先去github重新绑定秘钥（如果原来的掉了），步骤和安装是一样，然后去&lt;code&gt;c/Users/youuser/.ssh&lt;/code&gt;下删除&lt;code&gt;c:\users\username\.ssh\known_hosts&lt;/code&gt;这个文件，重新执行&lt;code&gt;ssh -T git@github.com&lt;/code&gt;，选择yes，连接成功，再进行hexo d提交。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2023/05/15/stable-diffusion-bu-shu-zai-ubuntu/</guid>
+            <title>stable-diffusion部署在centos</title>
+            <link>https://0xdadream.github.io/2023/05/15/stable-diffusion-bu-shu-zai-ubuntu/</link>
+            <category>tip</category>
+            <pubDate>Mon, 15 May 2023 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;stable-diffusion部署在centos&#34;&gt;&lt;a href=&#34;#stable-diffusion部署在centos&#34; class=&#34;headerlink&#34; title=&#34;stable-diffusion部署在centos&#34;&gt;&lt;/a&gt;stable-diffusion部署在centos&lt;/h1&gt;&lt;h2 id=&#34;安装python环境&#34;&gt;&lt;a href=&#34;#安装python环境&#34; class=&#34;headerlink&#34; title=&#34;安装python环境&#34;&gt;&lt;/a&gt;安装python环境&lt;/h2&gt;&lt;p&gt;版本推荐python3.10.6&lt;/p&gt;
+&lt;h2 id=&#34;安装git&#34;&gt;&lt;a href=&#34;#安装git&#34; class=&#34;headerlink&#34; title=&#34;安装git&#34;&gt;&lt;/a&gt;安装git&lt;/h2&gt;&lt;p&gt;sudo apt install git &lt;/p&gt;
+&lt;h2 id=&#34;开始部署&#34;&gt;&lt;a href=&#34;#开始部署&#34; class=&#34;headerlink&#34; title=&#34;开始部署&#34;&gt;&lt;/a&gt;开始部署&lt;/h2&gt;&lt;p&gt;到普通用户目录执行&lt;code&gt;git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git&lt;/code&gt;把项目下载&lt;/p&gt;
+&lt;p&gt;执行./webui.sh下载依赖最后启动&lt;/p&gt;
+&lt;h2 id=&#34;注意&#34;&gt;&lt;a href=&#34;#注意&#34; class=&#34;headerlink&#34; title=&#34;注意&#34;&gt;&lt;/a&gt;注意&lt;/h2&gt;&lt;p&gt;先安装pytorch&lt;/p&gt;
+&lt;p&gt;launch.py&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;找到torch_command = os.environ.get(&#39;TORCH_COMMAND&#39;, &#34;pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 --extra-index-url https://download.pytorch.org/whl/cu117&#34;)，并修改
+
+修改后：torch_command = os.environ.get(&#39;TORCH_COMMAND&#39;, &#34;pip install torch==1.13.1 torchvision==0.14.1&#34;) &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+
+&lt;pre class=&#34;line-numbers language-javascript&#34; data-language=&#34;javascript&#34;&gt;&lt;code class=&#34;language-javascript&#34;&gt;ln &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;s &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;local&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;bin&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;python3 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;bin&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;python
+ln &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;s &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;local&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;bin&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;pip3 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;bin&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;pip
+&lt;span class=&#34;token literal-property property&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;github&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token constant&#34;&gt;AUTOMATIC1111&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;stable&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;diffusion&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;webui&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;git
+&lt;span class=&#34;token constant&#34;&gt;COMMANDLINE_ARGS&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;skip&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;torch&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;cuda&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;test &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;precision full &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;no&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;half &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;lowvram&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;weibu.py中将shared.demo.launch()第一行&lt;/p&gt;
+&lt;p&gt;改为share=True&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;pip install -r requirements.txt
+pip install -r requirements_versions.txt
+pip install basicsr
+pip install facexlib
+
+pip install -r requirements.txt
+python setup.py develop
+
+# If you want to enhance the background (non-face) regions with Real-ESRGAN,
+# you also need to install the realesrgan package
+pip install realesrgan
+
+--skip-torch-cuda-test --upcast-sampling --use-cpu interrogate
+./webui.sh --listen --no-half&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install python3.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Failed to build these modules: _ctypes
+yum install libffi-devel&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;$ ./configure --prefix=/usr/local/python3 --enable-optimizations
+$ make
+$ make install&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;yum install -y xz-devel
+pip install backports.lzma
+yum install mesa-libGL&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/home/hero/stable-diffusion-webui/venv/bin/python3 -m pip install --upgrade torchvision==0.2.2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;systemctl status firewalld
+systemctl stop firewalld
+yum install -y iptables-services
+systemctl start iptables
+systemctl status iptables
+cp -a /etc/sysconfig/iptables /etc/sysconfig/iptables.bak
+iptables -I INPUT -p tcp --dport 7860 -m state --state NEW -j ACCEPT
+iptables-save &amp;gt; /etc/sysconfig/iptables
+systemctl enable iptables.service
+systemctl enable iptables.service
+systemctl reboot
+netstat -tulpen
+iptables -L
+iptables -A INPUT -p tcp --dport 7860 -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 7860 -j ACCEPT
+&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;~/stable-diffusion-webui/webui.sh --listen&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;vi /etc/sysconfig/iptables&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2023/03/23/python-diao-yong-datetime.now-ti-shi-wei-zhao-dao-mo-kuai/</guid>
+            <title>python调用datetime.now()提示未找到模块</title>
+            <link>https://0xdadream.github.io/2023/03/23/python-diao-yong-datetime.now-ti-shi-wei-zhao-dao-mo-kuai/</link>
+            <category>tip</category>
+            <pubDate>Thu, 23 Mar 2023 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;python调用datetime-now-提示未找到模块&#34;&gt;&lt;a href=&#34;#python调用datetime-now-提示未找到模块&#34; class=&#34;headerlink&#34; title=&#34;python调用datetime.now()提示未找到模块&#34;&gt;&lt;/a&gt;python调用datetime.now()提示未找到模块&lt;/h1&gt;&lt;p&gt;首先确定导入了模块&lt;code&gt;from datetime import datetime&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果还是报错，那么可能存在一个&lt;code&gt;datetime.py&lt;/code&gt;的文件覆盖了原模块&lt;/p&gt;
+&lt;p&gt;可以直接使用&lt;code&gt;datetime.datetime.now()&lt;/code&gt;来调用，或者将那个&lt;code&gt;datetime.py&lt;/code&gt;改名&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2023/03/23/jia-gu-wen-yun-chong-zhi-shi-li/</guid>
+            <title>甲骨文云重置实例</title>
+            <link>https://0xdadream.github.io/2023/03/23/jia-gu-wen-yun-chong-zhi-shi-li/</link>
+            <category>tip</category>
+            <pubDate>Thu, 23 Mar 2023 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;甲骨文云重置实例&#34;&gt;&lt;a href=&#34;#甲骨文云重置实例&#34; class=&#34;headerlink&#34; title=&#34;甲骨文云重置实例&#34;&gt;&lt;/a&gt;甲骨文云重置实例&lt;/h1&gt;&lt;p&gt;来自&lt;a href=&#34;https://v2rayssr.com/oracle-centos.html&#34;&gt;https://v2rayssr.com/oracle-centos.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;p&gt;1、甲骨文（oracle）机器一台（始终免费），若是没有，请看下面博文链接：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://v2rayssr.com/oracle.html&#34;&gt;始终免费的VPS！油管8K视频秒开，颠覆你对免费资源的看法。Oracle（甲骨文）免费云服务器注册指南及故障解决！&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://v2rayssr.com/oracle-arm.html&#34;&gt;始终免费的 4核 24G内存 的VPS！甲骨文 (oracle) 抢/刷 ARM 实例！一键脚本部署开ARM机器！&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、SSH 连接工具（&lt;a href=&#34;https://v2rayssr.com/go?url=https://www.hostbuf.com/t/988.html&#34;&gt;FinalShell&lt;/a&gt;），VNC 连接工具（&lt;a href=&#34;https://v2rayssr.com/go?url=https://www.realvnc.com/en/connect/download/viewer/&#34;&gt;VNC® Viewer&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;3、域名一个做好解析，开启 CDN（小云朵），毕竟是建站的&lt;/p&gt;
+&lt;h2 id=&#34;视频教程演示&#34;&gt;&lt;a href=&#34;#视频教程演示&#34; class=&#34;headerlink&#34; title=&#34;视频教程演示&#34;&gt;&lt;/a&gt;视频教程演示&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://v2rayssr.com/go?url=https://youtu.be/grebA_WHGXY&#34;&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/07/12232323.png&#34; alt=&#34;img&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;甲骨文-VPS-安装-CentOS-8&#34;&gt;&lt;a href=&#34;#甲骨文-VPS-安装-CentOS-8&#34; class=&#34;headerlink&#34; title=&#34;甲骨文 VPS 安装 CentOS 8&#34;&gt;&lt;/a&gt;甲骨文 VPS 安装 CentOS 8&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;友情提示：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;下面为 ARM 机器安装演示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;VPS-设置&#34;&gt;&lt;a href=&#34;#VPS-设置&#34; class=&#34;headerlink&#34; title=&#34;VPS 设置&#34;&gt;&lt;/a&gt;VPS 设置&lt;/h3&gt;&lt;p&gt;SSH 连接 VPS，并进入 boot 文件夹，下载 Netboot 启动文件&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;apt update -y
+apt install wget -y
+cd /boot/efi/EFI
+wget https://boot.netboot.xyz/ipxe/netboot.xyz-arm64.efi&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若你是重装系统，请执行下面命令&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;yum update -y
+yum install wget -y
+cd /boot/efi/EFI
+wget https://boot.netboot.xyz/ipxe/netboot.xyz-arm64.efi&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;甲骨文控制台设置&#34;&gt;&lt;a href=&#34;#甲骨文控制台设置&#34; class=&#34;headerlink&#34; title=&#34;甲骨文控制台设置&#34;&gt;&lt;/a&gt;甲骨文控制台设置&lt;/h3&gt;&lt;p&gt;进入甲骨文控制台，点击实例详情，在左边找到 “控制台连接” ，启动 Cloud Shell 连接&lt;/p&gt;
+&lt;h3 id=&#34;设置-Netboot-引导启动&#34;&gt;&lt;a href=&#34;#设置-Netboot-引导启动&#34; class=&#34;headerlink&#34; title=&#34;设置 Netboot 引导启动&#34;&gt;&lt;/a&gt;设置 Netboot 引导启动&lt;/h3&gt;&lt;p&gt;重启 VPS ，并在 Cloud Shell 里面不停按键盘 ESC 键，进入 BIOS ，如图所示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/112.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择 Boot Maintenance Manager —— Boot Frome File ，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/133.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择 &lt;code&gt;netboot.xyz-arm64.efi&lt;/code&gt;，点击回车，进行引导！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/1233.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在引导的界面，我们选择 &lt;code&gt;Linux Network Installs (arm64)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/1212.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择你需要安装的系统，选择错误，可以按 ESC 返回上级菜单，我们选择 &lt;code&gt;CentOS&lt;/code&gt; —— &lt;code&gt;CentOS 8.0 Stream&lt;/code&gt;，点击回车，再次选择 &lt;code&gt;CentOS 8-stream text based installer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/2323.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;开始引导安装了以后，我们在 Cloud Shell 里面会看到如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/232323.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们选择 1，使用 VNC 可视化进行安装&lt;/p&gt;
+&lt;p&gt;设置 VNC 的密码（一定只是6 – 8个字符），确认密码&lt;/p&gt;
+&lt;h3 id=&#34;VNC-连接-VPS&#34;&gt;&lt;a href=&#34;#VNC-连接-VPS&#34; class=&#34;headerlink&#34; title=&#34;VNC 连接 VPS&#34;&gt;&lt;/a&gt;VNC 连接 VPS&lt;/h3&gt;&lt;p&gt;现在我们就可以通过 VNC 工具来连接我们的甲骨文 ARM 机器，并进行安装了。&lt;/p&gt;
+&lt;p&gt;VNC® Viewer 软件连接地址：&lt;code&gt;VPSIP:1&lt;/code&gt; ，输入密码以后，你大致就连接成功了&lt;/p&gt;
+&lt;h3 id=&#34;安装-CentOS-8&#34;&gt;&lt;a href=&#34;#安装-CentOS-8&#34; class=&#34;headerlink&#34; title=&#34;安装 CentOS 8&#34;&gt;&lt;/a&gt;安装 CentOS 8&lt;/h3&gt;&lt;p&gt;安装的过程很简单，若是有不明白的地方，请观看 &lt;a href=&#34;https://v2rayssr.com/go?url=https://youtu.be/grebA_WHGXY&#34;&gt;&lt;strong&gt;视频教程&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/3434.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;安装完成以后，我们就直接可以从 SSH 工具，登录我们的 &lt;code&gt;CentOS 8-stream&lt;/code&gt; 了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/444.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;友情提醒：可以更改 VPS 主机名&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;hostnamectl set-hostname host.aaa.com --transienthostnamectl set-hostname host.aaa.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;安装宝塔面板&#34;&gt;&lt;a href=&#34;#安装宝塔面板&#34; class=&#34;headerlink&#34; title=&#34;安装宝塔面板&#34;&gt;&lt;/a&gt;安装宝塔面板&lt;/h3&gt;&lt;p&gt;安装宝塔面板，相关的插件，设置网站！&lt;/p&gt;
+&lt;p&gt;在安装宝塔面板的过程中，或许有下图的错误提示，看着很吓人：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/55.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其实，这个只是 &lt;code&gt;pip&lt;/code&gt; 的版本太低，我们根据提示命令更新下就好了！&lt;/p&gt;
+&lt;p&gt;在宝塔面板里面，推荐安装如下运行环境：（LNMP – 编译安装）因为下面版本我安装并没有出错。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/themes/b2/Assets/fontend/images/default-img.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;编译安装时间有点长，但是更稳定可靠，大家耐心等待，下面是我等待的时间：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;安装[opcache-74]【已完成】耗时12秒安装[exif-74]【已完成】耗时19秒安装[imagemagick-74]【已完成】耗时38秒安装[redis-74]【已完成】耗时74秒安装[fileinfo-74]【已完成】耗时30秒安装[php-7.4]【已完成】耗时179秒安装[mysql-5.7]【已完成】耗时991秒安装[nginx-1.20]【已完成】耗时376秒&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;完成以后，看见监控栏的几项参数，瞬间觉得，哇！甲骨文 YYDS！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/themes/b2/Assets/fontend/images/default-img.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/343434.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;设置好了 WordPress 以后，我们来看一下 WordPress 的站点健康检测：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://v2rayssr.com/wp-content/uploads/2022/06/3423.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/</guid>
+            <title>json.decoder.JSONDecodeError</title>
+            <link>https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Sat, 04 Mar 2023 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;json-decoder-JSONDecodeError&#34;&gt;&lt;a href=&#34;#json-decoder-JSONDecodeError&#34; class=&#34;headerlink&#34; title=&#34;json.decoder.JSONDecodeError&#34;&gt;&lt;/a&gt;json.decoder.JSONDecodeError&lt;/h1&gt;&lt;p&gt;我是安装&lt;code&gt;stable diffusion&lt;/code&gt;出现的错误&lt;/p&gt;
+&lt;p&gt;大致截图&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt; File &lt;span class=&#34;token string&#34;&gt;&#34;G:&lt;span class=&#34;token entity&#34; title=&#34;\r&#34;&gt;\r&lt;/span&gt;uanjian\stable-diffusion-webui-master&lt;span class=&#34;token entity&#34; title=&#34;\0&#34;&gt;\0&lt;/span&gt;xdadream\lib\site-packages&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;ransformers&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;okenization_utils_base.py&#34;&lt;/span&gt;, line &lt;span class=&#34;token number&#34;&gt;1956&lt;/span&gt;, &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; _from_pretrained
+    tokenizer &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; cls&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;*init_inputs, **init_kwargs&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+  File &lt;span class=&#34;token string&#34;&gt;&#34;G:&lt;span class=&#34;token entity&#34; title=&#34;\r&#34;&gt;\r&lt;/span&gt;uanjian\stable-diffusion-webui-master&lt;span class=&#34;token entity&#34; title=&#34;\0&#34;&gt;\0&lt;/span&gt;xdadream\lib\site-packages&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;ransformers\models&lt;span class=&#34;token entity&#34; title=&#34;\c&#34;&gt;\c&lt;/span&gt;lip&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;okenization_clip.py&#34;&lt;/span&gt;, line &lt;span class=&#34;token number&#34;&gt;323&lt;/span&gt;, &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; __init__
+    self.encoder &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; json.load&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;vocab_handle&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+ …………
+json.decoder.JSONDecodeError: Unterminated string starting at: line &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;column&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;11370&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;char &lt;span class=&#34;token number&#34;&gt;11369&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;问题出在这&lt;code&gt;json.load(vocab_handle)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;找到这个文件存放目录&lt;code&gt;C:\Users\xxx\.cache\huggingface\hub\models--openai--clip-vit-large-patch14\blobs\xxxx&lt;/code&gt;，把下面东西全删除&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json%EF%BC%8C%E4%B8%8B%E8%BD%BD%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E9%87%8D%E6%96%B0%E6%89%A7%E8%A1%8Cbat%E6%96%87%E4%BB%B6%E5%B0%B1%E6%88%90%E5%8A%9F%E4%BA%86&#34;&gt;https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json，下载这个文件放在目录下，重新执行bat文件就成功了&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个问题是因为文件出现了破损&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/05/24/cobalt-strike-an-zhuang-he-po-jie/</guid>
+            <title>Cobalt Strike安装和破解</title>
+            <link>https://0xdadream.github.io/2022/05/24/cobalt-strike-an-zhuang-he-po-jie/</link>
+            <category>tip</category>
+            <category>安装</category>
+            <pubDate>Tue, 24 May 2022 19:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Cobalt-Strike安装和破解&#34;&gt;&lt;a href=&#34;#Cobalt-Strike安装和破解&#34; class=&#34;headerlink&#34; title=&#34;Cobalt Strike安装和破解&#34;&gt;&lt;/a&gt;Cobalt Strike安装和破解&lt;/h1&gt;&lt;h2 id=&#34;安装&#34;&gt;&lt;a href=&#34;#安装&#34; class=&#34;headerlink&#34; title=&#34;安装&#34;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;首先CS分客户端和服务端，服务端我选择架设在kali中，客户端在windows11&lt;/p&gt;
+&lt;p&gt;首先必须有Java环境，kali内置Java环境，windows自行查找&lt;/p&gt;
+&lt;h3 id=&#34;CS下载&#34;&gt;&lt;a href=&#34;#CS下载&#34; class=&#34;headerlink&#34; title=&#34;CS下载&#34;&gt;&lt;/a&gt;CS下载&lt;/h3&gt;&lt;p&gt;地址&lt;/p&gt;
+&lt;p&gt;验证版本&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;certutil &lt;span class=&#34;token parameter variable&#34;&gt;-hashfile&lt;/span&gt; cobaltstrike.jar SHA256&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;破解-汉化&#34;&gt;&lt;a href=&#34;#破解-汉化&#34; class=&#34;headerlink&#34; title=&#34;破解+汉化&#34;&gt;&lt;/a&gt;破解+汉化&lt;/h2&gt;&lt;p&gt;下载CSAgent&lt;a href=&#34;https://github.com/Twi1ight/CSAgent&#34;&gt;Twi1ight/CSAgent: CobaltStrike 4.x通用白嫖及汉化加载器 (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将文件解压到与CS相同的目录下&lt;/p&gt;
+&lt;p&gt;替换cobaltstrike、teamserver、agscript、c2lint、cobaltstrike.bat文件中的解密key，目前内置的key为4.4版本&lt;/p&gt;
+&lt;p&gt;各个版本的官方解密key：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token number&#34;&gt;4.0&lt;/span&gt; 1be5be52c6255c33558e8a1cb667cb06
+&lt;span class=&#34;token number&#34;&gt;4.1&lt;/span&gt; 80e32a742060b884419ba0c171c9aa76
+&lt;span class=&#34;token number&#34;&gt;4.2&lt;/span&gt; b20d487addd4713418f2d5a3ae02a7a0
+&lt;span class=&#34;token number&#34;&gt;4.3&lt;/span&gt; 3a4425490f389aeec312bdd758ad2b99
+&lt;span class=&#34;token number&#34;&gt;4.4&lt;/span&gt; 5e98194a01c6b48fa582a6a9fcbb92d6&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下就能正常使用了&lt;/p&gt;
+&lt;h2 id=&#34;使用&#34;&gt;&lt;a href=&#34;#使用&#34; class=&#34;headerlink&#34; title=&#34;使用&#34;&gt;&lt;/a&gt;使用&lt;/h2&gt;&lt;h3 id=&#34;kali启动服务端&#34;&gt;&lt;a href=&#34;#kali启动服务端&#34; class=&#34;headerlink&#34; title=&#34;kali启动服务端&#34;&gt;&lt;/a&gt;kali启动服务端&lt;/h3&gt;&lt;p&gt;在存放文件的主目录打开终端&lt;/p&gt;
+&lt;p&gt;运行命令，当然你要先保证&lt;code&gt;teamserver&lt;/code&gt;文件有执行权限&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./teamserver kali_IP password&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;password为你想设置的连接密码，待会客户端连接会使用&lt;/p&gt;
+&lt;h3 id=&#34;kali里启动客户端&#34;&gt;&lt;a href=&#34;#kali里启动客户端&#34; class=&#34;headerlink&#34; title=&#34;kali里启动客户端&#34;&gt;&lt;/a&gt;kali里启动客户端&lt;/h3&gt;&lt;p&gt;可以同时在kali运行&lt;/p&gt;
+&lt;p&gt;可以运行命令&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;java&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:ParallelGCThreads&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:+AggressiveHeap&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:+UseParallelGC&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-javaagent:CSAgent.jar&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;5e98194a01c6b48fa582a6a9fcbb92d6 &lt;span class=&#34;token parameter variable&#34;&gt;-Duser.language&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;en &lt;span class=&#34;token parameter variable&#34;&gt;-jar&lt;/span&gt; cobaltstrike.jar&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为方便可以写入sh文件&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; clients.sh
+&lt;span class=&#34;token comment&#34;&gt;#复制进入&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;java&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:ParallelGCThreads&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:+AggressiveHeap&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-XX:+UseParallelGC&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-javaagent:CSAgent.jar&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;5e98194a01c6b48fa582a6a9fcbb92d6 &lt;span class=&#34;token parameter variable&#34;&gt;-Duser.language&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;en &lt;span class=&#34;token parameter variable&#34;&gt;-jar&lt;/span&gt; cobaltstrike.jar
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;777&lt;/span&gt; clients.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;windows中运行客户端&#34;&gt;&lt;a href=&#34;#windows中运行客户端&#34; class=&#34;headerlink&#34; title=&#34;windows中运行客户端&#34;&gt;&lt;/a&gt;windows中运行客户端&lt;/h3&gt;&lt;p&gt;执行运行cobaltstrike.bat&lt;/p&gt;
+&lt;p&gt;若想隐藏弹框，创建cobaltstrike.vbs的内容为&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;CreateObject&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;WScript.Shell&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;.Run &lt;span class=&#34;token string&#34;&gt;&#34;java -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -javaagent:CSAgent.jar=5e98194a01c6b48fa582a6a9fcbb92d6 -jar cobaltstrike.jar&#34;&lt;/span&gt;,0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/</guid>
+            <title>win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者</title>
+            <link>https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Fri, 20 May 2022 22:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者&#34;&gt;&lt;a href=&#34;#win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者&#34; class=&#34;headerlink&#34; title=&#34;win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者&#34;&gt;&lt;/a&gt;win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者&lt;/h1&gt;&lt;p&gt;下载补丁安装&lt;a href=&#34;https://www.catalog.update.microsoft.com/Search.aspx?q=kb4474419&#34;&gt;Microsoft Update Catalog&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/</guid>
+            <title>配置WSUS连接时HTTP错误</title>
+            <link>https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Sat, 30 Apr 2022 23:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;配置WSUS连接时HTTP错误&#34;&gt;&lt;a href=&#34;#配置WSUS连接时HTTP错误&#34; class=&#34;headerlink&#34; title=&#34;配置WSUS连接时HTTP错误&#34;&gt;&lt;/a&gt;配置WSUS连接时HTTP错误&lt;/h1&gt;&lt;p&gt;我尝试&lt;code&gt;ping microsoft.com&lt;/code&gt;，并不能ping通更新服务&lt;/p&gt;
+&lt;p&gt;打开自动更新，也更新不了，应该就是网络的原因&lt;/p&gt;
+&lt;p&gt;首先关闭防火墙，如果是静态IP要保证能访问外网，不然你可以换成DHCP，自动获取&lt;/p&gt;
+&lt;p&gt;然后可以设置代理服务器，或者挂一个代理软件&lt;/p&gt;
+&lt;p&gt;注：你可以先把主机的系统先更新了，该打的补丁打了&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/</guid>
+            <title>发生系统错误6118</title>
+            <link>https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Sat, 30 Apr 2022 22:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;发生系统错误6118此工作组的服务器列表当前无法使用&#34;&gt;&lt;a href=&#34;#发生系统错误6118此工作组的服务器列表当前无法使用&#34; class=&#34;headerlink&#34; title=&#34;发生系统错误6118此工作组的服务器列表当前无法使用&#34;&gt;&lt;/a&gt;发生系统错误6118此工作组的服务器列表当前无法使用&lt;/h1&gt;&lt;h2 id=&#34;问题&#34;&gt;&lt;a href=&#34;#问题&#34; class=&#34;headerlink&#34; title=&#34;问题&#34;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;当你在域服务器中运行&lt;code&gt;net view /domain&lt;/code&gt;是报错&lt;/p&gt;
+&lt;p&gt;发生系统错误6118。此工作组的服务器列表当前无法使用&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;首先检查静态IP是否在设置的域环境，没有就改回来&lt;/p&gt;
+&lt;p&gt;win+R打开运行框输入&lt;code&gt;services.msc&lt;/code&gt;运行&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;computer browser&lt;/code&gt; 服务&lt;/p&gt;
+&lt;p&gt;启动类型设置为自动&lt;/p&gt;
+&lt;p&gt;未启动则手动启动&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/</guid>
+            <title>windows监听端口失败</title>
+            <link>https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Tue, 08 Feb 2022 22:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;windows监听端口失败&#34;&gt;&lt;a href=&#34;#windows监听端口失败&#34; class=&#34;headerlink&#34; title=&#34;windows监听端口失败&#34;&gt;&lt;/a&gt;windows监听端口失败&lt;/h1&gt;&lt;p&gt;当你在某些情况需要用到监听端口时，会出现端口监听失败，获得类似信息&lt;code&gt;An attempt was made to access a socket in a way forbidden by its access permissions.&lt;/code&gt;，这时你通过命令查看端口信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; -ano&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; 端口号&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现这个端口并没有被占用，这时这些端口可能被系统保留了，查看保留端口&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 show excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;udp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后你可以避开这些端口，或者&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;关闭占用程序，我这里默认hyper-v，大多数都是，关闭后&lt;strong&gt;重启&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;dism.exe /Online /Disable-Feature:Microsoft-Hyper-V &lt;span class=&#34;token comment&#34;&gt;# 关闭&lt;/span&gt;
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V &lt;span class=&#34;token comment&#34;&gt;# 打开&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;配置动态端口，动态端口不能被保留，用完即释放&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; dynamicportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;store&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;active&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;persistent
+&lt;span class=&#34;token comment&#34;&gt;# start为起始端口，num为往后多少个端口，最小254，store为生效状态&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将使用的端口移除保留端口&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 delete excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# startport为起始端口，numberofports为往后多少个端口&lt;/span&gt;
+netsh int ipv4 &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 这是添加&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/</guid>
+            <title>自定义鼠标右键新建文件</title>
+            <link>https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Sat, 15 Jan 2022 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;自定义鼠标右键新建文件&#34;&gt;&lt;a href=&#34;#自定义鼠标右键新建文件&#34; class=&#34;headerlink&#34; title=&#34;自定义鼠标右键新建文件&#34;&gt;&lt;/a&gt;自定义鼠标右键新建文件&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;win+R 打开运行窗口，输入regedit进入注册表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进入&lt;code&gt;计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew&lt;/code&gt;目录下&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2022/01/15/7GtjiT.png&#34; alt=&#34;7GtjiT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;按这样修改，修改时可能你会遇到问题，看下文解决方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进入&lt;code&gt;计算机\HKEY_CLASSES_ROOT\.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;将默认值修改为&lt;code&gt;Typora.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2022/01/15/7GtvJU.png&#34; alt=&#34;7GtvJU.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2022/01/15/7GtxWF.png&#34; alt=&#34;7GtxWF.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如图，如果没有就这样修改&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;还是到&lt;code&gt;计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2022/01/15/7GNFdx.png&#34; alt=&#34;7GNFdx.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;右击ShellNew，点击权限，然后点击高级-&amp;gt;禁用继承&lt;/p&gt;
+&lt;p&gt;双击你登陆的用户（就是一个小人儿那个），取消勾选完全控制，然后应用，确定，刷新&lt;/p&gt;
+&lt;h2 id=&#34;注意&#34;&gt;&lt;a href=&#34;#注意&#34; class=&#34;headerlink&#34; title=&#34;注意&#34;&gt;&lt;/a&gt;注意&lt;/h2&gt;&lt;p&gt;添加其他的也类似&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/</guid>
+            <title>powershell导入一个自己写的模块</title>
+            <link>https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Mon, 03 Jan 2022 03:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;powershell导入一个自己写的模块&#34;&gt;&lt;a href=&#34;#powershell导入一个自己写的模块&#34; class=&#34;headerlink&#34; title=&#34;powershell导入一个自己写的模块&#34;&gt;&lt;/a&gt;powershell导入一个自己写的模块&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;想把你写的模块&lt;code&gt;name.psm1&lt;/code&gt;放在&lt;code&gt;C:\Users\yourname\Documents\PowerShell\Modules\name&lt;/code&gt;目录下&lt;/p&gt;
+&lt;p&gt;name为你的模块名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编辑文件&lt;code&gt;‪C:\Users\yourname\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&lt;/code&gt;，添加&lt;code&gt;Import-Module name&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新启动就ok了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;name.psm1其实放哪都可以，你只需要把第二步的name换为绝对路径，我放在那个目录是为了和其他模块一起方便管理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/</guid>
+            <title>windows terminal使用</title>
+            <link>https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/</link>
+            <category>tip</category>
+            <category>windows</category>
+            <pubDate>Wed, 29 Dec 2021 23:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;windows-terminal使用&#34;&gt;&lt;a href=&#34;#windows-terminal使用&#34; class=&#34;headerlink&#34; title=&#34;windows terminal使用&#34;&gt;&lt;/a&gt;windows terminal使用&lt;/h1&gt;&lt;p&gt;本文将介绍一些windows terminal的基本使用&lt;/p&gt;
+&lt;p&gt;首先是这个新建一个配置文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23kad.png&#34; alt=&#34;T23kad.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以建一个空的，也可以复制&lt;/p&gt;
+&lt;p&gt;我们新建一个配置文件，如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23AIA.png&#34; alt=&#34;T23AIA.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个配置文件就像一个按钮，命令行就相当于按钮的链接，点击就运行命令&lt;/p&gt;
+&lt;p&gt;名称，命令行，图标可以稍微设置一下，其他的没啥可修改的&lt;/p&gt;
+&lt;p&gt;图标可以使用网络链接，也可以是本地路径&lt;/p&gt;
+&lt;p&gt;这里主要讲一下命令行&lt;/p&gt;
+&lt;h2 id=&#34;命令行&#34;&gt;&lt;a href=&#34;#命令行&#34; class=&#34;headerlink&#34; title=&#34;命令行&#34;&gt;&lt;/a&gt;命令行&lt;/h2&gt;&lt;p&gt;主要的几个使用小技巧&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;如果你定义了环境变量，直接写环境变量，就能直接运行，例如python&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23VPI.png&#34; alt=&#34;T23VPI.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23ZGt.png&#34; alt=&#34;T23ZGt.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;没有定义环境变量，直接使用绝对路径&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23KsS.png&#34; alt=&#34;T23KsS.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23Mqg.png&#34; alt=&#34;T23Mqg.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以当作快速启动程序的一个方式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T23uM8.png&#34; alt=&#34;T23uM8.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;以管理员方式启动&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s4.ax1x.com/2021/12/30/T231aj.png&#34; alt=&#34;T231aj.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;wt为环境变量或者绝对路径&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

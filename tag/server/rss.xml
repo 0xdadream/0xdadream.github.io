@@ -1,0 +1,2476 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;server&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Thu, 12 Aug 2021 20:11:00 +0800</pubDate>
+        <lastBuildDate>Thu, 12 Aug 2021 20:11:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>安装</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>linux</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>java</category>
+        <category>学习</category>
+        <category>tools</category>
+        <category>文件上传</category>
+        <category>命令</category>
+        <category>bug</category>
+        <category>php</category>
+        <category>python</category>
+        <category>汇编</category>
+        <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/08/12/jiang-hexo-bu-shu-dao-fu-wu-qi/</guid>
+            <title>将hexo部署到服务器</title>
+            <link>https://0xdadream.github.io/2021/08/12/jiang-hexo-bu-shu-dao-fu-wu-qi/</link>
+            <category>tip</category>
+            <category>server</category>
+            <pubDate>Thu, 12 Aug 2021 20:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;将hexo部署到服务器&#34;&gt;&lt;a href=&#34;#将hexo部署到服务器&#34; class=&#34;headerlink&#34; title=&#34;将hexo部署到服务器&#34;&gt;&lt;/a&gt;将hexo部署到服务器&lt;/h1&gt;&lt;p&gt;我以前是部署在github上的，本机的部署都是完成了的，本机部署请看其他教程&lt;/p&gt;
+&lt;h2 id=&#34;安装git&#34;&gt;&lt;a href=&#34;#安装git&#34; class=&#34;headerlink&#34; title=&#34;安装git&#34;&gt;&lt;/a&gt;安装git&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;创建git用户&#34;&gt;&lt;a href=&#34;#创建git用户&#34; class=&#34;headerlink&#34; title=&#34;创建git用户&#34;&gt;&lt;/a&gt;创建git用户&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;adduser &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#/home 目录下生成一个git目录&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;passwd&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#设置密码&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; a+w /etc/sudoers
+&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; /etc/sudoers &lt;span class=&#34;token comment&#34;&gt;#添加git ALL=(ALL) ALL&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;配置SSH密钥&#34;&gt;&lt;a href=&#34;#配置SSH密钥&#34; class=&#34;headerlink&#34; title=&#34;配置SSH密钥&#34;&gt;&lt;/a&gt;配置SSH密钥&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; ~/.ssh/authorized_keys
+&lt;span class=&#34;token comment&#34;&gt;#在物理机中复制C:\Users\youruser\.ssh\id_rsa.pub中的公钥到上面的文件中&lt;/span&gt;
+保存退出&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;创建仓库&#34;&gt;&lt;a href=&#34;#创建仓库&#34; class=&#34;headerlink&#34; title=&#34;创建仓库&#34;&gt;&lt;/a&gt;创建仓库&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;su&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; /home/git
+&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; projects/hexo &lt;span class=&#34;token comment&#34;&gt;# 建立项目目录&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; repos &lt;span class=&#34;token comment&#34;&gt;#创建仓库目录&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; repos
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; init &lt;span class=&#34;token parameter variable&#34;&gt;--bare&lt;/span&gt; hexo.git &lt;span class=&#34;token comment&#34;&gt;#创建仓库&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;chown&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; git:git /home/git/repos/hexo.git &lt;span class=&#34;token comment&#34;&gt;# 给git用户添加权限&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;创建一个钩子&#34;&gt;&lt;a href=&#34;#创建一个钩子&#34; class=&#34;headerlink&#34; title=&#34;创建一个钩子&#34;&gt;&lt;/a&gt;创建一个钩子&lt;/h2&gt;&lt;p&gt;接上面继续操作&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; hexo.git/hooks
+&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; post-receive &lt;span class=&#34;token comment&#34;&gt;# 创建一个钩子&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#添加如下文件&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; --work-tree&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/var/www/blog --git-dir&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/git/repos/hexo.git checkout &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x post-receive &lt;span class=&#34;token comment&#34;&gt;# 添加可执行权限&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;本地建立SSH信任关系&#34;&gt;&lt;a href=&#34;#本地建立SSH信任关系&#34; class=&#34;headerlink&#34; title=&#34;本地建立SSH信任关系&#34;&gt;&lt;/a&gt;本地建立SSH信任关系&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-copy-id &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; ~/.ssh/id_rsa.pub git@server_ip &lt;span class=&#34;token comment&#34;&gt;# 建立信任关系&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; git@server_ip &lt;span class=&#34;token comment&#34;&gt;# 试一下能不能登录&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;更改git用户默认的shell&#34;&gt;&lt;a href=&#34;#更改git用户默认的shell&#34; class=&#34;headerlink&#34; title=&#34;更改git用户默认的shell&#34;&gt;&lt;/a&gt;更改git用户默认的shell&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /etc/shells &lt;span class=&#34;token comment&#34;&gt;# 查看 git-shell 是否在登录方式里面&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;which&lt;/span&gt; git-shell &lt;span class=&#34;token comment&#34;&gt;# 找到git-shell的路径，记下来&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; /etc/shells
+然后把刚才记下来的路径添加进去
+
+&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; /etc/passwd
+&lt;span class=&#34;token comment&#34;&gt;#把git:x:1000:1000::/home/git:/bin/bash修改为git:x:1000:1000:,,,:/home/git:/usr/bin/git-shell&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#没有就算了&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;BUG&#34;&gt;&lt;a href=&#34;#BUG&#34; class=&#34;headerlink&#34; title=&#34;BUG&#34;&gt;&lt;/a&gt;BUG&lt;/h2&gt;&lt;p&gt;报错&lt;code&gt;remote: fatal: cannot create directory at &#39;2019&#39;: Permission denied&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;部署目录没有写的权限，改法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; go+w /home/git/projects/hexo&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/08/11/apache-bu-shu-ssl/</guid>
+            <title>apache部署ssl</title>
+            <link>https://0xdadream.github.io/2021/08/11/apache-bu-shu-ssl/</link>
+            <category>tip</category>
+            <category>server</category>
+            <pubDate>Wed, 11 Aug 2021 04:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;apache部署ssl&#34;&gt;&lt;a href=&#34;#apache部署ssl&#34; class=&#34;headerlink&#34; title=&#34;apache部署ssl&#34;&gt;&lt;/a&gt;apache部署ssl&lt;/h1&gt;&lt;h2 id=&#34;开启mod-ssl模块&#34;&gt;&lt;a href=&#34;#开启mod-ssl模块&#34; class=&#34;headerlink&#34; title=&#34;开启mod_ssl模块&#34;&gt;&lt;/a&gt;开启mod_ssl模块&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+LoadModule ssl_module modules/mod_ssl.so&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;加载配置文件&#34;&gt;&lt;a href=&#34;#加载配置文件&#34; class=&#34;headerlink&#34; title=&#34;加载配置文件&#34;&gt;&lt;/a&gt;加载配置文件&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;includeOptionalconf.d/*.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;保存证书&#34;&gt;&lt;a href=&#34;#保存证书&#34; class=&#34;headerlink&#34; title=&#34;保存证书&#34;&gt;&lt;/a&gt;保存证书&lt;/h2&gt;&lt;p&gt;在apache安装目录中新建cert目录，将证书解压至此&lt;/p&gt;
+&lt;h2 id=&#34;修改ssl-conf配置文件&#34;&gt;&lt;a href=&#34;#修改ssl-conf配置文件&#34; class=&#34;headerlink&#34; title=&#34;修改ssl.conf配置文件&#34;&gt;&lt;/a&gt;修改ssl.conf配置文件&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
+    ServerName   &lt;span class=&#34;token comment&#34;&gt;#修改为申请证书时绑定的域名www.YourDomainName1.com。                    &lt;/span&gt;
+    DocumentRoot  /data/www/hbappserver/public          
+    SSLEngine on   
+    SSLProtocol all &lt;span class=&#34;token parameter variable&#34;&gt;-SSLv2&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-SSLv3&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 添加SSL协议支持协议，去掉不安全的协议。&lt;/span&gt;
+    SSLCipherSuite HIGH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;RC4:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;MD5:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;aNULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;eNULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;NULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;DH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;EDH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;EXP:+MEDIUM   &lt;span class=&#34;token comment&#34;&gt;# 修改加密套件。&lt;/span&gt;
+    SSLHonorCipherOrder on
+    SSLCertificateFile cert/domain name1_public.crt   &lt;span class=&#34;token comment&#34;&gt;# 将domain name1_public.crt替换成您证书文件名。&lt;/span&gt;
+    SSLCertificateKeyFile cert/domain name1.key   &lt;span class=&#34;token comment&#34;&gt;# 将domain name1.key替换成您证书的密钥文件名。&lt;/span&gt;
+    SSLCertificateChainFile cert/domain name1_chain.crt  &lt;span class=&#34;token comment&#34;&gt;# 将domain name1_chain.crt替换成您证书的密钥文件名；证书链开头如果有#字符，请删除。&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#如果证书包含多个域名，复制以上参数，并将ServerName替换成第二个域名。 &lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:44&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;3&lt;/span&gt;&amp;gt;&lt;/span&gt;     
+    ServerName   &lt;span class=&#34;token comment&#34;&gt;#修改为申请证书时绑定的第二个域名www.YourDomainName2.com。                    &lt;/span&gt;
+    DocumentRoot  /data/www/hbappserver/public          
+    SSLEngine on   
+    SSLProtocol all &lt;span class=&#34;token parameter variable&#34;&gt;-SSLv2&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-SSLv3&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 添加SSL协议支持协议，去掉不安全的协议。&lt;/span&gt;
+    SSLCipherSuite HIGH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;RC4:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;MD5:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;aNULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;eNULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;NULL:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;DH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;EDH:&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;EXP:+MEDIUM   &lt;span class=&#34;token comment&#34;&gt;# 修改加密套件。&lt;/span&gt;
+    SSLHonorCipherOrder on
+    SSLCertificateFile cert/domain name2_public.crt   &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名。&lt;/span&gt;
+    SSLCertificateKeyFile cert/domain name2.key   &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名。&lt;/span&gt;
+    SSLCertificateChainFile cert/domain name2_chain.crt  &lt;span class=&#34;token comment&#34;&gt;# 将domain name2替换成您申请证书时的第二个域名；证书链开头如果有#字符，请删除。&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;重启生效&#34;&gt;&lt;a href=&#34;#重启生效&#34; class=&#34;headerlink&#34; title=&#34;重启生效&#34;&gt;&lt;/a&gt;重启生效&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;HTTP请求自动跳转HTTPS&#34;&gt;&lt;a href=&#34;#HTTP请求自动跳转HTTPS&#34; class=&#34;headerlink&#34; title=&#34;HTTP请求自动跳转HTTPS&#34;&gt;&lt;/a&gt;HTTP请求自动跳转HTTPS&lt;/h2&gt;&lt;p&gt;httpd.conf文件中的&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt; &amp;lt;/VirtualHost&amp;gt;&lt;/code&gt;中间，添加以下重定向代码。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;RewriteEngine on
+RewriteCond %&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;SERVER_PORT&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;^443$
+RewriteRule ^&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;.*&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;$ https://%&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;SERVER_NAME&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;L,R&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/08/11/apache-an-zhuang/</guid>
+            <title>Apache安装</title>
+            <link>https://0xdadream.github.io/2021/08/11/apache-an-zhuang/</link>
+            <category>tip</category>
+            <category>server</category>
+            <pubDate>Wed, 11 Aug 2021 02:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Apache安装&#34;&gt;&lt;a href=&#34;#Apache安装&#34; class=&#34;headerlink&#34; title=&#34;Apache安装&#34;&gt;&lt;/a&gt;Apache安装&lt;/h1&gt;&lt;p&gt;首先安装apr，apr-util，apr-iconv，prce，这几个依赖包能提高生产力&lt;/p&gt;
+&lt;h2 id=&#34;apr&#34;&gt;&lt;a href=&#34;#apr&#34; class=&#34;headerlink&#34; title=&#34;apr&#34;&gt;&lt;/a&gt;apr&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://downloads.apache.org//apr/apr-1.7.0.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; apr-1.7.0.tar.gz
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; apr-1.7.0
+./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; 
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;apr-util&#34;&gt;&lt;a href=&#34;#apr-util&#34; class=&#34;headerlink&#34; title=&#34;apr-util&#34;&gt;&lt;/a&gt;apr-util&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://downloads.apache.org/apr/apr-util-1.6.1.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; apr-util-1.6.1.tar.gz
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; apr-util-1.6.1
+./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr-util --with-apr&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; 
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;apr-iconv&#34;&gt;&lt;a href=&#34;#apr-iconv&#34; class=&#34;headerlink&#34; title=&#34;apr-iconv&#34;&gt;&lt;/a&gt;apr-iconv&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://downloads.apache.org/apr/apr-iconv-1.2.2.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; apr-iconv-1.2.2.tar.gz
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; apr-iconv-1.2.2
+./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr-iconv --with-apr&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; 
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;prce&#34;&gt;&lt;a href=&#34;#prce&#34; class=&#34;headerlink&#34; title=&#34;prce&#34;&gt;&lt;/a&gt;prce&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://sourceforge.net/projects/pcre/files/pcre/8.44/pcre-8.44.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; pcre-8.44.tar.gz
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; pcre-8.44
+./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/pcre
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;apache&#34;&gt;&lt;a href=&#34;#apache&#34; class=&#34;headerlink&#34; title=&#34;apache&#34;&gt;&lt;/a&gt;apache&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://apache.mirror.digitalpacific.com.au//httpd/httpd-2.4.48.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; httpd-2.4.48.tar.gz
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; httpd-2.4.48
+./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/httpd --with-apr&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr/apr --with-apr-util&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/apr/util --with-pcre&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/local/pcre
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/08/10/a-li-yun-bu-shu-apache-er-ji-yu-ming/</guid>
+            <title>阿里云部署apache二级域名</title>
+            <link>https://0xdadream.github.io/2021/08/10/a-li-yun-bu-shu-apache-er-ji-yu-ming/</link>
+            <category>server</category>
+            <pubDate>Tue, 10 Aug 2021 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;阿里云部署apache二级域名&#34;&gt;&lt;a href=&#34;#阿里云部署apache二级域名&#34; class=&#34;headerlink&#34; title=&#34;阿里云部署apache二级域名&#34;&gt;&lt;/a&gt;阿里云部署apache二级域名&lt;/h1&gt;&lt;h2 id=&#34;添加DNS解析记录&#34;&gt;&lt;a href=&#34;#添加DNS解析记录&#34; class=&#34;headerlink&#34; title=&#34;添加DNS解析记录&#34;&gt;&lt;/a&gt;添加DNS解析记录&lt;/h2&gt;&lt;p&gt;到阿里云控制台-&amp;gt;云解析DNS-&amp;gt;域名解析-&amp;gt;解析设置-&amp;gt;添加记录&lt;/p&gt;
+&lt;p&gt;主机记录就是你的二级域名&lt;/p&gt;
+&lt;p&gt;记录类型为A——指向IPV4&lt;/p&gt;
+&lt;p&gt;解析路线默认&lt;/p&gt;
+&lt;p&gt;记录值为你的外网IP&lt;/p&gt;
+&lt;h2 id=&#34;配置Apache&#34;&gt;&lt;a href=&#34;#配置Apache&#34; class=&#34;headerlink&#34; title=&#34;配置Apache&#34;&gt;&lt;/a&gt;配置Apache&lt;/h2&gt;&lt;p&gt;编辑&lt;code&gt;httpd.conf&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注释掉虚拟目录外的&lt;code&gt;DocumentRoot&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;添加&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;NameVirtualHost *:80
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
+	ServerAdmin root@localhost
+	DocumentRoot &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your1&#34;&lt;/span&gt;
+	ServerName two1.yourname
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;Directory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your1&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+		Options Indexes FollowSymLinks
+		AllowOverride None
+		Require all granted
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;VirtualHost *:8&lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;0&lt;/span&gt;&amp;gt;&lt;/span&gt;
+	ServerAdmin root@localhost
+	DocumentRoot &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your2&#34;&lt;/span&gt;
+	ServerName two2.yourname
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;Directory &lt;span class=&#34;token string&#34;&gt;&#34;/var/www/your2&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+		Options Indexes FollowSymLinks
+		AllowOverride None
+		Require all granted
+	&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/Directory&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;/VirtualHost&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;重启&#34;&gt;&lt;a href=&#34;#重启&#34; class=&#34;headerlink&#34; title=&#34;重启&#34;&gt;&lt;/a&gt;重启&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2021/08/01/apache/</guid>
+            <title>Apache教程</title>
+            <link>https://0xdadream.github.io/2021/08/01/apache/</link>
+            <category>server</category>
+            <pubDate>Sun, 01 Aug 2021 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Apache教程&#34;&gt;&lt;a href=&#34;#Apache教程&#34; class=&#34;headerlink&#34; title=&#34;Apache教程&#34;&gt;&lt;/a&gt;Apache教程&lt;/h1&gt;&lt;h2 id=&#34;安装&#34;&gt;&lt;a href=&#34;#安装&#34; class=&#34;headerlink&#34; title=&#34;安装&#34;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;#安装Apache及其扩展包&lt;/span&gt;
+yum &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; httpd httpd-manual mod_ssl mod_perl mod_auth_mysql&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;启动、停止、重启&#34;&gt;&lt;a href=&#34;#启动、停止、重启&#34; class=&#34;headerlink&#34; title=&#34;启动、停止、重启&#34;&gt;&lt;/a&gt;启动、停止、重启&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;#centos&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd start
+&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd stop
+&lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; httpd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;主要的配置文件&#34;&gt;&lt;a href=&#34;#主要的配置文件&#34; class=&#34;headerlink&#34; title=&#34;主要的配置文件&#34;&gt;&lt;/a&gt;主要的配置文件&lt;/h2&gt;&lt;p&gt;配置文件在&lt;code&gt;\etc\httpd&lt;/code&gt;下面，主要的配置文件&lt;code&gt;\etc\httpd\conf\httpd.conf&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;基本配置&#34;&gt;&lt;a href=&#34;#基本配置&#34; class=&#34;headerlink&#34; title=&#34;基本配置&#34;&gt;&lt;/a&gt;基本配置&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名+值&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerRoot &#34;/your/index&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Apache安装的目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Listen 80&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;监听的端口，可以开启多个端口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Include conf.modules.d/*.conf&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;加载文件中的所有模块&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LoadModule foo_module modules/mod_foo.so&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;加载单独模块&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LoadFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;和&lt;code&gt;LoadModule&lt;/code&gt;类似，但使用绝对路径&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;User username&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;运行时的用户名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Group groupname&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;运行时的用户组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerAdmin root@localhost&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;管理员的邮件地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerName www.example.com:80&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;主站点名称，可以是域名也能是IP，不写时自动配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DocumentRoot &#34;/var/www/html&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;主站点的网页存储位置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DirectoryIndex index&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;默认索引目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RequestReadTimeout&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许限制客户端发送请求所花费的时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TimeOut&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;传输或接收的延时，大于这个时间SERVER 会断开这个链接&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;KeepAliveTimeout&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;等待下一个请求的时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;MaxClients&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许的最大客户个数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;KeepAlive&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是否允许一个链接同时发出多的请求&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;目录访问权限控制&#34;&gt;&lt;a href=&#34;#目录访问权限控制&#34; class=&#34;headerlink&#34; title=&#34;目录访问权限控制&#34;&gt;&lt;/a&gt;目录访问权限控制&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectory &#34;/yourindex&#34;&amp;gt; 
+&amp;amp;ltFiles &#34;private.html&#34;&amp;gt;
+        Require all denied
+    &amp;amp;lt/Files&amp;gt;
+Options FollowSymLinks 
+AllowOverride None 
+Order allow,deny 
+Allow from all 
+#Require all granted #Apache2.2后替换Order
+&amp;amp;lt/Directory&amp;gt; &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Directory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;权限配置的容器名（文件系统容器），路径能正则匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/yourindex&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;需要配置权限的目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Files&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定文件权限，路径能正则匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Options&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置在特定目录使用的特性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;None&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;不启用任何额外功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ExecCGI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在该目录下允许执行CGI脚本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FollowSymlinks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许指定目录下的文件连接到目录外的文件或目录（在该目录下允许文件系统使用符号连接）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Indexes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当用户访问该目录时，如果用户找不到&lt;code&gt;DirectoryIndex&lt;/code&gt;指定的主页文件(例如&lt;code&gt;index.html&lt;/code&gt;)，则返回该目录下的文件列表给用户&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SymLinksIfOwnerMatch&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当使用符号连接时，只有当符号连接的文件拥有者与实际文件的拥有者相同时才可以访问。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;All&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;开启除 &lt;code&gt;MultiViews&lt;/code&gt; 之外的所有选项&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AllowOverride&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许存在于&lt;code&gt;.htaccess&lt;/code&gt;文件中的指令类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;None&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;不搜索该目录下的&lt;code&gt;.htaccess&lt;/code&gt;文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;All&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在&lt;code&gt;.htaccess&lt;/code&gt;文件中可以使用所有的指令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Order&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;控制在访问时&lt;code&gt;Allow&lt;/code&gt;和&lt;code&gt;Deny&lt;/code&gt;两个访问规则哪个优先&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Allow&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许访问的主机列表(可用域名或子网，例如：&lt;code&gt;Allow from 192.168.0.0/16&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Deny&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;拒绝访问的主机列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Order deny,allow&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;先检查拒绝，再检查允许，当拒绝与允许有冲突时，允许优先，默认规则为允许&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Order allow,deny&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;先检查允许，再检查拒绝，当允许与拒绝有冲突时，拒绝优先。默认规则为拒绝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;测试经过身份验证的用户是否由授权提供者授权，Apache2.2后替换Order&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require all granted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许所有访问请求&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require all denied&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;拒绝所有访问请求&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require ip ip1 ip2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只允许来自特定IP或IP段的访问请求，其他请求将被拒绝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require host x.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只允许来自特定域名主机的访问请求，其他请求将被拒绝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require not ip ip1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;拒绝ip1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require not host gov&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;拒绝gov&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;虚拟主机容器&#34;&gt;&lt;a href=&#34;#虚拟主机容器&#34; class=&#34;headerlink&#34; title=&#34;虚拟主机容器&#34;&gt;&lt;/a&gt;虚拟主机容器&lt;/h3&gt;&lt;h4 id=&#34;VirtualHost&#34;&gt;&lt;a href=&#34;#VirtualHost&#34; class=&#34;headerlink&#34; title=&#34;VirtualHost&#34;&gt;&lt;/a&gt;VirtualHost&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltVirtualHost 10.1.2.3:80&amp;gt;
+  ServerAdmin webmaster@host.example.com
+  DocumentRoot &#34;/www/docs/host.example.com&#34;
+  ServerName host.example.com
+  ServerAlias server server2.example.com server2
+  ServerAlias *.example.com
+  UseCanonicalName Off
+  ErrorLog &#34;logs/host.example.com-error_log&#34;
+  TransferLog &#34;logs/host.example.com-access_log&#34;
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;VirtualHost&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;包含一组仅适用于特定虚拟主机的指令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerAlias&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;为主机名创建一个别名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPreserveHost On     &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用传入的主机 HTTP 请求标头进行代理请求&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt; ProxyPass &#34;/&#34; &#34;http://192.168.111.2/&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将远程服务器映射到本地服务器 URL 空间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPassReverse &#34;/&#34; &#34;http://192.168.111.2/&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;调整从反向代理服务器发送的 HTTP 响应标头中的 URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerPath&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;由不兼容的浏览器访问的基于名称的虚拟主机的旧 URL 路径名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteRule&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写引擎的规则&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;….&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;在单个-IP-地址上运行多个基于名称的网站&#34;&gt;&lt;a href=&#34;#在单个-IP-地址上运行多个基于名称的网站&#34; class=&#34;headerlink&#34; title=&#34;在单个 IP 地址上运行多个基于名称的网站&#34;&gt;&lt;/a&gt;在单个 IP 地址上运行多个基于名称的网站&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;# Ensure that Apache listens on port 80
+Listen 80
+&amp;amp;ltVirtualHost *:80&amp;gt;
+    DocumentRoot &#34;/www/example1&#34;
+    ServerName www.example.com
+
+    # Other directives here
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost *:80&amp;gt;
+    DocumentRoot &#34;/www/example2&#34;
+    ServerName www.example.org
+
+    # Other directives here
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;多个-IP-地址上的基于名称的主机&#34;&gt;&lt;a href=&#34;#多个-IP-地址上的基于名称的主机&#34; class=&#34;headerlink&#34; title=&#34;多个 IP 地址上的基于名称的主机&#34;&gt;&lt;/a&gt;多个 IP 地址上的基于名称的主机&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 80
+
+# This is the &#34;main&#34; server running on 172.20.30.40
+ServerName server.example.com
+DocumentRoot &#34;/www/mainserver&#34;
+
+&amp;amp;ltVirtualHost 172.20.30.50&amp;gt;
+    DocumentRoot &#34;/www/example1&#34;
+    ServerName www.example.com
+
+    # Other directives here ...
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.50&amp;gt;
+    DocumentRoot &#34;/www/example2&#34;
+    ServerName www.example.org
+
+    # Other directives here ...
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;在不同的-IP-地址（例如内部和外部地址）上提供相同的内容&#34;&gt;&lt;a href=&#34;#在不同的-IP-地址（例如内部和外部地址）上提供相同的内容&#34; class=&#34;headerlink&#34; title=&#34;在不同的 IP 地址（例如内部和外部地址）上提供相同的内容&#34;&gt;&lt;/a&gt;在不同的 IP 地址（例如内部和外部地址）上提供相同的内容&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltVirtualHost 192.168.1.1 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/server1&#34;
+    ServerName server.example.com
+    ServerAlias server
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;在不同的端口上运行不同的站点&#34;&gt;&lt;a href=&#34;#在不同的端口上运行不同的站点&#34; class=&#34;headerlink&#34; title=&#34;在不同的端口上运行不同的站点&#34;&gt;&lt;/a&gt;在不同的端口上运行不同的站点&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 80
+Listen 8080
+
+&amp;amp;ltVirtualHost 172.20.30.40:80&amp;gt;
+    ServerName www.example.com
+    DocumentRoot &#34;/www/domain-80&#34;
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40:8080&amp;gt;
+    ServerName www.example.com
+    DocumentRoot &#34;/www/domain-8080&#34;
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40:80&amp;gt;
+    ServerName www.example.org
+    DocumentRoot &#34;/www/otherdomain-80&#34;
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40:8080&amp;gt;
+    ServerName www.example.org
+    DocumentRoot &#34;/www/otherdomain-8080&#34;
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;基于IP的虚拟主机&#34;&gt;&lt;a href=&#34;#基于IP的虚拟主机&#34; class=&#34;headerlink&#34; title=&#34;基于IP的虚拟主机&#34;&gt;&lt;/a&gt;基于IP的虚拟主机&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 80
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/example1&#34;
+    ServerName www.example.com
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.50&amp;gt;
+    DocumentRoot &#34;/www/example2&#34;
+    ServerName www.example.org
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;基于端口和基于-ip-的混合虚拟主机&#34;&gt;&lt;a href=&#34;#基于端口和基于-ip-的混合虚拟主机&#34; class=&#34;headerlink&#34; title=&#34;基于端口和基于 ip 的混合虚拟主机&#34;&gt;&lt;/a&gt;基于端口和基于 ip 的混合虚拟主机&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 172.20.30.40:80
+Listen 172.20.30.40:8080
+Listen 172.20.30.50:80
+Listen 172.20.30.50:8080
+
+&amp;amp;ltVirtualHost 172.20.30.40:80&amp;gt;
+    DocumentRoot &#34;/www/example1-80&#34;
+    ServerName www.example.com
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40:8080&amp;gt;
+    DocumentRoot &#34;/www/example1-8080&#34;
+    ServerName www.example.com
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.50:80&amp;gt;
+    DocumentRoot &#34;/www/example2-80&#34;
+    ServerName www.example.org
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.50:8080&amp;gt;
+    DocumentRoot &#34;/www/example2-8080&#34;
+    ServerName www.example.org
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;混合基于名称和基于-IP-的虚拟主机&#34;&gt;&lt;a href=&#34;#混合基于名称和基于-IP-的虚拟主机&#34; class=&#34;headerlink&#34; title=&#34;混合基于名称和基于 IP 的虚拟主机&#34;&gt;&lt;/a&gt;混合基于名称和基于 IP 的虚拟主机&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 80
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/example1&#34;
+    ServerName www.example.com
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/example2&#34;
+    ServerName www.example.org
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/example3&#34;
+    ServerName www.example.net
+&amp;amp;lt/VirtualHost&amp;gt;
+
+# IP-based
+&amp;amp;ltVirtualHost 172.20.30.50&amp;gt;
+    DocumentRoot &#34;/www/example4&#34;
+    ServerName www.example.edu
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.60&amp;gt;
+    DocumentRoot &#34;/www/example5&#34;
+    ServerName www.example.gov
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;一起使用-Virtual-host-和-mod-proxy&#34;&gt;&lt;a href=&#34;#一起使用-Virtual-host-和-mod-proxy&#34; class=&#34;headerlink&#34; title=&#34;一起使用 Virtual_host 和 mod_proxy&#34;&gt;&lt;/a&gt;一起使用 Virtual_host 和 mod_proxy&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltVirtualHost *:*&amp;gt;
+    ProxyPreserveHost On
+    ProxyPass        &#34;/&#34; &#34;http://192.168.111.2/&#34;
+    ProxyPassReverse &#34;/&#34; &#34;http://192.168.111.2/&#34;
+    ServerName hostname.example.com
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;使用-default-vhosts&#34;&gt;&lt;a href=&#34;#使用-default-vhosts&#34; class=&#34;headerlink&#34; title=&#34;使用_default_vhosts&#34;&gt;&lt;/a&gt;使用&lt;code&gt;_default_&lt;/code&gt;vhosts&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltVirtualHost _default_:80&amp;gt;
+    DocumentRoot &#34;/www/default80&#34;
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost _default_:*&amp;gt;
+    DocumentRoot &#34;/www/default&#34;
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;将基于名称的虚拟主机迁移到基于-IP-的虚拟主机&#34;&gt;&lt;a href=&#34;#将基于名称的虚拟主机迁移到基于-IP-的虚拟主机&#34; class=&#34;headerlink&#34; title=&#34;将基于名称的虚拟主机迁移到基于 IP 的虚拟主机&#34;&gt;&lt;/a&gt;将基于名称的虚拟主机迁移到基于 IP 的虚拟主机&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Listen 80
+ServerName www.example.com
+DocumentRoot &#34;/www/example1&#34;
+
+&amp;amp;ltVirtualHost 172.20.30.40 172.20.30.50&amp;gt;
+    DocumentRoot &#34;/www/example2&#34;
+    ServerName www.example.org
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/example3&#34;
+    ServerName www.example.net
+    ServerAlias *.example.net
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;使用-ServerPath-指令&#34;&gt;&lt;a href=&#34;#使用-ServerPath-指令&#34; class=&#34;headerlink&#34; title=&#34;使用 ServerPath 指令&#34;&gt;&lt;/a&gt;使用 ServerPath 指令&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    # primary vhost
+    DocumentRoot &#34;/www/subdomain&#34;
+    RewriteEngine On
+    RewriteRule &#34;.&#34; &#34;/www/subdomain/index.html&#34;
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/subdomain/sub1&#34;
+    ServerName www.sub1.domain.tld
+    ServerPath &#34;/sub1/&#34;
+    RewriteEngine On
+    RewriteRule &#34;^(/sub1/.*)&#34; &#34;/www/subdomain$1&#34;
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;
+
+&amp;amp;ltVirtualHost 172.20.30.40&amp;gt;
+    DocumentRoot &#34;/www/subdomain/sub2&#34;
+    ServerName www.sub2.domain.tld
+    ServerPath &#34;/sub2/&#34;
+    RewriteEngine On
+    RewriteRule &#34;^(/sub2/.*)&#34; &#34;/www/subdomain$1&#34;
+    # ...
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;条件判断容器&#34;&gt;&lt;a href=&#34;#条件判断容器&#34; class=&#34;headerlink&#34; title=&#34;条件判断容器&#34;&gt;&lt;/a&gt;条件判断容器&lt;/h3&gt;&lt;h4 id=&#34;If&#34;&gt;&lt;a href=&#34;#If&#34; class=&#34;headerlink&#34; title=&#34;If&#34;&gt;&lt;/a&gt;If&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltIf &#34;!(%{HTTP_REFERER} -strmatch &#39;http://www.example.com/*&#39;)&#34;&amp;gt;
+    Require all denied
+&amp;amp;lt/If&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;If&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;条件满足则执行内部语句&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;!(%{HTTP_REFERER} -strmatch &#39;http://www.example.com/*&#39;)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;条件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;IfDefine&#34;&gt;&lt;a href=&#34;#IfDefine&#34; class=&#34;headerlink&#34; title=&#34;IfDefine&#34;&gt;&lt;/a&gt;IfDefine&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltIfDefine ClosedForNow&amp;gt;
+    Redirect / http://otherserver.example.com/
+&amp;amp;lt/IfDefine&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IfDefine&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;若使用&lt;code&gt;httpd -D ClosedForNow&lt;/code&gt;指令执行的操作就会执行里面的内容（可镶嵌）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ClosedForNow&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用&lt;code&gt;httpd -D ClosedForNow&lt;/code&gt;指令执行，前面加！表示相反&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Redirect&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;跳转到另一站点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;IfModule&#34;&gt;&lt;a href=&#34;#IfModule&#34; class=&#34;headerlink&#34; title=&#34;IfModule&#34;&gt;&lt;/a&gt;IfModule&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltIfModule mod_mime_magic.c&amp;gt;
+    MimeMagicFile conf/magic
+&amp;amp;lt/IfModule&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IfModule&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;若使用了&lt;code&gt;mod_mime_magic&lt;/code&gt;模块就执行里面内容（可镶嵌）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;mod_mime_magic.c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;模块名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;MimeMagicFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;执行的指令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;IfVersion&#34;&gt;&lt;a href=&#34;#IfVersion&#34; class=&#34;headerlink&#34; title=&#34;IfVersion&#34;&gt;&lt;/a&gt;IfVersion&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltIfVersion &amp;gt;= 2.1&amp;gt;
+    # this happens only in versions greater or
+    # equal 2.1.0.
+&amp;amp;lt/IfVersion&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IfVersion&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;版本满足就会执行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;….&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;网站空间容器&#34;&gt;&lt;a href=&#34;#网站空间容器&#34; class=&#34;headerlink&#34; title=&#34;网站空间容器&#34;&gt;&lt;/a&gt;网站空间容器&lt;/h3&gt;&lt;h4 id=&#34;Location&#34;&gt;&lt;a href=&#34;#Location&#34; class=&#34;headerlink&#34; title=&#34;Location&#34;&gt;&lt;/a&gt;Location&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltLocation &#34;/status&#34;&amp;gt;
+  SetHandler server-status
+  Require host example.com
+&amp;amp;lt/Location&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Location&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Location 容器内定义的指令仅对特定的 URL 有效&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/status&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将特定URL映射到&lt;code&gt;mod_status&lt;/code&gt;提供的内部&lt;code&gt;Apache HTTP Server&lt;/code&gt;处理程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;Proxy容器&#34;&gt;&lt;a href=&#34;#Proxy容器&#34; class=&#34;headerlink&#34; title=&#34;Proxy容器&#34;&gt;&lt;/a&gt;Proxy容器&lt;/h3&gt;&lt;h4 id=&#34;Proxy&#34;&gt;&lt;a href=&#34;#Proxy&#34; class=&#34;headerlink&#34; title=&#34;Proxy&#34;&gt;&lt;/a&gt;Proxy&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltProxy &#34;http://example.com/foo/*&#34;&amp;gt;
+  SetOutputFilter INCLUDES
+&amp;amp;lt/Proxy&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;更灵活的匹配容器&#34;&gt;&lt;a href=&#34;#更灵活的匹配容器&#34; class=&#34;headerlink&#34; title=&#34;更灵活的匹配容器&#34;&gt;&lt;/a&gt;更灵活的匹配容器&lt;/h3&gt;&lt;h4 id=&#34;DirectoryMatch&#34;&gt;&lt;a href=&#34;#DirectoryMatch&#34; class=&#34;headerlink&#34; title=&#34;DirectoryMatch&#34;&gt;&lt;/a&gt;DirectoryMatch&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectoryMatch &#34;^/www/(.+/)?[0-9]{3}/&#34;&amp;gt;
+    # ...
+&amp;amp;lt/DirectoryMatch&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;FilesMatch&#34;&gt;&lt;a href=&#34;#FilesMatch&#34; class=&#34;headerlink&#34; title=&#34;FilesMatch&#34;&gt;&lt;/a&gt;FilesMatch&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltFilesMatch &#34;.+\.(gif|jpe?g|png)$&#34;&amp;gt;
+    # ...
+&amp;amp;lt/FilesMatch&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;LocationMatch&#34;&gt;&lt;a href=&#34;#LocationMatch&#34; class=&#34;headerlink&#34; title=&#34;LocationMatch&#34;&gt;&lt;/a&gt;LocationMatch&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltLocationMatch &#34;^/combined/(?&amp;amp;ltsitename&amp;gt;[^/]+)&#34;&amp;gt;
+    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
+&amp;amp;lt/LocationMatch&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ProxyMatch&#34;&gt;&lt;a href=&#34;#ProxyMatch&#34; class=&#34;headerlink&#34; title=&#34;ProxyMatch&#34;&gt;&lt;/a&gt;ProxyMatch&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltProxyMatch &#34;^http://(?&amp;amp;ltsitename&amp;gt;[^/]+)&#34;&amp;gt;
+    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
+&amp;amp;lt/ProxyMatch&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;日志模块&#34;&gt;&lt;a href=&#34;#日志模块&#34; class=&#34;headerlink&#34; title=&#34;日志模块&#34;&gt;&lt;/a&gt;日志模块&lt;/h3&gt;&lt;h4 id=&#34;通用日志格式&#34;&gt;&lt;a href=&#34;#通用日志格式&#34; class=&#34;headerlink&#34; title=&#34;通用日志格式&#34;&gt;&lt;/a&gt;通用日志格式&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;LogFormat &#34;%h %l %u %t \&#34;%r\&#34; %&amp;gt;s %b&#34; common
+CustomLog logs/access_log.log common&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;组合日志格式&#34;&gt;&lt;a href=&#34;#组合日志格式&#34; class=&#34;headerlink&#34; title=&#34;组合日志格式&#34;&gt;&lt;/a&gt;组合日志格式&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;LogFormat &#34;%h %l %u %t \&#34;%r\&#34; %&amp;gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-agent}i\&#34;&#34; combined
+CustomLog log/access_log.log combined&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;%h&lt;/code&gt;是远程主机&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%l&lt;/code&gt;是由identd确定的用户的身份&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%u&lt;/code&gt;是HTTP身份验证确定的用户名&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%t&lt;/code&gt;是服务器处理完请求的时间&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%r&lt;/code&gt;是来自客户端的请求行GET、HTTP&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%&amp;gt; s&lt;/code&gt;是从服务器发送到客户端的状态代码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%b&lt;/code&gt;是客户端响应的大小(以字节为单位)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&#34;%{Referer}i&lt;/code&gt;是链接到此URL的页面&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%{User-Agent}i&lt;/code&gt; 是客户浏览器提供的浏览器识别信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;LogFormat &#34;%400,501{User-agent}i&#34; browserlog
+LogFormat &#34;%!200,304,302{Referer}i&#34; refererlog
+#前面的状态码是用来判断的&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ErrorLog&lt;/code&gt; “xxx”&lt;/td&gt;
+&lt;td&gt;定位服务器错误日志的位置，默认使用相对路径&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LogLevel warn&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;日志级别&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ErrorLogFormat&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置错误日志的格式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CustomLog logs/access_log common&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;创建和格式化日志文件&lt;code&gt;common&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LogFormat &#34;%h %l %u %t &#34;%r&#34; %&amp;gt;s %b &#34;%{Referer}i&#34; &#34;%{User-agent}i&#34;&#34; common&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;common&lt;/code&gt;为用户日志别名，中间为具体格式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TransferLog &#34;logs/host.example.com-access_log&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;创建日志文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;附加的配置文件&#34;&gt;&lt;a href=&#34;#附加的配置文件&#34; class=&#34;headerlink&#34; title=&#34;附加的配置文件&#34;&gt;&lt;/a&gt;附加的配置文件&lt;/h2&gt;&lt;h3 id=&#34;环境变量&#34;&gt;&lt;a href=&#34;#环境变量&#34; class=&#34;headerlink&#34; title=&#34;环境变量&#34;&gt;&lt;/a&gt;环境变量&lt;/h3&gt;&lt;h4 id=&#34;设置环境变量&#34;&gt;&lt;a href=&#34;#设置环境变量&#34; class=&#34;headerlink&#34; title=&#34;设置环境变量&#34;&gt;&lt;/a&gt;设置环境变量&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;unique_id_module&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;为每个请求提供一个具有唯一标识符的环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PassEnv LD_LIBRARY_PATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从 shell 传递环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetEnv SPECIAL_PATH /foo/bin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UnsetEnv LD_LIBRARY_PATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从环境中删除变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetEnvIf Request_URI &#34;\.(.*)$&#34; EXTENSION=$1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;根据请求的属性设置环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetEnvIfExpr expr [!]env-variable[=value] [[!]env-variable[=value]] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BrowserMatch Robot is_a_robot &lt;/code&gt;&amp;amp;ltbr&amp;gt;&lt;code&gt;SetEnvIf User-Agent Robot is_a_robot&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;以 HTTP 用户代理为条件设置环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetEnvIfNoCase&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;根据请求的属性设置环境变量而不考虑大小写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;使用环境变量&#34;&gt;&lt;a href=&#34;#使用环境变量&#34; class=&#34;headerlink&#34; title=&#34;使用环境变量&#34;&gt;&lt;/a&gt;使用环境变量&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require all granted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CustomLog&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置日志文件的文件名和格式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Allow&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;控制哪些主机可以访问服务器的某个区域&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Deny&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;控制哪些主机被拒绝访问服务器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ExtFilterDefine&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义外部过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`Header [condition] add&lt;/td&gt;
+&lt;td&gt;append&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Header set Content-Type &#34;text/plain&#34; &#34;expr=-z %{CONTENT_TYPE}&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteCond TestString CondPattern [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写发生的条件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteRule Pattern Substitution [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写引擎的规则&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;缓存指南&#34;&gt;&lt;a href=&#34;#缓存指南&#34; class=&#34;headerlink&#34; title=&#34;缓存指南&#34;&gt;&lt;/a&gt;缓存指南&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;Sample httpd.conf
+#
+# Sample Cache Configuration
+#
+LoadModule cache_module modules/mod_cache.so
+&amp;amp;ltIfModule mod_cache.c&amp;gt;
+    LoadModule cache_disk_module modules/mod_cache_disk.so
+    &amp;amp;ltIfModule mod_cache_disk.c&amp;gt;
+        CacheRoot &#34;c:/cacheroot&#34;
+        CacheEnable disk  &#34;/&#34;
+        CacheDirLevels 5
+        CacheDirLength 3
+    &amp;amp;lt/IfModule&amp;gt;
+
+    # When acting as a proxy, don&#39;t cache the list of security updates
+    CacheDisable &#34;http://security.update.server/update-list/&#34;
+&amp;amp;lt/IfModule&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheRoot&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;存放缓存文件的根目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheDirLength&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子目录名称中的字符数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheDirLevels&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;缓存中子目录的级别数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheMaxFileSize&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;要放置在缓存中的文档的最大大小（以字节为单位）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheReadSize&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在向下游发送数据之前要读取和缓存的文档的最小大小（以字节为单位）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheReadTime&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在向下游发送数据之前读取时应经过的最短时间（以毫秒为单位）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheEnable cache_type [url-string]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用指定的存储管理器启用指定 URL 的缓存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheSocache type[:args]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;要使用的共享对象缓存实现&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CacheDisable&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;禁用指定 URL 的缓存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;内容协商&#34;&gt;&lt;a href=&#34;#内容协商&#34; class=&#34;headerlink&#34; title=&#34;内容协商&#34;&gt;&lt;/a&gt;内容协商&lt;/h3&gt;&lt;h4 id=&#34;使用类型映射文件&#34;&gt;&lt;a href=&#34;#使用类型映射文件&#34; class=&#34;headerlink&#34; title=&#34;使用类型映射文件&#34;&gt;&lt;/a&gt;使用类型映射文件&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;AddHandler type-map .var&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类型映射文件应与其描述的资源具有相同的名称，后跟扩展名&lt;code&gt;.var&lt;/code&gt;.在下面显示的示例中，资源名为&lt;code&gt;foo&lt;/code&gt;，因此类型映射文件名为&lt;code&gt;foo.var&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;URI: foo
+
+URI: foo.en.html
+Content-type: text/html
+Content-language: en
+
+URI: foo.fr.de.html
+Content-type: text/html;charset=iso-8859-2
+Content-language: fr, de&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;URI: foo
+
+URI: foo.jpeg
+Content-type: image/jpeg; qs=0.8
+
+URI: foo.gif
+Content-type: image/gif; qs=0.5
+
+URI: foo.txt
+Content-type: text/plain; qs=0.01&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;URI: document.html
+
+Content-language: en
+Content-type: text/html
+URI: document.html.en
+
+Content-language: fr
+Content-type: text/html
+URI: document.html.fr
+
+Content-language: de
+Content-type: text/html
+URI: document.html.de&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这三段代码都是&lt;code&gt;type-map&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;URI: document.html&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;资源名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Content-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;资源类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Content-language&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;资源语言&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;qs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;权重&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AddHandler type-map .var&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与名为&lt;code&gt;type-map&lt;/code&gt;的处理程序关联&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.var&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;相当&lt;code&gt;*&lt;/code&gt;的匹配值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;Multiviews&#34;&gt;&lt;a href=&#34;#Multiviews&#34; class=&#34;headerlink&#34; title=&#34;Multiviews&#34;&gt;&lt;/a&gt;Multiviews&lt;/h4&gt;&lt;p&gt;如果服务器收到&lt;code&gt;/some/dir/foo&lt;/code&gt;的请求，如果&lt;code&gt;/some/dir&lt;/code&gt;启用了MultiViews，并且&lt;code&gt;/some/dir/foo&lt;/code&gt;不存在，那么服务器会读取寻找的目录名为&lt;code&gt;foo.*&lt;/code&gt;的文件&lt;/p&gt;
+&lt;h3 id=&#34;从-URL-映射到文件系统&#34;&gt;&lt;a href=&#34;#从-URL-映射到文件系统&#34; class=&#34;headerlink&#34; title=&#34;从 URL 映射到文件系统&#34;&gt;&lt;/a&gt;从 URL 映射到文件系统&lt;/h3&gt;&lt;p&gt;Apache HTTP Server 使用请求的 URL 来确定提供文件的文件系统位置&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;ProxyPass         &#34;/mirror/foo/&#34; &#34;http://backend.example.com/&#34;
+ProxyPassReverse  &#34;/mirror/foo/&#34; &#34;http://backend.example.com/&#34;
+ProxyPassReverseCookieDomain  &#34;backend.example.com&#34;  &#34;public.example.com&#34;
+ProxyPassReverseCookiePath  &#34;/&#34;  &#34;/mirror/foo/&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;`Alias [URL-path] file-path&lt;/td&gt;
+&lt;td&gt;directory-path`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Alias &#34;/docs&#34; &#34;/var/web&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;网址 &lt;code&gt;http://www.example.com/docs/dir/file.html&lt;/code&gt; 将从&lt;code&gt;/var/web/dir/file.html&lt;/code&gt;提供&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`AliasMatch regex file-path&lt;/td&gt;
+&lt;td&gt;directory-path`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AliasMatch &#34;^/icons(/$)(.*)&#34; &#34;/usr/local/apache/icons$1$2&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`CheckSpelling on&lt;/td&gt;
+&lt;td&gt;off`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DirectoryIndex disabled local-url [local-url] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;客户端请求目录时要查找的资源列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DocumentRoot &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ErrorDocument 404 /errors/bad_urls.php&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;发生错误时服务器将返回给客户端的内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Options&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPass &#34;/mirror/foo/&#34; &#34;http://backend.example.com/&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将远程服务器映射到本地服务器 URL 空间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPassReverse [path] url [interpolate]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;调整从反向代理服务器发送的 HTTP 响应标头中的 URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPassReverseCookieDomain internal-domain public-domain [interpolate]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从反向代理服务器调整 Set-Cookie 标头中的域字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPassReverseCookiePath internal-path public-path [interpolate]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;调整来自反向代理服务器的 Set-Cookie 标头中的 Path 字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Redirect [status] [URL-path] URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;发送外部重定向请求客户端获取不同的 URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Redirect 303 &#34;/three&#34; &#34;http://example.com/other&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RedirectMatch [status] regex URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;根据当前 URL 的正则表达式匹配发送外部重定向&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteCond TestString CondPattern [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写发生的条件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteRule Pattern Substitution [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写引擎的规则&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ScriptAlias [URL-path] file-path&lt;/td&gt;
+&lt;td&gt;directory-path`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ScriptAliasMatch regex file-path&lt;/td&gt;
+&lt;td&gt;directory-path`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UserDir directory-filename [directory-filename] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;用户特定目录的位置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;全局配置&#34;&gt;&lt;a href=&#34;#全局配置&#34; class=&#34;headerlink&#34; title=&#34;全局配置&#34;&gt;&lt;/a&gt;全局配置&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;`ServerName [scheme://]domain-name&lt;/td&gt;
+&lt;td&gt;ip-address[:port]`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ServerAdmin email-address&lt;/td&gt;
+&lt;td&gt;URL`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ServerSignature On&lt;/td&gt;
+&lt;td&gt;Off&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ServerTokens Major&lt;/td&gt;
+&lt;td&gt;Minor&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`UseCanonicalName On&lt;/td&gt;
+&lt;td&gt;Off&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`UseCanonicalPhysicalPort On&lt;/td&gt;
+&lt;td&gt;Off`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CoreDumpDirectory directory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Apache HTTP Server 在转储核心之前尝试切换的目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DocumentRoot directory-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;构成 Web 上可见的主文档树的目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ErrorLog file-path&lt;/td&gt;
+&lt;td&gt;syslog[:[facility]`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`Mutex mechanism [default&lt;/td&gt;
+&lt;td&gt;mutex-name] … [OmitPID]`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PidFile filename&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;服务器记录守护进程进程ID的文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ScoreBoardFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;用于存储子进程的协调数据的文件的位置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerRoot directory-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;服务器安装的基本目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LimitRequestBody bytes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;限制客户端发送的 HTTP 请求正文的总大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LimitRequestFields number&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;限制将从客户端接受的 HTTP 请求头字段的数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LimitRequestFieldSize bytes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;限制客户端允许的 HTTP 请求头的大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LimitRequestLine bytes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;限制将从客户端接受的 HTTP 请求行的大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`RLimitCPU seconds&lt;/td&gt;
+&lt;td&gt;max [seconds&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`RLimitMEM bytes&lt;/td&gt;
+&lt;td&gt;max [bytes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`RLimitNPROC number&lt;/td&gt;
+&lt;td&gt;max [number&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ThreadStackSize size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;处理客户端连接的线程使用的堆栈大小（以字节为单位）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;SSL-TLS-加密&#34;&gt;&lt;a href=&#34;#SSL-TLS-加密&#34; class=&#34;headerlink&#34; title=&#34;SSL/TLS 加密&#34;&gt;&lt;/a&gt;SSL/TLS 加密&lt;/h3&gt;&lt;p&gt;an example&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;LoadModule ssl_module modules/mod_ssl.so
+
+Listen 443
+&amp;amp;ltVirtualHost *:443&amp;gt;
+    ServerName www.example.com
+    SSLEngine on
+    SSLCertificateFile &#34;/path/to/www.example.com.cert&#34;
+    SSLCertificateKeyFile &#34;/path/to/www.example.com.key&#34;
+&amp;amp;lt/VirtualHost&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性值&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLEngine on&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;SSL 引擎操作开关&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`SSLCertificateFile file-path&lt;/td&gt;
+&lt;td&gt;certid`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`SSLCertificateKeyFile file-path&lt;/td&gt;
+&lt;td&gt;keyid`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLCipherSuite [protocol] cipher-spec&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;密码套件可用于 SSL 握手中的协商&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLCipherSuite RC4-SHA:AES128-SHA:HIGH:!aNULL:!MD5&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`SSLHonorCipherOrder on&lt;/td&gt;
+&lt;td&gt;off`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLUseStapling off&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在 TLS 握手中启用 OCSP 响应的装订&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLStaplingCache &#34;shmcb:logs/ssl_stapling(32768)&#34;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置 OCSP 装订缓存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLVerifyClient level&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;客户端证书验证类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLVerifyDepth number&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;客户端证书验证中 CA 证书的最大深度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLCACertificateFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;用于客户端身份验证的串联 PEM 编码 CA 证书文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`SSLOptions [+&lt;/td&gt;
+&lt;td&gt;-]option …`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SSLRequire expression&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;仅当任意复杂的布尔表达式为真时才允许访问&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;URL重写&#34;&gt;&lt;a href=&#34;#URL重写&#34; class=&#34;headerlink&#34; title=&#34;URL重写&#34;&gt;&lt;/a&gt;URL重写&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteBase URL-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置每个目录重写的基本 URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteCond TestString CondPattern [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写发生的条件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RewriteRule Pattern Substitution [flags]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义重写引擎的规则&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RewriteEngine on|off&lt;/td&gt;
+&lt;td&gt;启用或禁用运行时重写引擎&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RewriteMap &lt;em&gt;MapName&lt;/em&gt; &lt;em&gt;MapType&lt;/em&gt;:MapSource [MapTypeOptions]&lt;/td&gt;
+&lt;td&gt;定义键查找的映射函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RewriteOptions Options&lt;/td&gt;
+&lt;td&gt;为重写引擎设置一些特殊选项&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;认证和授权&#34;&gt;&lt;a href=&#34;#认证和授权&#34; class=&#34;headerlink&#34; title=&#34;认证和授权&#34;&gt;&lt;/a&gt;认证和授权&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性值&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AllowOverride AuthConfig&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;.htaccess 文件中允许的指令类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`AuthType None&lt;/td&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthBasicProvider provider-name [provider-name] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置此位置的身份验证提供程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthDigestProvider provider-name [provider-name] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置此位置的身份验证提供程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require [not] entity-name [entity-name] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;测试经过身份验证的用户是否由授权提供者授权&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthName auth-domain&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;用于 HTTP 身份验证的授权领域&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthUserFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置包含用于身份验证的用户和密码列表的文本文件的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthDBMUserFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置包含用于身份验证的用户和密码列表的数据库文件的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthGroupFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置包含授权用户组列表的文本文件的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`AuthLDAPURL url [NONE&lt;/td&gt;
+&lt;td&gt;SSL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AuthGroupFile file-path&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置包含授权用户组列表的文本文件的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require valid-user&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;所有有效用户都可以访问该资源&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require user userid [userid] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只有指定用户才能访问资源&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Require group group-name [group-name] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只有命名组中的用户才能访问资源&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;&amp;amp;ltRequireAll&amp;gt; ... &amp;amp;lt/RequireAll&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;附上一组授权指令，其中没有一个必须失败，并且至少一个必须成功才能使封闭指令成功&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;&amp;amp;ltRequireAny&amp;gt; ... &amp;amp;lt/RequireAny&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;附上一组授权指令，其中一个必须成功才能使封闭指令成功&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;&amp;amp;ltRequireNone&amp;gt; ... &amp;amp;lt/RequireNone&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;包含一组授权指令，其中没有一个必须成功才能使封闭指令不失败&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;如何工作&#34;&gt;&lt;a href=&#34;#如何工作&#34; class=&#34;headerlink&#34; title=&#34;如何工作&#34;&gt;&lt;/a&gt;如何工作&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;htpasswd &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; /usr/local/apache/passwd/passwords rbowen
+&lt;span class=&#34;token comment&#34;&gt;#创建文件&lt;/span&gt;
+
+GroupName: rbowen dpitts sungo rshersey
+&lt;span class=&#34;token comment&#34;&gt;#创建一个将组名与该组中的用户列表关联的组文件&lt;/span&gt;
+
+htpasswd /usr/local/apache/passwd/passwords dpitts
+&lt;span class=&#34;token comment&#34;&gt;#将用户添加到您已存在的密码文件&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;简单示例&#34;&gt;&lt;a href=&#34;#简单示例&#34; class=&#34;headerlink&#34; title=&#34;简单示例&#34;&gt;&lt;/a&gt;简单示例&lt;/h4&gt;&lt;p&gt;能放在&lt;code&gt;.htaccess&lt;/code&gt;中或者&lt;code&gt;Directory&lt;/code&gt;中&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;AuthType Basic
+AuthName &#34;Restricted Files&#34;
+# (Following line optional)
+AuthBasicProvider file
+AuthUserFile &#34;/usr/local/apache/passwd/passwords&#34;
+Require user rbowen&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;让不止一个人进来&#34;&gt;&lt;a href=&#34;#让不止一个人进来&#34; class=&#34;headerlink&#34; title=&#34;让不止一个人进来&#34;&gt;&lt;/a&gt;让不止一个人进来&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;AuthType Basic
+AuthName &#34;By Invitation Only&#34;
+# Optional line:
+AuthBasicProvider file
+AuthUserFile &#34;/usr/local/apache/passwd/passwords&#34;
+AuthGroupFile &#34;/usr/local/apache/passwd/groups&#34;
+Require group GroupName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;备用密码存储&#34;&gt;&lt;a href=&#34;#备用密码存储&#34; class=&#34;headerlink&#34; title=&#34;备用密码存储&#34;&gt;&lt;/a&gt;备用密码存储&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectory &#34;/www/docs/private&#34;&amp;gt;
+    AuthName &#34;Private&#34;
+    AuthType Basic
+    AuthBasicProvider dbm
+    AuthDBMUserFile &#34;/www/passwords/passwd.dbm&#34;
+    Require valid-user
+&amp;amp;lt/Directory&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;使用多个提供商&#34;&gt;&lt;a href=&#34;#使用多个提供商&#34; class=&#34;headerlink&#34; title=&#34;使用多个提供商&#34;&gt;&lt;/a&gt;使用多个提供商&lt;/h4&gt;&lt;p&gt;使用文件组授权和 LDAP 组授权&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectory &#34;/www/docs/private&#34;&amp;gt;
+    AuthName &#34;Private&#34;
+    AuthType Basic
+    AuthBasicProvider file
+    AuthUserFile &#34;/usr/local/apache/passwd/passwords&#34;
+    AuthLDAPURL ldap://ldaphost/o=yourorg
+    AuthGroupFile &#34;/usr/local/apache/passwd/groups&#34;
+    Require group GroupName
+    Require ldap-group cn=mygroup,o=yourorg
+&amp;amp;lt/Directory&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;CGI与动态内容&#34;&gt;&lt;a href=&#34;#CGI与动态内容&#34; class=&#34;headerlink&#34; title=&#34;CGI与动态内容&#34;&gt;&lt;/a&gt;CGI与动态内容&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AddHandler cgi-script .cgi&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将文件扩展名映射到指定的处理程序（指定拓展名.cgi为CGI文件）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Options ExecCGI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`ScriptAlias [URL-path] file-path&lt;/td&gt;
+&lt;td&gt;directory-path`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LoadModule cgi_module modules/mod_cgi.so&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置 Apache 以允许 CGI 执行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`SetHandler handler-name&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;要允许CGI程序执行用户目录中结束的任何文件。&lt;code&gt;.cgi&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectory &#34;/home/*/public_html&#34;&amp;gt;
+    Options +ExecCGI
+    AddHandler cgi-script .cgi
+&amp;amp;lt/Directory&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果您希望指定用户目录的子目录，其中所有内容都将被视为 CGI 程序。cgi-bin`&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltDirectory &#34;/home/*/public_html/cgi-bin&#34;&amp;gt;
+    Options ExecCGI
+    SetHandler cgi-script
+&amp;amp;lt/Directory&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;编写CGI&#34;&gt;&lt;a href=&#34;#编写CGI&#34; class=&#34;headerlink&#34; title=&#34;编写CGI&#34;&gt;&lt;/a&gt;编写CGI&lt;/h4&gt;&lt;p&gt;保存到名为&lt;code&gt;first.pl&lt;/code&gt;的文件中，并将其放在&lt;code&gt;cgi-bin&lt;/code&gt;目录中&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;#!/usr/bin/perl
+print &#34;Content-type: text/html\n\n&#34;;
+print &#34;Hello, World.&#34;;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览器输入URL地址&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;http://www.example.com/cgi-bin/first.pl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;反向代理&#34;&gt;&lt;a href=&#34;#反向代理&#34; class=&#34;headerlink&#34; title=&#34;反向代理&#34;&gt;&lt;/a&gt;反向代理&lt;/h3&gt;&lt;h4 id=&#34;简单的反向代理&#34;&gt;&lt;a href=&#34;#简单的反向代理&#34; class=&#34;headerlink&#34; title=&#34;简单的反向代理&#34;&gt;&lt;/a&gt;简单的反向代理&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;ProxyPass &#34;/images&#34;  &#34;http://www.example.com/&#34;
+ProxyPassReverse &#34;/images&#34;  &#34;http://www.example.com/&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;任何以&lt;code&gt;/images&lt;/code&gt;路径开头的请求都被代理到指定的后端，否则它将在本地处理&lt;/p&gt;
+&lt;h4 id=&#34;集群和均衡器&#34;&gt;&lt;a href=&#34;#集群和均衡器&#34; class=&#34;headerlink&#34; title=&#34;集群和均衡器&#34;&gt;&lt;/a&gt;集群和均衡器&lt;/h4&gt;&lt;p&gt;负载均衡和故障转移&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltProxy balancer://myset&amp;gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080
+    ProxySet lbmethod=bytraffic
+&amp;amp;lt/Proxy&amp;gt;
+
+ProxyPass &#34;/images/&#34;  &#34;balancer://myset/&#34;
+ProxyPassReverse &#34;/images/&#34;  &#34;balancer://myset/&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;均衡器和均衡器成员配置&#34;&gt;&lt;a href=&#34;#均衡器和均衡器成员配置&#34; class=&#34;headerlink&#34; title=&#34;均衡器和均衡器成员配置&#34;&gt;&lt;/a&gt;均衡器和均衡器成员配置&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltProxy balancer://myset&amp;gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
+    ProxySet lbmethod=bytraffic
+&amp;amp;lt/Proxy&amp;gt;
+
+ProxyPass &#34;/images&#34;  &#34;balancer://myset/&#34;
+ProxyPassReverse &#34;/images&#34;  &#34;balancer://myset/&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;故障转移&#34;&gt;&lt;a href=&#34;#故障转移&#34; class=&#34;headerlink&#34; title=&#34;故障转移&#34;&gt;&lt;/a&gt;故障转移&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltProxy balancer://myset&amp;gt;
+    BalancerMember http://www2.example.com:8080
+    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
+    BalancerMember http://spare1.example.com:8080 status=+R
+    BalancerMember http://spare2.example.com:8080 status=+R
+    BalancerMember http://hstandby.example.com:8080 status=+H
+    BalancerMember http://bkup1.example.com:8080 lbset=1
+    BalancerMember http://bkup2.example.com:8080 lbset=1
+    ProxySet lbmethod=byrequests
+&amp;amp;lt/Proxy&amp;gt;
+
+ProxyPass &#34;/images/&#34;  &#34;balancer://myset/&#34;
+ProxyPassReverse &#34;/images/&#34;  &#34;balancer://myset/&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;均衡器启用&#34;&gt;&lt;a href=&#34;#均衡器启用&#34; class=&#34;headerlink&#34; title=&#34;均衡器启用&#34;&gt;&lt;/a&gt;均衡器启用&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-config&#34; data-language=&#34;config&#34;&gt;&lt;code class=&#34;language-config&#34;&gt;&amp;amp;ltLocation &#34;/balancer-manager&#34;&amp;gt;
+    SetHandler balancer-manager
+    Require host localhost
+&amp;amp;lt/Location&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性值&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;`ProxyPass [path] !&lt;/td&gt;
+&lt;td&gt;url [key=value [key=value …]] [nocanon] [interpolate] [noquery]`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BalancerMember [balancerurl] url [key=value [key=value ...]]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;向负载均衡组添加成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxyPassReverse [path] url [interpolate]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;调整从反向代理服务器发送的 HTTP 响应标头中的 URL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BalancerMember [balancerurl] url [key=value [key=value ...]]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;向负载均衡组添加成员&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ProxySet url key=value [key=value ...]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置各种代理平衡器或成员参数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;htaccess文件&#34;&gt;&lt;a href=&#34;#htaccess文件&#34; class=&#34;headerlink&#34; title=&#34;.htaccess文件&#34;&gt;&lt;/a&gt;.htaccess文件&lt;/h3&gt;&lt;p&gt;和&lt;code&gt;httpd.conf&lt;/code&gt;的语法一样，作用于当前目录，一般用来设置单个功能&lt;/p&gt;
+&lt;h3 id=&#34;处理器&#34;&gt;&lt;a href=&#34;#处理器&#34; class=&#34;headerlink&#34; title=&#34;处理器&#34;&gt;&lt;/a&gt;处理器&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性名&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Action action-type cgi-script [virtual]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;为特定处理程序或内容类型激活 CGI 脚本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AddHandler handler-name extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将文件扩展名映射到指定的处理程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RemoveHandler extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删除一组文件扩展名的任何处理程序关联&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetHandler handler-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;过滤器&#34;&gt;&lt;a href=&#34;#过滤器&#34; class=&#34;headerlink&#34; title=&#34;过滤器&#34;&gt;&lt;/a&gt;过滤器&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;属性值&lt;/th&gt;
+&lt;th&gt;意义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FilterChain [+=-@!]filter-name ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置过滤器链&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FilterDeclare filter-name [type]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;声明一个智能过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FilterProtocol filter-name [provider-name] proto-flags&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;声明一个智能过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;FilterProvider filter-name provider-name expression&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;注册内容过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AddInputFilter filter[;filter...] extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将文件扩展名映射到将处理客户端请求的过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AddOutputFilter filter[;filter...] extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将文件扩展名映射到将处理来自服务器的响应的过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RemoveInputFilter extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删除一组文件扩展名的任何输入过滤器关联&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;RemoveOutputFilter extension [extension] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删除一组文件扩展名的任何输出过滤器关联&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ReflectorHeader inputheader [outputheader]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将输入标题反映到输出标题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ExtFilterDefine filtername parameters&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定义外部过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ExtFilterOptions option [option] ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置 &lt;code&gt;mod_ext_filter &lt;/code&gt;选项&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetInputFilter filter[;filter...]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置将处理客户端请求和 POST 输入的过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SetOutputFilter filter[;filter...]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置将处理来自服务器的响应的过滤器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;变量&#34;&gt;&lt;a href=&#34;#变量&#34; class=&#34;headerlink&#34; title=&#34;变量&#34;&gt;&lt;/a&gt;变量&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;HTTP变量&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_ACCEPT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_COOKIE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_FORWARDED&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_HOST&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_PROXY_CONNECTION&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_REFERER&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP_USER_AGENT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_METHOD&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;传入请求的 HTTP 方法（例如&lt;code&gt;GET&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_SCHEME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;该计划是请求URI的一部分&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_URI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;请求URI的路径部分&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DOCUMENT_URI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;和&lt;code&gt;REQUEST_URI&lt;/code&gt;一样&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_FILENAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果当时服务器已经确定了该路径，与请求匹配的文件或脚本的完整本地文件系统路径。否则，例如在虚拟主机上下文中使用时，与 &lt;code&gt;REQUEST_FILENAME REQUEST_URI &lt;/code&gt;相同的值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SCRIPT_FILENAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;和&lt;code&gt;REQUEST_FILENAME&lt;/code&gt;一样&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;LAST_MODIFIED&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果此时服务器已经确定该格式中文件上次修改的日期和时间，则参照该日期和时间进行引用。&lt;code&gt;20101231235959&lt;/code&gt; &lt;code&gt;LAST_MODIFIED&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SCRIPT_USER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;脚本所有者的用户名。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SCRIPT_GROUP&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;脚本组的组名。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PATH_INFO&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;尾随路径名称信息，请参阅&lt;code&gt;AcceptPathInfo&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;QUERY_STRING&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前请求的查询字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IS_SUBREQ&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果当前请求是次要请求&lt;code&gt;true&lt;/code&gt;，否则&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;THE_REQUEST&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;完整的请求行（例如”&lt;code&gt;GET /index.html HTTP/1.1&lt;/code&gt;“)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REMOTE_ADDR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;远程主机的 IP 地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REMOTE_PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;远程主机的端口（2.4.26 及以后）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REMOTE_HOST&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;远程主机的主机名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REMOTE_USER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;已验证用户的名称（在&lt;code&gt;&amp;amp;ltIF&amp;gt;&lt;/code&gt;不可用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REMOTE_IDENT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;mod_ident&lt;/code&gt; 设置的用户名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SERVER_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前的虚拟&lt;code&gt;ServerName&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SERVER_PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前vhost的服务器端口，请参阅&lt;code&gt;ServerName&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SERVER_ADMIN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前的虚拟&lt;code&gt;ServerAdmin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SERVER_PROTOCOL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;请求所使用的协议&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DOCUMENT_ROOT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前的虚拟&lt;code&gt;DocumentRoot&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;AUTH_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置（例如&lt;code&gt;AuthType basic&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTENT_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;响应的内容类型（在 &lt;code&gt;&amp;amp;ltIf&amp;gt;&lt;/code&gt; 间不可用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HANDLER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;创建响应的&lt;a href=&#34;http://httpd.apache.org/docs/2.4/handler.html&#34;&gt;处理程序&lt;/a&gt;的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTP2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果请求使用http/2&lt;code&gt;on&lt;/code&gt;，否则&lt;code&gt;off&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HTTPS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果请求使用https&lt;code&gt;on&lt;/code&gt;，否则&lt;code&gt;off&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IPV6&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;如果连接使用IPv6&lt;code&gt;on&lt;/code&gt;，否则&lt;code&gt;off&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_STATUS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;请求的 HTTP 错误状态（在&lt;code&gt;&amp;amp;ltIf&amp;gt;&lt;/code&gt;间不可用）)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;REQUEST_LOG_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;请求的错误日志ID（参见&lt;code&gt;ErrorLogFormat&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONN_LOG_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;连接的错误日志ID（参见&lt;code&gt;ErrorLogFormat&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONN_REMOTE_ADDR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;连接的同侪 IP 地址（参见模块）&lt;code&gt;mod_remoteip&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTEXT_PREFIX&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTEXT_DOCUMENT_ROOT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_YEAR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;本年度（例如&lt;code&gt;2010&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_MON&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当月（，…，&lt;code&gt;0112&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_DAY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;本月的当前日期（，…）&lt;code&gt;01&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_HOUR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前时间的小时部分（，…，&lt;code&gt;0023&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_MIN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前时间的分钟部分&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_SEC&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;当前时间的秒钟部分&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME_WDAY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;一周的一天（从周日开始）&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TIME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;格式中的日期和时间&lt;code&gt;20101231235959&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SERVER_SOFTWARE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;服务器版本字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;API_VERSION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;API 版本的日期（模块魔法数字）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;二进制变量&#34;&gt;&lt;a href=&#34;#二进制变量&#34; class=&#34;headerlink&#34; title=&#34;二进制变量&#34;&gt;&lt;/a&gt;二进制变量&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;名字&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;其他形式&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;==&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;=&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串均等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;!=&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串不平等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;amp;lt&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串少于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;amp;lt=&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串小于或等于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串大于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;&amp;gt;=&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串大于或等于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;=~&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串与常规表达方式匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;!~&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;字符串与常规表达不匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-eq&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;eq&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数平等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-ne&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;ne&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数不平等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-lt&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;lt&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数小于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-le&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;le&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数小于或相等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-gt&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;gt&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数大于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-ge&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;ge&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;整数大于或相等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;统一变量&#34;&gt;&lt;a href=&#34;#统一变量&#34; class=&#34;headerlink&#34; title=&#34;统一变量&#34;&gt;&lt;/a&gt;统一变量&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;名字&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-d&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。如果文件存在并且是目录，则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-e&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。如果存在文件（或目录和特殊文件），则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-f&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。如果文件存在并且是常规文件，则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-s&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。如果文件存在且不是空的，则正确&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-L&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。如果文件存在并且是符号链接，则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-h&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;参数被视为文件名。真实的，如果文件存在，是符号链接（与&lt;code&gt;-L&lt;/code&gt;相似)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-F&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果字符串是一个有效的文件，则可以通过该路径的所有服务器当前配置的访问控制进行访问。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-U&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果字符串是一个有效的URL，则可以通过该路径的所有服务器当前配置的访问控制进行访问。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-A&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;别名&lt;code&gt;-U&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-n&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果字符串不是空的，则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-z&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果字符串是空的，则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-T&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;如果字符串为空,””,””,”” 或 “”（不区分大小写），则为 False，否则为真&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;-R&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;与&lt;code&gt;%{REMOTE_ADDR} -ipmatch ...&lt;/code&gt;相同，但效率更高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;功能变量&#34;&gt;&lt;a href=&#34;#功能变量&#34; class=&#34;headerlink&#34; title=&#34;功能变量&#34;&gt;&lt;/a&gt;功能变量&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;名字&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;req&lt;/code&gt;,&lt;code&gt;http&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;获取 HTTP 请求标题；标头名称可以添加到 Vary 标头&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;req_novary&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;与 相同，但不会将标头名称添加到 Vary 标头中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;resp&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;获取 HTTP 响应头（大多数响应标题在&lt;code&gt;&amp;amp;ltIf&amp;gt;&lt;/code&gt;间尚未设置）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;reqenv&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;查找请求环境变量（作为快捷方式，也可用于访问变量）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;osenv&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;查找操作系统环境变量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;note&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;查找请求说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;env&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回第一个匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;tolower&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;将字符串转换为小写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;toupper&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;将字符串转换为大写&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;escape&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;在 %hex 编码中转义特殊字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;unescape&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Unescape %hex 编码的字符串，单独留下编码的斜杠；如果找到 %00，则返回空字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;base64&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;使用 base64 编码对字符串进行编码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;unbase64&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;解码base64编码的字符串，如果找到0x00则返回截断的字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;md5&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;使用 MD5 对字符串进行散列，然后使用十六进制编码对散列进行编码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;sha1&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;使用 SHA1 对字符串进行散列，然后使用十六进制编码对散列进行编码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;file&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;从文件中读取内容（包括行尾，如果存在）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;filemod&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回文件的最后修改时间（如果文件不存在或不是常规文件，则返回 0）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;code&gt;filesize&lt;/code&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;返回文件的大小（如果文件不存在或不是常规文件，则返回 0）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;模块&#34;&gt;&lt;a href=&#34;#模块&#34; class=&#34;headerlink&#34; title=&#34;模块&#34;&gt;&lt;/a&gt;模块&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/&#34;&gt;模块索引 - Apache HTTP 服务器 版本 2.4&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;核心与多处理模块-MPM&#34;&gt;&lt;a href=&#34;#核心与多处理模块-MPM&#34; class=&#34;headerlink&#34; title=&#34;核心与多处理模块(MPM)&#34;&gt;&lt;/a&gt;核心与多处理模块(MPM)&lt;/h4&gt;&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/core.html&#34;&gt;core&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;始终可用的核心 Apache HTTP Server 功能&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mpm_common.html&#34;&gt;mpm_common&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;由多个多处理模块 (MPM) 实现的一组指令&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/event.html&#34;&gt;event&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;MPM 的一种变体，其目标是仅为与活动处理工作者的连接消耗线程&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mpm_netware.html&#34;&gt;mpm_netware&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;实现专为 Novell NetWare 优化的线程 Web 服务器的多处理模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mpmt_os2.html&#34;&gt;mpmt_os2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 OS/2 的混合多进程、多线程 MPM&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/prefork.html&#34;&gt;prefork&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;实现一个非线程的、预分叉的 Web 服务器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mpm_winnt.html&#34;&gt;mpm_winnt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为 Windows NT 优化的多处理模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/worker.html&#34;&gt;worker&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;实现混合多线程多进程 Web 服务器的多处理模块&lt;/p&gt;
+&lt;h4 id=&#34;其他模块&#34;&gt;&lt;a href=&#34;#其他模块&#34; class=&#34;headerlink&#34; title=&#34;其他模块&#34;&gt;&lt;/a&gt;其他模块&lt;/h4&gt;&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_access_compat.html&#34;&gt;mod_access_compat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于主机（名称或 IP 地址）的组授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_actions.html&#34;&gt;mod_actions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;根据媒体类型或请求方法执行 CGI 脚本&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_alias.html&#34;&gt;mod_alias&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供在文档树中映射主机文件系统的不同部分和 URL 重定向&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_allowmethods.html&#34;&gt;mod_allowmethods&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;轻松限制可以在服务器上使用的 HTTP 方法&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_asis.html&#34;&gt;mod_asis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;发送包含自己的 HTTP 标头的文件&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_auth_basic.html&#34;&gt;mod_auth_basic&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基本 HTTP 身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_auth_digest.html&#34;&gt;mod_auth_digest&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用 MD5 摘要身份验证的用户身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_auth_form.html&#34;&gt;mod_auth_form&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;表单认证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_anon.html&#34;&gt;mod_authn_anon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;允许“匿名”用户访问经过身份验证的区域&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_core.html&#34;&gt;mod_authn_core&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;核心身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_dbd.html&#34;&gt;mod_authn_dbd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用 SQL 数据库进行用户身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_dbm.html&#34;&gt;mod_authn_dbm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用 DBM 文件进行用户身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_file.html&#34;&gt;mod_authn_file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用文本文件进行用户身份验证&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authn_socache.html&#34;&gt;mod_authn_socache&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;管理身份验证凭据缓存以减轻后端的负载&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authnz_fcgi.html&#34;&gt;mod_authnz_fcgi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;允许 FastCGI 授权器应用程序处理 Apache httpd 身份验证和授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html&#34;&gt;mod_authnz_ldap&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;允许使用 LDAP 目录来存储用于 HTTP 基本身份验证的数据库&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_core.html&#34;&gt;mod_authz_core&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;核心授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_dbd.html&#34;&gt;mod_authz_dbd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用 SQL 进行组授权和登录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_dbm.html&#34;&gt;mod_authz_dbm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用 DBM 文件的组授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_groupfile.html&#34;&gt;mod_authz_groupfile&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用纯文本文件的组授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_host.html&#34;&gt;mod_authz_host&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于主机（名称或 IP 地址）的组授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_owner.html&#34;&gt;mod_authz_owner&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于文件所有权的授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_user.html&#34;&gt;mod_authz_user&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用户授权&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_autoindex.html&#34;&gt;mod_autoindex&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;自动生成目录索引，类似于 Unix 命令或 Win32 shell commandlsdir&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_brotli.html&#34;&gt;mod_brotli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在将内容交付给客户端之前通过 Brotli 压缩内容&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_buffer.html&#34;&gt;mod_buffer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;支持请求缓冲&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cache.html&#34;&gt;mod_cache&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;符合 RFC 2616 的 HTTP 缓存过滤器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cache_disk.html&#34;&gt;mod_cache_disk&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 HTTP 缓存过滤器的基于磁盘的存储模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cache_socache.html&#34;&gt;mod_cache_socache&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于共享对象缓存 (socache) 的存储模块，用于 HTTP 缓存过滤器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cern_meta.html&#34;&gt;mod_cern_meta&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CERN httpd 元文件语义&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cgi.html&#34;&gt;mod_cgi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CGI脚本的执行&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_cgid.html&#34;&gt;mod_cgid&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用外部 CGI 守护程序执行 CGI 脚本&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_charset_lite.html&#34;&gt;mod_charset_lite&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;指定字符集转换或重新编码&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_data.html&#34;&gt;mod_data&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将响应正文转换为 RFC2397 数据 URL&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dav.html&#34;&gt;mod_dav&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;分布式创作和版本控制&lt;a href=&#34;http://www.webdav.org/&#34;&gt;WebDAV&lt;/a&gt; 功能&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dav_fs.html&#34;&gt;mod_dav_fs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mod_dav&lt;/code&gt; 的文件系统提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dav_lock.html&#34;&gt;mod_dav_lock&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mod_dav&lt;/code&gt; 的通用锁定模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dbd.html&#34;&gt;mod_dbd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;管理 SQL 数据库连接&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_deflate.html&#34;&gt;mod_deflate&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在将内容交付给客户端之前对其进行压缩&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dialup.html&#34;&gt;mod_dialup&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;以各种旧调制解调器标准定义的带宽速率限制发送静态内容&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dir.html&#34;&gt;mod_dir&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供”跟踪斜线”重定向和服务目录索引文件&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_dumpio.html&#34;&gt;mod_dumpio&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;根据需要将所有 I/O 转储到错误日志&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_echo.html&#34;&gt;mod_echo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一个简单的回显服务器来说明协议模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_env.html&#34;&gt;mod_env&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;修改传递给 CGI 脚本和 SSI 页面的环境&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_example_hooks.html&#34;&gt;mod_example_hooks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;说明 Apache 模块 API&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_expires.html&#34;&gt;mod_expires&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;根据用户指定的标准生成和 HTTP 标头&lt;code&gt;ExpiresCache-Control&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_ext_filter.html&#34;&gt;mod_ext_filter&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在传递给客户端之前通过外部程序传递响应正文&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_file_cache.html&#34;&gt;mod_file_cache&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在内存中缓存静态文件列表&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_filter.html&#34;&gt;mod_filter&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;上下文敏感的智能过滤器配置模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_headers.html&#34;&gt;mod_headers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;HTTP 请求和响应标题的自定义&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_heartbeat.html&#34;&gt;mod_heartbeat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将带有服务器状态的消息发送到前端代理&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_heartmonitor.html&#34;&gt;mod_heartmonitor&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_heartbeat源服务器的集中监视器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_http2.html&#34;&gt;mod_http2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;支持 HTTP/2 运输层&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_ident.html&#34;&gt;mod_ident&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;RFC 1413 标识查找&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_imagemap.html&#34;&gt;mod_imagemap&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;服务器侧图像映像处理&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_include.html&#34;&gt;mod_include&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;服务器解析 html 文档（服务器侧包含）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_info.html&#34;&gt;mod_info&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供服务器配置的全面概述&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_isapi.html&#34;&gt;mod_isapi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Apache for Windows 中的 ISAPI 扩展&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_bybusyness.html&#34;&gt;mod_lbmethod_bybusyness&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;待定请求计数负载平衡器调度器算法&lt;code&gt;mod_proxy_balancer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_byrequests.html&#34;&gt;mod_lbmethod_byrequests&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;请求计算负载平衡器调度器算法&lt;code&gt;mod_proxy_balancer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_bytraffic.html&#34;&gt;mod_lbmethod_bytraffic&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;加权流量计数负载平衡器调度器算法&lt;code&gt;mod_proxy_balancer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_lbmethod_heartbeat.html&#34;&gt;mod_lbmethod_heartbeat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;心跳流量计数负载平衡器调度器算法&lt;code&gt;mod_proxy_balancer&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_ldap.html&#34;&gt;mod_ldap&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;供其他 LDAP 模块使用的 LDAP 连接池和结果缓存服务&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_log_config.html&#34;&gt;mod_log_config&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;记录向服务器提出的请求&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_log_debug.html&#34;&gt;mod_log_debug&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;额外的可配置调试日志记录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_log_forensic.html&#34;&gt;mod_log_forensic&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对服务器发出的请求进行取证记录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_logio.html&#34;&gt;mod_logio&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;记录每个请求的输入和输出字节&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_lua.html&#34;&gt;mod_lua&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将 Lua 挂钩提供到 httpd 请求处理的各个部分&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_macro.html&#34;&gt;mod_macro&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在 apache httpd 运行时配置文件中提供宏&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_md.html&#34;&gt;mod_md&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;跨虚拟主机管理域，通过 ACME 协议提供证书&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_mime.html&#34;&gt;mod_mime&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将请求的文件名的扩展名与文件的行为（处理程序和过滤器）和内容（mime 类型、语言、字符集和编码）相关联 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_mime_magic.html&#34;&gt;mod_mime_magic&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;通过查看文件内容的几个字节来确定文件的 MIME 类型&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_negotiation.html&#34;&gt;mod_negotiation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供&lt;a href=&#34;http://httpd.apache.org/docs/2.4/content-negotiation.html&#34;&gt;内容协商&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_nw_ssl.html&#34;&gt;mod_nw_ssl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为 NetWare 启用 SSL 加密&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_privileges.html&#34;&gt;mod_privileges&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;支持 Solaris 特权和在不同用户 ID 下运行虚拟主机&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy.html&#34;&gt;mod_proxy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;多协议代理/网关服务器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_ajp.html&#34;&gt;mod_proxy_ajp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_proxy 的 AJP 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html&#34;&gt;mod_proxy_balancer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mod_proxy&lt;/code&gt;负载平衡的扩展&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_connect.html&#34;&gt;mod_proxy_connect&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于请求处理的 mod_proxy 扩展CONNECT&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_express.html&#34;&gt;mod_proxy_express&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_proxy 的动态大规模反向代理扩展&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html&#34;&gt;mod_proxy_fcgi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 mod_proxy 的 FastCGI 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_fdpass.html&#34;&gt;mod_proxy_fdpass&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 mod_proxy 的 fdpass 外部进程支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_ftp.html&#34;&gt;mod_proxy_ftp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_proxy 的 FTP 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_hcheck.html&#34;&gt;mod_proxy_hcheck&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对 mod_proxy 的 Balancer 成员（工作人员）进行动态健康检查&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_html.html&#34;&gt;mod_proxy_html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;重写 HTML 链接以确保它们可以从代理上下文中的客户端网络寻址&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html&#34;&gt;mod_proxy_http&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_proxy 的 HTTP 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_http2.html&#34;&gt;mod_proxy_http2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;mod_proxy 的 HTTP/2 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html&#34;&gt;mod_proxy_scgi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 mod_proxy 的 SCGI 网关模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html&#34;&gt;mod_proxy_uwsgi&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 mod_proxy 的 UWSGI 网关模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html&#34;&gt;mod_proxy_wstunnel&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于 mod_proxy 的 Websockets 支持模块&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_ratelimit.html&#34;&gt;mod_ratelimit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;客户端带宽速率限制&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_reflector.html&#34;&gt;mod_reflector&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;通过输出过滤器堆栈将请求正文反映为响应&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_remoteip.html&#34;&gt;mod_remoteip&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将连接的原始客户端 IP 地址替换为代理或负载均衡器通过请求标头提供的用户代理 IP 地址列表&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_reqtimeout.html&#34;&gt;mod_reqtimeout&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;设置接收请求的超时和最小数据速率&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_request.html&#34;&gt;mod_request&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;用于处理和提供可用 HTTP 请求正文的过滤器&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_rewrite.html&#34;&gt;mod_rewrite&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供基于规则的重写引擎来即时重写请求的 URL&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_sed.html&#34;&gt;mod_sed&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用语法过滤输入（请求）和输出（响应）内容&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_session.html&#34;&gt;mod_session&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;会话支持&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_session_cookie.html&#34;&gt;mod_session_cookie&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 Cookie 的会话支持&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_session_crypto.html&#34;&gt;mod_session_crypto&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;会话加密支持&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_session_dbd.html&#34;&gt;mod_session_dbd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 DBD/SQL 的会话支持&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_setenvif.html&#34;&gt;mod_setenvif&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;允许根据请求的特征设置环境变量&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_slotmem_plain.html&#34;&gt;mod_slotmem_plain&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于插槽的共享内存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_slotmem_shm.html&#34;&gt;mod_slotmem_shm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于插槽的共享内存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_so.html&#34;&gt;mod_so&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在启动或重新启动时将可执行代码和模块加载到服务器中&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_socache_dbm.html&#34;&gt;mod_socache_dbm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 DBM 的共享对象缓存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_socache_dc.html&#34;&gt;mod_socache_dc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 Distcache 的共享对象缓存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_socache_memcache.html&#34;&gt;mod_socache_memcache&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 Memcache 的共享对象缓存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_socache_redis.html&#34;&gt;mod_socache_redis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 Redis 的共享对象缓存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_socache_shmcb.html&#34;&gt;mod_socache_shmcb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;基于 shmcb 的共享对象缓存提供程序&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_speling.html&#34;&gt;mod_speling&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;尝试通过忽略大小写或尝试更正各种小拼写错误来更正错误的 URL&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_ssl.html&#34;&gt;mod_ssl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用安全套接字层 (SSL) 和传输层安全 (TLS) 协议的强密码术&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_status.html&#34;&gt;mod_status&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供有关服务器活动和性能的信息&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_substitute.html&#34;&gt;mod_substitute&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;对响应体执行搜索和替换操作&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_suexec.html&#34;&gt;mod_suexec&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;允许 CGI 脚本作为指定的用户和组运行&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_systemd.html&#34;&gt;mod_systemd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为系统集成提供更好的支持&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_unique_id.html&#34;&gt;mod_unique_id&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为每个请求提供一个具有唯一标识符的环境变量&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_unixd.html&#34;&gt;mod_unixd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unix 系列平台的基本（必需）安全性&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_userdir.html&#34;&gt;mod_userdir&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;特定于用户的目录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_usertrack.html&#34;&gt;mod_usertrack&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;站点上用户活动的点击流日志记录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_version.html&#34;&gt;mod_version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;版本相关配置&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_vhost_alias.html&#34;&gt;mod_vhost_alias&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;提供动态配置的海量虚拟主机&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_watchdog.html&#34;&gt;mod_watchdog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为其他模块提供基础设施以定期运行任务&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_xml2enc.html&#34;&gt;mod_xml2enc&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;增强了对基于 libxml2 的过滤器模块的字符集/国际化支持&lt;/p&gt;
+&lt;p&gt;[^更多请参考]: &lt;a href=&#34;http://httpd.apache.org/docs/2.4/zh-cn/&#34;&gt;Apache HTTP 服务器 2.4 文档 - Apache HTTP 服务器 版本 2.4&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
