@@ -476,27 +476,27 @@
 <span class="token number">4</span>.该脚本申请证书默认安装路径为/root/cert目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>准备好这些东西，cloudflare直接邮箱注册<a target="_blank" rel="noopener" href="https://cloudflare.com/%EF%BC%8CAPI">https://cloudflare.com/，API</a> KEY</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054345145.png" alt="image-20240307054345145"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054345145.png" alt="image-20240307054345145"></p>
 <p>之后依次输入</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054521404.png" alt="image-20240307054521404"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054521404.png" alt="image-20240307054521404"></p>
 <p>注意输入的域名为你解析到CF上的域名，不是A记录的域名，如下图1的位置</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055228662.png" alt="image-20240307055228662"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055228662.png" alt="image-20240307055228662"></p>
 <p>之后进入面板设置</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055410275.png" alt="image-20240307055410275"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055410275.png" alt="image-20240307055410275"></p>
 <p>将<code>/root/cert/xxx</code>填入框中，上面是cer，下面是key，之后进入cloudflare，改成这样，打开上面图2标记的小云朵，这样流量就被cf代理了</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055729883.png" alt="image-20240307055729883"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055729883.png" alt="image-20240307055729883"></p>
 <h2 id="4-创建代理"><a href="#4-创建代理" class="headerlink" title="4. 创建代理"></a>4. 创建代理</h2><p>接上面标记的那张图，将你的主机IP解析到这个域名的A记录下，名称随意填写，相当于得到了一个三级域名——<code>名称.域名</code>，例如<code>test.example.com</code></p>
 <p>进入x-ui 面板入站列表-添加入站</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060728590.png" alt="image-20240307060728590"></p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060941380.png" alt="image-20240307060941380"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060728590.png" alt="image-20240307060728590"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060941380.png" alt="image-20240307060941380"></p>
 <p>这里的域名就是你自己解析到的域名，名称+域名，添加，分享二维码就可以使用了</p>
 <h2 id="5-套CF优选IP"><a href="#5-套CF优选IP" class="headerlink" title="5. 套CF优选IP"></a>5. 套CF优选IP</h2><p><a target="_blank" rel="noopener" href="https://github.com/badafans/better-cloudflare-ip">badafans/better-cloudflare-ip: 查找适合自己当前网络环境的优选cloudflare anycast IP (github.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest">XIU2/CloudflareSpeedTest: 🌩「自选优选 IP」测试 Cloudflare CDN 延迟和速度，获取最快 IP ！当然也支持其他 CDN / 网站 IP ~ (github.com)</a></p>
 <p>两款工具</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307061731515.png" alt="image-20240307061731515"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307061731515.png" alt="image-20240307061731515"></p>
 <p>将优选得到的地址填写上去，将原来的地址写到伪装域名，需要优选443这个端口的地址</p>
 <h2 id="6-其他类型的代理"><a href="#6-其他类型的代理" class="headerlink" title="6.其他类型的代理"></a>6.其他类型的代理</h2><p>上面也可以不用443端口，这要添加一条规则</p>
-<p><img src="/.io//x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307062711360.png" alt="image-20240307062711360"></p>
+<p><img src="/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307062711360.png" alt="image-20240307062711360"></p>
 <p>然后就可以优选443的地址，端口改写443</p>
 <p>也能直接使用其他的端口，下面就不需要打开tls</p>
 <p>也可以网络直接选择tcp，选择reality，这种是直连，要看你的服务器网络质量</p>
@@ -1234,7 +1234,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">166.4k</span>
+                        class="white-color">166.5k</span>
             
             
             
