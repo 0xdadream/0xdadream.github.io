@@ -420,21 +420,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-06-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    191
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    6 分
                 </div>
                 
 
@@ -469,6 +469,195 @@ oh-my-posh init pwsh <span class="token operator">|</span> Invoke-Expression <sp
 oh-my-posh init pwsh <span class="token parameter variable">--config</span> <span class="token string">"<span class="token variable">$env</span>:POSH_THEMES_PATH<span class="token entity" title="\t">\t</span>heme.json"</span> <span class="token operator">|</span> Invoke-Expression
 <span class="token comment"># 将 $env:POSH_THEMES_PATH\theme.json 替换为实际的主题文件路径,运行$env:POSH_THEMES_PATH可以看到主题的绝对路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="powershell模块管理基础命令"><a href="#powershell模块管理基础命令" class="headerlink" title="powershell模块管理基础命令"></a>powershell模块管理基础命令</h2><h3 id="1-安装模块"><a href="#1-安装模块" class="headerlink" title="1. 安装模块"></a>1. 安装模块</h3><p>使用 <code>Install-Module</code> 命令从 PowerShell Gallery 安装模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Install-Module</span> <span class="token operator">-</span>Name ModuleName <span class="token operator">-</span>Force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-导入模块"><a href="#2-导入模块" class="headerlink" title="2. 导入模块"></a>2. 导入模块</h3><p>使用 <code>Import-Module</code> 命令加载模块，使其命令可用：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Import-Module</span> <span class="token operator">-</span>Name ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-查看已安装模块"><a href="#3-查看已安装模块" class="headerlink" title="3. 查看已安装模块"></a>3. 查看已安装模块</h3><p>使用 <code>Get-Module</code> 查看当前会话中已加载的模块，或者使用 <code>-ListAvailable</code> 参数查看系统上所有已安装的模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 查看当前会话中已加载的模块</span>
+<span class="token function">Get-Module</span>
+
+<span class="token comment"># 查看系统上所有已安装的模块</span>
+<span class="token function">Get-Module</span> <span class="token operator">-</span>ListAvailable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-获取模块命令"><a href="#4-获取模块命令" class="headerlink" title="4. 获取模块命令"></a>4. 获取模块命令</h3><p>使用 <code>Get-Command</code> 查看某个模块中的所有命令：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Command</span> <span class="token operator">-</span>Module ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-查看模块信息"><a href="#5-查看模块信息" class="headerlink" title="5. 查看模块信息"></a>5. 查看模块信息</h3><p>使用 <code>Get-Module</code> 查看模块的详细信息：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Module</span> <span class="token operator">-</span>Name ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="6-更新模块"><a href="#6-更新模块" class="headerlink" title="6. 更新模块"></a>6. 更新模块</h3><p>使用 <code>Update-Module</code> 更新已安装的模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Update-Module</span> <span class="token operator">-</span>Name ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="7-卸载模块"><a href="#7-卸载模块" class="headerlink" title="7. 卸载模块"></a>7. 卸载模块</h3><p>使用 <code>Remove-Module</code> 卸载模块，从当前会话中移除：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Remove-Module</span> <span class="token operator">-</span>Name ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="8-查找模块"><a href="#8-查找模块" class="headerlink" title="8. 查找模块"></a>8. 查找模块</h3><p>使用 <code>Find-Module</code> 从 PowerShell Gallery 查找模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Find-Module</span> <span class="token operator">-</span>Name ModuleName<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="9-保存模块"><a href="#9-保存模块" class="headerlink" title="9. 保存模块"></a>9. 保存模块</h3><p>使用 <code>Save-Module</code> 将模块保存到本地文件夹，而不是直接安装：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Save-Module</span> <span class="token operator">-</span>Name ModuleName <span class="token operator">-</span>Path C:\Path\To\Save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="10-发布模块"><a href="#10-发布模块" class="headerlink" title="10. 发布模块"></a>10. 发布模块</h3><p>使用 <code>Publish-Module</code> 将模块发布到 PowerShell Gallery（需要先进行配置和认证）：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Publish-Module</span> <span class="token operator">-</span>Name ModuleName <span class="token operator">-</span>NuGetApiKey <span class="token string">'YourApiKey'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="示例：安装和使用-PSReadLine-模块"><a href="#示例：安装和使用-PSReadLine-模块" class="headerlink" title="示例：安装和使用 PSReadLine 模块"></a>示例：安装和使用 <code>PSReadLine</code> 模块</h3><p>下面是一个完整的示例，展示了如何安装、导入和使用 <code>PSReadLine</code> 模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 安装 PSReadLine 模块</span>
+<span class="token function">Install-Module</span> <span class="token operator">-</span>Name PSReadLine <span class="token operator">-</span>Force
+
+<span class="token comment"># 导入 PSReadLine 模块</span>
+<span class="token function">Import-Module</span> <span class="token operator">-</span>Name PSReadLine
+
+<span class="token comment"># 查看 PSReadLine 模块中的命令</span>
+<span class="token function">Get-Command</span> <span class="token operator">-</span>Module PSReadLine
+
+<span class="token comment"># 设置 PSReadLine 选项（例如，设置语法高亮颜色）</span>
+<span class="token function">Set-PSReadLineOption</span> <span class="token operator">-</span>PredictionSource History
+
+<span class="token comment"># 卸载 PSReadLine 模块（从当前会话中移除）</span>
+<span class="token function">Remove-Module</span> <span class="token operator">-</span>Name PSReadLine<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="安装插件（可选）"><a href="#安装插件（可选）" class="headerlink" title="安装插件（可选）"></a>安装插件（可选）</h2><p>首先设置PSGallery为受信任存储库</p>
+<p>要将<code>PSGallery</code>设置为受信任的存储库，可以运行以下命令：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-PSRepository</span> <span class="token operator">-</span>Name <span class="token string">'PSGallery'</span> <span class="token operator">-</span>InstallationPolicy Truste<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="PSReadLine"><a href="#PSReadLine" class="headerlink" title="PSReadLine"></a>PSReadLine</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Install-Module <span class="token parameter variable">-Name</span> PSReadLine <span class="token parameter variable">-Scope</span> CurrentUser <span class="token parameter variable">-Force</span> <span class="token parameter variable">-SkipPublisherCheck</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我的配置附上</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Import-Module</span> PSReadLine
+<span class="token comment"># 设置 PSReadLine 的编辑模式为 Emacs 风格</span>
+<span class="token comment"># 禁用提示音</span>
+<span class="token comment"># 设置历史预测源为命令历史</span>
+<span class="token comment"># 设置预测视图样式为列表视图</span>
+<span class="token comment"># 启用工具提示功能</span>
+<span class="token comment"># 防止保存历史记录中的重复命令</span>
+<span class="token function">Set-PSReadLineOption</span> <span class="token operator">-</span>EditMode Emacs `
+                     <span class="token operator">-</span>BellStyle None `
+                     <span class="token operator">-</span>PredictionSource History `
+                     <span class="token operator">-</span>PredictionViewStyle ListView `
+                     <span class="token operator">-</span>ShowToolTips `
+                     <span class="token operator">-</span>HistoryNoDuplicates `
+                     <span class="token operator">-</span>Colors @<span class="token punctuation">{</span> <span class="token comment"># 设置不同元素的颜色，如命令、参数、运算符、变量、字符串、数字、成员、类型、和默认颜色</span>
+                         Command = <span class="token string">'Cyan'</span>
+                         Parameter = <span class="token string">'Yellow'</span>
+                         Operator = <span class="token string">'Red'</span>
+                         Variable = <span class="token string">'Green'</span>
+                         String = <span class="token string">'Magenta'</span>
+                         Number = <span class="token string">'White'</span>
+                         Member = <span class="token string">'DarkYellow'</span>
+                         <span class="token function">Type</span> = <span class="token string">'DarkCyan'</span>
+                         Default = <span class="token string">'Gray'</span>
+                     <span class="token punctuation">}</span>
+
+
+<span class="token comment"># 增量搜索，你在键入时会动态显示匹配项</span>
+<span class="token function">Set-PSReadLineKeyHandler</span> <span class="token operator">-</span>Chord Ctrl+R <span class="token operator">-</span><span class="token keyword">Function</span> ReverseSearchHistory
+<span class="token comment"># 逐步搜索，每按一次快捷键会找到下一个匹配项</span>
+<span class="token comment">#Set-PSReadLineKeyHandler -Chord 'Ctrl+r' -Function HistorySearchBackward </span>
+
+<span class="token comment"># Shows navigable menu of all options when hitting Tab</span>
+<span class="token function">Set-PSReadLineKeyHandler</span> <span class="token operator">-</span>Key Tab <span class="token operator">-</span><span class="token keyword">Function</span> Complete
+<span class="token comment">#Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="z"><a href="#z" class="headerlink" title="z"></a>z</h3><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Install-Module</span> <span class="token operator">-</span>Name Z <span class="token operator">-</span>Scope CurrentUser <span class="token operator">-</span>Force <span class="token operator">-</span>SkipPublisherCheck <span class="token comment"># 安装</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装完成后，使用以下命令导入 <code>z</code> 模块：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Import-Module</span> Z<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="使用-Z-模块"><a href="#使用-Z-模块" class="headerlink" title="使用 Z 模块"></a>使用 Z 模块</h4><h5 id="切换到目录"><a href="#切换到目录" class="headerlink" title="切换到目录"></a>切换到目录</h5><p>使用 <code>z</code> 命令加上目录的部分名称，可以快速切换到该目录：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">z foldername<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例如，假设你经常访问名为 <code>Projects</code> 的目录，你可以通过以下命令快速跳转到该目录：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">z projects<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="显示目录历史"><a href="#显示目录历史" class="headerlink" title="显示目录历史"></a>显示目录历史</h5><p>使用 <code>-l</code> 参数列出所有之前访问过的目录历史：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">z <span class="token operator">-</span>l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="posh-git"><a href="#posh-git" class="headerlink" title="posh-git"></a>posh-git</h3><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Install-Module</span> posh-git <span class="token operator">-</span>Scope CurrentUser <span class="token operator">-</span>Force <span class="token comment"># 安装</span>
+<span class="token function">Import-Module</span> posh-git <span class="token comment"># 导入</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>该模块管理和监视 Git 仓库的状态，进入git目录就能看到</p>
+<h3 id="PSFzf"><a href="#PSFzf" class="headerlink" title="PSFzf"></a>PSFzf</h3><p>提供了在命令行中进行快速模糊搜索和选择的功能</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Set-PsFzfOption <span class="token parameter variable">-PSReadLineChordProvider</span> <span class="token string">'Ctrl+f'</span> <span class="token parameter variable">-PSReadLineChordReverseHistory</span> <span class="token string">'Ctrl+r'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>Set-PsFzfOption</code> 命令用于配置 <code>PSFzf</code> 模块的选项，以定制键绑定和其他行为，将 <code>Ctrl+f</code> 设置为启动模糊搜索，<code>Ctrl+r</code> 设置为反向搜索历史记录的功能，使用这个可以不用上面那个，或者换个快捷键</p>
+<h2 id="添加别名"><a href="#添加别名" class="headerlink" title="添加别名"></a>添加别名</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Set-Alias ll <span class="token function">ls</span>
+Set-Alias g <span class="token function">git</span>
+Set-Alias <span class="token function">grep</span> findstr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>我的部分别名</p>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$env</span>:http_proxy<span class="token operator">=</span><span class="token string">"http://127.0.0.1:10809"</span>
+<span class="token variable">$env</span>:puser <span class="token operator">=</span> <span class="token string">"C:\Users\xxx\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的用处是在命令行执行<code>$env:http_proxy</code>就可以改变powershell的代理端口，执行<code>cat $env:puser</code>可以查看powershell的配置文件</p>
+<h2 id="加入配置文件"><a href="#加入配置文件" class="headerlink" title="加入配置文件"></a>加入配置文件</h2><p>执行<code>$PROFILE</code>可以得到配置文件目录，可以按目录创建文件，编辑文件，我的部分代码如下</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># Oh My Posh configuration</span>
+oh-my-posh init pwsh <span class="token operator">--</span>config <span class="token string">"C:\Users\xxx\AppData\Local\Programs\oh-my-posh\themes\night-owl.omp.json"</span> <span class="token punctuation">|</span> <span class="token function">Invoke-Expression</span>
+
+<span class="token comment"># Import other modules</span>
+<span class="token function">Import-Module</span> z
+<span class="token function">Import-Module</span> posh-git
+<span class="token comment">#Icons</span>
+<span class="token function">Import-Module</span> Terminal-Icons
+
+<span class="token comment"># PSReadLine options</span>
+<span class="token function">Import-Module</span> PSReadLine
+<span class="token comment"># 设置 PSReadLine 的编辑模式为 Emacs 风格</span>
+<span class="token comment"># 禁用提示音</span>
+<span class="token comment"># 设置历史预测源为命令历史</span>
+<span class="token comment"># 设置预测视图样式为列表视图</span>
+<span class="token comment"># 启用工具提示功能</span>
+<span class="token comment"># 防止保存历史记录中的重复命令</span>
+<span class="token function">Set-PSReadLineOption</span> <span class="token operator">-</span>EditMode Emacs `
+                     <span class="token operator">-</span>BellStyle None `
+                     <span class="token operator">-</span>PredictionSource History `
+                     <span class="token operator">-</span>PredictionViewStyle ListView `
+                     <span class="token operator">-</span>ShowToolTips `
+                     <span class="token operator">-</span>HistoryNoDuplicates `
+                     <span class="token operator">-</span>Colors @<span class="token punctuation">{</span> <span class="token comment"># 设置不同元素的颜色，如命令、参数、运算符、变量、字符串、数字、成员、类型、函数和默认颜色</span>
+                         Command = <span class="token string">'Cyan'</span>
+                         Parameter = <span class="token string">'Yellow'</span>
+                         Operator = <span class="token string">'Red'</span>
+                         Variable = <span class="token string">'Green'</span>
+                         String = <span class="token string">'Magenta'</span>
+                         Number = <span class="token string">'White'</span>
+                         Member = <span class="token string">'DarkYellow'</span>
+                         <span class="token function">Type</span> = <span class="token string">'DarkCyan'</span>
+<span class="token comment">#                         Function = 'Blue'</span>
+                         Default = <span class="token string">'Gray'</span>
+                     <span class="token punctuation">}</span>
+
+<span class="token comment"># 增量搜索，你在键入时会动态显示匹配项</span>
+<span class="token comment">#Set-PSReadLineKeyHandler -Chord Ctrl+R -Function ReverseSearchHistory</span>
+<span class="token comment"># 逐步搜索，每按一次快捷键会找到下一个匹配项#</span>
+<span class="token comment">#Set-PSReadLineKeyHandler -Chord 'Ctrl+r' -Function HistorySearchBackward </span>
+
+<span class="token comment"># Shows navigable menu of all options when hitting Tab</span>
+<span class="token function">Set-PSReadLineKeyHandler</span> <span class="token operator">-</span>Key Tab <span class="token operator">-</span><span class="token keyword">Function</span> Complete
+<span class="token comment">#Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</span>
+
+<span class="token comment">#Utilities</span>
+<span class="token keyword">function</span> which <span class="token punctuation">(</span><span class="token variable">$command</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">Get-Command</span> <span class="token operator">-</span>Name <span class="token variable">$command</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+	 <span class="token function">Select-Object</span> <span class="token operator">-</span>ExpandProperty Path <span class="token operator">-</span>ErrorAction SilentlyContinue
+<span class="token punctuation">}</span>
+
+<span class="token comment">#Fzf</span>
+<span class="token function">Import-Module</span> PSFzf
+<span class="token function">Set-PsFzfOption</span> <span class="token operator">-</span>PSReadLineChordProvider <span class="token string">'Ctrl+f'</span> <span class="token operator">-</span>PSReadLineChordReverseHistory <span class="token string">'Ctrl+r'</span>
+
+<span class="token comment"># Alias</span>
+<span class="token function">Set-Alias</span> ll <span class="token function">ls</span>
+<span class="token function">Set-Alias</span> g git
+<span class="token function">Set-Alias</span> grep findstr
+
+<span class="token comment">#env</span>
+<span class="token variable">$env</span>:http_proxy=<span class="token string">"http://127.0.0.1:10809"</span> <span class="token comment">#启动改变代理</span>
+<span class="token variable">$env</span>:puser = <span class="token string">"C:\Users\xxx\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中which函数实现了linux上的函数功能，其他的前面有讲，保存，启动powershell</p>
 
                 
             </div>
@@ -1205,7 +1394,7 @@ oh-my-posh init pwsh <span class="token parameter variable">--config</span> <spa
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">166.5k</span>
+                        class="white-color">167.9k</span>
             
             
             

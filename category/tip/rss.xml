@@ -25,10 +25,10 @@
         <category>命令</category>
         <category>学习</category>
         <category>tools</category>
-        <category>文件上传</category>
         <category>bug</category>
         <category>php</category>
         <category>python</category>
+        <category>文件上传</category>
         <category>汇编</category>
         <category>i春秋</category>
         <item>
@@ -49,6 +49,195 @@ oh-my-posh init pwsh &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; I
 oh-my-posh init pwsh &lt;span class=&#34;token parameter variable&#34;&gt;--config&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:POSH_THEMES_PATH&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;heme.json&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; Invoke-Expression
 &lt;span class=&#34;token comment&#34;&gt;# 将 $env:POSH_THEMES_PATH\theme.json 替换为实际的主题文件路径,运行$env:POSH_THEMES_PATH可以看到主题的绝对路径&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;powershell模块管理基础命令&#34;&gt;&lt;a href=&#34;#powershell模块管理基础命令&#34; class=&#34;headerlink&#34; title=&#34;powershell模块管理基础命令&#34;&gt;&lt;/a&gt;powershell模块管理基础命令&lt;/h2&gt;&lt;h3 id=&#34;1-安装模块&#34;&gt;&lt;a href=&#34;#1-安装模块&#34; class=&#34;headerlink&#34; title=&#34;1. 安装模块&#34;&gt;&lt;/a&gt;1. 安装模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Install-Module&lt;/code&gt; 命令从 PowerShell Gallery 安装模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-导入模块&#34;&gt;&lt;a href=&#34;#2-导入模块&#34; class=&#34;headerlink&#34; title=&#34;2. 导入模块&#34;&gt;&lt;/a&gt;2. 导入模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Import-Module&lt;/code&gt; 命令加载模块，使其命令可用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-查看已安装模块&#34;&gt;&lt;a href=&#34;#3-查看已安装模块&#34; class=&#34;headerlink&#34; title=&#34;3. 查看已安装模块&#34;&gt;&lt;/a&gt;3. 查看已安装模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Get-Module&lt;/code&gt; 查看当前会话中已加载的模块，或者使用 &lt;code&gt;-ListAvailable&lt;/code&gt; 参数查看系统上所有已安装的模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 查看当前会话中已加载的模块&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Module&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 查看系统上所有已安装的模块&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ListAvailable&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-获取模块命令&#34;&gt;&lt;a href=&#34;#4-获取模块命令&#34; class=&#34;headerlink&#34; title=&#34;4. 获取模块命令&#34;&gt;&lt;/a&gt;4. 获取模块命令&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Get-Command&lt;/code&gt; 查看某个模块中的所有命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Module ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-查看模块信息&#34;&gt;&lt;a href=&#34;#5-查看模块信息&#34; class=&#34;headerlink&#34; title=&#34;5. 查看模块信息&#34;&gt;&lt;/a&gt;5. 查看模块信息&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Get-Module&lt;/code&gt; 查看模块的详细信息：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-更新模块&#34;&gt;&lt;a href=&#34;#6-更新模块&#34; class=&#34;headerlink&#34; title=&#34;6. 更新模块&#34;&gt;&lt;/a&gt;6. 更新模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Update-Module&lt;/code&gt; 更新已安装的模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Update-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;7-卸载模块&#34;&gt;&lt;a href=&#34;#7-卸载模块&#34; class=&#34;headerlink&#34; title=&#34;7. 卸载模块&#34;&gt;&lt;/a&gt;7. 卸载模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Remove-Module&lt;/code&gt; 卸载模块，从当前会话中移除：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Remove-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;8-查找模块&#34;&gt;&lt;a href=&#34;#8-查找模块&#34; class=&#34;headerlink&#34; title=&#34;8. 查找模块&#34;&gt;&lt;/a&gt;8. 查找模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Find-Module&lt;/code&gt; 从 PowerShell Gallery 查找模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Find-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;9-保存模块&#34;&gt;&lt;a href=&#34;#9-保存模块&#34; class=&#34;headerlink&#34; title=&#34;9. 保存模块&#34;&gt;&lt;/a&gt;9. 保存模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Save-Module&lt;/code&gt; 将模块保存到本地文件夹，而不是直接安装：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Save-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path C:\Path\To\Save&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;10-发布模块&#34;&gt;&lt;a href=&#34;#10-发布模块&#34; class=&#34;headerlink&#34; title=&#34;10. 发布模块&#34;&gt;&lt;/a&gt;10. 发布模块&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;Publish-Module&lt;/code&gt; 将模块发布到 PowerShell Gallery（需要先进行配置和认证）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Publish-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name ModuleName &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NuGetApiKey &lt;span class=&#34;token string&#34;&gt;&#39;YourApiKey&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;示例：安装和使用-PSReadLine-模块&#34;&gt;&lt;a href=&#34;#示例：安装和使用-PSReadLine-模块&#34; class=&#34;headerlink&#34; title=&#34;示例：安装和使用 PSReadLine 模块&#34;&gt;&lt;/a&gt;示例：安装和使用 &lt;code&gt;PSReadLine&lt;/code&gt; 模块&lt;/h3&gt;&lt;p&gt;下面是一个完整的示例，展示了如何安装、导入和使用 &lt;code&gt;PSReadLine&lt;/code&gt; 模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 安装 PSReadLine 模块&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name PSReadLine &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force
+
+&lt;span class=&#34;token comment&#34;&gt;# 导入 PSReadLine 模块&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name PSReadLine
+
+&lt;span class=&#34;token comment&#34;&gt;# 查看 PSReadLine 模块中的命令&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Module PSReadLine
+
+&lt;span class=&#34;token comment&#34;&gt;# 设置 PSReadLine 选项（例如，设置语法高亮颜色）&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineOption&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PredictionSource History
+
+&lt;span class=&#34;token comment&#34;&gt;# 卸载 PSReadLine 模块（从当前会话中移除）&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Remove-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name PSReadLine&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;安装插件（可选）&#34;&gt;&lt;a href=&#34;#安装插件（可选）&#34; class=&#34;headerlink&#34; title=&#34;安装插件（可选）&#34;&gt;&lt;/a&gt;安装插件（可选）&lt;/h2&gt;&lt;p&gt;首先设置PSGallery为受信任存储库&lt;/p&gt;
+&lt;p&gt;要将&lt;code&gt;PSGallery&lt;/code&gt;设置为受信任的存储库，可以运行以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-PSRepository&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name &lt;span class=&#34;token string&#34;&gt;&#39;PSGallery&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;InstallationPolicy Truste&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;PSReadLine&#34;&gt;&lt;a href=&#34;#PSReadLine&#34; class=&#34;headerlink&#34; title=&#34;PSReadLine&#34;&gt;&lt;/a&gt;PSReadLine&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Install-Module &lt;span class=&#34;token parameter variable&#34;&gt;-Name&lt;/span&gt; PSReadLine &lt;span class=&#34;token parameter variable&#34;&gt;-Scope&lt;/span&gt; CurrentUser &lt;span class=&#34;token parameter variable&#34;&gt;-Force&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-SkipPublisherCheck&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我的配置附上&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; PSReadLine
+&lt;span class=&#34;token comment&#34;&gt;# 设置 PSReadLine 的编辑模式为 Emacs 风格&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 禁用提示音&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 设置历史预测源为命令历史&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 设置预测视图样式为列表视图&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 启用工具提示功能&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 防止保存历史记录中的重复命令&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineOption&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;EditMode Emacs `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;BellStyle None `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PredictionSource History `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PredictionViewStyle ListView `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ShowToolTips `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;HistoryNoDuplicates `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Colors @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 设置不同元素的颜色，如命令、参数、运算符、变量、字符串、数字、成员、类型、和默认颜色&lt;/span&gt;
+                         Command = &lt;span class=&#34;token string&#34;&gt;&#39;Cyan&#39;&lt;/span&gt;
+                         Parameter = &lt;span class=&#34;token string&#34;&gt;&#39;Yellow&#39;&lt;/span&gt;
+                         Operator = &lt;span class=&#34;token string&#34;&gt;&#39;Red&#39;&lt;/span&gt;
+                         Variable = &lt;span class=&#34;token string&#34;&gt;&#39;Green&#39;&lt;/span&gt;
+                         String = &lt;span class=&#34;token string&#34;&gt;&#39;Magenta&#39;&lt;/span&gt;
+                         Number = &lt;span class=&#34;token string&#34;&gt;&#39;White&#39;&lt;/span&gt;
+                         Member = &lt;span class=&#34;token string&#34;&gt;&#39;DarkYellow&#39;&lt;/span&gt;
+                         &lt;span class=&#34;token function&#34;&gt;Type&lt;/span&gt; = &lt;span class=&#34;token string&#34;&gt;&#39;DarkCyan&#39;&lt;/span&gt;
+                         Default = &lt;span class=&#34;token string&#34;&gt;&#39;Gray&#39;&lt;/span&gt;
+                     &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&#34;token comment&#34;&gt;# 增量搜索，你在键入时会动态显示匹配项&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineKeyHandler&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Chord Ctrl+R &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Function&lt;/span&gt; ReverseSearchHistory
+&lt;span class=&#34;token comment&#34;&gt;# 逐步搜索，每按一次快捷键会找到下一个匹配项&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#Set-PSReadLineKeyHandler -Chord &#39;Ctrl+r&#39; -Function HistorySearchBackward &lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# Shows navigable menu of all options when hitting Tab&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineKeyHandler&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Key Tab &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Function&lt;/span&gt; Complete
+&lt;span class=&#34;token comment&#34;&gt;#Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;z&#34;&gt;&lt;a href=&#34;#z&#34; class=&#34;headerlink&#34; title=&#34;z&#34;&gt;&lt;/a&gt;z&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Install-Module&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name Z &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Scope CurrentUser &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;SkipPublisherCheck &lt;span class=&#34;token comment&#34;&gt;# 安装&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装完成后，使用以下命令导入 &lt;code&gt;z&lt;/code&gt; 模块：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; Z&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;使用-Z-模块&#34;&gt;&lt;a href=&#34;#使用-Z-模块&#34; class=&#34;headerlink&#34; title=&#34;使用 Z 模块&#34;&gt;&lt;/a&gt;使用 Z 模块&lt;/h4&gt;&lt;h5 id=&#34;切换到目录&#34;&gt;&lt;a href=&#34;#切换到目录&#34; class=&#34;headerlink&#34; title=&#34;切换到目录&#34;&gt;&lt;/a&gt;切换到目录&lt;/h5&gt;&lt;p&gt;使用 &lt;code&gt;z&lt;/code&gt; 命令加上目录的部分名称，可以快速切换到该目录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;z foldername&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如，假设你经常访问名为 &lt;code&gt;Projects&lt;/code&gt; 的目录，你可以通过以下命令快速跳转到该目录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;z projects&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;显示目录历史&#34;&gt;&lt;a href=&#34;#显示目录历史&#34; class=&#34;headerlink&#34; title=&#34;显示目录历史&#34;&gt;&lt;/a&gt;显示目录历史&lt;/h5&gt;&lt;p&gt;使用 &lt;code&gt;-l&lt;/code&gt; 参数列出所有之前访问过的目录历史：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;z &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;posh-git&#34;&gt;&lt;a href=&#34;#posh-git&#34; class=&#34;headerlink&#34; title=&#34;posh-git&#34;&gt;&lt;/a&gt;posh-git&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Install-Module&lt;/span&gt; posh-git &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Scope CurrentUser &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force &lt;span class=&#34;token comment&#34;&gt;# 安装&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; posh-git &lt;span class=&#34;token comment&#34;&gt;# 导入&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该模块管理和监视 Git 仓库的状态，进入git目录就能看到&lt;/p&gt;
+&lt;h3 id=&#34;PSFzf&#34;&gt;&lt;a href=&#34;#PSFzf&#34; class=&#34;headerlink&#34; title=&#34;PSFzf&#34;&gt;&lt;/a&gt;PSFzf&lt;/h3&gt;&lt;p&gt;提供了在命令行中进行快速模糊搜索和选择的功能&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Set-PsFzfOption &lt;span class=&#34;token parameter variable&#34;&gt;-PSReadLineChordProvider&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;Ctrl+f&#39;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-PSReadLineChordReverseHistory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;Ctrl+r&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Set-PsFzfOption&lt;/code&gt; 命令用于配置 &lt;code&gt;PSFzf&lt;/code&gt; 模块的选项，以定制键绑定和其他行为，将 &lt;code&gt;Ctrl+f&lt;/code&gt; 设置为启动模糊搜索，&lt;code&gt;Ctrl+r&lt;/code&gt; 设置为反向搜索历史记录的功能，使用这个可以不用上面那个，或者换个快捷键&lt;/p&gt;
+&lt;h2 id=&#34;添加别名&#34;&gt;&lt;a href=&#34;#添加别名&#34; class=&#34;headerlink&#34; title=&#34;添加别名&#34;&gt;&lt;/a&gt;添加别名&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Set-Alias ll &lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt;
+Set-Alias g &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt;
+Set-Alias &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; findstr&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我的部分别名&lt;/p&gt;
+&lt;h2 id=&#34;设置环境变量&#34;&gt;&lt;a href=&#34;#设置环境变量&#34; class=&#34;headerlink&#34; title=&#34;设置环境变量&#34;&gt;&lt;/a&gt;设置环境变量&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:http_proxy&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:10809&#34;&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:puser &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;C:\Users\xxx\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的用处是在命令行执行&lt;code&gt;$env:http_proxy&lt;/code&gt;就可以改变powershell的代理端口，执行&lt;code&gt;cat $env:puser&lt;/code&gt;可以查看powershell的配置文件&lt;/p&gt;
+&lt;h2 id=&#34;加入配置文件&#34;&gt;&lt;a href=&#34;#加入配置文件&#34; class=&#34;headerlink&#34; title=&#34;加入配置文件&#34;&gt;&lt;/a&gt;加入配置文件&lt;/h2&gt;&lt;p&gt;执行&lt;code&gt;$PROFILE&lt;/code&gt;可以得到配置文件目录，可以按目录创建文件，编辑文件，我的部分代码如下&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# Oh My Posh configuration&lt;/span&gt;
+oh-my-posh init pwsh &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;config &lt;span class=&#34;token string&#34;&gt;&#34;C:\Users\xxx\AppData\Local\Programs\oh-my-posh\themes\night-owl.omp.json&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Invoke-Expression&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# Import other modules&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; z
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; posh-git
+&lt;span class=&#34;token comment&#34;&gt;#Icons&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; Terminal-Icons
+
+&lt;span class=&#34;token comment&#34;&gt;# PSReadLine options&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; PSReadLine
+&lt;span class=&#34;token comment&#34;&gt;# 设置 PSReadLine 的编辑模式为 Emacs 风格&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 禁用提示音&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 设置历史预测源为命令历史&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 设置预测视图样式为列表视图&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 启用工具提示功能&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 防止保存历史记录中的重复命令&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineOption&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;EditMode Emacs `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;BellStyle None `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PredictionSource History `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PredictionViewStyle ListView `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ShowToolTips `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;HistoryNoDuplicates `
+                     &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Colors @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 设置不同元素的颜色，如命令、参数、运算符、变量、字符串、数字、成员、类型、函数和默认颜色&lt;/span&gt;
+                         Command = &lt;span class=&#34;token string&#34;&gt;&#39;Cyan&#39;&lt;/span&gt;
+                         Parameter = &lt;span class=&#34;token string&#34;&gt;&#39;Yellow&#39;&lt;/span&gt;
+                         Operator = &lt;span class=&#34;token string&#34;&gt;&#39;Red&#39;&lt;/span&gt;
+                         Variable = &lt;span class=&#34;token string&#34;&gt;&#39;Green&#39;&lt;/span&gt;
+                         String = &lt;span class=&#34;token string&#34;&gt;&#39;Magenta&#39;&lt;/span&gt;
+                         Number = &lt;span class=&#34;token string&#34;&gt;&#39;White&#39;&lt;/span&gt;
+                         Member = &lt;span class=&#34;token string&#34;&gt;&#39;DarkYellow&#39;&lt;/span&gt;
+                         &lt;span class=&#34;token function&#34;&gt;Type&lt;/span&gt; = &lt;span class=&#34;token string&#34;&gt;&#39;DarkCyan&#39;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#                         Function = &#39;Blue&#39;&lt;/span&gt;
+                         Default = &lt;span class=&#34;token string&#34;&gt;&#39;Gray&#39;&lt;/span&gt;
+                     &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 增量搜索，你在键入时会动态显示匹配项&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#Set-PSReadLineKeyHandler -Chord Ctrl+R -Function ReverseSearchHistory&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 逐步搜索，每按一次快捷键会找到下一个匹配项#&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#Set-PSReadLineKeyHandler -Chord &#39;Ctrl+r&#39; -Function HistorySearchBackward &lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# Shows navigable menu of all options when hitting Tab&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-PSReadLineKeyHandler&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Key Tab &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Function&lt;/span&gt; Complete
+&lt;span class=&#34;token comment&#34;&gt;#Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#Utilities&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; which &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$command&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;token function&#34;&gt;Get-Command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name &lt;span class=&#34;token variable&#34;&gt;$command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+	 &lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ExpandProperty Path &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#Fzf&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Import-Module&lt;/span&gt; PSFzf
+&lt;span class=&#34;token function&#34;&gt;Set-PsFzfOption&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PSReadLineChordProvider &lt;span class=&#34;token string&#34;&gt;&#39;Ctrl+f&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;PSReadLineChordReverseHistory &lt;span class=&#34;token string&#34;&gt;&#39;Ctrl+r&#39;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# Alias&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-Alias&lt;/span&gt; ll &lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Set-Alias&lt;/span&gt; g git
+&lt;span class=&#34;token function&#34;&gt;Set-Alias&lt;/span&gt; grep findstr
+
+&lt;span class=&#34;token comment&#34;&gt;#env&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:http_proxy=&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:10809&#34;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#启动改变代理&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:puser = &lt;span class=&#34;token string&#34;&gt;&#34;C:\Users\xxx\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中which函数实现了linux上的函数功能，其他的前面有讲，保存，启动powershell&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -171,27 +360,27 @@ IP段,如:192.166.23.22/23&lt;span aria-hidden=&#34;true&#34; class=&#34;line-nu
 &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;.该脚本申请证书默认安装路径为/root/cert目录&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;准备好这些东西，cloudflare直接邮箱注册&lt;a href=&#34;https://cloudflare.com/%EF%BC%8CAPI&#34;&gt;https://cloudflare.com/，API&lt;/a&gt; KEY&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054345145.png&#34; alt=&#34;image-20240307054345145&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/38a0e932300ad70a71f61f02d2d631b9.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;之后依次输入&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307054521404.png&#34; alt=&#34;image-20240307054521404&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/be5c4f0e3840c67e1f522a704e1530ae.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;注意输入的域名为你解析到CF上的域名，不是A记录的域名，如下图1的位置&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055228662.png&#34; alt=&#34;image-20240307055228662&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/628eb2922e95e2f6f9b3e9a28233fd46.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;之后进入面板设置&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055410275.png&#34; alt=&#34;image-20240307055410275&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/a19a96035e892f12c79b7eb0450983b2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;将&lt;code&gt;/root/cert/xxx&lt;/code&gt;填入框中，上面是cer，下面是key，之后进入cloudflare，改成这样，打开上面图2标记的小云朵，这样流量就被cf代理了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307055729883.png&#34; alt=&#34;image-20240307055729883&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/92a55c17564e4c3ba2779fefa41c6d7e.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;4-创建代理&#34;&gt;&lt;a href=&#34;#4-创建代理&#34; class=&#34;headerlink&#34; title=&#34;4. 创建代理&#34;&gt;&lt;/a&gt;4. 创建代理&lt;/h2&gt;&lt;p&gt;接上面标记的那张图，将你的主机IP解析到这个域名的A记录下，名称随意填写，相当于得到了一个三级域名——&lt;code&gt;名称.域名&lt;/code&gt;，例如&lt;code&gt;test.example.com&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;进入x-ui 面板入站列表-添加入站&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060728590.png&#34; alt=&#34;image-20240307060728590&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307060941380.png&#34; alt=&#34;image-20240307060941380&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/15cddfb0eaadb83728413babe85da1a8.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/6796d0ebb5a7dc37dd4029c7afad2d94.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这里的域名就是你自己解析到的域名，名称+域名，添加，分享二维码就可以使用了&lt;/p&gt;
 &lt;h2 id=&#34;5-套CF优选IP&#34;&gt;&lt;a href=&#34;#5-套CF优选IP&#34; class=&#34;headerlink&#34; title=&#34;5. 套CF优选IP&#34;&gt;&lt;/a&gt;5. 套CF优选IP&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/badafans/better-cloudflare-ip&#34;&gt;badafans/better-cloudflare-ip: 查找适合自己当前网络环境的优选cloudflare anycast IP (github.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/XIU2/CloudflareSpeedTest&#34;&gt;XIU2/CloudflareSpeedTest: 🌩「自选优选 IP」测试 Cloudflare CDN 延迟和速度，获取最快 IP ！当然也支持其他 CDN / 网站 IP ~ (github.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;两款工具&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307061731515.png&#34; alt=&#34;image-20240307061731515&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/50fe30940fc75ca875f94f0279944f66.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;将优选得到的地址填写上去，将原来的地址写到伪装域名，需要优选443这个端口的地址&lt;/p&gt;
 &lt;h2 id=&#34;6-其他类型的代理&#34;&gt;&lt;a href=&#34;#6-其他类型的代理&#34; class=&#34;headerlink&#34; title=&#34;6.其他类型的代理&#34;&gt;&lt;/a&gt;6.其他类型的代理&lt;/h2&gt;&lt;p&gt;上面也可以不用443端口，这要添加一条规则&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/x-ui%E9%9D%A2%E6%9D%BF%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9+%E5%A5%97CF%5Cimage-20240307062711360.png&#34; alt=&#34;image-20240307062711360&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/06/125b23e45290caf95b4d3303a39b1b53.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然后就可以优选443的地址，端口改写443&lt;/p&gt;
 &lt;p&gt;也能直接使用其他的端口，下面就不需要打开tls&lt;/p&gt;
 &lt;p&gt;也可以网络直接选择tcp，选择reality，这种是直连，要看你的服务器网络质量&lt;/p&gt;
