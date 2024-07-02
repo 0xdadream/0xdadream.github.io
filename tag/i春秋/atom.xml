@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://0xdadream.github.io</id>
+    <title>逐梦 • Posts by &#34;i春秋&#34; tag</title>
+    <link href="https://0xdadream.github.io" />
+    <updated>2021-01-31T22:37:00.000Z</updated>
+    <category term="tip" />
+    <category term="安装" />
+    <category term="linux" />
+    <category term="re" />
+    <category term="工具" />
+    <category term="web" />
+    <category term="wp" />
+    <category term="攻防世界" />
+    <category term="windows" />
+    <category term="BUUCTF" />
+    <category term="server" />
+    <category term="bug" />
+    <category term="sql" />
+    <category term="代码审计" />
+    <category term="漏洞复现" />
+    <category term="java" />
+    <category term="命令" />
+    <category term="学习" />
+    <category term="tools" />
+    <category term="文件上传" />
+    <category term="php" />
+    <category term="python" />
+    <category term="汇编" />
+    <category term="i春秋" />
+    <entry>
+        <id>https://0xdadream.github.io/2021/02/01/bao-po-1/</id>
+        <title>爆破-1</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/02/01/bao-po-1/"/>
+        <content type="html">&lt;h2 id=&#34;爆破-1&#34;&gt;&lt;a href=&#34;#爆破-1&#34; class=&#34;headerlink&#34; title=&#34;爆破-1&#34;&gt;&lt;/a&gt;爆破-1&lt;/h2&gt;&lt;p&gt;进去后如下代码提示&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-php+HTML&#34; data-language=&#34;php+HTML&#34;&gt;&lt;code class=&#34;language-php+HTML&#34;&gt;&amp;lt;?php
+include &#34;flag.php&#34;;
+$a = @$_REQUEST[&#39;hello&#39;];
+if(!preg_match(&#39;/^\w*$/&#39;,$a )){
+  die(&#39;ERROR&#39;);
+}
+eval(&#34;var_dump($$a);&#34;);
+show_source(__FILE__);
+?&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;$_REQUEST[‘hello’]&lt;/p&gt;
+&lt;p&gt;提交的参数是hello，前面提示在某个6位变量中，想到爆破，但是工作量很大&lt;/p&gt;
+&lt;p&gt;/^\w*$/ &lt;/p&gt;
+&lt;p&gt;^n   以n开头&lt;/p&gt;
+&lt;p&gt;n$  以n结尾&lt;/p&gt;
+&lt;p&gt;n*  匹配0个或者多个n&lt;/p&gt;
+&lt;p&gt;\w  查找单词字符  A_Z  a_z  0_9  _&lt;/p&gt;
+&lt;p&gt;正则过滤后爆破还是很大的工作量&lt;/p&gt;
+&lt;p&gt;eval(“var_dump($$a);”)&lt;/p&gt;
+&lt;p&gt;eavl()是代码执行函数，&lt;/p&gt;
+&lt;p&gt;var_dump() 函数将变量的类型、值、结构等信息打印出来&lt;/p&gt;
+&lt;p&gt;这里就可以是用全局变量$GLOBALS将所有变量打印出来&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s3.ax1x.com/2021/03/03/6EyMdK.png&#34; alt=&#34;6EyMdK.png&#34;&gt;&lt;/p&gt;
+</content>
+        <category term="web" />
+        <category term="wp" />
+        <category term="i春秋" />
+        <updated>2021-01-31T22:37:00.000Z</updated>
+    </entry>
+</feed>

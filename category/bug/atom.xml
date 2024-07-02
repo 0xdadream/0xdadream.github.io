@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://0xdadream.github.io</id>
+    <title>逐梦 • Posts by &#34;bug&#34; category</title>
+    <link href="https://0xdadream.github.io" />
+    <updated>2024-07-03T01:25:00.000Z</updated>
+    <category term="tip" />
+    <category term="安装" />
+    <category term="linux" />
+    <category term="re" />
+    <category term="工具" />
+    <category term="web" />
+    <category term="wp" />
+    <category term="攻防世界" />
+    <category term="windows" />
+    <category term="BUUCTF" />
+    <category term="server" />
+    <category term="bug" />
+    <category term="sql" />
+    <category term="代码审计" />
+    <category term="漏洞复现" />
+    <category term="java" />
+    <category term="命令" />
+    <category term="学习" />
+    <category term="tools" />
+    <category term="文件上传" />
+    <category term="php" />
+    <category term="python" />
+    <category term="汇编" />
+    <category term="i春秋" />
+    <entry>
+        <id>https://0xdadream.github.io/2024/07/03/centos8-guan-fang-yuan-shi-xiao/</id>
+        <title>centos8官方源失效</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2024/07/03/centos8-guan-fang-yuan-shi-xiao/"/>
+        <content type="html">&lt;h1 id=&#34;centos8官方源失效&#34;&gt;&lt;a href=&#34;#centos8官方源失效&#34; class=&#34;headerlink&#34; title=&#34;centos8官方源失效&#34;&gt;&lt;/a&gt;centos8官方源失效&lt;/h1&gt;&lt;p&gt;当你运行yum的下载命令时有如下报错&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;CentOS Stream &lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt; - AppStream                                                                           
+Errors during downloading metadata &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; repository &lt;span class=&#34;token string&#34;&gt;&#39;appstream&#39;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这表明官方源已经失效，只能更换源，这里更换国内的阿里镜像源，当然在这之前你可以试试ping各类网站，试试是不是自己网络问题&lt;/p&gt;
+&lt;h2 id=&#34;更换源&#34;&gt;&lt;a href=&#34;#更换源&#34; class=&#34;headerlink&#34; title=&#34;更换源&#34;&gt;&lt;/a&gt;更换源&lt;/h2&gt;&lt;h3 id=&#34;重置-yum配置&#34;&gt;&lt;a href=&#34;#重置-yum配置&#34; class=&#34;headerlink&#34; title=&#34;重置 yum配置&#34;&gt;&lt;/a&gt;重置 yum配置&lt;/h3&gt;&lt;p&gt;如果之前进行了许多更改，可能需要重置yum配置以确保没有配置错误。&lt;/p&gt;
+&lt;h4 id=&#34;备份并重新创建-yum-配置文件&#34;&gt;&lt;a href=&#34;#备份并重新创建-yum-配置文件&#34; class=&#34;headerlink&#34; title=&#34;备份并重新创建 yum 配置文件&#34;&gt;&lt;/a&gt;备份并重新创建 yum 配置文件&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; /etc/yum.repos.d /etc/yum.repos.d.bak
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; /etc/yum.repos.d&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;下载阿里源&#34;&gt;&lt;a href=&#34;#下载阿里源&#34; class=&#34;headerlink&#34; title=&#34;下载阿里源&#34;&gt;&lt;/a&gt;下载阿里源&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-O&lt;/span&gt; /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若是本地网络，下载再上传&lt;/p&gt;
+&lt;h4 id=&#34;清理-yum-缓存并重建缓存&#34;&gt;&lt;a href=&#34;#清理-yum-缓存并重建缓存&#34; class=&#34;headerlink&#34; title=&#34;清理 yum 缓存并重建缓存&#34;&gt;&lt;/a&gt;清理 yum 缓存并重建缓存&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum clean all
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum makecache&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;添加一个非官方源（国外）&#34;&gt;&lt;a href=&#34;#添加一个非官方源（国外）&#34; class=&#34;headerlink&#34; title=&#34;添加一个非官方源（国外）&#34;&gt;&lt;/a&gt;添加一个非官方源（国外）&lt;/h2&gt;&lt;h3 id=&#34;在-CentOS-8-x-上安装-EPEL-存储库&#34;&gt;&lt;a href=&#34;#在-CentOS-8-x-上安装-EPEL-存储库&#34; class=&#34;headerlink&#34; title=&#34;在 CentOS 8.x 上安装 EPEL 存储库&#34;&gt;&lt;/a&gt;在 CentOS 8.x 上安装 EPEL 存储库&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#切换到root&lt;/span&gt;
+yum search epel  &lt;span class=&#34;token comment&#34;&gt;#搜索&lt;/span&gt;
+yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; epel-release &lt;span class=&#34;token comment&#34;&gt;# 安装&lt;/span&gt;
+yum config-manager --set-enabled epel &lt;span class=&#34;token comment&#34;&gt;#启用 EPEL 存储库&lt;/span&gt;
+yum config-manager --set-enabled PowerTools 
+yum update &lt;span class=&#34;token comment&#34;&gt;#更新源&lt;/span&gt;
+yum repolist &lt;span class=&#34;token comment&#34;&gt;#查看已安装的库&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用-EPEL-存储库&#34;&gt;&lt;a href=&#34;#使用-EPEL-存储库&#34; class=&#34;headerlink&#34; title=&#34;使用 EPEL 存储库&#34;&gt;&lt;/a&gt;使用 EPEL 存储库&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;sudo yum --disablerepo=&#34;*&#34; --enablerepo=&#34;epel&#34; list available | grep &#39;package&#39;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;**&lt;code&gt;yum&lt;/code&gt;**： 这是 CentOS 和 RHEL 系统上用于管理软件包的命令行工具&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;--disablerepo=&#34;\*&#34;&lt;/code&gt;**： 这个选项禁用所有配置的存储库，&lt;code&gt;*&lt;/code&gt; 是一个通配符，表示所有存储库都将被禁用&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;--enablerepo=&#34;epel&#34;&lt;/code&gt;**： 这个选项仅启用 EPEL 存储库，这样可以确保命令只查询并显示 EPEL 存储库中的软件包&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;list available&lt;/code&gt;**： 这个子命令列出所有可用的软件包，它会显示在启用的存储库中可供安装的软件包列表&lt;/p&gt;
+&lt;p&gt;**&lt;code&gt;grep &#39;package&#39;&lt;/code&gt;**：匹配包名&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token parameter variable&#34;&gt;--enablerepo&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;epel&#34;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;package&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 从 EPEL 存储库安装软件包&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;安装并启用-REMI-存储库&#34;&gt;&lt;a href=&#34;#安装并启用-REMI-存储库&#34; class=&#34;headerlink&#34; title=&#34;安装并启用 REMI 存储库&#34;&gt;&lt;/a&gt;安装并启用 REMI 存储库&lt;/h2&gt;&lt;p&gt;在终端中执行以下命令，在 CentOS 8上安装 REMI 存储库&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; https://rpms.remirepo.net/enterprise/remi-release-8.rpm&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;检查已启用的存储库&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum repolist&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;您可以安装 yum-config-manager，这将帮助您从命令行快速启用和禁用存储库，前面config-manager报错就可以安装&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; dnf-utils&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行时启用存储库&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token parameter variable&#34;&gt;--enablerepo&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;remi &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;package&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://help.aliyun.com/zh/ecs/user-guide/change-centos-8-repository-addresses&#34;&gt;CentOS 8 EOL如何切换源？_云服务器 ECS(ECS)-阿里云帮助中心 (aliyun.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cyberciti.biz/faq/how-to-enable-and-install-epel-repo-on-centos-8-x/&#34;&gt;如何在 CentOS 8 上启用和安装 EPEL Repo - nixCraft (cyberciti.biz)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://computingforgeeks.com/how-to-install-epel-repository-on-rhel-8-centos-8/&#34;&gt;如何在 RHEL 8 或 CentOS 8 上安装 EPEL 存储库 |ComputingForGeeks的&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://computingforgeeks.com/install-and-enable-remi-repository-on-centos-rhel/&#34;&gt;在 CentOS 8 上安装并启用 REMI 存储库 |RHEL 8 |ComputingForGeeks的&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="bug" />
+        <updated>2024-07-03T01:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/05/26/php-luan-ma/</id>
+        <title>php乱码解决方法</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/05/26/php-luan-ma/"/>
+        <content type="html">&lt;h2 id=&#34;php乱码&#34;&gt;&lt;a href=&#34;#php乱码&#34; class=&#34;headerlink&#34; title=&#34;php乱码&#34;&gt;&lt;/a&gt;php乱码&lt;/h2&gt;&lt;h3 id=&#34;HTML&#34;&gt;&lt;a href=&#34;#HTML&#34; class=&#34;headerlink&#34; title=&#34;HTML&#34;&gt;&lt;/a&gt;HTML&lt;/h3&gt;&lt;p&gt;head后，tilte前添加&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-markup&#34; data-language=&#34;markup&#34;&gt;&lt;code class=&#34;language-markup&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token tag&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;http-equiv&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#39;&lt;/span&gt;Content-Type&lt;span class=&#34;token punctuation&#34;&gt;&#39;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token attr-name&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;token attr-value&#34;&gt;&lt;span class=&#34;token punctuation attr-equals&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&#39;&lt;/span&gt;text/html; charset=utf-8&lt;span class=&#34;token punctuation&#34;&gt;&#39;&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;php&#34;&gt;&lt;a href=&#34;#php&#34; class=&#34;headerlink&#34; title=&#34;php&#34;&gt;&lt;/a&gt;php&lt;/h3&gt;&lt;p&gt;开头添加&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-php&#34; data-language=&#34;php&#34;&gt;&lt;code class=&#34;language-php&#34;&gt;&lt;span class=&#34;token function&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string double-quoted-string&#34;&gt;&#34;Content-Type: text/html;charset=utf-8&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+        <category term="bug" />
+        <updated>2021-05-26T01:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/04/21/guan-yu-hexo-cha-ru-tu-pian/</id>
+        <title>关于hexo插入图片</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/04/21/guan-yu-hexo-cha-ru-tu-pian/"/>
+        <content type="html">&lt;h1 id=&#34;hexo-博文中图片部署&#34;&gt;&lt;a href=&#34;#hexo-博文中图片部署&#34; class=&#34;headerlink&#34; title=&#34;hexo 博文中图片部署&#34;&gt;&lt;/a&gt;hexo 博文中图片部署&lt;/h1&gt;&lt;p&gt;在&lt;code&gt;source&lt;/code&gt;下创建一个&lt;code&gt;images&lt;/code&gt;目录，存放图片&lt;/p&gt;
+&lt;p&gt;引用方式&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-php&#34; data-language=&#34;php&#34;&gt;&lt;code class=&#34;language-php&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;images&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;xxx&lt;span class=&#34;token operator&#34;&gt;.&lt;/span&gt;jpg&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以为每条博文分别创建&lt;/p&gt;
+&lt;p&gt;在_post目录下创建一个与md同名的文件夹放图片&lt;/p&gt;
+&lt;p&gt;应用方式&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-php&#34; data-language=&#34;php&#34;&gt;&lt;code class=&#34;language-php&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;xxx&lt;span class=&#34;token operator&#34;&gt;.&lt;/span&gt;jpg&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意这里是&lt;code&gt;\&lt;/code&gt;,windows下是&lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+</content>
+        <category term="bug" />
+        <updated>2021-04-21T01:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/04/05/wu-li-ji-ssh-lian-jie-bu-shang-xu-ni-ji/</id>
+        <title>物理机ssh连接不上虚拟机</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/04/05/wu-li-ji-ssh-lian-jie-bu-shang-xu-ni-ji/"/>
+        <content type="html">&lt;p&gt;保证虚拟机连得上网，比如能ping百度&lt;/p&gt;
+&lt;p&gt;最简单办法&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/04/05/cQclWV.png&#34; alt=&#34;cQclWV.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击更改设置获取管理员权限&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/04/05/cQc1zT.png&#34; alt=&#34;cQc1zT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后还原&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/04/05/cQcNw9.png&#34; alt=&#34;cQcNw9.png&#34;&gt;&lt;/p&gt;
+</content>
+        <category term="bug" />
+        <updated>2021-04-05T01:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/03/21/ssh-ju-jue-lian-jie/</id>
+        <title>ssh拒绝连接</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/03/21/ssh-ju-jue-lian-jie/"/>
+        <content type="html">&lt;ol&gt;
+&lt;li&gt;sudo vi /etc/ssh/sshd_config  将PermitRootLogin修改为yes&lt;/li&gt;
+&lt;li&gt;sudo /etc/init.d/ssh restart重启动了sshd服务&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="bug" />
+        <updated>2021-03-21T01:25:00.000Z</updated>
+    </entry>
+</feed>
