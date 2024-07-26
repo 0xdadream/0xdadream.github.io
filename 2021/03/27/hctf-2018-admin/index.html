@@ -428,7 +428,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -603,7 +603,7 @@
 
 <p>flask是用python写的web框架，session以cookie形式存在客户端</p>
 <p>接下来解码，再伪造session</p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9EmwD.png" alt="c9EmwD.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/eed00b048156fdebb04153288475cbd7.png"></p>
 <p>拿到session</p>
 <pre class="line-numbers language-http" data-language="http"><code class="language-http">session：
 .eJxFUM9rwjAU_lfGO3toQ70IXkatOHgvVNKGl4s4rbZp4qBV1Ij_-4Ib2_n7_T1gcxiasYXZebg0E9h0e5g94O0TZoCWU6nLK_rqjp4DWbKsyzvZPpOKnNRFT2IhZF5luOSb8ZyQLjyFtpXKucgLMi981AQMq4zVUVDeT03Od7YrQdZZ4xeB9fqHvzQew75F9eHJVkEuyykpvKEvE6ljdlhELSYm7wWHdWvUTlDYd6iqOTwnsBuHw-b81Tenvwmka4e6cLFChmqXGBXtremkNg5trGPfLfuiN7ZMWVWJ0euOr_OXXee3x-b_DFFn9S9y2voIQAoTuIzN8PoM0gSe3-wTbLg.YGAkfw.j_uEzvi-2vEKxpp7Xzgj-Iyw1bc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -631,7 +631,7 @@
 <span class="token punctuation">.</span>eJxFUMuKwkAQ_JWlzx7iIxfBg5BNUOgOCROHmYv4iMl0ZrIQFXXEf99ZF3YPRdMUVV1dT9iehvrcwvwyXOsRbM0R5k_42MMckIsHSYwUf8Z5omIl1wYn1JLYMHLrlKwm6MoWxTL<span class="token operator">-</span>mdppgwG5KC3J1Q0zFVNSshLdHXkV0DzIra0SwUemVnE11i51yuM9l7rVorValjaX5IiLaZ4sbzhJHSVqillqyAdd0BAfvOJwIwu7tx36YgGvERzOw2l7<span class="token operator">-</span>erq_u8FSqoZ8jIKspmW6q45NVpuOkysIakd<span class="token operator">-</span>s6TaB55VsXEOkRLLRaLt51xu6b<span class="token operator">-</span>L6Nf97r5ZfqdCwTsjs70MILruR7evcE4gtc3l5pvNA<span class="token punctuation">.</span>YGBhyg<span class="token punctuation">.</span>8mFsYTGotorfD6H7bsHdSTnxKQ4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>然后用burp抓包，传入修改的session，得到flag</p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9EnTe.png" alt="c9EnTe.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/2da335133cf210becc8dd391024b9652.png"></p>
 <h4 id="Unicode欺骗"><a href="#Unicode欺骗" class="headerlink" title="Unicode欺骗"></a>Unicode欺骗</h4><p>利用解码机制，传入一个非预期的值得到预期的结果</p>
 <p>引用上面<code>routes.py</code></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/register'</span><span class="token punctuation">,</span> methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
@@ -696,10 +696,10 @@
 <p>查阅资料</p>
 <p><code>nodeprep.prepare</code>这个函数会把大写转换为小写 并且会做如下转换<br>假如有一个<code>ᴬ</code>字符 第一次调用函数时会造成<code>ᴬ-&gt;A</code>，第二次调用时会<code>A-&gt;a</code><br>所以思路就是 我们注册一个<code>ᴬdmin</code>账号 此时第一次调用<code>nodeprep.prepare</code> 账号变为<br><code>Admin</code>,在修改密码，会再次调用<code>nodeprep.prepare</code>,这是就变成了<code>admin</code></p>
 <p>再用改的密码登录admin就成功了</p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9Er60.png" alt="c9Er60.png"></p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9Eg7F.png" alt="c9Eg7F.png"><img src="https://z3.ax1x.com/2021/03/29/c9ERk4.png" alt="c9ERk4.png"></p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9Efh9.png" alt="c9Efh9.png"></p>
-<p><img src="https://z3.ax1x.com/2021/03/29/c9E4pR.png" alt="c9E4pR.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/61f32fe1637fae1ee2a8518376ec863f.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/0b7140acc16e55a440c1a3cca110b993.png"><img src="https://z3.ax1x.com/2021/03/29/c9ERk4.png" alt="c9ERk4.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/0d71cb0dbfc9d7ce0c338760b7caa735.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/78d77b713bfeff7b558f66944ef1991e.png"></p>
 
                 
             </div>

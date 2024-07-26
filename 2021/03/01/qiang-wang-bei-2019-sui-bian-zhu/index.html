@@ -428,7 +428,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -466,29 +466,29 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p>输入’报错</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6Es8uq.gif" alt="6Es8uq.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/d122e8e1ae90a3543da2e9e088e65646.gif"></p>
 <p>用order by 查出有两个字段</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsrK1.gif" alt="6EsrK1.gif"><img src="https://s3.ax1x.com/2021/03/03/6EsgUO.gif" alt="6EsgUO.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/786b126cdf1527ff4f81c87b79a79db8.gif"><img src="https://images.dadream.eu.org/images/2024/07/234921c3884ebbaa6abd09bcc592e863.gif"></p>
 <p>这里发现select被过滤，我绕不过</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsWPe.gif" alt="6EsWPe.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/4b57f7b01774a9d68cc5416849b296ee.gif"></p>
 <p>试了一下能进行堆叠注入</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsIKI.gif" alt="6EsIKI.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/f6d85641fdaca60eed73876f24e5052f.gif"></p>
 <p>查到两个表 1919810931114514、words</p>
 <p>查询表中列</p>
 <p>?inject=’;show columns from <code>1919810931114514</code> %23</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsTqP.jpg" alt="6EsTqP.jpg"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/7a19bd0bd4933150a1874a46c1047074.jpg"></p>
 <p>?inject=’;show columns from <code>words</code> %23</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsHVf.jpg" alt="6EsHVf.jpg"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/303abac6b9a079e574989f92493312be.jpg"></p>
 <p>禁用了select，可以采用预编译来爆数据</p>
 <p>这里存在大小写绕过</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EsOPg.gif" alt="6EsOPg.gif"></p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6Esj2j.gif" alt="6Esj2j.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/e30b5f3754b22755d9b593a019cc9e3b.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/cc1032d4bc15b41fc44cdc7549f4fe75.gif"></p>
 <p>alter table words rename to words1;alter table <code>1919810931114514</code> rename to words;alter table words change flag id varchar(50);#</p>
 <p>这种是猜测默认查words中的数据</p>
 <p>此payload是将words改为words1，将1919810931114514改为words，将其中数据列也改为id varchar（50）</p>
 <p>再通过’ or 1=1查全部数据</p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EySrq.gif" alt="6EySrq.gif"></p>
-<p><img src="https://s3.ax1x.com/2021/03/03/6EyPaT.gif" alt="6EyPaT.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/986575bed9828014c2ebd1bd0d0459af.gif"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/f8d1607e2fe8d240a409ea1b8846c9ae.gif"></p>
 <p>表名为数字时，要用反引号包起来查询</p>
 
                 

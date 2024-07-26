@@ -420,7 +420,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-07-27
                 </div>
                 
 
@@ -459,7 +459,7 @@
             <div id="articleContent">
                 <h1 id="win10右键添加cmd和powershell"><a href="#win10右键添加cmd和powershell" class="headerlink" title="win10右键添加cmd和powershell"></a>win10右键添加cmd和powershell</h1><h2 id="在空白处右击"><a href="#在空白处右击" class="headerlink" title="在空白处右击"></a>在空白处右击</h2><p>两种方式，一种改原生的注册表，一种添加新的注册表</p>
 <h3 id="1-改原生的注册表"><a href="#1-改原生的注册表" class="headerlink" title="1. 改原生的注册表"></a>1. 改原生的注册表</h3><p><code>win+r</code>输入<code>register</code>打开注册表</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcVHG8.png" alt="gcVHG8.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/24cd4255c8378cf4e5d6f354d4138c78.png"></p>
 <ul>
 <li><p>cmd</p>
 <p>找到<code>计算机\HKEY_CLASSES_ROOT\Directory\Background\shell\cmd</code></p>
@@ -473,7 +473,7 @@
 <p>因为<code>Extended</code>这个二进制值存在，需要shift+右键才能显示，要使用右键直接显示，可以将这个二进制值删除</p>
 <p>这个时候可能会因为权限原因修改失败，查看下文解决方法</p>
 <h3 id="2-添加新的注册表"><a href="#2-添加新的注册表" class="headerlink" title="2.添加新的注册表"></a>2.添加新的注册表</h3><p>创建如图几个项</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcZCGT.png" alt="gcZCGT.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/7bbb385f669630bd3a4e28a4e99c0f9c.png"></p>
 <p>这里直接演示添加以管理员打开，非管理员打开只需要做一些改动</p>
 <ul>
 <li><p>powershell</p>
@@ -482,9 +482,9 @@
 <p>新建字符串值<code>MUIVerb</code>值为<code>在此处以管理员打开powershell窗口</code></p>
 <p>新建字符串值<code>NoWorkingDirectory</code>值为空</p>
 <p>新建DWORD值<code>ShowBasedOnVelocityId</code>值为<code>639bc8</code></p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcZEL9.png" alt="gcZEL9.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/9c0ffd41679831bd370a2ec92ea2d200.png"></p>
 <p>对command写入数据</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcZ9iV.png" alt="gcZ9iV.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/a3a0b3d5a570402a1d2a9ca19a36cc07.png"></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">powershell.exe <span class="token parameter variable">-command</span> Start-Process powershell <span class="token parameter variable">-ArgumentList</span> <span class="token punctuation">\</span>"-noexit<span class="token punctuation">\</span>",<span class="token punctuation">\</span>"Set-Location <span class="token parameter variable">-literalPath</span> <span class="token string">'%V'</span><span class="token punctuation">\</span>" <span class="token parameter variable">-Verb</span> runAs
 
 powershell.exe <span class="token parameter variable">-command</span> Start-Process powershell
@@ -497,7 +497,7 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
 <li><p>cmd</p>
 <p>必须是<code>runas</code>名字不能改，在下面新建DWORD值<code>ShowBasedOnVelocityId</code>值为<code>639bc8</code></p>
 <p>对command写入数据</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcZZZR.png" alt="gcZZZR.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/65a0142229ab7e7b2480a1f8c57b0c57.png"></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cmd.exe /s /k <span class="token function">pushd</span> <span class="token string">"%V"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果要以普通用户打开，则可以将<code>runas</code>换为其他名字，再添加</p>
@@ -506,23 +506,23 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
 <h2 id="文件夹上右击"><a href="#文件夹上右击" class="headerlink" title="文件夹上右击"></a>文件夹上右击</h2><p>方法和前面相似</p>
 <p>转到<code>计算机\HKEY_CLASSES_ROOT\Folder\shell\</code>目录下</p>
 <p>建立项如下</p>
-<p><img src="https://z3.ax1x.com/2021/05/19/g4nmvR.png" alt="g4nmvR.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/55e14b349c2bd421b747891784334272.png"></p>
 <p>然后操作和前面相识</p>
 <p>只需要在主项<code>cmd</code>设置右键显示名字，数据改为你想设置的</p>
 <p><code>command</code>中添加和前面提到的一样的值</p>
 <p>示例</p>
-<p><img src="https://z3.ax1x.com/2021/05/19/g4nMb6.png" alt="g4nMb6.png"></p>
-<p><img src="https://z3.ax1x.com/2021/05/19/g4nGPe.png" alt="g4nGPe.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/a4f38b25fac91768235572f67fe84f76.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/26352475865cc4d7e5271f5476f7bc13.png"></p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>右击cmd-&gt;权限</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcVbRS.png" alt="gcVbRS.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/48bf4c8c8913e3b1a2c037ae5aec46b4.png"></p>
 <p>点击右下角高级</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcVqxg.png" alt="gcVqxg.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/c3513220a714b7d2fa218b086d572666.png"></p>
 <p>点击右上所有者旁的更改</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcVxZn.png" alt="gcVxZn.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/05b33eb0d878befa37be5e1c775295d9.png"></p>
 <p>输入<code>Administrators</code>点击检查名称-&gt;确定</p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcVzaq.png" alt="gcVzaq.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/6495b177aa60e745c574f2ec8cd4befe.png"></p>
 <p>双击<code>Administrators</code></p>
-<p><img src="https://z3.ax1x.com/2021/05/16/gcZSI0.png" alt="gcZSI0.png"></p>
+<p><img src="https://images.dadream.eu.org/images/2024/07/4d0cd074d2046fd0e4ae6c85697f7097.png"></p>
 <p>勾选完全控制，一直确定</p>
 <h2 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h2><ul>
 <li><p><code>Extended</code></p>
