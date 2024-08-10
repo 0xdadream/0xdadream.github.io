@@ -32,6 +32,7 @@
         <category>汇编</category>
         <category>i春秋</category>
         <category>教程</category>
+        <category>git</category>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/07/20/linux-mei-hua-ming-ling-xing/</guid>
             <title>linux美化命令行</title>
@@ -449,6 +450,71 @@ deb-src http://mirrors.163.com/ubuntu/ jammy-backports main restricted universe 
 -x或--unix：此参数的效果和指定&lt;span class=&#34;token string&#34;&gt;&#34;-A unix&#34;&lt;/span&gt;参数相同；
 --ip或--inet：此参数的效果和指定&lt;span class=&#34;token string&#34;&gt;&#34;-A inet&#34;&lt;/span&gt;参数相同。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;chmod&#34;&gt;&lt;a href=&#34;#chmod&#34; class=&#34;headerlink&#34; title=&#34;chmod&#34;&gt;&lt;/a&gt;chmod&lt;/h2&gt;&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt; 命令在 Unix 和类 Unix 操作系统中用于更改文件和目录的权限。&lt;/p&gt;
+&lt;h3 id=&#34;基本用法&#34;&gt;&lt;a href=&#34;#基本用法&#34; class=&#34;headerlink&#34; title=&#34;基本用法&#34;&gt;&lt;/a&gt;基本用法&lt;/h3&gt;&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt; 命令的一般语法是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 模式 文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模式&lt;/strong&gt;：指定要设置的权限。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件&lt;/strong&gt;：指定要更改权限的文件或目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;权限表示&#34;&gt;&lt;a href=&#34;#权限表示&#34; class=&#34;headerlink&#34; title=&#34;权限表示&#34;&gt;&lt;/a&gt;权限表示&lt;/h3&gt;&lt;p&gt;权限可以用符号或数字来表示。&lt;/p&gt;
+&lt;h3 id=&#34;符号表示&#34;&gt;&lt;a href=&#34;#符号表示&#34; class=&#34;headerlink&#34; title=&#34;符号表示&#34;&gt;&lt;/a&gt;符号表示&lt;/h3&gt;&lt;p&gt;权限由三组三个字符表示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一组字符是文件所有者（用户）的权限。&lt;/li&gt;
+&lt;li&gt;第二组字符是文件所有者所属组的权限。&lt;/li&gt;
+&lt;li&gt;第三组字符是其他用户的权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每组可以有以下字符：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;r&lt;/code&gt;（读）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;w&lt;/code&gt;（写）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt;（执行）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rwxr-xr--&lt;/code&gt; 表示文件所有者有读、写、执行权限；组有读、执行权限；其他用户只有读权限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数字表示&#34;&gt;&lt;a href=&#34;#数字表示&#34; class=&#34;headerlink&#34; title=&#34;数字表示&#34;&gt;&lt;/a&gt;数字表示&lt;/h3&gt;&lt;p&gt;权限也可以用八进制（base-8）数字表示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;读由 &lt;code&gt;4&lt;/code&gt; 表示。&lt;/li&gt;
+&lt;li&gt;写由 &lt;code&gt;2&lt;/code&gt; 表示。&lt;/li&gt;
+&lt;li&gt;执行由 &lt;code&gt;1&lt;/code&gt; 表示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;权限的总和表示最终权限：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;7&lt;/code&gt;（读 + 写 + 执行）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;6&lt;/code&gt;（读 + 写）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt;（读 + 执行）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;4&lt;/code&gt;（只有读）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt;（没有权限）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;755&lt;/code&gt; 表示文件所有者有 &lt;code&gt;7&lt;/code&gt;（读、写、执行），组有 &lt;code&gt;5&lt;/code&gt;（读、执行），其他用户有 &lt;code&gt;5&lt;/code&gt;（读、执行）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例&#34;&gt;&lt;a href=&#34;#示例&#34; class=&#34;headerlink&#34; title=&#34;示例&#34;&gt;&lt;/a&gt;示例&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;符号表示更改权限：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; u+x file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;给 &lt;code&gt;file.txt&lt;/code&gt; 的所有者添加执行权限。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;数字表示更改权限：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;644&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置 &lt;code&gt;file.txt&lt;/code&gt; 的所有者有读和写权限，组和其他用户只有读权限。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;递归更改权限：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;755&lt;/span&gt; /path/to/directory&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置 &lt;code&gt;/path/to/directory&lt;/code&gt; 内所有文件和目录的权限。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;选项&#34;&gt;&lt;a href=&#34;#选项&#34; class=&#34;headerlink&#34; title=&#34;选项&#34;&gt;&lt;/a&gt;选项&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-R&lt;/code&gt;：递归更改文件和目录的权限。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：详细模式。对每个处理的文件输出诊断信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;：类似详细模式，但仅在更改时报告。&lt;/li&gt;
+&lt;/ul&gt;
  ]]></description>
         </item>
         <item>

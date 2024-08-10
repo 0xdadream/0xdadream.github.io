@@ -61,9 +61,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
@@ -424,21 +424,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-06-27
+                    2024-08-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    358
+                    796
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -487,6 +487,71 @@
 -x或--unix：此参数的效果和指定<span class="token string">"-A unix"</span>参数相同；
 --ip或--inet：此参数的效果和指定<span class="token string">"-A inet"</span>参数相同。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p><code>chmod</code> 命令在 Unix 和类 Unix 操作系统中用于更改文件和目录的权限。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p><code>chmod</code> 命令的一般语法是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token punctuation">[</span>选项<span class="token punctuation">]</span> 模式 文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><strong>模式</strong>：指定要设置的权限。</li>
+<li><strong>文件</strong>：指定要更改权限的文件或目录。</li>
+</ul>
+<h3 id="权限表示"><a href="#权限表示" class="headerlink" title="权限表示"></a>权限表示</h3><p>权限可以用符号或数字来表示。</p>
+<h3 id="符号表示"><a href="#符号表示" class="headerlink" title="符号表示"></a>符号表示</h3><p>权限由三组三个字符表示：</p>
+<ul>
+<li>第一组字符是文件所有者（用户）的权限。</li>
+<li>第二组字符是文件所有者所属组的权限。</li>
+<li>第三组字符是其他用户的权限。</li>
+</ul>
+<p>每组可以有以下字符：</p>
+<ul>
+<li><code>r</code>（读）</li>
+<li><code>w</code>（写）</li>
+<li><code>x</code>（执行）</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><code>rwxr-xr--</code> 表示文件所有者有读、写、执行权限；组有读、执行权限；其他用户只有读权限。</li>
+</ul>
+<h3 id="数字表示"><a href="#数字表示" class="headerlink" title="数字表示"></a>数字表示</h3><p>权限也可以用八进制（base-8）数字表示：</p>
+<ul>
+<li>读由 <code>4</code> 表示。</li>
+<li>写由 <code>2</code> 表示。</li>
+<li>执行由 <code>1</code> 表示。</li>
+</ul>
+<p>权限的总和表示最终权限：</p>
+<ul>
+<li><code>7</code>（读 + 写 + 执行）</li>
+<li><code>6</code>（读 + 写）</li>
+<li><code>5</code>（读 + 执行）</li>
+<li><code>4</code>（只有读）</li>
+<li><code>0</code>（没有权限）</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><code>755</code> 表示文件所有者有 <code>7</code>（读、写、执行），组有 <code>5</code>（读、执行），其他用户有 <code>5</code>（读、执行）。</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ol>
+<li><p><strong>符号表示更改权限：</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> u+x file.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>给 <code>file.txt</code> 的所有者添加执行权限。</p>
+</li>
+<li><p><strong>数字表示更改权限：</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">644</span> file.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置 <code>file.txt</code> 的所有者有读和写权限，组和其他用户只有读权限。</p>
+</li>
+<li><p><strong>递归更改权限：</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">755</span> /path/to/directory<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置 <code>/path/to/directory</code> 内所有文件和目录的权限。</p>
+</li>
+</ol>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><ul>
+<li><code>-R</code>：递归更改文件和目录的权限。</li>
+<li><code>-v</code>：详细模式。对每个处理的文件输出诊断信息。</li>
+<li><code>-c</code>：类似详细模式，但仅在更改时报告。</li>
+</ul>
 
                 
             </div>
@@ -1233,7 +1298,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">170.1k</span>
+                        class="white-color">174.3k</span>
             
             
             
