@@ -61,9 +61,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
@@ -424,21 +424,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-08-10
+                    2024-08-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    796
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -552,6 +552,51 @@
 <li><code>-v</code>：详细模式。对每个处理的文件输出诊断信息。</li>
 <li><code>-c</code>：类似详细模式，但仅在更改时报告。</li>
 </ul>
+<h2 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h2><p><code>curl</code> 是一个非常强大的命令行工具，用于从命令行传输数据。它支持多种协议，如 HTTP, HTTPS, FTP, 和 SMTP。你可以用它来发送 GET 请求、POST 请求、下载文件，甚至与 API 交互。以下是 <code>curl</code> 的一些基本用法示例。</p>
+<h3 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1. 基本用法"></a>1. 基本用法</h3><p>最简单的 <code>curl</code> 用法就是发送一个 GET 请求并输出响应内容：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> http://example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会在终端中显示 <code>http://example.com</code> 的网页内容。</p>
+<h3 id="2-保存响应到文件"><a href="#2-保存响应到文件" class="headerlink" title="2. 保存响应到文件"></a>2. 保存响应到文件</h3><p>使用 <code>-o</code> 选项可以将响应保存到文件中：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-o</span> example.html http://example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会将 <code>example.com</code> 的内容保存到 <code>example.html</code> 文件中。</p>
+<h3 id="3-发送-POST-请求"><a href="#3-发送-POST-请求" class="headerlink" title="3. 发送 POST 请求"></a>3. 发送 POST 请求</h3><p>你可以使用 <code>-d</code> 选项发送 POST 请求。以下是一个发送表单数据的例子：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-d</span> <span class="token string">"name=John&amp;age=30"</span> <span class="token parameter variable">-X</span> POST http://example.com/post<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>-X</code> 选项用于指定请求方法。在这里，我们明确指定为 POST 请求。</p>
+<h3 id="4-使用自定义请求头"><a href="#4-使用自定义请求头" class="headerlink" title="4. 使用自定义请求头"></a>4. 使用自定义请求头</h3><p>你可以使用 <code>-H</code> 选项添加自定义请求头：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-H</span> <span class="token string">"Authorization: Bearer your_token_here"</span> http://example.com/secure<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这在访问需要认证的 API 时非常有用。</p>
+<h3 id="5-下载文件"><a href="#5-下载文件" class="headerlink" title="5. 下载文件"></a>5. 下载文件</h3><p>使用 <code>-O</code> 选项可以直接下载文件，并保留文件的原始名称：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-O</span> http://example.com/file.zip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会将 <code>file.zip</code> 下载到当前目录。</p>
+<h3 id="6-处理重定向"><a href="#6-处理重定向" class="headerlink" title="6. 处理重定向"></a>6. 处理重定向</h3><p>默认情况下，<code>curl</code> 不会跟随重定向。你可以使用 <code>-L</code> 选项让它跟随重定向：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-L</span> http://short.url<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会跟随重定向到最终的 URL 并获取内容。</p>
+<h3 id="7-显示详细信息"><a href="#7-显示详细信息" class="headerlink" title="7. 显示详细信息"></a>7. 显示详细信息</h3><p>如果你想查看请求和响应的详细信息，可以使用 <code>-v</code> 选项：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-v</span> http://example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会显示所有请求头、响应头以及其它调试信息。</p>
+<h3 id="8-使用代理"><a href="#8-使用代理" class="headerlink" title="8. 使用代理"></a>8. 使用代理</h3><p>如果你需要通过代理访问网络资源，可以使用 <code>-x</code> 选项：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-x</span> http://proxy.example.com:8080 http://example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="9-上传文件"><a href="#9-上传文件" class="headerlink" title="9. 上传文件"></a>9. 上传文件</h3><p>你可以使用 <code>-F</code> 选项上传文件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-F</span> <span class="token string">"file=@/path/to/file"</span> http://example.com/upload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会将指定的文件上传到服务器。</p>
+<h3 id="10-指定请求方法"><a href="#10-指定请求方法" class="headerlink" title="10. 指定请求方法"></a>10. 指定请求方法</h3><p>尽管 <code>curl</code> 默认发送的是 GET 请求，你也可以使用 <code>-X</code> 选项指定其他方法，如 PUT, DELETE 等：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> DELETE http://example.com/resource/123<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="进阶用法"><a href="#进阶用法" class="headerlink" title="进阶用法"></a>进阶用法</h3><p><code>curl</code> 还支持更多复杂的用法，如通过 <code>--data-binary</code> 发送原始二进制数据、使用 <code>--header</code> 添加多个请求头、通过 <code>-u</code> 进行 HTTP 基本认证等。</p>
+<p>如果你想查看 <code>curl</code> 的所有功能和选项，可以通过以下命令查看手册：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">man</span> <span class="token function">curl</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或者查看帮助文档：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">--help</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
                 
             </div>
@@ -1298,7 +1343,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">174.3k</span>
+                        class="white-color">178.1k</span>
             
             
             

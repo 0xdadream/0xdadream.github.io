@@ -61,9 +61,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
@@ -420,21 +420,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-08-10
+                    2024-08-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.7k
+                    4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    15 分
                 </div>
                 
 
@@ -640,6 +640,12 @@ index 83b2d7e<span class="token punctuation">..</span>e39a4ff <span class="token
 
 <h4 id="拉取更新"><a href="#拉取更新" class="headerlink" title="拉取更新"></a>拉取更新</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h4 id="Git标签"><a href="#Git标签" class="headerlink" title="Git标签"></a>Git标签</h4><p>给某个提交打标签（通常用于发布版本）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> tag <span class="token parameter variable">-a</span> v1.0 <span class="token parameter variable">-m</span> <span class="token string">"版本1.0"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>推送标签到远程仓库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin <span class="token parameter variable">--tags</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h3 id="7-分支管理"><a href="#7-分支管理" class="headerlink" title="7. 分支管理"></a>7. 分支管理</h3><h4 id="1-创建分支"><a href="#1-创建分支" class="headerlink" title="1. 创建分支"></a>1. 创建分支</h4><p>要创建一个新的分支，使用 <code>git branch</code> 命令。新分支会基于你当前所在的分支创建。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch feature/new-feature<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -715,7 +721,8 @@ index 83b2d7e<span class="token punctuation">..</span>e39a4ff <span class="token
 
 <p>这会将 <code>feature/new-feature</code> 分支推送到远程仓库的 <code>origin</code>（默认远程名称）上。</p>
 <h4 id="9-跟踪远程分支"><a href="#9-跟踪远程分支" class="headerlink" title="9. 跟踪远程分支"></a>9. 跟踪远程分支</h4><p>你可以将本地分支与远程分支关联，使推送和拉取更方便。</p>
-<h4 id="创建跟踪分支："><a href="#创建跟踪分支：" class="headerlink" title="创建跟踪分支："></a>创建跟踪分支：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/new-feature origin/feature/new-feature<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>创建跟踪分支：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/new-feature origin/feature/new-feature<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>或者，如果分支已经存在：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/feature/new-feature<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -753,7 +760,29 @@ stash@<span class="token punctuation">{</span><span class="token number">1</span
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> stash apply stash@<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这会恢复索引为 <code>stash@{1}</code> 的存储，并保留存储记录。</p>
+<h3 id="9-常见的Git-Hooks"><a href="#9-常见的Git-Hooks" class="headerlink" title="9.常见的Git Hooks"></a>9.常见的Git Hooks</h3><ul>
+<li><strong>pre-commit</strong>：在<code>git commit</code>命令执行之前触发。可以用来执行代码风格检查或静态分析，防止不合格的代码提交。</li>
+<li><strong>commit-msg</strong>：在提交信息编辑完成后触发。用于检查提交信息是否符合团队规范（如强制使用特定格式）。</li>
+<li><strong>post-commit</strong>：在提交完成后触发。可以用于执行通知或部署任务。</li>
+</ul>
+<h4 id="示例：自动检查代码风格"><a href="#示例：自动检查代码风格" class="headerlink" title="示例：自动检查代码风格"></a>示例：自动检查代码风格</h4><p>假设你使用<code>pre-commit</code>钩子来检查Python代码的风格是否符合PEP8标准。以下是一个简单的脚本：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token assign-left variable">files</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> <span class="token function">diff</span> <span class="token parameter variable">--cached</span> --name-only --diff-filter<span class="token operator">=</span>ACM <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'\.py$'</span><span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$files</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">0</span>
+<span class="token keyword">fi</span>
 
+<span class="token assign-left variable">unformatted</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pycodestyle $files<span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$unformatted</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Python代码风格检查失败:"</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$unformatted</span>"</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token builtin class-name">exit</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将这个脚本保存为<code>.git/hooks/pre-commit</code>并赋予可执行权限：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> +x .git/hooks/pre-commit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -1164,48 +1193,46 @@ stash@<span class="token punctuation">{</span><span class="token number">1</span
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/08/09/git-shi-yong/">
+                <a href="/2024/08/10/ruan-lian-jie-he-ying-lian-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/45.jpg" class="responsive-img" alt="git使用">
+                        <img src="/medias/featureimages/44.jpg" class="responsive-img" alt="软链接和硬链接">
                         
-                        <span class="card-title">git使用</span>
+                        <span class="card-title">软链接和硬链接</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            git使用
+                            软链接和硬链接
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-08-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/git/">
-                        <span class="chip bg-color">git</span>
+                    <a href="/tags/%E5%91%BD%E4%BB%A4/">
+                        <span class="chip bg-color">命令</span>
                     </a>
                     
                 </div>
@@ -1219,31 +1246,31 @@ stash@<span class="token punctuation">{</span><span class="token number">1</span
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/07/27/shi-yong-cloudflare-de-r2-chuang-jian-tu-chuang/">
+                <a href="/2024/08/03/shell/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/29.jpg" class="responsive-img" alt="使用cloudflare的R2创建图床">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="shell">
                         
-                        <span class="card-title">使用cloudflare的R2创建图床</span>
+                        <span class="card-title">shell</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用cloudflare的R2创建图床
+                            shell
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-03
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
                                 </a>
                             
                             
@@ -1253,8 +1280,8 @@ stash@<span class="token punctuation">{</span><span class="token number">1</span
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">教程</span>
+                    <a href="/tags/%E5%91%BD%E4%BB%A4/">
+                        <span class="chip bg-color">命令</span>
                     </a>
                     
                 </div>
@@ -1489,7 +1516,7 @@ stash@<span class="token punctuation">{</span><span class="token number">1</span
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">174.3k</span>
+                        class="white-color">178.1k</span>
             
             
             

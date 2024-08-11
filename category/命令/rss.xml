@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 08 Feb 2022 02:11:00 +0800</pubDate>
-        <lastBuildDate>Tue, 08 Feb 2022 02:11:00 +0800</lastBuildDate>
+        <pubDate>Mon, 12 Aug 2024 03:25:00 +0800</pubDate>
+        <lastBuildDate>Mon, 12 Aug 2024 03:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
         <category>linux</category>
@@ -33,6 +33,30 @@
         <category>i春秋</category>
         <category>教程</category>
         <category>git</category>
+        <category>环境</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/08/12/windows-chuang-jian-wen-jian/</guid>
+            <title>windows创建文件</title>
+            <link>https://0xdadream.github.io/2024/08/12/windows-chuang-jian-wen-jian/</link>
+            <category>windows</category>
+            <pubDate>Mon, 12 Aug 2024 03:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;windows创建文件&#34;&gt;&lt;a href=&#34;#windows创建文件&#34; class=&#34;headerlink&#34; title=&#34;windows创建文件&#34;&gt;&lt;/a&gt;windows创建文件&lt;/h1&gt;&lt;h3 id=&#34;1-使用-echo-命令&#34;&gt;&lt;a href=&#34;#1-使用-echo-命令&#34; class=&#34;headerlink&#34; title=&#34;1. 使用 echo 命令&#34;&gt;&lt;/a&gt;1. 使用 &lt;code&gt;echo&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;你可以使用 &lt;code&gt;echo&lt;/code&gt; 命令将内容写入一个新的文件中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;echo 文件内容 &amp;gt; 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果文件已经存在，这个命令会覆盖原来的内容。&lt;/p&gt;
+&lt;h3 id=&#34;2-使用-type-nul-命令&#34;&gt;&lt;a href=&#34;#2-使用-type-nul-命令&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 type nul 命令&#34;&gt;&lt;/a&gt;2. 使用 &lt;code&gt;type nul&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;这个命令可以创建一个空文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;type nul &amp;gt; 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-使用-copy-con-命令&#34;&gt;&lt;a href=&#34;#3-使用-copy-con-命令&#34; class=&#34;headerlink&#34; title=&#34;3. 使用 copy con 命令&#34;&gt;&lt;/a&gt;3. 使用 &lt;code&gt;copy con&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;&lt;code&gt;copy con&lt;/code&gt; 可以创建文件并直接输入内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;copy con 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输入完内容后，按 &lt;code&gt;Ctrl + Z&lt;/code&gt; 然后回车保存并退出。&lt;/p&gt;
+&lt;h3 id=&#34;4-使用-fsutil-命令&#34;&gt;&lt;a href=&#34;#4-使用-fsutil-命令&#34; class=&#34;headerlink&#34; title=&#34;4. 使用 fsutil 命令&#34;&gt;&lt;/a&gt;4. 使用 &lt;code&gt;fsutil&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;&lt;code&gt;fsutil&lt;/code&gt; 可以创建指定大小的文件（以字节为单位）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;fsutil file createnew 文件名.txt 文件大小（以字节为单位）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-使用-PowerShell-的-New-Item-cmdlet&#34;&gt;&lt;a href=&#34;#5-使用-PowerShell-的-New-Item-cmdlet&#34; class=&#34;headerlink&#34; title=&#34;5. 使用 PowerShell 的 New-Item cmdlet&#34;&gt;&lt;/a&gt;5. 使用 PowerShell 的 &lt;code&gt;New-Item&lt;/code&gt; cmdlet&lt;/h3&gt;&lt;p&gt;在PowerShell中，你可以使用 &lt;code&gt;New-Item&lt;/code&gt; 来创建文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;New-Item -Path .\文件名.txt -ItemType File&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2022/02/08/windows-zhong-netstat-ming-ling/</guid>
             <title>windows中netstat命令</title>

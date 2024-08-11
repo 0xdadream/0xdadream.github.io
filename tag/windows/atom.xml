@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://0xdadream.github.io</id>
+    <title>逐梦 • Posts by &#34;windows&#34; tag</title>
+    <link href="https://0xdadream.github.io" />
+    <updated>2024-08-11T19:25:00.000Z</updated>
+    <category term="tip" />
+    <category term="安装" />
+    <category term="linux" />
+    <category term="web" />
+    <category term="wp" />
+    <category term="攻防世界" />
+    <category term="re" />
+    <category term="工具" />
+    <category term="windows" />
+    <category term="BUUCTF" />
+    <category term="server" />
+    <category term="bug" />
+    <category term="sql" />
+    <category term="代码审计" />
+    <category term="漏洞复现" />
+    <category term="java" />
+    <category term="命令" />
+    <category term="学习" />
+    <category term="tools" />
+    <category term="文件上传" />
+    <category term="php" />
+    <category term="python" />
+    <category term="汇编" />
+    <category term="i春秋" />
+    <category term="教程" />
+    <category term="git" />
+    <category term="环境" />
+    <entry>
+        <id>https://0xdadream.github.io/2024/08/12/windows-chuang-jian-wen-jian/</id>
+        <title>windows创建文件</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2024/08/12/windows-chuang-jian-wen-jian/"/>
+        <content type="html">&lt;h1 id=&#34;windows创建文件&#34;&gt;&lt;a href=&#34;#windows创建文件&#34; class=&#34;headerlink&#34; title=&#34;windows创建文件&#34;&gt;&lt;/a&gt;windows创建文件&lt;/h1&gt;&lt;h3 id=&#34;1-使用-echo-命令&#34;&gt;&lt;a href=&#34;#1-使用-echo-命令&#34; class=&#34;headerlink&#34; title=&#34;1. 使用 echo 命令&#34;&gt;&lt;/a&gt;1. 使用 &lt;code&gt;echo&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;你可以使用 &lt;code&gt;echo&lt;/code&gt; 命令将内容写入一个新的文件中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;echo 文件内容 &amp;gt; 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果文件已经存在，这个命令会覆盖原来的内容。&lt;/p&gt;
+&lt;h3 id=&#34;2-使用-type-nul-命令&#34;&gt;&lt;a href=&#34;#2-使用-type-nul-命令&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 type nul 命令&#34;&gt;&lt;/a&gt;2. 使用 &lt;code&gt;type nul&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;这个命令可以创建一个空文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;type nul &amp;gt; 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-使用-copy-con-命令&#34;&gt;&lt;a href=&#34;#3-使用-copy-con-命令&#34; class=&#34;headerlink&#34; title=&#34;3. 使用 copy con 命令&#34;&gt;&lt;/a&gt;3. 使用 &lt;code&gt;copy con&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;&lt;code&gt;copy con&lt;/code&gt; 可以创建文件并直接输入内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;copy con 文件名.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输入完内容后，按 &lt;code&gt;Ctrl + Z&lt;/code&gt; 然后回车保存并退出。&lt;/p&gt;
+&lt;h3 id=&#34;4-使用-fsutil-命令&#34;&gt;&lt;a href=&#34;#4-使用-fsutil-命令&#34; class=&#34;headerlink&#34; title=&#34;4. 使用 fsutil 命令&#34;&gt;&lt;/a&gt;4. 使用 &lt;code&gt;fsutil&lt;/code&gt; 命令&lt;/h3&gt;&lt;p&gt;&lt;code&gt;fsutil&lt;/code&gt; 可以创建指定大小的文件（以字节为单位）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;fsutil file createnew 文件名.txt 文件大小（以字节为单位）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-使用-PowerShell-的-New-Item-cmdlet&#34;&gt;&lt;a href=&#34;#5-使用-PowerShell-的-New-Item-cmdlet&#34; class=&#34;headerlink&#34; title=&#34;5. 使用 PowerShell 的 New-Item cmdlet&#34;&gt;&lt;/a&gt;5. 使用 PowerShell 的 &lt;code&gt;New-Item&lt;/code&gt; cmdlet&lt;/h3&gt;&lt;p&gt;在PowerShell中，你可以使用 &lt;code&gt;New-Item&lt;/code&gt; 来创建文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;New-Item -Path .\文件名.txt -ItemType File&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;</content>
+        <category term="windows" />
+        <updated>2024-08-11T19:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2024/07/27/powershell-ti-quan/</id>
+        <title>powershell提权</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2024/07/27/powershell-ti-quan/"/>
+        <content type="html">&lt;h1 id=&#34;powershell提权&#34;&gt;&lt;a href=&#34;#powershell提权&#34; class=&#34;headerlink&#34; title=&#34;powershell提权&#34;&gt;&lt;/a&gt;powershell提权&lt;/h1&gt;&lt;p&gt;安装gsudo&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;winget &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; gerardog.gsudo&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gerardog.github.io/gsudo/docs/install&#34;&gt;How to Install | gsudo Documentation (gerardog.github.io)&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="windows" />
+        <category term="tools" />
+        <updated>2024-07-27T02:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/</id>
+        <title>json.decoder.JSONDecodeError</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2023/03/04/json.decoder.jsondecodeerror/"/>
+        <content type="html">&lt;h1 id=&#34;json-decoder-JSONDecodeError&#34;&gt;&lt;a href=&#34;#json-decoder-JSONDecodeError&#34; class=&#34;headerlink&#34; title=&#34;json.decoder.JSONDecodeError&#34;&gt;&lt;/a&gt;json.decoder.JSONDecodeError&lt;/h1&gt;&lt;p&gt;我是安装&lt;code&gt;stable diffusion&lt;/code&gt;出现的错误&lt;/p&gt;
+&lt;p&gt;大致截图&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt; File &lt;span class=&#34;token string&#34;&gt;&#34;G:&lt;span class=&#34;token entity&#34; title=&#34;\r&#34;&gt;\r&lt;/span&gt;uanjian\stable-diffusion-webui-master&lt;span class=&#34;token entity&#34; title=&#34;\0&#34;&gt;\0&lt;/span&gt;xdadream\lib\site-packages&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;ransformers&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;okenization_utils_base.py&#34;&lt;/span&gt;, line &lt;span class=&#34;token number&#34;&gt;1956&lt;/span&gt;, &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; _from_pretrained
+    tokenizer &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; cls&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;*init_inputs, **init_kwargs&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+  File &lt;span class=&#34;token string&#34;&gt;&#34;G:&lt;span class=&#34;token entity&#34; title=&#34;\r&#34;&gt;\r&lt;/span&gt;uanjian\stable-diffusion-webui-master&lt;span class=&#34;token entity&#34; title=&#34;\0&#34;&gt;\0&lt;/span&gt;xdadream\lib\site-packages&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;ransformers\models&lt;span class=&#34;token entity&#34; title=&#34;\c&#34;&gt;\c&lt;/span&gt;lip&lt;span class=&#34;token entity&#34; title=&#34;\t&#34;&gt;\t&lt;/span&gt;okenization_clip.py&#34;&lt;/span&gt;, line &lt;span class=&#34;token number&#34;&gt;323&lt;/span&gt;, &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; __init__
+    self.encoder &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; json.load&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;vocab_handle&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+ …………
+json.decoder.JSONDecodeError: Unterminated string starting at: line &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;column&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;11370&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;char &lt;span class=&#34;token number&#34;&gt;11369&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;问题出在这&lt;code&gt;json.load(vocab_handle)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;找到这个文件存放目录&lt;code&gt;C:\Users\xxx\.cache\huggingface\hub\models--openai--clip-vit-large-patch14\blobs\xxxx&lt;/code&gt;，把下面东西全删除&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json%EF%BC%8C%E4%B8%8B%E8%BD%BD%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E9%87%8D%E6%96%B0%E6%89%A7%E8%A1%8Cbat%E6%96%87%E4%BB%B6%E5%B0%B1%E6%88%90%E5%8A%9F%E4%BA%86&#34;&gt;https://huggingface.co/openai/clip-vit-base-patch32/resolve/main/vocab.json，下载这个文件放在目录下，重新执行bat文件就成功了&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个问题是因为文件出现了破损&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2023-03-03T20:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/</id>
+        <title>win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/"/>
+        <content type="html">&lt;h1 id=&#34;win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者&#34;&gt;&lt;a href=&#34;#win7中安装vm-tools时Windows-无法验证此驱动程序软件的发布者&#34; class=&#34;headerlink&#34; title=&#34;win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者&#34;&gt;&lt;/a&gt;win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者&lt;/h1&gt;&lt;p&gt;下载补丁安装&lt;a href=&#34;https://www.catalog.update.microsoft.com/Search.aspx?q=kb4474419&#34;&gt;Microsoft Update Catalog&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-05-20T14:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/</id>
+        <title>配置WSUS连接时HTTP错误</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/"/>
+        <content type="html">&lt;h1 id=&#34;配置WSUS连接时HTTP错误&#34;&gt;&lt;a href=&#34;#配置WSUS连接时HTTP错误&#34; class=&#34;headerlink&#34; title=&#34;配置WSUS连接时HTTP错误&#34;&gt;&lt;/a&gt;配置WSUS连接时HTTP错误&lt;/h1&gt;&lt;p&gt;我尝试&lt;code&gt;ping microsoft.com&lt;/code&gt;，并不能ping通更新服务&lt;/p&gt;
+&lt;p&gt;打开自动更新，也更新不了，应该就是网络的原因&lt;/p&gt;
+&lt;p&gt;首先关闭防火墙，如果是静态IP要保证能访问外网，不然你可以换成DHCP，自动获取&lt;/p&gt;
+&lt;p&gt;然后可以设置代理服务器，或者挂一个代理软件&lt;/p&gt;
+&lt;p&gt;注：你可以先把主机的系统先更新了，该打的补丁打了&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-04-30T15:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/</id>
+        <title>发生系统错误6118</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/"/>
+        <content type="html">&lt;h1 id=&#34;发生系统错误6118此工作组的服务器列表当前无法使用&#34;&gt;&lt;a href=&#34;#发生系统错误6118此工作组的服务器列表当前无法使用&#34; class=&#34;headerlink&#34; title=&#34;发生系统错误6118此工作组的服务器列表当前无法使用&#34;&gt;&lt;/a&gt;发生系统错误6118此工作组的服务器列表当前无法使用&lt;/h1&gt;&lt;h2 id=&#34;问题&#34;&gt;&lt;a href=&#34;#问题&#34; class=&#34;headerlink&#34; title=&#34;问题&#34;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;当你在域服务器中运行&lt;code&gt;net view /domain&lt;/code&gt;是报错&lt;/p&gt;
+&lt;p&gt;发生系统错误6118。此工作组的服务器列表当前无法使用&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;首先检查静态IP是否在设置的域环境，没有就改回来&lt;/p&gt;
+&lt;p&gt;win+R打开运行框输入&lt;code&gt;services.msc&lt;/code&gt;运行&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;computer browser&lt;/code&gt; 服务&lt;/p&gt;
+&lt;p&gt;启动类型设置为自动&lt;/p&gt;
+&lt;p&gt;未启动则手动启动&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-04-30T14:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/</id>
+        <title>windows监听端口失败</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/02/08/windows-jian-ting-duan-kou-shi-bai/"/>
+        <content type="html">&lt;h1 id=&#34;windows监听端口失败&#34;&gt;&lt;a href=&#34;#windows监听端口失败&#34; class=&#34;headerlink&#34; title=&#34;windows监听端口失败&#34;&gt;&lt;/a&gt;windows监听端口失败&lt;/h1&gt;&lt;p&gt;当你在某些情况需要用到监听端口时，会出现端口监听失败，获得类似信息&lt;code&gt;An attempt was made to access a socket in a way forbidden by its access permissions.&lt;/code&gt;，这时你通过命令查看端口信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; -ano&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; 端口号&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现这个端口并没有被占用，这时这些端口可能被系统保留了，查看保留端口&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 show excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;udp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后你可以避开这些端口，或者&lt;/p&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;关闭占用程序，我这里默认hyper-v，大多数都是，关闭后&lt;strong&gt;重启&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;dism.exe /Online /Disable-Feature:Microsoft-Hyper-V &lt;span class=&#34;token comment&#34;&gt;# 关闭&lt;/span&gt;
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V &lt;span class=&#34;token comment&#34;&gt;# 打开&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;配置动态端口，动态端口不能被保留，用完即释放&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; dynamicportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;store&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;active&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;persistent
+&lt;span class=&#34;token comment&#34;&gt;# start为起始端口，num为往后多少个端口，最小254，store为生效状态&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将使用的端口移除保留端口&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;netsh int ipv4 delete excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# startport为起始端口，numberofports为往后多少个端口&lt;/span&gt;
+netsh int ipv4 &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; excludedportrange &lt;span class=&#34;token assign-left variable&#34;&gt;protocol&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;tcp &lt;span class=&#34;token assign-left variable&#34;&gt;startport&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10000&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;numberofports&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 这是添加&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-02-08T14:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/02/08/windows-zhong-netstat-ming-ling/</id>
+        <title>windows中netstat命令</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/02/08/windows-zhong-netstat-ming-ling/"/>
+        <content type="html">&lt;h1 id=&#34;windows中netstat命令&#34;&gt;&lt;a href=&#34;#windows中netstat命令&#34; class=&#34;headerlink&#34; title=&#34;windows中netstat命令&#34;&gt;&lt;/a&gt;windows中netstat命令&lt;/h1&gt;&lt;h2 id=&#34;netstat-查看Linux中网络系统状态信息&#34;&gt;&lt;a href=&#34;#netstat-查看Linux中网络系统状态信息&#34; class=&#34;headerlink&#34; title=&#34;netstat-查看Linux中网络系统状态信息&#34;&gt;&lt;/a&gt;netstat-查看Linux中网络系统状态信息&lt;/h2&gt;&lt;p&gt;&lt;code&gt;NETSTAT [-a] [-b] [-e] [-f] [-i] [-n] [-o] [-p proto] [-r] [-s] [-t] [-x] [-y] [interval]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;选项&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; 显示所有连接和监听端口
+&lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; 显示创建每个连接所涉及的可执行文件或监听端口。在某些情况下，众所周知的可执行文件宿主多个独立的组件，在这些情况下创建连接所涉及的组件序列或显示监听端口。在这种情况下，可执行文件名称在底部的 &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 中，顶部是它调用的组件，以此类推，直到达到 TCP/IP
+&lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; 显示以太网统计信息，这可以与 &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; 结合使用选项
+&lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; 显示外国的完全限定域名&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;FQDN&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;地址
+&lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; 显示 TCP 连接在其当前状态下花费的时间
+&lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; 以数字形式显示地址和端口号
+&lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; 显示与每个连接关联的拥有进程 ID
+&lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; proto 显示由 proto 指定的协议的连接；原型可以是以下任何一种：TCP、UDP、TCPv6 或 UDPv6。如果与 &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; 一起使用显示每个协议统计信息的选项，proto 可以是以下任何一种：IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 或 UDPv6
+&lt;span class=&#34;token parameter variable&#34;&gt;-q&lt;/span&gt; 显示所有连接、监听端口和绑定非侦听 TCP 端口。绑定的非侦听端口可能会也可能不会与活动连接相关联
+&lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; 显示路由表
+&lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; 显示每个协议的统计信息。默认情况下，统计信息是针对 IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 和 UDPv6 显示；-p 选项可用于指定默认值的子集
+&lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; 显示当前连接卸载状态
+&lt;span class=&#34;token parameter variable&#34;&gt;-x&lt;/span&gt; 显示 NetworkDirect 连接、侦听器和共享端点
+&lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; 显示所有连接的 TCP 连接模板不能与其他选项结合使用
+interval 重新显示选定的统计信息，暂停间隔秒每个显示器之间。按 CTRL+C 停止重新显示统计数据。如果省略，netstat 将打印当前配置信息一次&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;常用&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-ano&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 显示所有连接和监听端口和ID号&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; -ano&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; yourfind grep也可以是findstr&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Proto	Local Address	Foreign Address	State	PID&lt;br&gt;协议	 本地地址			远程地址				状态	进程号&lt;/p&gt;
+&lt;p&gt;State分为&lt;br&gt;LISTEN  ：监听状态&lt;br&gt;ESTABLISHED ：已建立联机&lt;br&gt;TIME_WAIT ：等待联机&lt;/p&gt;
+</content>
+        <category term="windows" />
+        <category term="命令" />
+        <updated>2022-02-07T18:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/</id>
+        <title>自定义鼠标右键新建文件</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/"/>
+        <content type="html">&lt;h1 id=&#34;自定义鼠标右键新建文件&#34;&gt;&lt;a href=&#34;#自定义鼠标右键新建文件&#34; class=&#34;headerlink&#34; title=&#34;自定义鼠标右键新建文件&#34;&gt;&lt;/a&gt;自定义鼠标右键新建文件&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;win+R 打开运行窗口，输入regedit进入注册表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进入&lt;code&gt;计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew&lt;/code&gt;目录下&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/152f7683d757589f71203eb222e9a741.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;按这样修改，修改时可能你会遇到问题，看下文解决方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进入&lt;code&gt;计算机\HKEY_CLASSES_ROOT\.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;将默认值修改为&lt;code&gt;Typora.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/1fa2ac32670771a9126a313f14190b7d.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/b64192b14f7e26154ea3dfd1ea1170c5.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如图，如果没有就这样修改&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h2&gt;&lt;p&gt;还是到&lt;code&gt;计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/febdbcad26eceedd0d87be8d8eead1d0.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;右击ShellNew，点击权限，然后点击高级-&amp;gt;禁用继承&lt;/p&gt;
+&lt;p&gt;双击你登陆的用户（就是一个小人儿那个），取消勾选完全控制，然后应用，确定，刷新&lt;/p&gt;
+&lt;h2 id=&#34;注意&#34;&gt;&lt;a href=&#34;#注意&#34; class=&#34;headerlink&#34; title=&#34;注意&#34;&gt;&lt;/a&gt;注意&lt;/h2&gt;&lt;p&gt;添加其他的也类似&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-01-14T18:25:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/</id>
+        <title>powershell导入一个自己写的模块</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/"/>
+        <content type="html">&lt;h1 id=&#34;powershell导入一个自己写的模块&#34;&gt;&lt;a href=&#34;#powershell导入一个自己写的模块&#34; class=&#34;headerlink&#34; title=&#34;powershell导入一个自己写的模块&#34;&gt;&lt;/a&gt;powershell导入一个自己写的模块&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;想把你写的模块&lt;code&gt;name.psm1&lt;/code&gt;放在&lt;code&gt;C:\Users\yourname\Documents\PowerShell\Modules\name&lt;/code&gt;目录下&lt;/p&gt;
+&lt;p&gt;name为你的模块名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编辑文件&lt;code&gt;‪C:\Users\yourname\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&lt;/code&gt;，添加&lt;code&gt;Import-Module name&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重新启动就ok了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;name.psm1其实放哪都可以，你只需要把第二步的name换为绝对路径，我放在那个目录是为了和其他模块一起方便管理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2022-01-02T19:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/</id>
+        <title>windows terminal使用</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/12/29/windows-terminal-shi-yong/"/>
+        <content type="html">&lt;h1 id=&#34;windows-terminal使用&#34;&gt;&lt;a href=&#34;#windows-terminal使用&#34; class=&#34;headerlink&#34; title=&#34;windows terminal使用&#34;&gt;&lt;/a&gt;windows terminal使用&lt;/h1&gt;&lt;p&gt;本文将介绍一些windows terminal的基本使用&lt;/p&gt;
+&lt;p&gt;首先是这个新建一个配置文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/8d888573a6cfc1f763a264cb6d8324b6.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以建一个空的，也可以复制&lt;/p&gt;
+&lt;p&gt;我们新建一个配置文件，如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/792168aa40b5b4a90387e155e20924ee.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这个配置文件就像一个按钮，命令行就相当于按钮的链接，点击就运行命令&lt;/p&gt;
+&lt;p&gt;名称，命令行，图标可以稍微设置一下，其他的没啥可修改的&lt;/p&gt;
+&lt;p&gt;图标可以使用网络链接，也可以是本地路径&lt;/p&gt;
+&lt;p&gt;这里主要讲一下命令行&lt;/p&gt;
+&lt;h2 id=&#34;命令行&#34;&gt;&lt;a href=&#34;#命令行&#34; class=&#34;headerlink&#34; title=&#34;命令行&#34;&gt;&lt;/a&gt;命令行&lt;/h2&gt;&lt;p&gt;主要的几个使用小技巧&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;如果你定义了环境变量，直接写环境变量，就能直接运行，例如python&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/c6ae37b1ec262041c708b28ab8a4985d.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/034a395513e6619aa85c873727e61e86.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;没有定义环境变量，直接使用绝对路径&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/8b0f5eb28a69e3b6b80d378f95cc01d3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/87ed70ce6e4de3ea86cb1ea5582dff5a.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以当作快速启动程序的一个方式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/8b7dc7c55b7e12433f950d8f45a6749c.png&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;以管理员方式启动&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/57fa6806c4db8e4b573a2ec2738071ee.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;wt为环境变量或者绝对路径&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2021-12-29T15:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/12/29/windows-terminal-she-zhi-guan-li-yuan/</id>
+        <title>windows terminal设置管理员</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/12/29/windows-terminal-she-zhi-guan-li-yuan/"/>
+        <content type="html">&lt;h1 id=&#34;windows-terminal设置管理员&#34;&gt;&lt;a href=&#34;#windows-terminal设置管理员&#34; class=&#34;headerlink&#34; title=&#34;windows terminal设置管理员&#34;&gt;&lt;/a&gt;windows terminal设置管理员&lt;/h1&gt;&lt;p&gt;现在windows基本上都内置了，没有就去下载&lt;/p&gt;
+&lt;h2 id=&#34;通用方法&#34;&gt;&lt;a href=&#34;#通用方法&#34; class=&#34;headerlink&#34; title=&#34;通用方法&#34;&gt;&lt;/a&gt;通用方法&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;添加一个配置文件&lt;/p&gt;
+&lt;p&gt;设置-&amp;gt;添加一个新的配置文件，内容如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/f7bb93dc06ec38d4d29c7a9c3c4b1934.png&#34;&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;powershell.exe &lt;span class=&#34;token parameter variable&#34;&gt;-command&lt;/span&gt; Start-Process &lt;span class=&#34;token parameter variable&#34;&gt;-Verb&lt;/span&gt; RunAs &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&#34;wt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原理就是通过在powershell中以管理员方式再次打开Windows PowerShell，上面的命令行的作用就是这个，所以不能把这个配置文件设置为默认，不然会无限重启，手贱试了的就重启电脑，下次打开wt，点否，然后把配置改回来，所以这个有点小鸡肋，其中命令行&lt;strong&gt;wt&lt;/strong&gt;可以换成加过环境变量的其他程序，当然你也可以写绝对路径&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;利用其他程序来实现&lt;/p&gt;
+&lt;p&gt;这个安全性不得而知，因为这个程序能获取你的管理员权限，当然自己人用用还是没啥问题，它类似linux的sudo&lt;/p&gt;
+&lt;p&gt;安装，运行命令&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;PowerShell &lt;span class=&#34;token parameter variable&#34;&gt;-Command&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Set-ExecutionPolicy RemoteSigned -scope Process; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;询问是否使用别名，看自己的意向&lt;/p&gt;
+&lt;p&gt;然后添加如下配置&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/1e189d37b20bc7e2a7dc9a512693f23c.png&#34;&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;gsudo.exe powershell.exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;和上面一样意思&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行框启动&lt;/p&gt;
+&lt;p&gt;win+x打开运行窗口，输入wt（你想要运行的程序），确认同时按着ctrl+shift时，点击确定，便能以管理员方式运行&lt;/p&gt;
+&lt;p&gt;这个可以说最简单&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;写批处理文件&lt;/p&gt;
+&lt;p&gt;先一个bat文件，命名随意&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;powershell.exe Start-Process &lt;span class=&#34;token parameter variable&#34;&gt;-Verb&lt;/span&gt; RunAs &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&#34;wt&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在写一个vbs文件，命名随意&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Set ws &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; CreateObject&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Wscript.Shell&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;   
+ws.run &lt;span class=&#34;token string&#34;&gt;&#34;cmd /c wta.bat&#34;&lt;/span&gt;,vbhide&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;wta.bat是我的bat文件名，放在同一个目录，使用时打开vbs文件，我感觉这样最奈斯&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;win11&#34;&gt;&lt;a href=&#34;#win11&#34; class=&#34;headerlink&#34; title=&#34;win11&#34;&gt;&lt;/a&gt;win11&lt;/h2&gt;&lt;p&gt;右击开始-&amp;gt;Windows终端（管理员）&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2021-12-29T13:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/12/04/vmwareworkstation-zai-ci-zhu-ji-shang-bu-zhi-chi-qian-tao-xu-ni-hua/</id>
+        <title>VMware Workstation 在此主机上不支持嵌套虚拟化</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/12/04/vmwareworkstation-zai-ci-zhu-ji-shang-bu-zhi-chi-qian-tao-xu-ni-hua/"/>
+        <content type="html">&lt;h1 id=&#34;VMware-Workstation-在此主机上不支持嵌套虚拟化&#34;&gt;&lt;a href=&#34;#VMware-Workstation-在此主机上不支持嵌套虚拟化&#34; class=&#34;headerlink&#34; title=&#34;VMware Workstation 在此主机上不支持嵌套虚拟化&#34;&gt;&lt;/a&gt;VMware Workstation 在此主机上不支持嵌套虚拟化&lt;/h1&gt;&lt;p&gt;当想要使用vmware的虚拟化引擎，遇到了以下问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;此主机支持AMD-V，但AMD-V处于禁用状态&lt;/p&gt;
+&lt;p&gt;这是因为物理机没有打开虚拟化，参照&lt;a href=&#34;https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/&#34;&gt;开启虚拟化 | 逐梦 (0xdadream.github.io)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;此平台不支持AMD-V&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;VMware Workstation 在此主机上不支持嵌套虚拟化&lt;/p&gt;
+&lt;p&gt;这时你需要打开控制面板-》程序与应用-》启用或关闭windows功能，取消勾选Hyper-V&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/3a9773b4b6ec7f3723a3a29c229b2dda.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;不用管下面那个虚拟化&lt;/p&gt;
+&lt;p&gt;然后右键开始菜单-》计算机管理-》服务和应用程序-》服务，找到HV主机服务，禁用&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/2a4f1faff457aac72c981ec4eb2acf3f.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样还没有完全禁用，管理员权限运行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;bcdedit /set hypervisorlaunchtype off&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就能完全禁用了，重启便可使用镶嵌虚拟化&lt;/p&gt;
+&lt;p&gt;想要再启用hyper，关闭禁用，运行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;bcdedit /set hypervisorlaunchtype auto&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这主要是由于hyper和vmware的兼容性问题导致的，退回低版本可能也可以解决，我没试过哈&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上述的是专业版的Windows，家庭版好像程序和应用里没有Hyper-V，就不用去去掉复选框，其他解决方法和上面一样&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2021-12-04T13:11:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/</id>
+        <title>开启虚拟化</title>
+        <link rel="alternate" href="https://0xdadream.github.io/2021/11/27/kai-qi-xu-ni-hua/"/>
+        <content type="html">&lt;h1 id=&#34;开启虚拟化&#34;&gt;&lt;a href=&#34;#开启虚拟化&#34; class=&#34;headerlink&#34; title=&#34;开启虚拟化&#34;&gt;&lt;/a&gt;开启虚拟化&lt;/h1&gt;&lt;p&gt;我的CPU是AMD，Intel也差不多&lt;/p&gt;
+&lt;p&gt;在vmware创建虚拟机时，开启了AMD-V，如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/c03cd6f5a915d3fee66ad30232f55c22.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可能会遇到这种情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/96c8a061aad840bb3d7a61cd1f2e0015.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这时我们需要进入BIOS，开启虚拟化AMD-V&lt;/p&gt;
+&lt;p&gt;开机或重启（进入系统之前）按下F2或者Delete（各品牌电脑电脑有差别，自行查阅）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2024/07/71c4de87984d5279343c6b575d9d50d4.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;进入这个页面Configuration，选择AMD SVM Technology，改为Enable，F10保存退出&lt;/p&gt;
+</content>
+        <category term="tip" />
+        <category term="windows" />
+        <updated>2021-11-27T13:11:00.000Z</updated>
+    </entry>
+</feed>

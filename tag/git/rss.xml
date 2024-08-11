@@ -33,6 +33,7 @@
         <category>i春秋</category>
         <category>教程</category>
         <category>git</category>
+        <category>环境</category>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/08/09/git-shi-yong/</guid>
             <title>git使用</title>
@@ -222,6 +223,12 @@ index 83b2d7e&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;e39a4f
 
 &lt;h4 id=&#34;拉取更新&#34;&gt;&lt;a href=&#34;#拉取更新&#34; class=&#34;headerlink&#34; title=&#34;拉取更新&#34;&gt;&lt;/a&gt;拉取更新&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin master&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
+&lt;h4 id=&#34;Git标签&#34;&gt;&lt;a href=&#34;#Git标签&#34; class=&#34;headerlink&#34; title=&#34;Git标签&#34;&gt;&lt;/a&gt;Git标签&lt;/h4&gt;&lt;p&gt;给某个提交打标签（通常用于发布版本）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; tag &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; v1.0 &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;版本1.0&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;推送标签到远程仓库：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push origin &lt;span class=&#34;token parameter variable&#34;&gt;--tags&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;7-分支管理&#34;&gt;&lt;a href=&#34;#7-分支管理&#34; class=&#34;headerlink&#34; title=&#34;7. 分支管理&#34;&gt;&lt;/a&gt;7. 分支管理&lt;/h3&gt;&lt;h4 id=&#34;1-创建分支&#34;&gt;&lt;a href=&#34;#1-创建分支&#34; class=&#34;headerlink&#34; title=&#34;1. 创建分支&#34;&gt;&lt;/a&gt;1. 创建分支&lt;/h4&gt;&lt;p&gt;要创建一个新的分支，使用 &lt;code&gt;git branch&lt;/code&gt; 命令。新分支会基于你当前所在的分支创建。&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch feature/new-feature&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
@@ -297,7 +304,8 @@ index 83b2d7e&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;e39a4f
 
 &lt;p&gt;这会将 &lt;code&gt;feature/new-feature&lt;/code&gt; 分支推送到远程仓库的 &lt;code&gt;origin&lt;/code&gt;（默认远程名称）上。&lt;/p&gt;
 &lt;h4 id=&#34;9-跟踪远程分支&#34;&gt;&lt;a href=&#34;#9-跟踪远程分支&#34; class=&#34;headerlink&#34; title=&#34;9. 跟踪远程分支&#34;&gt;&lt;/a&gt;9. 跟踪远程分支&lt;/h4&gt;&lt;p&gt;你可以将本地分支与远程分支关联，使推送和拉取更方便。&lt;/p&gt;
-&lt;h4 id=&#34;创建跟踪分支：&#34;&gt;&lt;a href=&#34;#创建跟踪分支：&#34; class=&#34;headerlink&#34; title=&#34;创建跟踪分支：&#34;&gt;&lt;/a&gt;创建跟踪分支：&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout &lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; feature/new-feature origin/feature/new-feature&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建跟踪分支：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout &lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; feature/new-feature origin/feature/new-feature&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;或者，如果分支已经存在：&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch --set-upstream-to&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;origin/feature/new-feature&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
@@ -335,7 +343,29 @@ stash@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; stash apply stash@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这会恢复索引为 &lt;code&gt;stash@{1}&lt;/code&gt; 的存储，并保留存储记录。&lt;/p&gt;
- ]]></description>
+&lt;h3 id=&#34;9-常见的Git-Hooks&#34;&gt;&lt;a href=&#34;#9-常见的Git-Hooks&#34; class=&#34;headerlink&#34; title=&#34;9.常见的Git Hooks&#34;&gt;&lt;/a&gt;9.常见的Git Hooks&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pre-commit&lt;/strong&gt;：在&lt;code&gt;git commit&lt;/code&gt;命令执行之前触发。可以用来执行代码风格检查或静态分析，防止不合格的代码提交。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;commit-msg&lt;/strong&gt;：在提交信息编辑完成后触发。用于检查提交信息是否符合团队规范（如强制使用特定格式）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;post-commit&lt;/strong&gt;：在提交完成后触发。可以用于执行通知或部署任务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;示例：自动检查代码风格&#34;&gt;&lt;a href=&#34;#示例：自动检查代码风格&#34; class=&#34;headerlink&#34; title=&#34;示例：自动检查代码风格&#34;&gt;&lt;/a&gt;示例：自动检查代码风格&lt;/h4&gt;&lt;p&gt;假设你使用&lt;code&gt;pre-commit&lt;/code&gt;钩子来检查Python代码的风格是否符合PEP8标准。以下是一个简单的脚本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;diff&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--cached&lt;/span&gt; --name-only --diff-filter&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;ACM &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;\.py$&#39;&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-z&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$files&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token assign-left variable&#34;&gt;unformatted&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;pycodestyle $files&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-z&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$unformatted&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Python代码风格检查失败:&#34;&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$unformatted&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将这个脚本保存为&lt;code&gt;.git/hooks/pre-commit&lt;/code&gt;并赋予可执行权限：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x .git/hooks/pre-commit&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
         </item>
     </channel>
 </rss>

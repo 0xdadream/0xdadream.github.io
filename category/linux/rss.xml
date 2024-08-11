@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 20 Jul 2024 06:25:00 +0800</pubDate>
-        <lastBuildDate>Sat, 20 Jul 2024 06:25:00 +0800</lastBuildDate>
+        <pubDate>Sat, 10 Aug 2024 10:25:00 +0800</pubDate>
+        <lastBuildDate>Sat, 10 Aug 2024 10:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
         <category>linux</category>
@@ -33,6 +33,243 @@
         <category>i春秋</category>
         <category>教程</category>
         <category>git</category>
+        <category>环境</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/08/10/ruan-lian-jie-he-ying-lian-jie/</guid>
+            <title>软链接和硬链接</title>
+            <link>https://0xdadream.github.io/2024/08/10/ruan-lian-jie-he-ying-lian-jie/</link>
+            <category>命令</category>
+            <pubDate>Sat, 10 Aug 2024 10:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;软链接和硬链接&#34;&gt;&lt;a href=&#34;#软链接和硬链接&#34; class=&#34;headerlink&#34; title=&#34;软链接和硬链接&#34;&gt;&lt;/a&gt;软链接和硬链接&lt;/h1&gt;&lt;p&gt;在Linux和Unix系统中，&lt;strong&gt;软链接&lt;/strong&gt;（符号链接，symbolic link，简称&lt;code&gt;symlink&lt;/code&gt;）和&lt;strong&gt;硬链接&lt;/strong&gt;（hard link）是两种用于指向文件或目录的方式。它们有不同的用途和行为。&lt;/p&gt;
+&lt;h2 id=&#34;1-软链接（Symbolic-Link）&#34;&gt;&lt;a href=&#34;#1-软链接（Symbolic-Link）&#34; class=&#34;headerlink&#34; title=&#34;1. 软链接（Symbolic Link）&#34;&gt;&lt;/a&gt;1. 软链接（Symbolic Link）&lt;/h2&gt;&lt;p&gt;软链接类似于Windows中的快捷方式，它是一个指向另一个文件或目录的指针。创建软链接后，这个链接文件本身并不包含目标文件的数据，而是包含目标文件的路径。&lt;/p&gt;
+&lt;h4 id=&#34;特性：&#34;&gt;&lt;a href=&#34;#特性：&#34; class=&#34;headerlink&#34; title=&#34;特性：&#34;&gt;&lt;/a&gt;特性：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指向目标文件的路径&lt;/strong&gt;：软链接文件仅存储目标文件的路径，而不是文件内容。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨文件系统&lt;/strong&gt;：软链接可以指向不同文件系统中的文件或目录。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;链断裂问题&lt;/strong&gt;：如果目标文件被删除或移动，软链接将失效，成为“断链”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件大小&lt;/strong&gt;：软链接的大小是指向目标文件路径的长度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;创建软链接&#34;&gt;&lt;a href=&#34;#创建软链接&#34; class=&#34;headerlink&#34; title=&#34;创建软链接&#34;&gt;&lt;/a&gt;创建软链接&lt;/h4&gt;&lt;p&gt;要创建一个软链接，你可以使用&lt;code&gt;ln -s&lt;/code&gt;命令。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ln&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; /path/to/target /path/to/symlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ln&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; /home/user/original_file.txt /home/user/shortcut_to_file.txt &lt;span class=&#34;token comment&#34;&gt;# 也可以是目录&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这将创建一个名为&lt;code&gt;shortcut_to_file.txt&lt;/code&gt;的软链接，指向&lt;code&gt;/home/user/original_file.txt&lt;/code&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;查看软链接&#34;&gt;&lt;a href=&#34;#查看软链接&#34; class=&#34;headerlink&#34; title=&#34;查看软链接&#34;&gt;&lt;/a&gt;查看软链接&lt;/h4&gt;&lt;p&gt;使用&lt;code&gt;ls -l&lt;/code&gt;命令可以查看软链接的详细信息。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; /path/to/symlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; /home/user/shortcut_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;lrwxrwxrwx &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; user user &lt;span class=&#34;token number&#34;&gt;21&lt;/span&gt; Aug &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;:00 /home/user/shortcut_to_file.txt -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; /home/user/original_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;l&lt;/code&gt;表示这是一个软链接，箭头&lt;code&gt;-&amp;gt;&lt;/code&gt;后面是目标路径。&lt;/p&gt;
+&lt;h4 id=&#34;删除软链接&#34;&gt;&lt;a href=&#34;#删除软链接&#34; class=&#34;headerlink&#34; title=&#34;删除软链接&#34;&gt;&lt;/a&gt;删除软链接&lt;/h4&gt;&lt;p&gt;使用&lt;code&gt;rm&lt;/code&gt;命令删除软链接。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; /path/to/symlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; /home/user/shortcut_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这将删除软链接，但不会影响目标文件。&lt;/p&gt;
+&lt;h2 id=&#34;2-硬链接（Hard-Link）&#34;&gt;&lt;a href=&#34;#2-硬链接（Hard-Link）&#34; class=&#34;headerlink&#34; title=&#34;2. 硬链接（Hard Link）&#34;&gt;&lt;/a&gt;2. 硬链接（Hard Link）&lt;/h2&gt;&lt;p&gt;硬链接是文件系统中的一个目录条目，它指向文件的实际数据块。与软链接不同，硬链接不是指向路径，而是指向数据块。因此，硬链接和原始文件共享相同的数据块。&lt;/p&gt;
+&lt;h4 id=&#34;特性：-1&#34;&gt;&lt;a href=&#34;#特性：-1&#34; class=&#34;headerlink&#34; title=&#34;特性：&#34;&gt;&lt;/a&gt;特性：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指向数据块&lt;/strong&gt;：硬链接指向文件的实际数据块，而不是路径。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享文件数据&lt;/strong&gt;：硬链接和原始文件共享相同的数据块，因此它们内容完全相同，且修改一个文件内容会同时更新硬链接的内容。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不可跨文件系统&lt;/strong&gt;：硬链接必须在同一文件系统内。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;删除影响&lt;/strong&gt;：删除一个硬链接不会影响文件的实际数据，只有当所有指向数据块的硬链接都删除后，文件的数据才会被删除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;创建硬链接&#34;&gt;&lt;a href=&#34;#创建硬链接&#34; class=&#34;headerlink&#34; title=&#34;创建硬链接&#34;&gt;&lt;/a&gt;创建硬链接&lt;/h4&gt;&lt;p&gt;要创建一个硬链接，你可以使用&lt;code&gt;ln&lt;/code&gt;命令（不带&lt;code&gt;-s&lt;/code&gt;选项）。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ln&lt;/span&gt; /path/to/target /path/to/hardlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ln&lt;/span&gt; /home/user/original_file.txt /home/user/hardlink_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这将创建一个名为&lt;code&gt;hardlink_to_file.txt&lt;/code&gt;的硬链接，指向&lt;code&gt;/home/user/original_file.txt&lt;/code&gt;的数据块。&lt;/p&gt;
+&lt;h4 id=&#34;查看硬链接&#34;&gt;&lt;a href=&#34;#查看硬链接&#34; class=&#34;headerlink&#34; title=&#34;查看硬链接&#34;&gt;&lt;/a&gt;查看硬链接&lt;/h4&gt;&lt;p&gt;使用&lt;code&gt;ls -li&lt;/code&gt;命令可以查看文件的inode号，硬链接共享相同的inode号。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-li&lt;/span&gt; /path/to/target /path/to/hardlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-li&lt;/span&gt; /home/user/original_file.txt /home/user/hardlink_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token number&#34;&gt;1234567&lt;/span&gt; -rw-r--r-- &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; user user &lt;span class=&#34;token number&#34;&gt;1024&lt;/span&gt; Aug &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;:00 /home/user/original_file.txt
+&lt;span class=&#34;token number&#34;&gt;1234567&lt;/span&gt; -rw-r--r-- &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; user user &lt;span class=&#34;token number&#34;&gt;1024&lt;/span&gt; Aug &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;:00 /home/user/hardlink_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;两个文件共享相同的inode号（&lt;code&gt;1234567&lt;/code&gt;），说明它们是硬链接。&lt;/p&gt;
+&lt;h4 id=&#34;删除硬链接&#34;&gt;&lt;a href=&#34;#删除硬链接&#34; class=&#34;headerlink&#34; title=&#34;删除硬链接&#34;&gt;&lt;/a&gt;删除硬链接&lt;/h4&gt;&lt;p&gt;使用&lt;code&gt;rm&lt;/code&gt;命令删除硬链接。删除硬链接不会删除文件数据，只有当所有硬链接都被删除后，文件数据才会被删除。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; /path/to/hardlink&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; /home/user/hardlink_to_file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这将删除硬链接，但&lt;code&gt;/home/user/original_file.txt&lt;/code&gt;仍然存在，文件数据依然可用。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;&lt;a href=&#34;#注意事项&#34; class=&#34;headerlink&#34; title=&#34;注意事项&#34;&gt;&lt;/a&gt;注意事项&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;软链接&lt;/strong&gt;：适合用作快捷方式和指向目录。使用软链接时，请确保目标文件存在，或会造成“断链”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;硬链接&lt;/strong&gt;：适用于同一文件系统内共享文件数据，不能链接到目录（通常情况下）。硬链接不可跨文件系统。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;进阶操作&#34;&gt;&lt;a href=&#34;#进阶操作&#34; class=&#34;headerlink&#34; title=&#34;进阶操作&#34;&gt;&lt;/a&gt;进阶操作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看所有链接&lt;/strong&gt;：使用&lt;code&gt;find&lt;/code&gt;命令查找所有指向某个目标的软链接或硬链接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;find&lt;/span&gt; /path/to/directory &lt;span class=&#34;token parameter variable&#34;&gt;-type&lt;/span&gt; l &lt;span class=&#34;token parameter variable&#34;&gt;-name&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;link_name&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令会查找所有名为&lt;code&gt;link_name&lt;/code&gt;的软链接。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/08/03/shell/</guid>
+            <title>shell</title>
+            <link>https://0xdadream.github.io/2024/08/03/shell/</link>
+            <category>命令</category>
+            <pubDate>Sat, 03 Aug 2024 09:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;shell&#34;&gt;&lt;a href=&#34;#shell&#34; class=&#34;headerlink&#34; title=&#34;shell&#34;&gt;&lt;/a&gt;shell&lt;/h1&gt;&lt;p&gt;Shell 是一种用于与操作系统进行交互的命令行界面。常见的 Shell 有 Bash（Bourne Again Shell）、Zsh、Ksh、以及 Windows 上的 PowerShell。Shell 不仅可以用于执行单个命令，还可以编写脚本来自动化任务。以下是一些基本的 Shell 命令和脚本编写的示例。&lt;/p&gt;
+&lt;h2 id=&#34;基本-Shell-命令&#34;&gt;&lt;a href=&#34;#基本-Shell-命令&#34; class=&#34;headerlink&#34; title=&#34;基本 Shell 命令&#34;&gt;&lt;/a&gt;基本 Shell 命令&lt;/h2&gt;&lt;h3 id=&#34;文件和目录操作&#34;&gt;&lt;a href=&#34;#文件和目录操作&#34; class=&#34;headerlink&#34; title=&#34;文件和目录操作&#34;&gt;&lt;/a&gt;文件和目录操作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;ls&lt;/strong&gt;：列出目录内容&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 显示详细信息&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 显示所有文件，包括隐藏文件&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cd&lt;/strong&gt;：更改目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; /path/to/directory
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 返回上一级目录&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;pwd&lt;/strong&gt;：显示当前工作目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;pwd&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;mkdir&lt;/strong&gt;：创建目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; new_directory&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;rm&lt;/strong&gt;：删除文件或目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; directory  &lt;span class=&#34;token comment&#34;&gt;# 删除目录及其内容&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cp&lt;/strong&gt;：复制文件或目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; source_file destination
+&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; source_directory destination  &lt;span class=&#34;token comment&#34;&gt;# 复制目录及其内容&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;mv&lt;/strong&gt;：移动或重命名文件或目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; old_name new_name
+&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt; /path/to/destination&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;文件查看和编辑&#34;&gt;&lt;a href=&#34;#文件查看和编辑&#34; class=&#34;headerlink&#34; title=&#34;文件查看和编辑&#34;&gt;&lt;/a&gt;文件查看和编辑&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cat&lt;/strong&gt;：查看文件内容&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;less&lt;/strong&gt;：分页查看文件内容&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;less&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;head&lt;/strong&gt;：查看文件开头部分&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt; filename  &lt;span class=&#34;token comment&#34;&gt;# 查看前 10 行&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;tail&lt;/strong&gt;：查看文件末尾部分&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt; filename  &lt;span class=&#34;token comment&#34;&gt;# 查看后 10 行&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;nano&lt;/strong&gt;、&lt;strong&gt;vi&lt;/strong&gt;、&lt;strong&gt;vim&lt;/strong&gt;：文本编辑器&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;vi&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;系统信息和管理&#34;&gt;&lt;a href=&#34;#系统信息和管理&#34; class=&#34;headerlink&#34; title=&#34;系统信息和管理&#34;&gt;&lt;/a&gt;系统信息和管理&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;echo&lt;/strong&gt;：打印消息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Hello, World!&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;whoami&lt;/strong&gt;：显示当前用户&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;whoami&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;top&lt;/strong&gt;：实时显示系统性能信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;top&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;ps&lt;/strong&gt;：显示当前进程&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux  &lt;span class=&#34;token comment&#34;&gt;# 显示所有进程&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;kill&lt;/strong&gt;：终止进程&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;kill&lt;/span&gt; PID
+&lt;span class=&#34;token function&#34;&gt;kill&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-9&lt;/span&gt; PID  &lt;span class=&#34;token comment&#34;&gt;# 强制终止进程&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;chmod&lt;/strong&gt;：更改文件权限&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;755&lt;/span&gt; filename
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x filename  &lt;span class=&#34;token comment&#34;&gt;# 使文件可执行&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;chown&lt;/strong&gt;：更改文件所有者&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chown&lt;/span&gt; user:group filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;网络相关&#34;&gt;&lt;a href=&#34;#网络相关&#34; class=&#34;headerlink&#34; title=&#34;网络相关&#34;&gt;&lt;/a&gt;网络相关&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;ping&lt;/strong&gt;：测试网络连通性&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ping&lt;/span&gt; example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;curl&lt;/strong&gt;：发送网络请求&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; http://example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;wget&lt;/strong&gt;：下载文件&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; http://example.com/file&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;管道和重定向&#34;&gt;&lt;a href=&#34;#管道和重定向&#34; class=&#34;headerlink&#34; title=&#34;管道和重定向&#34;&gt;&lt;/a&gt;管道和重定向&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;**|**：管道，将一个命令的输出作为另一个命令的输入&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;pattern&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;**&amp;gt;**：重定向输出到文件（覆盖）&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Hello, World!&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;**&amp;gt;&amp;gt;**：重定向输出到文件（追加）&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Hello, World!&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;**&amp;lt;**：重定向输入&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; inputfile&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;变量&#34;&gt;&lt;a href=&#34;#变量&#34; class=&#34;headerlink&#34; title=&#34;变量&#34;&gt;&lt;/a&gt;变量&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;设置变量&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;MY_VAR&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Hello, World!&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用变量&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$MY_VAR&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Shell-脚本&#34;&gt;&lt;a href=&#34;#Shell-脚本&#34; class=&#34;headerlink&#34; title=&#34;Shell 脚本&#34;&gt;&lt;/a&gt;Shell 脚本&lt;/h2&gt;&lt;p&gt;Shell 脚本是一组 Shell 命令的集合，通常用于自动化任务。以下是一个简单的 Shell 脚本示例：&lt;/p&gt;
+&lt;h3 id=&#34;创建脚本文件&#34;&gt;&lt;a href=&#34;#创建脚本文件&#34; class=&#34;headerlink&#34; title=&#34;创建脚本文件&#34;&gt;&lt;/a&gt;创建脚本文件&lt;/h3&gt;&lt;p&gt;使用你喜欢的文本编辑器创建一个脚本文件，例如 &lt;code&gt;myscript.sh&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; myscript.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;编写脚本&#34;&gt;&lt;a href=&#34;#编写脚本&#34; class=&#34;headerlink&#34; title=&#34;编写脚本&#34;&gt;&lt;/a&gt;编写脚本&lt;/h3&gt;&lt;p&gt;在脚本文件中编写以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 打印消息&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;This is a simple shell script.&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 设置变量&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;NAME&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Alice&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 使用变量&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Hello, &lt;span class=&#34;token variable&#34;&gt;$NAME&lt;/span&gt;!&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 条件语句&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$NAME&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Alice&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Welcome, Alice!&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;You are not Alice.&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 循环&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token for-or-select variable&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Number: &lt;span class=&#34;token variable&#34;&gt;$i&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;done&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 函数&lt;/span&gt;
+&lt;span class=&#34;token function-name function&#34;&gt;my_function&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;This is a function.&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 调用函数&lt;/span&gt;
+my_function&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;运行脚本&#34;&gt;&lt;a href=&#34;#运行脚本&#34; class=&#34;headerlink&#34; title=&#34;运行脚本&#34;&gt;&lt;/a&gt;运行脚本&lt;/h3&gt;&lt;p&gt;首先使脚本可执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x myscript.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后运行脚本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./myscript.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/07/20/linux-mei-hua-ming-ling-xing/</guid>
             <title>linux美化命令行</title>
@@ -515,6 +752,51 @@ deb-src http://mirrors.163.com/ubuntu/ jammy-backports main restricted universe 
 &lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：详细模式。对每个处理的文件输出诊断信息。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-c&lt;/code&gt;：类似详细模式，但仅在更改时报告。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;curl&#34;&gt;&lt;a href=&#34;#curl&#34; class=&#34;headerlink&#34; title=&#34;curl&#34;&gt;&lt;/a&gt;curl&lt;/h2&gt;&lt;p&gt;&lt;code&gt;curl&lt;/code&gt; 是一个非常强大的命令行工具，用于从命令行传输数据。它支持多种协议，如 HTTP, HTTPS, FTP, 和 SMTP。你可以用它来发送 GET 请求、POST 请求、下载文件，甚至与 API 交互。以下是 &lt;code&gt;curl&lt;/code&gt; 的一些基本用法示例。&lt;/p&gt;
+&lt;h3 id=&#34;1-基本用法&#34;&gt;&lt;a href=&#34;#1-基本用法&#34; class=&#34;headerlink&#34; title=&#34;1. 基本用法&#34;&gt;&lt;/a&gt;1. 基本用法&lt;/h3&gt;&lt;p&gt;最简单的 &lt;code&gt;curl&lt;/code&gt; 用法就是发送一个 GET 请求并输出响应内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; http://example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会在终端中显示 &lt;code&gt;http://example.com&lt;/code&gt; 的网页内容。&lt;/p&gt;
+&lt;h3 id=&#34;2-保存响应到文件&#34;&gt;&lt;a href=&#34;#2-保存响应到文件&#34; class=&#34;headerlink&#34; title=&#34;2. 保存响应到文件&#34;&gt;&lt;/a&gt;2. 保存响应到文件&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;-o&lt;/code&gt; 选项可以将响应保存到文件中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; example.html http://example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会将 &lt;code&gt;example.com&lt;/code&gt; 的内容保存到 &lt;code&gt;example.html&lt;/code&gt; 文件中。&lt;/p&gt;
+&lt;h3 id=&#34;3-发送-POST-请求&#34;&gt;&lt;a href=&#34;#3-发送-POST-请求&#34; class=&#34;headerlink&#34; title=&#34;3. 发送 POST 请求&#34;&gt;&lt;/a&gt;3. 发送 POST 请求&lt;/h3&gt;&lt;p&gt;你可以使用 &lt;code&gt;-d&lt;/code&gt; 选项发送 POST 请求。以下是一个发送表单数据的例子：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;name=John&amp;amp;age=30&#34;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-X&lt;/span&gt; POST http://example.com/post&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;-X&lt;/code&gt; 选项用于指定请求方法。在这里，我们明确指定为 POST 请求。&lt;/p&gt;
+&lt;h3 id=&#34;4-使用自定义请求头&#34;&gt;&lt;a href=&#34;#4-使用自定义请求头&#34; class=&#34;headerlink&#34; title=&#34;4. 使用自定义请求头&#34;&gt;&lt;/a&gt;4. 使用自定义请求头&lt;/h3&gt;&lt;p&gt;你可以使用 &lt;code&gt;-H&lt;/code&gt; 选项添加自定义请求头：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-H&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Authorization: Bearer your_token_here&#34;&lt;/span&gt; http://example.com/secure&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这在访问需要认证的 API 时非常有用。&lt;/p&gt;
+&lt;h3 id=&#34;5-下载文件&#34;&gt;&lt;a href=&#34;#5-下载文件&#34; class=&#34;headerlink&#34; title=&#34;5. 下载文件&#34;&gt;&lt;/a&gt;5. 下载文件&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;-O&lt;/code&gt; 选项可以直接下载文件，并保留文件的原始名称：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-O&lt;/span&gt; http://example.com/file.zip&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会将 &lt;code&gt;file.zip&lt;/code&gt; 下载到当前目录。&lt;/p&gt;
+&lt;h3 id=&#34;6-处理重定向&#34;&gt;&lt;a href=&#34;#6-处理重定向&#34; class=&#34;headerlink&#34; title=&#34;6. 处理重定向&#34;&gt;&lt;/a&gt;6. 处理重定向&lt;/h3&gt;&lt;p&gt;默认情况下，&lt;code&gt;curl&lt;/code&gt; 不会跟随重定向。你可以使用 &lt;code&gt;-L&lt;/code&gt; 选项让它跟随重定向：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-L&lt;/span&gt; http://short.url&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会跟随重定向到最终的 URL 并获取内容。&lt;/p&gt;
+&lt;h3 id=&#34;7-显示详细信息&#34;&gt;&lt;a href=&#34;#7-显示详细信息&#34; class=&#34;headerlink&#34; title=&#34;7. 显示详细信息&#34;&gt;&lt;/a&gt;7. 显示详细信息&lt;/h3&gt;&lt;p&gt;如果你想查看请求和响应的详细信息，可以使用 &lt;code&gt;-v&lt;/code&gt; 选项：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会显示所有请求头、响应头以及其它调试信息。&lt;/p&gt;
+&lt;h3 id=&#34;8-使用代理&#34;&gt;&lt;a href=&#34;#8-使用代理&#34; class=&#34;headerlink&#34; title=&#34;8. 使用代理&#34;&gt;&lt;/a&gt;8. 使用代理&lt;/h3&gt;&lt;p&gt;如果你需要通过代理访问网络资源，可以使用 &lt;code&gt;-x&lt;/code&gt; 选项：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-x&lt;/span&gt; http://proxy.example.com:8080 http://example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;9-上传文件&#34;&gt;&lt;a href=&#34;#9-上传文件&#34; class=&#34;headerlink&#34; title=&#34;9. 上传文件&#34;&gt;&lt;/a&gt;9. 上传文件&lt;/h3&gt;&lt;p&gt;你可以使用 &lt;code&gt;-F&lt;/code&gt; 选项上传文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-F&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;file=@/path/to/file&#34;&lt;/span&gt; http://example.com/upload&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会将指定的文件上传到服务器。&lt;/p&gt;
+&lt;h3 id=&#34;10-指定请求方法&#34;&gt;&lt;a href=&#34;#10-指定请求方法&#34; class=&#34;headerlink&#34; title=&#34;10. 指定请求方法&#34;&gt;&lt;/a&gt;10. 指定请求方法&lt;/h3&gt;&lt;p&gt;尽管 &lt;code&gt;curl&lt;/code&gt; 默认发送的是 GET 请求，你也可以使用 &lt;code&gt;-X&lt;/code&gt; 选项指定其他方法，如 PUT, DELETE 等：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-X&lt;/span&gt; DELETE http://example.com/resource/123&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;进阶用法&#34;&gt;&lt;a href=&#34;#进阶用法&#34; class=&#34;headerlink&#34; title=&#34;进阶用法&#34;&gt;&lt;/a&gt;进阶用法&lt;/h3&gt;&lt;p&gt;&lt;code&gt;curl&lt;/code&gt; 还支持更多复杂的用法，如通过 &lt;code&gt;--data-binary&lt;/code&gt; 发送原始二进制数据、使用 &lt;code&gt;--header&lt;/code&gt; 添加多个请求头、通过 &lt;code&gt;-u&lt;/code&gt; 进行 HTTP 基本认证等。&lt;/p&gt;
+&lt;p&gt;如果你想查看 &lt;code&gt;curl&lt;/code&gt; 的所有功能和选项，可以通过以下命令查看手册：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;man&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者查看帮助文档：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--help&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
  ]]></description>
         </item>
         <item>
