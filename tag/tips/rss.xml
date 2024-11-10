@@ -5,14 +5,14 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Thu, 10 Oct 2024 15:25:00 +0800</pubDate>
-        <lastBuildDate>Thu, 10 Oct 2024 15:25:00 +0800</lastBuildDate>
+        <pubDate>Sun, 03 Nov 2024 09:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 03 Nov 2024 09:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>re</category>
         <category>工具</category>
+        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
-        <category>安装</category>
         <category>教程</category>
         <category>web</category>
         <category>wp</category>
@@ -20,12 +20,13 @@
         <category>windows</category>
         <category>BUUCTF</category>
         <category>server</category>
-        <category>bug</category>
         <category>环境</category>
+        <category>bug</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
         <category>tips</category>
+        <category>python</category>
         <category>git</category>
         <category>java</category>
         <category>命令</category>
@@ -33,10 +34,67 @@
         <category>tools</category>
         <category>文件上传</category>
         <category>php</category>
-        <category>python</category>
+        <category>区块链</category>
         <category>汇编</category>
         <category>i春秋</category>
-        <category>区块链</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/11/03/pip-huan-yuan/</guid>
+            <title>pip换源</title>
+            <link>https://0xdadream.github.io/2024/11/03/pip-huan-yuan/</link>
+            <category>tips</category>
+            <pubDate>Sun, 03 Nov 2024 09:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;pip换源&#34;&gt;&lt;a href=&#34;#pip换源&#34; class=&#34;headerlink&#34; title=&#34;pip换源&#34;&gt;&lt;/a&gt;pip换源&lt;/h1&gt;&lt;h3 id=&#34;1-临时换源&#34;&gt;&lt;a href=&#34;#1-临时换源&#34; class=&#34;headerlink&#34; title=&#34;1. 临时换源&#34;&gt;&lt;/a&gt;1. 临时换源&lt;/h3&gt;&lt;p&gt;临时换源是在安装某个包时指定使用特定的源，而不改变全局配置。例如，使用清华大学源安装一个包的命令如下：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; package_name &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; https://pypi.tuna.tsinghua.edu.cn/simple&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中&lt;code&gt;package_name&lt;/code&gt;是您要安装的包的名称。&lt;/p&gt;
+&lt;h3 id=&#34;2-永久换源&#34;&gt;&lt;a href=&#34;#2-永久换源&#34; class=&#34;headerlink&#34; title=&#34;2. 永久换源&#34;&gt;&lt;/a&gt;2. 永久换源&lt;/h3&gt;&lt;p&gt;永久换源是通过修改pip的配置文件来实现的，这样每次使用pip时都会默认使用指定的源。&lt;/p&gt;
+&lt;h4 id=&#34;2-1-找到pip配置文件的位置&#34;&gt;&lt;a href=&#34;#2-1-找到pip配置文件的位置&#34; class=&#34;headerlink&#34; title=&#34;2.1 找到pip配置文件的位置&#34;&gt;&lt;/a&gt;2.1 找到pip配置文件的位置&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unix/Linux/MacOS&lt;/strong&gt;: &lt;code&gt;~/.pip/pip.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows&lt;/strong&gt;: &lt;code&gt;%APPDATA%\pip\pip.ini&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果配置文件不存在，可以手动创建。&lt;/p&gt;
+&lt;h4 id=&#34;2-2-编辑pip配置文件&#34;&gt;&lt;a href=&#34;#2-2-编辑pip配置文件&#34; class=&#34;headerlink&#34; title=&#34;2.2 编辑pip配置文件&#34;&gt;&lt;/a&gt;2.2 编辑pip配置文件&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Unix/Linux/MacOS: 打开或创建&lt;code&gt;~/.pip/pip.conf&lt;/code&gt;文件，并添加以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Windows: 打开或创建&lt;code&gt;%APPDATA%\pip\pip.ini&lt;/code&gt;文件，并添加以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中&lt;code&gt;https://pypi.tuna.tsinghua.edu.cn/simple&lt;/code&gt;可以替换为您选择的其他源的URL。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-3-命令&#34;&gt;&lt;a href=&#34;#2-3-命令&#34; class=&#34;headerlink&#34; title=&#34;2.3 命令&#34;&gt;&lt;/a&gt;2.3 命令&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 清华源&lt;/span&gt;
+pip config &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; global.index-url https://pypi.tuna.tsinghua.edu.cn/simple&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-重置镜像源&#34;&gt;&lt;a href=&#34;#3-重置镜像源&#34; class=&#34;headerlink&#34; title=&#34;3. 重置镜像源&#34;&gt;&lt;/a&gt;3. 重置镜像源&lt;/h3&gt;&lt;p&gt;如果您需要重置镜像源到默认的PyPI官方源，可以使用以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip config &lt;span class=&#34;token builtin class-name&#34;&gt;unset&lt;/span&gt; global.index-url&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会将全局设置的镜像源删除，恢复到默认设置。&lt;/p&gt;
+&lt;h3 id=&#34;4-验证和测试&#34;&gt;&lt;a href=&#34;#4-验证和测试&#34; class=&#34;headerlink&#34; title=&#34;4. 验证和测试&#34;&gt;&lt;/a&gt;4. 验证和测试&lt;/h3&gt;&lt;p&gt;您可以通过以下命令检查当前pip配置的源：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip config list&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后尝试安装一个包来测试配置是否生效。&lt;/p&gt;
+&lt;h3 id=&#34;5-国内常用源地址&#34;&gt;&lt;a href=&#34;#5-国内常用源地址&#34; class=&#34;headerlink&#34; title=&#34;5. 国内常用源地址&#34;&gt;&lt;/a&gt;5. 国内常用源地址&lt;/h3&gt;&lt;p&gt;以下是一些国内常用的pip源地址，供您选择使用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;清华大学源：&lt;code&gt;https://pypi.tuna.tsinghua.edu.cn/simple&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;阿里云源：&lt;code&gt;https://mirrors.aliyun.com/pypi/simple&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;豆瓣源：&lt;code&gt;https://pypi.douban.com/simple&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;中国科学技术大学源：&lt;code&gt;https://pypi.mirrors.ustc.edu.cn/simple&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;腾讯云源：&lt;code&gt;https://mirrors.cloud.tencent.com/pypi/simple&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在pip镜像升级报警，只需要添加信任源即可：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;临时换源处理&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; beautifulsoup4 --trusted-host mirrors.aliyun.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更换默认源配置&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;install&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+trusted-host&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;pypi.douban.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/10/10/devc-an-zhuang-wai-bu-ku/</guid>
             <title>dev c++安装外部库</title>
