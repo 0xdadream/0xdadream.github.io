@@ -8,19 +8,19 @@
         <pubDate>Mon, 12 Aug 2024 01:25:00 +0800</pubDate>
         <lastBuildDate>Mon, 12 Aug 2024 01:25:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>安装</category>
         <category>re</category>
         <category>工具</category>
-        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
         <category>教程</category>
+        <category>环境</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
-        <category>环境</category>
         <category>bug</category>
         <category>sql</category>
         <category>代码审计</category>
@@ -32,8 +32,8 @@
         <category>命令</category>
         <category>学习</category>
         <category>tools</category>
-        <category>文件上传</category>
         <category>php</category>
+        <category>文件上传</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>i春秋</category>
@@ -169,6 +169,192 @@
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;bconda remove &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; myenv &lt;span class=&#34;token parameter variable&#34;&gt;--all&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;11-添加pycharm可执行文件&#34;&gt;&lt;a href=&#34;#11-添加pycharm可执行文件&#34; class=&#34;headerlink&#34; title=&#34;11.添加pycharm可执行文件&#34;&gt;&lt;/a&gt;11.添加pycharm可执行文件&lt;/h4&gt;&lt;p&gt;在设置/首选项窗口中，选择左侧的 &lt;code&gt;Project: 你的项目名&lt;/code&gt; &amp;gt; &lt;code&gt;Python Interpreter（解释器）&lt;/code&gt;，在Python Interpreter页面，点击右侧的添加解释器，选择 添加本地解释器，在弹出的窗口中，选择 &lt;code&gt;Conda Environment&lt;/code&gt;，可执行文件若为空，复制&lt;code&gt;conda\condabin\conda.bat&lt;/code&gt;文件的目录到框里就，在加载&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/07/03/msys2-jiao-cheng/</guid>
+            <title>MSYS2教程</title>
+            <link>https://0xdadream.github.io/2024/07/03/msys2-jiao-cheng/</link>
+            <category>教程</category>
+            <category>环境</category>
+            <pubDate>Wed, 03 Jul 2024 09:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;MSYS2教程&#34;&gt;&lt;a href=&#34;#MSYS2教程&#34; class=&#34;headerlink&#34; title=&#34;MSYS2教程&#34;&gt;&lt;/a&gt;MSYS2教程&lt;/h1&gt;&lt;hr&gt;
+&lt;h3 id=&#34;一、安装-MSYS2&#34;&gt;&lt;a href=&#34;#一、安装-MSYS2&#34; class=&#34;headerlink&#34; title=&#34;一、安装 MSYS2&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、安装 MSYS2&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载 MSYS2 安装程序&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 MSYS2 官方网站：&lt;a href=&#34;https://www.msys2.org/&#34;&gt;MSYS2 官网&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;下载适合你的系统的 MSYS2 安装程序（通常是 64 位版本）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装 MSYS2&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;运行下载的安装程序。&lt;/li&gt;
+&lt;li&gt;按照提示完成安装，建议将 MSYS2 安装到 &lt;code&gt;C:\msys64&lt;/code&gt; 等不包含空格或特殊字符的路径。&lt;/li&gt;
+&lt;li&gt;安装完成后，点击 &lt;strong&gt;Finish&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;初始化 MSYS2 环境&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;安装完成后运行 &lt;code&gt;C:\msys64\msys2.exe&lt;/code&gt; 启动 MSYS2 环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更新核心库：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Syu&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果提示需要关闭终端，关闭后重新打开 MSYS2 终端并继续更新：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Su&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;二、将-MSYS2-添加到终端&#34;&gt;&lt;a href=&#34;#二、将-MSYS2-添加到终端&#34; class=&#34;headerlink&#34; title=&#34;二、将 MSYS2 添加到终端&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、将 MSYS2 添加到终端&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;为 Windows Terminal 添加配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;运行 Windows Terminal 后，按照下面步骤新增 Msys2 shell&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点击标题栏右边的向下指示符，选择 &lt;code&gt;Settings&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;左边侧栏，下边，点击 &lt;code&gt;Add a new profile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;选择一个已经存在的 shell，点击 &lt;code&gt;Duplicate&lt;/code&gt;，即基于原存 shell 创建新 shell&lt;/li&gt;
+&lt;li&gt;主要设置项&lt;ul&gt;
+&lt;li&gt;Name: 如 &lt;code&gt;MSYS / MSYS2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Command line: &lt;code&gt;C:/msys64/msys2_shell.cmd -defterm -here -no-start -use-full-path -msys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Starting directory: &lt;code&gt;C:/msys64/home/%USERNAME%&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Icon: &lt;code&gt;C:/msys64/msys2.ico&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;点击 &lt;code&gt;Save&lt;/code&gt; 保存&lt;/li&gt;
+&lt;li&gt;要添加minge64，直接修改最后-msys为-ming64，其他同理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;为 VS Code 配置终端&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;打开 VS Code，按 &lt;code&gt;Ctrl + Shift + P&lt;/code&gt; 打开命令面板，选择 “Preferences: Open Settings (JSON)”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;添加以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-json&#34; data-language=&#34;json&#34;&gt;&lt;code class=&#34;language-json&#34;&gt;&lt;span class=&#34;token property&#34;&gt;&#34;terminal.integrated.profiles.windows&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;token property&#34;&gt;&#34;MSYS2&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token property&#34;&gt;&#34;path&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;C:/msys64/msys2_shell.cmd&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token property&#34;&gt;&#34;args&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-defterm, -here, -no-start, -use-full-path, -msys&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;token property&#34;&gt;&#34;terminal.integrated.defaultProfile.windows&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;MSYS2&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;全局访问 MSYS2&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果希望从 CMD、PowerShell 等终端中也能使用 MSYS2 工具，确保 &lt;code&gt;C:\msys64\usr\bin&lt;/code&gt;被添加到系统环境变量 Path中：&lt;ul&gt;
+&lt;li&gt;右键 &lt;strong&gt;此电脑&lt;/strong&gt; &amp;gt; &lt;strong&gt;属性&lt;/strong&gt; &amp;gt; &lt;strong&gt;高级系统设置&lt;/strong&gt; &amp;gt; &lt;strong&gt;环境变量&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在“系统变量”中找到 Path，点击“编辑”，添加：&lt;code&gt;C:\msys64\usr\bin&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保存后，重启终端即可在任意终端中访问 MSYS2 工具。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;三、MSYS2-基础操作&#34;&gt;&lt;a href=&#34;#三、MSYS2-基础操作&#34; class=&#34;headerlink&#34; title=&#34;三、MSYS2 基础操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、MSYS2 基础操作&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;MSYS2 提供三个核心环境：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MSYS&lt;/strong&gt;：适用于开发 Windows 工具。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MINGW32&lt;/strong&gt;：用于 32 位 Windows 应用程序开发。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MINGW64&lt;/strong&gt;：用于 64 位 Windows 应用程序开发。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;常见命令&#34;&gt;&lt;a href=&#34;#常见命令&#34; class=&#34;headerlink&#34; title=&#34;常见命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;常见命令&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换到 MSYS 环境&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;msys2_shell.cmd &lt;span class=&#34;token parameter variable&#34;&gt;-msys&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换到 64 位 MINGW 环境&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;msys2_shell.cmd &lt;span class=&#34;token parameter variable&#34;&gt;-mingw64&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换到 32 位 MINGW 环境&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;msys2_shell.cmd &lt;span class=&#34;token parameter variable&#34;&gt;-mingw32&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;四、MSYS2-包管理&#34;&gt;&lt;a href=&#34;#四、MSYS2-包管理&#34; class=&#34;headerlink&#34; title=&#34;四、MSYS2 包管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、MSYS2 包管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;MSYS2 使用 &lt;code&gt;pacman&lt;/code&gt; 包管理器来管理软件包。常用命令如下：&lt;/p&gt;
+&lt;h4 id=&#34;1-更新系统&#34;&gt;&lt;a href=&#34;#1-更新系统&#34; class=&#34;headerlink&#34; title=&#34;1. 更新系统&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 更新系统&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;更新软件包数据库并升级所有包：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Syu&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-搜索包&#34;&gt;&lt;a href=&#34;#2-搜索包&#34; class=&#34;headerlink&#34; title=&#34;2. 搜索包&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 搜索包&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;搜索某个软件包：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Ss&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;包名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如，搜索 &lt;code&gt;gcc&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Ss&lt;/span&gt; gcc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;3-安装包&#34;&gt;&lt;a href=&#34;#3-安装包&#34; class=&#34;headerlink&#34; title=&#34;3. 安装包&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 安装包&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;安装某个软件包：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-S&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;包名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如，安装 &lt;code&gt;gcc&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-S&lt;/span&gt; mingw-w64-x86_64-gcc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;4-卸载包&#34;&gt;&lt;a href=&#34;#4-卸载包&#34; class=&#34;headerlink&#34; title=&#34;4. 卸载包&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 卸载包&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;卸载某个软件包：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;包名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如，卸载 &lt;code&gt;gcc&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; mingw-w64-x86_64-gcc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;5-查看已安装包&#34;&gt;&lt;a href=&#34;#5-查看已安装包&#34; class=&#34;headerlink&#34; title=&#34;5. 查看已安装包&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 查看已安装包&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;查看已安装的软件包：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Q&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;6-清理缓存&#34;&gt;&lt;a href=&#34;#6-清理缓存&#34; class=&#34;headerlink&#34; title=&#34;6. 清理缓存&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 清理缓存&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;清理过时的缓存：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Sc&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;7-升级或者降级本地文件安装的包&#34;&gt;&lt;a href=&#34;#7-升级或者降级本地文件安装的包&#34; class=&#34;headerlink&#34; title=&#34;7. 升级或者降级本地文件安装的包&#34;&gt;&lt;/a&gt;7. &lt;strong&gt;升级或者降级本地文件安装的包&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果存储库中没有合适的旧版本，您可以通过以下方式获取旧版本：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;访问 MSYS2 包存储库&lt;a href=&#34;https://repo.msys2.org/%E3%80%82&#34;&gt;https://repo.msys2.org/。&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;搜索 &lt;code&gt;openssl&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;找到适合的版本（例如 1.1.x）。&lt;/li&gt;
+&lt;li&gt;下载 &lt;code&gt;.pkg.tar.zst&lt;/code&gt; 文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-U&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;文件路径&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从本地文件安装或升级软件包。&lt;br&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-U&lt;/span&gt; /path/to/package.pkg.tar.zst&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;找不到版本，可以去官方网站找，下载压缩包，解压进入目录执行(使用mingw64环境)&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./config &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/mingw64
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;8-查看依赖链&#34;&gt;&lt;a href=&#34;#8-查看依赖链&#34; class=&#34;headerlink&#34; title=&#34;8. 查看依赖链&#34;&gt;&lt;/a&gt;8. &lt;strong&gt;查看依赖链&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;查看哪些软件包依赖于 &lt;code&gt;mingw-w64-x86_64-openssl&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pactree &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; mingw-w64-x86_64-openssl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;9-强制卸载&#34;&gt;&lt;a href=&#34;#9-强制卸载&#34; class=&#34;headerlink&#34; title=&#34;9. 强制卸载&#34;&gt;&lt;/a&gt;9. &lt;strong&gt;强制卸载&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;您可以强制删除 &lt;code&gt;mingw-w64-x86_64-openssl&lt;/code&gt; 及其依赖软件，但请注意，这可能会导致其他软件无法正常工作。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Rdd&lt;/span&gt; mingw-w64-x86_64-openssl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;10-卸载相关依赖&#34;&gt;&lt;a href=&#34;#10-卸载相关依赖&#34; class=&#34;headerlink&#34; title=&#34;10. 卸载相关依赖&#34;&gt;&lt;/a&gt;10. &lt;strong&gt;卸载相关依赖&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;卸载所有依赖软件（如 &lt;code&gt;mingw-w64-x86_64-python&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Rns&lt;/span&gt; mingw-w64-x86_64-python&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;五、安装开发工具示例&#34;&gt;&lt;a href=&#34;#五、安装开发工具示例&#34; class=&#34;headerlink&#34; title=&#34;五、安装开发工具示例&#34;&gt;&lt;/a&gt;&lt;strong&gt;五、安装开发工具示例&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;安装-GCC-编译器&#34;&gt;&lt;a href=&#34;#安装-GCC-编译器&#34; class=&#34;headerlink&#34; title=&#34;安装 GCC 编译器&#34;&gt;&lt;/a&gt;&lt;strong&gt;安装 GCC 编译器&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装 GCC：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-S&lt;/span&gt; mingw-w64-x86_64-gcc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;验证安装：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;gcc --version&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果你希望在 CMD 或 PowerShell 中直接使用 GCC：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开系统的环境变量设置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将以下路径添加到用户或系统的 Path中：&lt;code&gt;C:\msys64\mingw64\bin&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;保存后，打开 CMD 或 PowerShell，运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;安装-Python&#34;&gt;&lt;a href=&#34;#安装-Python&#34; class=&#34;headerlink&#34; title=&#34;安装 Python&#34;&gt;&lt;/a&gt;&lt;strong&gt;安装 Python&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装 Python：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-S&lt;/span&gt; mingw-w64-x86_64-python&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;验证安装：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;安装-Node-js&#34;&gt;&lt;a href=&#34;#安装-Node-js&#34; class=&#34;headerlink&#34; title=&#34;安装 Node.js&#34;&gt;&lt;/a&gt;&lt;strong&gt;安装 Node.js&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装 Node.js：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pacman &lt;span class=&#34;token parameter variable&#34;&gt;-S&lt;/span&gt; mingw-w64-x86_64-nodejs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;验证安装：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
  ]]></description>
         </item>
     </channel>

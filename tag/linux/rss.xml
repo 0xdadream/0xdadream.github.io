@@ -5,22 +5,22 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 10 Nov 2024 09:25:00 +0800</pubDate>
-        <lastBuildDate>Sun, 10 Nov 2024 09:25:00 +0800</lastBuildDate>
+        <pubDate>Wed, 20 Nov 2024 09:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 20 Nov 2024 09:25:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>安装</category>
         <category>re</category>
         <category>工具</category>
-        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
         <category>教程</category>
+        <category>环境</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
-        <category>环境</category>
         <category>bug</category>
         <category>sql</category>
         <category>代码审计</category>
@@ -32,11 +32,65 @@
         <category>命令</category>
         <category>学习</category>
         <category>tools</category>
-        <category>文件上传</category>
         <category>php</category>
+        <category>文件上传</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/11/20/linux-bian-yi-charm-ku/</guid>
+            <title>linux编译charm库</title>
+            <link>https://0xdadream.github.io/2024/11/20/linux-bian-yi-charm-ku/</link>
+            <category>linux</category>
+            <category>bug</category>
+            <pubDate>Wed, 20 Nov 2024 09:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;linux编译charm库&#34;&gt;&lt;a href=&#34;#linux编译charm库&#34; class=&#34;headerlink&#34; title=&#34;linux编译charm库&#34;&gt;&lt;/a&gt;linux编译charm库&lt;/h1&gt;&lt;p&gt;在 Windows 的 Linux 子系统 (WSL) 中使用 Ubuntu 编译安装 Charm 库的步骤如下：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;基于-WSL-的-Charm-库安装教程&#34;&gt;&lt;a href=&#34;#基于-WSL-的-Charm-库安装教程&#34; class=&#34;headerlink&#34; title=&#34;基于 WSL 的 Charm 库安装教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;基于 WSL 的 Charm 库安装教程&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-更新系统并安装依赖&#34;&gt;&lt;a href=&#34;#1-更新系统并安装依赖&#34; class=&#34;headerlink&#34; title=&#34;1. 更新系统并安装依赖&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 更新系统并安装依赖&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;应用商店下载linux后执行&lt;code&gt;wsl --update&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 WSL Ubuntu 中，运行以下命令安装必要的编译工具和库：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; upgrade &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; build-essential python3 python3-dev python3-pip python3-setuptools &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+                     libgmp-dev libssl-dev swig libpbc-dev &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; gcc &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; m4 flex bison&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的库可以一个一个单独安装，没有就去找源码安装，下面报安装错也能再安装，这里ubuntu版本最好不要太高，openssl我的是3.0.2没问题，gmp最高，openssl，python一般会自带，python我的是python3.10&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;2-安装-PBC-库&#34;&gt;&lt;a href=&#34;#2-安装-PBC-库&#34; class=&#34;headerlink&#34; title=&#34;2. 安装 PBC 库&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 安装 PBC 库&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;PBC 是 Charm 的核心依赖之一，需要手动编译安装。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载源码：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://crypto.stanford.edu/pbc/download.html&#34;&gt;PBC Library - Pairing-Based Cryptography - Downloads&lt;/a&gt;下载第一个&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://crypto.stanford.edu/pbc/files/pbc-0.5.14.tar.gz
+&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-zxvf&lt;/span&gt; pbc-0.5.14.tar.gz&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;编译和安装：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;进入解压的目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/usr/local/lib&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; /etc/ld.so.conf.d/libpbc.conf
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;3-下载并安装-Charm-库&#34;&gt;&lt;a href=&#34;#3-下载并安装-Charm-库&#34; class=&#34;headerlink&#34; title=&#34;3. 下载并安装 Charm 库&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 下载并安装 Charm 库&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载源码：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone https://github.com/JHUISI/charm.git
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; charm&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;配置安装路径：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;执行 &lt;code&gt;configure.sh&lt;/code&gt; 脚本，指定 GMP 和 PBC 的安装路径：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;编译和安装：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;import charm&lt;/code&gt;判断安装是否成功&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;报错就看报错信息，可以参考官方&lt;a href=&#34;https://jhuisi.github.io/charm/install_source.html&#34;&gt;Platform Install Manual — Charm-Crypto 0.50 documentation&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/11/10/linux-fang-huo-qiang-gui-ze/</guid>
             <title>linux防火墙规则</title>
