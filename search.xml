@@ -54,6 +54,33 @@
     
     
     <entry>
+      <title>python库merklelib</title>
+      <link href="/2024/12/06/python-ku-merklelib/"/>
+      <url>/2024/12/06/python-ku-merklelib/</url>
+      
+        <content type="html"><![CDATA[<h1 id="python库merklelib"><a href="#python库merklelib" class="headerlink" title="python库merklelib"></a>python库merklelib</h1><h2 id="报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’"><a href="#报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’" class="headerlink" title="报错AttributeError: module ‘collections’ has no attribute ‘Iterable’"></a>报错AttributeError: module ‘collections’ has no attribute ‘Iterable’</h2><p>该错误发生在 Python 3.10 或更高版本中，因为 <code>collections.Iterable</code> 在 Python 3.10 中已被移至 <code>collections.abc.Iterable</code>。这是 Python 的一个兼容性问题。</p><p>要解决此问题，请将代码中的 <code>collections.Iterable</code> 替换为 <code>collections.abc.Iterable</code>：</p><h3 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> collections<span class="token punctuation">.</span>abc<span class="token keyword">if</span> <span class="token keyword">not</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> collections<span class="token punctuation">.</span>abc<span class="token punctuation">.</span>Iterable<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment"># Your logic here</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>如果你正在使用一个依赖于旧版 <code>collections.Iterable</code> 的库（如 <code>merklelib</code>），可以通过以下方式解决：</p><h3 id="解决方法-1：升级相关库"><a href="#解决方法-1：升级相关库" class="headerlink" title="解决方法 1：升级相关库"></a>解决方法 1：升级相关库</h3><p>检查是否有更新的版本来支持 Python 3.10+。你可以尝试更新库：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> merklelib<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="解决方法-2：兼容性修复"><a href="#解决方法-2：兼容性修复" class="headerlink" title="解决方法 2：兼容性修复"></a>解决方法 2：兼容性修复</h3><p>如果库尚未更新，你可以手动修复代码：</p><ol><li>打开出错的代码文件（通常在库的安装目录中）。</li><li>找到 <code>collections.Iterable</code> 并替换为 <code>collections.abc.Iterable</code>。</li></ol><p>或者，临时修复可以通过 Monkey Patch：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> collections<span class="token punctuation">.</span>abccollections<span class="token punctuation">.</span>Iterable <span class="token operator">=</span> collections<span class="token punctuation">.</span>abc<span class="token punctuation">.</span>Iterable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="解决方法-3：降级-Python-版本"><a href="#解决方法-3：降级-Python-版本" class="headerlink" title="解决方法 3：降级 Python 版本"></a>解决方法 3：降级 Python 版本</h3><p>如果无法更新库或代码，可以暂时降级到 Python 3.9：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pyenv <span class="token function">install</span> <span class="token number">3.9</span>.12pyenv global <span class="token number">3.9</span>.12<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>推荐优先升级库或修复代码以适应 Python 的新版本</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> bug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bug </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>WSL 与 Windows 互相访问教程</title>
       <link href="/2024/12/01/wsl-he-windows-hu-xiang-fang-wen/"/>
       <url>/2024/12/01/wsl-he-windows-hu-xiang-fang-wen/</url>

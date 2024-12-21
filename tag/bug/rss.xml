@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 25 Nov 2024 09:25:00 +0800</pubDate>
-        <lastBuildDate>Mon, 25 Nov 2024 09:25:00 +0800</lastBuildDate>
+        <pubDate>Fri, 06 Dec 2024 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 06 Dec 2024 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
         <category>re</category>
@@ -38,6 +38,40 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/12/06/python-ku-merklelib/</guid>
+            <title>python库merklelib</title>
+            <link>https://0xdadream.github.io/2024/12/06/python-ku-merklelib/</link>
+            <category>bug</category>
+            <category>python</category>
+            <pubDate>Fri, 06 Dec 2024 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;python库merklelib&#34;&gt;&lt;a href=&#34;#python库merklelib&#34; class=&#34;headerlink&#34; title=&#34;python库merklelib&#34;&gt;&lt;/a&gt;python库merklelib&lt;/h1&gt;&lt;h2 id=&#34;报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’&#34;&gt;&lt;a href=&#34;#报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’&#34; class=&#34;headerlink&#34; title=&#34;报错AttributeError: module ‘collections’ has no attribute ‘Iterable’&#34;&gt;&lt;/a&gt;报错AttributeError: module ‘collections’ has no attribute ‘Iterable’&lt;/h2&gt;&lt;p&gt;该错误发生在 Python 3.10 或更高版本中，因为 &lt;code&gt;collections.Iterable&lt;/code&gt; 在 Python 3.10 中已被移至 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;。这是 Python 的一个兼容性问题。&lt;/p&gt;
+&lt;p&gt;要解决此问题，请将代码中的 &lt;code&gt;collections.Iterable&lt;/code&gt; 替换为 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;：&lt;/p&gt;
+&lt;h3 id=&#34;修改代码&#34;&gt;&lt;a href=&#34;#修改代码&#34; class=&#34;headerlink&#34; title=&#34;修改代码&#34;&gt;&lt;/a&gt;修改代码&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;isinstance&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token comment&#34;&gt;# Your logic here&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你正在使用一个依赖于旧版 &lt;code&gt;collections.Iterable&lt;/code&gt; 的库（如 &lt;code&gt;merklelib&lt;/code&gt;），可以通过以下方式解决：&lt;/p&gt;
+&lt;h3 id=&#34;解决方法-1：升级相关库&#34;&gt;&lt;a href=&#34;#解决方法-1：升级相关库&#34; class=&#34;headerlink&#34; title=&#34;解决方法 1：升级相关库&#34;&gt;&lt;/a&gt;解决方法 1：升级相关库&lt;/h3&gt;&lt;p&gt;检查是否有更新的版本来支持 Python 3.10+。你可以尝试更新库：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--upgrade&lt;/span&gt; merklelib&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;解决方法-2：兼容性修复&#34;&gt;&lt;a href=&#34;#解决方法-2：兼容性修复&#34; class=&#34;headerlink&#34; title=&#34;解决方法 2：兼容性修复&#34;&gt;&lt;/a&gt;解决方法 2：兼容性修复&lt;/h3&gt;&lt;p&gt;如果库尚未更新，你可以手动修复代码：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开出错的代码文件（通常在库的安装目录中）。&lt;/li&gt;
+&lt;li&gt;找到 &lt;code&gt;collections.Iterable&lt;/code&gt; 并替换为 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;或者，临时修复可以通过 Monkey Patch：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc
+collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;解决方法-3：降级-Python-版本&#34;&gt;&lt;a href=&#34;#解决方法-3：降级-Python-版本&#34; class=&#34;headerlink&#34; title=&#34;解决方法 3：降级 Python 版本&#34;&gt;&lt;/a&gt;解决方法 3：降级 Python 版本&lt;/h3&gt;&lt;p&gt;如果无法更新库或代码，可以暂时降级到 Python 3.9：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pyenv &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;.12
+pyenv global &lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;.12&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;推荐优先升级库或修复代码以适应 Python 的新版本&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/11/25/modulenotfounderror-no-module-named-crypto.cipher/</guid>
             <title>Python报错ModuleNotFoundError:No-module-named-Crypto.Cipher</title>
