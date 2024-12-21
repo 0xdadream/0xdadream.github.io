@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 12 Aug 2024 03:25:00 +0800</pubDate>
-        <lastBuildDate>Mon, 12 Aug 2024 03:25:00 +0800</lastBuildDate>
+        <pubDate>Sat, 21 Dec 2024 12:25:00 +0800</pubDate>
+        <lastBuildDate>Sat, 21 Dec 2024 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
         <category>re</category>
@@ -38,6 +38,52 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <category>powershell</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</guid>
+            <title>更改 Windows PowerShell 的执行策略</title>
+            <link>https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</link>
+            <category>windows</category>
+            <category>powershell</category>
+            <pubDate>Sat, 21 Dec 2024 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;更改-Windows-PowerShell-的执行策略&#34;&gt;&lt;a href=&#34;#更改-Windows-PowerShell-的执行策略&#34; class=&#34;headerlink&#34; title=&#34;更改 Windows PowerShell 的执行策略&#34;&gt;&lt;/a&gt;更改 Windows PowerShell 的执行策略&lt;/h1&gt;&lt;h3 id=&#34;1-打开-PowerShell-以管理员身份运行&#34;&gt;&lt;a href=&#34;#1-打开-PowerShell-以管理员身份运行&#34; class=&#34;headerlink&#34; title=&#34;1. 打开 PowerShell 以管理员身份运行&#34;&gt;&lt;/a&gt;1. 打开 PowerShell 以管理员身份运行&lt;/h3&gt;&lt;p&gt;首先，您需要以管理员身份运行 PowerShell：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按 &lt;code&gt;Win + X&lt;/code&gt; 并选择“Windows PowerShell (管理员)”。&lt;/li&gt;
+&lt;li&gt;如果您使用的是较新的 Windows 版本，也可以搜索“PowerShell”，右键点击并选择“以管理员身份运行”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-检查当前执行策略&#34;&gt;&lt;a href=&#34;#2-检查当前执行策略&#34; class=&#34;headerlink&#34; title=&#34;2. 检查当前执行策略&#34;&gt;&lt;/a&gt;2. 检查当前执行策略&lt;/h3&gt;&lt;p&gt;在更改执行策略之前，您可以查看当前的执行策略设置，执行以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该命令将返回当前的执行策略，可能的输出包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;（默认策略，不允许执行任何脚本）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;（本地脚本可以运行，下载的脚本需要签名）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;（允许所有脚本运行）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ByPass&lt;/code&gt;（完全忽略执行策略）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-修改执行策略&#34;&gt;&lt;a href=&#34;#3-修改执行策略&#34; class=&#34;headerlink&#34; title=&#34;3. 修改执行策略&#34;&gt;&lt;/a&gt;3. 修改执行策略&lt;/h3&gt;&lt;p&gt;要更改执行策略，可以使用 &lt;code&gt;Set-ExecutionPolicy&lt;/code&gt; 命令。例如，您可以将执行策略更改为 &lt;code&gt;RemoteSigned&lt;/code&gt;，这样可以运行本地脚本并允许下载的签名脚本运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; RemoteSigned&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果您希望设置为不限制脚本执行，可以使用 &lt;code&gt;Unrestricted&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Unrestricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者，如果您希望脚本完全不受限制（但存在安全风险），可以使用 &lt;code&gt;Bypass&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Bypass&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-确认更改&#34;&gt;&lt;a href=&#34;#4-确认更改&#34; class=&#34;headerlink&#34; title=&#34;4. 确认更改&#34;&gt;&lt;/a&gt;4. 确认更改&lt;/h3&gt;&lt;p&gt;更改执行策略后，系统会要求您确认。输入 &lt;code&gt;Y&lt;/code&gt; 进行确认并按回车。&lt;/p&gt;
+&lt;h3 id=&#34;5-检查执行策略更改是否生效&#34;&gt;&lt;a href=&#34;#5-检查执行策略更改是否生效&#34; class=&#34;headerlink&#34; title=&#34;5. 检查执行策略更改是否生效&#34;&gt;&lt;/a&gt;5. 检查执行策略更改是否生效&lt;/h3&gt;&lt;p&gt;再次执行以下命令来确保策略已更新：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-了解不同的执行策略&#34;&gt;&lt;a href=&#34;#6-了解不同的执行策略&#34; class=&#34;headerlink&#34; title=&#34;6. 了解不同的执行策略&#34;&gt;&lt;/a&gt;6. 了解不同的执行策略&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;：不允许运行任何脚本（这是默认设置）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;：允许本地脚本运行，但从互联网下载的脚本需要有效的签名才能运行。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;：允许所有脚本运行，但会在运行下载的脚本时给出警告。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bypass&lt;/code&gt;：完全忽略执行策略（适用于临时需求，但有安全隐患）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AllSigned&lt;/code&gt;：要求所有脚本必须由可信的发布者签名，适用于更严格的安全要求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;7-恢复默认执行策略&#34;&gt;&lt;a href=&#34;#7-恢复默认执行策略&#34; class=&#34;headerlink&#34; title=&#34;7. 恢复默认执行策略&#34;&gt;&lt;/a&gt;7. 恢复默认执行策略&lt;/h3&gt;&lt;p&gt;如果您希望恢复默认的执行策略，只需执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Restricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/08/12/windows-chuang-jian-wen-jian/</guid>
             <title>windows创建文件</title>

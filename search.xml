@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>更改 Windows PowerShell 的执行策略</title>
+      <link href="/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/"/>
+      <url>/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</url>
+      
+        <content type="html"><![CDATA[<h1 id="更改-Windows-PowerShell-的执行策略"><a href="#更改-Windows-PowerShell-的执行策略" class="headerlink" title="更改 Windows PowerShell 的执行策略"></a>更改 Windows PowerShell 的执行策略</h1><h3 id="1-打开-PowerShell-以管理员身份运行"><a href="#1-打开-PowerShell-以管理员身份运行" class="headerlink" title="1. 打开 PowerShell 以管理员身份运行"></a>1. 打开 PowerShell 以管理员身份运行</h3><p>首先，您需要以管理员身份运行 PowerShell：</p><ul><li>按 <code>Win + X</code> 并选择“Windows PowerShell (管理员)”。</li><li>如果您使用的是较新的 Windows 版本，也可以搜索“PowerShell”，右键点击并选择“以管理员身份运行”。</li></ul><h3 id="2-检查当前执行策略"><a href="#2-检查当前执行策略" class="headerlink" title="2. 检查当前执行策略"></a>2. 检查当前执行策略</h3><p>在更改执行策略之前，您可以查看当前的执行策略设置，执行以下命令：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-ExecutionPolicy</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>该命令将返回当前的执行策略，可能的输出包括：</p><ul><li><code>Restricted</code>（默认策略，不允许执行任何脚本）</li><li><code>RemoteSigned</code>（本地脚本可以运行，下载的脚本需要签名）</li><li><code>Unrestricted</code>（允许所有脚本运行）</li><li><code>ByPass</code>（完全忽略执行策略）</li></ul><h3 id="3-修改执行策略"><a href="#3-修改执行策略" class="headerlink" title="3. 修改执行策略"></a>3. 修改执行策略</h3><p>要更改执行策略，可以使用 <code>Set-ExecutionPolicy</code> 命令。例如，您可以将执行策略更改为 <code>RemoteSigned</code>，这样可以运行本地脚本并允许下载的签名脚本运行：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-ExecutionPolicy</span> RemoteSigned<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果您希望设置为不限制脚本执行，可以使用 <code>Unrestricted</code>：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-ExecutionPolicy</span> Unrestricted<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>或者，如果您希望脚本完全不受限制（但存在安全风险），可以使用 <code>Bypass</code>：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-ExecutionPolicy</span> Bypass<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="4-确认更改"><a href="#4-确认更改" class="headerlink" title="4. 确认更改"></a>4. 确认更改</h3><p>更改执行策略后，系统会要求您确认。输入 <code>Y</code> 进行确认并按回车。</p><h3 id="5-检查执行策略更改是否生效"><a href="#5-检查执行策略更改是否生效" class="headerlink" title="5. 检查执行策略更改是否生效"></a>5. 检查执行策略更改是否生效</h3><p>再次执行以下命令来确保策略已更新：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-ExecutionPolicy</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="6-了解不同的执行策略"><a href="#6-了解不同的执行策略" class="headerlink" title="6. 了解不同的执行策略"></a>6. 了解不同的执行策略</h3><ul><li><code>Restricted</code>：不允许运行任何脚本（这是默认设置）。</li><li><code>RemoteSigned</code>：允许本地脚本运行，但从互联网下载的脚本需要有效的签名才能运行。</li><li><code>Unrestricted</code>：允许所有脚本运行，但会在运行下载的脚本时给出警告。</li><li><code>Bypass</code>：完全忽略执行策略（适用于临时需求，但有安全隐患）。</li><li><code>AllSigned</code>：要求所有脚本必须由可信的发布者签名，适用于更严格的安全要求。</li></ul><h3 id="7-恢复默认执行策略"><a href="#7-恢复默认执行策略" class="headerlink" title="7. 恢复默认执行策略"></a>7. 恢复默认执行策略</h3><p>如果您希望恢复默认的执行策略，只需执行：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-ExecutionPolicy</span> Restricted<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> windows </tag>
+            
+            <tag> powershell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>parsec教程</title>
       <link href="/2024/12/13/parsec-jiao-cheng/"/>
       <url>/2024/12/13/parsec-jiao-cheng/</url>
