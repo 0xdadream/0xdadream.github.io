@@ -5,40 +5,110 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 12 Jan 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sun, 12 Jan 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Fri, 17 Jan 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 17 Jan 2025 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
         <category>re</category>
         <category>工具</category>
         <category>Java</category>
-        <category>linux</category>
         <category>教程</category>
         <category>环境</category>
         <category>bug</category>
+        <category>linux</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
-        <category>tips</category>
+        <category>conda</category>
+        <category>powershell</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
+        <category>tips</category>
+        <category>emby</category>
         <category>python</category>
         <category>git</category>
+        <category>google</category>
         <category>java</category>
         <category>tools</category>
-        <category>命令</category>
         <category>学习</category>
-        <category>php</category>
+        <category>命令</category>
         <category>文件上传</category>
+        <category>php</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
-        <category>powershell</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/01/17/linux-she-zhi-matplotlib-zhong-wen-zi-ti/</guid>
+            <title>linux设置matplotlib中文字体</title>
+            <link>https://0xdadream.github.io/2025/01/17/linux-she-zhi-matplotlib-zhong-wen-zi-ti/</link>
+            <category>tools</category>
+            <pubDate>Fri, 17 Jan 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;linux设置matplotlib中文字体&#34;&gt;&lt;a href=&#34;#linux设置matplotlib中文字体&#34; class=&#34;headerlink&#34; title=&#34;linux设置matplotlib中文字体&#34;&gt;&lt;/a&gt;linux设置matplotlib中文字体&lt;/h1&gt;&lt;p&gt;在Linux上设置Matplotlib使用中文字体的步骤如下：&lt;/p&gt;
+&lt;h3 id=&#34;步骤-1-安装中文字体&#34;&gt;&lt;a href=&#34;#步骤-1-安装中文字体&#34; class=&#34;headerlink&#34; title=&#34;步骤 1: 安装中文字体&#34;&gt;&lt;/a&gt;步骤 1: 安装中文字体&lt;/h3&gt;&lt;p&gt;去&lt;a href=&#34;https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf&#34;&gt;scp_zh/fonts/SimHei.ttf at master · StellarCN/scp_zh&lt;/a&gt;下载中文字体&lt;/p&gt;
+&lt;h4 id=&#34;安装SimHei字体&#34;&gt;&lt;a href=&#34;#安装SimHei字体&#34; class=&#34;headerlink&#34; title=&#34;安装SimHei字体&#34;&gt;&lt;/a&gt;安装SimHei字体&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;import matplotlib.pyplot as plt
+from matplotlib import rcParams
+import pandas as pd
+
+# 设置中文字体
+rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]  # 或者使用 &#39;Microsoft YaHei&#39;
+rcParams[&#39;axes.unicode_minus&#39;] = False  # 解决负号显示问题
+
+# 示例数据
+data = {&#39;日期&#39;: [&#39;2024-01-01&#39;, &#39;2024-01-02&#39;, &#39;2024-01-03&#39;],
+        &#39;销售额&#39;: [150, 200, 250]}
+df = pd.DataFrame(data)
+
+# 绘制图表
+plt.plot(df[&#39;日期&#39;], df[&#39;销售额&#39;])
+plt.title(&#39;销售额趋势&#39;)
+plt.xlabel(&#39;日期&#39;)
+plt.ylabel(&#39;销售额&#39;)
+plt.xticks(rotation=45)
+plt.show()&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行命令找到配置目录&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; matplotlib
+matplotlib&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;matplotlib_fname&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# xxx/matplotlib/matplotlibrc&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改文件&lt;code&gt;matplotlibrc&lt;/code&gt;，找到&lt;code&gt;font.sans-serif: DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif, SimHei&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;vim matplotlibrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;SimHei&lt;/code&gt;就是我添加的中文字体&lt;/p&gt;
+&lt;p&gt;删除缓存&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; ~/.cache/matplotlib
+&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; * &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;步骤-2-配置Matplotlib使用中文字体&#34;&gt;&lt;a href=&#34;#步骤-2-配置Matplotlib使用中文字体&#34; class=&#34;headerlink&#34; title=&#34;步骤 2: 配置Matplotlib使用中文字体&#34;&gt;&lt;/a&gt;步骤 2: 配置Matplotlib使用中文字体&lt;/h3&gt;&lt;p&gt;测试代码&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; matplotlib&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pyplot &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; plt
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; matplotlib &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; rcParams
+&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; pandas &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; pd
+
+&lt;span class=&#34;token comment&#34;&gt;# 设置中文字体&lt;/span&gt;
+rcParams&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;font.sans-serif&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;SimHei&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 或者使用 &#39;Microsoft YaHei&#39;&lt;/span&gt;
+rcParams&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;axes.unicode_minus&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;False&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 解决负号显示问题&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 示例数据&lt;/span&gt;
+data &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;日期&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;2024-01-01&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;2024-01-02&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;2024-01-03&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;token string&#34;&gt;&#39;销售额&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;150&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;250&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+df &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; pd&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DataFrame&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 绘制图表&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;plot&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;df&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;日期&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; df&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;销售额&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;title&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;销售额趋势&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xlabel&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;日期&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ylabel&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;销售额&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xticks&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rotation&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;45&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;show&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/01/12/pandas-shi-yong/</guid>
             <title>pandas使用</title>
