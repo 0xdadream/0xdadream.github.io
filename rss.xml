@@ -5,43 +5,243 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 15 Feb 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sat, 15 Feb 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Tue, 18 Feb 2025 16:11:00 +0800</pubDate>
+        <lastBuildDate>Tue, 18 Feb 2025 16:11:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>安装</category>
+        <category>Java</category>
         <category>re</category>
         <category>工具</category>
-        <category>Java</category>
+        <category>linux</category>
         <category>教程</category>
         <category>环境</category>
         <category>bug</category>
-        <category>linux</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>BUUCTF</category>
         <category>windows</category>
+        <category>BUUCTF</category>
         <category>server</category>
-        <category>conda</category>
-        <category>powershell</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
+        <category>conda</category>
+        <category>powershell</category>
         <category>tips</category>
         <category>emby</category>
-        <category>python</category>
         <category>git</category>
+        <category>python</category>
         <category>google</category>
         <category>java</category>
-        <category>tools</category>
         <category>学习</category>
         <category>命令</category>
+        <category>tools</category>
+        <category>intel</category>
         <category>文件上传</category>
         <category>php</category>
+        <category>命令行</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/</guid>
+            <title>Intel显卡运行AI配置教程</title>
+            <link>https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/</link>
+            <category>intel</category>
+            <pubDate>Tue, 18 Feb 2025 16:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Intel显卡运行AI配置教程&#34;&gt;&lt;a href=&#34;#Intel显卡运行AI配置教程&#34; class=&#34;headerlink&#34; title=&#34;Intel显卡运行AI配置教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;Intel显卡运行AI配置教程&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;适用硬件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Arc系列显卡（如A770 16G）驱动为6559&lt;/li&gt;
+&lt;li&gt;win11&lt;/li&gt;
+&lt;li&gt;oneAPI==2025.0.1&lt;/li&gt;
+&lt;li&gt;torch==2.3.110&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-安装Miniconda并配置Python虚拟环境&#34;&gt;&lt;a href=&#34;#1-安装Miniconda并配置Python虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;1. 安装Miniconda并配置Python虚拟环境&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 安装Miniconda并配置Python虚拟环境&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;可以参考这个&lt;a href=&#34;https://0xdadream.github.io/2024/08/12/conda-an-zhuang-ji-shi-yong/&#34;&gt;conda安装及使用 | 逐梦&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;步骤说明&#34;&gt;&lt;a href=&#34;#步骤说明&#34; class=&#34;headerlink&#34; title=&#34;步骤说明&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤说明&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载Miniconda&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://docs.conda.io/en/latest/miniconda.html&#34;&gt;Miniconda官网&lt;/a&gt;，选择对应操作系统的安装包（建议Python 3.11版本）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装Miniconda&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：双击安装包，按提示操作，勾选“Add to PATH”选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux/macOS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; Miniconda3-latest-Linux-x86_64.sh  &lt;span class=&#34;token comment&#34;&gt;# 根据文件名调整  &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建Python 3.11虚拟环境&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  
+conda activate intel-ai  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-更新Intel显卡驱动&#34;&gt;&lt;a href=&#34;#2-更新Intel显卡驱动&#34; class=&#34;headerlink&#34; title=&#34;2. 更新Intel显卡驱动&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 更新Intel显卡驱动&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;关键操作&#34;&gt;&lt;a href=&#34;#关键操作&#34; class=&#34;headerlink&#34; title=&#34;关键操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;关键操作&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载最新驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://www.intel.cn/content/www/cn/zh/download-center/home.html&#34;&gt;Intel驱动下载页&lt;/a&gt;，选择Arc系列显卡的最新驱动（如&lt;strong&gt;32.0.101.6559&lt;/strong&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：运行安装程序，按提示完成安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：使用包管理器（如Ubuntu/Debian）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; intel-opencl-icd intel-level-zero-gpu level-zero  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证驱动状态&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：按 &lt;code&gt;Win + X&lt;/code&gt; &amp;gt; 设备管理器 &amp;gt; 显示适配器，确认显卡型号正确。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;lspci &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; intel  &lt;span class=&#34;token comment&#34;&gt;# 确认显卡识别  &lt;/span&gt;
+clinfo  &lt;span class=&#34;token comment&#34;&gt;# 检查OpenCL支持  &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-安装Visual-Studio-Build-Tools（仅Windows）&#34;&gt;&lt;a href=&#34;#3-安装Visual-Studio-Build-Tools（仅Windows）&#34; class=&#34;headerlink&#34; title=&#34;3. 安装Visual Studio Build Tools（仅Windows）&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 安装Visual Studio Build Tools（仅Windows）&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;操作步骤&#34;&gt;&lt;a href=&#34;#操作步骤&#34; class=&#34;headerlink&#34; title=&#34;操作步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;操作步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;下载Visual Studio 2022&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://visualstudio.microsoft.com/&#34;&gt;Visual Studio官网&lt;/a&gt;，下载社区版。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装C++桌面开发组件&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;在安装界面勾选：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用C++的桌面开发&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows 10/11 SDK&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C++ CMake工具&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;默认也行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证安装&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;打开命令提示符，运行 &lt;code&gt;cl&lt;/code&gt; 命令，确认返回编译器版本信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-安装Intel-oneAPI工具包&#34;&gt;&lt;a href=&#34;#4-安装Intel-oneAPI工具包&#34; class=&#34;headerlink&#34; title=&#34;4. 安装Intel oneAPI工具包&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 安装Intel oneAPI工具包&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;步骤说明-1&#34;&gt;&lt;a href=&#34;#步骤说明-1&#34; class=&#34;headerlink&#34; title=&#34;步骤说明&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤说明&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载oneAPI Base Toolkit&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://www.intel.cn/content/www/cn/zh/developer/tools/oneapi/toolkits.html&#34;&gt;oneAPI官网&lt;/a&gt;，选择Base Toolkit-&amp;gt;windows-&amp;gt;offline installer，然后点击右边往下一点Continue as a Guest (download starts immediately) →下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装oneAPI&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows：运行安装程序，默认勾选所有组件，一直点就行了。&lt;/li&gt;
+&lt;li&gt;Linux：使用包管理器或脚本安装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;激活oneAPI环境变量&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;call &lt;span class=&#34;token string&#34;&gt;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34;&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;# cmd使用&lt;/span&gt;
+cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# powershell使用&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; /opt/intel/oneapi/setvars.sh  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-安装Intel-Extension-for-PyTorch-IPEX&#34;&gt;&lt;a href=&#34;#5-安装Intel-Extension-for-PyTorch-IPEX&#34; class=&#34;headerlink&#34; title=&#34;5. 安装Intel Extension for PyTorch (IPEX)&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 安装Intel Extension for PyTorch (IPEX)&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;操作命令&#34;&gt;&lt;a href=&#34;#操作命令&#34; class=&#34;headerlink&#34; title=&#34;操作命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;操作命令&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;激活虚拟环境与oneAPI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;powershell中执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; xxx &lt;span class=&#34;token comment&#34;&gt;#最好切换到工作目录&lt;/span&gt;
+conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 前面创建过环境没有再次创建&lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境  &lt;/span&gt;
+cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 根据操作系统执行上述对应的oneAPI激活命令&lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 再次激活环境&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装PyTorch与IPEX&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 安装PyTorch CPU版本（IPEX会自动启用GPU支持）  &lt;/span&gt;
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-验证IPEX安装与显卡识别&#34;&gt;&lt;a href=&#34;#6-验证IPEX安装与显卡识别&#34; class=&#34;headerlink&#34; title=&#34;6. 验证IPEX安装与显卡识别&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 验证IPEX安装与显卡识别&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;验证步骤&#34;&gt;&lt;a href=&#34;#验证步骤&#34; class=&#34;headerlink&#34; title=&#34;验证步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;验证步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;运行Python脚本检查GPU支持&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; torch  
+&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; intel_extension_for_pytorch &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; ipex  
+
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;PyTorch版本: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;__version__&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;IPEX版本: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;ipex&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;__version__&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;Intel GPU是否可用: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xpu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;is_available&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;检测到的Intel GPU设备: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xpu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;get_device_name&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;import torch; import intel_extension_for_pytorch as ipex; print(&#39;PyTorch版本:&#39;, torch.__version__); print(&#39;IPEX版本:&#39;, ipex.__version__); print(&#39;Intel GPU是否可用:&#39;, torch.xpu.is_available()); print(&#39;检测到的Intel GPU设备:&#39;, torch.xpu.get_device_name(0))&#34;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 一键脚本&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;预期输出&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;PyTorch版本: &lt;span class=&#34;token number&#34;&gt;2.1&lt;/span&gt;.0  
+IPEX版本: &lt;span class=&#34;token number&#34;&gt;2.1&lt;/span&gt;.0  
+Intel GPU是否可用: True  
+检测到的Intel GPU设备: Intel&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;R&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; Arc&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;TM&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; A770 Graphics  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;官方脚本&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;import torch; import intel_extension_for_pytorch as ipex; print(torch.__version__); print(ipex.__version__); [print(f&#39;[{i}]: {torch.xpu.get_device_properties(i)}&#39;) for i in range(torch.xpu.device_count())];&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至此已经安装成功了&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-常见问题解决&#34;&gt;&lt;a href=&#34;#7-常见问题解决&#34; class=&#34;headerlink&#34; title=&#34;7. 常见问题解决&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 常见问题解决&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;遇到问题大多数时候都是各种版本不匹配，例如&lt;code&gt;raise err OSError: [WinError 126] 找不到指定的模块。&lt;/code&gt;，尽量使用教程相同版本。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;通过本教程，你已成功配置Intel显卡的AI开发环境，并验证了IPEX的GPU加速支持。接下来可尝试运行AI模型（如Stable Diffusion、LLM推理），并通过环境变量 &lt;code&gt;LIBOMPTARGET_PLUGIN=LEVEL0&lt;/code&gt; 或 &lt;code&gt;SYCL_CACHE_PERSISTENT=1&lt;/code&gt; 进一步优化性能。&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html&#34;&gt;获取英特尔® oneAPI Base Toolkit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://intel.github.io/intel-extension-for-pytorch/&#34;&gt;Welcome to Intel® Extension for PyTorch* Documentation!&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1dKaMeXE3B/?vd_source=b809bacd004cf290c08f612fa076f2eb&#34;&gt;intel arc 显卡 ComfyUI 安装教程_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/yunying985/article/details/140589680&#34;&gt;AI绘画 | 只要10步让你在英特尔A770显卡下安装ComfyUI运行StableDiffusion3最新开源模型_arc a750 安装comfyui-CSDN博客&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</guid>
+            <title></title>
+            <link>https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</link>
+            <pubDate>Tue, 18 Feb 2025 15:23:32 +0800</pubDate>
+            <description><![CDATA[  ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/</guid>
+            <title>python库报错汇总</title>
+            <link>https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/</link>
+            <category>python</category>
+            <pubDate>Tue, 18 Feb 2025 14:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;python库报错汇总&#34;&gt;&lt;a href=&#34;#python库报错汇总&#34; class=&#34;headerlink&#34; title=&#34;python库报错汇总&#34;&gt;&lt;/a&gt;python库报错汇总&lt;/h1&gt;&lt;p&gt;形如&lt;code&gt;ModuleNotFoundError: No module named &#39;xxx&#39;&lt;/code&gt;的报错&lt;/p&gt;
+&lt;p&gt;首先先试一试&lt;code&gt;pip install xxx&lt;/code&gt;能安装就能解决，没有就看下面，只是我遇到的&lt;/p&gt;
+&lt;h2 id=&#34;ModuleNotFoundError-No-module-named-‘cv2’&#34;&gt;&lt;a href=&#34;#ModuleNotFoundError-No-module-named-‘cv2’&#34; class=&#34;headerlink&#34; title=&#34;ModuleNotFoundError: No module named ‘cv2’&#34;&gt;&lt;/a&gt;ModuleNotFoundError: No module named ‘cv2’&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; opencv-contrib-python &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ModuleNotFoundError-No-module-named-‘colour-io’-‘colour’-is-not-a-package&#34;&gt;&lt;a href=&#34;#ModuleNotFoundError-No-module-named-‘colour-io’-‘colour’-is-not-a-package&#34; class=&#34;headerlink&#34; title=&#34;ModuleNotFoundError: No module named ‘colour.io’; ‘colour’ is not a package&#34;&gt;&lt;/a&gt;ModuleNotFoundError: No module named ‘colour.io’; ‘colour’ is not a package&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; colour-science&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;No-module-named-‘cpuinfo’&#34;&gt;&lt;a href=&#34;#No-module-named-‘cpuinfo’&#34; class=&#34;headerlink&#34; title=&#34;No module named ‘cpuinfo’&#34;&gt;&lt;/a&gt;No module named ‘cpuinfo’&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; py-cpuinfo&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ModuleNotFoundError-No-module-named-‘imageio‘&#34;&gt;&lt;a href=&#34;#ModuleNotFoundError-No-module-named-‘imageio‘&#34; class=&#34;headerlink&#34; title=&#34;ModuleNotFoundError: No module named ‘imageio‘&#34;&gt;&lt;/a&gt;ModuleNotFoundError: No module named ‘imageio‘&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; imgaug&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;解决ModuleNotFoundError-No-module-named-‘skimage‘&#34;&gt;&lt;a href=&#34;#解决ModuleNotFoundError-No-module-named-‘skimage‘&#34; class=&#34;headerlink&#34; title=&#34;解决ModuleNotFoundError: No module named ‘skimage‘&#34;&gt;&lt;/a&gt;解决ModuleNotFoundError: No module named ‘skimage‘&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; scikit-image&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;No-module-named-‘open-clip‘&#34;&gt;&lt;a href=&#34;#No-module-named-‘open-clip‘&#34; class=&#34;headerlink&#34; title=&#34;No module named ‘open_clip‘&#34;&gt;&lt;/a&gt;No module named ‘open_clip‘&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; open_clip_torch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+
+&lt;h2 id=&#34;其他&#34;&gt;&lt;a href=&#34;#其他&#34; class=&#34;headerlink&#34; title=&#34;其他&#34;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;p&gt;ERROR: Could not install packages due to an OSError: [WinError 5] 拒绝访问。： ‘E:\conda\envs\deepl\Lib\site-packages\cv2\cv2.pyd’ Consider using the &lt;code&gt;--user&lt;/code&gt; option or check the permissions.&lt;/p&gt;
+&lt;p&gt;如他说添加&lt;code&gt;--user&lt;/code&gt;参数&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/15/powershell-pei-zhi-mu-lu/</guid>
+            <title>powershell配置目录</title>
+            <link>https://0xdadream.github.io/2025/02/15/powershell-pei-zhi-mu-lu/</link>
+            <category>命令行</category>
+            <pubDate>Sat, 15 Feb 2025 21:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;powershell配置目录&#34;&gt;&lt;a href=&#34;#powershell配置目录&#34; class=&#34;headerlink&#34; title=&#34;powershell配置目录&#34;&gt;&lt;/a&gt;powershell配置目录&lt;/h1&gt;&lt;p&gt;执行命令&lt;code&gt;$PROFILE&lt;/code&gt;会得到类似于&lt;code&gt;C:\Users\xxx\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&lt;/code&gt;的目录&lt;/p&gt;
+&lt;p&gt;这个目录的文件就是你的powershell预执行的命令，相当于每次启动powershell都行执行一遍&lt;/p&gt;
+&lt;p&gt;然后这个目录还会存powershell的安装的插件文件，备份这个文件，即使卸载重装配置也不会变，但是要注意不同版本命令可能不一样。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/15/conda-zai-powershell7.5-zhi-xing-chu-xian-wen-ti/</guid>
             <title>conda在powershell7.5执行出现问题</title>
@@ -2591,798 +2791,6 @@ $$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;s
 &lt;td&gt;表示欧姆（电阻单位）、角速度、复数平面中的极限等&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/25/modulenotfounderror-no-module-named-crypto.cipher/</guid>
-            <title>Python报错ModuleNotFoundError:No-module-named-Crypto.Cipher</title>
-            <link>https://0xdadream.github.io/2024/11/25/modulenotfounderror-no-module-named-crypto.cipher/</link>
-            <category>bug</category>
-            <pubDate>Mon, 25 Nov 2024 09:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;Python报错ModuleNotFoundError-No-module-named-‘Crypto-Cipher’&#34;&gt;&lt;a href=&#34;#Python报错ModuleNotFoundError-No-module-named-‘Crypto-Cipher’&#34; class=&#34;headerlink&#34; title=&#34;Python报错ModuleNotFoundError: No module named ‘Crypto.Cipher’&#34;&gt;&lt;/a&gt;Python报错ModuleNotFoundError: No module named ‘Crypto.Cipher’&lt;/h1&gt;&lt;p&gt;这个报错通常是因为 Python 中的 &lt;code&gt;Crypto.Cipher&lt;/code&gt; 模块不可用，可能是没有正确安装相关库或者使用了错误的模块路径。&lt;/p&gt;
-&lt;p&gt;在 Python 中，如果要使用加密相关功能，可以安装并使用 &lt;strong&gt;PyCryptodome&lt;/strong&gt;，这是一个常用的加密库。&lt;/p&gt;
-&lt;h3 id=&#34;解决方法&#34;&gt;&lt;a href=&#34;#解决方法&#34; class=&#34;headerlink&#34; title=&#34;解决方法&#34;&gt;&lt;/a&gt;解决方法&lt;/h3&gt;&lt;h4 id=&#34;1-安装-pycryptodome&#34;&gt;&lt;a href=&#34;#1-安装-pycryptodome&#34; class=&#34;headerlink&#34; title=&#34;1. 安装 pycryptodome&#34;&gt;&lt;/a&gt;1. 安装 &lt;code&gt;pycryptodome&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;运行以下命令来安装正确的库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pycryptodome&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-检查安装版本是否正确&#34;&gt;&lt;a href=&#34;#2-检查安装版本是否正确&#34; class=&#34;headerlink&#34; title=&#34;2. 检查安装版本是否正确&#34;&gt;&lt;/a&gt;2. 检查安装版本是否正确&lt;/h4&gt;&lt;p&gt;确保安装成功，并查看库版本：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip show pycryptodome&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出应类似于：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Name: pycryptodome
-Version: &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;.x.x
-Location: /path/to/python/site-packages&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-如果问题仍存在&#34;&gt;&lt;a href=&#34;#3-如果问题仍存在&#34; class=&#34;headerlink&#34; title=&#34;3. 如果问题仍存在&#34;&gt;&lt;/a&gt;3. 如果问题仍存在&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;环境问题：确认是否安装在正确的 Python 环境中。你可以通过以下命令检查：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;which&lt;/span&gt; python
-&lt;span class=&#34;token function&#34;&gt;which&lt;/span&gt; pip&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;模块冲突：如果已经安装了一个名为 crypto的库（旧版本或其他库），可能会导致冲突。尝试卸载：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip uninstall crypto&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;示例代码&#34;&gt;&lt;a href=&#34;#示例代码&#34; class=&#34;headerlink&#34; title=&#34;示例代码&#34;&gt;&lt;/a&gt;示例代码&lt;/h4&gt;&lt;p&gt;以下是一个使用 &lt;code&gt;PyCryptodome&lt;/code&gt; 的简单示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; Crypto&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Cipher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; AES
-&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; Crypto&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Random &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; get_random_bytes
-
-&lt;span class=&#34;token comment&#34;&gt;# 生成随机密钥&lt;/span&gt;
-key &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; get_random_bytes&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-cipher &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; AES&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;new&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;key&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; AES&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;MODE_EAX&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-
-&lt;span class=&#34;token comment&#34;&gt;# 加密数据&lt;/span&gt;
-plaintext &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;b&#39;This is a secret message.&#39;&lt;/span&gt;
-nonce &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; cipher&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;nonce
-ciphertext&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; tag &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; cipher&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;encrypt_and_digest&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;plaintext&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Ciphertext:&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; ciphertext&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/24/dong-tai-lian-jie-ku/</guid>
-            <title>动态链接库</title>
-            <link>https://0xdadream.github.io/2024/11/24/dong-tai-lian-jie-ku/</link>
-            <category>命令</category>
-            <pubDate>Sun, 24 Nov 2024 23:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;动态链接库&#34;&gt;&lt;a href=&#34;#动态链接库&#34; class=&#34;headerlink&#34; title=&#34;动态链接库&#34;&gt;&lt;/a&gt;动态链接库&lt;/h1&gt;&lt;hr&gt;
-&lt;h3 id=&#34;一、-etc-ld-so-conf-d-的作用&#34;&gt;&lt;a href=&#34;#一、-etc-ld-so-conf-d-的作用&#34; class=&#34;headerlink&#34; title=&#34;一、/etc/ld.so.conf.d 的作用&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、&lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt; 的作用&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;动态库路径管理&lt;/strong&gt;：系统会读取该目录下的 &lt;code&gt;.conf&lt;/code&gt; 文件，这些文件指定了动态链接库的额外搜索路径。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;配置动态库缓存&lt;/strong&gt;：在运行程序时，动态链接器会从这些路径中查找所需的库。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;默认加载的路径&lt;/strong&gt;（视系统配置而定）：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;/lib&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/usr/lib&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/usr/local/lib&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;通过 &lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt;，可以扩展默认路径。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;二、动态库的加载顺序&#34;&gt;&lt;a href=&#34;#二、动态库的加载顺序&#34; class=&#34;headerlink&#34; title=&#34;二、动态库的加载顺序&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、动态库的加载顺序&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;动态链接器按照以下顺序查找动态库：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;环境变量&lt;/strong&gt;：&lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;缓存文件&lt;/strong&gt;：&lt;code&gt;/etc/ld.so.cache&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;默认路径&lt;/strong&gt;：如 &lt;code&gt;/lib&lt;/code&gt; 和 &lt;code&gt;/usr/lib&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：为了提高效率，系统不会直接读取所有路径，而是从 &lt;code&gt;/etc/ld.so.cache&lt;/code&gt; 中加载已经缓存的路径信息。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;三、-etc-ld-so-conf-d-的文件结构&#34;&gt;&lt;a href=&#34;#三、-etc-ld-so-conf-d-的文件结构&#34; class=&#34;headerlink&#34; title=&#34;三、/etc/ld.so.conf.d 的文件结构&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、&lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt; 的文件结构&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;该目录包含多个 &lt;code&gt;.conf&lt;/code&gt; 文件，每个文件可以指定一组路径。例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 查看 /etc/ld.so.conf.d 内容&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /etc/ld.so.conf.d&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-lua&#34; data-language=&#34;lua&#34;&gt;&lt;code class=&#34;language-lua&#34;&gt;glibc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf
-x86_64&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;linux&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;gnu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf
-&lt;span class=&#34;token keyword&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;文件示例&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;/etc/ld.so.conf.d/local.conf：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-vbnet&#34; data-language=&#34;vbnet&#34;&gt;&lt;code class=&#34;language-vbnet&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;local&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;lib&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;opt&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;custom&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;lib&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这些路径会被动态链接器添加到库搜索路径中。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;四、如何配置动态库路径&#34;&gt;&lt;a href=&#34;#四、如何配置动态库路径&#34; class=&#34;headerlink&#34; title=&#34;四、如何配置动态库路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、如何配置动态库路径&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-添加自定义路径&#34;&gt;&lt;a href=&#34;#1-添加自定义路径&#34; class=&#34;headerlink&#34; title=&#34;1. 添加自定义路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 添加自定义路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;假设有一个自定义动态库路径 &lt;code&gt;/home/user/mylibs&lt;/code&gt;，以下是配置步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建配置文件&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/ld.so.conf.d/mylibs.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;添加如下内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/home/user/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新动态库缓存&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证是否生效&lt;/strong&gt;： 查看是否包含新路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h4 id=&#34;2-临时配置路径&#34;&gt;&lt;a href=&#34;#2-临时配置路径&#34; class=&#34;headerlink&#34; title=&#34;2. 临时配置路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 临时配置路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果只是临时测试动态库路径，可以使用 &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; 环境变量：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/user/mylibs:&lt;span class=&#34;token variable&#34;&gt;$LD_LIBRARY_PATH&lt;/span&gt;
-./myprogram&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：这种方法仅对当前终端会话有效。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;五、ldconfig-的作用&#34;&gt;&lt;a href=&#34;#五、ldconfig-的作用&#34; class=&#34;headerlink&#34; title=&#34;五、ldconfig 的作用&#34;&gt;&lt;/a&gt;&lt;strong&gt;五、&lt;code&gt;ldconfig&lt;/code&gt; 的作用&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ldconfig&lt;/code&gt; 是管理动态库缓存的工具，其作用包括：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;扫描路径&lt;/strong&gt;：根据 &lt;code&gt;/etc/ld.so.conf&lt;/code&gt; 和 &lt;code&gt;/etc/ld.so.conf.d/&lt;/code&gt; 下的配置文件，扫描动态库路径。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;更新缓存&lt;/strong&gt;：生成 &lt;code&gt;/etc/ld.so.cache&lt;/code&gt; 文件，加速库的加载。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;常用命令&#34;&gt;&lt;a href=&#34;#常用命令&#34; class=&#34;headerlink&#34; title=&#34;常用命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;常用命令&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;指定路径更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig /home/user/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看当前缓存的库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;六、动态库配置实例&#34;&gt;&lt;a href=&#34;#六、动态库配置实例&#34; class=&#34;headerlink&#34; title=&#34;六、动态库配置实例&#34;&gt;&lt;/a&gt;&lt;strong&gt;六、动态库配置实例&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-动态库开发&#34;&gt;&lt;a href=&#34;#1-动态库开发&#34; class=&#34;headerlink&#34; title=&#34;1. 动态库开发&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 动态库开发&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;创建一个简单动态库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;// hello.c&lt;/span&gt;
-&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token function&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Hello, from dynamic library!\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编译成动态库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;gcc -fPIC -shared -o libhello.so hello.c&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将动态库移动到 &lt;code&gt;/opt/mylibs&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /opt/mylibs
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; libhello.so /opt/mylibs/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-配置加载路径&#34;&gt;&lt;a href=&#34;#2-配置加载路径&#34; class=&#34;headerlink&#34; title=&#34;2. 配置加载路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 配置加载路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;创建 &lt;code&gt;/etc/ld.so.conf.d/mylibs.conf&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/ld.so.conf.d/mylibs.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/opt/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用动态库&#34;&gt;&lt;a href=&#34;#3-使用动态库&#34; class=&#34;headerlink&#34; title=&#34;3. 使用动态库&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用动态库&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;编写一个测试程序：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;// main.c&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编译并运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; main main.c &lt;span class=&#34;token parameter variable&#34;&gt;-lhello&lt;/span&gt;
-./main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Hello, from dynamic library&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;七、排错方法&#34;&gt;&lt;a href=&#34;#七、排错方法&#34; class=&#34;headerlink&#34; title=&#34;七、排错方法&#34;&gt;&lt;/a&gt;&lt;strong&gt;七、排错方法&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;检查动态库是否存在&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; libhello&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证动态库路径是否正确&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldd ./main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;动态库无法加载时&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;检查是否添加了正确的路径到 &lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;检查是否运行了 &lt;code&gt;ldconfig&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/24/linux-wen-jian-cao-zuo-ming-ling/</guid>
-            <title>linux文件操作命令</title>
-            <link>https://0xdadream.github.io/2024/11/24/linux-wen-jian-cao-zuo-ming-ling/</link>
-            <category>命令</category>
-            <pubDate>Sun, 24 Nov 2024 09:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;linux文件操作命令&#34;&gt;&lt;a href=&#34;#linux文件操作命令&#34; class=&#34;headerlink&#34; title=&#34;linux文件操作命令&#34;&gt;&lt;/a&gt;linux文件操作命令&lt;/h1&gt;&lt;p&gt;以下是 Linux 系统中与文件操作相关的命令，附带常用参数的详细解释。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-查看文件和目录&#34;&gt;&lt;a href=&#34;#1-查看文件和目录&#34; class=&#34;headerlink&#34; title=&#34;1. 查看文件和目录&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 查看文件和目录&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;列出目录内容-ls&#34;&gt;&lt;a href=&#34;#列出目录内容-ls&#34; class=&#34;headerlink&#34; title=&#34;列出目录内容 (ls)&#34;&gt;&lt;/a&gt;&lt;strong&gt;列出目录内容 (&lt;code&gt;ls&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;路径&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-l&lt;/code&gt;：以详细列表形式显示，包括权限、所有者、文件大小、修改时间等。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-a&lt;/code&gt;：显示所有文件，包括以 &lt;code&gt;.&lt;/code&gt; 开头的隐藏文件。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-h&lt;/code&gt;：配合 &lt;code&gt;-l&lt;/code&gt;，以人类可读的文件大小显示（如 &lt;code&gt;1K&lt;/code&gt;, &lt;code&gt;1M&lt;/code&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：逆序排列。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-t&lt;/code&gt;：按时间排序。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-lah&lt;/span&gt; /home/user&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;查看当前路径-pwd&#34;&gt;&lt;a href=&#34;#查看当前路径-pwd&#34; class=&#34;headerlink&#34; title=&#34;查看当前路径 (pwd)&#34;&gt;&lt;/a&gt;&lt;strong&gt;查看当前路径 (&lt;code&gt;pwd&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;pwd&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;输出当前工作目录的完整路径。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-创建文件和目录&#34;&gt;&lt;a href=&#34;#2-创建文件和目录&#34; class=&#34;headerlink&#34; title=&#34;2. 创建文件和目录&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 创建文件和目录&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;创建文件-touch&#34;&gt;&lt;a href=&#34;#创建文件-touch&#34; class=&#34;headerlink&#34; title=&#34;创建文件 (touch)&#34;&gt;&lt;/a&gt;&lt;strong&gt;创建文件 (&lt;code&gt;touch&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;touch&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;功能：创建一个空文件或更新已有文件的时间戳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;创建目录-mkdir&#34;&gt;&lt;a href=&#34;#创建目录-mkdir&#34; class=&#34;headerlink&#34; title=&#34;创建目录 (mkdir)&#34;&gt;&lt;/a&gt;&lt;strong&gt;创建目录 (&lt;code&gt;mkdir&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 目录名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-p&lt;/code&gt;：递归创建目录。如果父目录不存在，会自动创建。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /home/user/project/logs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-查看文件内容&#34;&gt;&lt;a href=&#34;#3-查看文件内容&#34; class=&#34;headerlink&#34; title=&#34;3. 查看文件内容&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 查看文件内容&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;显示文件内容-cat&#34;&gt;&lt;a href=&#34;#显示文件内容-cat&#34; class=&#34;headerlink&#34; title=&#34;显示文件内容 (cat)&#34;&gt;&lt;/a&gt;&lt;strong&gt;显示文件内容 (&lt;code&gt;cat&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 文件名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-n&lt;/code&gt;：显示行号。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-A&lt;/code&gt;：显示所有字符，包括不可见字符。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;分页查看-less-和-more&#34;&gt;&lt;a href=&#34;#分页查看-less-和-more&#34; class=&#34;headerlink&#34; title=&#34;分页查看 (less 和 more)&#34;&gt;&lt;/a&gt;&lt;strong&gt;分页查看 (&lt;code&gt;less&lt;/code&gt; 和 &lt;code&gt;more&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;less：分页查看，支持向前滚动。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;less&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;more：逐页查看，按空格翻页。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;more&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-编辑文件&#34;&gt;&lt;a href=&#34;#4-编辑文件&#34; class=&#34;headerlink&#34; title=&#34;4. 编辑文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 编辑文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;简单编辑器-nano&#34;&gt;&lt;a href=&#34;#简单编辑器-nano&#34; class=&#34;headerlink&#34; title=&#34;简单编辑器 (nano)&#34;&gt;&lt;/a&gt;&lt;strong&gt;简单编辑器 (&lt;code&gt;nano&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用快捷键（如 &lt;code&gt;Ctrl+O&lt;/code&gt; 保存，&lt;code&gt;Ctrl+X&lt;/code&gt; 退出）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;高级编辑器-vim&#34;&gt;&lt;a href=&#34;#高级编辑器-vim&#34; class=&#34;headerlink&#34; title=&#34;高级编辑器 (vim)&#34;&gt;&lt;/a&gt;&lt;strong&gt;高级编辑器 (&lt;code&gt;vim&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; filename&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;基本模式：&lt;ul&gt;
-&lt;li&gt;按 &lt;code&gt;i&lt;/code&gt; 进入插入模式。&lt;/li&gt;
-&lt;li&gt;编辑完成后按 &lt;code&gt;Esc&lt;/code&gt;，输入 &lt;code&gt;:wq&lt;/code&gt; 保存并退出。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;5-复制、移动和重命名文件&#34;&gt;&lt;a href=&#34;#5-复制、移动和重命名文件&#34; class=&#34;headerlink&#34; title=&#34;5. 复制、移动和重命名文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 复制、移动和重命名文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;复制文件和目录-cp&#34;&gt;&lt;a href=&#34;#复制文件和目录-cp&#34; class=&#34;headerlink&#34; title=&#34;复制文件和目录 (cp)&#34;&gt;&lt;/a&gt;&lt;strong&gt;复制文件和目录 (&lt;code&gt;cp&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 源文件 目标文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：递归复制目录。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-p&lt;/code&gt;：保留文件属性（权限、时间戳等）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-i&lt;/code&gt;：覆盖前提示确认。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：显示详细过程。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-rp&lt;/span&gt; source_dir/ target_dir/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;移动和重命名-mv&#34;&gt;&lt;a href=&#34;#移动和重命名-mv&#34; class=&#34;headerlink&#34; title=&#34;移动和重命名 (mv)&#34;&gt;&lt;/a&gt;&lt;strong&gt;移动和重命名 (&lt;code&gt;mv&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 源文件 目标文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-i&lt;/code&gt;：覆盖前提示确认。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;：显示详细过程。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; file1.txt file2.txt  &lt;span class=&#34;token comment&#34;&gt;# 重命名&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; file.txt /path/to/dir/  &lt;span class=&#34;token comment&#34;&gt;# 移动文件&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;6-删除文件和目录&#34;&gt;&lt;a href=&#34;#6-删除文件和目录&#34; class=&#34;headerlink&#34; title=&#34;6. 删除文件和目录&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 删除文件和目录&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;删除文件和目录-rm&#34;&gt;&lt;a href=&#34;#删除文件和目录-rm&#34; class=&#34;headerlink&#34; title=&#34;删除文件和目录 (rm)&#34;&gt;&lt;/a&gt;&lt;strong&gt;删除文件和目录 (&lt;code&gt;rm&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 文件/目录&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：递归删除目录及其内容。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-f&lt;/code&gt;：强制删除，无需确认。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-i&lt;/code&gt;：删除前提示确认。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-rf&lt;/span&gt; /tmp/test&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;7-搜索文件和内容&#34;&gt;&lt;a href=&#34;#7-搜索文件和内容&#34; class=&#34;headerlink&#34; title=&#34;7. 搜索文件和内容&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 搜索文件和内容&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;查找文件-find&#34;&gt;&lt;a href=&#34;#查找文件-find&#34; class=&#34;headerlink&#34; title=&#34;查找文件 (find)&#34;&gt;&lt;/a&gt;&lt;strong&gt;查找文件 (&lt;code&gt;find&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;find&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;路径&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;条件&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;操作&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用条件：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-name&lt;/code&gt;：按文件名查找（支持通配符）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-type&lt;/code&gt;：按类型查找，如 &lt;code&gt;f&lt;/code&gt;（文件），&lt;code&gt;d&lt;/code&gt;（目录）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-size&lt;/code&gt;：按文件大小查找，如 &lt;code&gt;+1M&lt;/code&gt;（大于1MB）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-mtime&lt;/code&gt;：按修改时间查找，如 &lt;code&gt;-7&lt;/code&gt;（7天内修改的文件）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;find&lt;/span&gt; /home &lt;span class=&#34;token parameter variable&#34;&gt;-name&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;*.txt&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;搜索文件内容-grep&#34;&gt;&lt;a href=&#34;#搜索文件内容-grep&#34; class=&#34;headerlink&#34; title=&#34;搜索文件内容 (grep)&#34;&gt;&lt;/a&gt;&lt;strong&gt;搜索文件内容 (&lt;code&gt;grep&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;关键字&#34;&lt;/span&gt; 文件名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-i&lt;/code&gt;：忽略大小写。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;：递归搜索目录。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-n&lt;/code&gt;：显示行号。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-rn&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;error&#34;&lt;/span&gt; /var/log/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;8-修改文件权限&#34;&gt;&lt;a href=&#34;#8-修改文件权限&#34; class=&#34;headerlink&#34; title=&#34;8. 修改文件权限&#34;&gt;&lt;/a&gt;&lt;strong&gt;8. 修改文件权限&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;修改权限-chmod&#34;&gt;&lt;a href=&#34;#修改权限-chmod&#34; class=&#34;headerlink&#34; title=&#34;修改权限 (chmod)&#34;&gt;&lt;/a&gt;&lt;strong&gt;修改权限 (&lt;code&gt;chmod&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;模式&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;权限格式：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;u&lt;/code&gt;：用户，&lt;code&gt;g&lt;/code&gt;：组，&lt;code&gt;o&lt;/code&gt;：其他，&lt;code&gt;a&lt;/code&gt;：全部。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;+&lt;/code&gt;：添加权限，&lt;code&gt;-&lt;/code&gt;：删除权限，&lt;code&gt;=&lt;/code&gt;：设置权限。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; u+x script.sh    &lt;span class=&#34;token comment&#34;&gt;# 给用户添加执行权限&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;755&lt;/span&gt; file.txt     &lt;span class=&#34;token comment&#34;&gt;# 设置读写执行权限&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;修改所有者-chown&#34;&gt;&lt;a href=&#34;#修改所有者-chown&#34; class=&#34;headerlink&#34; title=&#34;修改所有者 (chown)&#34;&gt;&lt;/a&gt;&lt;strong&gt;修改所有者 (&lt;code&gt;chown&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chown&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 用户:组 文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chown&lt;/span&gt; user:group file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;9-压缩和解压文件&#34;&gt;&lt;a href=&#34;#9-压缩和解压文件&#34; class=&#34;headerlink&#34; title=&#34;9. 压缩和解压文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;9. 压缩和解压文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;压缩文件&#34;&gt;&lt;a href=&#34;#压缩文件&#34; class=&#34;headerlink&#34; title=&#34;压缩文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;压缩文件&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;tar：创建归档文件。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-czvf&lt;/span&gt; archive.tar.gz 文件/目录&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;zip：压缩为 ZIP 格式。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;zip&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; archive.zip 文件/目录&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;解压文件&#34;&gt;&lt;a href=&#34;#解压文件&#34; class=&#34;headerlink&#34; title=&#34;解压文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;解压文件&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;tar：解压 .tar.gz文件。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-xzvf&lt;/span&gt; archive.tar.gz&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;unzip：解压 ZIP 文件。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;unzip&lt;/span&gt; archive.zip&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;10-其他常用操作&#34;&gt;&lt;a href=&#34;#10-其他常用操作&#34; class=&#34;headerlink&#34; title=&#34;10. 其他常用操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;10. 其他常用操作&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;统计文件行、词、字符数-wc&#34;&gt;&lt;a href=&#34;#统计文件行、词、字符数-wc&#34; class=&#34;headerlink&#34; title=&#34;统计文件行、词、字符数 (wc)&#34;&gt;&lt;/a&gt;&lt;strong&gt;统计文件行、词、字符数 (&lt;code&gt;wc&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;选项&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; 文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;常用选项：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-l&lt;/code&gt;：统计行数。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-w&lt;/code&gt;：统计单词数。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;：统计字节数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;监视文件内容-tail-和-head&#34;&gt;&lt;a href=&#34;#监视文件内容-tail-和-head&#34; class=&#34;headerlink&#34; title=&#34;监视文件内容 (tail 和 head)&#34;&gt;&lt;/a&gt;&lt;strong&gt;监视文件内容 (&lt;code&gt;tail&lt;/code&gt; 和 &lt;code&gt;head&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;显示文件头部：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;动态监视文件末尾：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; file.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;在 Linux 中，&lt;strong&gt;管道符 (&lt;code&gt;|&lt;/code&gt;)&lt;/strong&gt; 是一种强大的工具，用于将一个命令的输出传递给另一个命令作为输入。以下是管道符的详细介绍和常见使用场景。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;管道符语法&#34;&gt;&lt;a href=&#34;#管道符语法&#34; class=&#34;headerlink&#34; title=&#34;管道符语法&#34;&gt;&lt;/a&gt;&lt;strong&gt;管道符语法&lt;/strong&gt;&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;command1 &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; command2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;command1&lt;/code&gt;：第一个命令，生成输出。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;|&lt;/code&gt;：管道符，将第一个命令的输出传递给第二个命令。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;command2&lt;/code&gt;：第二个命令，将接收的输入进行处理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;常见场景和示例&#34;&gt;&lt;a href=&#34;#常见场景和示例&#34; class=&#34;headerlink&#34; title=&#34;常见场景和示例&#34;&gt;&lt;/a&gt;&lt;strong&gt;常见场景和示例&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;1-结合-grep-搜索内容&#34;&gt;&lt;a href=&#34;#1-结合-grep-搜索内容&#34; class=&#34;headerlink&#34; title=&#34;1. 结合 grep 搜索内容&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 结合 &lt;code&gt;grep&lt;/code&gt; 搜索内容&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查找某目录中包含特定关键词的文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;
-&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;filename&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;示例：列出当前目录下包含 “log” 的文件名：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;log&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-结合-sort-排序&#34;&gt;&lt;a href=&#34;#2-结合-sort-排序&#34; class=&#34;headerlink&#34; title=&#34;2. 结合 sort 排序&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 结合 &lt;code&gt;sort&lt;/code&gt; 排序&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;按文件大小排序（结合 ls -l）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sort&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-k&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-k 5&lt;/code&gt;：按第 5 列（文件大小）排序。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-n&lt;/code&gt;：按数值排序。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-结合-wc-统计&#34;&gt;&lt;a href=&#34;#3-结合-wc-统计&#34; class=&#34;headerlink&#34; title=&#34;3. 结合 wc 统计&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 结合 &lt;code&gt;wc&lt;/code&gt; 统计&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;统计当前目录下的文件数量：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;统计文件中的行数、单词数和字符数：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; file.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;4-结合-head-和-tail-查看内容&#34;&gt;&lt;a href=&#34;#4-结合-head-和-tail-查看内容&#34; class=&#34;headerlink&#34; title=&#34;4. 结合 head 和 tail 查看内容&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 结合 &lt;code&gt;head&lt;/code&gt; 和 &lt;code&gt;tail&lt;/code&gt; 查看内容&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查看文件的前 10 行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; file.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看文件的最后 10 行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; file.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;5-结合-cut-提取字段&#34;&gt;&lt;a href=&#34;#5-结合-cut-提取字段&#34; class=&#34;headerlink&#34; title=&#34;5. 结合 cut 提取字段&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 结合 &lt;code&gt;cut&lt;/code&gt; 提取字段&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;从 ls -l中提取文件权限：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;cut&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-d &#39; &#39;&lt;/code&gt;：以空格为分隔符。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-f 1&lt;/code&gt;：提取第 1 列。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;6-结合-awk-进行格式化&#34;&gt;&lt;a href=&#34;#6-结合-awk-进行格式化&#34; class=&#34;headerlink&#34; title=&#34;6. 结合 awk 进行格式化&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 结合 &lt;code&gt;awk&lt;/code&gt; 进行格式化&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;提取文件名和大小：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;awk&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;{print $5, $9}&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$5&lt;/code&gt;：表示文件大小。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$9&lt;/code&gt;：表示文件名。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;7-结合-uniq-去重&#34;&gt;&lt;a href=&#34;#7-结合-uniq-去重&#34; class=&#34;headerlink&#34; title=&#34;7. 结合 uniq 去重&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 结合 &lt;code&gt;uniq&lt;/code&gt; 去重&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;统计文件中的唯一单词（结合 sort 和 uniq）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; file.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sort&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;uniq&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;8-结合-tee-保存和显示&#34;&gt;&lt;a href=&#34;#8-结合-tee-保存和显示&#34; class=&#34;headerlink&#34; title=&#34;8. 结合 tee 保存和显示&#34;&gt;&lt;/a&gt;&lt;strong&gt;8. 结合 &lt;code&gt;tee&lt;/code&gt; 保存和显示&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;将命令输出保存到文件，同时在终端显示：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;9-结合-xargs-执行批量命令&#34;&gt;&lt;a href=&#34;#9-结合-xargs-执行批量命令&#34; class=&#34;headerlink&#34; title=&#34;9. 结合 xargs 执行批量命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;9. 结合 &lt;code&gt;xargs&lt;/code&gt; 执行批量命令&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;删除包含特定关键词的文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;temp&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;xargs&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;将文本文件中的内容逐行作为命令行参数：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; files.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;xargs&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-I&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; /backup/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;10-动态监控日志文件&#34;&gt;&lt;a href=&#34;#10-动态监控日志文件&#34; class=&#34;headerlink&#34; title=&#34;10. 动态监控日志文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;10. 动态监控日志文件&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;监控日志文件中包含错误的行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /var/log/syslog &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;error&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;管道符结合其他符号&#34;&gt;&lt;a href=&#34;#管道符结合其他符号&#34; class=&#34;headerlink&#34; title=&#34;管道符结合其他符号&#34;&gt;&lt;/a&gt;&lt;strong&gt;管道符结合其他符号&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;与重定向符号一起使用&#34;&gt;&lt;a href=&#34;#与重定向符号一起使用&#34; class=&#34;headerlink&#34; title=&#34;与重定向符号一起使用&#34;&gt;&lt;/a&gt;&lt;strong&gt;与重定向符号一起使用&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;将管道符的输出保存到文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; result.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;多重管道&#34;&gt;&lt;a href=&#34;#多重管道&#34; class=&#34;headerlink&#34; title=&#34;多重管道&#34;&gt;&lt;/a&gt;&lt;strong&gt;多重管道&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;将多个命令串联：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; file.txt &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;keyword&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sort&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;uniq&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sort&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-nr&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;功能：&lt;ol&gt;
-&lt;li&gt;搜索文件中的 &lt;code&gt;keyword&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;排序结果。&lt;/li&gt;
-&lt;li&gt;去重并统计出现次数。&lt;/li&gt;
-&lt;li&gt;按出现次数逆序排序。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;在 Linux 中，&lt;strong&gt;重定向&lt;/strong&gt; 是将命令的输出或输入重定向到文件或其他设备的操作。它通常用于保存输出、将错误输出单独处理或读取文件作为输入。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-输出重定向&#34;&gt;&lt;a href=&#34;#1-输出重定向&#34; class=&#34;headerlink&#34; title=&#34;1. 输出重定向&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 输出重定向&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;标准输出&#34;&gt;&lt;a href=&#34;#标准输出&#34; class=&#34;headerlink&#34; title=&#34;标准输出 (&gt;)&#34;&gt;&lt;/a&gt;&lt;strong&gt;标准输出 (&lt;code&gt;&amp;gt;&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将命令的标准输出（正常输出）重定向到文件。&lt;/li&gt;
-&lt;li&gt;如果文件已存在，会&lt;strong&gt;覆盖&lt;/strong&gt;原文件内容。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将 ls 命令的输出保存到 output.txt文件中。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;追加输出&#34;&gt;&lt;a href=&#34;#追加输出&#34; class=&#34;headerlink&#34; title=&#34;追加输出 (&gt;&gt;)&#34;&gt;&lt;/a&gt;&lt;strong&gt;追加输出 (&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将命令的标准输出&lt;strong&gt;追加&lt;/strong&gt;到文件末尾，而不是覆盖。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;New line&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将字符串 “New line” 添加到 output.txt 的末尾。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-错误重定向&#34;&gt;&lt;a href=&#34;#2-错误重定向&#34; class=&#34;headerlink&#34; title=&#34;2. 错误重定向&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 错误重定向&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;标准错误输出-2&#34;&gt;&lt;a href=&#34;#标准错误输出-2&#34; class=&#34;headerlink&#34; title=&#34;标准错误输出 (2&gt;)&#34;&gt;&lt;/a&gt;&lt;strong&gt;标准错误输出 (&lt;code&gt;2&amp;gt;&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将命令的错误输出（标准错误）重定向到文件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; error.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; nonexistent_file &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; error.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将错误消息保存到 error.txt。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;追加错误输出-2&#34;&gt;&lt;a href=&#34;#追加错误输出-2&#34; class=&#34;headerlink&#34; title=&#34;追加错误输出 (2&gt;&gt;)&#34;&gt;&lt;/a&gt;&lt;strong&gt;追加错误输出 (&lt;code&gt;2&amp;gt;&amp;gt;&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将错误输出&lt;strong&gt;追加&lt;/strong&gt;到文件末尾。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&amp;gt;&lt;/span&gt; error.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;3-合并标准输出和错误输出&#34;&gt;&lt;a href=&#34;#3-合并标准输出和错误输出&#34; class=&#34;headerlink&#34; title=&#34;3. 合并标准输出和错误输出&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 合并标准输出和错误输出&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;将标准输出和标准错误合并到同一文件&#34;&gt;&lt;a href=&#34;#将标准输出和标准错误合并到同一文件&#34; class=&#34;headerlink&#34; title=&#34;将标准输出和标准错误合并到同一文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;将标准输出和标准错误合并到同一文件&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;使用 &lt;code&gt;&amp;amp;&amp;gt;&lt;/code&gt; 将正常输出和错误输出都保存到一个文件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;gt;&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; existing_file nonexistent_file &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;gt;&lt;/span&gt; all_output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;追加合并输出&#34;&gt;&lt;a href=&#34;#追加合并输出&#34; class=&#34;headerlink&#34; title=&#34;追加合并输出&#34;&gt;&lt;/a&gt;&lt;strong&gt;追加合并输出&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;使用 &lt;code&gt;&amp;amp;&amp;gt;&amp;gt;&lt;/code&gt; 将正常输出和错误输出都追加到一个文件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;gt;&amp;gt;&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;4-输入重定向&#34;&gt;&lt;a href=&#34;#4-输入重定向&#34; class=&#34;headerlink&#34; title=&#34;4. 输入重定向&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 输入重定向&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;将文件作为命令的输入&#34;&gt;&lt;a href=&#34;#将文件作为命令的输入&#34; class=&#34;headerlink&#34; title=&#34;将文件作为命令的输入 (&lt;)&#34;&gt;&lt;/a&gt;&lt;strong&gt;将文件作为命令的输入 (&lt;code&gt;&amp;lt;&lt;/code&gt;)&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;使用 &lt;code&gt;&amp;lt;&lt;/code&gt; 将文件内容作为命令的输入。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; input.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;统计 input.txt 的行数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;5-同时处理输出和错误&#34;&gt;&lt;a href=&#34;#5-同时处理输出和错误&#34; class=&#34;headerlink&#34; title=&#34;5. 同时处理输出和错误&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 同时处理输出和错误&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;将标准输出和错误分别保存到不同文件&#34;&gt;&lt;a href=&#34;#将标准输出和错误分别保存到不同文件&#34; class=&#34;headerlink&#34; title=&#34;将标准输出和错误分别保存到不同文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;将标准输出和错误分别保存到不同文件&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;使用 &lt;code&gt;&amp;gt; file&lt;/code&gt; 和 &lt;code&gt;2&amp;gt; error_file&lt;/code&gt;：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; output.txt &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; error.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; existing_file nonexistent_file &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; stdout.txt &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; stderr.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;6-特殊重定向&#34;&gt;&lt;a href=&#34;#6-特殊重定向&#34; class=&#34;headerlink&#34; title=&#34;6. 特殊重定向&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 特殊重定向&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;丢弃输出到-dev-null&#34;&gt;&lt;a href=&#34;#丢弃输出到-dev-null&#34; class=&#34;headerlink&#34; title=&#34;丢弃输出到 /dev/null&#34;&gt;&lt;/a&gt;&lt;strong&gt;丢弃输出到 &lt;code&gt;/dev/null&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;/dev/null&lt;/code&gt; 是一个特殊设备文件，重定向到它的内容会被丢弃。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;丢弃标准输出：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; /dev/null&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;丢弃标准错误：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; /dev/null&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;同时丢弃标准输出和错误：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;gt;&lt;/span&gt; /dev/null&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;7-使用-tee-同时输出到文件和终端&#34;&gt;&lt;a href=&#34;#7-使用-tee-同时输出到文件和终端&#34; class=&#34;headerlink&#34; title=&#34;7. 使用 tee 同时输出到文件和终端&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 使用 &lt;code&gt;tee&lt;/code&gt; 同时输出到文件和终端&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;tee&lt;/code&gt; 命令可以将输入同时保存到文件和终端。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将 &lt;code&gt;ls&lt;/code&gt; 的输出显示在终端的同时保存到 &lt;code&gt;output.txt&lt;/code&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;追加模式：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;8-重定向符号总结&#34;&gt;&lt;a href=&#34;#8-重定向符号总结&#34; class=&#34;headerlink&#34; title=&#34;8. 重定向符号总结&#34;&gt;&lt;/a&gt;&lt;strong&gt;8. 重定向符号总结&lt;/strong&gt;&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;符号&lt;/th&gt;
-&lt;th&gt;作用&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将标准输出重定向到文件，覆盖文件内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将标准输出追加到文件末尾&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;2&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将错误输出重定向到文件，覆盖文件内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;2&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将错误输出追加到文件末尾&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;&amp;amp;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将标准输出和错误输出重定向到同一文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;&amp;amp;&amp;gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将标准输出和错误输出追加到同一文件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;将文件内容作为命令的标准输入&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;/dev/null&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;丢弃所有输出&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;`&lt;/td&gt;
-&lt;td&gt;tee`&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;示例：组合重定向&#34;&gt;&lt;a href=&#34;#示例：组合重定向&#34; class=&#34;headerlink&#34; title=&#34;示例：组合重定向&#34;&gt;&lt;/a&gt;&lt;strong&gt;示例：组合重定向&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;同时保存输出和错误到不同文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; existing_file nonexistent_file &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; stdout.txt &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; stderr.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;同时显示输出在终端，并保存到文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;tee&lt;/span&gt; output.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;统计某文件夹的文件数量，但丢弃错误：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /path/to/dir &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; /dev/null &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/23/vim-bian-ji-qi/</guid>
-            <title>Vim 编辑器详细教程</title>
-            <link>https://0xdadream.github.io/2024/11/23/vim-bian-ji-qi/</link>
-            <category>tools</category>
-            <pubDate>Sat, 23 Nov 2024 23:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;Vim-编辑器详细教程&#34;&gt;&lt;a href=&#34;#Vim-编辑器详细教程&#34; class=&#34;headerlink&#34; title=&#34;Vim 编辑器详细教程&#34;&gt;&lt;/a&gt;Vim 编辑器详细教程&lt;/h1&gt;&lt;p&gt;Vim 是一个强大的文本编辑器，以其高效的编辑能力和强大的功能著称，特别适合程序员和文字处理工作者。以下是一个详细的 Vim 教程，从基础操作到高级用法。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-Vim-基础操作&#34;&gt;&lt;a href=&#34;#1-Vim-基础操作&#34; class=&#34;headerlink&#34; title=&#34;1. Vim 基础操作&#34;&gt;&lt;/a&gt;1. &lt;strong&gt;Vim 基础操作&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;1-1-Vim-的三种模式&#34;&gt;&lt;a href=&#34;#1-1-Vim-的三种模式&#34; class=&#34;headerlink&#34; title=&#34;1.1 Vim 的三种模式&#34;&gt;&lt;/a&gt;1.1 Vim 的三种模式&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;正常模式&lt;/strong&gt;（Normal Mode）：默认进入的模式，用于浏览、操作和执行命令。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;插入模式&lt;/strong&gt;（Insert Mode）：用于编辑文本，按 &lt;code&gt;i&lt;/code&gt; 进入。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;命令模式&lt;/strong&gt;（Command Mode）：执行文件操作或配置命令，按 &lt;code&gt;:&lt;/code&gt; 进入。&lt;/li&gt;
-&lt;li&gt;ESC：三种模式切换。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;1-2-启动和退出-Vim&#34;&gt;&lt;a href=&#34;#1-2-启动和退出-Vim&#34; class=&#34;headerlink&#34; title=&#34;1.2 启动和退出 Vim&#34;&gt;&lt;/a&gt;1.2 启动和退出 Vim&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;启动 Vim：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; 文件名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;退出 Vim：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;保存并退出：&lt;code&gt;:&lt;/code&gt; → 输入 &lt;code&gt;wq&lt;/code&gt; → 按 &lt;code&gt;Enter&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;强制退出（不保存）：&lt;code&gt;:&lt;/code&gt; → 输入 &lt;code&gt;q!&lt;/code&gt; → 按 &lt;code&gt;Enter&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-Vim-基本移动命令&#34;&gt;&lt;a href=&#34;#2-Vim-基本移动命令&#34; class=&#34;headerlink&#34; title=&#34;2. Vim 基本移动命令&#34;&gt;&lt;/a&gt;2. &lt;strong&gt;Vim 基本移动命令&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;按键快速移动：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;h&lt;/code&gt;：向左移动一个字符&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;l&lt;/code&gt;：向右移动一个字符&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;j&lt;/code&gt;：向下移动一行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;k&lt;/code&gt;：向上移动一行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;按单词移动：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;w&lt;/code&gt;：跳到下一个单词开头&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;e&lt;/code&gt;：跳到当前或下一个单词末尾&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;b&lt;/code&gt;：跳到当前或前一个单词开头&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;按行快速移动：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;0&lt;/code&gt;：跳到行首&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;^&lt;/code&gt;：跳到行首的第一个非空字符&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$&lt;/code&gt;：跳到行尾&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;按页移动：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Ctrl-d&lt;/code&gt;：向下滚动半屏&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl-u&lt;/code&gt;：向上滚动半屏&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-文本编辑操作&#34;&gt;&lt;a href=&#34;#3-文本编辑操作&#34; class=&#34;headerlink&#34; title=&#34;3. 文本编辑操作&#34;&gt;&lt;/a&gt;3. &lt;strong&gt;文本编辑操作&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;3-1-插入文本&#34;&gt;&lt;a href=&#34;#3-1-插入文本&#34; class=&#34;headerlink&#34; title=&#34;3.1 插入文本&#34;&gt;&lt;/a&gt;3.1 插入文本&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;i&lt;/code&gt;：在光标前插入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;I&lt;/code&gt;：在行首插入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;a&lt;/code&gt;：在光标后插入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;A&lt;/code&gt;：在行尾插入&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;o&lt;/code&gt;：在当前行下插入新行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;O&lt;/code&gt;：在当前行上插入新行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-2-删除文本&#34;&gt;&lt;a href=&#34;#3-2-删除文本&#34; class=&#34;headerlink&#34; title=&#34;3.2 删除文本&#34;&gt;&lt;/a&gt;3.2 删除文本&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;x&lt;/code&gt;：删除光标处字符&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dw&lt;/code&gt;：删除当前单词&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;dd&lt;/code&gt;：删除当前行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;d$&lt;/code&gt;：删除光标到行尾&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;d0&lt;/code&gt;：删除光标到行首&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-3-复制与粘贴&#34;&gt;&lt;a href=&#34;#3-3-复制与粘贴&#34; class=&#34;headerlink&#34; title=&#34;3.3 复制与粘贴&#34;&gt;&lt;/a&gt;3.3 复制与粘贴&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;yy&lt;/code&gt;：复制当前行&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;y$&lt;/code&gt;：复制光标到行尾&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;p&lt;/code&gt;：粘贴到光标后&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;P&lt;/code&gt;：粘贴到光标前&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-4-替换文本&#34;&gt;&lt;a href=&#34;#3-4-替换文本&#34; class=&#34;headerlink&#34; title=&#34;3.4 替换文本&#34;&gt;&lt;/a&gt;3.4 替换文本&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;r&lt;/code&gt;：替换当前字符&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;R&lt;/code&gt;：进入替换模式&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cw&lt;/code&gt;：替换当前单词&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;C&lt;/code&gt;：替换光标到行尾内容&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-搜索与替换&#34;&gt;&lt;a href=&#34;#4-搜索与替换&#34; class=&#34;headerlink&#34; title=&#34;4. 搜索与替换&#34;&gt;&lt;/a&gt;4. &lt;strong&gt;搜索与替换&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;4-1-搜索&#34;&gt;&lt;a href=&#34;#4-1-搜索&#34; class=&#34;headerlink&#34; title=&#34;4.1 搜索&#34;&gt;&lt;/a&gt;4.1 搜索&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;/关键词&lt;/code&gt;：向下搜索&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;?关键词&lt;/code&gt;：向上搜索&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;：跳到下一个匹配&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;N&lt;/code&gt;：跳到上一个匹配&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;4-2-替换&#34;&gt;&lt;a href=&#34;#4-2-替换&#34; class=&#34;headerlink&#34; title=&#34;4.2 替换&#34;&gt;&lt;/a&gt;4.2 替换&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;单次替换：&lt;code&gt;:%s/旧文本/新文本/g&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;确认替换：&lt;code&gt;:%s/旧文本/新文本/gc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;5-多文件与多窗口&#34;&gt;&lt;a href=&#34;#5-多文件与多窗口&#34; class=&#34;headerlink&#34; title=&#34;5. 多文件与多窗口&#34;&gt;&lt;/a&gt;5. &lt;strong&gt;多文件与多窗口&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;5-1-分屏操作&#34;&gt;&lt;a href=&#34;#5-1-分屏操作&#34; class=&#34;headerlink&#34; title=&#34;5.1 分屏操作&#34;&gt;&lt;/a&gt;5.1 分屏操作&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;:sp 文件名&lt;/code&gt;：水平分屏&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:vsp 文件名&lt;/code&gt;：垂直分屏&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl-w&lt;/code&gt; + &lt;code&gt;方向键&lt;/code&gt;：切换窗口&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;5-2-标签页&#34;&gt;&lt;a href=&#34;#5-2-标签页&#34; class=&#34;headerlink&#34; title=&#34;5.2 标签页&#34;&gt;&lt;/a&gt;5.2 标签页&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;:tabnew 文件名&lt;/code&gt;：打开新标签页&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:tabn&lt;/code&gt;：切换到下一个标签页&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:tabp&lt;/code&gt;：切换到上一个标签页&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;6-Vim-配置&#34;&gt;&lt;a href=&#34;#6-Vim-配置&#34; class=&#34;headerlink&#34; title=&#34;6. Vim 配置&#34;&gt;&lt;/a&gt;6. &lt;strong&gt;Vim 配置&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;6-1-创建配置文件&#34;&gt;&lt;a href=&#34;#6-1-创建配置文件&#34; class=&#34;headerlink&#34; title=&#34;6.1 创建配置文件&#34;&gt;&lt;/a&gt;6.1 创建配置文件&lt;/h3&gt;&lt;p&gt;Vim 配置文件路径：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Linux: &lt;code&gt;~/.vimrc&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Windows: &lt;code&gt;C:\Users\&amp;lt;用户名&amp;gt;\_vimrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;6-2-常用配置&#34;&gt;&lt;a href=&#34;#6-2-常用配置&#34; class=&#34;headerlink&#34; title=&#34;6.2 常用配置&#34;&gt;&lt;/a&gt;6.2 常用配置&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-vim&#34; data-language=&#34;vim&#34;&gt;&lt;code class=&#34;language-vim&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;number&lt;/span&gt;           &lt;span class=&#34;token comment&#34;&gt;&#34; 显示行号&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;tabstop&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;        &lt;span class=&#34;token comment&#34;&gt;&#34; 设置 Tab 宽度为 4&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;shiftwidth&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;     &lt;span class=&#34;token comment&#34;&gt;&#34; 自动缩进宽度为 4&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;expandtab&lt;/span&gt;        &lt;span class=&#34;token comment&#34;&gt;&#34; 将 Tab 转为空格&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;autoindent&lt;/span&gt;       &lt;span class=&#34;token comment&#34;&gt;&#34; 自动缩进&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;hlsearch&lt;/span&gt;         &lt;span class=&#34;token comment&#34;&gt;&#34; 高亮搜索结果&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;incsearch&lt;/span&gt;        &lt;span class=&#34;token comment&#34;&gt;&#34; 实时搜索&lt;/span&gt;
-&lt;span class=&#34;token builtin&#34;&gt;syntax&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;on&lt;/span&gt;            &lt;span class=&#34;token comment&#34;&gt;&#34; 开启语法高亮&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;7-高级功能&#34;&gt;&lt;a href=&#34;#7-高级功能&#34; class=&#34;headerlink&#34; title=&#34;7. 高级功能&#34;&gt;&lt;/a&gt;7. &lt;strong&gt;高级功能&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;7-1-宏录制&#34;&gt;&lt;a href=&#34;#7-1-宏录制&#34; class=&#34;headerlink&#34; title=&#34;7.1 宏录制&#34;&gt;&lt;/a&gt;7.1 宏录制&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;开始录制：按 &lt;code&gt;q&lt;/code&gt; → 输入一个字母（如 &lt;code&gt;a&lt;/code&gt;）&lt;/li&gt;
-&lt;li&gt;执行操作（如插入文本或删除行）&lt;/li&gt;
-&lt;li&gt;结束录制：再次按 &lt;code&gt;q&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;播放宏：&lt;code&gt;@a&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;7-2-快速跳转&#34;&gt;&lt;a href=&#34;#7-2-快速跳转&#34; class=&#34;headerlink&#34; title=&#34;7.2 快速跳转&#34;&gt;&lt;/a&gt;7.2 快速跳转&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Ctrl-o&lt;/code&gt;：返回上一个光标位置&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl-i&lt;/code&gt;：前进到下一个光标位置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;8-学习资源&#34;&gt;&lt;a href=&#34;#8-学习资源&#34; class=&#34;headerlink&#34; title=&#34;8. 学习资源&#34;&gt;&lt;/a&gt;8. &lt;strong&gt;学习资源&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;官方文档：&lt;code&gt;:help&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;在线教程：&lt;a href=&#34;https://vim-adventures.com/&#34;&gt;Vim Adventures&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
  ]]></description>
         </item>
     </channel>

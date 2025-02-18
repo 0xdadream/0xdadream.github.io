@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;intel&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 18 Feb 2025 16:11:00 +0800</pubDate>
+        <lastBuildDate>Tue, 18 Feb 2025 16:11:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>linux</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>bug</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>conda</category>
+        <category>powershell</category>
+        <category>tips</category>
+        <category>emby</category>
+        <category>git</category>
+        <category>python</category>
+        <category>google</category>
+        <category>java</category>
+        <category>学习</category>
+        <category>命令</category>
+        <category>tools</category>
+        <category>intel</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>命令行</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/</guid>
+            <title>Intel显卡运行AI配置教程</title>
+            <link>https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/</link>
+            <category>intel</category>
+            <pubDate>Tue, 18 Feb 2025 16:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Intel显卡运行AI配置教程&#34;&gt;&lt;a href=&#34;#Intel显卡运行AI配置教程&#34; class=&#34;headerlink&#34; title=&#34;Intel显卡运行AI配置教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;Intel显卡运行AI配置教程&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;适用硬件&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Intel Arc系列显卡（如A770 16G）驱动为6559&lt;/li&gt;
+&lt;li&gt;win11&lt;/li&gt;
+&lt;li&gt;oneAPI==2025.0.1&lt;/li&gt;
+&lt;li&gt;torch==2.3.110&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-安装Miniconda并配置Python虚拟环境&#34;&gt;&lt;a href=&#34;#1-安装Miniconda并配置Python虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;1. 安装Miniconda并配置Python虚拟环境&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 安装Miniconda并配置Python虚拟环境&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;可以参考这个&lt;a href=&#34;https://0xdadream.github.io/2024/08/12/conda-an-zhuang-ji-shi-yong/&#34;&gt;conda安装及使用 | 逐梦&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;步骤说明&#34;&gt;&lt;a href=&#34;#步骤说明&#34; class=&#34;headerlink&#34; title=&#34;步骤说明&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤说明&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载Miniconda&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://docs.conda.io/en/latest/miniconda.html&#34;&gt;Miniconda官网&lt;/a&gt;，选择对应操作系统的安装包（建议Python 3.11版本）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装Miniconda&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：双击安装包，按提示操作，勾选“Add to PATH”选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux/macOS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; Miniconda3-latest-Linux-x86_64.sh  &lt;span class=&#34;token comment&#34;&gt;# 根据文件名调整  &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建Python 3.11虚拟环境&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  
+conda activate intel-ai  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-更新Intel显卡驱动&#34;&gt;&lt;a href=&#34;#2-更新Intel显卡驱动&#34; class=&#34;headerlink&#34; title=&#34;2. 更新Intel显卡驱动&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 更新Intel显卡驱动&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;关键操作&#34;&gt;&lt;a href=&#34;#关键操作&#34; class=&#34;headerlink&#34; title=&#34;关键操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;关键操作&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载最新驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://www.intel.cn/content/www/cn/zh/download-center/home.html&#34;&gt;Intel驱动下载页&lt;/a&gt;，选择Arc系列显卡的最新驱动（如&lt;strong&gt;32.0.101.6559&lt;/strong&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装驱动&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：运行安装程序，按提示完成安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：使用包管理器（如Ubuntu/Debian）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; intel-opencl-icd intel-level-zero-gpu level-zero  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证驱动状态&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：按 &lt;code&gt;Win + X&lt;/code&gt; &amp;gt; 设备管理器 &amp;gt; 显示适配器，确认显卡型号正确。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;lspci &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; intel  &lt;span class=&#34;token comment&#34;&gt;# 确认显卡识别  &lt;/span&gt;
+clinfo  &lt;span class=&#34;token comment&#34;&gt;# 检查OpenCL支持  &lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-安装Visual-Studio-Build-Tools（仅Windows）&#34;&gt;&lt;a href=&#34;#3-安装Visual-Studio-Build-Tools（仅Windows）&#34; class=&#34;headerlink&#34; title=&#34;3. 安装Visual Studio Build Tools（仅Windows）&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 安装Visual Studio Build Tools（仅Windows）&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;操作步骤&#34;&gt;&lt;a href=&#34;#操作步骤&#34; class=&#34;headerlink&#34; title=&#34;操作步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;操作步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;下载Visual Studio 2022&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://visualstudio.microsoft.com/&#34;&gt;Visual Studio官网&lt;/a&gt;，下载社区版。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装C++桌面开发组件&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;在安装界面勾选：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用C++的桌面开发&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows 10/11 SDK&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;C++ CMake工具&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;默认也行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证安装&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;打开命令提示符，运行 &lt;code&gt;cl&lt;/code&gt; 命令，确认返回编译器版本信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-安装Intel-oneAPI工具包&#34;&gt;&lt;a href=&#34;#4-安装Intel-oneAPI工具包&#34; class=&#34;headerlink&#34; title=&#34;4. 安装Intel oneAPI工具包&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 安装Intel oneAPI工具包&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;步骤说明-1&#34;&gt;&lt;a href=&#34;#步骤说明-1&#34; class=&#34;headerlink&#34; title=&#34;步骤说明&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤说明&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载oneAPI Base Toolkit&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问 &lt;a href=&#34;https://www.intel.cn/content/www/cn/zh/developer/tools/oneapi/toolkits.html&#34;&gt;oneAPI官网&lt;/a&gt;，选择Base Toolkit-&amp;gt;windows-&amp;gt;offline installer，然后点击右边往下一点Continue as a Guest (download starts immediately) →下载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装oneAPI&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows：运行安装程序，默认勾选所有组件，一直点就行了。&lt;/li&gt;
+&lt;li&gt;Linux：使用包管理器或脚本安装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;激活oneAPI环境变量&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;call &lt;span class=&#34;token string&#34;&gt;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34;&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;# cmd使用&lt;/span&gt;
+cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# powershell使用&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Linux：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; /opt/intel/oneapi/setvars.sh  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-安装Intel-Extension-for-PyTorch-IPEX&#34;&gt;&lt;a href=&#34;#5-安装Intel-Extension-for-PyTorch-IPEX&#34; class=&#34;headerlink&#34; title=&#34;5. 安装Intel Extension for PyTorch (IPEX)&#34;&gt;&lt;/a&gt;&lt;strong&gt;5. 安装Intel Extension for PyTorch (IPEX)&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;操作命令&#34;&gt;&lt;a href=&#34;#操作命令&#34; class=&#34;headerlink&#34; title=&#34;操作命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;操作命令&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;激活虚拟环境与oneAPI&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;powershell中执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; xxx &lt;span class=&#34;token comment&#34;&gt;#最好切换到工作目录&lt;/span&gt;
+conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 前面创建过环境没有再次创建&lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境  &lt;/span&gt;
+cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 根据操作系统执行上述对应的oneAPI激活命令&lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 再次激活环境&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装PyTorch与IPEX&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 安装PyTorch CPU版本（IPEX会自动启用GPU支持）  &lt;/span&gt;
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-验证IPEX安装与显卡识别&#34;&gt;&lt;a href=&#34;#6-验证IPEX安装与显卡识别&#34; class=&#34;headerlink&#34; title=&#34;6. 验证IPEX安装与显卡识别&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 验证IPEX安装与显卡识别&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;验证步骤&#34;&gt;&lt;a href=&#34;#验证步骤&#34; class=&#34;headerlink&#34; title=&#34;验证步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;验证步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;运行Python脚本检查GPU支持&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; torch  
+&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; intel_extension_for_pytorch &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; ipex  
+
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;PyTorch版本: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;__version__&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;IPEX版本: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;ipex&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;__version__&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;Intel GPU是否可用: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xpu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;is_available&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;检测到的Intel GPU设备: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;torch&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;xpu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;get_device_name&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;import torch; import intel_extension_for_pytorch as ipex; print(&#39;PyTorch版本:&#39;, torch.__version__); print(&#39;IPEX版本:&#39;, ipex.__version__); print(&#39;Intel GPU是否可用:&#39;, torch.xpu.is_available()); print(&#39;检测到的Intel GPU设备:&#39;, torch.xpu.get_device_name(0))&#34;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# 一键脚本&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;预期输出&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;PyTorch版本: &lt;span class=&#34;token number&#34;&gt;2.1&lt;/span&gt;.0  
+IPEX版本: &lt;span class=&#34;token number&#34;&gt;2.1&lt;/span&gt;.0  
+Intel GPU是否可用: True  
+检测到的Intel GPU设备: Intel&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;R&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; Arc&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;TM&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; A770 Graphics  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;官方脚本&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;-c&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;import torch; import intel_extension_for_pytorch as ipex; print(torch.__version__); print(ipex.__version__); [print(f&#39;[{i}]: {torch.xpu.get_device_properties(i)}&#39;) for i in range(torch.xpu.device_count())];&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至此已经安装成功了&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-常见问题解决&#34;&gt;&lt;a href=&#34;#7-常见问题解决&#34; class=&#34;headerlink&#34; title=&#34;7. 常见问题解决&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 常见问题解决&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;遇到问题大多数时候都是各种版本不匹配，例如&lt;code&gt;raise err OSError: [WinError 126] 找不到指定的模块。&lt;/code&gt;，尽量使用教程相同版本。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;通过本教程，你已成功配置Intel显卡的AI开发环境，并验证了IPEX的GPU加速支持。接下来可尝试运行AI模型（如Stable Diffusion、LLM推理），并通过环境变量 &lt;code&gt;LIBOMPTARGET_PLUGIN=LEVEL0&lt;/code&gt; 或 &lt;code&gt;SYCL_CACHE_PERSISTENT=1&lt;/code&gt; 进一步优化性能。&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html&#34;&gt;获取英特尔® oneAPI Base Toolkit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://intel.github.io/intel-extension-for-pytorch/&#34;&gt;Welcome to Intel® Extension for PyTorch* Documentation!&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1dKaMeXE3B/?vd_source=b809bacd004cf290c08f612fa076f2eb&#34;&gt;intel arc 显卡 ComfyUI 安装教程_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/yunying985/article/details/140589680&#34;&gt;AI绘画 | 只要10步让你在英特尔A770显卡下安装ComfyUI运行StableDiffusion3最新开源模型_arc a750 安装comfyui-CSDN博客&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
