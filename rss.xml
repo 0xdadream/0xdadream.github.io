@@ -5,13 +5,14 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 18 Feb 2025 16:11:00 +0800</pubDate>
-        <lastBuildDate>Tue, 18 Feb 2025 16:11:00 +0800</lastBuildDate>
+        <pubDate>Tue, 18 Feb 2025 18:11:00 +0800</pubDate>
+        <lastBuildDate>Tue, 18 Feb 2025 18:11:00 +0800</lastBuildDate>
+        <category>intel</category>
         <category>tip</category>
         <category>安装</category>
-        <category>Java</category>
         <category>re</category>
         <category>工具</category>
+        <category>Java</category>
         <category>linux</category>
         <category>教程</category>
         <category>环境</category>
@@ -22,21 +23,20 @@
         <category>windows</category>
         <category>BUUCTF</category>
         <category>server</category>
+        <category>conda</category>
+        <category>powershell</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>conda</category>
-        <category>powershell</category>
         <category>tips</category>
         <category>emby</category>
-        <category>git</category>
         <category>python</category>
+        <category>git</category>
         <category>google</category>
         <category>java</category>
-        <category>学习</category>
         <category>命令</category>
         <category>tools</category>
-        <category>intel</category>
+        <category>学习</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
@@ -44,6 +44,55 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</guid>
+            <title>ArcA770使用comfyui教程</title>
+            <link>https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</link>
+            <category>intel</category>
+            <pubDate>Tue, 18 Feb 2025 18:11:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;ArcA770使用comfyui教程&#34;&gt;&lt;a href=&#34;#ArcA770使用comfyui教程&#34; class=&#34;headerlink&#34; title=&#34;ArcA770使用comfyui教程&#34;&gt;&lt;/a&gt;ArcA770使用comfyui教程&lt;/h1&gt;&lt;h3 id=&#34;1-前置配置&#34;&gt;&lt;a href=&#34;#1-前置配置&#34; class=&#34;headerlink&#34; title=&#34;1. 前置配置&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 前置配置&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;conda&lt;/li&gt;
+&lt;li&gt;更新驱动&lt;/li&gt;
+&lt;li&gt;安装&lt;strong&gt;Visual Studio Build Tools&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;安装oneAPI&lt;/li&gt;
+&lt;li&gt;安装IPEX&lt;/li&gt;
+&lt;li&gt;具体看链接&lt;a href=&#34;https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/&#34;&gt;Intel显卡运行AI配置教程 | 逐梦&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-配置Python&#34;&gt;&lt;a href=&#34;#2-配置Python&#34; class=&#34;headerlink&#34; title=&#34;2. 配置Python&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 配置Python&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Python环境&lt;/strong&gt;：&lt;br&gt;建议使用&lt;strong&gt;Python 3.10或更高版本&lt;/strong&gt;，并通过虚拟环境（如&lt;code&gt;venv&lt;/code&gt;或&lt;code&gt;conda&lt;/code&gt;）隔离依赖。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; comfyui &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  这里comfyui就是安装IPEX的环境
+conda activate comfyui&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-安装ComfyUI及依赖库&#34;&gt;&lt;a href=&#34;#3-安装ComfyUI及依赖库&#34; class=&#34;headerlink&#34; title=&#34;3. 安装ComfyUI及依赖库&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 安装ComfyUI及依赖库&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;克隆ComfyUI仓库&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; xxxx &lt;span class=&#34;token comment&#34;&gt;#工作目录&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone https://github.com/comfyanonymous/ComfyUI.git
+&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; ComfyUI
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; requirements.txt &lt;span class=&#34;token comment&#34;&gt;# 安装依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-验证显卡识别与性能调优&#34;&gt;&lt;a href=&#34;#4-验证显卡识别与性能调优&#34; class=&#34;headerlink&#34; title=&#34;4. 验证显卡识别与性能调优&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 验证显卡识别与性能调优&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;显存与算力优化&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;启用Intel的&lt;strong&gt;XMX引擎&lt;/strong&gt;（AI加速单元）和&lt;strong&gt;XeSS技术&lt;/strong&gt;（超分辨率），可通过设置环境变量优化显存分配410。&lt;/li&gt;
+&lt;li&gt;调整ComfyUI配置文件，指定使用&lt;code&gt;XPU&lt;/code&gt;（Intel GPU）而非默认的CUDA。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;5-启动comfyui&#34;&gt;&lt;a href=&#34;#5-启动comfyui&#34; class=&#34;headerlink&#34; title=&#34;5.启动comfyui&#34;&gt;&lt;/a&gt;&lt;strong&gt;5.启动comfyui&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;接着上面的目录执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python main.py --use-pytorch-cross-attention &lt;span class=&#34;token parameter variable&#34;&gt;--highvram&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;快捷脚本&#34;&gt;&lt;a href=&#34;#快捷脚本&#34; class=&#34;headerlink&#34; title=&#34;快捷脚本&#34;&gt;&lt;/a&gt;快捷脚本&lt;/h4&gt;&lt;h5 id=&#34;cmd&#34;&gt;&lt;a href=&#34;#cmd&#34; class=&#34;headerlink&#34; title=&#34;cmd&#34;&gt;&lt;/a&gt;cmd&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-bat&#34; data-language=&#34;bat&#34;&gt;&lt;code class=&#34;language-bat&#34;&gt;call &#34;E:\conda\Scripts\activate.bat&#34; deepl  
+call &#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34;
+python main.py --use-pytorch-cross-attention --highvram&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存为&lt;code&gt;.bat&lt;/code&gt;文件&lt;/p&gt;
+&lt;p&gt;powershell&lt;/p&gt;
+&lt;p&gt;没搞出来&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/</guid>
             <title>Intel显卡运行AI配置教程</title>
@@ -197,13 +246,6 @@ Intel GPU是否可用: True
 &lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1dKaMeXE3B/?vd_source=b809bacd004cf290c08f612fa076f2eb&#34;&gt;intel arc 显卡 ComfyUI 安装教程_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/yunying985/article/details/140589680&#34;&gt;AI绘画 | 只要10步让你在英特尔A770显卡下安装ComfyUI运行StableDiffusion3最新开源模型_arc a750 安装comfyui-CSDN博客&lt;/a&gt;&lt;/p&gt;
  ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</guid>
-            <title></title>
-            <link>https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</link>
-            <pubDate>Tue, 18 Feb 2025 15:23:32 +0800</pubDate>
-            <description><![CDATA[  ]]></description>
         </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/</guid>

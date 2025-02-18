@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="逐梦">
-    <meta name="description" content="">
+    <meta name="keywords" content="ArcA770使用comfyui教程, 逐梦">
+    <meta name="description" content="ArcA770使用comfyui教程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>逐梦</title>
+    <title>ArcA770使用comfyui教程 | 逐梦</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -359,12 +359,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">ArcA770使用comfyui教程</h1>
                 </div>
             </div>
         </div>
@@ -386,12 +386,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/intel/">
+                                <span class="chip bg-color">intel</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                教程
+                            </a>
+                        
+                            <a href="/categories/%E6%95%99%E7%A8%8B/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -414,7 +431,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    267
                 </div>
                 
 
@@ -444,7 +461,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="ArcA770使用comfyui教程"><a href="#ArcA770使用comfyui教程" class="headerlink" title="ArcA770使用comfyui教程"></a>ArcA770使用comfyui教程</h1><h3 id="1-前置配置"><a href="#1-前置配置" class="headerlink" title="1. 前置配置"></a><strong>1. 前置配置</strong></h3><ul>
+<li>conda</li>
+<li>更新驱动</li>
+<li>安装<strong>Visual Studio Build Tools</strong></li>
+<li>安装oneAPI</li>
+<li>安装IPEX</li>
+<li>具体看链接<a href="https://0xdadream.github.io/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/">Intel显卡运行AI配置教程 | 逐梦</a></li>
+</ul>
+<hr>
+<h3 id="2-配置Python"><a href="#2-配置Python" class="headerlink" title="2. 配置Python"></a><strong>2. 配置Python</strong></h3><ul>
+<li><p><strong>Python环境</strong>：<br>建议使用<strong>Python 3.10或更高版本</strong>，并通过虚拟环境（如<code>venv</code>或<code>conda</code>）隔离依赖。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda create <span class="token parameter variable">-n</span> comfyui <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span>  这里comfyui就是安装IPEX的环境
+conda activate comfyui<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<hr>
+<h3 id="3-安装ComfyUI及依赖库"><a href="#3-安装ComfyUI及依赖库" class="headerlink" title="3. 安装ComfyUI及依赖库"></a><strong>3. 安装ComfyUI及依赖库</strong></h3><ul>
+<li><p><strong>克隆ComfyUI仓库</strong>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> xxxx <span class="token comment">#工作目录</span>
+<span class="token function">git</span> clone https://github.com/comfyanonymous/ComfyUI.git
+<span class="token builtin class-name">cd</span> ComfyUI
+pip <span class="token function">install</span> <span class="token parameter variable">-r</span> requirements.txt <span class="token comment"># 安装依赖</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<hr>
+<h3 id="4-验证显卡识别与性能调优"><a href="#4-验证显卡识别与性能调优" class="headerlink" title="4. 验证显卡识别与性能调优"></a><strong>4. 验证显卡识别与性能调优</strong></h3><ul>
+<li><strong>显存与算力优化</strong>：<ul>
+<li>启用Intel的<strong>XMX引擎</strong>（AI加速单元）和<strong>XeSS技术</strong>（超分辨率），可通过设置环境变量优化显存分配410。</li>
+<li>调整ComfyUI配置文件，指定使用<code>XPU</code>（Intel GPU）而非默认的CUDA。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-启动comfyui"><a href="#5-启动comfyui" class="headerlink" title="5.启动comfyui"></a><strong>5.启动comfyui</strong></h3><p>接着上面的目录执行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python main.py --use-pytorch-cross-attention <span class="token parameter variable">--highvram</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="快捷脚本"><a href="#快捷脚本" class="headerlink" title="快捷脚本"></a>快捷脚本</h4><h5 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h5><pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">call "E:\conda\Scripts\activate.bat" deepl  
+call "C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
+python main.py --use-pytorch-cross-attention --highvram<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>保存为<code>.bat</code>文件</p>
+<p>powershell</p>
+<p>没搞出来</p>
+
                 
             </div>
             <hr/>
@@ -507,7 +565,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/intel/">
+                                    <span class="chip bg-color">intel</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -851,9 +913,64 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="ArcA770使用comfyui教程">
+                        
+                        <span class="card-title">ArcA770使用comfyui教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ArcA770使用comfyui教程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/intel/">
+                        <span class="chip bg-color">intel</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/">
                     <div class="card-image">
@@ -871,9 +988,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -895,55 +1012,6 @@
                     
                     <a href="/tags/intel/">
                         <span class="chip bg-color">intel</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/02/18/python-ku-bao-cuo-hui-zong/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="python库报错汇总">
-                        
-                        <span class="card-title">python库报错汇总</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            python库报错汇总
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
-                                    报错修复
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
@@ -1178,7 +1246,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">225.8k</span>
+                        class="white-color">226.1k</span>
             
             
             
