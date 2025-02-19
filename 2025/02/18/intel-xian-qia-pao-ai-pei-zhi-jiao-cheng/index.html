@@ -424,21 +424,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-02-18
+                    2025-02-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -564,14 +564,19 @@ cmd.exe <span class="token string">"/K"</span> <span class="token string">'"C:\P
 <p>powershell中执行</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> xxx <span class="token comment">#最好切换到工作目录</span>
 conda create <span class="token parameter variable">-n</span> intel-ai <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.11</span>  <span class="token comment"># 前面创建过环境没有再次创建</span>
-conda activate intel-ai <span class="token comment"># 激活环境  </span>
+conda activate intel-ai <span class="token comment"># 激活环境 </span>
+conda <span class="token function">install</span> libjepg-turbo <span class="token comment">#提前安装这两个库以免报错</span>
+conda <span class="token function">install</span> libpng 
 cmd.exe <span class="token string">"/K"</span> <span class="token string">'"C:\Program Files (x86)\Intel\oneAPI\setvars.bat" &amp;&amp; powershell'</span>  <span class="token comment"># 根据操作系统执行上述对应的oneAPI激活命令</span>
 conda activate intel-ai <span class="token comment"># 再次激活环境</span>
-conda <span class="token function">install</span> pkg-config libuv <span class="token comment"># 安装一些依赖</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+conda <span class="token function">install</span> pkg-config libuv <span class="token comment"># 安装一些依赖</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>安装PyTorch与IPEX</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装PyTorch CPU版本（IPEX会自动启用GPU支持）  </span>
-pip <span class="token function">install</span> <span class="token assign-left variable">torch</span><span class="token operator">==</span><span class="token number">2.3</span>.1.post0+cxx11.abi <span class="token assign-left variable">torchvision</span><span class="token operator">==</span><span class="token number">0.18</span>.1.post0+cxx11.abi <span class="token assign-left variable">torchaudio</span><span class="token operator">==</span><span class="token number">2.3</span>.1.post0+cxx11.abi intel-extension-for-pytorch<span class="token operator">==</span><span class="token number">2.3</span>.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+pip <span class="token function">install</span> <span class="token assign-left variable">torch</span><span class="token operator">==</span><span class="token number">2.3</span>.1.post0+cxx11.abi <span class="token assign-left variable">torchvision</span><span class="token operator">==</span><span class="token number">0.18</span>.1.post0+cxx11.abi <span class="token assign-left variable">torchaudio</span><span class="token operator">==</span><span class="token number">2.3</span>.1.post0+cxx11.abi intel-extension-for-pytorch<span class="token operator">==</span><span class="token number">2.3</span>.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token assign-left variable">torch</span><span class="token operator">==</span><span class="token number">2.5</span>.1+cxx11.abi <span class="token assign-left variable">torchvision</span><span class="token operator">==</span><span class="token number">0.20</span>.1+cxx11.abi <span class="token assign-left variable">torchaudio</span><span class="token operator">==</span><span class="token number">2.5</span>.1+cxx11.abi intel-extension-for-pytorch<span class="token operator">==</span><span class="token number">2.5</span>.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+<span class="token comment"># 最新版实测也能用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ol>
 <hr>
 <h2 id="6-验证IPEX安装与显卡识别"><a href="#6-验证IPEX安装与显卡识别" class="headerlink" title="6. 验证IPEX安装与显卡识别"></a><strong>6. 验证IPEX安装与显卡识别</strong></h2><h3 id="验证步骤"><a href="#验证步骤" class="headerlink" title="验证步骤"></a><strong>验证步骤</strong></h3><ol>
@@ -601,6 +606,16 @@ Intel GPU是否可用: True
 </ol>
 <hr>
 <h2 id="7-常见问题解决"><a href="#7-常见问题解决" class="headerlink" title="7. 常见问题解决"></a><strong>7. 常见问题解决</strong></h2><p>遇到问题大多数时候都是各种版本不匹配，例如<code>raise err OSError: [WinError 126] 找不到指定的模块。</code>，尽量使用教程相同版本。</p>
+<p>报错信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">E:<span class="token punctuation">\</span>conda<span class="token punctuation">\</span>envs<span class="token punctuation">\</span>deepll<span class="token punctuation">\</span>Lib<span class="token punctuation">\</span>site-packages<span class="token punctuation">\</span>torchvision<span class="token punctuation">\</span>io<span class="token punctuation">\</span>image.py:14: UserWarning: Failed to load image Python extension: <span class="token string">'Could not find module '</span>E:<span class="token punctuation">\</span>conda<span class="token punctuation">\</span>envs<span class="token punctuation">\</span>deepll<span class="token punctuation">\</span>Lib<span class="token punctuation">\</span>site-packages<span class="token punctuation">\</span>torchvision<span class="token punctuation">\</span>image.pyd<span class="token string">' (or one of its dependencies). Try using the full path with constructor syntax.'</span>If you don't plan on using image functionality from <span class="token variable"><span class="token variable">`</span>torchvision.io<span class="token variable">`</span></span>, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have <span class="token variable"><span class="token variable">`</span>libjpeg<span class="token variable">`</span></span> or <span class="token variable"><span class="token variable">`</span>libpng<span class="token variable">`</span></span> installed before building <span class="token variable"><span class="token variable">`</span>torchvision<span class="token variable">`</span></span> from source?
+  warn<span class="token punctuation">(</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>解决方案</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate deepl <span class="token comment"># 激活对应环境</span>
+conda <span class="token function">install</span> libjepg-turbo
+conda <span class="token function">install</span> libpng<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>若有其他缺少库报错，安装对应库即可，可以参考文章<a href="https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/">python库报错汇总 | 逐梦</a></p>
 <hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>通过本教程，你已成功配置Intel显卡的AI开发环境，并验证了IPEX的GPU加速支持。接下来可尝试运行AI模型（如Stable Diffusion、LLM推理），并通过环境变量 <code>LIBOMPTARGET_PLUGIN=LEVEL0</code> 或 <code>SYCL_CACHE_PERSISTENT=1</code> 进一步优化性能。</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html">获取英特尔® oneAPI Base Toolkit</a></p>
@@ -1345,7 +1360,7 @@ Intel GPU是否可用: True
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">226.1k</span>
+                        class="white-color">226.9k</span>
             
             
             

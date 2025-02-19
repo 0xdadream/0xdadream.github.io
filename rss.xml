@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 18 Feb 2025 18:11:00 +0800</pubDate>
-        <lastBuildDate>Tue, 18 Feb 2025 18:11:00 +0800</lastBuildDate>
+        <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 19 Feb 2025 16:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>安装</category>
@@ -20,30 +20,82 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
         <category>conda</category>
+        <category>tools</category>
         <category>powershell</category>
+        <category>emby</category>
+        <category>tips</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tips</category>
-        <category>emby</category>
         <category>python</category>
         <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
-        <category>tools</category>
         <category>学习</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
-        <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
+        <category>区块链</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</guid>
+            <title>conda换源</title>
+            <link>https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</link>
+            <category>conda</category>
+            <category>tools</category>
+            <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;conda换源&#34;&gt;&lt;a href=&#34;#conda换源&#34; class=&#34;headerlink&#34; title=&#34;conda换源&#34;&gt;&lt;/a&gt;conda换源&lt;/h1&gt;&lt;p&gt;由于网络连接原因，使用 Anaconda 或 Miniconda 时，默认的官方源速度较慢。为提高下载速度，您可以将 Conda 的源更换为国内的镜像源。以下是详细的操作步骤：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 生成 &lt;code&gt;.condarc&lt;/code&gt; 配置文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 Windows 系统中，用户目录下可能没有 &lt;code&gt;.condarc&lt;/code&gt; 文件。您可以通过以下命令生成该文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config &lt;span class=&#34;token parameter variable&#34;&gt;--set&lt;/span&gt; show_channel_urls &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后，&lt;code&gt;.condarc&lt;/code&gt; 文件将被创建在用户主目录下。在 Windows 上，用户主目录通常位于 &lt;code&gt;C:\Users\用户名\&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 编辑 &lt;code&gt;.condarc&lt;/code&gt; 文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用文本编辑器打开 &lt;code&gt;.condarc&lt;/code&gt; 文件，将其内容替换为以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; defaults
+&lt;span class=&#34;token key atrule&#34;&gt;show_channel_urls&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean important&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key atrule&#34;&gt;default_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/main
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/r
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/msys2
+&lt;span class=&#34;token key atrule&#34;&gt;custom_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;conda-forge&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;msys2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;bioconda&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;menpo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch-lts&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;simpleitk&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上述配置将 Conda 的源更换为北京外国语大学的镜像站。您也可以选择其他国内镜像源，如清华大学、上海交通大学等。具体的镜像源配置可以参考清华大学开源软件镜像站的官方文档。 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/?utm_source=chatgpt.com&#34;&gt;mirrors.tuna.tsinghua.edu.cn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 清理索引缓存：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;更换源后，建议清理 Conda 的索引缓存，以确保使用新的镜像源：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda clean &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;4. 测试新的源：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建一个新的 Conda 环境，并安装一个包，以验证新的源是否生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; test_env numpy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果安装过程顺利且速度较快，则说明源更换成功。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意事项：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;备份原始配置：&lt;/strong&gt; 在更改 &lt;code&gt;.condarc&lt;/code&gt; 文件之前，建议备份原始配置，以防需要恢复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恢复默认源：&lt;/strong&gt; 如果需要恢复默认源，可以删除 &lt;code&gt;.condarc&lt;/code&gt; 文件，或者执行以下命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config --remove-key channels&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上步骤，您可以成功将 Conda 的源更换为国内镜像源，从而提高包的下载速度和稳定性。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</guid>
             <title>ArcA770使用comfyui教程</title>
@@ -202,14 +254,19 @@ cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;s
 &lt;p&gt;powershell中执行&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; xxx &lt;span class=&#34;token comment&#34;&gt;#最好切换到工作目录&lt;/span&gt;
 conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 前面创建过环境没有再次创建&lt;/span&gt;
-conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境  &lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境 &lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libjepg-turbo &lt;span class=&#34;token comment&#34;&gt;#提前安装这两个库以免报错&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpng 
 cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 根据操作系统执行上述对应的oneAPI激活命令&lt;/span&gt;
 conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 再次激活环境&lt;/span&gt;
-conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;安装PyTorch与IPEX&lt;/strong&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 安装PyTorch CPU版本（IPEX会自动启用GPU支持）  &lt;/span&gt;
-pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/ &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.1+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.20&lt;/span&gt;.1+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.1+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+&lt;span class=&#34;token comment&#34;&gt;# 最新版实测也能用&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;6-验证IPEX安装与显卡识别&#34;&gt;&lt;a href=&#34;#6-验证IPEX安装与显卡识别&#34; class=&#34;headerlink&#34; title=&#34;6. 验证IPEX安装与显卡识别&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 验证IPEX安装与显卡识别&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;验证步骤&#34;&gt;&lt;a href=&#34;#验证步骤&#34; class=&#34;headerlink&#34; title=&#34;验证步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;验证步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
@@ -239,6 +296,16 @@ Intel GPU是否可用: True
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;7-常见问题解决&#34;&gt;&lt;a href=&#34;#7-常见问题解决&#34; class=&#34;headerlink&#34; title=&#34;7. 常见问题解决&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 常见问题解决&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;遇到问题大多数时候都是各种版本不匹配，例如&lt;code&gt;raise err OSError: [WinError 126] 找不到指定的模块。&lt;/code&gt;，尽量使用教程相同版本。&lt;/p&gt;
+&lt;p&gt;报错信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;E:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;conda&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;envs&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;deepll&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;site-packages&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;torchvision&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;io&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;image.py:14: UserWarning: Failed to load image Python extension: &lt;span class=&#34;token string&#34;&gt;&#39;Could not find module &#39;&lt;/span&gt;E:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;conda&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;envs&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;deepll&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;site-packages&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;torchvision&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;image.pyd&lt;span class=&#34;token string&#34;&gt;&#39; (or one of its dependencies). Try using the full path with constructor syntax.&#39;&lt;/span&gt;If you don&#39;t plan on using image functionality from &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;torchvision.io&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;libjpeg&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; or &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;libpng&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; installed before building &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;torchvision&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; from source?
+  warn&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决方案&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda activate deepl &lt;span class=&#34;token comment&#34;&gt;# 激活对应环境&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libjepg-turbo
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpng&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若有其他缺少库报错，安装对应库即可，可以参考文章&lt;a href=&#34;https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/&#34;&gt;python库报错汇总 | 逐梦&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;通过本教程，你已成功配置Intel显卡的AI开发环境，并验证了IPEX的GPU加速支持。接下来可尝试运行AI模型（如Stable Diffusion、LLM推理），并通过环境变量 &lt;code&gt;LIBOMPTARGET_PLUGIN=LEVEL0&lt;/code&gt; 或 &lt;code&gt;SYCL_CACHE_PERSISTENT=1&lt;/code&gt; 进一步优化性能。&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html&#34;&gt;获取英特尔® oneAPI Base Toolkit&lt;/a&gt;&lt;/p&gt;
@@ -2645,194 +2712,6 @@ $$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;s
 &lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;渲染效果：-4&#34;&gt;&lt;a href=&#34;#渲染效果：-4&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/25/xi-la-zi-mu/</guid>
-            <title>希腊字母</title>
-            <link>https://0xdadream.github.io/2024/11/25/xi-la-zi-mu/</link>
-            <category>tools</category>
-            <pubDate>Mon, 25 Nov 2024 19:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;希腊字母&#34;&gt;&lt;a href=&#34;#希腊字母&#34; class=&#34;headerlink&#34; title=&#34;希腊字母&#34;&gt;&lt;/a&gt;希腊字母&lt;/h1&gt;&lt;p&gt;以下是数学和科学中常用的 &lt;strong&gt;希腊字母&lt;/strong&gt; 及其用途的对照表，包括大写和小写形式：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;序号&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;字母&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;名称&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;发音（英文）&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;数学与科学用途&lt;/strong&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;Αα&lt;/td&gt;
-&lt;td&gt;Alpha&lt;/td&gt;
-&lt;td&gt;ˈælfə&lt;/td&gt;
-&lt;td&gt;表示角度、系数、角速度等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;Ββ&lt;/td&gt;
-&lt;td&gt;Beta&lt;/td&gt;
-&lt;td&gt;ˈbeɪtə 或 ˈbiːtə&lt;/td&gt;
-&lt;td&gt;表示系数、β辐射、概率密度函数中的参数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;Γγ&lt;/td&gt;
-&lt;td&gt;Gamma&lt;/td&gt;
-&lt;td&gt;ˈɡæmə&lt;/td&gt;
-&lt;td&gt;表示伽马函数、光谱系数、第三角速度等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;Δδ&lt;/td&gt;
-&lt;td&gt;Delta&lt;/td&gt;
-&lt;td&gt;ˈdɛltə&lt;/td&gt;
-&lt;td&gt;表示变化量、偏导数（小写 δ）、有限差分等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td&gt;Εε&lt;/td&gt;
-&lt;td&gt;Epsilon&lt;/td&gt;
-&lt;td&gt;ˈɛpsɪlɒn&lt;/td&gt;
-&lt;td&gt;表示小量、误差、介电常数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;6&lt;/td&gt;
-&lt;td&gt;Ζζ&lt;/td&gt;
-&lt;td&gt;Zeta&lt;/td&gt;
-&lt;td&gt;ˈzeɪtə&lt;/td&gt;
-&lt;td&gt;表示黎曼ζ函数、阻尼系数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;7&lt;/td&gt;
-&lt;td&gt;Ηη&lt;/td&gt;
-&lt;td&gt;Eta&lt;/td&gt;
-&lt;td&gt;ˈiːtə 或 ˈeɪtə&lt;/td&gt;
-&lt;td&gt;表示效率、黏滞系数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;8&lt;/td&gt;
-&lt;td&gt;Θθ&lt;/td&gt;
-&lt;td&gt;Theta&lt;/td&gt;
-&lt;td&gt;ˈθeɪtə&lt;/td&gt;
-&lt;td&gt;表示角度、温度、周期等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;9&lt;/td&gt;
-&lt;td&gt;Ιι&lt;/td&gt;
-&lt;td&gt;Iota&lt;/td&gt;
-&lt;td&gt;aɪˈoʊtə&lt;/td&gt;
-&lt;td&gt;很少用于数学，通常表示极小值&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;10&lt;/td&gt;
-&lt;td&gt;Κκ&lt;/td&gt;
-&lt;td&gt;Kappa&lt;/td&gt;
-&lt;td&gt;ˈkæpə&lt;/td&gt;
-&lt;td&gt;表示曲率、波数、热导率等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;11&lt;/td&gt;
-&lt;td&gt;Λλ&lt;/td&gt;
-&lt;td&gt;Lambda&lt;/td&gt;
-&lt;td&gt;ˈlæmdə&lt;/td&gt;
-&lt;td&gt;表示波长、特征值、线性密度等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;12&lt;/td&gt;
-&lt;td&gt;Μμ&lt;/td&gt;
-&lt;td&gt;Mu&lt;/td&gt;
-&lt;td&gt;mjuː&lt;/td&gt;
-&lt;td&gt;表示摩擦系数、磁导率、平均值等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;13&lt;/td&gt;
-&lt;td&gt;Νν&lt;/td&gt;
-&lt;td&gt;Nu&lt;/td&gt;
-&lt;td&gt;njuː&lt;/td&gt;
-&lt;td&gt;表示频率、泊松比等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;14&lt;/td&gt;
-&lt;td&gt;Ξξ&lt;/td&gt;
-&lt;td&gt;Xi&lt;/td&gt;
-&lt;td&gt;zaɪ 或 ksiː&lt;/td&gt;
-&lt;td&gt;表示随机变量、配分函数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;15&lt;/td&gt;
-&lt;td&gt;Οο&lt;/td&gt;
-&lt;td&gt;Omicron&lt;/td&gt;
-&lt;td&gt;ˈɒmɪkrɒn&lt;/td&gt;
-&lt;td&gt;很少用于数学与科学&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;16&lt;/td&gt;
-&lt;td&gt;Ππ&lt;/td&gt;
-&lt;td&gt;Pi&lt;/td&gt;
-&lt;td&gt;paɪ&lt;/td&gt;
-&lt;td&gt;表示圆周率（π\piπ）、乘积符号（∏\prod∏）等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;17&lt;/td&gt;
-&lt;td&gt;Ρρ&lt;/td&gt;
-&lt;td&gt;Rho&lt;/td&gt;
-&lt;td&gt;roʊ&lt;/td&gt;
-&lt;td&gt;表示密度、电阻率等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;18&lt;/td&gt;
-&lt;td&gt;Σσ/ς&lt;/td&gt;
-&lt;td&gt;Sigma&lt;/td&gt;
-&lt;td&gt;ˈsɪɡmə&lt;/td&gt;
-&lt;td&gt;表示求和符号（∑\sum∑）、标准差等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;19&lt;/td&gt;
-&lt;td&gt;Ττ&lt;/td&gt;
-&lt;td&gt;Tau&lt;/td&gt;
-&lt;td&gt;taʊ&lt;/td&gt;
-&lt;td&gt;表示时间常数、剪切应力等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;td&gt;Υυ&lt;/td&gt;
-&lt;td&gt;Upsilon&lt;/td&gt;
-&lt;td&gt;ˈʌpsɪlɒn 或 ˈjuːpsɪlɒn&lt;/td&gt;
-&lt;td&gt;很少用于数学，偶用于表示介质传播系数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;21&lt;/td&gt;
-&lt;td&gt;Φφ&lt;/td&gt;
-&lt;td&gt;Phi&lt;/td&gt;
-&lt;td&gt;faɪ 或 fiː&lt;/td&gt;
-&lt;td&gt;表示黄金比例、角度、磁通量等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;22&lt;/td&gt;
-&lt;td&gt;Χχ&lt;/td&gt;
-&lt;td&gt;Chi&lt;/td&gt;
-&lt;td&gt;kaɪ&lt;/td&gt;
-&lt;td&gt;表示卡方分布、特征函数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;23&lt;/td&gt;
-&lt;td&gt;Ψψ&lt;/td&gt;
-&lt;td&gt;Psi&lt;/td&gt;
-&lt;td&gt;saɪ&lt;/td&gt;
-&lt;td&gt;表示波函数、状态函数等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;24&lt;/td&gt;
-&lt;td&gt;Ωω&lt;/td&gt;
-&lt;td&gt;Omega&lt;/td&gt;
-&lt;td&gt;ˈoʊmɪɡə 或 oʊˈmeɪɡə&lt;/td&gt;
-&lt;td&gt;表示欧姆（电阻单位）、角速度、复数平面中的极限等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
  ]]></description>
         </item>
     </channel>

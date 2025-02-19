@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 18 Feb 2025 18:11:00 +0800</pubDate>
-        <lastBuildDate>Tue, 18 Feb 2025 18:11:00 +0800</lastBuildDate>
+        <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 19 Feb 2025 16:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>安装</category>
@@ -20,30 +20,82 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
         <category>conda</category>
+        <category>tools</category>
         <category>powershell</category>
+        <category>emby</category>
+        <category>tips</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tips</category>
-        <category>emby</category>
         <category>python</category>
         <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
-        <category>tools</category>
         <category>学习</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
-        <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
+        <category>区块链</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</guid>
+            <title>conda换源</title>
+            <link>https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</link>
+            <category>conda</category>
+            <category>tools</category>
+            <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;conda换源&#34;&gt;&lt;a href=&#34;#conda换源&#34; class=&#34;headerlink&#34; title=&#34;conda换源&#34;&gt;&lt;/a&gt;conda换源&lt;/h1&gt;&lt;p&gt;由于网络连接原因，使用 Anaconda 或 Miniconda 时，默认的官方源速度较慢。为提高下载速度，您可以将 Conda 的源更换为国内的镜像源。以下是详细的操作步骤：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 生成 &lt;code&gt;.condarc&lt;/code&gt; 配置文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 Windows 系统中，用户目录下可能没有 &lt;code&gt;.condarc&lt;/code&gt; 文件。您可以通过以下命令生成该文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config &lt;span class=&#34;token parameter variable&#34;&gt;--set&lt;/span&gt; show_channel_urls &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后，&lt;code&gt;.condarc&lt;/code&gt; 文件将被创建在用户主目录下。在 Windows 上，用户主目录通常位于 &lt;code&gt;C:\Users\用户名\&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 编辑 &lt;code&gt;.condarc&lt;/code&gt; 文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用文本编辑器打开 &lt;code&gt;.condarc&lt;/code&gt; 文件，将其内容替换为以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; defaults
+&lt;span class=&#34;token key atrule&#34;&gt;show_channel_urls&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean important&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key atrule&#34;&gt;default_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/main
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/r
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/msys2
+&lt;span class=&#34;token key atrule&#34;&gt;custom_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;conda-forge&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;msys2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;bioconda&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;menpo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch-lts&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;simpleitk&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上述配置将 Conda 的源更换为北京外国语大学的镜像站。您也可以选择其他国内镜像源，如清华大学、上海交通大学等。具体的镜像源配置可以参考清华大学开源软件镜像站的官方文档。 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/?utm_source=chatgpt.com&#34;&gt;mirrors.tuna.tsinghua.edu.cn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 清理索引缓存：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;更换源后，建议清理 Conda 的索引缓存，以确保使用新的镜像源：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda clean &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;4. 测试新的源：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建一个新的 Conda 环境，并安装一个包，以验证新的源是否生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; test_env numpy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果安装过程顺利且速度较快，则说明源更换成功。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意事项：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;备份原始配置：&lt;/strong&gt; 在更改 &lt;code&gt;.condarc&lt;/code&gt; 文件之前，建议备份原始配置，以防需要恢复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恢复默认源：&lt;/strong&gt; 如果需要恢复默认源，可以删除 &lt;code&gt;.condarc&lt;/code&gt; 文件，或者执行以下命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config --remove-key channels&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上步骤，您可以成功将 Conda 的源更换为国内镜像源，从而提高包的下载速度和稳定性。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/</guid>
             <title>ArcA770使用comfyui教程</title>
@@ -202,14 +254,19 @@ cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;s
 &lt;p&gt;powershell中执行&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; xxx &lt;span class=&#34;token comment&#34;&gt;#最好切换到工作目录&lt;/span&gt;
 conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; intel-ai &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.11&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 前面创建过环境没有再次创建&lt;/span&gt;
-conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境  &lt;/span&gt;
+conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 激活环境 &lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libjepg-turbo &lt;span class=&#34;token comment&#34;&gt;#提前安装这两个库以免报错&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpng 
 cmd.exe &lt;span class=&#34;token string&#34;&gt;&#34;/K&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&#34;C:\Program Files (x86)\Intel\oneAPI\setvars.bat&#34; &amp;amp;&amp;amp; powershell&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 根据操作系统执行上述对应的oneAPI激活命令&lt;/span&gt;
 conda activate intel-ai &lt;span class=&#34;token comment&#34;&gt;# 再次激活环境&lt;/span&gt;
-conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pkg-config libuv &lt;span class=&#34;token comment&#34;&gt;# 安装一些依赖&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;安装PyTorch与IPEX&lt;/strong&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 安装PyTorch CPU版本（IPEX会自动启用GPU支持）  &lt;/span&gt;
-pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/  &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.18&lt;/span&gt;.1.post0+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.1.post0+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.3&lt;/span&gt;.110.post0+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/ &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;torch&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.1+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchvision&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.20&lt;/span&gt;.1+cxx11.abi &lt;span class=&#34;token assign-left variable&#34;&gt;torchaudio&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.1+cxx11.abi intel-extension-for-pytorch&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.5&lt;/span&gt;.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/cn/
+&lt;span class=&#34;token comment&#34;&gt;# 最新版实测也能用&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;6-验证IPEX安装与显卡识别&#34;&gt;&lt;a href=&#34;#6-验证IPEX安装与显卡识别&#34; class=&#34;headerlink&#34; title=&#34;6. 验证IPEX安装与显卡识别&#34;&gt;&lt;/a&gt;&lt;strong&gt;6. 验证IPEX安装与显卡识别&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;验证步骤&#34;&gt;&lt;a href=&#34;#验证步骤&#34; class=&#34;headerlink&#34; title=&#34;验证步骤&#34;&gt;&lt;/a&gt;&lt;strong&gt;验证步骤&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
@@ -239,6 +296,16 @@ Intel GPU是否可用: True
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;7-常见问题解决&#34;&gt;&lt;a href=&#34;#7-常见问题解决&#34; class=&#34;headerlink&#34; title=&#34;7. 常见问题解决&#34;&gt;&lt;/a&gt;&lt;strong&gt;7. 常见问题解决&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;遇到问题大多数时候都是各种版本不匹配，例如&lt;code&gt;raise err OSError: [WinError 126] 找不到指定的模块。&lt;/code&gt;，尽量使用教程相同版本。&lt;/p&gt;
+&lt;p&gt;报错信息&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;E:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;conda&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;envs&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;deepll&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;site-packages&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;torchvision&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;io&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;image.py:14: UserWarning: Failed to load image Python extension: &lt;span class=&#34;token string&#34;&gt;&#39;Could not find module &#39;&lt;/span&gt;E:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;conda&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;envs&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;deepll&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Lib&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;site-packages&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;torchvision&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;image.pyd&lt;span class=&#34;token string&#34;&gt;&#39; (or one of its dependencies). Try using the full path with constructor syntax.&#39;&lt;/span&gt;If you don&#39;t plan on using image functionality from &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;torchvision.io&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;libjpeg&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; or &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;libpng&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; installed before building &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;torchvision&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; from source?
+  warn&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决方案&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda activate deepl &lt;span class=&#34;token comment&#34;&gt;# 激活对应环境&lt;/span&gt;
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libjepg-turbo
+conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpng&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若有其他缺少库报错，安装对应库即可，可以参考文章&lt;a href=&#34;https://0xdadream.github.io/2025/02/18/python-ku-bao-cuo-hui-zong/&#34;&gt;python库报错汇总 | 逐梦&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;通过本教程，你已成功配置Intel显卡的AI开发环境，并验证了IPEX的GPU加速支持。接下来可尝试运行AI模型（如Stable Diffusion、LLM推理），并通过环境变量 &lt;code&gt;LIBOMPTARGET_PLUGIN=LEVEL0&lt;/code&gt; 或 &lt;code&gt;SYCL_CACHE_PERSISTENT=1&lt;/code&gt; 进一步优化性能。&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html&#34;&gt;获取英特尔® oneAPI Base Toolkit&lt;/a&gt;&lt;/p&gt;
@@ -3314,578 +3381,6 @@ x86_64&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;linux&lt;span cla
 &lt;li&gt;官方文档：&lt;code&gt;:help&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;在线教程：&lt;a href=&#34;https://vim-adventures.com/&#34;&gt;Vim Adventures&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/23/bian-yi-shi-yong/</guid>
-            <title>编译教程</title>
-            <link>https://0xdadream.github.io/2024/11/23/bian-yi-shi-yong/</link>
-            <category>命令</category>
-            <pubDate>Sat, 23 Nov 2024 09:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;编译教程&#34;&gt;&lt;a href=&#34;#编译教程&#34; class=&#34;headerlink&#34; title=&#34;编译教程&#34;&gt;&lt;/a&gt;编译教程&lt;/h1&gt;&lt;p&gt;下面是一个&lt;strong&gt;完整的从源码编译安装软件的教程&lt;/strong&gt;，涵盖了从环境准备到配置、编译、安装的所有可能会用到的步骤和细节，适用于各种类型的软件包。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;一、环境准备&#34;&gt;&lt;a href=&#34;#一、环境准备&#34; class=&#34;headerlink&#34; title=&#34;一、环境准备&#34;&gt;&lt;/a&gt;一、环境准备&lt;/h2&gt;&lt;p&gt;在开始编译源码之前，确保系统满足以下条件：&lt;/p&gt;
-&lt;h3 id=&#34;1-安装必要工具&#34;&gt;&lt;a href=&#34;#1-安装必要工具&#34; class=&#34;headerlink&#34; title=&#34;1. 安装必要工具&#34;&gt;&lt;/a&gt;1. &lt;strong&gt;安装必要工具&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;在 Linux 环境下，通常需要以下工具：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;编译器&lt;/strong&gt;: &lt;code&gt;gcc&lt;/code&gt; 或 &lt;code&gt;clang&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;构建工具&lt;/strong&gt;: &lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;其他依赖&lt;/strong&gt;: &lt;code&gt;autoconf&lt;/code&gt;, &lt;code&gt;automake&lt;/code&gt;, &lt;code&gt;libtool&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;对于基于 Debian 的系统（如 Ubuntu）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; build-essential autoconf automake libtool pkg-config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对于基于 RHEL 的系统（如 CentOS）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum groupinstall &lt;span class=&#34;token string&#34;&gt;&#34;Development Tools&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; autoconf automake libtool pkgconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-下载源码&#34;&gt;&lt;a href=&#34;#2-下载源码&#34; class=&#34;headerlink&#34; title=&#34;2. 下载源码&#34;&gt;&lt;/a&gt;2. &lt;strong&gt;下载源码&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;源码通常以 &lt;code&gt;.tar.gz&lt;/code&gt; 或 &lt;code&gt;.tar.bz2&lt;/code&gt; 的形式提供：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://example.com/software-1.0.tar.gz
-&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-xzvf&lt;/span&gt; software-1.0.tar.gz
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; software-1.0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;二、运行-configure&#34;&gt;&lt;a href=&#34;#二、运行-configure&#34; class=&#34;headerlink&#34; title=&#34;二、运行 ./configure&#34;&gt;&lt;/a&gt;二、运行 &lt;code&gt;./configure&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;./configure&lt;/code&gt; 是自动生成的配置脚本，用于检查系统环境，生成适合当前系统的编译配置。以下是配置过程的所有选项说明。&lt;/p&gt;
-&lt;h3 id=&#34;1-路径相关选项&#34;&gt;&lt;a href=&#34;#1-路径相关选项&#34; class=&#34;headerlink&#34; title=&#34;1. 路径相关选项&#34;&gt;&lt;/a&gt;1. &lt;strong&gt;路径相关选项&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;选项&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;默认值&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--prefix=DIR&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;软件安装的根目录&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/usr/local&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--prefix=/opt/myapp&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--exec-prefix=DIR&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;架构相关文件的安装路径&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;$prefix&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--exec-prefix=/usr&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--bindir=DIR&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;可执行文件安装路径&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;$exec_prefix/bin&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--bindir=/usr/bin&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--libdir=DIR&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;库文件安装路径&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;$exec_prefix/lib&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--libdir=/opt/myapp/lib&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--includedir=DIR&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;头文件安装路径&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;$prefix/include&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--includedir=/opt/include&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp &lt;span class=&#34;token parameter variable&#34;&gt;--bindir&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp/bin &lt;span class=&#34;token parameter variable&#34;&gt;--libdir&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp/lib&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;prefix-的用途&#34;&gt;&lt;a href=&#34;#prefix-的用途&#34; class=&#34;headerlink&#34; title=&#34;prefix 的用途&#34;&gt;&lt;/a&gt;&lt;code&gt;prefix&lt;/code&gt; 的用途&lt;/h4&gt;&lt;p&gt;&lt;code&gt;prefix&lt;/code&gt; 是通过 &lt;code&gt;./configure --prefix=DIR&lt;/code&gt; 选项指定的路径。其主要作用是告诉构建系统，安装的文件应该放在哪个目录下。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$prefix&lt;/code&gt; 的默认值通常是：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/usr/local&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果你运行以下命令：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;那么，安装路径会变成以下结构：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/opt/myapp/bin       # 可执行文件
-/opt/myapp/lib       # 库文件
-/opt/myapp/include   # 头文件
-/opt/myapp/share     # 共享资源（如文档、手册）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h4 id=&#34;如何修改-prefix&#34;&gt;&lt;a href=&#34;#如何修改-prefix&#34; class=&#34;headerlink&#34; title=&#34;如何修改 $prefix&#34;&gt;&lt;/a&gt;如何修改 &lt;code&gt;$prefix&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;在配置阶段指定通过 &lt;code&gt;./configure&lt;/code&gt; 的 &lt;code&gt;--prefix&lt;/code&gt; 参数直接指定：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/custom/path&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果不指定，系统会默认安装到 &lt;code&gt;/usr/local&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;
-&lt;span class=&#34;token comment&#34;&gt;# 文件安装到 /usr/local/...&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h4 id=&#34;prefix-的实际应用&#34;&gt;&lt;a href=&#34;#prefix-的实际应用&#34; class=&#34;headerlink&#34; title=&#34;$prefix 的实际应用&#34;&gt;&lt;/a&gt;&lt;code&gt;$prefix&lt;/code&gt; 的实际应用&lt;/h4&gt;&lt;p&gt;假设我们正在安装一个名为 &lt;code&gt;myapp&lt;/code&gt; 的软件：&lt;/p&gt;
-&lt;p&gt;示例 1: 默认安装到 &lt;code&gt;/usr/local&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;安装完成后，文件路径如下：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/usr/local/bin/myapp        # 可执行文件
-/usr/local/lib/libmyapp.so  # 动态库
-/usr/local/include/myapp.h  # 头文件
-/usr/local/share/myapp      # 共享数据&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;示例 2: 自定义安装路径&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;安装完成后，文件路径如下：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/opt/myapp/bin/myapp        # 可执行文件
-/opt/myapp/lib/libmyapp.so  # 动态库
-/opt/myapp/include/myapp.h  # 头文件
-/opt/myapp/share/myapp      # 共享数据&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h4 id=&#34;为什么-prefix-很重要&#34;&gt;&lt;a href=&#34;#为什么-prefix-很重要&#34; class=&#34;headerlink&#34; title=&#34;为什么 $prefix 很重要&#34;&gt;&lt;/a&gt;为什么 &lt;code&gt;$prefix&lt;/code&gt; 很重要&lt;/h4&gt;&lt;h5 id=&#34;1-避免覆盖系统文件&#34;&gt;&lt;a href=&#34;#1-避免覆盖系统文件&#34; class=&#34;headerlink&#34; title=&#34;1. 避免覆盖系统文件&#34;&gt;&lt;/a&gt;1. 避免覆盖系统文件&lt;/h5&gt;&lt;p&gt;默认路径 &lt;code&gt;/usr/local&lt;/code&gt; 不会影响系统自带的软件，安全且独立。&lt;/p&gt;
-&lt;h5 id=&#34;2-方便不同版本共存&#34;&gt;&lt;a href=&#34;#2-方便不同版本共存&#34; class=&#34;headerlink&#34; title=&#34;2. 方便不同版本共存&#34;&gt;&lt;/a&gt;2. 方便不同版本共存&lt;/h5&gt;&lt;p&gt;通过为不同版本指定不同的 &lt;code&gt;--prefix&lt;/code&gt;，可以在同一台机器上运行多版本的软件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp-1.0
-./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp-2.0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;3-灵活管理软件&#34;&gt;&lt;a href=&#34;#3-灵活管理软件&#34; class=&#34;headerlink&#34; title=&#34;3. 灵活管理软件&#34;&gt;&lt;/a&gt;3. 灵活管理软件&lt;/h5&gt;&lt;p&gt;如果安装路径是自定义的，例如 &lt;code&gt;/opt/myapp&lt;/code&gt;，删除整个软件只需移除该目录：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rm&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-rf&lt;/span&gt; /opt/myapp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h4 id=&#34;如何查看-prefix-的值&#34;&gt;&lt;a href=&#34;#如何查看-prefix-的值&#34; class=&#34;headerlink&#34; title=&#34;如何查看 $prefix 的值&#34;&gt;&lt;/a&gt;如何查看 &lt;code&gt;$prefix&lt;/code&gt; 的值&lt;/h4&gt;&lt;p&gt;配置完成后，&lt;code&gt;$prefix&lt;/code&gt; 的值通常会被记录在 &lt;code&gt;Makefile&lt;/code&gt; 中，你可以通过以下方法查看：&lt;/p&gt;
-&lt;h5 id=&#34;1-直接查看-Makefile&#34;&gt;&lt;a href=&#34;#1-直接查看-Makefile&#34; class=&#34;headerlink&#34; title=&#34;1. 直接查看 Makefile&#34;&gt;&lt;/a&gt;1. 直接查看 &lt;code&gt;Makefile&lt;/code&gt;&lt;/h5&gt;&lt;p&gt;打开 &lt;code&gt;Makefile&lt;/code&gt;，找到 &lt;code&gt;prefix&lt;/code&gt; 的定义：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;^prefix&#34;&lt;/span&gt; Makefile&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;2-使用-config-log&#34;&gt;&lt;a href=&#34;#2-使用-config-log&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 config.log&#34;&gt;&lt;/a&gt;2. 使用 &lt;code&gt;config.log&lt;/code&gt;&lt;/h5&gt;&lt;p&gt;查看配置过程生成的日志文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;prefix&#34;&lt;/span&gt; config.log&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-功能启用-禁用选项&#34;&gt;&lt;a href=&#34;#2-功能启用-禁用选项&#34; class=&#34;headerlink&#34; title=&#34;2. 功能启用/禁用选项&#34;&gt;&lt;/a&gt;2. &lt;strong&gt;功能启用/禁用选项&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;选项&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--enable-FEATURE&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;启用某个功能&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--enable-ssl&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--disable-FEATURE&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;禁用某个功能&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--disable-debug&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--with-FEATURE&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;启用功能，并指定路径或配置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--with-ssl=/opt/openssl&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--without-FEATURE&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;禁用功能&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--without-zlib&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure --enable-optimizations --disable-debug --with-ssl&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/openssl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-编译器相关选项&#34;&gt;&lt;a href=&#34;#3-编译器相关选项&#34; class=&#34;headerlink&#34; title=&#34;3. 编译器相关选项&#34;&gt;&lt;/a&gt;3. &lt;strong&gt;编译器相关选项&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;选项&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;CC=COMPILER&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;指定 C 编译器&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;CC=gcc&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;CXX=COMPILER&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;指定 C++ 编译器&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;CXX=g++&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;CFLAGS=FLAGS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;为 C 编译器设置标志&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;CFLAGS=&#34;-O2 -Wall&#34;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;CXXFLAGS=FLAGS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;为 C++ 编译器设置标志&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;CXXFLAGS=&#34;-O2 -Wall&#34;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;LDFLAGS=FLAGS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;设置链接器标志&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;LDFLAGS=&#34;-L/usr/lib&#34;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;CPPFLAGS=FLAGS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;设置预处理器标志（头文件路径等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;CPPFLAGS=&#34;-I/usr/include&#34;&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token assign-left variable&#34;&gt;CC&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;gcc &lt;span class=&#34;token assign-left variable&#34;&gt;CFLAGS&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-O2 -Wall&#34;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;LDFLAGS&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-L/usr/local/lib&#34;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CPPFLAGS&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-I/usr/local/include&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-调试与日志选项&#34;&gt;&lt;a href=&#34;#4-调试与日志选项&#34; class=&#34;headerlink&#34; title=&#34;4. 调试与日志选项&#34;&gt;&lt;/a&gt;4. &lt;strong&gt;调试与日志选项&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;选项&lt;/th&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--enable-debug&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;启用调试模式&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--enable-debug&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--disable-debug&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;禁用调试模式&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--disable-debug&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--quiet&lt;/code&gt; 或 &lt;code&gt;--silent&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;减少输出&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--quiet&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;--verbose&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;显示详细输出&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;--verbose&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;h3 id=&#34;5-查看所有参数&#34;&gt;&lt;a href=&#34;#5-查看所有参数&#34; class=&#34;headerlink&#34; title=&#34;5.查看所有参数&#34;&gt;&lt;/a&gt;5.查看所有参数&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;-h&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;例如得到&lt;code&gt;./configure --python=路径&lt;/code&gt;，可以指定安装到指定python版本库中&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;三、编译源码&#34;&gt;&lt;a href=&#34;#三、编译源码&#34; class=&#34;headerlink&#34; title=&#34;三、编译源码&#34;&gt;&lt;/a&gt;三、编译源码&lt;/h2&gt;&lt;p&gt;运行 &lt;code&gt;make&lt;/code&gt; 命令开始编译：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;加速编译&lt;/strong&gt;&lt;br&gt;利用多核 CPU：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; -j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;常见问题&lt;/strong&gt;&lt;br&gt;如果出现依赖问题，请根据报错信息安装缺失的库。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;四、测试编译结果&#34;&gt;&lt;a href=&#34;#四、测试编译结果&#34; class=&#34;headerlink&#34; title=&#34;四、测试编译结果&#34;&gt;&lt;/a&gt;四、测试编译结果&lt;/h2&gt;&lt;p&gt;在安装前，可以运行测试（如果源码支持）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;test&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; check&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;五、安装编译结果&#34;&gt;&lt;a href=&#34;#五、安装编译结果&#34; class=&#34;headerlink&#34; title=&#34;五、安装编译结果&#34;&gt;&lt;/a&gt;五、安装编译结果&lt;/h2&gt;&lt;p&gt;运行 &lt;code&gt;make install&lt;/code&gt; 安装编译完成的文件到目标路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;安装完成后，检查安装路径下是否有生成的文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /opt/myapp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;六、卸载（可选）&#34;&gt;&lt;a href=&#34;#六、卸载（可选）&#34; class=&#34;headerlink&#34; title=&#34;六、卸载（可选）&#34;&gt;&lt;/a&gt;六、卸载（可选）&lt;/h2&gt;&lt;p&gt;如果需要卸载，使用 &lt;code&gt;make uninstall&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; uninstall&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;七、完整操作示例&#34;&gt;&lt;a href=&#34;#七、完整操作示例&#34; class=&#34;headerlink&#34; title=&#34;七、完整操作示例&#34;&gt;&lt;/a&gt;七、完整操作示例&lt;/h2&gt;&lt;p&gt;以下是完整的从下载到安装的操作流程示例：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;下载源码&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://example.com/software-1.0.tar.gz
-&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-xzvf&lt;/span&gt; software-1.0.tar.gz
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; software-1.0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;运行配置脚本&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure &lt;span class=&#34;token parameter variable&#34;&gt;--prefix&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp --enable-optimizations --with-ssl&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/openssl &lt;span class=&#34;token assign-left variable&#34;&gt;CFLAGS&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-O2 -Wall&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;编译源码&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; -j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;运行测试&lt;/strong&gt;（可选）:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;test&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装程序&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证安装&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/opt/myapp/bin/software &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;八、常见问题及解决方案&#34;&gt;&lt;a href=&#34;#八、常见问题及解决方案&#34; class=&#34;headerlink&#34; title=&#34;八、常见问题及解决方案&#34;&gt;&lt;/a&gt;八、常见问题及解决方案&lt;/h2&gt;&lt;h3 id=&#34;1-缺少依赖库&#34;&gt;&lt;a href=&#34;#1-缺少依赖库&#34; class=&#34;headerlink&#34; title=&#34;1. 缺少依赖库&#34;&gt;&lt;/a&gt;1. 缺少依赖库&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;错误信息&lt;/strong&gt;: &lt;code&gt;configure: error: Missing library xyz&lt;/code&gt;&lt;br&gt;&lt;strong&gt;解决方法&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libxyz-dev  &lt;span class=&#34;token comment&#34;&gt;# Debian/Ubuntu&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; xyz-devel   &lt;span class=&#34;token comment&#34;&gt;# CentOS/RHEL&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-权限不足&#34;&gt;&lt;a href=&#34;#2-权限不足&#34; class=&#34;headerlink&#34; title=&#34;2. 权限不足&#34;&gt;&lt;/a&gt;2. 权限不足&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;错误信息&lt;/strong&gt;: &lt;code&gt;Permission denied&lt;/code&gt;&lt;br&gt;&lt;strong&gt;解决方法&lt;/strong&gt;:&lt;br&gt;在需要权限的命令前加 &lt;code&gt;sudo&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-环境变量问题&#34;&gt;&lt;a href=&#34;#3-环境变量问题&#34; class=&#34;headerlink&#34; title=&#34;3. 环境变量问题&#34;&gt;&lt;/a&gt;3. 环境变量问题&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;问题描述&lt;/strong&gt;: 安装后无法找到可执行文件。&lt;br&gt;&lt;strong&gt;解决方法&lt;/strong&gt;: 将安装路径添加到 &lt;code&gt;PATH&lt;/code&gt; 中：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/opt/myapp/bin:&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;p&gt;以下是 &lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt; 的完整使用教程，包括它们的基本概念、工作原理和实际使用步骤。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;一、autoconf-和-automake-的简介&#34;&gt;&lt;a href=&#34;#一、autoconf-和-automake-的简介&#34; class=&#34;headerlink&#34; title=&#34;一、autoconf 和 automake 的简介&#34;&gt;&lt;/a&gt;一、&lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt; 的简介&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-autoconf&#34;&gt;&lt;a href=&#34;#1-什么是-autoconf&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 autoconf&#34;&gt;&lt;/a&gt;1. 什么是 &lt;code&gt;autoconf&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;autoconf&lt;/code&gt; 是一种自动生成 &lt;code&gt;configure&lt;/code&gt; 脚本的工具，主要用来检测构建系统的环境是否满足软件的依赖需求，并生成相应的配置文件（如 &lt;code&gt;Makefile&lt;/code&gt;）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;提供跨平台兼容性。&lt;/li&gt;
-&lt;li&gt;检查依赖工具和库的存在。&lt;/li&gt;
-&lt;li&gt;自动生成编译脚本。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;2-什么是-automake&#34;&gt;&lt;a href=&#34;#2-什么是-automake&#34; class=&#34;headerlink&#34; title=&#34;2. 什么是 automake&#34;&gt;&lt;/a&gt;2. 什么是 &lt;code&gt;automake&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;automake&lt;/code&gt; 是一种自动生成 &lt;code&gt;Makefile.in&lt;/code&gt; 文件的工具，它依赖于更高层次的构建规则定义文件 &lt;code&gt;Makefile.am&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;简化 &lt;code&gt;Makefile&lt;/code&gt; 编写。&lt;/li&gt;
-&lt;li&gt;与 &lt;code&gt;autoconf&lt;/code&gt; 配合，生成完整的构建系统。&lt;/li&gt;
-&lt;li&gt;提供模块化和扩展支持。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;二、工作原理&#34;&gt;&lt;a href=&#34;#二、工作原理&#34; class=&#34;headerlink&#34; title=&#34;二、工作原理&#34;&gt;&lt;/a&gt;二、工作原理&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;autoconf&lt;/code&gt; 从 &lt;code&gt;configure.ac&lt;/code&gt; 或 &lt;code&gt;configure.in&lt;/code&gt; 文件生成 &lt;code&gt;configure&lt;/code&gt; 脚本。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;automake&lt;/code&gt; 从 &lt;code&gt;Makefile.am&lt;/code&gt; 文件生成 &lt;code&gt;Makefile.in&lt;/code&gt; 文件，最终结合 &lt;code&gt;autoconf&lt;/code&gt; 的输出生成 &lt;code&gt;Makefile&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;工具链流程&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;configure.ac --&amp;gt; autoconf --&amp;gt; configure
-Makefile.am  --&amp;gt; automake --&amp;gt; Makefile.in
-configure + Makefile.in --&amp;gt; ./configure --&amp;gt; Makefile&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;三、安装和准备环境&#34;&gt;&lt;a href=&#34;#三、安装和准备环境&#34; class=&#34;headerlink&#34; title=&#34;三、安装和准备环境&#34;&gt;&lt;/a&gt;三、安装和准备环境&lt;/h2&gt;&lt;h3 id=&#34;1-安装工具&#34;&gt;&lt;a href=&#34;#1-安装工具&#34; class=&#34;headerlink&#34; title=&#34;1. 安装工具&#34;&gt;&lt;/a&gt;1. 安装工具&lt;/h3&gt;&lt;p&gt;在 Linux 环境中安装 &lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; autoconf automake  &lt;span class=&#34;token comment&#34;&gt;# Debian/Ubuntu&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; autoconf automake     &lt;span class=&#34;token comment&#34;&gt;# CentOS&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;2-项目准备&#34;&gt;&lt;a href=&#34;#2-项目准备&#34; class=&#34;headerlink&#34; title=&#34;2. 项目准备&#34;&gt;&lt;/a&gt;2. 项目准备&lt;/h3&gt;&lt;p&gt;创建一个简单的 C 项目目录：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; myproject
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; myproject
-&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; src
-&lt;span class=&#34;token function&#34;&gt;touch&lt;/span&gt; configure.ac Makefile.am src/Makefile.am&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;四、autoconf-和-automake-使用流程&#34;&gt;&lt;a href=&#34;#四、autoconf-和-automake-使用流程&#34; class=&#34;headerlink&#34; title=&#34;四、autoconf 和 automake 使用流程&#34;&gt;&lt;/a&gt;四、&lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt; 使用流程&lt;/h2&gt;&lt;h3 id=&#34;1-创建-configure-ac-文件&#34;&gt;&lt;a href=&#34;#1-创建-configure-ac-文件&#34; class=&#34;headerlink&#34; title=&#34;1. 创建 configure.ac 文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建 &lt;code&gt;configure.ac&lt;/code&gt; 文件&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;configure.ac&lt;/code&gt; 是 &lt;code&gt;autoconf&lt;/code&gt; 的核心文件，定义了项目名称、版本、依赖工具等。&lt;/p&gt;
-&lt;p&gt;以下是一个简单示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([myproject], [1.0], [user@example.com])  # 项目名称、版本和维护者
-AM_INIT_AUTOMAKE                                  # 初始化 automake
-AC_PROG_CC                                       # 检测 C 编译器
-AC_CONFIG_FILES([Makefile src/Makefile])         # 配置 Makefile 文件
-AC_OUTPUT                                        # 输出配置文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;2-创建-Makefile-am-文件&#34;&gt;&lt;a href=&#34;#2-创建-Makefile-am-文件&#34; class=&#34;headerlink&#34; title=&#34;2. 创建 Makefile.am 文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 创建 &lt;code&gt;Makefile.am&lt;/code&gt; 文件&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;顶层目录的-Makefile-am&#34;&gt;&lt;a href=&#34;#顶层目录的-Makefile-am&#34; class=&#34;headerlink&#34; title=&#34;顶层目录的 Makefile.am&#34;&gt;&lt;/a&gt;顶层目录的 &lt;code&gt;Makefile.am&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-makefile&#34; data-language=&#34;makefile&#34;&gt;&lt;code class=&#34;language-makefile&#34;&gt;SUBDIRS &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; src&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;src-Makefile-am&#34;&gt;&lt;a href=&#34;#src-Makefile-am&#34; class=&#34;headerlink&#34; title=&#34;src/Makefile.am&#34;&gt;&lt;/a&gt;&lt;code&gt;src/Makefile.am&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-makefile&#34; data-language=&#34;makefile&#34;&gt;&lt;code class=&#34;language-makefile&#34;&gt;bin_PROGRAMS &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; myapp
-myapp_SOURCES &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; main.c utils.c utils.h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;3-生成构建脚本和文件&#34;&gt;&lt;a href=&#34;#3-生成构建脚本和文件&#34; class=&#34;headerlink&#34; title=&#34;3. 生成构建脚本和文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 生成构建脚本和文件&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 &lt;code&gt;aclocal.m4&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;aclocal&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 &lt;code&gt;configure&lt;/code&gt; 脚本&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoconf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 &lt;code&gt;Makefile.in&lt;/code&gt; 文件&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;automake --add-missing&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 &lt;code&gt;Makefile&lt;/code&gt; 文件&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;4-编译和安装&#34;&gt;&lt;a href=&#34;#4-编译和安装&#34; class=&#34;headerlink&#34; title=&#34;4. 编译和安装&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. 编译和安装&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;编译&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;运行程序&lt;/strong&gt;&lt;br&gt;如果你的程序是一个可执行文件，例如 &lt;code&gt;myapp&lt;/code&gt;，可以直接运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./src/myapp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;五、完整示例&#34;&gt;&lt;a href=&#34;#五、完整示例&#34; class=&#34;headerlink&#34; title=&#34;五、完整示例&#34;&gt;&lt;/a&gt;五、完整示例&lt;/h2&gt;&lt;p&gt;假设你有以下项目结构：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;myproject/
-├── configure.ac
-├── Makefile.am
-├── src/
-│   ├── Makefile.am
-│   ├── main.c
-│   ├── utils.c
-│   └── utils.h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下是各个文件的内容：&lt;/p&gt;
-&lt;h3 id=&#34;1-configure-ac&#34;&gt;&lt;a href=&#34;#1-configure-ac&#34; class=&#34;headerlink&#34; title=&#34;1. configure.ac&#34;&gt;&lt;/a&gt;1. &lt;code&gt;configure.ac&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([myproject], [1.0], [user@example.com])
-AM_INIT_AUTOMAKE
-AC_PROG_CC
-AC_CONFIG_FILES([Makefile src/Makefile])
-AC_OUTPUT&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-顶层-Makefile-am&#34;&gt;&lt;a href=&#34;#2-顶层-Makefile-am&#34; class=&#34;headerlink&#34; title=&#34;2. 顶层 Makefile.am&#34;&gt;&lt;/a&gt;2. 顶层 &lt;code&gt;Makefile.am&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-makefile&#34; data-language=&#34;makefile&#34;&gt;&lt;code class=&#34;language-makefile&#34;&gt;SUBDIRS &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; src&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-src-Makefile-am&#34;&gt;&lt;a href=&#34;#3-src-Makefile-am&#34; class=&#34;headerlink&#34; title=&#34;3. src/Makefile.am&#34;&gt;&lt;/a&gt;3. &lt;code&gt;src/Makefile.am&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-makefile&#34; data-language=&#34;makefile&#34;&gt;&lt;code class=&#34;language-makefile&#34;&gt;bin_PROGRAMS &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; myapp
-myapp_SOURCES &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; main.c utils.c utils.h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-src-main-c&#34;&gt;&lt;a href=&#34;#4-src-main-c&#34; class=&#34;headerlink&#34; title=&#34;4. src/main.c&#34;&gt;&lt;/a&gt;4. &lt;code&gt;src/main.c&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;utils.h&#34;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token function&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Sum: %d\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;5-src-utils-c&#34;&gt;&lt;a href=&#34;#5-src-utils-c&#34; class=&#34;headerlink&#34; title=&#34;5. src/utils.c&#34;&gt;&lt;/a&gt;5. &lt;code&gt;src/utils.c&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;utils.h&#34;&lt;/span&gt;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; a&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; a &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6-src-utils-h&#34;&gt;&lt;a href=&#34;#6-src-utils-h&#34; class=&#34;headerlink&#34; title=&#34;6. src/utils.h&#34;&gt;&lt;/a&gt;6. &lt;code&gt;src/utils.h&lt;/code&gt;&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;ifndef&lt;/span&gt; &lt;span class=&#34;token expression&#34;&gt;UTILS_H&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;define&lt;/span&gt; &lt;span class=&#34;token macro-name&#34;&gt;UTILS_H&lt;/span&gt;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; a&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-
-&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;endif&lt;/span&gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;构建和运行&#34;&gt;&lt;a href=&#34;#构建和运行&#34; class=&#34;headerlink&#34; title=&#34;构建和运行&#34;&gt;&lt;/a&gt;构建和运行&lt;/h3&gt;&lt;h4 id=&#34;1-生成文件&#34;&gt;&lt;a href=&#34;#1-生成文件&#34; class=&#34;headerlink&#34; title=&#34;1. 生成文件&#34;&gt;&lt;/a&gt;1. 生成文件&lt;/h4&gt;&lt;p&gt;运行以下命令生成必要的构建文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;aclocal
-autoconf
-automake --add-missing
-./configure&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-编译&#34;&gt;&lt;a href=&#34;#2-编译&#34; class=&#34;headerlink&#34; title=&#34;2. 编译&#34;&gt;&lt;/a&gt;2. 编译&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-安装&#34;&gt;&lt;a href=&#34;#3-安装&#34; class=&#34;headerlink&#34; title=&#34;3. 安装&#34;&gt;&lt;/a&gt;3. 安装&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;4-运行程序&#34;&gt;&lt;a href=&#34;#4-运行程序&#34; class=&#34;headerlink&#34; title=&#34;4. 运行程序&#34;&gt;&lt;/a&gt;4. 运行程序&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./src/myapp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;六、常见问题及解决方法&#34;&gt;&lt;a href=&#34;#六、常见问题及解决方法&#34; class=&#34;headerlink&#34; title=&#34;六、常见问题及解决方法&#34;&gt;&lt;/a&gt;六、常见问题及解决方法&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;aclocal: command not found&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;原因&lt;/strong&gt;: 未安装 &lt;code&gt;automake&lt;/code&gt;。&lt;br&gt;&lt;strong&gt;解决&lt;/strong&gt;: 安装 &lt;code&gt;automake&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;configure.ac: no proper invocation of AM_INIT_AUTOMAKE&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;原因&lt;/strong&gt;: &lt;code&gt;configure.ac&lt;/code&gt; 中缺少 &lt;code&gt;AM_INIT_AUTOMAKE&lt;/code&gt;。&lt;br&gt;&lt;strong&gt;解决&lt;/strong&gt;: 添加 &lt;code&gt;AM_INIT_AUTOMAKE&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;Makefile.am: required file &#39;INSTALL&#39; not found&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;原因&lt;/strong&gt;: 缺少默认的 &lt;code&gt;INSTALL&lt;/code&gt; 文件。&lt;br&gt;&lt;strong&gt;解决&lt;/strong&gt;: 使用 &lt;code&gt;automake --add-missing&lt;/code&gt; 自动生成。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;一、autoscan&#34;&gt;&lt;a href=&#34;#一、autoscan&#34; class=&#34;headerlink&#34; title=&#34;一、autoscan&#34;&gt;&lt;/a&gt;一、&lt;code&gt;autoscan&lt;/code&gt;&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-autoscan&#34;&gt;&lt;a href=&#34;#1-什么是-autoscan&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 autoscan&#34;&gt;&lt;/a&gt;1. 什么是 &lt;code&gt;autoscan&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;autoscan&lt;/code&gt; 是 &lt;code&gt;autoconf&lt;/code&gt; 的一个辅助工具，用于自动生成初始的 &lt;code&gt;configure.ac&lt;/code&gt; 文件（或者早期的 &lt;code&gt;configure.in&lt;/code&gt; 文件）。它会扫描项目目录中的文件，推测需要哪些检查，并生成一个名为 &lt;code&gt;configure.scan&lt;/code&gt; 的模板文件供开发者参考。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;2-autoscan-的功能&#34;&gt;&lt;a href=&#34;#2-autoscan-的功能&#34; class=&#34;headerlink&#34; title=&#34;2. autoscan 的功能&#34;&gt;&lt;/a&gt;2. &lt;code&gt;autoscan&lt;/code&gt; 的功能&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;自动检测源码中的依赖，例如头文件、库文件。&lt;/li&gt;
-&lt;li&gt;提供一个初步的 &lt;code&gt;configure.ac&lt;/code&gt; 文件模板。&lt;/li&gt;
-&lt;li&gt;简化了手动编写配置文件的过程。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;3-使用方法&#34;&gt;&lt;a href=&#34;#3-使用方法&#34; class=&#34;headerlink&#34; title=&#34;3. 使用方法&#34;&gt;&lt;/a&gt;3. 使用方法&lt;/h3&gt;&lt;h4 id=&#34;1-初始化项目&#34;&gt;&lt;a href=&#34;#1-初始化项目&#34; class=&#34;headerlink&#34; title=&#34;(1) 初始化项目&#34;&gt;&lt;/a&gt;(1) 初始化项目&lt;/h4&gt;&lt;p&gt;确保项目目录结构已经创建，并包含至少一个源文件（如 &lt;code&gt;main.c&lt;/code&gt;）。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; myproject
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; myproject
-&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;#include &amp;lt;stdio.h&amp;gt;&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; main.c
-&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;int main() { return 0; }&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; main.c&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-运行-autoscan&#34;&gt;&lt;a href=&#34;#2-运行-autoscan&#34; class=&#34;headerlink&#34; title=&#34;(2) 运行 autoscan&#34;&gt;&lt;/a&gt;(2) 运行 &lt;code&gt;autoscan&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;在项目目录中运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoscan&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行完成后，生成一个 &lt;code&gt;configure.scan&lt;/code&gt; 文件。&lt;/p&gt;
-&lt;h4 id=&#34;3-修改-configure-scan&#34;&gt;&lt;a href=&#34;#3-修改-configure-scan&#34; class=&#34;headerlink&#34; title=&#34;(3) 修改 configure.scan&#34;&gt;&lt;/a&gt;(3) 修改 &lt;code&gt;configure.scan&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;将 &lt;code&gt;configure.scan&lt;/code&gt; 重命名为 &lt;code&gt;configure.ac&lt;/code&gt;，并根据实际需求修改内容。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; configure.scan configure.ac&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;示例生成的 &lt;code&gt;configure.scan&lt;/code&gt; 文件可能包含以下内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([UNKNOWN], [1.0], [bug-report@example.com])
-AC_CONFIG_SRCDIR([main.c])
-AC_CONFIG_HEADERS([config.h])
-AC_PROG_CC
-AC_OUTPUT&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改后，可添加更多具体的检查内容，例如库依赖、路径配置等。&lt;/p&gt;
-&lt;h4 id=&#34;4-继续构建&#34;&gt;&lt;a href=&#34;#4-继续构建&#34; class=&#34;headerlink&#34; title=&#34;(4) 继续构建&#34;&gt;&lt;/a&gt;(4) 继续构建&lt;/h4&gt;&lt;p&gt;生成 &lt;code&gt;configure&lt;/code&gt; 脚本：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoconf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;4-autoscan-的注意事项&#34;&gt;&lt;a href=&#34;#4-autoscan-的注意事项&#34; class=&#34;headerlink&#34; title=&#34;4. autoscan 的注意事项&#34;&gt;&lt;/a&gt;4. &lt;code&gt;autoscan&lt;/code&gt; 的注意事项&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;它只能作为生成初始配置的工具，输出的 &lt;code&gt;configure.scan&lt;/code&gt; 文件需要手动完善。&lt;/li&gt;
-&lt;li&gt;如果项目目录中没有 &lt;code&gt;.c&lt;/code&gt; 文件或标准构建文件，&lt;code&gt;autoscan&lt;/code&gt; 可能无法推断正确的配置。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;二、aclocal&#34;&gt;&lt;a href=&#34;#二、aclocal&#34; class=&#34;headerlink&#34; title=&#34;二、aclocal&#34;&gt;&lt;/a&gt;二、&lt;code&gt;aclocal&lt;/code&gt;&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-aclocal&#34;&gt;&lt;a href=&#34;#1-什么是-aclocal&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 aclocal&#34;&gt;&lt;/a&gt;1. 什么是 &lt;code&gt;aclocal&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;aclocal&lt;/code&gt; 是 &lt;code&gt;automake&lt;/code&gt; 的辅助工具，专门用于生成 &lt;code&gt;aclocal.m4&lt;/code&gt; 文件。&lt;code&gt;aclocal.m4&lt;/code&gt; 是一个包含各种宏定义的文件，用于支持 &lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt; 的功能。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;aclocal&lt;/code&gt; 会扫描项目目录中的 &lt;code&gt;configure.ac&lt;/code&gt; 文件，以及系统中可用的宏定义，生成一个与项目兼容的宏文件。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;2-aclocal-的功能&#34;&gt;&lt;a href=&#34;#2-aclocal-的功能&#34; class=&#34;headerlink&#34; title=&#34;2. aclocal 的功能&#34;&gt;&lt;/a&gt;2. &lt;code&gt;aclocal&lt;/code&gt; 的功能&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;根据 &lt;code&gt;configure.ac&lt;/code&gt; 的内容，生成或更新 &lt;code&gt;aclocal.m4&lt;/code&gt; 文件。&lt;/li&gt;
-&lt;li&gt;提供对额外宏库的支持，例如 GNU 库的宏。&lt;/li&gt;
-&lt;li&gt;管理自定义宏，以便 &lt;code&gt;autoconf&lt;/code&gt; 和 &lt;code&gt;automake&lt;/code&gt; 可以正确工作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;3-使用方法-1&#34;&gt;&lt;a href=&#34;#3-使用方法-1&#34; class=&#34;headerlink&#34; title=&#34;3. 使用方法&#34;&gt;&lt;/a&gt;3. 使用方法&lt;/h3&gt;&lt;h4 id=&#34;1-编写-configure-ac&#34;&gt;&lt;a href=&#34;#1-编写-configure-ac&#34; class=&#34;headerlink&#34; title=&#34;(1) 编写 configure.ac&#34;&gt;&lt;/a&gt;(1) 编写 &lt;code&gt;configure.ac&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;假设我们有以下简单的 &lt;code&gt;configure.ac&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([myproject], [1.0], [bug-report@example.com])
-AM_INIT_AUTOMAKE
-AC_PROG_CC
-AC_OUTPUT&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-运行-aclocal&#34;&gt;&lt;a href=&#34;#2-运行-aclocal&#34; class=&#34;headerlink&#34; title=&#34;(2) 运行 aclocal&#34;&gt;&lt;/a&gt;(2) 运行 &lt;code&gt;aclocal&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;运行以下命令生成或更新 &lt;code&gt;aclocal.m4&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;aclocal&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;生成的 &lt;code&gt;aclocal.m4&lt;/code&gt; 文件可能包含标准宏，例如对编译器检查、头文件检查等的支持。&lt;/p&gt;
-&lt;h4 id=&#34;3-后续步骤&#34;&gt;&lt;a href=&#34;#3-后续步骤&#34; class=&#34;headerlink&#34; title=&#34;(3) 后续步骤&#34;&gt;&lt;/a&gt;(3) 后续步骤&lt;/h4&gt;&lt;p&gt;生成 &lt;code&gt;configure&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoconf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;4-自定义宏支持&#34;&gt;&lt;a href=&#34;#4-自定义宏支持&#34; class=&#34;headerlink&#34; title=&#34;4. 自定义宏支持&#34;&gt;&lt;/a&gt;4. 自定义宏支持&lt;/h3&gt;&lt;p&gt;如果你需要自定义宏，可以创建一个名为 &lt;code&gt;m4/&lt;/code&gt; 的目录，并将宏文件放入其中。例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; m4
-&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;AC_DEFUN([MY_MACRO], [echo &#34;This is my custom macro&#34;])&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; m4/my_macro.m4&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后在 &lt;code&gt;configure.ac&lt;/code&gt; 中引用：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([myproject], [1.0], [bug-report@example.com])
-AC_CONFIG_MACRO_DIR([m4])  # 指定宏目录
-AM_INIT_AUTOMAKE
-MY_MACRO
-AC_OUTPUT&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行以下命令，&lt;code&gt;aclocal&lt;/code&gt; 会自动包含自定义宏：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;aclocal&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;三、完整实践示例&#34;&gt;&lt;a href=&#34;#三、完整实践示例&#34; class=&#34;headerlink&#34; title=&#34;三、完整实践示例&#34;&gt;&lt;/a&gt;三、完整实践示例&lt;/h2&gt;&lt;p&gt;假设我们有一个简单的项目：&lt;br&gt;目录结构如下：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;myproject/
-├── configure.ac
-├── Makefile.am
-├── src/
-│   ├── main.c
-│   ├── utils.c
-│   └── utils.h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下是构建流程：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;生成初始文件&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoscan
-&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; configure.scan configure.ac&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;完善 &lt;code&gt;configure.ac&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-m4&#34; data-language=&#34;m4&#34;&gt;&lt;code class=&#34;language-m4&#34;&gt;AC_INIT([myproject], [1.0], [bug-report@example.com])
-AC_CONFIG_SRCDIR([src/main.c])
-AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE
-AC_PROG_CC
-AC_OUTPUT&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;生成宏文件&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;aclocal&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;生成 &lt;code&gt;configure&lt;/code&gt; 脚本&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;autoconf
-automake --add-missing&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;运行 &lt;code&gt;configure&lt;/code&gt; 和编译&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure
-&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
  ]]></description>
         </item>
     </channel>

@@ -420,21 +420,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-02-17
+                    2025-02-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    999
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -560,11 +560,12 @@
 
 <p>这将创建一个名为 <code>myenv</code> 的新环境并安装 Python 3.9。</p>
 <h4 id="4-激活环境"><a href="#4-激活环境" class="headerlink" title="4. 激活环境"></a>4. 激活环境</h4><p>创建环境后，使用以下命令激活它：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate myenv<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda activate myenv
+conda deactivate myenv <span class="token comment"># 关闭环境</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>激活环境后，命令提示符前缀将会显示当前激活的环境名称。</p>
 <h4 id="5-安装包"><a href="#5-安装包" class="headerlink" title="5. 安装包"></a>5. 安装包</h4><p>在激活的环境中，使用以下命令安装所需包（例如 NumPy）：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">install</span> numpy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">install</span> numpy <span class="token comment"># 这里安装的包只有使用conda list能看到,pip list 不能查看，但是在某个具体环境安装的都是conda 和 pip 的包共同工作的</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>Conda 会自动处理包的依赖关系，并为你安装所有必要的依赖。</p>
 <h4 id="6-列出已安装的包"><a href="#6-列出已安装的包" class="headerlink" title="6. 列出已安装的包"></a>6. 列出已安装的包</h4><p>使用以下命令查看当前环境中已安装的所有包：</p>
@@ -583,6 +584,12 @@
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda remove <span class="token parameter variable">-n</span> myenv <span class="token parameter variable">--all</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="11-添加pycharm可执行文件"><a href="#11-添加pycharm可执行文件" class="headerlink" title="11.添加pycharm可执行文件"></a>11.添加pycharm可执行文件</h4><p>在设置/首选项窗口中，选择左侧的 <code>Project: 你的项目名</code> &gt; <code>Python Interpreter（解释器）</code>，在Python Interpreter页面，点击右侧的添加解释器，选择 添加本地解释器，在弹出的窗口中，选择 <code>Conda Environment</code>，可执行文件若为空，复制<code>conda\condabin\conda.bat</code>文件的目录到框里就，在加载</p>
+<h4 id="12-查找包"><a href="#12-查找包" class="headerlink" title="12.查找包"></a>12.查找包</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda search numpy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="13-生成需要分享环境的yml文件-需要在虚拟环境中执行"><a href="#13-生成需要分享环境的yml文件-需要在虚拟环境中执行" class="headerlink" title="13.生成需要分享环境的yml文件 (需要在虚拟环境中执行)"></a>13.生成需要分享环境的yml文件 (需要在虚拟环境中执行)</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">env</span> <span class="token builtin class-name">export</span> <span class="token operator">&gt;</span> environment.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="14-指定配置创建"><a href="#14-指定配置创建" class="headerlink" title="14.指定配置创建"></a>14.指定配置创建</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">conda <span class="token function">env</span> create <span class="token parameter variable">-f</span> environment.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>安装卸载conda时关闭火绒</p>
 
                 
@@ -1318,7 +1325,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">226.1k</span>
+                        class="white-color">226.9k</span>
             
             
             

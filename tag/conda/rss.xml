@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 15 Feb 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sat, 15 Feb 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 19 Feb 2025 16:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>安装</category>
@@ -20,30 +20,82 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>BUUCTF</category>
+        <category>windows</category>
         <category>server</category>
         <category>conda</category>
+        <category>tools</category>
         <category>powershell</category>
+        <category>emby</category>
+        <category>tips</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tips</category>
-        <category>emby</category>
         <category>python</category>
         <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
-        <category>tools</category>
         <category>学习</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
-        <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
+        <category>区块链</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</guid>
+            <title>conda换源</title>
+            <link>https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</link>
+            <category>conda</category>
+            <category>tools</category>
+            <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;conda换源&#34;&gt;&lt;a href=&#34;#conda换源&#34; class=&#34;headerlink&#34; title=&#34;conda换源&#34;&gt;&lt;/a&gt;conda换源&lt;/h1&gt;&lt;p&gt;由于网络连接原因，使用 Anaconda 或 Miniconda 时，默认的官方源速度较慢。为提高下载速度，您可以将 Conda 的源更换为国内的镜像源。以下是详细的操作步骤：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 生成 &lt;code&gt;.condarc&lt;/code&gt; 配置文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 Windows 系统中，用户目录下可能没有 &lt;code&gt;.condarc&lt;/code&gt; 文件。您可以通过以下命令生成该文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config &lt;span class=&#34;token parameter variable&#34;&gt;--set&lt;/span&gt; show_channel_urls &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后，&lt;code&gt;.condarc&lt;/code&gt; 文件将被创建在用户主目录下。在 Windows 上，用户主目录通常位于 &lt;code&gt;C:\Users\用户名\&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 编辑 &lt;code&gt;.condarc&lt;/code&gt; 文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用文本编辑器打开 &lt;code&gt;.condarc&lt;/code&gt; 文件，将其内容替换为以下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; defaults
+&lt;span class=&#34;token key atrule&#34;&gt;show_channel_urls&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean important&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key atrule&#34;&gt;default_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/main
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/r
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/pkgs/msys2
+&lt;span class=&#34;token key atrule&#34;&gt;custom_channels&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;conda-forge&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;msys2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;bioconda&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;menpo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;pytorch-lts&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud
+  &lt;span class=&#34;token key atrule&#34;&gt;simpleitk&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; https&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//mirrors.bfsu.edu.cn/anaconda/cloud&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上述配置将 Conda 的源更换为北京外国语大学的镜像站。您也可以选择其他国内镜像源，如清华大学、上海交通大学等。具体的镜像源配置可以参考清华大学开源软件镜像站的官方文档。 &lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/?utm_source=chatgpt.com&#34;&gt;mirrors.tuna.tsinghua.edu.cn&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 清理索引缓存：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;更换源后，建议清理 Conda 的索引缓存，以确保使用新的镜像源：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda clean &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;4. 测试新的源：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建一个新的 Conda 环境，并安装一个包，以验证新的源是否生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; test_env numpy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果安装过程顺利且速度较快，则说明源更换成功。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意事项：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;备份原始配置：&lt;/strong&gt; 在更改 &lt;code&gt;.condarc&lt;/code&gt; 文件之前，建议备份原始配置，以防需要恢复。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恢复默认源：&lt;/strong&gt; 如果需要恢复默认源，可以删除 &lt;code&gt;.condarc&lt;/code&gt; 文件，或者执行以下命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda config --remove-key channels&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上步骤，您可以成功将 Conda 的源更换为国内镜像源，从而提高包的下载速度和稳定性。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/15/conda-zai-powershell7.5-zhi-xing-chu-xian-wen-ti/</guid>
             <title>conda在powershell7.5执行出现问题</title>
