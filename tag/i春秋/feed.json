@@ -11,8 +11,8 @@
             "date_published": "2021-01-31T22:37:00.000Z",
             "content_html": "<h2 id=\"爆破-1\"><a href=\"#爆破-1\" class=\"headerlink\" title=\"爆破-1\"></a>爆破-1</h2><p>进去后如下代码提示</p>\n<pre class=\"line-numbers language-php+HTML\" data-language=\"php+HTML\"><code class=\"language-php+HTML\">&lt;?php\ninclude \"flag.php\";\n$a = @$_REQUEST['hello'];\nif(!preg_match('/^\\w*$/',$a )){\n  die('ERROR');\n}\neval(\"var_dump($$a);\");\nshow_source(__FILE__);\n?&gt;<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>\n\n<p>$_REQUEST[‘hello’]</p>\n<p>提交的参数是hello，前面提示在某个6位变量中，想到爆破，但是工作量很大</p>\n<p>/^\\w*$/ </p>\n<p>^n   以n开头</p>\n<p>n$  以n结尾</p>\n<p>n*  匹配0个或者多个n</p>\n<p>\\w  查找单词字符  A_Z  a_z  0_9  _</p>\n<p>正则过滤后爆破还是很大的工作量</p>\n<p>eval(“var_dump($$a);”)</p>\n<p>eavl()是代码执行函数，</p>\n<p>var_dump() 函数将变量的类型、值、结构等信息打印出来</p>\n<p>这里就可以是用全局变量$GLOBALS将所有变量打印出来</p>\n<p><img src=\"https://images.dadream.eu.org/images/2024/07/9bc8ef5992e9bcaf2af7691be3c53d64.png\"></p>\n",
             "tags": [
-                "wp",
                 "web",
+                "wp",
                 "i春秋"
             ]
         }

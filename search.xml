@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>文件链接全教程</title>
+      <link href="/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/"/>
+      <url>/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/</url>
+      
+        <content type="html"><![CDATA[<h1 id="文件链接全教程"><a href="#文件链接全教程" class="headerlink" title="文件链接全教程"></a>文件链接全教程</h1><h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="1-链接基础概念"><a href="#1-链接基础概念" class="headerlink" title="1. 链接基础概念"></a>1. 链接基础概念</h3><p>在 Windows 中，“链接”实际上有几种形式，主要包括以下几类：</p><ul><li>符号链接（Symbolic Link，软链接）<ul><li><strong>概念：</strong> 符号链接是一个特殊文件，其中保存了目标文件或目录的路径。它类似于 Linux 中的软链接，并且看起来和普通文件或文件夹没有区别。</li><li>特点：<ul><li>可用于文件和目录</li><li>可以跨分区甚至跨网络路径（UNC）</li><li>如果目标被删除或移动，符号链接会失效</li><li>从 Windows Vista 开始支持，最新 Windows（如 Windows 10/11）中在开发人员模式下可不需要管理员权限创建</li></ul></li></ul></li><li>硬链接（Hard Link）<ul><li><strong>概念：</strong> 硬链接是指向同一数据实体（数据块或 NTFS 中的文件记录）的另一个目录项。每个硬链接都与目标文件共享同一份数据。</li><li>特点：<ul><li>仅适用于文件，不能用于目录</li><li>必须在同一 NTFS 卷内（不能跨分区）</li><li>删除其中一个链接不会影响其它链接或数据本身，只有当所有硬链接都删除后数据才会释放</li></ul></li></ul></li><li>目录联接（Junction Point）<ul><li><strong>概念：</strong> 目录联接也称为“联接”，用于将一个目录指向另一个目录。在早期版本中常用来兼容旧版 Windows。</li><li>特点：<ul><li>只适用于目录</li><li>创建时会自动转换为绝对路径</li><li>适用于同一台计算机，支持跨盘符（但不支持网络路径）</li></ul></li></ul></li></ul><hr><h3 id="2-创建链接的方法"><a href="#2-创建链接的方法" class="headerlink" title="2. 创建链接的方法"></a>2. 创建链接的方法</h3><p>在 Windows 中创建链接主要有两种方式：通过 CMD 命令行（使用 <code>mklink</code> 命令）和通过 PowerShell（使用 <code>New-Item</code> 命令）。</p><h4 id="2-1-使用-CMD-命令创建链接"><a href="#2-1-使用-CMD-命令创建链接" class="headerlink" title="2.1 使用 CMD 命令创建链接"></a>2.1 使用 CMD 命令创建链接</h4><p><strong>命令语法：</strong></p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">mklink [[/D] | [/H] | [/J]] Link Target<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li><strong>默认（无参数）</strong>：创建文件的符号链接</li><li><strong>/D</strong>：创建目录的符号链接</li><li><strong>/H</strong>：创建硬链接（仅用于文件）</li><li><strong>/J</strong>：创建目录联接（Junction，适用于目录）</li></ul><p><strong>示例：</strong></p><ol><li><p><strong>创建文件的符号链接</strong><br> 假设有一个文件 <code>C:\Data\original.txt</code>，我们在同目录下创建一个名为 <code>link.txt</code> 的符号链接：</p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">mklink C:\Data\link.txt C:\Data\original.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>此时，<code>link.txt</code> 实际上保存了 <code>original.txt</code> 的路径，当你打开 <code>link.txt</code> 时，系统会自动访问 <code>original.txt</code>。</p></li><li><p><strong>创建目录的符号链接</strong><br> 假设有一个目录 <code>C:\Data\SourceFolder</code>，希望在 <code>C:\Data</code> 下创建一个符号链接目录 <code>LinkFolder</code>：</p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">mklink /D C:\Data\LinkFolder C:\Data\SourceFolder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这样，在资源管理器中打开 <code>LinkFolder</code> 就等同于打开 <code>SourceFolder</code>。</p></li><li><p><strong>创建文件的硬链接</strong><br> 依然以文件 <code>C:\Data\original.txt</code> 为例，创建一个硬链接 <code>hardlink.txt</code>：</p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">mklink /H C:\Data\hardlink.txt C:\Data\original.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>硬链接与原文件共享同一数据块，因此修改任一文件都会同步改变内容，但请注意：</p><ul><li>硬链接只能用于文件</li><li>必须在同一卷内</li></ul></li><li><p><strong>创建目录联接（Junction）</strong><br> 使用 /J 参数来创建目录联接，适用于目录，但和符号链接不同的是，Junction 通常保存绝对路径：</p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">mklink /J C:\Data\JunctionFolder C:\Data\SourceFolder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>使用 Junction 时，删除链接不会删除目标目录中的数据。</p></li></ol><p><em>注意：</em></p><ul><li>创建符号链接和某些操作可能需要以<strong>管理员身份</strong>运行 CMD。</li><li>Windows 10 及以后版本如果开启“开发人员模式”，可以允许普通用户创建符号链接。</li></ul><hr><h4 id="2-2-使用-PowerShell-创建链接"><a href="#2-2-使用-PowerShell-创建链接" class="headerlink" title="2.2 使用 PowerShell 创建链接"></a>2.2 使用 PowerShell 创建链接</h4><p>PowerShell 提供了更现代的 <code>New-Item</code> 命令来创建不同类型的链接。</p><p><strong>语法及示例：</strong></p><ol><li><p><strong>创建文件或目录的符号链接：</strong></p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-Item</span> <span class="token operator">-</span>ItemType SymbolicLink <span class="token operator">-</span>Path <span class="token string">"C:\Data\Link.txt"</span> <span class="token operator">-</span>Target <span class="token string">"C:\Data\original.txt"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>或者创建目录符号链接：</p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-Item</span> <span class="token operator">-</span>ItemType SymbolicLink <span class="token operator">-</span>Path <span class="token string">"C:\Data\LinkFolder"</span> <span class="token operator">-</span>Target <span class="token string">"C:\Data\SourceFolder"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>PowerShell 中的 <code>SymbolicLink</code> 同样创建的是软链接，和 CMD 中 <code>mklink</code> 默认行为一致。</p></li><li><p><strong>创建文件的硬链接：</strong></p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-Item</span> <span class="token operator">-</span>ItemType HardLink <span class="token operator">-</span>Path <span class="token string">"C:\Data\hardlink.txt"</span> <span class="token operator">-</span>Target <span class="token string">"C:\Data\original.txt"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这会为 <code>original.txt</code> 创建一个硬链接，注意硬链接只能用于文件，且必须在同一卷内。</p></li><li><p><strong>创建目录联接（Junction）：</strong></p><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Junction <span class="token operator">-</span>Path <span class="token string">"C:\Data\JunctionFolder"</span> <span class="token operator">-</span>Target <span class="token string">"C:\Data\SourceFolder"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>此命令会创建一个指向目录的联接，与符号链接在某些场景下效果类似，但内部处理略有差异。</p></li></ol><p><em>提示：</em></p><ul><li>PowerShell 命令执行时也可能需要管理员权限，具体取决于目标路径所在的位置（例如系统文件夹或 Program Files）。</li><li>在使用相对路径创建符号链接时，系统会将其转换为绝对路径存储在 NTFS 中。</li></ul><hr><h3 id="3-使用场景与注意事项"><a href="#3-使用场景与注意事项" class="headerlink" title="3. 使用场景与注意事项"></a>3. 使用场景与注意事项</h3><h4 id="3-1-常见使用场景"><a href="#3-1-常见使用场景" class="headerlink" title="3.1 常见使用场景"></a>3.1 常见使用场景</h4><ul><li><p><strong>数据备份和增量备份</strong><br> 利用硬链接可以在不占用额外磁盘空间的情况下创建多个访问入口。例如，备份软件（如 Windows 版的“时间机器”）就会使用硬链接来实现增量备份。</p></li><li><p><strong>移动或重定向系统目录</strong><br> 为了节省系统盘空间或实现重装系统不丢失用户数据，可以将如 <code>C:\Users</code> 目录复制到其他分区，然后使用 Junction 将原位置重定向到新位置：</p><pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">robocopy "C:\Users" "D:\Users" /E /COPYALL /XJrmdir "C:\Users" /S /Qmklink /J "C:\Users" "D:\Users"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li><li><p><strong>开发环境下共享资源</strong><br> 当多个项目需要使用同一份库或模型文件时，可以通过符号链接或硬链接共享文件，避免重复存储。</p></li></ul><h4 id="3-2-注意事项"><a href="#3-2-注意事项" class="headerlink" title="3.2 注意事项"></a>3.2 注意事项</h4><ul><li><p><strong>权限问题</strong></p><ul><li>在 Windows 中，创建符号链接通常需要管理员权限；不过在 Windows 10 开发人员模式下可允许普通用户创建符号链接。</li><li>硬链接不需要额外的权限，但目标文件必须在同一 NTFS 卷内。</li></ul></li><li><p><strong>目标失效风险</strong></p><ul><li>符号链接依赖于目标路径。如果目标移动或删除，符号链接会成为“悬挂链接”（无效链接）。</li><li>硬链接与目标数据直接关联，即使原始文件名被删除，只要至少还有一个硬链接存在，数据依然可用。</li></ul></li><li><p><strong>跨分区限制</strong></p><ul><li>硬链接只能在同一卷内使用，而符号链接和 Junction 则可以跨卷（但符号链接可以支持网络路径，而 Junction 则不行）。</li></ul></li><li><p><strong>命令使用环境</strong></p><ul><li>使用 <code>mklink</code> 命令时建议打开<strong>管理员命令提示符</strong>。</li><li>使用 PowerShell 时，若涉及系统目录或受保护区域，建议以管理员身份运行 PowerShell。</li></ul></li><li><p>查看链接和删除</p><p>直接在资源管理器操作</p></li></ul><h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p><a href="https://0xdadream.github.io/2025/02/20/arc-zai-comfyui-bao-cuo/">Arc在comfyui报错 | 逐梦</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 命令 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>comfyui报错huggingface</title>
+      <link href="/2025/03/09/comfyui-bao-cuo-huggingface/"/>
+      <url>/2025/03/09/comfyui-bao-cuo-huggingface/</url>
+      
+        <content type="html"><![CDATA[<h1 id="comfyui报错huggingface"><a href="#comfyui报错huggingface" class="headerlink" title="comfyui报错huggingface"></a>comfyui报错huggingface</h1><p>报错信息</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">huggingface_hub.errors.LocalEntryNotFoundError: An error happened <span class="token keyword">while</span> trying to <span class="token function">locate</span> the <span class="token function">file</span> on the Hub and we cannot <span class="token function">find</span> the requested files <span class="token keyword">in</span> the <span class="token builtin class-name">local</span> cache. Please check your connection and try again or <span class="token function">make</span> sure your Internet connection is on.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>解决方法</p><p>到<code>main.py</code>代码前面添加</p><pre class="line-numbers language-python" data-language="python"><code class="language-python">os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"HF_ENDPOINT"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"https://hf-mirror.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>换镜像</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 报错修复 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> comfyui </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>pycharm显示显示表格</title>
       <link href="/2025/02/21/pycharm-xian-shi-xian-shi-biao-ge/"/>
       <url>/2025/02/21/pycharm-xian-shi-xian-shi-biao-ge/</url>
@@ -807,7 +857,7 @@
       <link href="/2024/11/03/pip-huan-yuan/"/>
       <url>/2024/11/03/pip-huan-yuan/</url>
       
-        <content type="html"><![CDATA[<h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><h3 id="1-临时换源"><a href="#1-临时换源" class="headerlink" title="1. 临时换源"></a>1. 临时换源</h3><p>临时换源是在安装某个包时指定使用特定的源，而不改变全局配置。例如，使用清华大学源安装一个包的命令如下：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> package_name <span class="token parameter variable">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中<code>package_name</code>是您要安装的包的名称。</p><h3 id="2-永久换源"><a href="#2-永久换源" class="headerlink" title="2. 永久换源"></a>2. 永久换源</h3><p>永久换源是通过修改pip的配置文件来实现的，这样每次使用pip时都会默认使用指定的源。</p><h4 id="2-1-找到pip配置文件的位置"><a href="#2-1-找到pip配置文件的位置" class="headerlink" title="2.1 找到pip配置文件的位置"></a>2.1 找到pip配置文件的位置</h4><ul><li><strong>Unix/Linux/MacOS</strong>: <code>~/.pip/pip.conf</code></li><li><strong>Windows</strong>: <code>%APPDATA%\pip\pip.ini</code></li></ul><p>如果配置文件不存在，可以手动创建。</p><h4 id="2-2-编辑pip配置文件"><a href="#2-2-编辑pip配置文件" class="headerlink" title="2.2 编辑pip配置文件"></a>2.2 编辑pip配置文件</h4><ul><li><p>Unix/Linux/MacOS: 打开或创建<code>~/.pip/pip.conf</code>文件，并添加以下内容：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">[global]index-url = https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><p>Windows: 打开或创建<code>%APPDATA%\pip\pip.ini</code>文件，并添加以下内容：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">[global]index-url = https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>其中<code>https://pypi.tuna.tsinghua.edu.cn/simple</code>可以替换为您选择的其他源的URL。</p></li></ul><h4 id="2-3-命令"><a href="#2-3-命令" class="headerlink" title="2.3 命令"></a>2.3 命令</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 清华源</span>pip config <span class="token builtin class-name">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="3-重置镜像源"><a href="#3-重置镜像源" class="headerlink" title="3. 重置镜像源"></a>3. 重置镜像源</h3><p>如果您需要重置镜像源到默认的PyPI官方源，可以使用以下命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config <span class="token builtin class-name">unset</span> global.index-url<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这会将全局设置的镜像源删除，恢复到默认设置。</p><h3 id="4-验证和测试"><a href="#4-验证和测试" class="headerlink" title="4. 验证和测试"></a>4. 验证和测试</h3><p>您可以通过以下命令检查当前pip配置的源：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后尝试安装一个包来测试配置是否生效。</p><h3 id="5-国内常用源地址"><a href="#5-国内常用源地址" class="headerlink" title="5. 国内常用源地址"></a>5. 国内常用源地址</h3><p>以下是一些国内常用的pip源地址，供您选择使用：</p><ul><li>清华大学源：<code>https://pypi.tuna.tsinghua.edu.cn/simple</code></li><li>阿里云源：<code>https://mirrors.aliyun.com/pypi/simple</code></li><li>豆瓣源：<code>https://pypi.douban.com/simple</code></li><li>中国科学技术大学源：<code>https://pypi.mirrors.ustc.edu.cn/simple</code></li><li>腾讯云源：<code>https://mirrors.cloud.tencent.com/pypi/simple</code></li><li>官方源：<code>https://pypi.org/simple</code></li></ul><p>在pip镜像升级报警，只需要添加信任源即可：</p><ul><li><p>临时换源处理</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> beautifulsoup4 --trusted-host mirrors.aliyun.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>更换默认源配置</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>install<span class="token punctuation">]</span>trusted-host<span class="token operator">=</span>pypi.douban.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h1><h3 id="1-临时换源"><a href="#1-临时换源" class="headerlink" title="1. 临时换源"></a>1. 临时换源</h3><p>临时换源是在安装某个包时指定使用特定的源，而不改变全局配置。例如，使用清华大学源安装一个包的命令如下：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> package_name <span class="token parameter variable">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>其中<code>package_name</code>是您要安装的包的名称。</p><h3 id="2-永久换源"><a href="#2-永久换源" class="headerlink" title="2. 永久换源"></a>2. 永久换源</h3><p>永久换源是通过修改pip的配置文件来实现的，这样每次使用pip时都会默认使用指定的源。</p><h4 id="2-1-找到pip配置文件的位置"><a href="#2-1-找到pip配置文件的位置" class="headerlink" title="2.1 找到pip配置文件的位置"></a>2.1 找到pip配置文件的位置</h4><ul><li><strong>Unix/Linux/MacOS</strong>: <code>~/.pip/pip.conf</code></li><li><strong>Windows</strong>: <code>%APPDATA%\pip\pip.ini</code></li></ul><p>如果配置文件不存在，可以手动创建。</p><h4 id="2-2-编辑pip配置文件"><a href="#2-2-编辑pip配置文件" class="headerlink" title="2.2 编辑pip配置文件"></a>2.2 编辑pip配置文件</h4><ul><li><p>Unix/Linux/MacOS: 打开或创建<code>~/.pip/pip.conf</code>文件，并添加以下内容：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">[global]index-url = https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li><li><p>Windows: 打开或创建<code>%APPDATA%\pip\pip.ini</code>文件，并添加以下内容：</p><pre class="line-numbers language-text" data-language="text"><code class="language-text">[global]index-url = https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>其中<code>https://pypi.tuna.tsinghua.edu.cn/simple</code>可以替换为您选择的其他源的URL。</p></li></ul><h4 id="2-3-命令"><a href="#2-3-命令" class="headerlink" title="2.3 命令"></a>2.3 命令</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 清华源</span>pip config <span class="token builtin class-name">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><h3 id="3-重置镜像源"><a href="#3-重置镜像源" class="headerlink" title="3. 重置镜像源"></a>3. 重置镜像源</h3><p>如果您需要重置镜像源到默认的PyPI官方源，可以使用以下命令：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config <span class="token builtin class-name">unset</span> global.index-url<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这会将全局设置的镜像源删除，恢复到默认设置。</p><h3 id="4-验证和测试"><a href="#4-验证和测试" class="headerlink" title="4. 验证和测试"></a>4. 验证和测试</h3><p>您可以通过以下命令检查当前pip配置的源：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后尝试安装一个包来测试配置是否生效。</p><h3 id="5-国内常用源地址"><a href="#5-国内常用源地址" class="headerlink" title="5. 国内常用源地址"></a>5. 国内常用源地址</h3><p>以下是一些国内常用的pip源地址，供您选择使用：</p><ul><li>清华大学源：<code>https://pypi.tuna.tsinghua.edu.cn/simple</code></li><li>阿里云源：<code>https://mirrors.aliyun.com/pypi/simple</code></li><li>豆瓣源：<code>https://pypi.douban.com/simple</code></li><li>中国科学技术大学源：<code>https://pypi.mirrors.ustc.edu.cn/simple</code></li><li>腾讯云源：<code>https://mirrors.cloud.tencent.com/pypi/simple</code></li><li>官方源：<code>https://pypi.org/simple</code></li></ul><p>在pip镜像升级报警，只需要添加信任源即可：</p><ul><li><p>临时换源处理</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> beautifulsoup4 --trusted-host mirrors.aliyun.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>更换默认源配置</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>install<span class="token punctuation">]</span>trusted-host<span class="token operator">=</span>pypi.douban.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li></ul><h3 id="设置本地代理"><a href="#设置本地代理" class="headerlink" title="设置本地代理"></a>设置本地代理</h3><p>2.2配置文件中加入下面</p><pre class="line-numbers language-none"><code class="language-none">proxy = http://[用户名:密码@]代理地址:端口<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
       
       
       <categories>
@@ -3225,9 +3275,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3254,9 +3304,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3308,9 +3358,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3337,9 +3387,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3366,9 +3416,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3470,9 +3520,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3499,9 +3549,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3528,9 +3578,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3557,9 +3607,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3605,9 +3655,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3634,9 +3684,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3663,9 +3713,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3692,9 +3742,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3721,9 +3771,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3750,9 +3800,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3779,9 +3829,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3808,9 +3858,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3837,9 +3887,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3866,9 +3916,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3895,9 +3945,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3924,9 +3974,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3953,9 +4003,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -3982,9 +4032,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> BUUCTF </tag>
             
@@ -4011,9 +4061,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> 攻防世界 </tag>
             
@@ -4040,9 +4090,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> 攻防世界 </tag>
             
@@ -4069,9 +4119,9 @@
       
         <tags>
             
-            <tag> wp </tag>
-            
             <tag> web </tag>
+            
+            <tag> wp </tag>
             
             <tag> i春秋 </tag>
             

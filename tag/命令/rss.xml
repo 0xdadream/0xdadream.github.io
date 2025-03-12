@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 24 Nov 2024 23:25:00 +0800</pubDate>
-        <lastBuildDate>Sun, 24 Nov 2024 23:25:00 +0800</lastBuildDate>
+        <pubDate>Wed, 12 Mar 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 12 Mar 2025 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>intel</category>
         <category>安装</category>
@@ -17,26 +17,27 @@
         <category>教程</category>
         <category>环境</category>
         <category>bug</category>
-        <category>wp</category>
         <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
         <category>BUUCTF</category>
         <category>windows</category>
-        <category>攻防世界</category>
         <category>server</category>
         <category>conda</category>
         <category>powershell</category>
-        <category>tools</category>
+        <category>comfyui</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
+        <category>tools</category>
         <category>emby</category>
         <category>tips</category>
         <category>git</category>
-        <category>google</category>
         <category>python</category>
+        <category>google</category>
+        <category>java</category>
         <category>命令</category>
         <category>学习</category>
-        <category>java</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
@@ -44,6 +45,160 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/</guid>
+            <title>文件链接全教程</title>
+            <link>https://0xdadream.github.io/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/</link>
+            <category>命令</category>
+            <pubDate>Wed, 12 Mar 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;文件链接全教程&#34;&gt;&lt;a href=&#34;#文件链接全教程&#34; class=&#34;headerlink&#34; title=&#34;文件链接全教程&#34;&gt;&lt;/a&gt;文件链接全教程&lt;/h1&gt;&lt;h2 id=&#34;Windows&#34;&gt;&lt;a href=&#34;#Windows&#34; class=&#34;headerlink&#34; title=&#34;Windows&#34;&gt;&lt;/a&gt;Windows&lt;/h2&gt;&lt;h3 id=&#34;1-链接基础概念&#34;&gt;&lt;a href=&#34;#1-链接基础概念&#34; class=&#34;headerlink&#34; title=&#34;1. 链接基础概念&#34;&gt;&lt;/a&gt;1. 链接基础概念&lt;/h3&gt;&lt;p&gt;在 Windows 中，“链接”实际上有几种形式，主要包括以下几类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;符号链接（Symbolic Link，软链接）&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 符号链接是一个特殊文件，其中保存了目标文件或目录的路径。它类似于 Linux 中的软链接，并且看起来和普通文件或文件夹没有区别。&lt;/li&gt;
+&lt;li&gt;特点：&lt;ul&gt;
+&lt;li&gt;可用于文件和目录&lt;/li&gt;
+&lt;li&gt;可以跨分区甚至跨网络路径（UNC）&lt;/li&gt;
+&lt;li&gt;如果目标被删除或移动，符号链接会失效&lt;/li&gt;
+&lt;li&gt;从 Windows Vista 开始支持，最新 Windows（如 Windows 10/11）中在开发人员模式下可不需要管理员权限创建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;硬链接（Hard Link）&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 硬链接是指向同一数据实体（数据块或 NTFS 中的文件记录）的另一个目录项。每个硬链接都与目标文件共享同一份数据。&lt;/li&gt;
+&lt;li&gt;特点：&lt;ul&gt;
+&lt;li&gt;仅适用于文件，不能用于目录&lt;/li&gt;
+&lt;li&gt;必须在同一 NTFS 卷内（不能跨分区）&lt;/li&gt;
+&lt;li&gt;删除其中一个链接不会影响其它链接或数据本身，只有当所有硬链接都删除后数据才会释放&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;目录联接（Junction Point）&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念：&lt;/strong&gt; 目录联接也称为“联接”，用于将一个目录指向另一个目录。在早期版本中常用来兼容旧版 Windows。&lt;/li&gt;
+&lt;li&gt;特点：&lt;ul&gt;
+&lt;li&gt;只适用于目录&lt;/li&gt;
+&lt;li&gt;创建时会自动转换为绝对路径&lt;/li&gt;
+&lt;li&gt;适用于同一台计算机，支持跨盘符（但不支持网络路径）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-创建链接的方法&#34;&gt;&lt;a href=&#34;#2-创建链接的方法&#34; class=&#34;headerlink&#34; title=&#34;2. 创建链接的方法&#34;&gt;&lt;/a&gt;2. 创建链接的方法&lt;/h3&gt;&lt;p&gt;在 Windows 中创建链接主要有两种方式：通过 CMD 命令行（使用 &lt;code&gt;mklink&lt;/code&gt; 命令）和通过 PowerShell（使用 &lt;code&gt;New-Item&lt;/code&gt; 命令）。&lt;/p&gt;
+&lt;h4 id=&#34;2-1-使用-CMD-命令创建链接&#34;&gt;&lt;a href=&#34;#2-1-使用-CMD-命令创建链接&#34; class=&#34;headerlink&#34; title=&#34;2.1 使用 CMD 命令创建链接&#34;&gt;&lt;/a&gt;2.1 使用 CMD 命令创建链接&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;命令语法：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;mklink [[/D] | [/H] | [/J]] Link Target&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;默认（无参数）&lt;/strong&gt;：创建文件的符号链接&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/D&lt;/strong&gt;：创建目录的符号链接&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/H&lt;/strong&gt;：创建硬链接（仅用于文件）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;/J&lt;/strong&gt;：创建目录联接（Junction，适用于目录）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建文件的符号链接&lt;/strong&gt;&lt;br&gt; 假设有一个文件 &lt;code&gt;C:\Data\original.txt&lt;/code&gt;，我们在同目录下创建一个名为 &lt;code&gt;link.txt&lt;/code&gt; 的符号链接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;mklink C:\Data\link.txt C:\Data\original.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时，&lt;code&gt;link.txt&lt;/code&gt; 实际上保存了 &lt;code&gt;original.txt&lt;/code&gt; 的路径，当你打开 &lt;code&gt;link.txt&lt;/code&gt; 时，系统会自动访问 &lt;code&gt;original.txt&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建目录的符号链接&lt;/strong&gt;&lt;br&gt; 假设有一个目录 &lt;code&gt;C:\Data\SourceFolder&lt;/code&gt;，希望在 &lt;code&gt;C:\Data&lt;/code&gt; 下创建一个符号链接目录 &lt;code&gt;LinkFolder&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;mklink /D C:\Data\LinkFolder C:\Data\SourceFolder&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，在资源管理器中打开 &lt;code&gt;LinkFolder&lt;/code&gt; 就等同于打开 &lt;code&gt;SourceFolder&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建文件的硬链接&lt;/strong&gt;&lt;br&gt; 依然以文件 &lt;code&gt;C:\Data\original.txt&lt;/code&gt; 为例，创建一个硬链接 &lt;code&gt;hardlink.txt&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;mklink /H C:\Data\hardlink.txt C:\Data\original.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;硬链接与原文件共享同一数据块，因此修改任一文件都会同步改变内容，但请注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;硬链接只能用于文件&lt;/li&gt;
+&lt;li&gt;必须在同一卷内&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建目录联接（Junction）&lt;/strong&gt;&lt;br&gt; 使用 /J 参数来创建目录联接，适用于目录，但和符号链接不同的是，Junction 通常保存绝对路径：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;mklink /J C:\Data\JunctionFolder C:\Data\SourceFolder&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用 Junction 时，删除链接不会删除目标目录中的数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;注意：&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建符号链接和某些操作可能需要以&lt;strong&gt;管理员身份&lt;/strong&gt;运行 CMD。&lt;/li&gt;
+&lt;li&gt;Windows 10 及以后版本如果开启“开发人员模式”，可以允许普通用户创建符号链接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;2-2-使用-PowerShell-创建链接&#34;&gt;&lt;a href=&#34;#2-2-使用-PowerShell-创建链接&#34; class=&#34;headerlink&#34; title=&#34;2.2 使用 PowerShell 创建链接&#34;&gt;&lt;/a&gt;2.2 使用 PowerShell 创建链接&lt;/h4&gt;&lt;p&gt;PowerShell 提供了更现代的 &lt;code&gt;New-Item&lt;/code&gt; 命令来创建不同类型的链接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;语法及示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建文件或目录的符号链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType SymbolicLink &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\Link.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Target &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\original.txt&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者创建目录符号链接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType SymbolicLink &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\LinkFolder&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Target &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\SourceFolder&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PowerShell 中的 &lt;code&gt;SymbolicLink&lt;/code&gt; 同样创建的是软链接，和 CMD 中 &lt;code&gt;mklink&lt;/code&gt; 默认行为一致。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建文件的硬链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType HardLink &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\hardlink.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Target &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\original.txt&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会为 &lt;code&gt;original.txt&lt;/code&gt; 创建一个硬链接，注意硬链接只能用于文件，且必须在同一卷内。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建目录联接（Junction）：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType Junction &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\JunctionFolder&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Target &lt;span class=&#34;token string&#34;&gt;&#34;C:\Data\SourceFolder&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会创建一个指向目录的联接，与符号链接在某些场景下效果类似，但内部处理略有差异。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;提示：&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PowerShell 命令执行时也可能需要管理员权限，具体取决于目标路径所在的位置（例如系统文件夹或 Program Files）。&lt;/li&gt;
+&lt;li&gt;在使用相对路径创建符号链接时，系统会将其转换为绝对路径存储在 NTFS 中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-使用场景与注意事项&#34;&gt;&lt;a href=&#34;#3-使用场景与注意事项&#34; class=&#34;headerlink&#34; title=&#34;3. 使用场景与注意事项&#34;&gt;&lt;/a&gt;3. 使用场景与注意事项&lt;/h3&gt;&lt;h4 id=&#34;3-1-常见使用场景&#34;&gt;&lt;a href=&#34;#3-1-常见使用场景&#34; class=&#34;headerlink&#34; title=&#34;3.1 常见使用场景&#34;&gt;&lt;/a&gt;3.1 常见使用场景&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;数据备份和增量备份&lt;/strong&gt;&lt;br&gt; 利用硬链接可以在不占用额外磁盘空间的情况下创建多个访问入口。例如，备份软件（如 Windows 版的“时间机器”）就会使用硬链接来实现增量备份。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;移动或重定向系统目录&lt;/strong&gt;&lt;br&gt; 为了节省系统盘空间或实现重装系统不丢失用户数据，可以将如 &lt;code&gt;C:\Users&lt;/code&gt; 目录复制到其他分区，然后使用 Junction 将原位置重定向到新位置：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;robocopy &#34;C:\Users&#34; &#34;D:\Users&#34; /E /COPYALL /XJ
+rmdir &#34;C:\Users&#34; /S /Q
+mklink /J &#34;C:\Users&#34; &#34;D:\Users&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;开发环境下共享资源&lt;/strong&gt;&lt;br&gt; 当多个项目需要使用同一份库或模型文件时，可以通过符号链接或硬链接共享文件，避免重复存储。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-2-注意事项&#34;&gt;&lt;a href=&#34;#3-2-注意事项&#34; class=&#34;headerlink&#34; title=&#34;3.2 注意事项&#34;&gt;&lt;/a&gt;3.2 注意事项&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;权限问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 Windows 中，创建符号链接通常需要管理员权限；不过在 Windows 10 开发人员模式下可允许普通用户创建符号链接。&lt;/li&gt;
+&lt;li&gt;硬链接不需要额外的权限，但目标文件必须在同一 NTFS 卷内。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;目标失效风险&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;符号链接依赖于目标路径。如果目标移动或删除，符号链接会成为“悬挂链接”（无效链接）。&lt;/li&gt;
+&lt;li&gt;硬链接与目标数据直接关联，即使原始文件名被删除，只要至少还有一个硬链接存在，数据依然可用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;跨分区限制&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;硬链接只能在同一卷内使用，而符号链接和 Junction 则可以跨卷（但符号链接可以支持网络路径，而 Junction 则不行）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;命令使用环境&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;mklink&lt;/code&gt; 命令时建议打开&lt;strong&gt;管理员命令提示符&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;使用 PowerShell 时，若涉及系统目录或受保护区域，建议以管理员身份运行 PowerShell。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看链接和删除&lt;/p&gt;
+&lt;p&gt;直接在资源管理器操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux&#34;&gt;&lt;a href=&#34;#linux&#34; class=&#34;headerlink&#34; title=&#34;linux&#34;&gt;&lt;/a&gt;linux&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://0xdadream.github.io/2025/02/20/arc-zai-comfyui-bao-cuo/&#34;&gt;Arc在comfyui报错 | 逐梦&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/11/24/dong-tai-lian-jie-ku/</guid>
             <title>动态链接库</title>
