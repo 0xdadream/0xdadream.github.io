@@ -5,13 +5,14 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 24 Mar 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Mon, 24 Mar 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
+        <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 10 Apr 2025 12:25:00 +0800</lastBuildDate>
         <category>intel</category>
-        <category>安装</category>
+        <category>tip</category>
+        <category>tips</category>
         <category>re</category>
         <category>工具</category>
+        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
         <category>教程</category>
@@ -20,20 +21,20 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>BUUCTF</category>
         <category>windows</category>
+        <category>BUUCTF</category>
         <category>server</category>
+        <category>wall</category>
+        <category>comfyui</category>
         <category>conda</category>
         <category>powershell</category>
-        <category>comfyui</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tools</category>
         <category>emby</category>
-        <category>tips</category>
-        <category>git</category>
         <category>python</category>
+        <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
@@ -45,6 +46,167 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</guid>
+            <title>安装WSL子系统教程</title>
+            <link>https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</link>
+            <category>linux</category>
+            <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;安装WSL子系统教程&#34;&gt;&lt;a href=&#34;#安装WSL子系统教程&#34; class=&#34;headerlink&#34; title=&#34;安装WSL子系统教程&#34;&gt;&lt;/a&gt;安装WSL子系统教程&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-前提条件与准备工作&#34;&gt;&lt;a href=&#34;#1-前提条件与准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 前提条件与准备工作&#34;&gt;&lt;/a&gt;1. 前提条件与准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;操作系统要求&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;Windows 10：要求版本 2004 及 Build 19041 以上，或&lt;/li&gt;
+&lt;li&gt;Windows 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络环境&lt;/strong&gt;：部分地区需要设置代理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管理员权限&lt;/strong&gt;：安装及部分配置需要以管理员身份运行 PowerShell 或 CMD。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储空间及磁盘规划&lt;/strong&gt;：WSL 会在系统盘或你指定的目录中保存 Linux 文件系统，提前规划好存储位置与空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-WSL-安装方法&#34;&gt;&lt;a href=&#34;#2-WSL-安装方法&#34; class=&#34;headerlink&#34; title=&#34;2. WSL 安装方法&#34;&gt;&lt;/a&gt;2. WSL 安装方法&lt;/h2&gt;&lt;h3 id=&#34;2-1-一键安装（推荐）&#34;&gt;&lt;a href=&#34;#2-1-一键安装（推荐）&#34; class=&#34;headerlink&#34; title=&#34;2.1 一键安装（推荐）&#34;&gt;&lt;/a&gt;2.1 一键安装（推荐）&lt;/h3&gt;&lt;p&gt;适用于 Windows 10 21H2 及之后版本以及 Windows 11。步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开 PowerShell（管理员模式）&lt;/strong&gt;：&lt;br&gt; 在开始菜单搜索 “PowerShell”，右键选择“以管理员身份运行”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;执行安装命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会自动启用 WSL 相关组件、虚拟机平台，并默认安装最新的 WSL 版本（通常为 WSL2）和默认 Linux 发行版（一般为 Ubuntu）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;重启电脑&lt;/strong&gt;：安装完成后系统会提示重启以完成配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-2-手动安装&#34;&gt;&lt;a href=&#34;#2-2-手动安装&#34; class=&#34;headerlink&#34; title=&#34;2.2 手动安装&#34;&gt;&lt;/a&gt;2.2 手动安装&lt;/h3&gt;&lt;p&gt;对于需要更多自定义选项的用户，手动安装步骤如下：&lt;/p&gt;
+&lt;h4 id=&#34;（1）启用-WSL-和虚拟机平台功能&#34;&gt;&lt;a href=&#34;#（1）启用-WSL-和虚拟机平台功能&#34; class=&#34;headerlink&#34; title=&#34;（1）启用 WSL 和虚拟机平台功能&#34;&gt;&lt;/a&gt;（1）启用 WSL 和虚拟机平台功能&lt;/h4&gt;&lt;p&gt;在管理员模式下打开 PowerShell，依次执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:Microsoft-Windows-Subsystem-Linux &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart
+dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:VirtualMachinePlatform &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后重启计算机。&lt;/p&gt;
+&lt;h4 id=&#34;（2）安装-WSL2-内核更新包&#34;&gt;&lt;a href=&#34;#（2）安装-WSL2-内核更新包&#34; class=&#34;headerlink&#34; title=&#34;（2）安装 WSL2 内核更新包&#34;&gt;&lt;/a&gt;（2）安装 WSL2 内核更新包&lt;/h4&gt;&lt;p&gt;前往 WSL2 内核更新包下载链接 ，下载并运行安装包，更新 Linux 内核。&lt;/p&gt;
+&lt;h4 id=&#34;（3）设置默认-WSL-版本为-WSL2&#34;&gt;&lt;a href=&#34;#（3）设置默认-WSL-版本为-WSL2&#34; class=&#34;headerlink&#34; title=&#34;（3）设置默认 WSL 版本为 WSL2&#34;&gt;&lt;/a&gt;（3）设置默认 WSL 版本为 WSL2&lt;/h4&gt;&lt;p&gt;再次打开 PowerShell（无需管理员模式也可），执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（4）安装-Linux-发行版&#34;&gt;&lt;a href=&#34;#（4）安装-Linux-发行版&#34; class=&#34;headerlink&#34; title=&#34;（4）安装 Linux 发行版&#34;&gt;&lt;/a&gt;（4）安装 Linux 发行版&lt;/h4&gt;&lt;p&gt;有两种方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;通过 Microsoft Store&lt;/strong&gt;：搜索 &lt;code&gt;Ubuntu&lt;/code&gt;、&lt;code&gt;Debian&lt;/code&gt; 等，选择版本（如 Ubuntu 22.04 LTS），点击“获取”安装，推荐这个，然后再执行命令行安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;命令行安装&lt;/strong&gt;：查看支持的在线发行版列表：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;list &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;online&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装指定版本（例如 Ubuntu 20.04）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-Linux-发行版安装及首次使用&#34;&gt;&lt;a href=&#34;#3-Linux-发行版安装及首次使用&#34; class=&#34;headerlink&#34; title=&#34;3. Linux 发行版安装及首次使用&#34;&gt;&lt;/a&gt;3. Linux 发行版安装及首次使用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;首次启动&lt;/strong&gt;：安装完成后，从“开始菜单”启动对应 Linux 发行版。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建用户&lt;/strong&gt;：系统会提示你为 Linux 系统创建用户名（须为小写）和密码，这样你就可以使用 &lt;code&gt;sudo&lt;/code&gt; 提权操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; upgrade&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装常用软件&lt;/strong&gt;：根据需要安装 &lt;code&gt;git&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt;、&lt;code&gt;python3&lt;/code&gt; 等：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; python3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-WSL-版本切换：WSL1-与-WSL2&#34;&gt;&lt;a href=&#34;#4-WSL-版本切换：WSL1-与-WSL2&#34; class=&#34;headerlink&#34; title=&#34;4. WSL 版本切换：WSL1 与 WSL2&#34;&gt;&lt;/a&gt;4. WSL 版本切换：WSL1 与 WSL2&lt;/h2&gt;&lt;p&gt;WSL 中各发行版可以独立设置为 WSL1 或 WSL2。查看所有已安装发行版及其版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-pgsql&#34; data-language=&#34;pgsql&#34;&gt;&lt;code class=&#34;language-pgsql&#34;&gt; NAME            STATE           VERSION
+* Ubuntu-22.04    Running         2
+  Ubuntu-20.04    Stopped         2
+  Debian          Stopped         1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;切换版本&#34;&gt;&lt;a href=&#34;#切换版本&#34; class=&#34;headerlink&#34; title=&#34;切换版本&#34;&gt;&lt;/a&gt;切换版本&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL2&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; Debian 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL1&lt;/strong&gt;（如有需求）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认安装版本&lt;/strong&gt;：在安装新发行版时，可以用下面命令设置默认版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;切换版本过程中，转换时间与系统数据量有关，部分较大发行版可能需要几分钟。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-附加功能与进阶用法&#34;&gt;&lt;a href=&#34;#5-附加功能与进阶用法&#34; class=&#34;headerlink&#34; title=&#34;5. 附加功能与进阶用法&#34;&gt;&lt;/a&gt;5. 附加功能与进阶用法&lt;/h2&gt;&lt;h3 id=&#34;5-1-Windows-与-WSL-文件共享&#34;&gt;&lt;a href=&#34;#5-1-Windows-与-WSL-文件共享&#34; class=&#34;headerlink&#34; title=&#34;5.1 Windows 与 WSL 文件共享&#34;&gt;&lt;/a&gt;5.1 Windows 与 WSL 文件共享&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;WSL 文件系统访问&lt;/strong&gt;：&lt;br&gt; 在 WSL 中可通过 &lt;code&gt;/mnt/c/&lt;/code&gt; 等路径访问 Windows 磁盘。例如访问 &lt;code&gt;C:\Users\YourName&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cd &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;mnt/c/Users/YourName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;在 Windows 中访问 WSL 文件&lt;/strong&gt;：&lt;br&gt; 可使用 File Explorer 直接访问：在地址栏输入 &lt;code&gt;\\wsl$&lt;/code&gt;，会显示所有已安装的 WSL 发行版及其文件系统。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;同步代码与项目文件&lt;/strong&gt;：&lt;br&gt; 可以将项目文件放在 Windows 共享目录中，再在 WSL 中编辑、执行，这样两个系统间文件同步简单且快速。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-2-WSL-GUI-应用（WSLg）&#34;&gt;&lt;a href=&#34;#5-2-WSL-GUI-应用（WSLg）&#34; class=&#34;headerlink&#34; title=&#34;5.2 WSL GUI 应用（WSLg）&#34;&gt;&lt;/a&gt;5.2 WSL GUI 应用（WSLg）&lt;/h3&gt;&lt;p&gt;在最新版本的 Windows 10 和 Windows 11 上，WSL 支持 Linux 图形界面应用（WSLg）。配置方法如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;确保 WSL 更新至最新版本&lt;/strong&gt;：执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动 GUI 应用&lt;/strong&gt;（如 Firefox）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; firefox
+firefox &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;WSLg 会自动启动并显示 Linux GUI 应用，无需额外配置 X 服务器。&lt;/p&gt;
+&lt;h3 id=&#34;5-3-代理设置&#34;&gt;&lt;a href=&#34;#5-3-代理设置&#34; class=&#34;headerlink&#34; title=&#34;5.3 代理设置&#34;&gt;&lt;/a&gt;5.3 代理设置&lt;/h3&gt;&lt;p&gt;如果你处于网络环境受限或想加快下载速度，可以设置代理。&lt;/p&gt;
+&lt;h4 id=&#34;（1）设置-Windows-系统代理&#34;&gt;&lt;a href=&#34;#（1）设置-Windows-系统代理&#34; class=&#34;headerlink&#34; title=&#34;（1）设置 Windows 系统代理&#34;&gt;&lt;/a&gt;（1）设置 Windows 系统代理&lt;/h4&gt;&lt;p&gt;如果使用科学上网工具（如 Clash、V2Ray、VPN），确保系统代理已启用。可在 Windows 设置 → 网络和 Internet → 代理中配置，也可以通过命令设置环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;setx http_proxy http://127.0.0.1:7890 /m
+setx https_proxy http://127.0.0.1:7890 /m&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（2）在-WSL-中设置代理&#34;&gt;&lt;a href=&#34;#（2）在-WSL-中设置代理&#34; class=&#34;headerlink&#34; title=&#34;（2）在 WSL 中设置代理&#34;&gt;&lt;/a&gt;（2）在 WSL 中设置代理&lt;/h4&gt;&lt;p&gt;在 WSL 中使用环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;http_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;https_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若需要全局生效，在 &lt;code&gt;~/.bashrc&lt;/code&gt; 或 &lt;code&gt;~/.zshrc&lt;/code&gt; 文件末尾加入以上配置，并执行 &lt;code&gt;source ~/.bashrc&lt;/code&gt; 使其生效。&lt;/p&gt;
+&lt;h4 id=&#34;（3）apt-专用代理配置&#34;&gt;&lt;a href=&#34;#（3）apt-专用代理配置&#34; class=&#34;headerlink&#34; title=&#34;（3）apt 专用代理配置&#34;&gt;&lt;/a&gt;（3）apt 专用代理配置&lt;/h4&gt;&lt;p&gt;创建或编辑 apt 配置文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/apt/apt.conf.d/proxy.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cpp&#34; data-language=&#34;cpp&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;http&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;https&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后，&lt;code&gt;sudo apt update&lt;/code&gt; 将走代理。&lt;/p&gt;
+&lt;h3 id=&#34;5-4-多实例安装（同一版本多个副本）&#34;&gt;&lt;a href=&#34;#5-4-多实例安装（同一版本多个副本）&#34; class=&#34;headerlink&#34; title=&#34;5.4 多实例安装（同一版本多个副本）&#34;&gt;&lt;/a&gt;5.4 多实例安装（同一版本多个副本）&lt;/h3&gt;&lt;p&gt;WSL 允许你导入同一 Linux 发行版的多个副本，便于隔离不同任务。操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导出已有实例&lt;/strong&gt;&lt;br&gt; 假设已安装 &lt;code&gt;Ubuntu-20.04&lt;/code&gt;，用以下命令导出为 &lt;code&gt;.tar&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;export Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导入为新实例&lt;/strong&gt;&lt;br&gt; 用新名称（例如 &lt;code&gt;Ubuntu-Dev&lt;/code&gt;）创建副本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;import Ubuntu-Dev D:\WSL\Ubuntu-Dev D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动新实例&lt;/strong&gt;&lt;br&gt; 使用下面命令启动新导入的实例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-Dev&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样你就可以在同一台机器上同时运行多个独立的 Linux 环境。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-常用命令与管理技巧&#34;&gt;&lt;a href=&#34;#6-常用命令与管理技巧&#34; class=&#34;headerlink&#34; title=&#34;6. 常用命令与管理技巧&#34;&gt;&lt;/a&gt;6. 常用命令与管理技巧&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看已安装发行版及版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动指定发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认发行版（直接运行 wsl 时启动的系统）&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;setdefault &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换 WSL 版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新 WSL 内核&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;关闭所有运行中的 WSL 实例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;卸载某个发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;unregister &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/03/24/bian-yi-shi-bao-cuo-rootminiconda3compiler-compatld/</guid>
             <title>编译时报错rootminiconda3compiler_compatld</title>
@@ -133,11 +295,64 @@ pypbc               &lt;span class=&#34;token number&#34;&gt;0.2&lt;/span&gt;&lt
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;配置安装路径：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;执行 &lt;code&gt;configure.sh&lt;/code&gt; 脚本，指定 GMP 和 PBC 的安装路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure.sh
+
+&lt;span class=&#34;token comment&#34;&gt;#执行成功&lt;/span&gt;
+Install prefix    /usr/local
+data directory    /usr/local/share/charm
+binary directory  /usr/local/bin
+library directory /usr/local/lib
+config directory  /usr/local/etc
+Source path       /home/hero/charm
+CFLAGS            &lt;span class=&#34;token parameter variable&#34;&gt;-O2&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt;
+CHARM_CFLAGS       &lt;span class=&#34;token parameter variable&#34;&gt;-m64&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-Wall&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-Wundef&lt;/span&gt; -Wwrite-strings -Wmissing-prototypes  -fstack-protector-all -Wendif-labels -Wmissing-include-dirs -Wempty-body -Wnested-externs -Wformat-security -Wformat-y2k -Winit-self -Wignored-qualifiers -Wold-style-declaration -Wold-style-definition -Wtype-limits
+LDFLAGS           &lt;span class=&#34;token parameter variable&#34;&gt;-m64&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;              &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
+python            /usr/bin/python3
+python-config     /usr/bin/python3-config
+build_ext options build_ext
+&lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;           &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;host&lt;/span&gt; CPU          x86_64
+&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt;              /usr/bin/wget
+gprof enabled     no
+profiler          no
+static build      no
+&lt;span class=&#34;token parameter variable&#34;&gt;-Werror&lt;/span&gt; enabled   no
+integer module    &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+ecc module        &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+pairing module    &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+disable benchmark no
+libm found        &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+libgmp found      &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+libpbc found      &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+libcrypto found   &lt;span class=&#34;token function&#34;&gt;yes&lt;/span&gt;
+Documentation     no&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;编译和安装：&lt;/strong&gt;&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;#执行成功&lt;/span&gt;
+copying build/lib.linux-x86_64-3.8/charm/core/math/pairing.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/math/integer.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/math/elliptic_curve.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/benchmark.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/cryptobase.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/AES.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/DES.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/DES3.cpython-38-x86_64-linux-gnu.so -&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; charm/core/crypto
+Complete
+
+
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;#执行成功&lt;/span&gt;
+Installed /usr/local/lib/python3.8/dist-packages/attrs-25.3.0-py3.8.egg
+Searching &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;setuptools&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;45.2&lt;/span&gt;.0
+Best match: setuptools &lt;span class=&#34;token number&#34;&gt;45.2&lt;/span&gt;.0
+Adding setuptools &lt;span class=&#34;token number&#34;&gt;45.2&lt;/span&gt;.0 to easy-install.pth &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt;
+Installing easy_install script to /usr/local/bin
+
+Using /usr/lib/python3/dist-packages
+Finished processing dependencies &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; Charm-Crypto&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.50&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;import charm&lt;/code&gt;判断安装是否成功&lt;/p&gt;
 &lt;/li&gt;

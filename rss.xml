@@ -5,13 +5,14 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 24 Mar 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Mon, 24 Mar 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
+        <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 10 Apr 2025 12:25:00 +0800</lastBuildDate>
         <category>intel</category>
-        <category>安装</category>
+        <category>tip</category>
+        <category>tips</category>
         <category>re</category>
         <category>工具</category>
+        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
         <category>教程</category>
@@ -20,20 +21,20 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>BUUCTF</category>
         <category>windows</category>
+        <category>BUUCTF</category>
         <category>server</category>
+        <category>wall</category>
+        <category>comfyui</category>
         <category>conda</category>
         <category>powershell</category>
-        <category>comfyui</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tools</category>
         <category>emby</category>
-        <category>tips</category>
-        <category>git</category>
         <category>python</category>
+        <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
@@ -45,6 +46,207 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</guid>
+            <title>安装WSL子系统教程</title>
+            <link>https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</link>
+            <category>linux</category>
+            <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;安装WSL子系统教程&#34;&gt;&lt;a href=&#34;#安装WSL子系统教程&#34; class=&#34;headerlink&#34; title=&#34;安装WSL子系统教程&#34;&gt;&lt;/a&gt;安装WSL子系统教程&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-前提条件与准备工作&#34;&gt;&lt;a href=&#34;#1-前提条件与准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 前提条件与准备工作&#34;&gt;&lt;/a&gt;1. 前提条件与准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;操作系统要求&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;Windows 10：要求版本 2004 及 Build 19041 以上，或&lt;/li&gt;
+&lt;li&gt;Windows 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络环境&lt;/strong&gt;：部分地区需要设置代理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管理员权限&lt;/strong&gt;：安装及部分配置需要以管理员身份运行 PowerShell 或 CMD。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储空间及磁盘规划&lt;/strong&gt;：WSL 会在系统盘或你指定的目录中保存 Linux 文件系统，提前规划好存储位置与空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-WSL-安装方法&#34;&gt;&lt;a href=&#34;#2-WSL-安装方法&#34; class=&#34;headerlink&#34; title=&#34;2. WSL 安装方法&#34;&gt;&lt;/a&gt;2. WSL 安装方法&lt;/h2&gt;&lt;h3 id=&#34;2-1-一键安装（推荐）&#34;&gt;&lt;a href=&#34;#2-1-一键安装（推荐）&#34; class=&#34;headerlink&#34; title=&#34;2.1 一键安装（推荐）&#34;&gt;&lt;/a&gt;2.1 一键安装（推荐）&lt;/h3&gt;&lt;p&gt;适用于 Windows 10 21H2 及之后版本以及 Windows 11。步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开 PowerShell（管理员模式）&lt;/strong&gt;：&lt;br&gt; 在开始菜单搜索 “PowerShell”，右键选择“以管理员身份运行”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;执行安装命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会自动启用 WSL 相关组件、虚拟机平台，并默认安装最新的 WSL 版本（通常为 WSL2）和默认 Linux 发行版（一般为 Ubuntu）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;重启电脑&lt;/strong&gt;：安装完成后系统会提示重启以完成配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-2-手动安装&#34;&gt;&lt;a href=&#34;#2-2-手动安装&#34; class=&#34;headerlink&#34; title=&#34;2.2 手动安装&#34;&gt;&lt;/a&gt;2.2 手动安装&lt;/h3&gt;&lt;p&gt;对于需要更多自定义选项的用户，手动安装步骤如下：&lt;/p&gt;
+&lt;h4 id=&#34;（1）启用-WSL-和虚拟机平台功能&#34;&gt;&lt;a href=&#34;#（1）启用-WSL-和虚拟机平台功能&#34; class=&#34;headerlink&#34; title=&#34;（1）启用 WSL 和虚拟机平台功能&#34;&gt;&lt;/a&gt;（1）启用 WSL 和虚拟机平台功能&lt;/h4&gt;&lt;p&gt;在管理员模式下打开 PowerShell，依次执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:Microsoft-Windows-Subsystem-Linux &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart
+dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:VirtualMachinePlatform &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后重启计算机。&lt;/p&gt;
+&lt;h4 id=&#34;（2）安装-WSL2-内核更新包&#34;&gt;&lt;a href=&#34;#（2）安装-WSL2-内核更新包&#34; class=&#34;headerlink&#34; title=&#34;（2）安装 WSL2 内核更新包&#34;&gt;&lt;/a&gt;（2）安装 WSL2 内核更新包&lt;/h4&gt;&lt;p&gt;前往 WSL2 内核更新包下载链接 ，下载并运行安装包，更新 Linux 内核。&lt;/p&gt;
+&lt;h4 id=&#34;（3）设置默认-WSL-版本为-WSL2&#34;&gt;&lt;a href=&#34;#（3）设置默认-WSL-版本为-WSL2&#34; class=&#34;headerlink&#34; title=&#34;（3）设置默认 WSL 版本为 WSL2&#34;&gt;&lt;/a&gt;（3）设置默认 WSL 版本为 WSL2&lt;/h4&gt;&lt;p&gt;再次打开 PowerShell（无需管理员模式也可），执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（4）安装-Linux-发行版&#34;&gt;&lt;a href=&#34;#（4）安装-Linux-发行版&#34; class=&#34;headerlink&#34; title=&#34;（4）安装 Linux 发行版&#34;&gt;&lt;/a&gt;（4）安装 Linux 发行版&lt;/h4&gt;&lt;p&gt;有两种方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;通过 Microsoft Store&lt;/strong&gt;：搜索 &lt;code&gt;Ubuntu&lt;/code&gt;、&lt;code&gt;Debian&lt;/code&gt; 等，选择版本（如 Ubuntu 22.04 LTS），点击“获取”安装，推荐这个，然后再执行命令行安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;命令行安装&lt;/strong&gt;：查看支持的在线发行版列表：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;list &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;online&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装指定版本（例如 Ubuntu 20.04）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-Linux-发行版安装及首次使用&#34;&gt;&lt;a href=&#34;#3-Linux-发行版安装及首次使用&#34; class=&#34;headerlink&#34; title=&#34;3. Linux 发行版安装及首次使用&#34;&gt;&lt;/a&gt;3. Linux 发行版安装及首次使用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;首次启动&lt;/strong&gt;：安装完成后，从“开始菜单”启动对应 Linux 发行版。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建用户&lt;/strong&gt;：系统会提示你为 Linux 系统创建用户名（须为小写）和密码，这样你就可以使用 &lt;code&gt;sudo&lt;/code&gt; 提权操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; upgrade&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装常用软件&lt;/strong&gt;：根据需要安装 &lt;code&gt;git&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt;、&lt;code&gt;python3&lt;/code&gt; 等：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; python3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-WSL-版本切换：WSL1-与-WSL2&#34;&gt;&lt;a href=&#34;#4-WSL-版本切换：WSL1-与-WSL2&#34; class=&#34;headerlink&#34; title=&#34;4. WSL 版本切换：WSL1 与 WSL2&#34;&gt;&lt;/a&gt;4. WSL 版本切换：WSL1 与 WSL2&lt;/h2&gt;&lt;p&gt;WSL 中各发行版可以独立设置为 WSL1 或 WSL2。查看所有已安装发行版及其版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-pgsql&#34; data-language=&#34;pgsql&#34;&gt;&lt;code class=&#34;language-pgsql&#34;&gt; NAME            STATE           VERSION
+* Ubuntu-22.04    Running         2
+  Ubuntu-20.04    Stopped         2
+  Debian          Stopped         1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;切换版本&#34;&gt;&lt;a href=&#34;#切换版本&#34; class=&#34;headerlink&#34; title=&#34;切换版本&#34;&gt;&lt;/a&gt;切换版本&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL2&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; Debian 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL1&lt;/strong&gt;（如有需求）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认安装版本&lt;/strong&gt;：在安装新发行版时，可以用下面命令设置默认版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;切换版本过程中，转换时间与系统数据量有关，部分较大发行版可能需要几分钟。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-附加功能与进阶用法&#34;&gt;&lt;a href=&#34;#5-附加功能与进阶用法&#34; class=&#34;headerlink&#34; title=&#34;5. 附加功能与进阶用法&#34;&gt;&lt;/a&gt;5. 附加功能与进阶用法&lt;/h2&gt;&lt;h3 id=&#34;5-1-Windows-与-WSL-文件共享&#34;&gt;&lt;a href=&#34;#5-1-Windows-与-WSL-文件共享&#34; class=&#34;headerlink&#34; title=&#34;5.1 Windows 与 WSL 文件共享&#34;&gt;&lt;/a&gt;5.1 Windows 与 WSL 文件共享&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;WSL 文件系统访问&lt;/strong&gt;：&lt;br&gt; 在 WSL 中可通过 &lt;code&gt;/mnt/c/&lt;/code&gt; 等路径访问 Windows 磁盘。例如访问 &lt;code&gt;C:\Users\YourName&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cd &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;mnt/c/Users/YourName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;在 Windows 中访问 WSL 文件&lt;/strong&gt;：&lt;br&gt; 可使用 File Explorer 直接访问：在地址栏输入 &lt;code&gt;\\wsl$&lt;/code&gt;，会显示所有已安装的 WSL 发行版及其文件系统。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;同步代码与项目文件&lt;/strong&gt;：&lt;br&gt; 可以将项目文件放在 Windows 共享目录中，再在 WSL 中编辑、执行，这样两个系统间文件同步简单且快速。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-2-WSL-GUI-应用（WSLg）&#34;&gt;&lt;a href=&#34;#5-2-WSL-GUI-应用（WSLg）&#34; class=&#34;headerlink&#34; title=&#34;5.2 WSL GUI 应用（WSLg）&#34;&gt;&lt;/a&gt;5.2 WSL GUI 应用（WSLg）&lt;/h3&gt;&lt;p&gt;在最新版本的 Windows 10 和 Windows 11 上，WSL 支持 Linux 图形界面应用（WSLg）。配置方法如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;确保 WSL 更新至最新版本&lt;/strong&gt;：执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动 GUI 应用&lt;/strong&gt;（如 Firefox）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; firefox
+firefox &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;WSLg 会自动启动并显示 Linux GUI 应用，无需额外配置 X 服务器。&lt;/p&gt;
+&lt;h3 id=&#34;5-3-代理设置&#34;&gt;&lt;a href=&#34;#5-3-代理设置&#34; class=&#34;headerlink&#34; title=&#34;5.3 代理设置&#34;&gt;&lt;/a&gt;5.3 代理设置&lt;/h3&gt;&lt;p&gt;如果你处于网络环境受限或想加快下载速度，可以设置代理。&lt;/p&gt;
+&lt;h4 id=&#34;（1）设置-Windows-系统代理&#34;&gt;&lt;a href=&#34;#（1）设置-Windows-系统代理&#34; class=&#34;headerlink&#34; title=&#34;（1）设置 Windows 系统代理&#34;&gt;&lt;/a&gt;（1）设置 Windows 系统代理&lt;/h4&gt;&lt;p&gt;如果使用科学上网工具（如 Clash、V2Ray、VPN），确保系统代理已启用。可在 Windows 设置 → 网络和 Internet → 代理中配置，也可以通过命令设置环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;setx http_proxy http://127.0.0.1:7890 /m
+setx https_proxy http://127.0.0.1:7890 /m&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（2）在-WSL-中设置代理&#34;&gt;&lt;a href=&#34;#（2）在-WSL-中设置代理&#34; class=&#34;headerlink&#34; title=&#34;（2）在 WSL 中设置代理&#34;&gt;&lt;/a&gt;（2）在 WSL 中设置代理&lt;/h4&gt;&lt;p&gt;在 WSL 中使用环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;http_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;https_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若需要全局生效，在 &lt;code&gt;~/.bashrc&lt;/code&gt; 或 &lt;code&gt;~/.zshrc&lt;/code&gt; 文件末尾加入以上配置，并执行 &lt;code&gt;source ~/.bashrc&lt;/code&gt; 使其生效。&lt;/p&gt;
+&lt;h4 id=&#34;（3）apt-专用代理配置&#34;&gt;&lt;a href=&#34;#（3）apt-专用代理配置&#34; class=&#34;headerlink&#34; title=&#34;（3）apt 专用代理配置&#34;&gt;&lt;/a&gt;（3）apt 专用代理配置&lt;/h4&gt;&lt;p&gt;创建或编辑 apt 配置文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/apt/apt.conf.d/proxy.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cpp&#34; data-language=&#34;cpp&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;http&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;https&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后，&lt;code&gt;sudo apt update&lt;/code&gt; 将走代理。&lt;/p&gt;
+&lt;h3 id=&#34;5-4-多实例安装（同一版本多个副本）&#34;&gt;&lt;a href=&#34;#5-4-多实例安装（同一版本多个副本）&#34; class=&#34;headerlink&#34; title=&#34;5.4 多实例安装（同一版本多个副本）&#34;&gt;&lt;/a&gt;5.4 多实例安装（同一版本多个副本）&lt;/h3&gt;&lt;p&gt;WSL 允许你导入同一 Linux 发行版的多个副本，便于隔离不同任务。操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导出已有实例&lt;/strong&gt;&lt;br&gt; 假设已安装 &lt;code&gt;Ubuntu-20.04&lt;/code&gt;，用以下命令导出为 &lt;code&gt;.tar&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;export Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导入为新实例&lt;/strong&gt;&lt;br&gt; 用新名称（例如 &lt;code&gt;Ubuntu-Dev&lt;/code&gt;）创建副本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;import Ubuntu-Dev D:\WSL\Ubuntu-Dev D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动新实例&lt;/strong&gt;&lt;br&gt; 使用下面命令启动新导入的实例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-Dev&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样你就可以在同一台机器上同时运行多个独立的 Linux 环境。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-常用命令与管理技巧&#34;&gt;&lt;a href=&#34;#6-常用命令与管理技巧&#34; class=&#34;headerlink&#34; title=&#34;6. 常用命令与管理技巧&#34;&gt;&lt;/a&gt;6. 常用命令与管理技巧&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看已安装发行版及版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动指定发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认发行版（直接运行 wsl 时启动的系统）&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;setdefault &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换 WSL 版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新 WSL 内核&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;关闭所有运行中的 WSL 实例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;卸载某个发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;unregister &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/08/pycharm-bao-cun-xu-ke-zheng-shu-ju-shi-chu-cuo/</guid>
+            <title>pycharm保存许可证数据时出错</title>
+            <link>https://0xdadream.github.io/2025/04/08/pycharm-bao-cun-xu-ke-zheng-shu-ju-shi-chu-cuo/</link>
+            <category>tools</category>
+            <pubDate>Tue, 08 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;pycharm保存许可证数据时出错&#34;&gt;&lt;a href=&#34;#pycharm保存许可证数据时出错&#34; class=&#34;headerlink&#34; title=&#34;pycharm保存许可证数据时出错&#34;&gt;&lt;/a&gt;pycharm保存许可证数据时出错&lt;/h1&gt;&lt;p&gt;报错&lt;/p&gt;
+&lt;p&gt; C:\Users\xxx\AppData\Roaming\JetBrains\PyCharm2024.2\pycharm.key (拒绝访问)&lt;/p&gt;
+&lt;p&gt;去这个目录下把这个文件改成&lt;code&gt;pycharm.key.bak&lt;/code&gt;做一个备份，然后新建一个文件空&lt;code&gt;pycharm.key&lt;/code&gt;，不创建好像也能自己创建，我没试过&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/07/google-nei-rong-zai-xin-biao-qian-ye-da-kai/</guid>
+            <title>Google内容在新标签页打开</title>
+            <link>https://0xdadream.github.io/2025/04/07/google-nei-rong-zai-xin-biao-qian-ye-da-kai/</link>
+            <category>tips</category>
+            <pubDate>Mon, 07 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Google内容在新标签页打开&#34;&gt;&lt;a href=&#34;#Google内容在新标签页打开&#34; class=&#34;headerlink&#34; title=&#34;Google内容在新标签页打开&#34;&gt;&lt;/a&gt;Google内容在新标签页打开&lt;/h1&gt;&lt;p&gt;进入&lt;code&gt;google.com&lt;/code&gt;，右下角找到设置，搜索设置，找到在新的浏览器窗口中打开所选的每条搜索结果勾选&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/05/clash-verge-jie-dian-quan-bu-chao-shi/</guid>
+            <title>clash_verge节点全部超时</title>
+            <link>https://0xdadream.github.io/2025/04/05/clash-verge-jie-dian-quan-bu-chao-shi/</link>
+            <category>wall</category>
+            <pubDate>Sat, 05 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;clash-verge节点全部超时&#34;&gt;&lt;a href=&#34;#clash-verge节点全部超时&#34; class=&#34;headerlink&#34; title=&#34;clash_verge节点全部超时&#34;&gt;&lt;/a&gt;clash_verge节点全部超时&lt;/h1&gt;&lt;p&gt;clash_verge正常使用需要确保本地计算机系统时间与服务器上是一致，如果存在一定时差会导致全部服务器连接超时，一般都是标准北京时间可以到系统的 “日期和时间” 设置中同步一下标准时间。&lt;/p&gt;
+&lt;p&gt;或者&lt;/p&gt;
+&lt;p&gt;关闭DNS，到设置-&amp;gt;DNS覆写-&amp;gt;关闭DNS&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/</guid>
+            <title>解决报错jinja2.exceptions.TemplateNotFound_index.html</title>
+            <link>https://0xdadream.github.io/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/</link>
+            <category>python</category>
+            <pubDate>Thu, 03 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;解决报错jinja2-exceptions-TemplateNotFound-index-html&#34;&gt;&lt;a href=&#34;#解决报错jinja2-exceptions-TemplateNotFound-index-html&#34; class=&#34;headerlink&#34; title=&#34;解决报错jinja2.exceptions.TemplateNotFound_index.html&#34;&gt;&lt;/a&gt;解决报错jinja2.exceptions.TemplateNotFound_index.html&lt;/h1&gt;&lt;p&gt;templates文件夹需要和xxx.py需要再一级文件夹&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/03/24/bian-yi-shi-bao-cuo-rootminiconda3compiler-compatld/</guid>
             <title>编译时报错rootminiconda3compiler_compatld</title>
@@ -622,7 +824,8 @@ conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpng&lt;
 &lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; 下载目录
 pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; triton-3.0.0-cp311-cp311-win_amd64.whl  &lt;span class=&#34;token comment&#34;&gt;# 文件名&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;h2 id=&#34;ImportError-cannot-import-name-‘soft-unicode‘-from-‘markupsafe‘&#34;&gt;&lt;a href=&#34;#ImportError-cannot-import-name-‘soft-unicode‘-from-‘markupsafe‘&#34; class=&#34;headerlink&#34; title=&#34;ImportError: cannot import name ‘soft_unicode‘ from ‘markupsafe‘&#34;&gt;&lt;/a&gt;ImportError: cannot import name ‘soft_unicode‘ from ‘markupsafe‘&lt;/h2&gt;&lt;p&gt;执行命令重新安装&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;markupsafe&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.0&lt;/span&gt;.1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;其他&#34;&gt;&lt;a href=&#34;#其他&#34; class=&#34;headerlink&#34; title=&#34;其他&#34;&gt;&lt;/a&gt;其他&lt;/h2&gt;&lt;p&gt;ERROR: Could not install packages due to an OSError: [WinError 5] 拒绝访问。： ‘E:\conda\envs\deepl\Lib\site-packages\cv2\cv2.pyd’ Consider using the &lt;code&gt;--user&lt;/code&gt; option or check the permissions.&lt;/p&gt;
 &lt;p&gt;如他说添加&lt;code&gt;--user&lt;/code&gt;参数&lt;/p&gt;
@@ -2128,588 +2331,6 @@ df&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pipe&lt;span class
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/01/10/liang-tai-dian-nao-shi-yong-github-pycharm-tong-bu-kai-fa/</guid>
-            <title>两台电脑使用github+pycharm同步开发</title>
-            <link>https://0xdadream.github.io/2025/01/10/liang-tai-dian-nao-shi-yong-github-pycharm-tong-bu-kai-fa/</link>
-            <category>tools</category>
-            <pubDate>Fri, 10 Jan 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;两台电脑使用github-pycharm同步开发&#34;&gt;&lt;a href=&#34;#两台电脑使用github-pycharm同步开发&#34; class=&#34;headerlink&#34; title=&#34;两台电脑使用github+pycharm同步开发&#34;&gt;&lt;/a&gt;两台电脑使用github+pycharm同步开发&lt;/h1&gt;&lt;p&gt;本文介绍如何在两台电脑之间通过 GitHub 和 PyCharm 实现项目的同步开发。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;一、准备工作&#34;&gt;&lt;a href=&#34;#一、准备工作&#34; class=&#34;headerlink&#34; title=&#34;一、准备工作&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、准备工作&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-在两台电脑上安装必要工具&#34;&gt;&lt;a href=&#34;#1-在两台电脑上安装必要工具&#34; class=&#34;headerlink&#34; title=&#34;1. 在两台电脑上安装必要工具&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 在两台电脑上安装必要工具&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Git&lt;/strong&gt;：下载并安装 &lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PyCharm&lt;/strong&gt;：下载并安装 &lt;a href=&#34;https://www.jetbrains.com/pycharm/&#34;&gt;PyCharm&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GitHub 账号&lt;/strong&gt;：确保已经注册并拥有 GitHub 账号。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-配置-Git-环境&#34;&gt;&lt;a href=&#34;#2-配置-Git-环境&#34; class=&#34;headerlink&#34; title=&#34;2. 配置 Git 环境&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 配置 Git 环境&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在两台电脑上分别配置 Git：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置用户名和邮箱&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.name &lt;span class=&#34;token string&#34;&gt;&#34;你的用户名&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.email &lt;span class=&#34;token string&#34;&gt;&#34;你的邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 SSH 密钥&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&#34;token parameter variable&#34;&gt;-C&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;你的邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;按提示生成密钥（存储在 &lt;code&gt;~/.ssh/id_ed25519&lt;/code&gt;）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用以下命令查看并复制公钥内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; ~/.ssh/id_ed25519.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;登录 GitHub，进入 &lt;strong&gt;Settings &amp;gt; SSH and GPG keys&lt;/strong&gt;，点击 &lt;strong&gt;New SSH key&lt;/strong&gt;，将公钥粘贴并保存。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;测试连接&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-T&lt;/span&gt; git@github.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果返回：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-vbnet&#34; data-language=&#34;vbnet&#34;&gt;&lt;code class=&#34;language-vbnet&#34;&gt;Hi &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;! You&#39;ve successfully authenticated, but GitHub does not provide shell access.&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;表示配置成功。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;二、创建远程仓库并上传项目&#34;&gt;&lt;a href=&#34;#二、创建远程仓库并上传项目&#34; class=&#34;headerlink&#34; title=&#34;二、创建远程仓库并上传项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、创建远程仓库并上传项目&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-创建远程仓库&#34;&gt;&lt;a href=&#34;#1-创建远程仓库&#34; class=&#34;headerlink&#34; title=&#34;1. 创建远程仓库&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建远程仓库&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;登录 GitHub，点击右上角的 &lt;strong&gt;+&lt;/strong&gt; &amp;gt; &lt;strong&gt;New repository&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;填写仓库名称（例如 &lt;code&gt;my_project&lt;/code&gt;），选择 &lt;strong&gt;Public&lt;/strong&gt; 或 &lt;strong&gt;Private&lt;/strong&gt;，然后点击 &lt;strong&gt;Create repository&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;2-将本地项目上传到远程仓库&#34;&gt;&lt;a href=&#34;#2-将本地项目上传到远程仓库&#34; class=&#34;headerlink&#34; title=&#34;2. 将本地项目上传到远程仓库&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 将本地项目上传到远程仓库&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在已存在的项目目录中初始化 Git，并推送到远程仓库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; /path/to/your/project
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; init  &lt;span class=&#34;token comment&#34;&gt;# 初始化&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 提交所有文件到暂存区&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Initial commit&#34;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 提交到当前分支&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch &lt;span class=&#34;token parameter variable&#34;&gt;-M&lt;/span&gt; main &lt;span class=&#34;token comment&#34;&gt;# 将当前分支重命名为main，github默认分支为main&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; remote &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; origin git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git  &lt;span class=&#34;token comment&#34;&gt;# 绑定远程仓库&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; origin main &lt;span class=&#34;token comment&#34;&gt;# 将 main 分支推送到远程仓库，并建立本地与远程分支的关联，添加 -u 参数后，本地的 main 分支会与远程的 main 分支关联起来。这样，后续执行 git pull 或 git push 时，不需要再指定分支名称&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;三、在两台电脑上同步项目&#34;&gt;&lt;a href=&#34;#三、在两台电脑上同步项目&#34; class=&#34;headerlink&#34; title=&#34;三、在两台电脑上同步项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、在两台电脑上同步项目&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;电脑-A-操作&#34;&gt;&lt;a href=&#34;#电脑-A-操作&#34; class=&#34;headerlink&#34; title=&#34;电脑 A 操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;电脑 A 操作&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;克隆远程仓库&lt;/strong&gt;： 如果电脑 A 尚未有项目代码：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; my_project&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果电脑 A 已有代码并已推送到远程仓库，则跳过此步骤。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;用 PyCharm 打开项目&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;打开 PyCharm，点击 &lt;strong&gt;File &amp;gt; Open&lt;/strong&gt;，选择项目目录。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;电脑-B-操作&#34;&gt;&lt;a href=&#34;#电脑-B-操作&#34; class=&#34;headerlink&#34; title=&#34;电脑 B 操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;电脑 B 操作&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;克隆远程仓库&lt;/strong&gt;： 在电脑 B 的终端中运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; my_project&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;用 PyCharm 打开项目&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;打开 PyCharm，点击 &lt;strong&gt;File &amp;gt; Open&lt;/strong&gt;，选择项目目录。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;四、日常开发流程&#34;&gt;&lt;a href=&#34;#四、日常开发流程&#34; class=&#34;headerlink&#34; title=&#34;四、日常开发流程&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、日常开发流程&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-在电脑-A-或-B-上修改代码&#34;&gt;&lt;a href=&#34;#1-在电脑-A-或-B-上修改代码&#34; class=&#34;headerlink&#34; title=&#34;1. 在电脑 A 或 B 上修改代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 在电脑 A 或 B 上修改代码&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;使用 PyCharm 编辑代码。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在终端或 PyCharm 的 Git 工具窗口中提交更改：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;描述本次更改的内容&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;2-在另一台电脑同步代码&#34;&gt;&lt;a href=&#34;#2-在另一台电脑同步代码&#34; class=&#34;headerlink&#34; title=&#34;2. 在另一台电脑同步代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 在另一台电脑同步代码&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在另一台电脑上拉取最新代码：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后继续开发。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;五、解决冲突&#34;&gt;&lt;a href=&#34;#五、解决冲突&#34; class=&#34;headerlink&#34; title=&#34;五、解决冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;五、解决冲突&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果两台电脑同时修改了同一个文件并提交，可能会出现冲突。解决方法如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;拉取代码时提示冲突&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Git 会提示冲突的文件。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;手动解决冲突&lt;/strong&gt;： 打开冲突文件，按照以下格式解决冲突：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; HEAD
-你的修改
-=======
-另一台电脑的修改
-&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; commit-hash&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改为期望的代码并保存。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;标记冲突已解决并提交&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;解决冲突&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;六、PyCharm-中内置-Git-工具的使用&#34;&gt;&lt;a href=&#34;#六、PyCharm-中内置-Git-工具的使用&#34; class=&#34;headerlink&#34; title=&#34;六、PyCharm 中内置 Git 工具的使用&#34;&gt;&lt;/a&gt;&lt;strong&gt;六、PyCharm 中内置 Git 工具的使用&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;提交代码&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;在 PyCharm 界面右上角，点击 &lt;strong&gt;Commit&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;勾选修改的文件，填写提交信息，然后点击 &lt;strong&gt;Commit&lt;/strong&gt; 或 &lt;strong&gt;Commit and Push&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;拉取代码&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;点击 &lt;strong&gt;Git &amp;gt; Pull&lt;/strong&gt;，选择远程分支，点击 &lt;strong&gt;OK&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;查看分支和日志&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;点击 &lt;strong&gt;Git &amp;gt; Log&lt;/strong&gt;，查看提交历史和分支结构。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;七、注意事项&#34;&gt;&lt;a href=&#34;#七、注意事项&#34; class=&#34;headerlink&#34; title=&#34;七、注意事项&#34;&gt;&lt;/a&gt;&lt;strong&gt;七、注意事项&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;保持代码同步&lt;/strong&gt;：每次在另一台电脑开发前，先执行 &lt;code&gt;git pull&lt;/code&gt; 拉取最新代码。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;频繁提交&lt;/strong&gt;：尽量将每次修改后的小更新提交到远程仓库，避免产生冲突。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多人协作时注意分支管理&lt;/strong&gt;：可以为不同功能创建分支，完成后再合并到主分支。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;八、分支管理&#34;&gt;&lt;a href=&#34;#八、分支管理&#34; class=&#34;headerlink&#34; title=&#34;八、分支管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;八、分支管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;当开发新功能或进行实验时，可以使用分支来避免影响主分支。&lt;/p&gt;
-&lt;h4 id=&#34;1-创建和切换分支&#34;&gt;&lt;a href=&#34;#1-创建和切换分支&#34; class=&#34;headerlink&#34; title=&#34;1. 创建和切换分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建和切换分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;创建新分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;切换到新分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或直接创建并切换：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout &lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-合并分支&#34;&gt;&lt;a href=&#34;#2-合并分支&#34; class=&#34;headerlink&#34; title=&#34;2. 合并分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 合并分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;切换到主分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;合并新功能分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; merge feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-删除分支&#34;&gt;&lt;a href=&#34;#3-删除分支&#34; class=&#34;headerlink&#34; title=&#34;3. 删除分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 删除分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;删除本地分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;删除远程分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push origin &lt;span class=&#34;token parameter variable&#34;&gt;--delete&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;九、处理多人协作的冲突&#34;&gt;&lt;a href=&#34;#九、处理多人协作的冲突&#34; class=&#34;headerlink&#34; title=&#34;九、处理多人协作的冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;九、处理多人协作的冲突&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果你在两台电脑之外，还与其他人协作开发，可以通过以下方式优化工作流。&lt;/p&gt;
-&lt;h4 id=&#34;1-定期拉取最新代码&#34;&gt;&lt;a href=&#34;#1-定期拉取最新代码&#34; class=&#34;headerlink&#34; title=&#34;1. 定期拉取最新代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 定期拉取最新代码&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在本地开发前，确保代码是最新的：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-使用-rebase-整理提交历史&#34;&gt;&lt;a href=&#34;#2-使用-rebase-整理提交历史&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 rebase 整理提交历史&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 使用 &lt;code&gt;rebase&lt;/code&gt; 整理提交历史&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在同步远程分支时，你可以选择 &lt;code&gt;rebase&lt;/code&gt; 方式，使提交历史更加整洁：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull &lt;span class=&#34;token parameter variable&#34;&gt;--rebase&lt;/span&gt; origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用标签管理版本&#34;&gt;&lt;a href=&#34;#3-使用标签管理版本&#34; class=&#34;headerlink&#34; title=&#34;3. 使用标签管理版本&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用标签管理版本&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;当一个功能开发完成后，可以添加一个标签：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; tag &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; v1.0 &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Version 1.0 release&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push origin v1.0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;十、PyCharm-的一些高级-Git-功能&#34;&gt;&lt;a href=&#34;#十、PyCharm-的一些高级-Git-功能&#34; class=&#34;headerlink&#34; title=&#34;十、PyCharm 的一些高级 Git 功能&#34;&gt;&lt;/a&gt;&lt;strong&gt;十、PyCharm 的一些高级 Git 功能&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-可视化查看分支&#34;&gt;&lt;a href=&#34;#1-可视化查看分支&#34; class=&#34;headerlink&#34; title=&#34;1. 可视化查看分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 可视化查看分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 界面右下角，点击 &lt;strong&gt;Git 分支名称&lt;/strong&gt;，可以查看和切换分支。&lt;/li&gt;
-&lt;li&gt;打开 &lt;strong&gt;Git &amp;gt; Log&lt;/strong&gt;，可以看到分支结构图和提交历史。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-解决冲突&#34;&gt;&lt;a href=&#34;#2-解决冲突&#34; class=&#34;headerlink&#34; title=&#34;2. 解决冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 解决冲突&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;当拉取代码遇到冲突时，PyCharm 提供了图形化工具：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;点击 &lt;strong&gt;Merge Conflicts&lt;/strong&gt; 提示框。&lt;/li&gt;
-&lt;li&gt;使用 PyCharm 的三栏界面，直观地合并冲突。&lt;/li&gt;
-&lt;li&gt;合并完成后，保存并提交。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;3-使用变基（Rebase）&#34;&gt;&lt;a href=&#34;#3-使用变基（Rebase）&#34; class=&#34;headerlink&#34; title=&#34;3. 使用变基（Rebase）&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用变基（Rebase）&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 中，选择 &lt;strong&gt;VCS &amp;gt; Git &amp;gt; Rebase&lt;/strong&gt;，可以直观地重新整理提交。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十一、优化开发体验&#34;&gt;&lt;a href=&#34;#十一、优化开发体验&#34; class=&#34;headerlink&#34; title=&#34;十一、优化开发体验&#34;&gt;&lt;/a&gt;&lt;strong&gt;十一、优化开发体验&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-配置-gitignore&#34;&gt;&lt;a href=&#34;#1-配置-gitignore&#34; class=&#34;headerlink&#34; title=&#34;1. 配置 .gitignore&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 配置 &lt;code&gt;.gitignore&lt;/code&gt;&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;避免将不必要的文件推送到远程仓库。比如 Python 项目常用的 &lt;code&gt;.gitignore&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;__pycache__/
-*.pyc
-*.pyo
-*.log
-.idea/
-.vscode/
-.DS_Store&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将 &lt;code&gt;.gitignore&lt;/code&gt; 文件添加到项目根目录，然后提交：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; .gitignore
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Add .gitignore&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-提高拉取速度&#34;&gt;&lt;a href=&#34;#2-提高拉取速度&#34; class=&#34;headerlink&#34; title=&#34;2. 提高拉取速度&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 提高拉取速度&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果仓库较大，可以通过浅克隆（仅克隆最近的提交历史）加快速度：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone &lt;span class=&#34;token parameter variable&#34;&gt;--depth&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用-SSH-配置多个远程地址&#34;&gt;&lt;a href=&#34;#3-使用-SSH-配置多个远程地址&#34; class=&#34;headerlink&#34; title=&#34;3. 使用 SSH 配置多个远程地址&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用 SSH 配置多个远程地址&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果有多个远程仓库，可以配置多个 &lt;code&gt;remote&lt;/code&gt; 地址：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; remote &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; backup git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project_backup.git&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;十二、代码评审（Code-Review）和协作工具&#34;&gt;&lt;a href=&#34;#十二、代码评审（Code-Review）和协作工具&#34; class=&#34;headerlink&#34; title=&#34;十二、代码评审（Code Review）和协作工具&#34;&gt;&lt;/a&gt;&lt;strong&gt;十二、代码评审（Code Review）和协作工具&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果需要团队协作，可以用 GitHub 的 Pull Request 功能：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;创建一个新分支进行开发。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;推送分支到远程：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; origin feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在 GitHub 上发起 **Pull Request (PR)**，让团队成员进行代码审查。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;审查通过后，合并分支。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十三、备份与恢复操作&#34;&gt;&lt;a href=&#34;#十三、备份与恢复操作&#34; class=&#34;headerlink&#34; title=&#34;十三、备份与恢复操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;十三、备份与恢复操作&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-创建仓库副本（Fork）&#34;&gt;&lt;a href=&#34;#1-创建仓库副本（Fork）&#34; class=&#34;headerlink&#34; title=&#34;1. 创建仓库副本（Fork）&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建仓库副本（Fork）&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;如果你想备份项目或创建自己的分支，可以直接在 GitHub 上点击 &lt;strong&gt;Fork&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-恢复代码&#34;&gt;&lt;a href=&#34;#2-恢复代码&#34; class=&#34;headerlink&#34; title=&#34;2. 恢复代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 恢复代码&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;如果需要回滚到某次提交：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; reset &lt;span class=&#34;token parameter variable&#34;&gt;--hard&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;commit-id&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看历史提交记录：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; log&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十四、自动化工作流&#34;&gt;&lt;a href=&#34;#十四、自动化工作流&#34; class=&#34;headerlink&#34; title=&#34;十四、自动化工作流&#34;&gt;&lt;/a&gt;&lt;strong&gt;十四、自动化工作流&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-使用-GitHub-Actions-自动化任务&#34;&gt;&lt;a href=&#34;#1-使用-GitHub-Actions-自动化任务&#34; class=&#34;headerlink&#34; title=&#34;1. 使用 GitHub Actions 自动化任务&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 使用 GitHub Actions 自动化任务&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;你可以在 GitHub 上配置 &lt;strong&gt;GitHub Actions&lt;/strong&gt;，实现以下功能：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;自动运行测试代码。&lt;/li&gt;
-&lt;li&gt;部署代码到服务器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;示例 &lt;code&gt;.github/workflows/main.yml&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; CI/CD Pipeline
-
-&lt;span class=&#34;token key atrule&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-  &lt;span class=&#34;token key atrule&#34;&gt;push&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token key atrule&#34;&gt;branches&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; main
-
-&lt;span class=&#34;token key atrule&#34;&gt;jobs&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-  &lt;span class=&#34;token key atrule&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token key atrule&#34;&gt;runs-on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ubuntu&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;latest
-    &lt;span class=&#34;token key atrule&#34;&gt;steps&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Checkout code
-        &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/checkout@v3
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Setup Python
-        &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/setup&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;python@v4
-        &lt;span class=&#34;token key atrule&#34;&gt;with&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-          &lt;span class=&#34;token key atrule&#34;&gt;python-version&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;3.8&#39;&lt;/span&gt;
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Install dependencies
-        &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; pip install &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;r requirements.txt
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Run tests
-        &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; pytest&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-使用-PyCharm-的任务管理&#34;&gt;&lt;a href=&#34;#2-使用-PyCharm-的任务管理&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 PyCharm 的任务管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 使用 PyCharm 的任务管理&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 中配置 &lt;strong&gt;Tasks &amp;amp; Contexts&lt;/strong&gt;，跟踪开发任务和环境状态。&lt;/li&gt;
-&lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</guid>
-            <title>更改 Windows PowerShell 的执行策略</title>
-            <link>https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</link>
-            <category>windows</category>
-            <category>powershell</category>
-            <pubDate>Sat, 21 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;更改-Windows-PowerShell-的执行策略&#34;&gt;&lt;a href=&#34;#更改-Windows-PowerShell-的执行策略&#34; class=&#34;headerlink&#34; title=&#34;更改 Windows PowerShell 的执行策略&#34;&gt;&lt;/a&gt;更改 Windows PowerShell 的执行策略&lt;/h1&gt;&lt;h3 id=&#34;1-打开-PowerShell-以管理员身份运行&#34;&gt;&lt;a href=&#34;#1-打开-PowerShell-以管理员身份运行&#34; class=&#34;headerlink&#34; title=&#34;1. 打开 PowerShell 以管理员身份运行&#34;&gt;&lt;/a&gt;1. 打开 PowerShell 以管理员身份运行&lt;/h3&gt;&lt;p&gt;首先，您需要以管理员身份运行 PowerShell：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;按 &lt;code&gt;Win + X&lt;/code&gt; 并选择“Windows PowerShell (管理员)”。&lt;/li&gt;
-&lt;li&gt;如果您使用的是较新的 Windows 版本，也可以搜索“PowerShell”，右键点击并选择“以管理员身份运行”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-检查当前执行策略&#34;&gt;&lt;a href=&#34;#2-检查当前执行策略&#34; class=&#34;headerlink&#34; title=&#34;2. 检查当前执行策略&#34;&gt;&lt;/a&gt;2. 检查当前执行策略&lt;/h3&gt;&lt;p&gt;在更改执行策略之前，您可以查看当前的执行策略设置，执行以下命令：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;该命令将返回当前的执行策略，可能的输出包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;（默认策略，不允许执行任何脚本）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;（本地脚本可以运行，下载的脚本需要签名）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;（允许所有脚本运行）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ByPass&lt;/code&gt;（完全忽略执行策略）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-修改执行策略&#34;&gt;&lt;a href=&#34;#3-修改执行策略&#34; class=&#34;headerlink&#34; title=&#34;3. 修改执行策略&#34;&gt;&lt;/a&gt;3. 修改执行策略&lt;/h3&gt;&lt;p&gt;要更改执行策略，可以使用 &lt;code&gt;Set-ExecutionPolicy&lt;/code&gt; 命令。例如，您可以将执行策略更改为 &lt;code&gt;RemoteSigned&lt;/code&gt;，这样可以运行本地脚本并允许下载的签名脚本运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; RemoteSigned&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果您希望设置为不限制脚本执行，可以使用 &lt;code&gt;Unrestricted&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Unrestricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者，如果您希望脚本完全不受限制（但存在安全风险），可以使用 &lt;code&gt;Bypass&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Bypass&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-确认更改&#34;&gt;&lt;a href=&#34;#4-确认更改&#34; class=&#34;headerlink&#34; title=&#34;4. 确认更改&#34;&gt;&lt;/a&gt;4. 确认更改&lt;/h3&gt;&lt;p&gt;更改执行策略后，系统会要求您确认。输入 &lt;code&gt;Y&lt;/code&gt; 进行确认并按回车。&lt;/p&gt;
-&lt;h3 id=&#34;5-检查执行策略更改是否生效&#34;&gt;&lt;a href=&#34;#5-检查执行策略更改是否生效&#34; class=&#34;headerlink&#34; title=&#34;5. 检查执行策略更改是否生效&#34;&gt;&lt;/a&gt;5. 检查执行策略更改是否生效&lt;/h3&gt;&lt;p&gt;再次执行以下命令来确保策略已更新：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6-了解不同的执行策略&#34;&gt;&lt;a href=&#34;#6-了解不同的执行策略&#34; class=&#34;headerlink&#34; title=&#34;6. 了解不同的执行策略&#34;&gt;&lt;/a&gt;6. 了解不同的执行策略&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;：不允许运行任何脚本（这是默认设置）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;：允许本地脚本运行，但从互联网下载的脚本需要有效的签名才能运行。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;：允许所有脚本运行，但会在运行下载的脚本时给出警告。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Bypass&lt;/code&gt;：完全忽略执行策略（适用于临时需求，但有安全隐患）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;AllSigned&lt;/code&gt;：要求所有脚本必须由可信的发布者签名，适用于更严格的安全要求。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;7-恢复默认执行策略&#34;&gt;&lt;a href=&#34;#7-恢复默认执行策略&#34; class=&#34;headerlink&#34; title=&#34;7. 恢复默认执行策略&#34;&gt;&lt;/a&gt;7. 恢复默认执行策略&lt;/h3&gt;&lt;p&gt;如果您希望恢复默认的执行策略，只需执行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Restricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/13/parsec-jiao-cheng/</guid>
-            <title>parsec教程</title>
-            <link>https://0xdadream.github.io/2024/12/13/parsec-jiao-cheng/</link>
-            <category>tools</category>
-            <pubDate>Fri, 13 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;parsec教程&#34;&gt;&lt;a href=&#34;#parsec教程&#34; class=&#34;headerlink&#34; title=&#34;parsec教程&#34;&gt;&lt;/a&gt;parsec教程&lt;/h1&gt;&lt;h2 id=&#34;修改代理&#34;&gt;&lt;a href=&#34;#修改代理&#34; class=&#34;headerlink&#34; title=&#34;修改代理&#34;&gt;&lt;/a&gt;修改代理&lt;/h2&gt;&lt;p&gt;找到文件&lt;code&gt;C:\Users\用户名\AppData\Roaming\Parsec\config.josn&lt;/code&gt;，修改&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,
-&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy_address&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;127.0.0.1&#34;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,
-&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy_port&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10808&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参照你的代理端口修改&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/11/pycharm-kuai-jie-jian/</guid>
-            <title>pycharm快捷键</title>
-            <link>https://0xdadream.github.io/2024/12/11/pycharm-kuai-jie-jian/</link>
-            <category>tools</category>
-            <pubDate>Wed, 11 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;pycharm快捷键&#34;&gt;&lt;a href=&#34;#pycharm快捷键&#34; class=&#34;headerlink&#34; title=&#34;pycharm快捷键&#34;&gt;&lt;/a&gt;pycharm快捷键&lt;/h1&gt;&lt;p&gt;pycharm快捷键&lt;/p&gt;
-&lt;p&gt;以下是 PyCharm 在 Windows 上高效开发常用的快捷键列表，按照功能分类：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;文件与项目管理&#34;&gt;&lt;a href=&#34;#文件与项目管理&#34; class=&#34;headerlink&#34; title=&#34;文件与项目管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;文件与项目管理&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;打开文件/最近文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + E&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + N&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;切换到项目视图&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示/隐藏工具窗口&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + #[1-9]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;代码导航&#34;&gt;&lt;a href=&#34;#代码导航&#34; class=&#34;headerlink&#34; title=&#34;代码导航&#34;&gt;&lt;/a&gt;&lt;strong&gt;代码导航&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;跳转到声明/定义&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + B&lt;/code&gt; 或 &lt;code&gt;Ctrl + 鼠标左键&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;返回到上一个位置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + 左箭头&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;前进到下一个位置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + 右箭头&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;快速导航到符号（类、方法等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + Alt + N&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示方法列表&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F12&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;代码编辑&#34;&gt;&lt;a href=&#34;#代码编辑&#34; class=&#34;headerlink&#34; title=&#34;代码编辑&#34;&gt;&lt;/a&gt;&lt;strong&gt;代码编辑&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;格式化代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + L&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;智能补全（代码补全）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + 空格&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;自动导入&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + Enter&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;多光标选择&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 鼠标左键&lt;/code&gt; 或 &lt;code&gt;Ctrl + Alt + Shift + J&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;快速重构（重命名、提取变量等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F6&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;注释/取消注释行代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + /&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;注释/取消注释块代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + /&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;运行与调试&#34;&gt;&lt;a href=&#34;#运行与调试&#34; class=&#34;headerlink&#34; title=&#34;运行与调试&#34;&gt;&lt;/a&gt;&lt;strong&gt;运行与调试&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;运行当前文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F10&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;调试当前文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F9&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;添加断点&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;步入（Step Into）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F7&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;步过（Step Over）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;跳出（Step Out）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;搜索与替换&#34;&gt;&lt;a href=&#34;#搜索与替换&#34; class=&#34;headerlink&#34; title=&#34;搜索与替换&#34;&gt;&lt;/a&gt;&lt;strong&gt;搜索与替换&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;全局搜索&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + F&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;替换&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + R&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;在文件中搜索&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找下一个&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找上一个&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;版本控制&#34;&gt;&lt;a href=&#34;#版本控制&#34; class=&#34;headerlink&#34; title=&#34;版本控制&#34;&gt;&lt;/a&gt;&lt;strong&gt;版本控制&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;查看版本历史（当前文件）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + A&lt;/code&gt; 然后输入 &lt;code&gt;File History&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;提交变更&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + K&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;更新项目&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + T&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示版本控制窗口&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 9&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;通用快捷键&#34;&gt;&lt;a href=&#34;#通用快捷键&#34; class=&#34;headerlink&#34; title=&#34;通用快捷键&#34;&gt;&lt;/a&gt;&lt;strong&gt;通用快捷键&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;搜索动作（如功能、设置等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + A&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;打开设置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + S&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;切换全屏模式&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + F11&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示代码提示信息&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Q&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/06/python-ku-merklelib/</guid>
-            <title>python库merklelib</title>
-            <link>https://0xdadream.github.io/2024/12/06/python-ku-merklelib/</link>
-            <category>bug</category>
-            <category>python</category>
-            <pubDate>Fri, 06 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;python库merklelib&#34;&gt;&lt;a href=&#34;#python库merklelib&#34; class=&#34;headerlink&#34; title=&#34;python库merklelib&#34;&gt;&lt;/a&gt;python库merklelib&lt;/h1&gt;&lt;h2 id=&#34;报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’&#34;&gt;&lt;a href=&#34;#报错AttributeError-module-‘collections’-has-no-attribute-‘Iterable’&#34; class=&#34;headerlink&#34; title=&#34;报错AttributeError: module ‘collections’ has no attribute ‘Iterable’&#34;&gt;&lt;/a&gt;报错AttributeError: module ‘collections’ has no attribute ‘Iterable’&lt;/h2&gt;&lt;p&gt;该错误发生在 Python 3.10 或更高版本中，因为 &lt;code&gt;collections.Iterable&lt;/code&gt; 在 Python 3.10 中已被移至 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;。这是 Python 的一个兼容性问题。&lt;/p&gt;
-&lt;p&gt;要解决此问题，请将代码中的 &lt;code&gt;collections.Iterable&lt;/code&gt; 替换为 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;：&lt;/p&gt;
-&lt;h3 id=&#34;修改代码&#34;&gt;&lt;a href=&#34;#修改代码&#34; class=&#34;headerlink&#34; title=&#34;修改代码&#34;&gt;&lt;/a&gt;修改代码&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc
-
-&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;isinstance&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token comment&#34;&gt;# Your logic here&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果你正在使用一个依赖于旧版 &lt;code&gt;collections.Iterable&lt;/code&gt; 的库（如 &lt;code&gt;merklelib&lt;/code&gt;），可以通过以下方式解决：&lt;/p&gt;
-&lt;h3 id=&#34;解决方法-1：升级相关库&#34;&gt;&lt;a href=&#34;#解决方法-1：升级相关库&#34; class=&#34;headerlink&#34; title=&#34;解决方法 1：升级相关库&#34;&gt;&lt;/a&gt;解决方法 1：升级相关库&lt;/h3&gt;&lt;p&gt;检查是否有更新的版本来支持 Python 3.10+。你可以尝试更新库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--upgrade&lt;/span&gt; merklelib&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;解决方法-2：兼容性修复&#34;&gt;&lt;a href=&#34;#解决方法-2：兼容性修复&#34; class=&#34;headerlink&#34; title=&#34;解决方法 2：兼容性修复&#34;&gt;&lt;/a&gt;解决方法 2：兼容性修复&lt;/h3&gt;&lt;p&gt;如果库尚未更新，你可以手动修复代码：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开出错的代码文件（通常在库的安装目录中）。&lt;/li&gt;
-&lt;li&gt;找到 &lt;code&gt;collections.Iterable&lt;/code&gt; 并替换为 &lt;code&gt;collections.abc.Iterable&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;或者，临时修复可以通过 Monkey Patch：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc
-collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; collections&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;abc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Iterable&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;解决方法-3：降级-Python-版本&#34;&gt;&lt;a href=&#34;#解决方法-3：降级-Python-版本&#34; class=&#34;headerlink&#34; title=&#34;解决方法 3：降级 Python 版本&#34;&gt;&lt;/a&gt;解决方法 3：降级 Python 版本&lt;/h3&gt;&lt;p&gt;如果无法更新库或代码，可以暂时降级到 Python 3.9：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pyenv &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;.12
-pyenv global &lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;.12&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;推荐优先升级库或修复代码以适应 Python 的新版本&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

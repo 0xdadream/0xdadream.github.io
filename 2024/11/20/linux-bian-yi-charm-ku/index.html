@@ -61,9 +61,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
@@ -428,21 +428,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-03-24
+                    2025-04-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    406
+                    775
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -499,11 +499,64 @@
 </li>
 <li><p><strong>配置安装路径：</strong></p>
 <p>执行 <code>configure.sh</code> 脚本，指定 GMP 和 PBC 的安装路径：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./configure.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./configure.sh
+
+<span class="token comment">#执行成功</span>
+Install prefix    /usr/local
+data directory    /usr/local/share/charm
+binary directory  /usr/local/bin
+library directory /usr/local/lib
+config directory  /usr/local/etc
+Source path       /home/hero/charm
+CFLAGS            <span class="token parameter variable">-O2</span> <span class="token parameter variable">-g</span>
+CHARM_CFLAGS       <span class="token parameter variable">-m64</span> <span class="token parameter variable">-Wall</span> <span class="token parameter variable">-Wundef</span> -Wwrite-strings -Wmissing-prototypes  -fstack-protector-all -Wendif-labels -Wmissing-include-dirs -Wempty-body -Wnested-externs -Wformat-security -Wformat-y2k -Winit-self -Wignored-qualifiers -Wold-style-declaration -Wold-style-definition -Wtype-limits
+LDFLAGS           <span class="token parameter variable">-m64</span>
+<span class="token function">make</span>              <span class="token function">make</span>
+python            /usr/bin/python3
+python-config     /usr/bin/python3-config
+build_ext options build_ext
+<span class="token function">install</span>           <span class="token function">install</span>
+<span class="token function">host</span> CPU          x86_64
+<span class="token function">wget</span>              /usr/bin/wget
+gprof enabled     no
+profiler          no
+static build      no
+<span class="token parameter variable">-Werror</span> enabled   no
+integer module    <span class="token function">yes</span>
+ecc module        <span class="token function">yes</span>
+pairing module    <span class="token function">yes</span>
+disable benchmark no
+libm found        <span class="token function">yes</span>
+libgmp found      <span class="token function">yes</span>
+libpbc found      <span class="token function">yes</span>
+libcrypto found   <span class="token function">yes</span>
+Documentation     no<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p><strong>编译和安装：</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span>
-<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<span class="token comment">#执行成功</span>
+copying build/lib.linux-x86_64-3.8/charm/core/math/pairing.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/math/integer.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/math/elliptic_curve.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/math
+copying build/lib.linux-x86_64-3.8/charm/core/benchmark.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/cryptobase.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/AES.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/DES.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/crypto
+copying build/lib.linux-x86_64-3.8/charm/core/crypto/DES3.cpython-38-x86_64-linux-gnu.so -<span class="token operator">&gt;</span> charm/core/crypto
+Complete
+
+
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token comment">#执行成功</span>
+Installed /usr/local/lib/python3.8/dist-packages/attrs-25.3.0-py3.8.egg
+Searching <span class="token keyword">for</span> <span class="token assign-left variable">setuptools</span><span class="token operator">==</span><span class="token number">45.2</span>.0
+Best match: setuptools <span class="token number">45.2</span>.0
+Adding setuptools <span class="token number">45.2</span>.0 to easy-install.pth <span class="token function">file</span>
+Installing easy_install script to /usr/local/bin
+
+Using /usr/lib/python3/dist-packages
+Finished processing dependencies <span class="token keyword">for</span> Charm-Crypto<span class="token operator">==</span><span class="token number">0.50</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>import charm</code>判断安装是否成功</p>
 </li>
@@ -1256,7 +1309,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">229.4k</span>
+                        class="white-color">231.6k</span>
             
             
             

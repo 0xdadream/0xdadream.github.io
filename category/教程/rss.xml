@@ -5,13 +5,14 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Wed, 12 Mar 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Wed, 12 Mar 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
+        <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 10 Apr 2025 12:25:00 +0800</lastBuildDate>
         <category>intel</category>
-        <category>安装</category>
+        <category>tip</category>
+        <category>tips</category>
         <category>re</category>
         <category>工具</category>
+        <category>安装</category>
         <category>Java</category>
         <category>linux</category>
         <category>教程</category>
@@ -20,20 +21,20 @@
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>BUUCTF</category>
         <category>windows</category>
+        <category>BUUCTF</category>
         <category>server</category>
+        <category>wall</category>
+        <category>comfyui</category>
         <category>conda</category>
         <category>powershell</category>
-        <category>comfyui</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tools</category>
         <category>emby</category>
-        <category>tips</category>
-        <category>git</category>
         <category>python</category>
+        <category>git</category>
         <category>google</category>
         <category>java</category>
         <category>命令</category>
@@ -45,6 +46,167 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</guid>
+            <title>安装WSL子系统教程</title>
+            <link>https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</link>
+            <category>linux</category>
+            <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;安装WSL子系统教程&#34;&gt;&lt;a href=&#34;#安装WSL子系统教程&#34; class=&#34;headerlink&#34; title=&#34;安装WSL子系统教程&#34;&gt;&lt;/a&gt;安装WSL子系统教程&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-前提条件与准备工作&#34;&gt;&lt;a href=&#34;#1-前提条件与准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 前提条件与准备工作&#34;&gt;&lt;/a&gt;1. 前提条件与准备工作&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;操作系统要求&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;Windows 10：要求版本 2004 及 Build 19041 以上，或&lt;/li&gt;
+&lt;li&gt;Windows 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络环境&lt;/strong&gt;：部分地区需要设置代理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管理员权限&lt;/strong&gt;：安装及部分配置需要以管理员身份运行 PowerShell 或 CMD。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储空间及磁盘规划&lt;/strong&gt;：WSL 会在系统盘或你指定的目录中保存 Linux 文件系统，提前规划好存储位置与空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-WSL-安装方法&#34;&gt;&lt;a href=&#34;#2-WSL-安装方法&#34; class=&#34;headerlink&#34; title=&#34;2. WSL 安装方法&#34;&gt;&lt;/a&gt;2. WSL 安装方法&lt;/h2&gt;&lt;h3 id=&#34;2-1-一键安装（推荐）&#34;&gt;&lt;a href=&#34;#2-1-一键安装（推荐）&#34; class=&#34;headerlink&#34; title=&#34;2.1 一键安装（推荐）&#34;&gt;&lt;/a&gt;2.1 一键安装（推荐）&lt;/h3&gt;&lt;p&gt;适用于 Windows 10 21H2 及之后版本以及 Windows 11。步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开 PowerShell（管理员模式）&lt;/strong&gt;：&lt;br&gt; 在开始菜单搜索 “PowerShell”，右键选择“以管理员身份运行”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;执行安装命令&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会自动启用 WSL 相关组件、虚拟机平台，并默认安装最新的 WSL 版本（通常为 WSL2）和默认 Linux 发行版（一般为 Ubuntu）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;重启电脑&lt;/strong&gt;：安装完成后系统会提示重启以完成配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-2-手动安装&#34;&gt;&lt;a href=&#34;#2-2-手动安装&#34; class=&#34;headerlink&#34; title=&#34;2.2 手动安装&#34;&gt;&lt;/a&gt;2.2 手动安装&lt;/h3&gt;&lt;p&gt;对于需要更多自定义选项的用户，手动安装步骤如下：&lt;/p&gt;
+&lt;h4 id=&#34;（1）启用-WSL-和虚拟机平台功能&#34;&gt;&lt;a href=&#34;#（1）启用-WSL-和虚拟机平台功能&#34; class=&#34;headerlink&#34; title=&#34;（1）启用 WSL 和虚拟机平台功能&#34;&gt;&lt;/a&gt;（1）启用 WSL 和虚拟机平台功能&lt;/h4&gt;&lt;p&gt;在管理员模式下打开 PowerShell，依次执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:Microsoft-Windows-Subsystem-Linux &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart
+dism&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;online &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;enable-feature&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;featurename:VirtualMachinePlatform &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;all &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;norestart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后重启计算机。&lt;/p&gt;
+&lt;h4 id=&#34;（2）安装-WSL2-内核更新包&#34;&gt;&lt;a href=&#34;#（2）安装-WSL2-内核更新包&#34; class=&#34;headerlink&#34; title=&#34;（2）安装 WSL2 内核更新包&#34;&gt;&lt;/a&gt;（2）安装 WSL2 内核更新包&lt;/h4&gt;&lt;p&gt;前往 WSL2 内核更新包下载链接 ，下载并运行安装包，更新 Linux 内核。&lt;/p&gt;
+&lt;h4 id=&#34;（3）设置默认-WSL-版本为-WSL2&#34;&gt;&lt;a href=&#34;#（3）设置默认-WSL-版本为-WSL2&#34; class=&#34;headerlink&#34; title=&#34;（3）设置默认 WSL 版本为 WSL2&#34;&gt;&lt;/a&gt;（3）设置默认 WSL 版本为 WSL2&lt;/h4&gt;&lt;p&gt;再次打开 PowerShell（无需管理员模式也可），执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（4）安装-Linux-发行版&#34;&gt;&lt;a href=&#34;#（4）安装-Linux-发行版&#34; class=&#34;headerlink&#34; title=&#34;（4）安装 Linux 发行版&#34;&gt;&lt;/a&gt;（4）安装 Linux 发行版&lt;/h4&gt;&lt;p&gt;有两种方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;通过 Microsoft Store&lt;/strong&gt;：搜索 &lt;code&gt;Ubuntu&lt;/code&gt;、&lt;code&gt;Debian&lt;/code&gt; 等，选择版本（如 Ubuntu 22.04 LTS），点击“获取”安装，推荐这个，然后再执行命令行安装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;命令行安装&lt;/strong&gt;：查看支持的在线发行版列表：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;list &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;online&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装指定版本（例如 Ubuntu 20.04）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;install &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-Linux-发行版安装及首次使用&#34;&gt;&lt;a href=&#34;#3-Linux-发行版安装及首次使用&#34; class=&#34;headerlink&#34; title=&#34;3. Linux 发行版安装及首次使用&#34;&gt;&lt;/a&gt;3. Linux 发行版安装及首次使用&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;首次启动&lt;/strong&gt;：安装完成后，从“开始菜单”启动对应 Linux 发行版。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建用户&lt;/strong&gt;：系统会提示你为 Linux 系统创建用户名（须为小写）和密码，这样你就可以使用 &lt;code&gt;sudo&lt;/code&gt; 提权操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新系统&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; upgrade&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装常用软件&lt;/strong&gt;：根据需要安装 &lt;code&gt;git&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt;、&lt;code&gt;python3&lt;/code&gt; 等：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; python3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-WSL-版本切换：WSL1-与-WSL2&#34;&gt;&lt;a href=&#34;#4-WSL-版本切换：WSL1-与-WSL2&#34; class=&#34;headerlink&#34; title=&#34;4. WSL 版本切换：WSL1 与 WSL2&#34;&gt;&lt;/a&gt;4. WSL 版本切换：WSL1 与 WSL2&lt;/h2&gt;&lt;p&gt;WSL 中各发行版可以独立设置为 WSL1 或 WSL2。查看所有已安装发行版及其版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-pgsql&#34; data-language=&#34;pgsql&#34;&gt;&lt;code class=&#34;language-pgsql&#34;&gt; NAME            STATE           VERSION
+* Ubuntu-22.04    Running         2
+  Ubuntu-20.04    Stopped         2
+  Debian          Stopped         1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;切换版本&#34;&gt;&lt;a href=&#34;#切换版本&#34; class=&#34;headerlink&#34; title=&#34;切换版本&#34;&gt;&lt;/a&gt;切换版本&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL2&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; Debian 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;将发行版切换为 WSL1&lt;/strong&gt;（如有需求）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; 1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认安装版本&lt;/strong&gt;：在安装新发行版时，可以用下面命令设置默认版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-default&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;切换版本过程中，转换时间与系统数据量有关，部分较大发行版可能需要几分钟。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-附加功能与进阶用法&#34;&gt;&lt;a href=&#34;#5-附加功能与进阶用法&#34; class=&#34;headerlink&#34; title=&#34;5. 附加功能与进阶用法&#34;&gt;&lt;/a&gt;5. 附加功能与进阶用法&lt;/h2&gt;&lt;h3 id=&#34;5-1-Windows-与-WSL-文件共享&#34;&gt;&lt;a href=&#34;#5-1-Windows-与-WSL-文件共享&#34; class=&#34;headerlink&#34; title=&#34;5.1 Windows 与 WSL 文件共享&#34;&gt;&lt;/a&gt;5.1 Windows 与 WSL 文件共享&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;WSL 文件系统访问&lt;/strong&gt;：&lt;br&gt; 在 WSL 中可通过 &lt;code&gt;/mnt/c/&lt;/code&gt; 等路径访问 Windows 磁盘。例如访问 &lt;code&gt;C:\Users\YourName&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cd &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;mnt/c/Users/YourName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;在 Windows 中访问 WSL 文件&lt;/strong&gt;：&lt;br&gt; 可使用 File Explorer 直接访问：在地址栏输入 &lt;code&gt;\\wsl$&lt;/code&gt;，会显示所有已安装的 WSL 发行版及其文件系统。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;同步代码与项目文件&lt;/strong&gt;：&lt;br&gt; 可以将项目文件放在 Windows 共享目录中，再在 WSL 中编辑、执行，这样两个系统间文件同步简单且快速。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-2-WSL-GUI-应用（WSLg）&#34;&gt;&lt;a href=&#34;#5-2-WSL-GUI-应用（WSLg）&#34; class=&#34;headerlink&#34; title=&#34;5.2 WSL GUI 应用（WSLg）&#34;&gt;&lt;/a&gt;5.2 WSL GUI 应用（WSLg）&lt;/h3&gt;&lt;p&gt;在最新版本的 Windows 10 和 Windows 11 上，WSL 支持 Linux 图形界面应用（WSLg）。配置方法如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;确保 WSL 更新至最新版本&lt;/strong&gt;：执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动 GUI 应用&lt;/strong&gt;（如 Firefox）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; firefox
+firefox &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;WSLg 会自动启动并显示 Linux GUI 应用，无需额外配置 X 服务器。&lt;/p&gt;
+&lt;h3 id=&#34;5-3-代理设置&#34;&gt;&lt;a href=&#34;#5-3-代理设置&#34; class=&#34;headerlink&#34; title=&#34;5.3 代理设置&#34;&gt;&lt;/a&gt;5.3 代理设置&lt;/h3&gt;&lt;p&gt;如果你处于网络环境受限或想加快下载速度，可以设置代理。&lt;/p&gt;
+&lt;h4 id=&#34;（1）设置-Windows-系统代理&#34;&gt;&lt;a href=&#34;#（1）设置-Windows-系统代理&#34; class=&#34;headerlink&#34; title=&#34;（1）设置 Windows 系统代理&#34;&gt;&lt;/a&gt;（1）设置 Windows 系统代理&lt;/h4&gt;&lt;p&gt;如果使用科学上网工具（如 Clash、V2Ray、VPN），确保系统代理已启用。可在 Windows 设置 → 网络和 Internet → 代理中配置，也可以通过命令设置环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;setx http_proxy http://127.0.0.1:7890 /m
+setx https_proxy http://127.0.0.1:7890 /m&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;（2）在-WSL-中设置代理&#34;&gt;&lt;a href=&#34;#（2）在-WSL-中设置代理&#34; class=&#34;headerlink&#34; title=&#34;（2）在 WSL 中设置代理&#34;&gt;&lt;/a&gt;（2）在 WSL 中设置代理&lt;/h4&gt;&lt;p&gt;在 WSL 中使用环境变量：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;http_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;https_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若需要全局生效，在 &lt;code&gt;~/.bashrc&lt;/code&gt; 或 &lt;code&gt;~/.zshrc&lt;/code&gt; 文件末尾加入以上配置，并执行 &lt;code&gt;source ~/.bashrc&lt;/code&gt; 使其生效。&lt;/p&gt;
+&lt;h4 id=&#34;（3）apt-专用代理配置&#34;&gt;&lt;a href=&#34;#（3）apt-专用代理配置&#34; class=&#34;headerlink&#34; title=&#34;（3）apt 专用代理配置&#34;&gt;&lt;/a&gt;（3）apt 专用代理配置&lt;/h4&gt;&lt;p&gt;创建或编辑 apt 配置文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/apt/apt.conf.d/proxy.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cpp&#34; data-language=&#34;cpp&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;http&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+Acquire&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;https&lt;span class=&#34;token double-colon punctuation&#34;&gt;::&lt;/span&gt;Proxy &lt;span class=&#34;token string&#34;&gt;&#34;http://127.0.0.1:7890&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后，&lt;code&gt;sudo apt update&lt;/code&gt; 将走代理。&lt;/p&gt;
+&lt;h3 id=&#34;5-4-多实例安装（同一版本多个副本）&#34;&gt;&lt;a href=&#34;#5-4-多实例安装（同一版本多个副本）&#34; class=&#34;headerlink&#34; title=&#34;5.4 多实例安装（同一版本多个副本）&#34;&gt;&lt;/a&gt;5.4 多实例安装（同一版本多个副本）&lt;/h3&gt;&lt;p&gt;WSL 允许你导入同一 Linux 发行版的多个副本，便于隔离不同任务。操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导出已有实例&lt;/strong&gt;&lt;br&gt; 假设已安装 &lt;code&gt;Ubuntu-20.04&lt;/code&gt;，用以下命令导出为 &lt;code&gt;.tar&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;export Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;导入为新实例&lt;/strong&gt;&lt;br&gt; 用新名称（例如 &lt;code&gt;Ubuntu-Dev&lt;/code&gt;）创建副本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;import Ubuntu-Dev D:\WSL\Ubuntu-Dev D:\wsl-backups\ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;tar &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;version 2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动新实例&lt;/strong&gt;&lt;br&gt; 使用下面命令启动新导入的实例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-Dev&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样你就可以在同一台机器上同时运行多个独立的 Linux 环境。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-常用命令与管理技巧&#34;&gt;&lt;a href=&#34;#6-常用命令与管理技巧&#34; class=&#34;headerlink&#34; title=&#34;6. 常用命令与管理技巧&#34;&gt;&lt;/a&gt;6. 常用命令与管理技巧&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看已安装发行版及版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动指定发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置默认发行版（直接运行 wsl 时启动的系统）&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;setdefault &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;切换 WSL 版本&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;set-version&lt;/span&gt; &amp;lt;发行版名称&amp;gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新 WSL 内核&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;关闭所有运行中的 WSL 实例&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;卸载某个发行版&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;unregister &amp;lt;发行版名称&amp;gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/</guid>
             <title>文件链接全教程</title>
@@ -2860,145 +3022,6 @@ $$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;s
 &lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;渲染效果：-4&#34;&gt;&lt;a href=&#34;#渲染效果：-4&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/24/dong-tai-lian-jie-ku/</guid>
-            <title>动态链接库</title>
-            <link>https://0xdadream.github.io/2024/11/24/dong-tai-lian-jie-ku/</link>
-            <category>命令</category>
-            <pubDate>Sun, 24 Nov 2024 23:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;动态链接库&#34;&gt;&lt;a href=&#34;#动态链接库&#34; class=&#34;headerlink&#34; title=&#34;动态链接库&#34;&gt;&lt;/a&gt;动态链接库&lt;/h1&gt;&lt;hr&gt;
-&lt;h3 id=&#34;一、-etc-ld-so-conf-d-的作用&#34;&gt;&lt;a href=&#34;#一、-etc-ld-so-conf-d-的作用&#34; class=&#34;headerlink&#34; title=&#34;一、/etc/ld.so.conf.d 的作用&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、&lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt; 的作用&lt;/strong&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;动态库路径管理&lt;/strong&gt;：系统会读取该目录下的 &lt;code&gt;.conf&lt;/code&gt; 文件，这些文件指定了动态链接库的额外搜索路径。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;配置动态库缓存&lt;/strong&gt;：在运行程序时，动态链接器会从这些路径中查找所需的库。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;默认加载的路径&lt;/strong&gt;（视系统配置而定）：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;/lib&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/usr/lib&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/usr/local/lib&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;通过 &lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt;，可以扩展默认路径。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;二、动态库的加载顺序&#34;&gt;&lt;a href=&#34;#二、动态库的加载顺序&#34; class=&#34;headerlink&#34; title=&#34;二、动态库的加载顺序&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、动态库的加载顺序&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;动态链接器按照以下顺序查找动态库：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;环境变量&lt;/strong&gt;：&lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;缓存文件&lt;/strong&gt;：&lt;code&gt;/etc/ld.so.cache&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;默认路径&lt;/strong&gt;：如 &lt;code&gt;/lib&lt;/code&gt; 和 &lt;code&gt;/usr/lib&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：为了提高效率，系统不会直接读取所有路径，而是从 &lt;code&gt;/etc/ld.so.cache&lt;/code&gt; 中加载已经缓存的路径信息。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;三、-etc-ld-so-conf-d-的文件结构&#34;&gt;&lt;a href=&#34;#三、-etc-ld-so-conf-d-的文件结构&#34; class=&#34;headerlink&#34; title=&#34;三、/etc/ld.so.conf.d 的文件结构&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、&lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt; 的文件结构&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;该目录包含多个 &lt;code&gt;.conf&lt;/code&gt; 文件，每个文件可以指定一组路径。例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 查看 /etc/ld.so.conf.d 内容&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /etc/ld.so.conf.d&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出示例：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-lua&#34; data-language=&#34;lua&#34;&gt;&lt;code class=&#34;language-lua&#34;&gt;glibc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf
-x86_64&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;linux&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;gnu&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf
-&lt;span class=&#34;token keyword&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;文件示例&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;/etc/ld.so.conf.d/local.conf：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-vbnet&#34; data-language=&#34;vbnet&#34;&gt;&lt;code class=&#34;language-vbnet&#34;&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;usr&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;local&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;lib&lt;/span&gt;
-&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;opt&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;custom&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;lib&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这些路径会被动态链接器添加到库搜索路径中。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;四、如何配置动态库路径&#34;&gt;&lt;a href=&#34;#四、如何配置动态库路径&#34; class=&#34;headerlink&#34; title=&#34;四、如何配置动态库路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、如何配置动态库路径&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-添加自定义路径&#34;&gt;&lt;a href=&#34;#1-添加自定义路径&#34; class=&#34;headerlink&#34; title=&#34;1. 添加自定义路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 添加自定义路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;假设有一个自定义动态库路径 &lt;code&gt;/home/user/mylibs&lt;/code&gt;，以下是配置步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建配置文件&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/ld.so.conf.d/mylibs.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;添加如下内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/home/user/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;更新动态库缓存&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证是否生效&lt;/strong&gt;： 查看是否包含新路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h4 id=&#34;2-临时配置路径&#34;&gt;&lt;a href=&#34;#2-临时配置路径&#34; class=&#34;headerlink&#34; title=&#34;2. 临时配置路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 临时配置路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果只是临时测试动态库路径，可以使用 &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; 环境变量：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/user/mylibs:&lt;span class=&#34;token variable&#34;&gt;$LD_LIBRARY_PATH&lt;/span&gt;
-./myprogram&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：这种方法仅对当前终端会话有效。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;五、ldconfig-的作用&#34;&gt;&lt;a href=&#34;#五、ldconfig-的作用&#34; class=&#34;headerlink&#34; title=&#34;五、ldconfig 的作用&#34;&gt;&lt;/a&gt;&lt;strong&gt;五、&lt;code&gt;ldconfig&lt;/code&gt; 的作用&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ldconfig&lt;/code&gt; 是管理动态库缓存的工具，其作用包括：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;扫描路径&lt;/strong&gt;：根据 &lt;code&gt;/etc/ld.so.conf&lt;/code&gt; 和 &lt;code&gt;/etc/ld.so.conf.d/&lt;/code&gt; 下的配置文件，扫描动态库路径。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;更新缓存&lt;/strong&gt;：生成 &lt;code&gt;/etc/ld.so.cache&lt;/code&gt; 文件，加速库的加载。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;常用命令&#34;&gt;&lt;a href=&#34;#常用命令&#34; class=&#34;headerlink&#34; title=&#34;常用命令&#34;&gt;&lt;/a&gt;&lt;strong&gt;常用命令&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;指定路径更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig /home/user/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看当前缓存的库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;六、动态库配置实例&#34;&gt;&lt;a href=&#34;#六、动态库配置实例&#34; class=&#34;headerlink&#34; title=&#34;六、动态库配置实例&#34;&gt;&lt;/a&gt;&lt;strong&gt;六、动态库配置实例&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-动态库开发&#34;&gt;&lt;a href=&#34;#1-动态库开发&#34; class=&#34;headerlink&#34; title=&#34;1. 动态库开发&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 动态库开发&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;创建一个简单动态库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;// hello.c&lt;/span&gt;
-&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token function&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Hello, from dynamic library!\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编译成动态库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;gcc -fPIC -shared -o libhello.so hello.c&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将动态库移动到 &lt;code&gt;/opt/mylibs&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /opt/mylibs
-&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; libhello.so /opt/mylibs/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-配置加载路径&#34;&gt;&lt;a href=&#34;#2-配置加载路径&#34; class=&#34;headerlink&#34; title=&#34;2. 配置加载路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 配置加载路径&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;创建 &lt;code&gt;/etc/ld.so.conf.d/mylibs.conf&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/ld.so.conf.d/mylibs.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/opt/mylibs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更新缓存：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ldconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用动态库&#34;&gt;&lt;a href=&#34;#3-使用动态库&#34; class=&#34;headerlink&#34; title=&#34;3. 使用动态库&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用动态库&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;编写一个测试程序：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-c&#34; data-language=&#34;c&#34;&gt;&lt;code class=&#34;language-c&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;// main.c&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-
-&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;token function&#34;&gt;hello&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;编译并运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; main main.c &lt;span class=&#34;token parameter variable&#34;&gt;-lhello&lt;/span&gt;
-./main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Hello, from dynamic library&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;七、排错方法&#34;&gt;&lt;a href=&#34;#七、排错方法&#34; class=&#34;headerlink&#34; title=&#34;七、排错方法&#34;&gt;&lt;/a&gt;&lt;strong&gt;七、排错方法&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;检查动态库是否存在&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldconfig &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; libhello&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;验证动态库路径是否正确&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ldd ./main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;动态库无法加载时&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;检查是否添加了正确的路径到 &lt;code&gt;/etc/ld.so.conf.d&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;检查是否运行了 &lt;code&gt;ldconfig&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
  ]]></description>
         </item>
     </channel>
