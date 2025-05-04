@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Thu, 10 Apr 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Fri, 02 May 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 02 May 2025 12:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>tips</category>
@@ -46,6 +46,323 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/02/whl-wen-jian-ming-hou-zhui/</guid>
+            <title>whl文件名后缀</title>
+            <link>https://0xdadream.github.io/2025/05/02/whl-wen-jian-ming-hou-zhui/</link>
+            <category>python</category>
+            <pubDate>Fri, 02 May 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;whl文件名后缀&#34;&gt;&lt;a href=&#34;#whl文件名后缀&#34; class=&#34;headerlink&#34; title=&#34;whl文件名后缀&#34;&gt;&lt;/a&gt;whl文件名后缀&lt;/h1&gt;&lt;h2 id=&#34;1-Wheel-文件名的基本格式&#34;&gt;&lt;a href=&#34;#1-Wheel-文件名的基本格式&#34; class=&#34;headerlink&#34; title=&#34;1. Wheel 文件名的基本格式&#34;&gt;&lt;/a&gt;1. Wheel 文件名的基本格式&lt;/h2&gt;&lt;p&gt;Wheel 名称遵循 PEP 427 规范，通用格式为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ruby&#34; data-language=&#34;ruby&#34;&gt;&lt;code class=&#34;language-ruby&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;distribution&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;version&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;build tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;python tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;abi tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;platform tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;whl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;distribution&lt;/strong&gt;：包名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;version&lt;/strong&gt;：包版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;build tag&lt;/strong&gt;（可选）：构建号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;python tag&lt;/strong&gt;：支持的 Python 解释器及版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;abi tag&lt;/strong&gt;：二进制兼容的 ABI（应用二进制接口）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;platform tag&lt;/strong&gt;：目标操作系统和硬件平台&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;mypkg-1.2.3-1-cp39-cp39-manylinux2014_x86_64.whl
+       │    │   │    │            └──── platform tag
+       │    │   │    └──────────────── abi tag
+       │    │   └─────────────────────── python tag
+       │    └─────────────────────────── build tag
+       └─────────────────────────────── distribution-version&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;2-build-tag&#34;&gt;&lt;a href=&#34;#2-build-tag&#34; class=&#34;headerlink&#34; title=&#34;2. build tag&#34;&gt;&lt;/a&gt;2. build tag&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;格式：一个整数，有时候也会带字母或其他标识&lt;/li&gt;
+&lt;li&gt;用途：同一版本的多次编译时区分，比如针对不同源或依赖变动的二进制重构&lt;/li&gt;
+&lt;li&gt;示例：&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mypkg-1.0-1-...&lt;/code&gt; 与 &lt;code&gt;mypkg-1.0-2-...&lt;/code&gt; 表示同一版本的第 1 次和第 2 次构建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-python-tag&#34;&gt;&lt;a href=&#34;#3-python-tag&#34; class=&#34;headerlink&#34; title=&#34;3. python tag&#34;&gt;&lt;/a&gt;3. python tag&lt;/h2&gt;&lt;p&gt;指明哪些 Python 解释器及版本可以安装该 Wheel。常见格式及含义：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;支持所有 Python 3.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py36&lt;/code&gt; 、&lt;code&gt;py37&lt;/code&gt;…&lt;/td&gt;
+&lt;td&gt;专用于 Python 3.6、3.7 等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py2.py3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同时支持 Python 2.x 和 3.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp310&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pp37&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;PyPy 3.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;jy37&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Jython 2.7（标识为 &lt;code&gt;jy27&lt;/code&gt;）等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;前缀&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;py&lt;/code&gt;：纯 Python 实现&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cp&lt;/code&gt;：CPython（二进制扩展）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pp&lt;/code&gt;：PyPy&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;jy&lt;/code&gt;：Jython&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-abi-tag&#34;&gt;&lt;a href=&#34;#4-abi-tag&#34; class=&#34;headerlink&#34; title=&#34;4. abi tag&#34;&gt;&lt;/a&gt;4. abi tag&lt;/h2&gt;&lt;p&gt;ABI（Application Binary Interface）决定了编译的 C 扩展与解释器的二进制兼容性。常见 ABI tag：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;none&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;纯 Python 包，不含 C 扩展&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;abi3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用了稳定的“limited API”（PEP 384），跨多个 CPython 版本兼容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;针对 CPython 3.9 标准 ABI 编译&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39m&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.9 + pymalloc enabled（&lt;code&gt;m&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp310d&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.10 Debug build（&lt;code&gt;d&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;如果 &lt;code&gt;python tag&lt;/code&gt; 与 &lt;code&gt;abi tag&lt;/code&gt; 一致（如 &lt;code&gt;cp39-cp39&lt;/code&gt;），表示该包针对该版本的标准 ABI 编译&lt;/li&gt;
+&lt;li&gt;带后缀的如 &lt;code&gt;m&lt;/code&gt;、&lt;code&gt;d&lt;/code&gt;、&lt;code&gt;u&lt;/code&gt; 等表示特定的编译选项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-platform-tag&#34;&gt;&lt;a href=&#34;#5-platform-tag&#34; class=&#34;headerlink&#34; title=&#34;5. platform tag&#34;&gt;&lt;/a&gt;5. platform tag&lt;/h2&gt;&lt;p&gt;描述该 Wheel 的目标操作系统、系统版本和 CPU 架构。常见平台 tag 及示例：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;platform tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;manylinux1_x86_64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Linux x86_64，符合 Manylinux1 标准&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;manylinux2014_aarch64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Linux ARM64，符合 Manylinux2014 标准&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;win_amd64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Windows 64 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;win32&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Windows 32 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;macosx_10_9_x86_64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;macOS 10.9+ on x86_64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;macosx_11_0_arm64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;macOS 11+ on Apple Silicon (ARM64)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;any&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;平台无关（纯 Python 包）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;manylinux&lt;/strong&gt; 系列：用于在大多数 Linux 发行版上安装二进制扩展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;macosx&lt;/strong&gt;：通常还会带上最低支持的 macOS 版本号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;any&lt;/strong&gt;：完全纯 Python，无平台限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-综合示例解析&#34;&gt;&lt;a href=&#34;#6-综合示例解析&#34; class=&#34;headerlink&#34; title=&#34;6. 综合示例解析&#34;&gt;&lt;/a&gt;6. 综合示例解析&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Wheel 名称&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;requests-2.28.1-py3-none-any.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;纯 Python 包 &lt;code&gt;requests&lt;/code&gt; v2.28.1，支持所有 Python 3，平台无关&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;numpy-1.24.0-cp39-cp39-manylinux2014_x86_64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;numpy&lt;/code&gt; v1.24.0，CPython 3.9 标准 ABI，Linux x86_64 二进制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Pillow-9.3.0-cp310-cp310-win_amd64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Pillow&lt;/code&gt; v9.3.0，CPython 3.10，Windows 64 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;somepkg-0.1.0-2-cp38-abi3-manylinux1_x86_64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;somepkg&lt;/code&gt; v0.1.0，第 2 次构建，CPython 3.8 编译但使用 abi3，Linux x86_64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-为什么要了解这些后缀&#34;&gt;&lt;a href=&#34;#7-为什么要了解这些后缀&#34; class=&#34;headerlink&#34; title=&#34;7. 为什么要了解这些后缀&#34;&gt;&lt;/a&gt;7. 为什么要了解这些后缀&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;避免安装失败&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pip install package.whl&lt;/code&gt; 时，若当前环境的 Python 版本、ABI 或平台与 Wheel 不匹配，安装会被跳过或报错。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提高下载速度&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;选择预编译好的 &lt;code&gt;.whl&lt;/code&gt;，可免去源码编译时间，尤其是大型 C 扩展库（如 NumPy、SciPy）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨平台兼容&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;理解 &lt;code&gt;manylinux&lt;/code&gt;、&lt;code&gt;macosx&lt;/code&gt;、&lt;code&gt;win&lt;/code&gt; 等标签，有助于在不同系统间无痛部署。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-查找可用的-Wheel&#34;&gt;&lt;a href=&#34;#8-查找可用的-Wheel&#34; class=&#34;headerlink&#34; title=&#34;8. 查找可用的 Wheel&#34;&gt;&lt;/a&gt;8. 查找可用的 Wheel&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip index versions PACKAGE_NAME&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; PACKAGE_NAME --only-binary&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;:all:&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一个命令列出所有可用版本及对应的 Wheel&lt;/li&gt;
+&lt;li&gt;第二个命令强制只使用二进制 Wheel 安装&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/linux-an-zhuang-conda-jiao-cheng/</guid>
+            <title>Linux安装Conda教程</title>
+            <link>https://0xdadream.github.io/2025/04/10/linux-an-zhuang-conda-jiao-cheng/</link>
+            <category>conda</category>
+            <pubDate>Thu, 10 Apr 2025 13:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Linux安装Conda教程&#34;&gt;&lt;a href=&#34;#Linux安装Conda教程&#34; class=&#34;headerlink&#34; title=&#34;Linux安装Conda教程&#34;&gt;&lt;/a&gt;Linux安装Conda教程&lt;/h1&gt;&lt;h2 id=&#34;1-准备工作&#34;&gt;&lt;a href=&#34;#1-准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 准备工作&#34;&gt;&lt;/a&gt;1. 准备工作&lt;/h2&gt;&lt;h3 id=&#34;1-1-系统要求&#34;&gt;&lt;a href=&#34;#1-1-系统要求&#34; class=&#34;headerlink&#34; title=&#34;1.1 系统要求&#34;&gt;&lt;/a&gt;1.1 系统要求&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;操作系统：大多数 Linux 发行版（如 Ubuntu、Debian、CentOS、Fedora 等）都可使用。&lt;/li&gt;
+&lt;li&gt;权限：建议使用普通用户（避免使用 root 权限直接安装）来安装并管理 conda 环境。&lt;/li&gt;
+&lt;li&gt;网络连接：需要下载安装脚本，可以使用 &lt;code&gt;wget&lt;/code&gt; 或 &lt;code&gt;curl&lt;/code&gt; 工具。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-2-安装前依赖（可选）&#34;&gt;&lt;a href=&#34;#1-2-安装前依赖（可选）&#34; class=&#34;headerlink&#34; title=&#34;1.2 安装前依赖（可选）&#34;&gt;&lt;/a&gt;1.2 安装前依赖（可选）&lt;/h3&gt;&lt;p&gt;大多数 Linux 系统都自带 &lt;code&gt;bash&lt;/code&gt; 和基本工具。如果你的系统缺少 wget 或 curl，可以使用包管理器安装，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# Ubuntu / Debian 系统&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# CentOS / Fedora 系统&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;2-下载-Miniconda-安装脚本&#34;&gt;&lt;a href=&#34;#2-下载-Miniconda-安装脚本&#34; class=&#34;headerlink&#34; title=&#34;2. 下载 Miniconda 安装脚本&#34;&gt;&lt;/a&gt;2. 下载 Miniconda 安装脚本&lt;/h2&gt;&lt;p&gt;Miniconda 提供了适用于 Linux 的安装脚本。可以按以下步骤操作：&lt;/p&gt;
+&lt;h3 id=&#34;2-1-选择合适的安装程序&#34;&gt;&lt;a href=&#34;#2-1-选择合适的安装程序&#34; class=&#34;headerlink&#34; title=&#34;2.1 选择合适的安装程序&#34;&gt;&lt;/a&gt;2.1 选择合适的安装程序&lt;/h3&gt;&lt;p&gt;对于大多数 64 位系统，下载最新的 Miniconda3 版本。安装脚本文件名为 &lt;code&gt;Miniconda3-latest-Linux-x86_64.sh&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-使用-wget-或-curl-下载&#34;&gt;&lt;a href=&#34;#2-2-使用-wget-或-curl-下载&#34; class=&#34;headerlink&#34; title=&#34;2.2 使用 wget 或 curl 下载&#34;&gt;&lt;/a&gt;2.2 使用 wget 或 curl 下载&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;wget&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或使用 &lt;code&gt;curl&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-O&lt;/span&gt; https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;3-验证安装包完整性（可选）&#34;&gt;&lt;a href=&#34;#3-验证安装包完整性（可选）&#34; class=&#34;headerlink&#34; title=&#34;3. 验证安装包完整性（可选）&#34;&gt;&lt;/a&gt;3. 验证安装包完整性（可选）&lt;/h2&gt;&lt;p&gt;为确保下载的文件未被破坏或篡改，可以检查 SHA256 校验和。你需要从 Miniconda 官方页面 查看对应版本的正确 SHA256 值，然后执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;sha256sum Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比较输出结果和官方提供的校验和。如果一致，则可以继续安装。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-安装-Miniconda&#34;&gt;&lt;a href=&#34;#4-安装-Miniconda&#34; class=&#34;headerlink&#34; title=&#34;4. 安装 Miniconda&#34;&gt;&lt;/a&gt;4. 安装 Miniconda&lt;/h2&gt;&lt;h3 id=&#34;4-1-赋予执行权限&#34;&gt;&lt;a href=&#34;#4-1-赋予执行权限&#34; class=&#34;headerlink&#34; title=&#34;4.1 赋予执行权限&#34;&gt;&lt;/a&gt;4.1 赋予执行权限&lt;/h3&gt;&lt;p&gt;首先为下载的脚本添加执行权限：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-2-运行安装脚本&#34;&gt;&lt;a href=&#34;#4-2-运行安装脚本&#34; class=&#34;headerlink&#34; title=&#34;4.2 运行安装脚本&#34;&gt;&lt;/a&gt;4.2 运行安装脚本&lt;/h3&gt;&lt;p&gt;使用 bash 执行安装脚本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-3-安装过程中注意事项&#34;&gt;&lt;a href=&#34;#4-3-安装过程中注意事项&#34; class=&#34;headerlink&#34; title=&#34;4.3 安装过程中注意事项&#34;&gt;&lt;/a&gt;4.3 安装过程中注意事项&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;阅读许可协议&lt;/strong&gt;：安装脚本开始时会显示许可协议，需要按下 &lt;code&gt;Enter&lt;/code&gt; 浏览内容，然后输入 &lt;code&gt;yes&lt;/code&gt; 接受许可协议。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;选择安装路径&lt;/strong&gt;：脚本默认建议安装到用户主目录下的 &lt;code&gt;miniconda3&lt;/code&gt; 目录。你可以按回车键接受默认设置，也可以输入自定义路径。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;初始化 conda&lt;/strong&gt;：安装过程中会询问是否初始化 conda（即修改 shell 启动文件，如 &lt;code&gt;~/.bashrc&lt;/code&gt;）。推荐选择 “yes”，这样每次登录时都会自动加载 conda 环境配置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;安装完成后，安装脚本会显示 “installation finished.” 的提示。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-激活-conda-环境&#34;&gt;&lt;a href=&#34;#5-激活-conda-环境&#34; class=&#34;headerlink&#34; title=&#34;5. 激活 conda 环境&#34;&gt;&lt;/a&gt;5. 激活 conda 环境&lt;/h2&gt;&lt;p&gt;如果安装时选择了初始化，则会自动在 &lt;code&gt;~/.bashrc&lt;/code&gt; 中添加必要的配置，通常类似如下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# !! Contents within this block are managed by &#39;conda init&#39; !!&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;__conda_setup&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;&#39;/home/your_username/miniconda3/bin/conda&lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt;shell.bash&lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt;hook&#39; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; /dev/null&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$?&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;eval&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$__conda_setup&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/etc/profile.d/conda.sh&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+        &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/etc/profile.d/conda.sh&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+        &lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/bin:&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;unset&lt;/span&gt; __conda_setup
+&lt;span class=&#34;token comment&#34;&gt;# &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你没有选择自动初始化，可以手动执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/miniconda3/etc/profile.d/conda.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者直接将 conda 的路径添加到你的 PATH 环境变量中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=~&lt;/span&gt;/miniconda3/bin:&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;建议将上述命令添加到 &lt;code&gt;~/.bashrc&lt;/code&gt; 或其他相应的 shell 配置文件中。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-验证安装&#34;&gt;&lt;a href=&#34;#6-验证安装&#34; class=&#34;headerlink&#34; title=&#34;6. 验证安装&#34;&gt;&lt;/a&gt;6. 验证安装&lt;/h2&gt;&lt;p&gt;打开一个新的终端或在当前终端执行激活命令后，运行以下命令检查 conda 是否安装成功：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下，会输出类似 &lt;code&gt;conda 4.x.x&lt;/code&gt; 版本信息。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-基本使用&#34;&gt;&lt;a href=&#34;#7-基本使用&#34; class=&#34;headerlink&#34; title=&#34;7. 基本使用&#34;&gt;&lt;/a&gt;7. 基本使用&lt;/h2&gt;&lt;h3 id=&#34;7-1-创建虚拟环境&#34;&gt;&lt;a href=&#34;#7-1-创建虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;7.1 创建虚拟环境&#34;&gt;&lt;/a&gt;7.1 创建虚拟环境&lt;/h3&gt;&lt;p&gt;例如，创建一个名为 &lt;code&gt;myenv&lt;/code&gt; 的环境，并安装 Python 3.9：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; myenv &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;7-2-激活虚拟环境&#34;&gt;&lt;a href=&#34;#7-2-激活虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;7.2 激活虚拟环境&#34;&gt;&lt;/a&gt;7.2 激活虚拟环境&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda activate myenv&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;激活后，命令提示符中会显示环境名称。&lt;/p&gt;
+&lt;h3 id=&#34;7-3-安装其他包&#34;&gt;&lt;a href=&#34;#7-3-安装其他包&#34; class=&#34;headerlink&#34; title=&#34;7.3 安装其他包&#34;&gt;&lt;/a&gt;7.3 安装其他包&lt;/h3&gt;&lt;p&gt;可以直接使用 conda 安装需要的包，例如安装 numpy：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; numpy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此外，也可以使用 pip 安装不在 conda 仓库里的包，但推荐先查找 conda 仓库，因为 conda 可能已经进行了优化和依赖管理。&lt;/p&gt;
+&lt;h3 id=&#34;7-4-更新-conda&#34;&gt;&lt;a href=&#34;#7-4-更新-conda&#34; class=&#34;headerlink&#34; title=&#34;7.4 更新 conda&#34;&gt;&lt;/a&gt;7.4 更新 conda&lt;/h3&gt;&lt;p&gt;建议定期更新 conda 以确保使用最新的功能和安全补丁：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda update conda&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;8-常见问题排查&#34;&gt;&lt;a href=&#34;#8-常见问题排查&#34; class=&#34;headerlink&#34; title=&#34;8. 常见问题排查&#34;&gt;&lt;/a&gt;8. 常见问题排查&lt;/h2&gt;&lt;h3 id=&#34;8-1-conda-命令未找到&#34;&gt;&lt;a href=&#34;#8-1-conda-命令未找到&#34; class=&#34;headerlink&#34; title=&#34;8.1 conda 命令未找到&#34;&gt;&lt;/a&gt;8.1 conda 命令未找到&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;请确保你的 &lt;code&gt;~/.bashrc&lt;/code&gt; 文件已正确载入，可以执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;检查是否正确添加了 conda 的安装路径至 PATH 环境变量中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-2-安装或更新失败&#34;&gt;&lt;a href=&#34;#8-2-安装或更新失败&#34; class=&#34;headerlink&#34; title=&#34;8.2 安装或更新失败&#34;&gt;&lt;/a&gt;8.2 安装或更新失败&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;检查网络连接或国内用户是否需要配置代理或使用镜像源（例如清华、阿里等提供的 conda 镜像）。&lt;/li&gt;
+&lt;li&gt;参考官方文档（conda 官方文档）获取更多帮助和说明。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-参考资料&#34;&gt;&lt;a href=&#34;#9-参考资料&#34; class=&#34;headerlink&#34; title=&#34;9. 参考资料&#34;&gt;&lt;/a&gt;9. 参考资料&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</guid>
             <title>安装WSL子系统教程</title>
@@ -2900,128 +3217,6 @@ df&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pipe&lt;span class
 &lt;li&gt;&lt;strong&gt;LWE&lt;/strong&gt; 和 &lt;strong&gt;SVP&lt;/strong&gt; 是格密码中相互关联的问题。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;IFP&lt;/strong&gt; 和 &lt;strong&gt;DLP&lt;/strong&gt; 是经典密码的两个主要难题。&lt;/li&gt;
 &lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/27/an-zhuang-pypbc/</guid>
-            <title>python安装pypbc</title>
-            <link>https://0xdadream.github.io/2024/11/27/an-zhuang-pypbc/</link>
-            <category>linux</category>
-            <pubDate>Wed, 27 Nov 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;python安装pypbc&#34;&gt;&lt;a href=&#34;#python安装pypbc&#34; class=&#34;headerlink&#34; title=&#34;python安装pypbc&#34;&gt;&lt;/a&gt;python安装pypbc&lt;/h1&gt;&lt;p&gt;python安装pypbc&lt;/p&gt;
-&lt;p&gt;首先我是ubuntu22环境，python版本为3.10&lt;/p&gt;
-&lt;p&gt;去&lt;a href=&#34;https://github.com/debatem1/pypbc&#34;&gt;pypbc&lt;/a&gt;把代码全部下载，进去目录&lt;code&gt;pypbc&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; pypbc
-pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;多版本使用对应的pip安装即可，执行完就晚装完成了&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip list &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; pypbc  &lt;span class=&#34;token comment&#34;&gt;# 验证安装&lt;/span&gt;
-pypbc               &lt;span class=&#34;token number&#34;&gt;0.2&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/27/typora-shu-xue-fu-hao/</guid>
-            <title>typora数学符号</title>
-            <link>https://0xdadream.github.io/2024/11/27/typora-shu-xue-fu-hao/</link>
-            <category>tools</category>
-            <pubDate>Wed, 27 Nov 2024 00:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;typora数学符号&#34;&gt;&lt;a href=&#34;#typora数学符号&#34; class=&#34;headerlink&#34; title=&#34;typora数学符号&#34;&gt;&lt;/a&gt;typora数学符号&lt;/h1&gt;&lt;p&gt;Typora 是一个支持 LaTeX 数学公式的优秀 Markdown 编辑器，可以直接编写数学公式并实时渲染。以下是如何在 Typora 中使用数学公式的详细指南：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-启用数学公式支持&#34;&gt;&lt;a href=&#34;#1-启用数学公式支持&#34; class=&#34;headerlink&#34; title=&#34;1. 启用数学公式支持&#34;&gt;&lt;/a&gt;1. &lt;strong&gt;启用数学公式支持&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;默认情况下，Typora 支持 LaTeX 格式的数学公式，无需额外设置。如果未生效，请确保已启用数学渲染：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开 Typora。&lt;/li&gt;
-&lt;li&gt;点击顶部菜单栏的 &lt;strong&gt;File &amp;gt; Preferences（设置）&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;在设置中，选择 &lt;strong&gt;Markdown&lt;/strong&gt; 选项卡。&lt;/li&gt;
-&lt;li&gt;确保勾选了 &lt;strong&gt;Enable MathJax&lt;/strong&gt; 或 &lt;strong&gt;Enable Katex&lt;/strong&gt;，以支持数学公式渲染。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-数学公式语法&#34;&gt;&lt;a href=&#34;#2-数学公式语法&#34; class=&#34;headerlink&#34; title=&#34;2. 数学公式语法&#34;&gt;&lt;/a&gt;2. &lt;strong&gt;数学公式语法&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;2-1-行内公式&#34;&gt;&lt;a href=&#34;#2-1-行内公式&#34; class=&#34;headerlink&#34; title=&#34;2.1 行内公式&#34;&gt;&lt;/a&gt;2.1 行内公式&lt;/h3&gt;&lt;p&gt;在段落中插入公式，使用单个 &lt;code&gt;$&lt;/code&gt; 包裹公式内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;行内公式示例：$E = mc^2$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果： 行内公式示例：$E = mc^2$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;2-2-独立公式&#34;&gt;&lt;a href=&#34;#2-2-独立公式&#34; class=&#34;headerlink&#34; title=&#34;2.2 独立公式&#34;&gt;&lt;/a&gt;2.2 独立公式&lt;/h3&gt;&lt;p&gt;单独显示的数学公式，使用双 &lt;code&gt;$&lt;/code&gt; 或 &lt;code&gt;$$&lt;/code&gt; 包裹公式内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;独立公式示例：
-$$
-\int_a^b f(x)dx = F(b) - F(a)
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果：&lt;br&gt;$$&lt;br&gt;\int_a^b f(x)dx = F(b) - F(a)&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-复杂数学公式&#34;&gt;&lt;a href=&#34;#3-复杂数学公式&#34; class=&#34;headerlink&#34; title=&#34;3. 复杂数学公式&#34;&gt;&lt;/a&gt;3. &lt;strong&gt;复杂数学公式&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;示例-1：矩阵&#34;&gt;&lt;a href=&#34;#示例-1：矩阵&#34; class=&#34;headerlink&#34; title=&#34;示例 1：矩阵&#34;&gt;&lt;/a&gt;示例 1：矩阵&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;矩阵：
-$$
-\mathbf{A} = \begin{bmatrix}
-1 &amp;amp; 2 &amp;amp; 3 \\
-4 &amp;amp; 5 &amp;amp; 6 \\
-7 &amp;amp; 8 &amp;amp; 9
-\end{bmatrix}
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果：&lt;br&gt;$$&lt;br&gt;\mathbf{A} = \begin{bmatrix}&lt;br&gt;1 &amp;amp; 2 &amp;amp; 3 \&lt;br&gt;4 &amp;amp; 5 &amp;amp; 6 \&lt;br&gt;7 &amp;amp; 8 &amp;amp; 9&lt;br&gt;\end{bmatrix}&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;示例-2：分数和开方&#34;&gt;&lt;a href=&#34;#示例-2：分数和开方&#34; class=&#34;headerlink&#34; title=&#34;示例 2：分数和开方&#34;&gt;&lt;/a&gt;示例 2：分数和开方&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;分数与开方：
-$$
-x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果：&lt;br&gt;$$&lt;br&gt;x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;示例-3：求和与极限&#34;&gt;&lt;a href=&#34;#示例-3：求和与极限&#34; class=&#34;headerlink&#34; title=&#34;示例 3：求和与极限&#34;&gt;&lt;/a&gt;示例 3：求和与极限&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;求和与极限：
-$$
-\sum_{i=1}^n i = \frac{n(n+1)}{2}, \quad \lim_{x \to \infty} \frac{1}{x} = 0
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果：&lt;br&gt;$$&lt;br&gt;\sum_{i=1}^n i = \frac{n(n+1)}{2}, \quad \lim_{x \to \infty} \frac{1}{x} = 0&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;示例-4：多行公式对齐&#34;&gt;&lt;a href=&#34;#示例-4：多行公式对齐&#34; class=&#34;headerlink&#34; title=&#34;示例 4：多行公式对齐&#34;&gt;&lt;/a&gt;示例 4：多行公式对齐&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;多行公式对齐：
-$$
-\begin{aligned}
-y &amp;amp;= mx + b \\
-f(x) &amp;amp;= x^2 + 2x + 1
-\end{aligned}
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;渲染效果：&lt;br&gt;$$&lt;br&gt;\begin{aligned}&lt;br&gt;y &amp;amp;= mx + b \&lt;br&gt;f(x) &amp;amp;= x^2 + 2x + 1&lt;br&gt;\end{aligned}&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-快捷键&#34;&gt;&lt;a href=&#34;#4-快捷键&#34; class=&#34;headerlink&#34; title=&#34;4. 快捷键&#34;&gt;&lt;/a&gt;4. &lt;strong&gt;快捷键&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;使用 &lt;strong&gt;&lt;code&gt;Ctrl + T&lt;/code&gt;&lt;/strong&gt; 或 &lt;strong&gt;&lt;code&gt;Command + T&lt;/code&gt;&lt;/strong&gt; 可以快速切换公式预览。&lt;/li&gt;
-&lt;li&gt;如果希望查看公式源代码，按下 &lt;strong&gt;&lt;code&gt;Ctrl + /&lt;/code&gt;&lt;/strong&gt; 或 **&lt;code&gt;Command + /&lt;/code&gt;**。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;在 Typora 中，如果需要数学公式与文字紧密排列在一起，可以使用 &lt;strong&gt;行内公式&lt;/strong&gt; 格式。具体方法如下：&lt;/p&gt;
-&lt;p&gt;偏好设置-&amp;gt;markdown-&amp;gt;勾选内联公式&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;1-使用-实现行内公式&#34;&gt;&lt;a href=&#34;#1-使用-实现行内公式&#34; class=&#34;headerlink&#34; title=&#34;1. 使用 $...$ 实现行内公式&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 使用 &lt;code&gt;$...$&lt;/code&gt; 实现行内公式&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;行内公式会随着文字的排版而排列，可以直接插入到文字之间。例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;爱因斯坦的质能方程为 $E=mc^2$，这是能量和质量关系的基础公式。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;渲染效果：&#34;&gt;&lt;a href=&#34;#渲染效果：&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;爱因斯坦的质能方程为 $E=mc^2$，这是能量和质量关系的基础公式。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-注意空格与对齐问题&#34;&gt;&lt;a href=&#34;#2-注意空格与对齐问题&#34; class=&#34;headerlink&#34; title=&#34;2. 注意空格与对齐问题&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 注意空格与对齐问题&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;示例-1：在公式与文字之间增加适当的空格&#34;&gt;&lt;a href=&#34;#示例-1：在公式与文字之间增加适当的空格&#34; class=&#34;headerlink&#34; title=&#34;示例 1：在公式与文字之间增加适当的空格&#34;&gt;&lt;/a&gt;示例 1：在公式与文字之间增加适当的空格&lt;/h3&gt;&lt;p&gt;当公式两侧紧挨中文字符时，可能需要手动添加空格，以确保渲染结果美观：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;质量 $m$ 和能量 $E$ 之间的关系为 $E = mc^2$。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;渲染效果：-1&#34;&gt;&lt;a href=&#34;#渲染效果：-1&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;质量 $m$ 和能量 $E$ 之间的关系为 $E = mc^2$。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;示例-2：纯英文情况下，公式无需额外空格&#34;&gt;&lt;a href=&#34;#示例-2：纯英文情况下，公式无需额外空格&#34; class=&#34;headerlink&#34; title=&#34;示例 2：纯英文情况下，公式无需额外空格&#34;&gt;&lt;/a&gt;示例 2：纯英文情况下，公式无需额外空格&lt;/h3&gt;&lt;p&gt;在纯英文环境中，公式通常与文字自然对齐，无需调整：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;The equation $E=mc^2$ explains the relationship between energy and mass.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;渲染效果：-2&#34;&gt;&lt;a href=&#34;#渲染效果：-2&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;The equation $E=mc^2$ explains the relationship between energy and mass.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-混合行内和块级公式&#34;&gt;&lt;a href=&#34;#3-混合行内和块级公式&#34; class=&#34;headerlink&#34; title=&#34;3. 混合行内和块级公式&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 混合行内和块级公式&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;如果需要同时包含行内和块级公式，可以灵活使用：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;爱因斯坦提出了著名的公式 $E = mc^2$，用于描述能量和质量的关系。
-
-更详细的表达形式为：
-$$
-E = \int_a^b f(x) dx
-$$&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;渲染效果：-3&#34;&gt;&lt;a href=&#34;#渲染效果：-3&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;爱因斯坦提出了著名的公式 $E = mc^2$，用于描述能量和质量的关系。&lt;/p&gt;
-&lt;p&gt;更详细的表达形式为：&lt;br&gt;$$&lt;br&gt;E = \int_a^b f(x) dx&lt;br&gt;$$&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-Typora-自动调整换行&#34;&gt;&lt;a href=&#34;#4-Typora-自动调整换行&#34; class=&#34;headerlink&#34; title=&#34;4. Typora 自动调整换行&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. Typora 自动调整换行&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;如果文字较多且公式插入后自动换行，可以通过调整文字排版来控制公式位置。例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;渲染效果：-4&#34;&gt;&lt;a href=&#34;#渲染效果：-4&#34; class=&#34;headerlink&#34; title=&#34;渲染效果：&#34;&gt;&lt;/a&gt;渲染效果：&lt;/h3&gt;&lt;p&gt;为了进一步验证公式 $E=mc^2$ 的正确性，我们需要对其进行理论推导，涉及到积分与导数等高等数学内容。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Wed, 19 Feb 2025 16:25:00 +0800</pubDate>
-        <lastBuildDate>Wed, 19 Feb 2025 16:25:00 +0800</lastBuildDate>
+        <pubDate>Thu, 10 Apr 2025 13:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 10 Apr 2025 13:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>tips</category>
@@ -46,6 +46,113 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/linux-an-zhuang-conda-jiao-cheng/</guid>
+            <title>Linux安装Conda教程</title>
+            <link>https://0xdadream.github.io/2025/04/10/linux-an-zhuang-conda-jiao-cheng/</link>
+            <category>conda</category>
+            <pubDate>Thu, 10 Apr 2025 13:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Linux安装Conda教程&#34;&gt;&lt;a href=&#34;#Linux安装Conda教程&#34; class=&#34;headerlink&#34; title=&#34;Linux安装Conda教程&#34;&gt;&lt;/a&gt;Linux安装Conda教程&lt;/h1&gt;&lt;h2 id=&#34;1-准备工作&#34;&gt;&lt;a href=&#34;#1-准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 准备工作&#34;&gt;&lt;/a&gt;1. 准备工作&lt;/h2&gt;&lt;h3 id=&#34;1-1-系统要求&#34;&gt;&lt;a href=&#34;#1-1-系统要求&#34; class=&#34;headerlink&#34; title=&#34;1.1 系统要求&#34;&gt;&lt;/a&gt;1.1 系统要求&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;操作系统：大多数 Linux 发行版（如 Ubuntu、Debian、CentOS、Fedora 等）都可使用。&lt;/li&gt;
+&lt;li&gt;权限：建议使用普通用户（避免使用 root 权限直接安装）来安装并管理 conda 环境。&lt;/li&gt;
+&lt;li&gt;网络连接：需要下载安装脚本，可以使用 &lt;code&gt;wget&lt;/code&gt; 或 &lt;code&gt;curl&lt;/code&gt; 工具。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-2-安装前依赖（可选）&#34;&gt;&lt;a href=&#34;#1-2-安装前依赖（可选）&#34; class=&#34;headerlink&#34; title=&#34;1.2 安装前依赖（可选）&#34;&gt;&lt;/a&gt;1.2 安装前依赖（可选）&lt;/h3&gt;&lt;p&gt;大多数 Linux 系统都自带 &lt;code&gt;bash&lt;/code&gt; 和基本工具。如果你的系统缺少 wget 或 curl，可以使用包管理器安装，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# Ubuntu / Debian 系统&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# CentOS / Fedora 系统&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;2-下载-Miniconda-安装脚本&#34;&gt;&lt;a href=&#34;#2-下载-Miniconda-安装脚本&#34; class=&#34;headerlink&#34; title=&#34;2. 下载 Miniconda 安装脚本&#34;&gt;&lt;/a&gt;2. 下载 Miniconda 安装脚本&lt;/h2&gt;&lt;p&gt;Miniconda 提供了适用于 Linux 的安装脚本。可以按以下步骤操作：&lt;/p&gt;
+&lt;h3 id=&#34;2-1-选择合适的安装程序&#34;&gt;&lt;a href=&#34;#2-1-选择合适的安装程序&#34; class=&#34;headerlink&#34; title=&#34;2.1 选择合适的安装程序&#34;&gt;&lt;/a&gt;2.1 选择合适的安装程序&lt;/h3&gt;&lt;p&gt;对于大多数 64 位系统，下载最新的 Miniconda3 版本。安装脚本文件名为 &lt;code&gt;Miniconda3-latest-Linux-x86_64.sh&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-使用-wget-或-curl-下载&#34;&gt;&lt;a href=&#34;#2-2-使用-wget-或-curl-下载&#34; class=&#34;headerlink&#34; title=&#34;2.2 使用 wget 或 curl 下载&#34;&gt;&lt;/a&gt;2.2 使用 wget 或 curl 下载&lt;/h3&gt;&lt;p&gt;使用 &lt;code&gt;wget&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或使用 &lt;code&gt;curl&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-O&lt;/span&gt; https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;3-验证安装包完整性（可选）&#34;&gt;&lt;a href=&#34;#3-验证安装包完整性（可选）&#34; class=&#34;headerlink&#34; title=&#34;3. 验证安装包完整性（可选）&#34;&gt;&lt;/a&gt;3. 验证安装包完整性（可选）&lt;/h2&gt;&lt;p&gt;为确保下载的文件未被破坏或篡改，可以检查 SHA256 校验和。你需要从 Miniconda 官方页面 查看对应版本的正确 SHA256 值，然后执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;sha256sum Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比较输出结果和官方提供的校验和。如果一致，则可以继续安装。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-安装-Miniconda&#34;&gt;&lt;a href=&#34;#4-安装-Miniconda&#34; class=&#34;headerlink&#34; title=&#34;4. 安装 Miniconda&#34;&gt;&lt;/a&gt;4. 安装 Miniconda&lt;/h2&gt;&lt;h3 id=&#34;4-1-赋予执行权限&#34;&gt;&lt;a href=&#34;#4-1-赋予执行权限&#34; class=&#34;headerlink&#34; title=&#34;4.1 赋予执行权限&#34;&gt;&lt;/a&gt;4.1 赋予执行权限&lt;/h3&gt;&lt;p&gt;首先为下载的脚本添加执行权限：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-2-运行安装脚本&#34;&gt;&lt;a href=&#34;#4-2-运行安装脚本&#34; class=&#34;headerlink&#34; title=&#34;4.2 运行安装脚本&#34;&gt;&lt;/a&gt;4.2 运行安装脚本&lt;/h3&gt;&lt;p&gt;使用 bash 执行安装脚本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;./Miniconda3-latest-Linux-x86_64.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-3-安装过程中注意事项&#34;&gt;&lt;a href=&#34;#4-3-安装过程中注意事项&#34; class=&#34;headerlink&#34; title=&#34;4.3 安装过程中注意事项&#34;&gt;&lt;/a&gt;4.3 安装过程中注意事项&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;阅读许可协议&lt;/strong&gt;：安装脚本开始时会显示许可协议，需要按下 &lt;code&gt;Enter&lt;/code&gt; 浏览内容，然后输入 &lt;code&gt;yes&lt;/code&gt; 接受许可协议。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;选择安装路径&lt;/strong&gt;：脚本默认建议安装到用户主目录下的 &lt;code&gt;miniconda3&lt;/code&gt; 目录。你可以按回车键接受默认设置，也可以输入自定义路径。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;初始化 conda&lt;/strong&gt;：安装过程中会询问是否初始化 conda（即修改 shell 启动文件，如 &lt;code&gt;~/.bashrc&lt;/code&gt;）。推荐选择 “yes”，这样每次登录时都会自动加载 conda 环境配置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;安装完成后，安装脚本会显示 “installation finished.” 的提示。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-激活-conda-环境&#34;&gt;&lt;a href=&#34;#5-激活-conda-环境&#34; class=&#34;headerlink&#34; title=&#34;5. 激活 conda 环境&#34;&gt;&lt;/a&gt;5. 激活 conda 环境&lt;/h2&gt;&lt;p&gt;如果安装时选择了初始化，则会自动在 &lt;code&gt;~/.bashrc&lt;/code&gt; 中添加必要的配置，通常类似如下内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# !! Contents within this block are managed by &#39;conda init&#39; !!&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;__conda_setup&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;&#39;/home/your_username/miniconda3/bin/conda&lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt;shell.bash&lt;span class=&#34;token string&#34;&gt;&#39; &#39;&lt;/span&gt;hook&#39; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt; /dev/null&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$?&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;eval&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$__conda_setup&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/etc/profile.d/conda.sh&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+        &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/etc/profile.d/conda.sh&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+        &lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;/home/your_username/miniconda3/bin:&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;unset&lt;/span&gt; __conda_setup
+&lt;span class=&#34;token comment&#34;&gt;# &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你没有选择自动初始化，可以手动执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/miniconda3/etc/profile.d/conda.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者直接将 conda 的路径添加到你的 PATH 环境变量中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=~&lt;/span&gt;/miniconda3/bin:&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;建议将上述命令添加到 &lt;code&gt;~/.bashrc&lt;/code&gt; 或其他相应的 shell 配置文件中。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-验证安装&#34;&gt;&lt;a href=&#34;#6-验证安装&#34; class=&#34;headerlink&#34; title=&#34;6. 验证安装&#34;&gt;&lt;/a&gt;6. 验证安装&lt;/h2&gt;&lt;p&gt;打开一个新的终端或在当前终端执行激活命令后，运行以下命令检查 conda 是否安装成功：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下，会输出类似 &lt;code&gt;conda 4.x.x&lt;/code&gt; 版本信息。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-基本使用&#34;&gt;&lt;a href=&#34;#7-基本使用&#34; class=&#34;headerlink&#34; title=&#34;7. 基本使用&#34;&gt;&lt;/a&gt;7. 基本使用&lt;/h2&gt;&lt;h3 id=&#34;7-1-创建虚拟环境&#34;&gt;&lt;a href=&#34;#7-1-创建虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;7.1 创建虚拟环境&#34;&gt;&lt;/a&gt;7.1 创建虚拟环境&lt;/h3&gt;&lt;p&gt;例如，创建一个名为 &lt;code&gt;myenv&lt;/code&gt; 的环境，并安装 Python 3.9：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda create &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; myenv &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.9&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;7-2-激活虚拟环境&#34;&gt;&lt;a href=&#34;#7-2-激活虚拟环境&#34; class=&#34;headerlink&#34; title=&#34;7.2 激活虚拟环境&#34;&gt;&lt;/a&gt;7.2 激活虚拟环境&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda activate myenv&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;激活后，命令提示符中会显示环境名称。&lt;/p&gt;
+&lt;h3 id=&#34;7-3-安装其他包&#34;&gt;&lt;a href=&#34;#7-3-安装其他包&#34; class=&#34;headerlink&#34; title=&#34;7.3 安装其他包&#34;&gt;&lt;/a&gt;7.3 安装其他包&lt;/h3&gt;&lt;p&gt;可以直接使用 conda 安装需要的包，例如安装 numpy：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; numpy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此外，也可以使用 pip 安装不在 conda 仓库里的包，但推荐先查找 conda 仓库，因为 conda 可能已经进行了优化和依赖管理。&lt;/p&gt;
+&lt;h3 id=&#34;7-4-更新-conda&#34;&gt;&lt;a href=&#34;#7-4-更新-conda&#34; class=&#34;headerlink&#34; title=&#34;7.4 更新 conda&#34;&gt;&lt;/a&gt;7.4 更新 conda&lt;/h3&gt;&lt;p&gt;建议定期更新 conda 以确保使用最新的功能和安全补丁：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;conda update conda&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;8-常见问题排查&#34;&gt;&lt;a href=&#34;#8-常见问题排查&#34; class=&#34;headerlink&#34; title=&#34;8. 常见问题排查&#34;&gt;&lt;/a&gt;8. 常见问题排查&lt;/h2&gt;&lt;h3 id=&#34;8-1-conda-命令未找到&#34;&gt;&lt;a href=&#34;#8-1-conda-命令未找到&#34; class=&#34;headerlink&#34; title=&#34;8.1 conda 命令未找到&#34;&gt;&lt;/a&gt;8.1 conda 命令未找到&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;请确保你的 &lt;code&gt;~/.bashrc&lt;/code&gt; 文件已正确载入，可以执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;检查是否正确添加了 conda 的安装路径至 PATH 环境变量中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-2-安装或更新失败&#34;&gt;&lt;a href=&#34;#8-2-安装或更新失败&#34; class=&#34;headerlink&#34; title=&#34;8.2 安装或更新失败&#34;&gt;&lt;/a&gt;8.2 安装或更新失败&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;检查网络连接或国内用户是否需要配置代理或使用镜像源（例如清华、阿里等提供的 conda 镜像）。&lt;/li&gt;
+&lt;li&gt;参考官方文档（conda 官方文档）获取更多帮助和说明。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-参考资料&#34;&gt;&lt;a href=&#34;#9-参考资料&#34; class=&#34;headerlink&#34; title=&#34;9. 参考资料&#34;&gt;&lt;/a&gt;9. 参考资料&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/02/19/conda-huan-yuan/</guid>
             <title>conda换源</title>

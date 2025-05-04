@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Thu, 03 Apr 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Thu, 03 Apr 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Fri, 02 May 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 02 May 2025 12:25:00 +0800</lastBuildDate>
         <category>intel</category>
         <category>tip</category>
         <category>tips</category>
@@ -46,6 +46,216 @@
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/02/whl-wen-jian-ming-hou-zhui/</guid>
+            <title>whl文件名后缀</title>
+            <link>https://0xdadream.github.io/2025/05/02/whl-wen-jian-ming-hou-zhui/</link>
+            <category>python</category>
+            <pubDate>Fri, 02 May 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;whl文件名后缀&#34;&gt;&lt;a href=&#34;#whl文件名后缀&#34; class=&#34;headerlink&#34; title=&#34;whl文件名后缀&#34;&gt;&lt;/a&gt;whl文件名后缀&lt;/h1&gt;&lt;h2 id=&#34;1-Wheel-文件名的基本格式&#34;&gt;&lt;a href=&#34;#1-Wheel-文件名的基本格式&#34; class=&#34;headerlink&#34; title=&#34;1. Wheel 文件名的基本格式&#34;&gt;&lt;/a&gt;1. Wheel 文件名的基本格式&lt;/h2&gt;&lt;p&gt;Wheel 名称遵循 PEP 427 规范，通用格式为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ruby&#34; data-language=&#34;ruby&#34;&gt;&lt;code class=&#34;language-ruby&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;distribution&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;version&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;build tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;python tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;abi tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;platform tag&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;whl&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;distribution&lt;/strong&gt;：包名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;version&lt;/strong&gt;：包版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;build tag&lt;/strong&gt;（可选）：构建号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;python tag&lt;/strong&gt;：支持的 Python 解释器及版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;abi tag&lt;/strong&gt;：二进制兼容的 ABI（应用二进制接口）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;platform tag&lt;/strong&gt;：目标操作系统和硬件平台&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-markdown&#34; data-language=&#34;markdown&#34;&gt;&lt;code class=&#34;language-markdown&#34;&gt;mypkg-1.2.3-1-cp39-cp39-manylinux2014_x86_64.whl
+       │    │   │    │            └──── platform tag
+       │    │   │    └──────────────── abi tag
+       │    │   └─────────────────────── python tag
+       │    └─────────────────────────── build tag
+       └─────────────────────────────── distribution-version&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;2-build-tag&#34;&gt;&lt;a href=&#34;#2-build-tag&#34; class=&#34;headerlink&#34; title=&#34;2. build tag&#34;&gt;&lt;/a&gt;2. build tag&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;格式：一个整数，有时候也会带字母或其他标识&lt;/li&gt;
+&lt;li&gt;用途：同一版本的多次编译时区分，比如针对不同源或依赖变动的二进制重构&lt;/li&gt;
+&lt;li&gt;示例：&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mypkg-1.0-1-...&lt;/code&gt; 与 &lt;code&gt;mypkg-1.0-2-...&lt;/code&gt; 表示同一版本的第 1 次和第 2 次构建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-python-tag&#34;&gt;&lt;a href=&#34;#3-python-tag&#34; class=&#34;headerlink&#34; title=&#34;3. python tag&#34;&gt;&lt;/a&gt;3. python tag&lt;/h2&gt;&lt;p&gt;指明哪些 Python 解释器及版本可以安装该 Wheel。常见格式及含义：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;支持所有 Python 3.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py36&lt;/code&gt; 、&lt;code&gt;py37&lt;/code&gt;…&lt;/td&gt;
+&lt;td&gt;专用于 Python 3.6、3.7 等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;py2.py3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同时支持 Python 2.x 和 3.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp310&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;pp37&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;PyPy 3.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;jy37&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Jython 2.7（标识为 &lt;code&gt;jy27&lt;/code&gt;）等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;前缀&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;py&lt;/code&gt;：纯 Python 实现&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cp&lt;/code&gt;：CPython（二进制扩展）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pp&lt;/code&gt;：PyPy&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;jy&lt;/code&gt;：Jython&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-abi-tag&#34;&gt;&lt;a href=&#34;#4-abi-tag&#34; class=&#34;headerlink&#34; title=&#34;4. abi tag&#34;&gt;&lt;/a&gt;4. abi tag&lt;/h2&gt;&lt;p&gt;ABI（Application Binary Interface）决定了编译的 C 扩展与解释器的二进制兼容性。常见 ABI tag：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;none&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;纯 Python 包，不含 C 扩展&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;abi3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用了稳定的“limited API”（PEP 384），跨多个 CPython 版本兼容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;针对 CPython 3.9 标准 ABI 编译&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp39m&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.9 + pymalloc enabled（&lt;code&gt;m&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cp310d&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CPython 3.10 Debug build（&lt;code&gt;d&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;如果 &lt;code&gt;python tag&lt;/code&gt; 与 &lt;code&gt;abi tag&lt;/code&gt; 一致（如 &lt;code&gt;cp39-cp39&lt;/code&gt;），表示该包针对该版本的标准 ABI 编译&lt;/li&gt;
+&lt;li&gt;带后缀的如 &lt;code&gt;m&lt;/code&gt;、&lt;code&gt;d&lt;/code&gt;、&lt;code&gt;u&lt;/code&gt; 等表示特定的编译选项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-platform-tag&#34;&gt;&lt;a href=&#34;#5-platform-tag&#34; class=&#34;headerlink&#34; title=&#34;5. platform tag&#34;&gt;&lt;/a&gt;5. platform tag&lt;/h2&gt;&lt;p&gt;描述该 Wheel 的目标操作系统、系统版本和 CPU 架构。常见平台 tag 及示例：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;platform tag 示例&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;manylinux1_x86_64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Linux x86_64，符合 Manylinux1 标准&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;manylinux2014_aarch64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Linux ARM64，符合 Manylinux2014 标准&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;win_amd64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Windows 64 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;win32&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Windows 32 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;macosx_10_9_x86_64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;macOS 10.9+ on x86_64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;macosx_11_0_arm64&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;macOS 11+ on Apple Silicon (ARM64)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;any&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;平台无关（纯 Python 包）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;manylinux&lt;/strong&gt; 系列：用于在大多数 Linux 发行版上安装二进制扩展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;macosx&lt;/strong&gt;：通常还会带上最低支持的 macOS 版本号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;any&lt;/strong&gt;：完全纯 Python，无平台限制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-综合示例解析&#34;&gt;&lt;a href=&#34;#6-综合示例解析&#34; class=&#34;headerlink&#34; title=&#34;6. 综合示例解析&#34;&gt;&lt;/a&gt;6. 综合示例解析&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Wheel 名称&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;requests-2.28.1-py3-none-any.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;纯 Python 包 &lt;code&gt;requests&lt;/code&gt; v2.28.1，支持所有 Python 3，平台无关&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;numpy-1.24.0-cp39-cp39-manylinux2014_x86_64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;numpy&lt;/code&gt; v1.24.0，CPython 3.9 标准 ABI，Linux x86_64 二进制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Pillow-9.3.0-cp310-cp310-win_amd64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Pillow&lt;/code&gt; v9.3.0，CPython 3.10，Windows 64 位&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;somepkg-0.1.0-2-cp38-abi3-manylinux1_x86_64.whl&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;somepkg&lt;/code&gt; v0.1.0，第 2 次构建，CPython 3.8 编译但使用 abi3，Linux x86_64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-为什么要了解这些后缀&#34;&gt;&lt;a href=&#34;#7-为什么要了解这些后缀&#34; class=&#34;headerlink&#34; title=&#34;7. 为什么要了解这些后缀&#34;&gt;&lt;/a&gt;7. 为什么要了解这些后缀&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;避免安装失败&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pip install package.whl&lt;/code&gt; 时，若当前环境的 Python 版本、ABI 或平台与 Wheel 不匹配，安装会被跳过或报错。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提高下载速度&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;选择预编译好的 &lt;code&gt;.whl&lt;/code&gt;，可免去源码编译时间，尤其是大型 C 扩展库（如 NumPy、SciPy）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨平台兼容&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;理解 &lt;code&gt;manylinux&lt;/code&gt;、&lt;code&gt;macosx&lt;/code&gt;、&lt;code&gt;win&lt;/code&gt; 等标签，有助于在不同系统间无痛部署。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-查找可用的-Wheel&#34;&gt;&lt;a href=&#34;#8-查找可用的-Wheel&#34; class=&#34;headerlink&#34; title=&#34;8. 查找可用的 Wheel&#34;&gt;&lt;/a&gt;8. 查找可用的 Wheel&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip index versions PACKAGE_NAME&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; PACKAGE_NAME --only-binary&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;:all:&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;第一个命令列出所有可用版本及对应的 Wheel&lt;/li&gt;
+&lt;li&gt;第二个命令强制只使用二进制 Wheel 安装&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/</guid>
             <title>解决报错jinja2.exceptions.TemplateNotFound_index.html</title>
