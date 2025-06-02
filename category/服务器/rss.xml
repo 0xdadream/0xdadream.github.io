@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;服务器&#34; category</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 25 May 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 25 May 2025 12:25:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>intel</category>
+        <category>cloudflare</category>
+        <category>tips</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>conda</category>
+        <category>linux</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>bug</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>powershell</category>
+        <category>comfyui</category>
+        <category>wall</category>
+        <category>tools</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>emby</category>
+        <category>google</category>
+        <category>python</category>
+        <category>git</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>学习</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/25/zheng-shu-hou-zhui/</guid>
+            <title>证书后缀</title>
+            <link>https://0xdadream.github.io/2025/05/25/zheng-shu-hou-zhui/</link>
+            <category>证书</category>
+            <pubDate>Sun, 25 May 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;证书后缀&#34;&gt;&lt;a href=&#34;#证书后缀&#34; class=&#34;headerlink&#34; title=&#34;证书后缀&#34;&gt;&lt;/a&gt;证书后缀&lt;/h1&gt;&lt;p&gt;我们来详细解释一下 &lt;code&gt;key&lt;/code&gt; / &lt;code&gt;crt&lt;/code&gt; / &lt;code&gt;pem&lt;/code&gt; 之间的关系：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一、三种常见文件类型的说明&#34;&gt;&lt;a href=&#34;#一、三种常见文件类型的说明&#34; class=&#34;headerlink&#34; title=&#34;一、三种常见文件类型的说明&#34;&gt;&lt;/a&gt;一、三种常见文件类型的说明&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文件名扩展名&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;内容&lt;/th&gt;
+&lt;th&gt;是否可以互相转换&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.key&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;私钥文件&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;通常是 RSA 或 ECC 私钥（PEM 格式）&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.crt&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;证书文件&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;公钥证书，通常是 PEM 编码的 X.509&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.pem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;通用容器格式&lt;/strong&gt;（推荐）&lt;/td&gt;
+&lt;td&gt;可以包含私钥、证书、CA链等内容&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、-pem-是通用格式（包括-key-和-crt）&#34;&gt;&lt;a href=&#34;#二、-pem-是通用格式（包括-key-和-crt）&#34; class=&#34;headerlink&#34; title=&#34;二、.pem 是通用格式（包括 .key 和 .crt）&#34;&gt;&lt;/a&gt;二、&lt;code&gt;.pem&lt;/code&gt; 是通用格式（包括 &lt;code&gt;.key&lt;/code&gt; 和 &lt;code&gt;.crt&lt;/code&gt;）&lt;/h2&gt;&lt;p&gt;&lt;code&gt;.pem&lt;/code&gt;（Privacy-Enhanced Mail）是一种 &lt;strong&gt;Base64 编码的 ASCII 文本格式&lt;/strong&gt;，广泛用于存储各种加密材料。&lt;/p&gt;
+&lt;p&gt;它的内容可能是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只包含私钥（相当于 &lt;code&gt;.key&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;只包含证书（相当于 &lt;code&gt;.crt&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;包含完整的证书链（即 fullchain.pem）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例：&#34;&gt;&lt;a href=&#34;#示例：&#34; class=&#34;headerlink&#34; title=&#34;示例：&#34;&gt;&lt;/a&gt;示例：&lt;/h3&gt;&lt;h4 id=&#34;1-私钥-key-key-pem&#34;&gt;&lt;a href=&#34;#1-私钥-key-key-pem&#34; class=&#34;headerlink&#34; title=&#34;1. 私钥 .key / key.pem&#34;&gt;&lt;/a&gt;1. 私钥 &lt;code&gt;.key&lt;/code&gt; / &lt;code&gt;key.pem&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.
+-----END PRIVATE KEY-----&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-证书-crt-cert-pem&#34;&gt;&lt;a href=&#34;#2-证书-crt-cert-pem&#34; class=&#34;headerlink&#34; title=&#34;2. 证书 .crt / cert.pem&#34;&gt;&lt;/a&gt;2. 证书 &lt;code&gt;.crt&lt;/code&gt; / &lt;code&gt;cert.pem&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;-----BEGIN CERTIFICATE-----
+MIIDdTCCAl2gAwIBAgIJ&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.
+-----END CERTIFICATE-----&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;3-完整链-fullchain-pem&#34;&gt;&lt;a href=&#34;#3-完整链-fullchain-pem&#34; class=&#34;headerlink&#34; title=&#34;3. 完整链 .fullchain.pem&#34;&gt;&lt;/a&gt;3. 完整链 &lt;code&gt;.fullchain.pem&lt;/code&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;-----BEGIN CERTIFICATE-----   &lt;span class=&#34;token comment&#34;&gt;# leaf cert&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----   &lt;span class=&#34;token comment&#34;&gt;# intermediate cert&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.
+-----END CERTIFICATE-----&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;三、Nginx-Apache-Java-各如何使用&#34;&gt;&lt;a href=&#34;#三、Nginx-Apache-Java-各如何使用&#34; class=&#34;headerlink&#34; title=&#34;三、Nginx / Apache / Java 各如何使用&#34;&gt;&lt;/a&gt;三、Nginx / Apache / Java 各如何使用&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;应用&lt;/th&gt;
+&lt;th&gt;需要什么文件&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Nginx&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssl_certificate&lt;/code&gt; 用 &lt;code&gt;.crt&lt;/code&gt; 或 &lt;code&gt;.pem&lt;/code&gt;   &lt;code&gt;ssl_certificate_key&lt;/code&gt; 用 &lt;code&gt;.key&lt;/code&gt; 或 &lt;code&gt;.key.pem&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Apache&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;类似，支持 &lt;code&gt;.pem&lt;/code&gt; 更推荐&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Java keystore&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;需要转换成 &lt;code&gt;.p12&lt;/code&gt; 或 &lt;code&gt;.jks&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四、转换方法&#34;&gt;&lt;a href=&#34;#四、转换方法&#34; class=&#34;headerlink&#34; title=&#34;四、转换方法&#34;&gt;&lt;/a&gt;四、转换方法&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 分离 fullchain.pem 为单独证书和中间证书&lt;/span&gt;
+openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; fullchain.pem &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; cert.crt
+
+&lt;span class=&#34;token comment&#34;&gt;# 转换 PEM -&amp;gt; PFX（含私钥）&lt;/span&gt;
+openssl pkcs12 &lt;span class=&#34;token parameter variable&#34;&gt;-export&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; cert.pfx &lt;span class=&#34;token parameter variable&#34;&gt;-inkey&lt;/span&gt; key.pem &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; fullchain.pem&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.pem&lt;/code&gt; 是一种格式，而 &lt;code&gt;.key&lt;/code&gt; / &lt;code&gt;.crt&lt;/code&gt; 是常见用途的命名方式。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fullchain.pem&lt;/code&gt; 包含了完整的证书链。&lt;/li&gt;
+&lt;li&gt;所有这些文件 &lt;strong&gt;实际内容可能都是 PEM 格式&lt;/strong&gt;，只是用途不同。&lt;/li&gt;
+&lt;li&gt;使用时只要指定路径正确、软件支持即可，无论扩展名叫啥。&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/15/shen-qing-mian-fei-zheng-shu/</guid>
+            <title>申请免费证书</title>
+            <link>https://0xdadream.github.io/2025/05/15/shen-qing-mian-fei-zheng-shu/</link>
+            <category>证书</category>
+            <pubDate>Thu, 15 May 2025 22:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;申请免费证书&#34;&gt;&lt;a href=&#34;#申请免费证书&#34; class=&#34;headerlink&#34; title=&#34;申请免费证书&#34;&gt;&lt;/a&gt;申请免费证书&lt;/h1&gt;&lt;p&gt;【增强版 Bash 脚本】：交互选择使用 Cloudflare DNS 或 HTTP 验证，支持三大 CA&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;====== Acme.sh 证书申请一键脚本 ======&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 输入基本信息 =====&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;请输入你的主域名（如 example.com）: &#34;&lt;/span&gt; DOMAIN
+&lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;是否使用泛域名（*.&lt;span class=&#34;token variable&#34;&gt;${DOMAIN}&lt;/span&gt;)? [y/N]: &#34;&lt;/span&gt; WILDCARD
+&lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;请输入你的邮箱地址（如 me@example.com）: &#34;&lt;/span&gt; EMAIL
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 选择 CA 机构 =====&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token entity&#34; title=&#34;\n&#34;&gt;\n&lt;/span&gt;请选择你要使用的证书颁发机构（CA）:&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;token for-or-select variable&#34;&gt;CA_PROVIDER&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Let&#39;s Encrypt&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ZeroSSL&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Buypass&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;case&lt;/span&gt; &lt;span class=&#34;token environment constant&#34;&gt;$REPLY&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt;
+    &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CA_SERVER&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;letsencrypt&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CA_SERVER&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;zerossl&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CA_SERVER&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;buypass&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    *&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;请输入 1-3 的数字&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;esac&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;done&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 选择验证方式 =====&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token entity&#34; title=&#34;\n&#34;&gt;\n&lt;/span&gt;请选择验证方式:&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;token for-or-select variable&#34;&gt;VERIFY_METHOD&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Cloudflare DNS 验证（推荐用于泛域名）&#34;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Standalone HTTP 验证（监听80端口）&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;do&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;case&lt;/span&gt; &lt;span class=&#34;token environment constant&#34;&gt;$REPLY&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt;
+    &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;VERIFY_METHOD&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;dns_cf&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DNS_MODE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;true&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;VERIFY_METHOD&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;standalone&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DNS_MODE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;false&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    *&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;请输入 1 或 2&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;esac&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;done&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 安装 acme.sh =====&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token environment constant&#34;&gt;$HOME&lt;/span&gt;/.acme.sh&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;[+] 安装 acme.sh ...&#34;&lt;/span&gt;
+  &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; https://get.acme.sh &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sh&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token environment constant&#34;&gt;$HOME&lt;/span&gt;/.acme.sh/acme.sh.env&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 注册账户 =====&lt;/span&gt;
+acme.sh --set-default-ca &lt;span class=&#34;token parameter variable&#34;&gt;--server&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$CA_SERVER&lt;/span&gt;
+acme.sh --register-account &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$EMAIL&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 处理域名格式 =====&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$WILDCARD&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=~&lt;/span&gt; ^&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;Yy&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;$ &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token assign-left variable&#34;&gt;CERT_DOMAIN&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;*.&lt;span class=&#34;token variable&#34;&gt;$DOMAIN&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+  &lt;span class=&#34;token assign-left variable&#34;&gt;CERT_DOMAIN&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$DOMAIN&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 如果使用 Cloudflare，输入 Token =====&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$DNS_MODE&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;请输入你的 Cloudflare API Token: &#34;&lt;/span&gt; CF_API_TOKEN
+  &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-z&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CF_API_TOKEN&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;[✗] Token 不能为空！&#34;&lt;/span&gt;
+    &lt;span class=&#34;token builtin class-name&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CF_Token&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CF_API_TOKEN&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 执行证书申请 =====&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;[+] 开始申请证书: &lt;span class=&#34;token variable&#34;&gt;$CERT_DOMAIN&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$DNS_MODE&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  acme.sh &lt;span class=&#34;token parameter variable&#34;&gt;--issue&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--dns&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$VERIFY_METHOD&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DOMAIN&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--force&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;[!] 请确保 80 端口未被占用（如 nginx），或已临时关闭&#34;&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;确认后按回车继续...&#34;&lt;/span&gt;
+  acme.sh &lt;span class=&#34;token parameter variable&#34;&gt;--issue&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--standalone&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DOMAIN&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--force&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 安装证书到系统路径 =====&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;REAL_DOMAIN&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;${DOMAIN&lt;span class=&#34;token operator&#34;&gt;#&lt;/span&gt;*.}&lt;/span&gt;&#34;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 去掉 *.&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;CERT_DIR&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;/etc/ssl/&lt;span class=&#34;token variable&#34;&gt;$REAL_DOMAIN&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DIR&lt;/span&gt;&#34;&lt;/span&gt;
+
+acme.sh --install-cert &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DOMAIN&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  --key-file       &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DIR&lt;/span&gt;/key.pem&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  --fullchain-file &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$CERT_DIR&lt;/span&gt;/fullchain.pem&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;--reloadcmd&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;echo &#39;[✓] 可配置 nginx reload 命令&#39;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;--force&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 自动更新启用 =====&lt;/span&gt;
+acme.sh &lt;span class=&#34;token parameter variable&#34;&gt;--upgrade&lt;/span&gt; --auto-upgrade
+
+&lt;span class=&#34;token comment&#34;&gt;# ===== 成功信息 =====&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token entity&#34; title=&#34;\n&#34;&gt;\n&lt;/span&gt;[✓] 证书申请成功！&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;私钥路径:      &lt;span class=&#34;token variable&#34;&gt;$CERT_DIR&lt;/span&gt;/key.pem&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;完整证书路径:  &lt;span class=&#34;token variable&#34;&gt;$CERT_DIR&lt;/span&gt;/fullchain.pem&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;自动续期:      已启用（每天检测）&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存为xxx.sh，执行&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x acme_cert_auto.sh
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ./acme_cert_auto.sh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+    </channel>
+</rss>

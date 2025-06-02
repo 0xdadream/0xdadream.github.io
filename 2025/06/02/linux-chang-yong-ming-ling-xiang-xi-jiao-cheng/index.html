@@ -1,0 +1,3984 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux 常用命令详解教程, 逐梦">
+    <meta name="description" content="Linux 常用命令详解教程">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux 常用命令详解教程 | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/35.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux 常用命令详解教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">教程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/linux/" class="post-category">
+                                linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-06-02
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-06-02
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    22.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    90 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Linux-常用命令详解教程"><a href="#Linux-常用命令详解教程" class="headerlink" title="Linux 常用命令详解教程"></a>Linux 常用命令详解教程</h1><p>本教程旨在提供一份全面的 Linux 常用命令列表，涵盖文件管理、系统信息获取、高级系统监控、文本处理、用户与权限管理、网络配置与诊断以及端口和防火墙管理等多个方面。每个命令都将包含其用途、常用语法、重要选项及示例，力求内容完整且实用。</p>
+<h2 id="一、文件和目录管理-File-and-Directory-Management"><a href="#一、文件和目录管理-File-and-Directory-Management" class="headerlink" title="一、文件和目录管理 (File and Directory Management)"></a>一、文件和目录管理 (File and Directory Management)</h2><p>文件和目录管理是 Linux 系统操作的基础。以下命令能帮助用户有效地在文件系统中进行导航、创建、删除、复制、移动和查找文件及目录。</p>
+<h3 id="1-1-基本导航与列表-Basic-Navigation-and-Listing"><a href="#1-1-基本导航与列表-Basic-Navigation-and-Listing" class="headerlink" title="1.1 基本导航与列表 (Basic Navigation and Listing)"></a>1.1 基本导航与列表 (Basic Navigation and Listing)</h3><ul>
+<li><strong><code>ls</code></strong> (列出目录内容 List directory contents)<ul>
+<li><strong>用途:</strong> 显示目录中的文件和子目录。 </li>
+<li><strong>语法:</strong> <code>ls [选项][目录名]</code> </li>
+<li>常用选项:<ul>
+<li><code>-l</code>: 以长格式显示详细信息，包括权限、所有者、大小、修改日期等。 </li>
+<li><code>-a</code>: 显示所有文件，包括隐藏文件（以 <code>.</code> 开头的文件）。 </li>
+<li><code>-h</code>: 以人类可读的格式显示文件大小 (例如 1K, 234M, 2G)。 </li>
+<li><code>-A</code>: 显示除 <code>.</code> 和 <code>..</code> 之外的所有文件，包括隐藏文件。 </li>
+<li><code>-S</code>: 按文件大小降序排序。 </li>
+<li><code>-t</code>: 按修改时间排序，最新修改的在前。 </li>
+<li><code>-R</code>: 递归列出所有子目录的内容。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>ls -l /home/user</code>: 以长格式列出 <code>/home/user</code> 目录的内容。</li>
+<li><code>ls -ah</code>: 以人类可读格式显示当前目录所有文件（包括隐藏文件）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>cd</code></strong> (更改目录 Change directory)<ul>
+<li><strong>用途:</strong> 切换当前工作目录。 </li>
+<li><strong>语法:</strong> <code>cd [目录路径]</code> </li>
+<li>特殊用法:<ul>
+<li><code>cd..</code>: 切换到上一级目录。 </li>
+<li><code>cd ~</code> 或 <code>cd</code>: 切换到当前用户的主目录。 </li>
+<li><code>cd -</code>: 切换到上一个工作目录。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>cd /var/log</code>: 切换到 <code>/var/log</code> 目录。</li>
+<li><code>cd../documents</code>: 从当前目录切换到上一级的 <code>documents</code> 子目录。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>pwd</code></strong> (打印工作目录 Print working directory)<ul>
+<li><strong>用途:</strong> 显示当前所在的完整目录路径。 </li>
+<li><strong>语法:</strong> <code>pwd</code> </li>
+<li><strong>示例:</strong> <code>pwd</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-文件与目录操作-File-and-Directory-Operations"><a href="#1-2-文件与目录操作-File-and-Directory-Operations" class="headerlink" title="1.2 文件与目录操作 (File and Directory Operations)"></a>1.2 文件与目录操作 (File and Directory Operations)</h3><ul>
+<li><strong><code>mkdir</code></strong> (创建目录 Make directory)<ul>
+<li><strong>用途:</strong> 创建一个新的目录。 </li>
+<li><strong>语法:</strong> <code>mkdir [选项] 目录名</code> </li>
+<li>常用选项:<ul>
+<li><code>-p</code>: 递归创建目录，如果父目录不存在则一并创建。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>mkdir new_project</code>: 在当前目录下创建名为 <code>new_project</code> 的目录。</li>
+<li><code>mkdir -p project/docs/images</code>: 递归创建 <code>project</code> 目录及其子目录 <code>docs</code> 和 <code>images</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>rmdir</code></strong> (删除空目录 Remove empty directory)<ul>
+<li><strong>用途:</strong> 删除一个空的目录。 </li>
+<li><strong>语法:</strong> <code>rmdir [选项] 目录名</code> </li>
+<li>常用选项:<ul>
+<li><code>-p</code>: 递归删除目录，当子目录被删除后其父目录变为空时，也一同被删除。 </li>
+<li><code>--ignore-fail-on-non-empty</code>: 删除非空目录时忽略错误（通常不推荐，应使用 <code>rm -r</code>）。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>rmdir old_folder</code> (如果 <code>old_folder</code> 为空，则删除它)。</li>
+</ul>
+</li>
+<li><strong><code>cp</code></strong> (复制文件和目录 Copy files and directories)<ul>
+<li><strong>用途:</strong> 复制文件或目录。 </li>
+<li><strong>语法:</strong> <code>cp [选项] 源文件/目录 目标文件/目录</code> </li>
+<li>常用选项:<ul>
+<li><code>-r</code> 或 <code>-R</code>: 递归复制目录及其内容。 </li>
+<li><code>-i</code>: 覆盖前提示。 </li>
+<li><code>-v</code>: 显示详细的复制过程。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>cp file1.txt file1_backup.txt</code>: 将 <code>file1.txt</code> 复制为 <code>file1_backup.txt</code>。</li>
+<li><code>cp -r project_a/ /backup/project_a_backup</code>: 将 <code>project_a</code> 目录及其所有内容复制到 <code>/backup/project_a_backup</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>mv</code></strong> (移动或重命名文件和目录 Move or rename files and directories)<ul>
+<li><strong>用途:</strong> 移动文件或目录，或者在同一目录下对文件或目录进行重命名。 </li>
+<li><strong>语法:</strong> <code>mv [选项] 源文件/目录 目标文件/目录</code> </li>
+<li>常用选项:<ul>
+<li><code>-i</code>: 覆盖前提示。 </li>
+<li><code>-n</code>: 不覆盖已存在的目标文件。 </li>
+<li><code>-u</code>: 仅当源文件比目标文件新，或目标文件不存在时，才执行移动。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>mv report.docx documents/</code>: 将 <code>report.docx</code> 移动到 <code>documents</code> 目录。</li>
+<li><code>mv old_name.txt new_name.txt</code>: 将 <code>old_name.txt</code> 重命名为 <code>new_name.txt</code>。</li>
+<li><code>mv temp_folder /opt/archive/</code>: 将 <code>temp_folder</code> 目录移动到 <code>/opt/archive/</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>rm</code></strong> (删除文件或目录 Remove files or directories)<ul>
+<li><strong>用途:</strong> 删除文件或目录。这是一个非常强大的命令，使用时需格外小心。 </li>
+<li><strong>语法:</strong> <code>rm [选项] 文件/目录...</code> </li>
+<li>常用选项:<ul>
+<li><code>-r</code> 或 <code>-R</code>: 递归删除目录及其所有内容。 </li>
+<li><code>-f</code>: 强制删除，不进行提示，忽略不存在的文件和参数。 </li>
+<li><code>-i</code>: 删除前逐一提示确认。 </li>
+<li><code>-v</code>: 显示详细的删除过程。</li>
+</ul>
+</li>
+<li><strong>警告:</strong> <code>rm -rf</code> 命令会无提示地递归删除指定目录下的所有内容，一旦执行无法轻易恢复，务必谨慎使用。 </li>
+<li>示例:<ul>
+<li><code>rm unwanted_file.txt</code>: 删除 <code>unwanted_file.txt</code> 文件。</li>
+<li><code>rm -rf old_project/</code>: 强制递归删除 <code>old_project</code> 目录及其所有内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>touch</code></strong> (创建空文件或更新文件时间戳 Create empty file or update file timestamps)<ul>
+<li><strong>用途:</strong> 创建一个空文件，或者更新已有文件的时间戳（访问时间和修改时间）。 </li>
+<li><strong>语法:</strong> <code>touch [选项] 文件名...</code> </li>
+<li>示例:<ul>
+<li><code>touch newfile.log</code>: 创建一个名为 <code>newfile.log</code> 的空文件。</li>
+<li><code>touch existing_file.txt</code>: 更新 <code>existing_file.txt</code> 的时间戳。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>ln</code></strong> (创建链接 Create links)<ul>
+<li><strong>用途:</strong> 在文件之间创建链接，分为硬链接和符号链接（软链接）。 </li>
+<li><strong>语法:</strong> <code>ln [选项] 源文件 链接名</code> </li>
+<li>常用选项:<ul>
+<li><code>-s</code>: 创建符号链接（软链接）。如果不使用此选项，则创建硬链接。 </li>
+<li><code>-v</code>: 显示详细过程。</li>
+</ul>
+</li>
+<li>硬链接与符号链接的区别:<ul>
+<li>硬链接：与原文件共享相同的inode号和数据块，删除原文件不影响硬链接的访问，除非所有硬链接和原文件都被删除。不能对目录创建硬链接，不能跨文件系统创建硬链接。 </li>
+<li>符号链接：一个指向原文件路径的特殊文件，类似于快捷方式。删除原文件会导致符号链接失效。可以对目录创建符号链接，也可以跨文件系统创建。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>ln target.txt hard_link.txt</code>: 为 <code>target.txt</code> 创建一个名为 <code>hard_link.txt</code> 的硬链接。</li>
+<li><code>ln -s /opt/app/config.conf /etc/app_config.conf</code>: 为 <code>/opt/app/config.conf</code> 创建一个名为 <code>/etc/app_config.conf</code> 的符号链接。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-文件查找与类型判断-File-Searching-and-Type-Identification"><a href="#1-3-文件查找与类型判断-File-Searching-and-Type-Identification" class="headerlink" title="1.3 文件查找与类型判断 (File Searching and Type Identification)"></a>1.3 文件查找与类型判断 (File Searching and Type Identification)</h3><ul>
+<li><strong><code>find</code></strong> (在目录层次结构中查找文件 Search for files in a directory hierarchy)<ul>
+<li><strong>用途:</strong> 根据指定的条件在目录树中搜索文件和目录。 </li>
+<li><strong>语法:</strong> <code>find [路径...][表达式选项]</code> </li>
+<li>常用表达式选项:<ul>
+<li><code>-name "模式"</code>: 按文件名模式查找 (支持通配符, 如 <code>*.txt</code>)。 </li>
+<li><code>-type 类型</code>: 按文件类型查找 (如 <code>f</code> 普通文件, <code>d</code> 目录, <code>l</code> 符号链接)。 </li>
+<li><code>-user 用户名</code>: 按文件所有者查找。</li>
+<li><code>-group 组名</code>: 按文件所属组查找。</li>
+<li><code>-size [+|-]大小[cwbkMG]</code>: 按文件大小查找 (如 <code>+10M</code> 大于10MB, <code>-1k</code> 小于1KB)。</li>
+<li><code>-mtime [-|+]天数</code>: 按文件修改时间查找 (如 <code>-7</code> 7天内修改, <code>+30</code> 30天前修改)。</li>
+<li><code>-exec 命令 {} \;</code>: 对找到的每个文件执行指定的命令。</li>
+<li><code>-maxdepth 层数</code>: 限制搜索深度。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>find /home/user -name "*.log" -mtime -7</code>: 在 <code>/home/user</code> 目录及其子目录下查找最近7天内修改过的所有 <code>.log</code> 文件。</li>
+<li><code>find. -type f -size +100M -exec rm {} \;</code>: 查找当前目录下大于100MB的普通文件并删除它们（删除前会提示）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>file</code></strong> (判断文件类型 Determine file type)<ul>
+<li><strong>用途:</strong> 识别给定文件的类型。 </li>
+<li><strong>语法:</strong> <code>file [选项] 文件名...</code> </li>
+<li>常用选项:<ul>
+<li><code>-b</code> 或 <code>--brief</code>: 简要模式，不输出文件名。 </li>
+<li><code>-i</code>: 输出MIME类型字符串。 </li>
+<li><code>-z</code>: 尝试查看压缩文件内部。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>file document.pdf</code>: 显示 <code>document.pdf</code> 的文件类型。</li>
+<li><code>file -bi image.jpg</code>: 以MIME类型格式简要显示 <code>image.jpg</code> 的类型。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、系统信息与管理-System-Information-and-Management"><a href="#二、系统信息与管理-System-Information-and-Management" class="headerlink" title="二、系统信息与管理 (System Information and Management)"></a>二、系统信息与管理 (System Information and Management)</h2><p>了解系统的运行状态、硬件信息和基本配置是系统管理的重要组成部分。</p>
+<h3 id="2-1-系统基本信息-Basic-System-Information"><a href="#2-1-系统基本信息-Basic-System-Information" class="headerlink" title="2.1 系统基本信息 (Basic System Information)"></a>2.1 系统基本信息 (Basic System Information)</h3><ul>
+<li><strong><code>uname</code></strong> (打印系统信息 Print system information)<ul>
+<li><strong>用途:</strong> 显示当前系统的内核名称、版本、主机名等信息。 </li>
+<li><strong>语法:</strong> <code>uname [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-a</code>: 显示所有可用信息。 </li>
+<li><code>-r</code>: 显示内核发行版本。 </li>
+<li><code>-s</code>: 显示内核名称。</li>
+<li><code>-n</code>: 显示网络节点主机名。</li>
+<li><code>-m</code>: 显示机器硬件名称。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>uname -a</code></li>
+</ul>
+</li>
+<li><strong><code>hostname</code></strong> (显示或设置系统的主机名 Show or set the system’s host name)<ul>
+<li><strong>用途:</strong> 查看或临时设置系统的主机名。 </li>
+<li><strong>语法:</strong> <code>hostname [选项][新主机名]</code> </li>
+<li>常用选项:<ul>
+<li><code>-s</code> 或 <code>--short</code>: 显示短主机名 (第一个点之前的部分)。 </li>
+<li><code>-f</code> 或 <code>--fqdn</code> 或 <code>--long</code>: 显示完全限定域名 (FQDN)。 </li>
+<li><code>-i</code> 或 <code>--ip-address</code>: 显示主机的IP地址 (如果可解析)。 </li>
+<li><code>-I</code> 或 <code>--all-ip-addresses</code>: 显示主机所有网络接口的IP地址。 </li>
+<li><code>-d</code> 或 <code>--domain</code>: 显示DNS域名。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>hostname</code>: 显示当前主机名。</li>
+<li><code>sudo hostname new-server-name</code>: 临时将主机名设置为 <code>new-server-name</code> (永久更改需修改配置文件，如 <code>/etc/hostname</code> )。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>date</code></strong> (打印或设置系统日期和时间 Print or set the system date and time)<ul>
+<li><strong>用途:</strong> 显示或设置系统的当前日期和时间。 </li>
+<li><strong>语法:</strong> <code>date [选项][+格式]YY][.ss]]</code></li>
+<li>常用选项与格式:<ul>
+<li><code>+%Y-%m-%d %H:%M:%S</code>: 以 <code>年-月-日 时:分:秒</code> 格式显示。</li>
+<li><code>--set="字符串"</code>: 设置日期和时间。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>date</code>: 显示当前日期和时间。</li>
+<li><code>date '+%A, %B %d, %Y'</code>: 以 “星期几, 月份 日期, 年份” 格式显示。</li>
+<li><code>sudo date --set="2024-07-30 10:30:00"</code>: 将日期和时间设置为2024年7月30日10点30分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>uptime</code></strong> (告诉系统已运行多长时间 Tell how long the system has been running)<ul>
+<li><strong>用途:</strong> 显示系统自上次启动以来运行了多长时间、当前用户数量以及系统平均负载。 </li>
+<li><strong>语法:</strong> <code>uptime [选项]</code></li>
+<li>常用选项:<ul>
+<li><code>-p</code>: 以易读格式显示运行时间。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>uptime</code></li>
+</ul>
+</li>
+<li><strong><code>whoami</code></strong> (打印有效用户ID Print effective user ID)<ul>
+<li><strong>用途:</strong> 显示当前正在操作的用户名。 </li>
+<li><strong>语法:</strong> <code>whoami</code> </li>
+<li><strong>示例:</strong> <code>whoami</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-磁盘与内存使用-Disk-and-Memory-Usage"><a href="#2-2-磁盘与内存使用-Disk-and-Memory-Usage" class="headerlink" title="2.2 磁盘与内存使用 (Disk and Memory Usage)"></a>2.2 磁盘与内存使用 (Disk and Memory Usage)</h3><ul>
+<li><strong><code>df</code></strong> (报告文件系统磁盘空间使用情况 Report file system disk space usage)<ul>
+<li><strong>用途:</strong> 显示文件系统的总空间、已用空间、可用空间和挂载点。 </li>
+<li><strong>语法:</strong> <code>df [选项][文件/目录]</code> </li>
+<li>常用选项:<ul>
+<li><code>-h</code>: 以人类可读的格式显示 (例如 GB, MB)。 </li>
+<li><code>-T</code>: 显示文件系统类型。</li>
+<li><code>-i</code>: 显示inode信息而非块使用情况。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>df -h</code></li>
+</ul>
+</li>
+<li><strong><code>du</code></strong> (估算文件空间使用情况 Estimate file space usage)<ul>
+<li><strong>用途:</strong> 显示指定文件或目录占用的磁盘空间大小。 </li>
+<li><strong>语法:</strong> <code>du [选项][文件/目录]</code> </li>
+<li>常用选项:<ul>
+<li><code>-h</code>: 以人类可读的格式显示。 </li>
+<li><code>-s</code>: 仅显示总计大小。 </li>
+<li><code>-c</code>: 显示总计大小，并在最后显示所有参数的总和。</li>
+<li><code>--max-depth=N</code>: 只显示指定深度的目录大小。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>du -sh /var/log</code>: 显示 <code>/var/log</code> 目录的总大小。</li>
+<li><code>du -h --max-depth=1 /home</code>: 显示 <code>/home</code> 目录下第一级子目录和文件的大小。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>free</code></strong> (显示系统中的可用和已用物理内存和交换内存量 Display amount of free and used memory in the system)<ul>
+<li><strong>用途:</strong> 查看系统内存和交换空间的使用情况。 </li>
+<li><strong>语法:</strong> <code>free [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-h</code>: 以人类可读的格式显示。 </li>
+<li><code>-m</code>: 以MB为单位显示。 </li>
+<li><code>-g</code>: 以GB为单位显示。</li>
+<li><code>-s N</code>: 每N秒刷新一次。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>free -h</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-系统控制-System-Control"><a href="#2-3-系统控制-System-Control" class="headerlink" title="2.3 系统控制 (System Control)"></a>2.3 系统控制 (System Control)</h3><ul>
+<li><strong><code>shutdown</code></strong> (关闭系统 Schedule a system shutdown)<ul>
+<li><strong>用途:</strong> 安全地关闭或重启Linux系统，可以指定延迟时间或特定时间，并向登录用户发送警告信息。 </li>
+<li><strong>语法:</strong> <code>sudo shutdown [选项] 时间 [警告信息]</code> </li>
+<li>常用选项:<ul>
+<li><code>-h</code>: 关闭系统后停止电源 (halt)。 </li>
+<li><code>-P</code>: 关闭系统后切断电源 (power off)，通常是 <code>-h</code> 的默认行为。 </li>
+<li><code>-r</code>: 重启系统。 </li>
+<li><code>-c</code>: 取消先前安排的关机。 </li>
+<li><code>-k</code>: 发送警告信息，但不实际关机。</li>
+</ul>
+</li>
+<li>时间参数:<ul>
+<li><code>now</code>: 立刻执行。 </li>
+<li><code>+分钟数</code>: 指定多少分钟后执行 (例如 <code>+10</code>)。 </li>
+<li><code>hh:mm</code>: 指定绝对时间执行 (例如 <code>23:00</code>)。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo shutdown -h now</code>: 立刻关闭系统。</li>
+<li><code>sudo shutdown -r +15 "系统将在15分钟后重启以进行维护"</code>: 15分钟后重启系统并发送消息。</li>
+<li><code>sudo shutdown -c</code>: 取消已计划的关机或重启。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>reboot</code></strong> (重启系统 Reboot the system)<ul>
+<li><strong>用途:</strong> 重启Linux系统。通常是 <code>shutdown -r now</code> 的一个快捷方式。 </li>
+<li><strong>语法:</strong> <code>sudo reboot [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-f</code>: 强制重启，不调用 <code>shutdown</code>。不推荐常规使用。 </li>
+<li><code>-p</code>: 关闭电源（如果系统支持）。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>sudo reboot</code></li>
+</ul>
+</li>
+<li><strong><code>history</code></strong> (显示或操作历史列表 Display or manipulate the history list)<ul>
+<li><strong>用途:</strong> 显示用户在当前shell会话中执行过的命令历史。 </li>
+<li><strong>语法:</strong> <code>history [选项][数量]</code></li>
+<li>常用选项:<ul>
+<li><code>-c</code>: 清空历史列表。 </li>
+<li><code>-d 偏移量</code>: 删除指定偏移量的历史条目。</li>
+</ul>
+</li>
+<li>特殊用法:<ul>
+<li><code>!!</code>: 执行上一条命令。 </li>
+<li><code>!编号</code>: 执行历史列表中指定编号的命令。 </li>
+<li><code>!字符串</code>: 执行最近一条以指定字符串开头的命令。 </li>
+<li><code>Ctrl+R</code>: 反向搜索历史命令。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>history</code>: 显示所有命令历史。</li>
+<li><code>history 20</code>: 显示最近20条命令历史。</li>
+<li><code>!ls</code>: 执行最近一条以 <code>ls</code> 开头的命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>man</code></strong> (系统参考手册的分页程序 an interface to the on-line reference manuals)<ul>
+<li><strong>用途:</strong> 显示命令、函数或配置文件的帮助手册页。 </li>
+<li><strong>语法:</strong> <code>man [选项][章节] 命令名/主题</code></li>
+<li>常用选项:<ul>
+<li><code>-k 关键字</code>: 根据关键字搜索手册页标题和描述 (等同于 <code>apropos</code>)。</li>
+</ul>
+</li>
+<li><strong>导航:</strong> 在 <code>man</code> 页面中，通常使用与 <code>less</code> 相同的导航键（如空格翻页，<code>q</code> 退出，<code>/</code> 搜索）。 </li>
+<li>示例:<ul>
+<li><code>man ls</code>: 显示 <code>ls</code> 命令的手册页。</li>
+<li><code>man 5 passwd</code>: 显示 <code>/etc/passwd</code> 文件格式的手册页 (第5章节通常是文件格式)。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>clear</code></strong> (清屏 Clear the terminal screen)<ul>
+<li><strong>用途:</strong> 清除终端屏幕上的所有内容，将提示符移到屏幕顶部。 </li>
+<li><strong>语法:</strong> <code>clear</code></li>
+<li><strong>示例:</strong> <code>clear</code> (快捷键通常是 <code>Ctrl+L</code></li>
+</ul>
+</li>
+<li><strong><code>alias</code></strong> (定义或显示别名 Define or display aliases)<ul>
+<li><strong>用途:</strong> 为长命令或常用命令序列创建简短的别名。 </li>
+<li>语法:<ul>
+<li><code>alias</code>: 显示所有已定义的别名。 </li>
+<li><code>alias 名称='命令'</code> : 定义一个别名。 </li>
+<li><code>unalias 名称</code>: 删除一个别名。</li>
+</ul>
+</li>
+<li><strong>持久化:</strong> 临时定义的别名只在当前shell会话有效。要使其永久生效，需将其添加到shell的配置文件中，如 <code>~/.bashrc</code> 或 <code>~/.bash_aliases</code>。 </li>
+<li>示例:<ul>
+<li><code>alias ll='ls -alF'</code>: 定义 <code>ll</code> 作为 <code>ls -alF</code> 的别名。</li>
+<li><code>alias update='sudo apt update &amp;&amp; sudo apt upgrade -y'</code>: 定义 <code>update</code> 用于更新系统。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、高级系统监控-Advanced-System-Monitoring"><a href="#三、高级系统监控-Advanced-System-Monitoring" class="headerlink" title="三、高级系统监控 (Advanced System Monitoring)"></a>三、高级系统监控 (Advanced System Monitoring)</h2><p>除了基本的系统信息查看，Linux还提供了一系列高级工具，用于深入监控系统性能的各个方面，如CPU、内存、I/O和网络活动。</p>
+<h3 id="3-1-进程管理与监控-Process-Management-and-Monitoring"><a href="#3-1-进程管理与监控-Process-Management-and-Monitoring" class="headerlink" title="3.1 进程管理与监控 (Process Management and Monitoring)"></a>3.1 进程管理与监控 (Process Management and Monitoring)</h3><ul>
+<li><strong><code>ps</code></strong> (报告当前进程的快照 Report a snapshot of the current processes)<ul>
+<li><strong>用途:</strong> 显示当前系统中正在运行的进程信息。 </li>
+<li><strong>语法:</strong> <code>ps [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>aux</code>: 显示所有用户的进程（System V风格，无 <code>-</code>）。 </li>
+<li><code>-ef</code>: 显示所有进程，以完整格式（BSD风格，有 <code>-</code>）。 </li>
+<li><code>-u 用户名</code>: 显示指定用户的进程。 </li>
+<li><code>--forest</code>: 以ASCII字符显示进程树。 </li>
+<li><code>--sort=关键字</code>: 按指定关键字排序 (例如 <code>%cpu</code>, <code>%mem</code>)。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>ps aux</code>: 显示系统中所有正在运行的进程的详细信息。</li>
+<li><code>ps -ef | grep sshd</code>: 查找名为 <code>sshd</code> 的进程。 </li>
+<li><code>ps aux --sort=-%mem | head -n 5</code>: 显示内存使用率最高的5个进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>top</code></strong> (显示Linux进程 Display Linux processes)<ul>
+<li><strong>用途:</strong> 实时动态地显示系统中各个进程的资源占用状况，如CPU使用率、内存使用率等，默认按CPU使用率排序。 </li>
+<li><strong>语法:</strong> <code>top [选项]</code> </li>
+<li>交互命令 (在 <code>top</code> 运行时):<ul>
+<li><code>P</code>: 按CPU使用百分比排序。</li>
+<li><code>M</code>: 按内存使用百分比排序。</li>
+<li><code>N</code>: 按进程ID (PID) 排序。</li>
+<li><code>k</code>: 杀死一个进程 (需要输入PID和信号，默认为15 SIGTERM)。</li>
+<li><code>r</code>: 重新设置一个进程的nice值 (优先级)。</li>
+<li><code>h</code> 或 <code>?</code>: 显示帮助。 </li>
+<li><code>q</code>: 退出 <code>top</code>。 </li>
+<li><code>d</code>: 改变刷新延迟时间。</li>
+</ul>
+</li>
+<li>常用选项:<ul>
+<li><code>-d 秒数</code>: 设置屏幕刷新间隔。 </li>
+<li><code>-n 次数</code>: 刷新指定次数后退出。 </li>
+<li><code>-b</code>: 批处理模式，适合将输出重定向到文件。 </li>
+<li><code>-o +列名</code>: 按指定列排序 (如 <code>+%MEM</code> 按内存排序)。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>top</code> (启动实时监控)</li>
+</ul>
+</li>
+<li><strong><code>htop</code></strong> (交互式进程查看器 Interactive process viewer)<ul>
+<li><strong>用途:</strong> <code>top</code> 的增强版，提供更友好的交互界面、颜色显示、鼠标支持、水平/垂直滚动以及完整的命令行显示。 </li>
+<li><strong>语法:</strong> <code>htop [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-d 延迟</code>: 设置更新之间的延迟（单位为十分之一秒，例如 <code>-d 10</code> 表示1秒）。 </li>
+<li><code>-u 用户名</code>: 只显示指定用户的进程。 </li>
+<li><code>-s 列名</code>: 按指定列排序 (例如 <code>-s PERCENT_MEM</code>)。 </li>
+<li><code>-t</code>: 以树状视图显示进程层级关系。</li>
+</ul>
+</li>
+<li>交互命令 (在 <code>htop</code> 运行时):<ul>
+<li><code>F4</code> (或 <code>\</code>): 过滤进程。 </li>
+<li><code>F5</code> (或 <code>t</code>): 切换树状视图。 </li>
+<li><code>F6</code> (或 <code>&lt;</code> <code>&gt;</code>): 选择排序字段。 </li>
+<li><code>F9</code> (或 <code>k</code>): 杀死选中的进程。 </li>
+<li><code>F10</code> (或 <code>q</code>): 退出 <code>htop</code>。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>htop</code></li>
+</ul>
+</li>
+<li><strong><code>kill</code></strong> (向进程发送信号 Send a signal to a process)<ul>
+<li><strong>用途:</strong> 向指定的进程发送信号，常用于终止进程。 </li>
+<li><strong>语法:</strong> <code>kill [选项] PID...</code> </li>
+<li>常用信号:<ul>
+<li><code>SIGTERM</code> (15): 默认信号，请求进程正常终止。</li>
+<li><code>SIGKILL</code> (9): 强制终止进程，进程无法捕获此信号。 </li>
+<li><code>SIGHUP</code> (1): 挂起进程，常用于让守护进程重新读取配置文件。 </li>
+<li><code>SIGINT</code> (2): 中断进程，等同于 <code>Ctrl+C</code>。</li>
+</ul>
+</li>
+<li>常用选项:<ul>
+<li><code>-l</code>: 列出所有可用的信号名称。 </li>
+<li><code>-信号编号或名称</code>: 指定要发送的信号 (例如 <code>-9</code> 或 <code>-SIGKILL</code>)。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>kill 12345</code>: 向PID为12345的进程发送 <code>SIGTERM</code> 信号。</li>
+<li><code>kill -9 54321</code>: 强制杀死PID为54321的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>pkill</code></strong> (根据名称和其他属性查找或发信号给进程 Signal processes based on name and other attributes)<ul>
+<li><strong>用途:</strong> 根据进程名或其他属性向进程发送信号，通常用于终止进程。 </li>
+<li><strong>语法:</strong> <code>pkill [选项] 模式</code></li>
+<li>常用选项:<ul>
+<li><code>-信号</code>: 指定要发送的信号 (例如 <code>-9</code>)。</li>
+<li><code>-u 用户名</code>: 匹配指定用户的进程。</li>
+<li><code>-f</code>: 匹配完整命令行参数。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>pkill firefox</code>: 终止所有名为 <code>firefox</code> 的进程。 </li>
+<li><code>pkill -9 -f "stale_script.py"</code>: 强制杀死完整命令行包含 “stale_script.py” 的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>jobs</code></strong> (列出活动作业 List active jobs)<ul>
+<li><strong>用途:</strong> 显示在当前shell会话中放到后台运行或被挂起的作业。 </li>
+<li><strong>语法:</strong> <code>jobs [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-l</code>: 同时显示作业的进程ID (PID)。 </li>
+<li><code>-p</code>: 只显示作业的进程ID。 </li>
+<li><code>-r</code>: 只显示正在运行的作业。 </li>
+<li><code>-s</code>: 只显示已停止（挂起）的作业。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>jobs -l</code></li>
+</ul>
+</li>
+<li><strong><code>bg</code></strong> (将作业放到后台运行 Resume suspended jobs in the background)<ul>
+<li><strong>用途:</strong> 将一个已挂起（stopped）的作业转到后台继续运行。 </li>
+<li><strong>语法:</strong> <code>bg</code> 51 (作业ID可通过 <code>jobs</code> 命令查看，通常以 <code>%</code> 开头，如 <code>%1</code>)</li>
+<li><strong>示例:</strong> <code>bg %1</code> (将作业号为1的挂起作业转到后台运行)</li>
+</ul>
+</li>
+<li><strong><code>fg</code></strong> (将作业放到前台运行 Resume jobs in the foreground)<ul>
+<li><strong>用途:</strong> 将一个在后台运行或已挂起的作业转到前台继续运行。 </li>
+<li><strong>语法:</strong> <code>fg</code> </li>
+<li><strong>示例:</strong> <code>fg %2</code> (将作业号为2的作业转到前台运行)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-系统性能分析-System-Performance-Analysis"><a href="#3-2-系统性能分析-System-Performance-Analysis" class="headerlink" title="3.2 系统性能分析 (System Performance Analysis)"></a>3.2 系统性能分析 (System Performance Analysis)</h3><ul>
+<li><p><strong><code>vmstat</code></strong> (报告虚拟内存统计信息 Report virtual memory statistics)</p>
+<ul>
+<li><p><strong>用途:</strong> 显示关于进程、内存、分页、块I/O、陷阱和CPU活动的即时信息。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>vmstat [选项][延迟 [次数]]</code> </p>
+</li>
+<li><p>常用选项:</p>
+<ul>
+<li><code>-a</code>: 显示活动/非活动内存。 </li>
+<li><code>-s</code>: 显示各种事件计数器和内存统计信息的表格。 </li>
+<li><code>-d</code>: 显示磁盘统计信息。 </li>
+<li><code>-p 分区</code>: 显示指定分区的详细统计信息。 </li>
+<li><code>-t</code>: 在输出中添加时间戳。 </li>
+<li><code>延迟 次数</code>: 每隔“延迟”秒输出一次报告，共输出“次数”次。</li>
+</ul>
+</li>
+<li><p>输出字段解释:</p>
+<ul>
+<li><code>procs</code>: <code>r</code> (等待运行的进程数), <code>b</code> (不可中断睡眠的进程数)。</li>
+<li><code>memory</code>: <code>swpd</code> (使用的虚拟内存), <code>free</code> (空闲物理内存), <code>buff</code> (用作缓冲的内存), <code>cache</code> (用作缓存的内存)。</li>
+<li><code>swap</code>: <code>si</code> (从磁盘换入的内存量/秒), <code>so</code> (换出到磁盘的内存量/秒)。</li>
+<li><code>io</code>: <code>bi</code> (从块设备接收到的块数/秒), <code>bo</code> (发送到块设备的块数/秒)。</li>
+<li><code>system</code>: <code>in</code> (每秒中断次数), <code>cs</code> (每秒上下文切换次数)。</li>
+<li><code>cpu</code>: <code>us</code> (用户CPU时间百分比), <code>sy</code> (系统CPU时间百分比), <code>id</code> (空闲CPU时间百分比), <code>wa</code> (等待I/O的CPU时间百分比), <code>st</code> (从虚拟机窃取的CPU时间百分比)。</li>
+</ul>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>vmstat 2 5</code>: 每2秒显示一次系统状态，共显示5次。</li>
+<li><code>vmstat -s</code>: 显示内存和事件计数器摘要。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>iostat</code></strong> (报告CPU统计信息和输入/输出统计信息 Report Central Processing Unit (CPU) statistics and input/output statistics for devices and partitions)</p>
+<ul>
+<li><p><strong>用途:</strong> 监控系统输入/输出设备和CPU的活动情况，用于识别磁盘或CPU瓶颈。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>iostat [选项][间隔 [次数]]</code> </p>
+</li>
+<li><p>常用选项:</p>
+<ul>
+<li><code>-c</code>: 仅显示CPU利用率报告。 </li>
+<li><code>-d</code>: 仅显示设备利用率报告。 </li>
+<li><code>-x</code>: 显示扩展的I/O统计信息。 </li>
+<li><code>-k</code>: 以KB为单位显示统计信息。 </li>
+<li><code>-m</code>: 以MB为单位显示统计信息。 </li>
+<li><code>-t</code>: 打印每个报告的时间。 </li>
+<li><code>-p [设备 | ALL]</code>: 显示块设备及其所有分区的统计信息。 </li>
+<li><code>间隔 次数</code>: 每隔“间隔”秒输出一次报告，共输出“次数”次。</li>
+</ul>
+</li>
+<li><p>输出字段解释 (部分):</p>
+<ul>
+<li><code>%user</code>: 用户级别CPU利用率。</li>
+<li><code>%system</code>: 系统级别CPU利用率。</li>
+<li><code>%iowait</code>: CPU等待I/O操作完成的时间百分比。高 <code>%iowait</code> 通常表示I/O瓶颈。 </li>
+<li><code>%idle</code>: CPU空闲时间百分比。</li>
+<li><code>tps</code>: 每秒传输次数。</li>
+<li><code>Blk_read/s</code> (或 <code>kB_read/s</code>, <code>MB_read/s</code>): 每秒读取的块/KB/MB数。</li>
+<li><code>Blk_wrtn/s</code> (或 <code>kB_wrtn/s</code>, <code>MB_wrtn/s</code>): 每秒写入的块/KB/MB数。</li>
+<li><code>%util</code>: 存储设备繁忙的时间百分比。</li>
+</ul>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>iostat -dx 2 5</code>: 每2秒显示一次扩展的磁盘I/O统计信息，共显示5次。</li>
+<li><code>iostat -c 1</code>: 每1秒显示一次CPU利用率。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>sar</code></strong> (收集、报告或保存系统活动信息 Collect, report, or save system activity information)</p>
+<ul>
+<li><strong>用途:</strong> System Activity Reporter，一个强大的系统性能分析工具，可以收集和报告CPU、内存、I/O、网络等多种系统活动的统计数据，支持历史数据分析。 </li>
+<li><strong>安装:</strong> <code>sar</code> 通常包含在 <code>sysstat</code> 包中，可能需要手动安装: <code>sudo apt-get install sysstat</code> 或 <code>sudo yum install sysstat</code>。 </li>
+<li><strong>语法:</strong> <code>sar [选项][间隔 [次数]]</code> </li>
+<li>常用选项:<ul>
+<li><code>-u</code>: 显示CPU利用率。 </li>
+<li><code>-r</code>: 显示内存利用率。 </li>
+<li><code>-b</code>: 显示I/O和传输速率统计。 </li>
+<li><code>-d</code>: 显示块设备（磁盘）活动。 </li>
+<li><code>-n DEV | EDEV |...</code>: 显示网络统计信息 (<code>DEV</code> 为网络接口，<code>EDEV</code> 为网络错误)。 </li>
+<li><code>-q</code>: 显示运行队列长度和平均负载。 </li>
+<li><code>-P ALL | CPU号</code>: 报告每个处理器的统计信息。</li>
+<li><code>-o 文件名</code>: 将数据保存到二进制文件。 </li>
+<li><code>-f 文件名</code>: 从指定文件读取数据。 </li>
+<li><code>间隔 次数</code>: 每隔“间隔”秒输出一次报告，共输出“次数”次。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sar -u 2 5</code>: 每2秒显示一次CPU利用率，共显示5次。 </li>
+<li><code>sar -r 1 3</code>: 每1秒显示一次内存利用率，共显示3次。 </li>
+<li><code>sar -n DEV 1</code>: 每1秒显示一次网络接口统计。 </li>
+<li><code>sar -f /var/log/sa/saDD</code> (其中DD为日期): 查看历史系统活动报告。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>lsof</code></strong> (列出打开的文件 List open files)</p>
+<ul>
+<li><p><strong>用途:</strong> 显示系统中所有进程打开的文件列表。在Linux中，“一切皆文件”，因此 <code>lsof</code> 可以显示打开的普通文件、目录、网络套接字、设备等。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>lsof [选项][文件名]</code> </p>
+</li>
+<li><p>常用选项:</p>
+<ul>
+<li><p><code>-i [条件]</code>: 显示符合条件的网络连接。例如:</p>
+<ul>
+<li><code>-i TCP:22</code>: 显示监听或连接到TCP端口22的进程。 </li>
+<li><code>-i :80</code>: 显示监听或连接到端口80的进程。</li>
+<li><code>-i @主机名/IP</code>: 显示与指定主机相关的连接。</li>
+</ul>
+</li>
+<li><p><code>-u 用户名</code>: 显示指定用户打开的文件。 </p>
+</li>
+<li><p><code>-p PID</code>: 显示指定进程ID打开的文件。 </p>
+</li>
+<li><p><code>-c 命令名</code>: 显示由指定命令名开头的进程打开的文件。 </p>
+</li>
+<li><p><code>+D 目录</code>: 递归显示目录下被打开的文件。 </p>
+</li>
+<li><p><code>-t</code>: 只输出进程ID (PID)，常用于与其他命令结合。</p>
+</li>
+</ul>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>sudo lsof -i :80</code>: 查看哪些进程正在使用80端口。</li>
+<li><code>sudo lsof -u apache</code>: 查看用户 <code>apache</code> 打开了哪些文件。</li>
+<li><code>sudo lsof /var/log/syslog</code>: 查看哪个进程打开了 <code>/var/log/syslog</code> 文件。</li>
+<li><code>sudo lsof -p 1234</code>: 查看PID为1234的进程打开了哪些文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、文本处理-Text-Processing"><a href="#四、文本处理-Text-Processing" class="headerlink" title="四、文本处理 (Text Processing)"></a>四、文本处理 (Text Processing)</h2><p>Linux 提供了大量强大的文本处理工具，用于查看、搜索、编辑和分析文本文件。</p>
+<h3 id="4-1-文件内容查看-Viewing-File-Contents"><a href="#4-1-文件内容查看-Viewing-File-Contents" class="headerlink" title="4.1 文件内容查看 (Viewing File Contents)"></a>4.1 文件内容查看 (Viewing File Contents)</h3><ul>
+<li><strong><code>cat</code></strong> (连接文件并打印到标准输出 Concatenate files and print on the standard output)<ul>
+<li><strong>用途:</strong> 显示一个或多个文件的全部内容，也可用于创建或合并文件。 </li>
+<li><strong>语法:</strong> <code>cat [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-n</code>: 显示行号。 </li>
+<li><code>-E</code>: 在每行末尾显示 <code>$</code> 符号。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>cat myfile.txt</code>: 显示 <code>myfile.txt</code> 的内容。</li>
+<li><code>cat file1.txt file2.txt &gt; combined.txt</code>: 合并 <code>file1.txt</code> 和 <code>file2.txt</code> 的内容到 <code>combined.txt</code>。</li>
+<li><code>cat -n script.sh</code>: 显示 <code>script.sh</code> 的内容并带行号。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>less</code></strong> (与 <code>more</code> 功能相反，但功能更强大 Opposite of more, but with more features)<ul>
+<li><strong>用途:</strong> 分页查看文件内容，允许向前和向后滚动，支持搜索。比 <code>cat</code> 更适合查看大文件。 </li>
+<li><strong>语法:</strong> <code>less [选项] 文件名</code> </li>
+<li>常用选项:<ul>
+<li><code>-N</code>: 显示行号。 </li>
+<li><code>-S</code>: 禁止长行自动换行 (内容超出屏幕宽度时可水平滚动)。 </li>
+<li><code>-i</code>: 搜索时忽略大小写。 </li>
+<li><code>-F</code>: 如果内容能在一屏内显示完则自动退出。 </li>
+<li><code>-X</code>: 退出 <code>less</code> 后不清屏。</li>
+</ul>
+</li>
+<li>交互命令 (在 <code>less</code> 运行时):<ul>
+<li>空格键 或 <code>f</code>: 向下翻一页。 </li>
+<li><code>b</code>: 向上翻一页。 </li>
+<li><code>j</code> 或 向下箭头: 向下滚动一行。 </li>
+<li><code>k</code> 或 向上箭头: 向上滚动一行。 </li>
+<li><code>G</code>: 跳转到文件末尾。 </li>
+<li><code>g</code>: 跳转到文件开头。 </li>
+<li><code>/模式</code>: 向下搜索指定模式。 </li>
+<li><code>?模式</code>: 向上搜索指定模式。 </li>
+<li><code>n</code>: 重复上一次搜索 (同方向)。 </li>
+<li><code>N</code>: 重复上一次搜索 (反方向)。 </li>
+<li><code>q</code>: 退出 <code>less</code>。 </li>
+<li><code>h</code>: 显示帮助。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>less large_log_file.log</code>: 查看 <code>large_log_file.log</code>。</li>
+<li><code>dmesg | less -N</code>: 分页显示内核环形缓冲区消息并带行号。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>head</code></strong> (输出文件的第一部分 Output the first part of files)<ul>
+<li><strong>用途:</strong> 显示文件的开头部分，默认显示前10行。 </li>
+<li><strong>语法:</strong> <code>head [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-n 数字</code> 或 <code>-数字</code>: 指定显示的行数。 </li>
+<li><code>-c 字节数</code>: 指定显示的字节数。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>head access.log</code>: 显示 <code>access.log</code> 的前10行。</li>
+<li><code>head -n 20 error.log</code>: 显示 <code>error.log</code> 的前20行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>tail</code></strong> (输出文件的最后一部分 Output the last part of files)<ul>
+<li><strong>用途:</strong> 显示文件的末尾部分，默认显示最后10行。常用于监控实时更新的日志文件。 </li>
+<li><strong>语法:</strong> <code>tail [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-n 数字</code> 或 <code>-数字</code>: 指定显示的行数。 </li>
+<li><code>-c 字节数</code>: 指定显示的字节数。</li>
+<li><code>-f</code>: 持续显示文件末尾追加的内容，直到按 <code>Ctrl+C</code> 终止。非常适用于实时日志监控。 </li>
+<li><code>-n +数字</code>: 从第几行开始显示到文件末尾。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>tail messages.log</code>: 显示 <code>messages.log</code> 的最后10行。</li>
+<li><code>tail -n 50 system.log</code>: 显示 <code>system.log</code> 的最后50行。</li>
+<li><code>tail -f /var/log/syslog</code>: 实时监控 <code>/var/log/syslog</code> 文件的新增内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-文本搜索与模式匹配-Text-Searching-and-Pattern-Matching"><a href="#4-2-文本搜索与模式匹配-Text-Searching-and-Pattern-Matching" class="headerlink" title="4.2 文本搜索与模式匹配 (Text Searching and Pattern Matching)"></a>4.2 文本搜索与模式匹配 (Text Searching and Pattern Matching)</h3><ul>
+<li><p><code>grep</code></p>
+<p> (打印匹配模式的行 Print lines matching a pattern)</p>
+<ul>
+<li><strong>用途:</strong> 在文件中搜索包含指定模式（字符串或正则表达式）的行，并打印这些行。 </li>
+<li><strong>语法:</strong> <code>grep [选项] 模式 [文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-i</code>: 忽略模式和输入数据的大小写。 </li>
+<li><code>-v</code>: 反向匹配，打印不包含模式的行。 </li>
+<li><code>-r</code> 或 <code>-R</code>: 递归搜索目录下的所有文件。 </li>
+<li><code>-n</code>: 显示匹配行的行号。 </li>
+<li><code>-c</code>: 只打印匹配行的计数。 </li>
+<li><code>-l</code>: 只打印包含匹配模式的文件名。 </li>
+<li><code>-w</code>: 整词匹配。 </li>
+<li><code>-E</code>: 使用扩展正则表达式 (ERE)。</li>
+<li><code>-A 数字</code>: 打印匹配行及其后N行。 </li>
+<li><code>-B 数字</code>: 打印匹配行及其前N行。 </li>
+<li><code>-C 数字</code>: 打印匹配行及其前后各N行。 </li>
+<li><code>-e 模式</code>: 指定多个搜索模式。 </li>
+<li><code>-o</code>: 只显示匹配模式的部分。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>grep "error" application.log</code>: 在 <code>application.log</code> 中搜索包含 “error” 的行。</li>
+<li><code>grep -i "warning" /var/log/messages</code>: 在 <code>/var/log/messages</code> 中不区分大小写地搜索 “warning”。 </li>
+<li><code>grep -r "config_value" /etc/myapp/</code>: 递归搜索 <code>/etc/myapp/</code> 目录中包含 “config_value” 的文件。 </li>
+<li><code>ps aux | grep -v "grep"</code>: 显示进程列表，但不显示 <code>grep</code> 命令本身。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-文本编辑与转换-Text-Editing-and-Transformation"><a href="#4-3-文本编辑与转换-Text-Editing-and-Transformation" class="headerlink" title="4.3 文本编辑与转换 (Text Editing and Transformation)"></a>4.3 文本编辑与转换 (Text Editing and Transformation)</h3><ul>
+<li><p><strong><code>sed</code></strong> (流编辑器，用于对输入流执行基本文本转换 Stream editor for performing basic text transformations on an input stream)</p>
+<ul>
+<li><p><strong>用途:</strong> 一个强大的流编辑器，用于对文件或输入流进行非交互式的文本替换、删除、插入、转换等操作。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>sed [选项] '脚本' [输入文件...]</code> </p>
+</li>
+<li><p>常用选项:</p>
+<ul>
+<li><code>-i[后缀]</code>: 直接修改文件内容 (如果提供后缀，则创建备份)。 </li>
+<li><code>-n</code>: 禁止自动打印模式空间的内容，通常与 <code>p</code> 命令配合使用。 </li>
+<li><code>-e 脚本</code>: 添加要执行的脚本。允许多个 <code>-e</code> 来执行多个命令。 </li>
+<li><code>-f 脚本文件</code>: 从脚本文件中读取 <code>sed</code> 命令。 </li>
+<li><code>-r</code> 或 <code>-E</code>: 使用扩展正则表达式。</li>
+</ul>
+</li>
+<li><p>常用命令 (在脚本中):</p>
+<ul>
+<li><p><code>s/旧模式/新模式/[标志]</code>: 替换 (substitute)。标志可以是：</p>
+<ul>
+<li><code>g</code>: 全局替换行内所有匹配。 </li>
+<li><code>N</code>: 替换第N个匹配项。 </li>
+<li><code>I</code> 或 <code>i</code>: 忽略大小写。</li>
+</ul>
+</li>
+<li><p><code>d</code>: 删除匹配的行。 </p>
+</li>
+<li><p><code>p</code>: 打印模式空间的内容 (通常与 <code>-n</code> 选项一起使用)。 </p>
+</li>
+<li><p><code>a\文本</code>: 在匹配行之后追加文本。</p>
+</li>
+<li><p><code>i\文本</code>: 在匹配行之前插入文本。</p>
+</li>
+<li><p><code>c\文本</code>: 用文本替换匹配的行。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>地址 (指定命令作用的行):</strong> 可以是行号、正则表达式、或行号范围 (如 <code>1,5</code> 表示第1到5行；<code>/pattern/</code> 表示匹配模式的行)。 </p>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>sed 's/apple/orange/g' fruit.txt</code>: 将 <code>fruit.txt</code> 中所有的 “apple” 替换为 “orange” 并输出到标准输出。</li>
+<li><code>sed -i 's/old_domain.com/new_domain.com/g' config.file</code>: 直接修改 <code>config.file</code>，将其中的 “old_domain.com” 全部替换为 “new_domain.com”。</li>
+<li><code>sed -n '/error/p' server.log</code>: 只打印 <code>server.log</code> 中包含 “error” 的行。</li>
+<li><code>sed '1,5d' data.txt</code>: 删除 <code>data.txt</code> 文件的前5行。 </li>
+<li><code>sed '/^#/d' config.conf</code>: 删除 <code>config.conf</code> 中所有以 <code>#</code> 开头的注释行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>awk</code></strong> (模式扫描和处理语言 Pattern scanning and processing language)</p>
+<ul>
+<li><strong>用途:</strong> 一种强大的文本处理编程语言，非常适合处理结构化数据（如按列分隔的数据）、生成报告和执行复杂的文本操作。 </li>
+<li><strong>语法:</strong> <code>awk '[选项] '模式 {动作}' [输入文件...]'</code> </li>
+<li>核心概念:<ul>
+<li>记录 (Record): <code>awk</code> 逐行处理输入，每行被视为一个记录，默认记录分隔符是换行符。</li>
+<li>字段 (Field): 每个记录被进一步分解为字段，默认字段分隔符是空格或制表符。字段可以用 <code>$1</code>, <code>$2</code>,… <code>$NF</code> (最后一个字段) 表示，<code>$0</code> 表示整个记录。 </li>
+<li>模式 (Pattern): 在执行动作之前检查的条件。可以是正则表达式、比较表达式等。如果省略模式，则对每一行都执行动作。 </li>
+<li>动作 (Action): 由花括号 <code>{}</code> 包围的一系列命令。 </li>
+<li><code>BEGIN</code> 块: 在处理任何输入行之前执行一次。 </li>
+<li><code>END</code> 块: 在处理完所有输入行之后执行一次。</li>
+</ul>
+</li>
+<li>常用选项:<ul>
+<li><code>-F 分隔符</code>: 指定输入字段分隔符。 </li>
+<li><code>-v 变量=值</code>: 定义 <code>awk</code> 脚本中可以使用的变量。 </li>
+<li><code>-f 程序文件</code>: 从文件中读取 <code>awk</code> 程序。</li>
+</ul>
+</li>
+<li>内置变量:<ul>
+<li><code>FS</code>: 输入字段分隔符 (同 <code>-F</code> 选项)。</li>
+<li><code>OFS</code>: 输出字段分隔符 (默认为空格)。 </li>
+<li><code>RS</code>: 输入记录分隔符 (默认为换行符)。</li>
+<li><code>ORS</code>: 输出记录分隔符 (默认为换行符)。</li>
+<li><code>NR</code>: 当前已处理的记录数（行号）。 </li>
+<li><code>NF</code>: 当前记录中的字段数。</li>
+</ul>
+</li>
+<li><code>awk</code> 不仅仅是一个简单的文本过滤器，它实际上是一种编程语言，拥有变量、条件语句（如 <code>if</code>）、循环（如 <code>for</code>, <code>while</code>）等编程结构 。这使其能够处理比 <code>grep</code> 或 <code>sed</code> 更复杂的文本处理任务，例如对数据进行计算、格式化输出复杂的报告等。</li>
+<li>示例:<ul>
+<li><code>awk -F':' '{print $1, $3}' /etc/passwd</code>: 打印 <code>/etc/passwd</code> 文件中以冒号分隔的第一和第三个字段（用户名和UID）。</li>
+<li><code>awk '/error/ {count++; print "Error on line " NR ": " $0} END {print "Total errors found: " count}' system.log</code>: 搜索 <code>system.log</code> 中包含 “error” 的行，打印行号和内容，并在最后打印错误总数。</li>
+<li><code>ls -l | awk '{if ($5 &gt; 1024) print $9, "is larger than 1KB"}'</code>: 列出当前目录中大于1KB的文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>tr</code></strong> (转换或删除字符 Translate or delete characters)</p>
+<ul>
+<li><strong>用途:</strong> 用于字符级别的转换（如大小写转换）或删除。 </li>
+<li><strong>语法:</strong> <code>tr [选项] SET1</code> </li>
+<li>常用选项:<ul>
+<li><code>-d</code>: 删除 <code>SET1</code> 中指定的所有字符。 </li>
+<li><code>-s</code>: 压缩 <code>SET1</code> (或 <code>SET2</code> 如果提供了 <code>SET2</code>) 中连续重复的字符为一个。 </li>
+<li><code>-c</code>: 使用 <code>SET1</code> 的补集。</li>
+</ul>
+</li>
+<li><strong>字符集 (SET):</strong> 可以是单个字符、字符范围 (如 <code>a-z</code>, <code>0-9</code>) 或特殊字符类 (如 <code>[:lower:]</code>, <code>[:upper:]</code>, <code>[:digit:]</code>, <code>[:space:]</code>)。 </li>
+<li>示例:<ul>
+<li><code>echo "Hello World" | tr 'A-Z' 'a-z'</code>: 将标准输入中的大写字母转换为小写，输出 “hello world”。 </li>
+<li><code>cat myfile.txt | tr -d '\r'</code>: 删除 <code>myfile.txt</code> 中的回车符 (Windows换行符转Unix换行符)。</li>
+<li><code>echo "This has too many spaces" | tr -s ' '</code>: 将多个连续空格压缩为单个空格，输出 “This has too many spaces”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>cut</code></strong> (从每行中删除文本区域 Remove sections from each line of files)</p>
+<ul>
+<li><strong>用途:</strong> 从文件的每一行中提取（剪切）指定的列或字符。 </li>
+<li><strong>语法:</strong> <code>cut [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-d 分隔符</code>: 指定字段分隔符 (默认是制表符 TAB)。 </li>
+<li><code>-f 字段列表</code>: 指定要提取的字段编号，可以用逗号分隔多个字段 (如 <code>1,3</code>) 或用连字符表示范围 (如 <code>2-5</code>)。 </li>
+<li><code>-c 字符列表</code>: 指定要提取的字符位置，格式同 <code>-f</code>。 </li>
+<li><code>-b 字节列表</code>: 指定要提取的字节位置，格式同 <code>-f</code>。 </li>
+<li><code>--complement</code>: 提取指定字段/字符/字节之外的部分。 </li>
+<li><code>--output-delimiter=字符串</code>: 指定输出字段的分隔符。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>cut -d':' -f1,7 /etc/passwd</code>: 提取 <code>/etc/passwd</code> 文件中以冒号分隔的第一和第七个字段（用户名和shell）。 </li>
+<li><code>date | cut -c12-19</code>: 显示当前时间的 时:分:秒 部分。</li>
+<li><code>who | cut -c1-8</code>: 提取 <code>who</code> 命令输出中每行的前8个字符（通常是用户名）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-4-文本比较与统计-Text-Comparison-and-Statistics"><a href="#4-4-文本比较与统计-Text-Comparison-and-Statistics" class="headerlink" title="4.4 文本比较与统计 (Text Comparison and Statistics)"></a>4.4 文本比较与统计 (Text Comparison and Statistics)</h3><ul>
+<li><strong><code>sort</code></strong> (对文本文件的行进行排序 Sort lines of text files)<ul>
+<li><strong>用途:</strong> 对文件内容按行进行排序，支持多种排序规则。 </li>
+<li><strong>语法:</strong> <code>sort [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-r</code>: 反向排序（降序）。 </li>
+<li><code>-n</code>: 按数值大小进行排序。 </li>
+<li><code>-k 字段号[,结束字段号][选项]</code>: 按指定的字段进行排序。字段号从1开始。可以附加排序选项，如 <code>n</code> (数值), <code>r</code> (反向)。 </li>
+<li><code>-t 分隔符</code>: 指定字段分隔符。 </li>
+<li><code>-u</code>: 输出唯一的行（去除重复行，等同于 <code>sort file | uniq</code>）。 </li>
+<li><code>-f</code>: 忽略大小写进行排序。 </li>
+<li><code>-M</code>: 按月份名称排序 (Jan, Feb,…)。 </li>
+<li><code>-h</code>: 人类可读数字排序 (例如 2K, 1G)。 </li>
+<li><code>-o 输出文件</code>: 将排序结果写入指定文件，而不是标准输出。可以用于原地排序，例如 <code>sort -o file.txt file.txt</code>。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sort names.txt</code>: 按字母顺序对 <code>names.txt</code> 的行进行排序。</li>
+<li><code>sort -rn data.log | head -n 5</code>: 对 <code>data.log</code> 中的数字进行反向（从大到小）排序，并显示前5行。</li>
+<li><code>sort -t':' -k3n /etc/passwd</code>: 以冒号为分隔符，按第三个字段（UID）的数值大小对 <code>/etc/passwd</code> 文件进行排序。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>uniq</code></strong> (报告或省略重复行 Report or omit repeated lines)<ul>
+<li><strong>用途:</strong> 从已排序的输入中删除或报告重复的相邻行。因此，<code>uniq</code> 通常与 <code>sort</code> 命令配合使用。 </li>
+<li><strong>语法:</strong> <code>uniq [选项][输入文件 [输出文件]]</code> </li>
+<li>常用选项:<ul>
+<li><code>-c</code>: 在每行前输出该行重复出现的次数。 </li>
+<li><code>-d</code>: 仅显示重复出现的行（每组重复行只显示一次）。 </li>
+<li><code>-D</code>: 显示所有重复的行（而不是每组只显示一次）。 </li>
+<li><code>-u</code>: 仅显示不重复的行。 </li>
+<li><code>-i</code>: 比较时忽略大小写。 </li>
+<li><code>-f N</code> 或 <code>--skip-fields=N</code>: 跳过比较每行的前N个字段。 </li>
+<li><code>-s N</code> 或 <code>--skip-chars=N</code>: 跳过比较每行的前N个字符。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sort access.log | uniq -c</code>: 统计 <code>access.log</code> 中每种唯一请求的次数。</li>
+<li><code>sort data.txt | uniq -d</code>: 显示 <code>data.txt</code> 中所有重复的行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>wc</code></strong> (打印换行符、字和字节计数 Print newline, word, and byte counts for each file)<ul>
+<li><strong>用途:</strong> 统计指定文件或标准输入的行数、单词数、字符数或字节数。 </li>
+<li><strong>语法:</strong> <code>wc [选项][文件...]</code> </li>
+<li>常用选项:<ul>
+<li><code>-l</code>: 只统计行数。 </li>
+<li><code>-w</code>: 只统计单词数。 </li>
+<li><code>-c</code>: 只统计字节数。 </li>
+<li><code>-m</code>: 只统计字符数 (考虑多字节字符)。 </li>
+<li><code>-L</code>: 打印最长行的长度。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>wc report.txt</code>: 显示 <code>report.txt</code> 的行数、单词数和字节数。</li>
+<li><code>ls -1 | wc -l</code>: 统计当前目录下的文件和目录数量。</li>
+<li><code>grep "error" logfile | wc -l</code>: 统计 <code>logfile</code> 中包含 “error” 的行数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>diff</code></strong> (逐行比较文件 Compare files line by line)<ul>
+<li><strong>用途:</strong> 比较两个文件的内容，并显示它们之间的差异。常用于比较代码文件、配置文件等。 </li>
+<li><strong>语法:</strong> <code>diff [选项] 文件1 文件2</code> </li>
+<li>常用选项:<ul>
+<li><code>-u</code> 或 <code>-U 数字</code>: 以统一格式 (unified format) 输出差异，通常更易读，并被 <code>patch</code> 命令使用。 </li>
+<li><code>-c</code>: 以上下文格式 (context format) 输出差异。 </li>
+<li><code>-i</code>: 比较时忽略大小写。 </li>
+<li><code>-w</code>: 忽略所有空格导致的差异。 </li>
+<li><code>-B</code>: 忽略因空行导致的差异。 </li>
+<li><code>-r</code>: 递归比较目录。如果比较的是目录，<code>diff</code> 会比较两个目录中同名的文件。 </li>
+<li><code>-q</code> 或 <code>--brief</code>: 仅报告文件是否不同，不显示具体差异。 </li>
+<li><code>-s</code>: 当文件相同时报告。</li>
+</ul>
+</li>
+<li>输出格式解释:<ul>
+<li>默认格式：<code>&lt;</code> 表示第一个文件中的行，<code>&gt;</code> 表示第二个文件中的行，行号和操作符（<code>a</code> 添加, <code>d</code> 删除, <code>c</code> 更改）指示如何从文件1转换到文件2。 </li>
+<li>统一格式 (<code>-u</code>): 以 <code>--- file1</code> 和 <code>+++ file2</code> 开头，差异部分用 <code>-</code> (来自文件1) 和 <code>+</code> (来自文件2) 标记。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>diff config_v1.conf config_v2.conf</code>: 比较两个配置文件的差异。</li>
+<li><code>diff -u old_script.sh new_script.sh &gt; script.patch</code>: 以统一格式生成补丁文件。 </li>
+<li><code>diff -r project_v1/ project_v2/</code>: 递归比较两个项目目录。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、用户、用户组与权限管理-User-Group-and-Permission-Management"><a href="#五、用户、用户组与权限管理-User-Group-and-Permission-Management" class="headerlink" title="五、用户、用户组与权限管理 (User, Group, and Permission Management)"></a>五、用户、用户组与权限管理 (User, Group, and Permission Management)</h2><p>管理用户账户、用户组以及文件和目录的访问权限是 Linux 系统安全与管理的核心。</p>
+<h3 id="5-1-用户信息查看-Viewing-User-Information"><a href="#5-1-用户信息查看-Viewing-User-Information" class="headerlink" title="5.1 用户信息查看 (Viewing User Information)"></a>5.1 用户信息查看 (Viewing User Information)</h3><ul>
+<li><strong><code>who</code></strong> (显示当前已登录的用户 Show who is logged on)<ul>
+<li><strong>用途:</strong> 显示当前登录到系统的用户信息，包括用户名、终端、登录时间、来源IP等。 </li>
+<li><strong>语法:</strong> <code>who [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-a</code> 或 <code>--all</code>: 显示所有信息，包括空闲时间、进程ID等。 </li>
+<li><code>-b</code> 或 <code>--boot</code>: 显示上次系统启动时间。 </li>
+<li><code>-H</code> 或 <code>--heading</code>: 显示列标题。 </li>
+<li><code>-u</code> 或 <code>--users</code>: 列出已登录用户，并显示空闲时间和PID。 </li>
+<li><code>-q</code> 或 <code>--count</code>: 只显示登录用户名和数量。 </li>
+<li><code>am i</code> (或 <code>am I</code>): 显示运行 <code>who</code> 命令的当前用户信息。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>who</code>: 显示当前登录用户。</li>
+<li><code>who -H</code>: 显示当前登录用户并带列标题。</li>
+<li><code>who am i</code>: 显示当前终端会话的用户信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>id</code></strong> (打印真实和有效的用户和组ID Print real and effective user and group IDs)<ul>
+<li><strong>用途:</strong> 显示指定用户（默认为当前用户）的UID（用户ID）、GID（组ID）以及所属的用户组信息。 </li>
+<li><strong>语法:</strong> <code>id [选项][用户名]</code> </li>
+<li>常用选项:<ul>
+<li><code>-u</code>: 只显示有效用户ID (UID)。 </li>
+<li><code>-g</code>: 只显示有效组ID (GID)。 </li>
+<li><code>-G</code>: 显示所有组ID。 </li>
+<li><code>-n</code>: 与 <code>-u</code>, <code>-g</code>, <code>-G</code> 配合使用，显示名称而非数字ID。 </li>
+<li><code>-r</code>: 与 <code>-u</code>, <code>-g</code>, <code>-G</code> 配合使用，显示真实ID而非有效ID。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>id</code>: 显示当前用户的ID信息。</li>
+<li><code>id john</code>: 显示用户 <code>john</code> 的ID信息。</li>
+<li><code>id -Gn jane</code>: 显示用户 <code>jane</code> 所属的所有组的名称。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-用户切换与提权-Switching-Users-and-Elevating-Privileges"><a href="#5-2-用户切换与提权-Switching-Users-and-Elevating-Privileges" class="headerlink" title="5.2 用户切换与提权 (Switching Users and Elevating Privileges)"></a>5.2 用户切换与提权 (Switching Users and Elevating Privileges)</h3><ul>
+<li><strong><code>su</code></strong> (切换用户或成为超级用户 Switch user or become superuser)<ul>
+<li><strong>用途:</strong> 允许用户在当前终端会话中切换到另一个用户账户，如果未指定用户名，则默认切换到超级用户 (root)。 </li>
+<li><strong>语法:</strong> <code>su [选项][用户名]</code> </li>
+<li>常用选项:<ul>
+<li><code>-</code> 或 <code>-l</code> 或 <code>--login</code>: 模拟一次完整的登录过程，加载目标用户的环境变量、主目录和shell配置。这是推荐的切换用户方式，以避免环境混乱。 </li>
+<li><code>-c "命令"</code>: 以目标用户身份执行单个命令后退出。 </li>
+<li><code>-s shell路径</code>: 指定切换后使用的shell。 </li>
+<li><code>-p</code> 或 <code>-m</code> 或 <code>--preserve-environment</code>: 保留当前用户的环境变量。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>su - john</code>: 切换到用户 <code>john</code>，并加载其完整的登录环境。</li>
+<li><code>su -</code>: 切换到 <code>root</code> 用户，并加载其完整的登录环境 (需要输入root密码)。</li>
+<li><code>su -c "ls /root" someuser</code>: 以 <code>someuser</code> 的身份执行 <code>ls /root</code> 命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>sudo</code></strong> (以其他用户身份执行命令，通常是root Execute a command as another user, typically root)<ul>
+<li><strong>用途:</strong> 允许授权用户以超级用户 (root) 或其他指定用户的身份执行命令，而无需知道目标用户的密码（通常需要输入当前用户的密码进行验证）。这是比直接使用 <code>root</code> 账户更安全的权限提升方式。 </li>
+<li><strong>语法:</strong> <code>sudo [选项] 命令</code> </li>
+<li>常用选项:<ul>
+<li><code>-u 用户名</code>: 以指定用户的身份执行命令。 </li>
+<li><code>-i</code>: 模拟一次 <code>root</code> 用户的登录shell，加载 <code>root</code> 的环境。 </li>
+<li><code>-s</code>: 执行由 <code>SHELL</code> 环境变量指定的shell，通常是 <code>root</code> 的shell。 </li>
+<li><code>-l</code>: 列出当前用户可以通过 <code>sudo</code> 执行的命令以及禁止执行的命令。 </li>
+<li><code>-v</code>: 延长 <code>sudo</code> 的密码凭证时效，而不执行命令。 </li>
+<li><code>-k</code>: 使当前的 <code>sudo</code> 密码凭证失效，下次使用 <code>sudo</code> 时需要重新输入密码。 </li>
+<li><code>-b</code>: 在后台运行命令。</li>
+</ul>
+</li>
+<li><strong>配置文件:</strong> <code>sudo</code> 的权限配置存储在 <code>/etc/sudoers</code> 文件中，应使用 <code>visudo</code> 命令进行编辑，以确保语法正确并防止配置错误导致系统无法使用 <code>sudo</code>。 </li>
+<li>示例:<ul>
+<li><code>sudo apt update</code>: 以 <code>root</code> 权限更新软件包列表。 </li>
+<li><code>sudo -u www-data crontab -l</code>: 以 <code>www-data</code> 用户身份列出其 <code>cron</code> 作业。</li>
+<li><code>sudo -i</code>: 切换到 <code>root</code> 用户的交互式shell。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-用户账户管理-User-Account-Management"><a href="#5-3-用户账户管理-User-Account-Management" class="headerlink" title="5.3 用户账户管理 (User Account Management)"></a>5.3 用户账户管理 (User Account Management)</h3><ul>
+<li><strong><code>useradd</code></strong> (创建新用户 Create a new user or update default new user information)<ul>
+<li><strong>用途:</strong> 用于在Linux系统中添加新的用户账户。 </li>
+<li><strong>语法:</strong> <code>useradd [选项] 用户名</code> </li>
+<li>常用选项:<ul>
+<li><code>-m</code>: 创建用户的主目录（如果不存在）。 </li>
+<li><code>-d 家目录路径</code>: 指定用户的主目录路径。 </li>
+<li><code>-s shell路径</code>: 指定用户的默认登录shell (例如 <code>/bin/bash</code>, <code>/sbin/nologin</code>)。 </li>
+<li><code>-g 初始组名或GID</code>: 指定用户的主组。 </li>
+<li><code>-G 附加组列表</code>: 指定用户所属的附加组（逗号分隔）。 </li>
+<li><code>-c "注释"</code>: 为用户账户添加注释信息（例如全名）。 </li>
+<li><code>-e YYYY-MM-DD</code>: 设置账户的过期日期。</li>
+</ul>
+</li>
+<li><strong>注意:</strong> <code>useradd</code> 是一个底层工具，而 <code>adduser</code> 是一个更用户友好的脚本，通常在Debian/Ubuntu系统中使用，它会进行更多交互式设置。 </li>
+<li>示例:<ul>
+<li><code>sudo useradd -m -s /bin/bash -c "John Doe" johnd</code>: 创建一个名为 <code>johnd</code> 的用户，创建其主目录，设置shell为bash，并添加注释。</li>
+<li><code>sudo useradd -m -G developers,testers jane</code>: 创建用户 <code>jane</code>，创建其主目录，并将其加入 <code>developers</code> 和 <code>testers</code> 组。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>userdel</code></strong> (删除用户账户 Delete a user account and related files)<ul>
+<li><strong>用途:</strong> 用于从系统中删除用户账户。 </li>
+<li><strong>语法:</strong> <code>userdel [选项] 用户名</code> </li>
+<li>常用选项:<ul>
+<li><code>-r</code>: 删除用户的主目录及其中的文件，以及用户的邮件池。 </li>
+<li><code>-f</code>: 强制删除用户账户，即使该用户当前已登录或其文件仍被使用。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo userdel olduser</code>: 删除用户 <code>olduser</code> (不删除其主目录)。</li>
+<li><code>sudo userdel -r former_employee</code>: 删除用户 <code>former_employee</code> 并移除其主目录和邮件池。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>usermod</code></strong> (修改用户账户 Modify a user account)<ul>
+<li><strong>用途:</strong> 用于修改现有用户账户的各种属性。 </li>
+<li><strong>语法:</strong> <code>usermod [选项] 用户名</code> </li>
+<li>常用选项:<ul>
+<li><code>-l 新登录名</code>: 更改用户的登录名。 </li>
+<li><code>-d 新家目录路径 [-m]</code>: 更改用户的主目录。<code>-m</code> 选项会将旧主目录的内容移动到新主目录。 </li>
+<li><code>-s 新shell路径</code>: 更改用户的默认登录shell。 </li>
+<li><code>-g 新主组名或GID</code>: 更改用户的主组。 </li>
+<li><code>-G 新附加组列表</code>: 更改用户所属的附加组列表（会覆盖原有的附加组）。 </li>
+<li><code>-aG 附加组</code>: 将用户追加到指定的附加组，而不影响其他已有的附加组 ( <code>-a</code> 必须与 <code>-G</code> 一起使用)。 </li>
+<li><code>-L</code>: 锁定用户账户，使其无法登录。 </li>
+<li><code>-U</code>: 解锁用户账户。 </li>
+<li><code>-e YYYY-MM-DD</code>: 设置账户的过期日期。 </li>
+<li><code>-c "新注释"</code>: 修改用户的注释信息。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo usermod -s /usr/sbin/nologin restricted_user</code>: 将用户 <code>restricted_user</code> 的shell设置为 <code>/usr/sbin/nologin</code>，使其无法登录。</li>
+<li><code>sudo usermod -aG docker current_user</code>: 将用户 <code>current_user</code> 添加到 <code>docker</code> 组。</li>
+<li><code>sudo usermod -L problematic_user</code>: 锁定用户 <code>problematic_user</code> 的账户。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>passwd</code></strong> (更改用户密码 Change user password)<ul>
+<li><strong>用途:</strong> 用于设置或更改用户账户的密码。 </li>
+<li><strong>语法:</strong> <code>passwd [选项][用户名]</code> </li>
+<li>行为:<ul>
+<li>如果未指定用户名，则更改当前用户的密码 (需要输入当前密码)。 </li>
+<li>如果由 <code>root</code> 用户执行并指定了用户名，则可以直接更改该用户的密码，无需知道其旧密码。</li>
+</ul>
+</li>
+<li>常用选项:<ul>
+<li><code>-d</code>: 删除指定用户的密码，使其可以无密码登录 (非常不安全，慎用)。</li>
+<li><code>-l</code>: 锁定指定用户的密码，使其无法通过密码登录。 </li>
+<li><code>-u</code>: 解锁指定用户的密码。 </li>
+<li><code>-e</code> 或 <code>--expire</code>: 强制用户在下次登录时更改密码。 </li>
+<li><code>-S</code>: 显示密码状态信息。</li>
+<li><code>-n 天数</code>: 设置密码最短有效天数。 </li>
+<li><code>-x 天数</code>: 设置密码最长有效天数。</li>
+<li><code>-w 天数</code>: 设置密码过期前多少天开始警告。 </li>
+<li><code>-i 天数</code>: 密码过期后账户停用前的天数。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>passwd</code>: 更改当前用户的密码。</li>
+<li><code>sudo passwd john</code>: 更改用户 <code>john</code> 的密码。</li>
+<li><code>sudo passwd -l jane</code>: 锁定用户 <code>jane</code> 的密码。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-4-用户组管理-Group-Management"><a href="#5-4-用户组管理-Group-Management" class="headerlink" title="5.4 用户组管理 (Group Management)"></a>5.4 用户组管理 (Group Management)</h3><ul>
+<li><strong><code>groupadd</code></strong> (创建新用户组 Create a new group)<ul>
+<li><strong>用途:</strong> 用于在系统中创建一个新的用户组。 </li>
+<li><strong>语法:</strong> <code>groupadd [选项] 组名</code> </li>
+<li>常用选项:<ul>
+<li><code>-g GID</code>: 指定新用户组的GID (组ID)。如果省略，系统会自动分配一个。 </li>
+<li><code>-r</code>: 创建一个系统组。</li>
+</ul>
+</li>
+<li><strong>示例:</strong> <code>sudo groupadd developers</code>: 创建一个名为 <code>developers</code> 的用户组。</li>
+</ul>
+</li>
+<li><strong><code>groupdel</code></strong> (删除用户组 Delete a group)<ul>
+<li><strong>用途:</strong> 用于从系统中删除一个已存在的用户组。 </li>
+<li><strong>语法:</strong> <code>groupdel [选项] 组名</code> </li>
+<li>常用选项:<ul>
+<li><code>-f</code> 或 <code>--force</code>: 强制删除组，即使该组是某个用户的主组（通常不推荐这样做，除非明确知道后果）。</li>
+</ul>
+</li>
+<li><strong>注意:</strong> 不能删除作为任何用户主组的组，除非先更改该用户的主组。 </li>
+<li><strong>示例:</strong> <code>sudo groupdel old_project_team</code>: 删除名为 <code>old_project_team</code> 的用户组。</li>
+</ul>
+</li>
+<li><strong><code>groupmod</code></strong> (修改用户组 Modify a group definition on the system)<ul>
+<li><strong>用途:</strong> 用于修改现有用户组的属性，如组名或GID。 </li>
+<li><strong>语法:</strong> <code>groupmod [选项] 组名</code> </li>
+<li>常用选项:<ul>
+<li><code>-n 新组名</code>: 更改用户组的名称。 </li>
+<li><code>-g 新GID</code>: 更改用户组的GID。 </li>
+<li><code>-o</code>: 与 <code>-g</code> 配合使用，允许GID不唯一（通常不推荐）。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo groupmod -n web_developers developers</code>: 将用户组 <code>developers</code> 重命名为 <code>web_developers</code>。</li>
+<li><code>sudo groupmod -g 1005 new_team</code>: 将用户组 <code>new_team</code> 的GID修改为1005。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>groups</code></strong> (打印用户所属的组 Print the groups a user is in)<ul>
+<li><strong>用途:</strong> 显示指定用户（默认为当前用户）所属的所有组的列表。 </li>
+<li><strong>语法:</strong> <code>groups [用户名]</code></li>
+<li>示例:<ul>
+<li><code>groups</code>: 显示当前用户所属的组。</li>
+<li><code>groups john</code>: 显示用户 <code>john</code> 所属的组。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-5-文件权限与归属管理-File-Permission-and-Ownership-Management"><a href="#5-5-文件权限与归属管理-File-Permission-and-Ownership-Management" class="headerlink" title="5.5 文件权限与归属管理 (File Permission and Ownership Management)"></a>5.5 文件权限与归属管理 (File Permission and Ownership Management)</h3><p>Linux 文件权限基于“用户-组-其他” (UGO) 模型，对每个文件或目录定义了读(r)、写(w)、执行(x)三种基本权限。</p>
+<ul>
+<li><p><code>chmod</code></p>
+<p> (更改文件模式位/权限 Change file mode bits)</p>
+<ul>
+<li><strong>用途:</strong> 修改文件或目录的访问权限。 </li>
+<li><strong>语法:</strong> <code>chmod [选项] 模式 文件/目录...</code> </li>
+<li>模式 (Mode):<ul>
+<li><strong>符号模式 (Symbolic Mode):</strong> 使用 <code>u</code> (所有者/用户), <code>g</code> (组), <code>o</code> (其他), <code>a</code> (所有) 结合 <code>+</code> (添加权限), <code>-</code> (移除权限), <code>=</code> (设置精确权限) 以及 <code>r</code> (读), <code>w</code> (写), <code>x</code> (执行)。 </li>
+<li><strong>数字模式 (Octal Mode):</strong> 使用三位八进制数表示权限，每位分别对应所有者、组和其他人。每位数字是r(4), w(2), x(1)权限值的和。</li>
+</ul>
+</li>
+<li>常用选项:<ul>
+<li><code>-R</code>: 递归地修改目录及其内容的权限。</li>
+</ul>
+</li>
+<li><strong>表格5.1: <code>chmod</code> 数字模式权限含义</strong></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>数字</strong></th>
+<th><strong>r (读)</strong></th>
+<th><strong>w (写)</strong></th>
+<th><strong>x (执行)</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>无权限</td>
+</tr>
+<tr>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>x</td>
+<td>执行权限</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-</td>
+<td>w</td>
+<td>-</td>
+<td>写入权限</td>
+</tr>
+<tr>
+<td>3</td>
+<td>-</td>
+<td>w</td>
+<td>x</td>
+<td>写入和执行权限</td>
+</tr>
+<tr>
+<td>4</td>
+<td>r</td>
+<td>-</td>
+<td>-</td>
+<td>读取权限</td>
+</tr>
+<tr>
+<td>5</td>
+<td>r</td>
+<td>-</td>
+<td>x</td>
+<td>读取和执行权限</td>
+</tr>
+<tr>
+<td>6</td>
+<td>r</td>
+<td>w</td>
+<td>-</td>
+<td>读取和写入权限</td>
+</tr>
+<tr>
+<td>7</td>
+<td>r</td>
+<td>w</td>
+<td>x</td>
+<td>读取、写入和执行权限</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">**示例:**
+<span class="token variable"><span class="token variable">`</span><span class="token function">chmod</span> u+x script.sh<span class="token variable">`</span></span><span class="token builtin class-name">:</span> 为文件 <span class="token variable"><span class="token variable">`</span>script.sh<span class="token variable">`</span></span> 的所有者添加执行权限。 
+ <span class="token variable"><span class="token variable">`</span><span class="token function">chmod</span> <span class="token number">600</span> private_key.pem<span class="token variable">`</span></span><span class="token builtin class-name">:</span> 设置 <span class="token variable"><span class="token variable">`</span>private_key.pem<span class="token variable">`</span></span> 文件的权限为所有者可读写，组和其他人无任何权限 <span class="token punctuation">(</span>rw-------<span class="token punctuation">)</span>。
+<span class="token variable"><span class="token variable">`</span><span class="token function">chmod</span> <span class="token number">755</span> public_script.sh<span class="token variable">`</span></span><span class="token builtin class-name">:</span> 设置 <span class="token variable"><span class="token variable">`</span>public_script.sh<span class="token variable">`</span></span> 权限为所有者可读写执行，组和其他人可读可执行 <span class="token punctuation">(</span>rwxr-xr-x<span class="token punctuation">)</span>。 
+<span class="token variable"><span class="token variable">`</span><span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">750</span> /var/www/my_app<span class="token variable">`</span></span><span class="token builtin class-name">:</span> 递归地设置 <span class="token variable"><span class="token variable">`</span>/var/www/my_app<span class="token variable">`</span></span> 目录及其内容的权限为所有者读写执行，所属组读执行，其他人无权限。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><strong><code>chown</code></strong> (更改文件所有者和组 Change file owner and group)<ul>
+<li><strong>用途:</strong> 更改文件或目录的用户所有者和/或组所有者。通常需要超级用户权限。 </li>
+<li><strong>语法:</strong> <code>chown [选项][新所有者][:新组] 文件/目录...</code> </li>
+<li>常用选项:<ul>
+<li><code>-R</code>: 递归地更改目录及其内容的所有权。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo chown john myfile.txt</code>: 将 <code>myfile.txt</code> 的所有者更改为用户 <code>john</code>。 </li>
+<li><code>sudo chown jane:developers report.doc</code>: 将 <code>report.doc</code> 的所有者更改为 <code>jane</code>，所属组更改为 <code>developers</code>。 </li>
+<li><code>sudo chown -R www-data:www-data /var/www/html</code>: 递归地将 <code>/var/www/html</code> 目录及其所有内容的所有者和所属组更改为 <code>www-data</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>chgrp</code></strong> (更改文件组所有权 Change file group ownership)<ul>
+<li><strong>用途:</strong> 单独更改文件或目录的组所有者。通常需要超级用户权限。 </li>
+<li><strong>语法:</strong> <code>chgrp [选项] 新组 文件/目录...</code> </li>
+<li>常用选项:<ul>
+<li><code>-R</code>: 递归地更改目录及其内容的组所有权。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>sudo chgrp editors draft.txt</code>: 将 <code>draft.txt</code> 的所属组更改为 <code>editors</code>。 </li>
+<li><code>sudo chgrp -R web_content /srv/my_website/assets</code>: 递归地将 <code>/srv/my_website/assets</code> 目录及其所有内容的所属组更改为 <code>web_content</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、网络命令-Networking-Commands"><a href="#六、网络命令-Networking-Commands" class="headerlink" title="六、网络命令 (Networking Commands)"></a>六、网络命令 (Networking Commands)</h2><p>Linux 提供了丰富的网络命令，用于测试连接、配置接口、查看状态、进行远程操作和DNS查询。</p>
+<h3 id="6-1-网络连接测试-Network-Connectivity-Testing"><a href="#6-1-网络连接测试-Network-Connectivity-Testing" class="headerlink" title="6.1 网络连接测试 (Network Connectivity Testing)"></a>6.1 网络连接测试 (Network Connectivity Testing)</h3><ul>
+<li><p><code>ping</code></p>
+<p> (向网络主机发送ICMP ECHO_REQUEST数据包 Send ICMP ECHO_REQUEST to network hosts)</p>
+<ul>
+<li><strong>用途:</strong> 测试与目标主机之间的网络连通性，通过发送ICMP回显请求并等待回显应答。 </li>
+<li><strong>语法:</strong> <code>ping [选项] 主机名或IP地址</code> </li>
+<li>常用选项:<ul>
+<li><code>-c 次数</code>: 发送指定数量的回显请求包后停止。 </li>
+<li><code>-i 间隔</code>: 设置发送每个包之间的间隔秒数。</li>
+<li><code>-s 包大小</code>: 设置发送包的大小（字节）。</li>
+<li><code>-W 超时</code>: 设置等待响应的超时时间（秒）。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>ping google.com</code>: 持续向 <code>google.com</code> 发送ping包，直到手动停止 (<code>Ctrl+C</code>)。</li>
+<li><code>ping -c 5 192.168.1.1</code>: 向 IP 地址 <code>192.168.1.1</code> 发送5个ping包。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-网络接口配置与查看-Network-Interface-Configuration-and-Viewing"><a href="#6-2-网络接口配置与查看-Network-Interface-Configuration-and-Viewing" class="headerlink" title="6.2 网络接口配置与查看 (Network Interface Configuration and Viewing)"></a>6.2 网络接口配置与查看 (Network Interface Configuration and Viewing)</h3><ul>
+<li><p><strong><code>ip</code></strong> (显示/操作路由、网络设备、接口和隧道 Show / manipulate routing, network devices, interfaces and tunnels)</p>
+<ul>
+<li><p><strong>用途:</strong> 这是Linux系统中用于网络配置的核心工具，功能强大，已取代旧的 <code>ifconfig</code> 和 <code>route</code> 等命令。 </p>
+</li>
+<li><p>子命令:</p>
+<ul>
+<li><p><code>addr</code>(或 a): 管理网络接口的IP地址。</p>
+</li>
+<li><p><code>ip addr show [dev 接口名]</code>: 显示指定接口（或所有接口）的IP地址信息。 </p>
+<ul>
+<li><code>sudo ip addr add IP地址/掩码 dev 接口名</code>: 为接口添加IP地址。</li>
+</ul>
+</li>
+<li><p><code>sudo ip addr del IP地址/掩码 dev 接口名</code>: 从接口删除IP地址。 </p>
+</li>
+<li><p><code>link</code>(或 l): 管理网络设备（接口）本身。</p>
+<ul>
+<li><code>ip link show [dev 接口名]</code>: 显示接口的状态和属性。</li>
+</ul>
+</li>
+<li><p><code>sudo ip link set 接口名 up/down</code>: 启用或禁用指定的网络接口。 </p>
+</li>
+<li><p><code>sudo ip link set 接口名 mtu 数值</code>: 设置接口的最大传输单元 (MTU)。 </p>
+</li>
+<li><p><code>route</code>(或 r): 管理路由表。</p>
+<ul>
+<li><code>ip route show</code> 或 <code>ip route list</code>: 显示内核路由表。 </li>
+<li><code>sudo ip route add 目标网络/掩码 via 网关地址 [dev 接口名]</code>: 添加一条静态路由。</li>
+</ul>
+</li>
+<li><p><code>sudo ip route del 目标网络/掩码</code>: 删除一条路由。</p>
+</li>
+</ul>
+</li>
+<li><p><code>neigh</code>(或 n): 管理ARP或NDP缓存（邻居表）。</p>
+<ul>
+<li><code>ip neigh show</code>: 显示邻居表。</li>
+</ul>
+</li>
+<li><p><code>ip</code> 命令是 <code>ifconfig</code> 的现代替代品，功能更强大，语法更一致。<code>ifconfig</code> 在许多新发行版中已不再默认安装。 </p>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>ip addr show eth0</code>: 显示 <code>eth0</code> 接口的IP地址信息。</li>
+<li><code>sudo ip link set wlan0 down</code>: 禁用 <code>wlan0</code> 无线接口。</li>
+<li><code>ip route add default via 192.168.1.254 dev eth0</code>: 添加默认网关。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>ifconfig</code></strong> (配置网络接口 - 旧版 Configure a network interface - deprecated)</p>
+<ul>
+<li><strong>用途:</strong> 在较旧的Linux系统中用于配置和显示网络接口信息。 </li>
+<li>内容:<ul>
+<li><code>ifconfig</code>: 显示所有活动接口的信息。</li>
+<li><code>ifconfig 接口名</code>: 显示指定接口的信息。</li>
+<li><code>sudo ifconfig 接口名 IP地址 netmask 子网掩码 up</code>: 配置接口IP并启用。</li>
+</ul>
+</li>
+<li><strong>注意:</strong> 此命令已逐渐被 <code>ip</code> 命令取代，在新系统中可能未预装。 </li>
+<li><strong>示例:</strong> <code>ifconfig eth0</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-3-网络状态与套接字查看-Network-Status-and-Socket-Viewing"><a href="#6-3-网络状态与套接字查看-Network-Status-and-Socket-Viewing" class="headerlink" title="6.3 网络状态与套接字查看 (Network Status and Socket Viewing)"></a>6.3 网络状态与套接字查看 (Network Status and Socket Viewing)</h3><ul>
+<li><strong><code>ss</code></strong> (另一个调查套接字的实用程序 Another utility to investigate sockets)<ul>
+<li><strong>用途:</strong> 用于显示活动的套接字连接信息，是 <code>netstat</code> 的现代替代品，通常更快且提供更多信息。 </li>
+<li><strong>语法:</strong> <code>ss [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-t</code>: 显示TCP套接字。 </li>
+<li><code>-u</code>: 显示UDP套接字。 </li>
+<li><code>-x</code>: 显示Unix域套接字。 </li>
+<li><code>-l</code>: 显示监听状态的套接字。 </li>
+<li><code>-p</code>: 显示使用套接字的进程。 </li>
+<li><code>-n</code>: 不解析服务名称，直接显示数字地址和端口号。 </li>
+<li><code>-a</code>: 显示所有状态的套接字（监听和非监听）。 </li>
+<li><code>-e</code>: 显示详细的套接字信息。 </li>
+<li><code>-o</code>: 显示计时器信息。 </li>
+<li><code>-s</code>: 显示套接字摘要统计。 </li>
+<li><code>state 状态</code>: 过滤特定状态的连接 (如 <code>established</code>, <code>listen</code>, <code>time-wait</code>)。</li>
+</ul>
+</li>
+<li><code>ss</code> 命令比 <code>netstat</code> 更快、提供更多信息，并且是 <code>netstat</code> 的推荐替代品。 </li>
+<li>示例:<ul>
+<li><code>ss -tulnp</code>: 显示所有TCP和UDP的监听端口及其对应的进程，并以数字形式显示地址和端口。</li>
+<li><code>ss -tan state established</code>: 显示所有已建立的TCP连接。 </li>
+<li><code>ss -tlp sport = :22</code>: 显示监听在SSH端口（22）的TCP连接及进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>netstat</code></strong> (打印网络连接、路由表、接口统计等 - 旧版 Print network connections, routing tables, interface statistics, masquerade connections, and multicast memberships - deprecated)<ul>
+<li><strong>用途:</strong> 显示网络连接、路由表、接口统计等信息。 </li>
+<li><strong>语法:</strong> <code>netstat [选项]</code> </li>
+<li>常用选项:<ul>
+<li><code>-t</code>: 显示TCP连接。 </li>
+<li><code>-u</code>: 显示UDP连接。 </li>
+<li><code>-l</code>: 显示监听套接字。 </li>
+<li><code>-p</code>: 显示与套接字关联的进程ID和名称。 </li>
+<li><code>-n</code>: 以数字形式显示地址和端口号。 </li>
+<li><code>-a</code>: 显示所有活动的连接和监听端口。 </li>
+<li><code>-r</code>: 显示内核路由表。 </li>
+<li><code>-i</code>: 显示网络接口统计信息。 </li>
+<li><code>-s</code>: 显示各协议的统计摘要。</li>
+</ul>
+</li>
+<li><strong>注意:</strong> <code>netstat</code> 已被 <code>ss</code> 命令取代，在新系统中可能未预装或不被推荐使用。 </li>
+<li><strong>示例:</strong> <code>sudo netstat -tulnp</code>: 显示所有TCP和UDP的监听端口、对应的进程，并以数字形式显示地址和端口。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-4-远程连接与文件传输-Remote-Connection-and-File-Transfer"><a href="#6-4-远程连接与文件传输-Remote-Connection-and-File-Transfer" class="headerlink" title="6.4 远程连接与文件传输 (Remote Connection and File Transfer)"></a>6.4 远程连接与文件传输 (Remote Connection and File Transfer)</h3><ul>
+<li><p><strong><code>ssh</code></strong> (安全Shell客户端 OpenSSH SSH client (remote login program))</p>
+<ul>
+<li><strong>用途:</strong> Secure Shell，用于安全地远程登录到另一台Linux/Unix服务器，并执行命令。所有通信都会被加密。 </li>
+<li><strong>语法:</strong> <code>ssh [选项] 用户名@主机名或IP地址 [命令]</code> </li>
+<li>常用选项:<ul>
+<li><code>-p 端口号</code>: 指定连接的远程SSH服务器端口 (默认为22)。 </li>
+<li><code>-i 身份文件路径</code>: 指定用于公钥认证的私钥文件路径。</li>
+<li><code>-X</code>: 启用X11转发，允许在本地显示远程GUI应用的界面。 </li>
+<li><code>-L 本地端口:目标主机:目标端口</code>: 设置本地端口转发。 </li>
+<li><code>-R 远程端口:目标主机:目标端口</code>: 设置远程端口转发。 </li>
+<li><code>-C</code>: 启用压缩，可以加快慢速网络下的传输速度。 </li>
+<li><code>-v</code>: 详细模式，显示连接过程的调试信息。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>ssh user@example.com</code>: 以用户 <code>user</code> 的身份登录到 <code>example.com</code>。</li>
+<li><code>ssh -p 2222 admin@192.168.1.100 "df -h"</code>: 通过2222端口以 <code>admin</code> 用户身份连接到 <code>192.168.1.100</code> 并执行 <code>df -h</code> 命令。</li>
+<li><code>ssh -L 8080:localhost:80 user@remote_server</code>: 将本地的8080端口转发到远程服务器的80端口。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>scp</code></strong> (安全复制文件 Secure copy (remote file copy program))</p>
+<ul>
+<li><strong>用途:</strong> Secure Copy Protocol，用于在本地主机和远程主机之间，或者两台远程主机之间安全地复制文件和目录。它使用SSH进行数据传输和认证。 </li>
+<li><strong>语法:</strong> <code>scp [选项][[用户名@]源主机:]源文件路径 [[用户名@]目标主机:]目标文件路径</code> </li>
+<li>常用选项:<ul>
+<li><code>-P 端口号</code> (注意是大写P): 指定远程主机的SSH端口。 </li>
+<li><code>-r</code>: 递归复制整个目录。 </li>
+<li><code>-i 身份文件路径</code>: 指定用于认证的私钥文件。 </li>
+<li><code>-C</code>: 启用压缩。 </li>
+<li><code>-v</code>: 显示详细的传输过程。 </li>
+<li><code>-l 带宽限制</code>: 限制传输带宽 (Kbit/s)。</li>
+</ul>
+</li>
+<li>示例:<ul>
+<li><code>scp local_document.pdf user@remote.server.com:/home/user/documents/</code>: 将本地文件 <code>local_document.pdf</code> 复制到远程服务器的指定目录。 </li>
+<li><code>scp -r user@source.server.com:/var/www/html/ /backup/website/</code>: 将远程服务器上的 <code>html</code> 目录递归复制到本地的 <code>/backup/website/</code> 目录。</li>
+<li><code>scp -P 2200 file.zip user@another.host:~/backups/</code>: 通过2200端口将 <code>file.zip</code> 复制到另一台远程主机的 <code>backups</code> 目录。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>sftp</code></strong> (安全文件传输程序 Secure File Transfer Program)</p>
+<ul>
+<li><p><strong>用途:</strong> 提供一个交互式的安全文件传输会话，类似于传统的FTP客户端，但所有操作都通过SSH加密通道进行。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>sftp [选项][用户名@]主机名或IP地址</code> </p>
+</li>
+<li><p>常用选项:</p>
+<ul>
+<li><code>-P 端口号</code> (大写P): 指定远程SSH端口。 </li>
+<li><code>-b 批处理文件</code>: 从批处理文件中读取命令执行。 </li>
+<li><code>-B 缓冲区大小</code>: 指定传输缓冲区大小。</li>
+</ul>
+</li>
+<li><p>交互模式常用命令:</p>
+<p> (在 sftp&gt;提示符下使用) </p>
+<ul>
+<li><code>get 远程文件 [本地路径]</code>: 下载文件。</li>
+<li><code>put 本地文件 [远程路径]</code>: 上传文件。</li>
+<li><code>ls [远程路径]</code>: 列出远程目录内容。</li>
+<li><code>cd 远程路径</code>: 更改远程当前目录。</li>
+<li><code>lcd 本地路径</code>: 更改本地当前目录。</li>
+<li><code>pwd</code>: 显示远程当前工作目录。</li>
+<li><code>lpwd</code>: 显示本地当前工作目录。</li>
+<li><code>rm 远程文件</code>: 删除远程文件。</li>
+<li><code>mkdir 远程目录名</code>: 创建远程目录。</li>
+<li><code>rmdir 远程目录名</code>: 删除远程目录。</li>
+<li><code>help</code> 或 <code>?</code>: 显示帮助信息。</li>
+<li><code>exit</code> 或 <code>quit</code> 或 <code>bye</code>: 断开连接并退出SFTP。</li>
+</ul>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>sftp user@fileserver.example.com</code>: 连接到SFTP服务器。</li>
+<li>(在 <code>sftp&gt;</code> 提示符下) <code>get important_data.zip /local/backups/</code>: 从远程服务器下载文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>ftp</code></strong> (文件传输协议客户端 - 旧版，不安全 File Transfer Protocol client - deprecated, insecure)</p>
+<ul>
+<li><p><strong>用途:</strong> 用于通过文件传输协议 (FTP) 在网络上的计算机之间传输文件。 </p>
+</li>
+<li><p><strong>内容:</strong> FTP传输数据和凭证（用户名、密码）时通常不加密，存在安全风险。推荐使用SFTP或SCP作为更安全的选择。 </p>
+</li>
+<li><p><strong>语法:</strong> <code>ftp [主机名或IP地址]</code> </p>
+</li>
+<li><p>交互模式常用命令:</p>
+<p> (在 ftp&gt; 提示符下使用) </p>
+<ul>
+<li><code>user 用户名 [密码]</code>: 登录。</li>
+<li><code>get 远程文件 [本地文件名]</code>: 下载文件。</li>
+<li><code>put 本地文件 [远程文件名]</code>: 上传文件。</li>
+<li><code>mget 远程文件模式</code>: 下载多个文件。</li>
+<li><code>mput 本地文件模式</code>: 上传多个文件。</li>
+<li><code>ls</code>: 列出远程目录内容。</li>
+<li><code>cd 远程目录</code>: 更改远程当前目录。</li>
+<li><code>pwd</code>: 显示远程当前工作目录。</li>
+<li><code>delete 远程文件</code>: 删除远程文件。</li>
+<li><code>mkdir 远程目录名</code>: 创建远程目录。</li>
+<li><code>binary</code>: 设置二进制传输模式 (传输非文本文件时必须)。</li>
+<li><code>ascii</code>: 设置ASCII传输模式 (传输文本文件时)。</li>
+<li><code>bye</code> 或 <code>quit</code>: 断开连接并退出FTP。</li>
+</ul>
+</li>
+<li><p>示例:</p>
+<ul>
+<li><code>ftp ftp.example.com</code>: 连接到FTP服务器 <code>ftp.example.com</code>。</li>
+<li>(在 <code>ftp&gt;</code> 提示符下) <code>get report.pdf</code>: 下载 <code>report.pdf</code> 文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>wget</code></strong> (非交互式网络下载器 The non-interactive network downloader)</p>
+<ul>
+<li><strong>用途:</strong> 从Web服务器下载文件，支持HTTP, HTTPS, FTP协议。它是一个非交互式工具，可以在后台运行。 </li>
+<li><strong>语法:</strong> <code>wget [选项]......</code> </li>
+<li>常用选项:<ul>
+<li><code>-O 文件名</code>: 将下载内容保存为指定的文件名。 </li>
+<li><code>-P 目录</code>: 指定下载文件的保存目录。 </li>
+<li><code>-c</code>: 断点续传，继续下载未完成的文件。 </li>
+<li><code>-r</code>: 递归下载整个网站或目录。 </li>
+<li><code>-l 深度</code>: 递归下载时指定最大深度。</li>
+<li><code>-np</code>: 递归下载时不进入父目录。</li>
+<li><code>-k</code>: 转换链接，使下载的HTML文件可以在本地查看。 </li>
+<li><code>-p</code>: 下载所有显示HTML页面所需的文件，如图片等。 </li>
+<li><code>-b</code>: 后台下载。 </li>
+<li><code>-i 文件</code>: 从文件中读取URL列表进行下载。 </li>
+<li><code>--limit-rate=速度</code>: 限制下载速度 (例如 <code>100k</code>,</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="wget-非交互式网络下载器-The-non-interactive-network-downloader"><a href="#wget-非交互式网络下载器-The-non-interactive-network-downloader" class="headerlink" title="wget (非交互式网络下载器 The non-interactive network downloader)"></a><code>wget</code> (非交互式网络下载器 The non-interactive network downloader)</h3><p><strong>用途:</strong> 从Web服务器下载文件，支持HTTP, HTTPS, FTP协议。它是一个非交互式工具，可以在后台运行。</p>
+<p><strong>语法:</strong> <code>wget [选项]...... [URL...]</code></p>
+<p><strong>常用选项:</strong></p>
+<ul>
+<li><code>-O 文件名</code>: 将下载内容保存为指定的文件名。<ul>
+<li>示例: <code>wget -O latest.tar.gz https://example.com/latest-version.tar.gz</code></li>
+</ul>
+</li>
+<li><code>-P 目录</code>: 指定下载文件的保存目录。<ul>
+<li>示例: <code>wget -P /opt/downloads https://example.com/archive.zip</code></li>
+</ul>
+</li>
+<li><code>-c</code>: 断点续传，继续下载未完成的文件。<ul>
+<li>示例: <code>wget -c https://large.example.com/bigfile.iso</code></li>
+</ul>
+</li>
+<li><code>-r</code>: 递归下载整个网站或目录。<ul>
+<li>示例: <code>wget -r http://example.com/docs/</code></li>
+</ul>
+</li>
+<li><code>-l 深度</code>: 递归下载时指定最大深度。<ul>
+<li>示例: <code>wget -r -l 2 http://example.com/</code> (下载当前页和下一层链接)</li>
+</ul>
+</li>
+<li><code>-np</code>: 递归下载时不进入父目录。<ul>
+<li>示例: <code>wget -r -np http://example.com/parent/child/</code> (不会下载 <code>http://example.com/parent/</code> 的其他内容)</li>
+</ul>
+</li>
+<li><code>-k</code>: 转换链接，使下载的HTML文件可以在本地查看。通常与 <code>-r</code>一起使用。<ul>
+<li>示例: <code>wget -r -k http://example.com/</code></li>
+</ul>
+</li>
+<li><code>-p</code>: 下载所有显示HTML页面所需的文件，如图片、CSS等。通常与 <code>-r</code>一起使用。<ul>
+<li>示例: <code>wget -r -p http://example.com/page.html</code></li>
+</ul>
+</li>
+<li><code>-b</code>: 后台下载。日志默认输出到 <code>wget-log</code>。<ul>
+<li>示例: <code>wget -b https://large.example.com/bigfile.iso</code></li>
+</ul>
+</li>
+<li><code>-i 文件</code>: 从文件中读取URL列表进行下载，每行一个URL。<ul>
+<li>示例: <code>wget -i urls.txt</code> (其中 <code>urls.txt</code> 包含多个下载链接)</li>
+</ul>
+</li>
+<li><code>--limit-rate=速度</code>: 限制下载速度 (例如 100k, 1m)。<ul>
+<li>示例: <code>wget --limit-rate=200k https://example.com/file.zip</code></li>
+</ul>
+</li>
+<li><code>--tries=数字</code>: 设置重试次数 (0 表示无限)。<ul>
+<li>示例: <code>wget --tries=5 https://example.com/file.zip</code></li>
+</ul>
+</li>
+<li><code>--user-agent="字符串"</code>: 设置自定义 User-Agent。<ul>
+<li>示例: <code>wget --user-agent="MyCustomBrowser/1.0" https://example.com/</code></li>
+</ul>
+</li>
+<li><code>--no-check-certificate</code>: 不检查服务器的SSL证书 (不安全，慎用)。<ul>
+<li>示例: <code>wget --no-check-certificate https://self-signed.example.com/</code></li>
+</ul>
+</li>
+<li><code>--user=用户名 --password=密码</code>: FTP或HTTP认证。<ul>
+<li>示例: <code>wget --user=myuser --password=mypass ftp://ftp.example.com/file.dat</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="curl-Client-URL-请求库"><a href="#curl-Client-URL-请求库" class="headerlink" title="curl (Client URL 请求库)"></a><code>curl</code> (Client URL 请求库)</h3><p><strong>用途:</strong> 用于传输数据的命令行工具，支持多种协议，包括 HTTP, HTTPS, FTP, FTPS, SCP, SFTP, LDAP, SMTP 等。非常灵活，常用于API测试和自动化脚本。</p>
+<p><strong>语法:</strong> <code>curl [选项] [URL...]</code></p>
+<p><strong>常用选项:</strong></p>
+<ul>
+<li><code>-O</code>: 将输出写入与远程文件名相同的文件。<ul>
+<li>示例: <code>curl -O https://example.com/archive.zip</code> (保存为 <code>archive.zip</code>)</li>
+</ul>
+</li>
+<li><code>-o 文件名</code>: 将输出写入指定的文件名。<ul>
+<li>示例: <code>curl -o new_archive.zip https://example.com/archive.zip</code></li>
+</ul>
+</li>
+<li><code>-L</code>: 跟随HTTP重定向。<ul>
+<li>示例: <code>curl -L http://example.com</code></li>
+</ul>
+</li>
+<li><code>-I</code> 或 <code>--head</code>: 仅获取HTTP头信息。<ul>
+<li>示例: <code>curl -I https://example.com</code></li>
+</ul>
+</li>
+<li><code>-H "头部信息"</code>: 添加自定义HTTP头部。<ul>
+<li>示例: <code>curl -H "Authorization: Bearer mytoken" https://api.example.com/data</code></li>
+</ul>
+</li>
+<li><code>-X 请求方法</code>: 指定HTTP请求方法 (GET, POST, PUT, DELETE 等)。<ul>
+<li>示例 (POST): <code>curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' https://api.example.com/submit</code></li>
+</ul>
+</li>
+<li><code>-d "数据"</code> 或 <code>--data "数据"</code>: 发送HTTP POST请求的数据。<ul>
+<li>示例: <code>curl -d "param1=value1&amp;param2=value2" https://example.com/form</code></li>
+</ul>
+</li>
+<li><code>-F "表单数据"</code> 或 <code>--form "表单数据"</code>: 模拟multipart/form-data提交，常用于文件上传。<ul>
+<li>示例: <code>curl -F "file=@/path/to/localfile.txt" -F "name=myfile" https://example.com/upload</code></li>
+</ul>
+</li>
+<li><code>-u 用户名:密码</code>: 进行服务器认证。<ul>
+<li>示例: <code>curl -u myuser:mypassword https://api.example.com/protected</code></li>
+</ul>
+</li>
+<li><code>-s</code> 或 <code>--silent</code>: 静默模式，不显示进度条或错误信息。<ul>
+<li>示例: <code>STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://example.com)</code></li>
+</ul>
+</li>
+<li><code>-v</code> 或 <code>--verbose</code>: 显示详细的通信信息，包括请求和响应头。<ul>
+<li>示例: <code>curl -v https://example.com</code></li>
+</ul>
+</li>
+<li><code>-k</code> 或 <code>--insecure</code>: 允许连接到没有有效SSL证书的HTTPS站点 (不安全，慎用)。<ul>
+<li>示例: <code>curl -k https://self-signed.example.com</code></li>
+</ul>
+</li>
+<li><code>--connect-timeout 秒数</code>: 设置最大连接时间。<ul>
+<li>示例: <code>curl --connect-timeout 5 https://example.com</code></li>
+</ul>
+</li>
+<li><code>--max-time 秒数</code>: 设置允许操作完成的最大总时间。<ul>
+<li>示例: <code>curl --max-time 30 https://example.com/largefile</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="nslookup-Name-Server-Lookup-🌐"><a href="#nslookup-Name-Server-Lookup-🌐" class="headerlink" title="nslookup (Name Server Lookup) 🌐"></a><code>nslookup</code> (Name Server Lookup) 🌐</h3><p><strong>用途:</strong> 查询DNS域名服务器，获取域名对应的IP地址或其他DNS记录。</p>
+<p><strong>语法:</strong></p>
+<ul>
+<li>非交互模式: <code>nslookup [选项] [域名] [DNS服务器]</code></li>
+<li>交互模式: <code>nslookup</code> (进入提示符后输入域名或选项)</li>
+</ul>
+<p><strong>常用选项/查询类型:</strong></p>
+<ul>
+<li>默认查询A记录 (IP地址)。</li>
+<li><code>set type=mx</code>: 查询MX记录 (邮件交换服务器)。</li>
+<li><code>set type=ns</code>: 查询NS记录 (域名服务器)。</li>
+<li><code>set type=soa</code>: 查询SOA记录 (起始授权机构记录)。</li>
+<li><code>set type=txt</code>: 查询TXT记录 (文本记录)。</li>
+<li><code>set type=ptr</code>: 查询PTR记录 (反向DNS查找)。</li>
+<li><code>server &lt;DNS服务器IP&gt;</code>: 在交互模式下指定查询使用的DNS服务器。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><p><code>nslookup example.com</code> (<a target="_blank" rel="noopener" href="https://www.google.com/search?q=%E6%9F%A5%E8%AF%A2example.com%E7%9A%84A%E8%AE%B0%E5%BD%95">https://www.google.com/search?q=%E6%9F%A5%E8%AF%A2example.com的A记录</a>)</p>
+</li>
+<li><p><code>nslookup example.com 8.8.8.8</code> (使用Google <a target="_blank" rel="noopener" href="https://www.google.com/search?q=DNS%E6%9F%A5%E8%AF%A2example.com">https://www.google.com/search?q=DNS%E6%9F%A5%E8%AF%A2example.com</a>)</p>
+</li>
+<li><p>交互模式:</p>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">nslookup
+&gt; server 8.8.8.8
+&gt; set type=mx
+&gt; google.com
+&gt; exit<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><code>nslookup -type=mx google.com</code> (非交互式查询MX记录)</p>
+</li>
+<li><p><code>nslookup 8.8.4.4</code> (反向查询IP地址对应的主机名)</p>
+</li>
+</ul>
+<hr>
+<h3 id="dig-Domain-Information-Groper-⛏️"><a href="#dig-Domain-Information-Groper-⛏️" class="headerlink" title="dig (Domain Information Groper) ⛏️"></a><code>dig</code> (Domain Information Groper) ⛏️</h3><p><strong>用途:</strong> 更强大和灵活的DNS查询工具，常用于DNS故障排除。</p>
+<p><strong>语法:</strong> <code>dig [@服务器] [域名] [查询类型] [选项]</code></p>
+<p><strong>常用选项/查询类型:</strong></p>
+<ul>
+<li>默认查询A记录。</li>
+<li><code>MX</code>: 查询邮件交换记录。</li>
+<li><code>NS</code>: 查询域名服务器记录。</li>
+<li><code>SOA</code>: 查询起始授权机构记录。</li>
+<li><code>TXT</code>: 查询文本记录。</li>
+<li><code>ANY</code>: 查询所有类型的记录。</li>
+<li><code>-x &lt;IP地址&gt;</code>: 进行反向DNS查询。</li>
+<li><code>+short</code>: 只显示简短的答案。</li>
+<li><code>+trace</code>: 显示从根域名服务器开始的完整解析路径。</li>
+<li><code>+noall +answer</code>: 只显示答案部分。</li>
+<li><code>@&lt;DNS服务器IP&gt;</code>: 指定查询使用的DNS服务器。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><code>dig example.com</code></li>
+<li><code>dig example.com MX</code></li>
+<li><code>dig @8.8.8.8 example.com NS</code></li>
+<li><code>dig -x 8.8.4.4</code></li>
+<li><code>dig example.com +short</code></li>
+<li><code>dig example.com +trace</code></li>
+<li><code>dig example.com ANY +noall +answer</code></li>
+</ul>
+<hr>
+<h3 id="traceroute-追踪路由路径-🗺️"><a href="#traceroute-追踪路由路径-🗺️" class="headerlink" title="traceroute (追踪路由路径) 🗺️"></a><code>traceroute</code> (追踪路由路径) 🗺️</h3><p><strong>用途:</strong> 显示数据包从本地主机到目标主机所经过的路由路径，以及每一跳的延迟。</p>
+<p><strong>语法:</strong> <code>traceroute [选项] 主机名或IP地址</code></p>
+<p><strong>常用选项:</strong></p>
+<ul>
+<li><code>-n</code>: 不将IP地址解析为主机名，加快显示速度。</li>
+<li><code>-I</code>: 使用ICMP ECHO请求代替UDP数据报 (类似Windows的tracert)。</li>
+<li><code>-T</code>: 使用TCP SYN请求代替UDP数据报。</li>
+<li><code>-p 端口号</code>: 指定UDP或TCP的目标端口号。</li>
+<li><code>-m 最大跳数</code>: 设置最大跳数 (默认为30)。</li>
+<li><code>-q 查询次数</code>: 设置对每一跳发送的探测包数量 (默认为3)。</li>
+<li><code>-w 等待时间</code>: 设置等待探测包回复的超时时间 (秒)。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><code>traceroute google.com</code></li>
+<li><code>traceroute -n 8.8.8.8</code></li>
+<li><code>traceroute -I example.com</code> (使用ICMP)</li>
+<li><code>traceroute -T -p 80 example.com</code> (<a target="_blank" rel="noopener" href="https://www.google.com/search?q=%E8%BF%BD%E8%B8%AA%E5%88%B0example.com%E7%9A%84TCP">https://www.google.com/search?q=%E8%BF%BD%E8%B8%AA%E5%88%B0example.com的TCP</a> 80端口)</li>
+</ul>
+<hr>
+<h3 id="route-显示-操作IP路由表-传统"><a href="#route-显示-操作IP路由表-传统" class="headerlink" title="route (显示/操作IP路由表 - 传统)"></a><code>route</code> (显示/操作IP路由表 - 传统)</h3><p><strong>用途:</strong> (传统工具，推荐使用 <code>ip route</code>) 显示和管理内核的IP路由表。</p>
+<p><strong>语法:</strong></p>
+<ul>
+<li><code>route</code> 或 <code>route -n</code> (显示路由表，-n以数字形式显示IP和端口)</li>
+<li><code>route add [-net|-host] 目标 [netmask Nm] [gw Gw] [metric M] [[dev] If]</code></li>
+<li><code>route del [-net|-host] 目标 [netmask Nm] [gw Gw] [metric M] [[dev] If]</code></li>
+</ul>
+<p><strong>常用选项/参数:</strong></p>
+<ul>
+<li><code>-n</code>: 以数字形式显示地址，不解析主机名。</li>
+<li><code>add</code>: 添加一条路由。</li>
+<li><code>del</code>: 删除一条路由。</li>
+<li><code>-net 目标网络</code>: 指定目标是一个网络。</li>
+<li><code>-host 目标主机</code>: 指定目标是一个主机。</li>
+<li><code>netmask Nm</code>: 指定网络的子网掩码。</li>
+<li><code>gw Gw</code>: 指定网关地址。</li>
+<li><code>dev If</code>: 指定路由通过哪个网络接口。</li>
+<li><code>metric M</code>: 设置路由的度量值 (成本)。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><code>route -n</code> (显示当前路由表)</li>
+<li><code>route add default gw 192.168.1.1</code> (添加默认网关)</li>
+<li><code>route del default gw 192.168.1.1</code> (删除默认网关)</li>
+<li><code>route add -net 10.0.0.0 netmask 255.0.0.0 gw 192.168.0.1</code> (添加一个到10.0.0.0/8网络的静态路由)</li>
+<li><code>route del -net 10.0.0.0 netmask 255.0.0.0</code> (删除上述静态路由)</li>
+</ul>
+<hr>
+<h2 id="七、端口查看与防火墙管理"><a href="#七、端口查看与防火墙管理" class="headerlink" title="七、端口查看与防火墙管理"></a>七、端口查看与防火墙管理</h2><h3 id="ss-Socket-Statistics-SOCKET"><a href="#ss-Socket-Statistics-SOCKET" class="headerlink" title="ss (Socket Statistics)  SOCKET"></a><code>ss</code> (Socket Statistics)  SOCKET</h3><p><strong>用途:</strong> 用于转储套接字统计信息，可以显示比 <code>netstat</code> 更多的TCP和状态信息。它是 <code>netstat</code> 的现代替代品。</p>
+<p><strong>语法:</strong> <code>ss [选项]</code></p>
+<p><strong>常用选项:</strong></p>
+<ul>
+<li><code>-t</code>: 显示TCP套接字。</li>
+<li><code>-u</code>: 显示UDP套接字。</li>
+<li><code>-l</code>: 显示监听状态的套接字。</li>
+<li><code>-p</code>: 显示使用套接字的进程。</li>
+<li><code>-n</code>: 不解析服务名称，直接显示端口号。</li>
+<li><code>-a</code>: 显示所有套接字 (监听和非监听)。</li>
+<li><code>-e</code>: 显示详细的套接字信息。</li>
+<li><code>-o</code>: 显示计时器信息。</li>
+<li>state &lt;状态&gt;: 过滤特定状态的连接，如 <code>established, listen, time-wait</code>。<ul>
+<li>例如: <code>ss state established</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><code>ss -tulnp</code> (最常用组合：显示所有TCP和UDP监听端口及其进程，不解析名称)</li>
+<li><code>ss -tan</code> (显示所有TCP连接，不解析名称)</li>
+<li><code>ss -s</code> (显示套接字使用摘要)</li>
+<li><code>ss -t -a dst :22</code> (显示所有到22端口的TCP连接)</li>
+<li><code>ss -t -a src 192.168.1.100:http</code> (显示源自192.168.1.100的HTTP TCP连接)</li>
+</ul>
+<hr>
+<h3 id="netstat-Network-Statistics-传统"><a href="#netstat-Network-Statistics-传统" class="headerlink" title="netstat (Network Statistics - 传统)"></a><code>netstat</code> (Network Statistics - 传统)</h3><p><strong>用途:</strong> (传统工具，推荐使用 <code>ss</code>) 显示网络连接、路由表、接口统计等信息。</p>
+<p><strong>语法:</strong> <code>netstat [选项]</code></p>
+<p><strong>常用选项:</strong></p>
+<ul>
+<li><code>-t</code>: 显示TCP连接。</li>
+<li><code>-u</code>: 显示UDP连接。</li>
+<li><code>-l</code>: 显示监听状态的套接字。</li>
+<li><code>-p</code>: 显示使用套接字的进程PID和名称 (通常需要root权限)。</li>
+<li><code>-n</code>: 以数字形式显示地址和端口号，不解析名称。</li>
+<li><code>-a</code>: 显示所有活动的连接和监听端口。</li>
+<li><code>-r</code>: 显示路由表 (类似 <code>route -n</code>)。</li>
+<li><code>-i</code>: 显示网络接口统计信息 (类似 <code>ifconfig</code> 或 <code>ip -s link</code>)。</li>
+<li><code>-c</code>: 持续显示信息。</li>
+<li><code>-e</code>: 显示扩展信息。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ul>
+<li><code>netstat -tulnp</code> (最常用组合：显示所有TCP和UDP监听端口及其进程，不解析名称)</li>
+<li><code>netstat -an</code> (显示所有活动的连接和监听端口，不解析名称)</li>
+<li><code>netstat -rn</code> (显示路由表)</li>
+<li><code>netstat -i</code> (显示网络接口)</li>
+<li><code>netstat -antp | grep ESTABLISHED</code> (显示所有已建立的TCP连接及其进程)</li>
+</ul>
+<hr>
+<h3 id="iptables-IPv4-Packet-Filtering-and-NAT-🔥🧱"><a href="#iptables-IPv4-Packet-Filtering-and-NAT-🔥🧱" class="headerlink" title="iptables (IPv4 Packet Filtering and NAT) 🔥🧱"></a><code>iptables</code> (IPv4 Packet Filtering and NAT) 🔥🧱</h3><p><strong>用途:</strong> Linux内核防火墙 <code>netfilter</code> 的用户空间命令行工具，用于配置IPv4数据包过滤规则、NAT和包处理。功能强大但语法复杂。</p>
+<p><strong>基本概念:</strong></p>
+<ul>
+<li><p>Tables (表):</p>
+<ul>
+<li><code>filter</code>: 默认表，用于数据包过滤 (INPUT, OUTPUT, FORWARD 链)。</li>
+<li><code>nat</code>: 用于网络地址转换 (PREROUTING, POSTROUTING, OUTPUT 链)。</li>
+<li><code>mangle</code>: 用于修改IP头字段 (所有链)。</li>
+<li><code>raw</code>: 用于配置豁免，使数据包不经过连接跟踪。</li>
+</ul>
+</li>
+<li><p>Chains (链):</p>
+<p> 规则的有序列表。</p>
+<ul>
+<li><code>INPUT</code>: 处理发往本机的入站数据包。</li>
+<li><code>OUTPUT</code>: 处理本机发出的出站数据包。</li>
+<li><code>FORWARD</code>: 处理流经本机的转发数据包。</li>
+<li><code>PREROUTING</code>: 在路由决策之前处理数据包 (常用于DNAT)。</li>
+<li><code>POSTROUTING</code>: 在路由决策之后，数据包即将发出时处理 (常用于SNAT)。</li>
+</ul>
+</li>
+<li><p>Targets (目标):</p>
+<p> 规则匹配后执行的动作。</p>
+<ul>
+<li><code>ACCEPT</code>: 接受数据包。</li>
+<li><code>DROP</code>: 丢弃数据包 (不响应)。</li>
+<li><code>REJECT</code>: 拒绝数据包 (通常会返回错误信息)。</li>
+<li><code>LOG</code>: 记录数据包信息。</li>
+<li><code>SNAT</code>: 源地址转换。</li>
+<li><code>DNAT</code>: 目标地址转换。</li>
+<li><code>MASQUERADE</code>: 动态源地址转换 (常用于共享上网)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>语法 (通用):</strong> <code>iptables [-t 表名] 命令 链名 匹配条件 -j 目标</code></p>
+<p><strong>常用命令:</strong></p>
+<ul>
+<li><code>-L [链名]</code>: 列出规则。<ul>
+<li><code>-v</code>: 显示详细信息 (包和字节计数器)。</li>
+<li><code>-n</code>: 数字格式显示IP和端口。</li>
+<li><code>--line-numbers</code>: 显示规则编号。</li>
+</ul>
+</li>
+<li><code>-A 链名</code>: 追加新规则到链尾。</li>
+<li><code>-I 链名 [规则编号]</code>: 插入新规则到指定位置 (默认链首)。</li>
+<li><code>-D 链名 规则编号或规则定义</code>: 删除规则。</li>
+<li><code>-R 链名 规则编号 规则定义</code>: 替换规则。</li>
+<li><code>-F [链名]</code>: 清空链中的所有规则。</li>
+<li><code>-Z [链名]</code>: 清零链中所有规则的包和字节计数器。</li>
+<li><code>-P 链名 目标</code>: 设置链的默认策略 (ACCEPT, DROP)。</li>
+<li><code>-N 链名</code>: 创建用户自定义链。</li>
+<li><code>-X [链名]</code>: 删除用户自定义空链。</li>
+<li><code>-E 旧链名 新链名</code>: 重命名用户自定义链。</li>
+</ul>
+<p><strong>常用匹配条件:</strong></p>
+<ul>
+<li><code>-p 协议</code>: 指定协议 (tcp, udp, icmp, all)。</li>
+<li><code>-s 源地址/掩码</code>: 指定源IP地址或网络。</li>
+<li><code>-d 目标地址/掩码</code>: 指定目标IP地址或网络。</li>
+<li><code>-i 输入接口</code>: 指定数据包进入的网络接口。</li>
+<li><code>-o 输出接口</code>: 指定数据包流出的网络接口。</li>
+<li><code>--sport 源端口</code>: 指定源端口 (需与 <code>-p tcp</code> 或 <code>-p udp</code> 配合)。</li>
+<li><code>--dport 目标端口</code>: 指定目标端口。</li>
+<li><code>-m 模块名 --模块选项</code>: 使用扩展模块 (如 <code>state, conntrack, multiport, tcp, udp</code>)。<ul>
+<li><code>-m state --state NEW,ESTABLISHED,RELATED</code>: 匹配连接状态。</li>
+<li><code>-m multiport --dports 22,80,443</code>: 匹配多个目标端口。</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例:</strong></p>
+<ol>
+<li><strong>查看规则:</strong><ul>
+<li><code>sudo iptables -L -n -v</code> (查看filter表所有链的规则)</li>
+<li><code>sudo iptables -t nat -L -n -v --line-numbers</code> (查看nat表规则并显示行号)</li>
+</ul>
+</li>
+<li><strong>设置默认策略:</strong> (通常先允许所有传出，拒绝所有传入和转发)<ul>
+<li><code>sudo iptables -P INPUT DROP</code></li>
+<li><code>sudo iptables -P FORWARD DROP</code></li>
+<li><code>sudo iptables -P OUTPUT ACCEPT</code></li>
+</ul>
+</li>
+<li><strong>允许特定端口/服务:</strong><ul>
+<li><code>sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT</code> (允许SSH)</li>
+<li><code>sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT</code> (允许HTTP)</li>
+<li><code>sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT</code> (允许HTTPS)</li>
+<li><code>sudo iptables -A INPUT -i lo -j ACCEPT</code> (允许来自本地回环接口的所有流量)</li>
+<li><code>sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</code> (允许已建立和相关的连接)</li>
+</ul>
+</li>
+<li><strong>允许特定IP:</strong><ul>
+<li><code>sudo iptables -A INPUT -s 192.168.1.100 -j ACCEPT</code></li>
+</ul>
+</li>
+<li><strong>阻止特定IP:</strong><ul>
+<li><code>sudo iptables -A INPUT -s 1.2.3.4 -j DROP</code> (阻止单个IP)</li>
+<li><code>sudo iptables -A INPUT -s 1.2.3.0/24 -j REJECT</code> (拒绝整个子网)</li>
+</ul>
+</li>
+<li><strong>删除规则:</strong><ul>
+<li><code>sudo iptables -D INPUT 3</code> (删除INPUT链中编号为3的规则)</li>
+<li><code>sudo iptables -D INPUT -s 1.2.3.4 -j DROP</code> (按规则定义删除)</li>
+</ul>
+</li>
+<li><strong>清空规则:</strong><ul>
+<li><code>sudo iptables -F INPUT</code> (清空INPUT链)</li>
+<li><code>sudo iptables -F</code> (清空filter表所有链)</li>
+<li><code>sudo iptables -t nat -F</code> (清空nat表所有链)</li>
+</ul>
+</li>
+<li><strong>NAT示例 (SNAT/MASQUERADE - 共享上网):</strong><ul>
+<li>假设 <code>eth0</code> 是外网接口，<code>eth1</code> 是内网接口 (内网IP段 <code>192.168.1.0/24</code>)。</li>
+<li><code>sudo sysctl -w net.ipv4.ip_forward=1</code> (开启IP转发)</li>
+<li><code>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</code></li>
+<li><code>sudo iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT</code></li>
+<li><code>sudo iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT</code></li>
+</ul>
+</li>
+<li><strong>NAT示例 (DNAT - 端口转发):</strong><ul>
+<li>将外网接口 <code>eth0</code> 的TCP 8080端口转发到内网服务器 <code>192.168.1.100</code> 的80端口。</li>
+<li><code>sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j DNAT --to-destination 192.168.1.100:80</code></li>
+<li><code>sudo iptables -A FORWARD -p tcp -d 192.168.1.100 --dport 80 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>保存和恢复规则:</strong></p>
+<ul>
+<li>规则默认在重启后丢失。</li>
+<li><strong>保存:</strong> <code>sudo iptables-save &gt; /etc/iptables/rules.v4</code> (Debian/Ubuntu，需安装 <code>iptables-persistent</code>) <code>sudo ip6tables-save &gt; /etc/iptables/rules.v6</code> 在RHEL/CentOS系统上，通常使用 <code>systemctl enable iptables</code> 和 <code>systemctl start iptables</code> (需要 <code>iptables-services</code> 包)，规则保存在 <code>/etc/sysconfig/iptables</code>。</li>
+<li><strong>恢复:</strong> <code>sudo iptables-restore &lt; /etc/iptables/rules.v4</code></li>
+<li><code>iptables-persistent</code> (Debian/Ubuntu):<ul>
+<li>安装: <code>sudo apt install iptables-persistent</code></li>
+<li>保存当前规则: <code>sudo netfilter-persistent save</code> (或 <code>sudo /etc/init.d/netfilter-persistent save</code>)</li>
+<li>系统启动时会自动加载。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="ufw-Uncomplicated-Firewall-🛡️"><a href="#ufw-Uncomplicated-Firewall-🛡️" class="headerlink" title="ufw (Uncomplicated Firewall) 🛡️"></a><code>ufw</code> (Uncomplicated Firewall) 🛡️</h3><p><strong>用途:</strong> 一个用户友好的 <code>iptables</code> 前端，旨在简化防火墙配置。</p>
+<p><strong>语法:</strong> <code>sudo ufw [选项] 命令</code></p>
+<p><strong>常用命令与选项:</strong></p>
+<ul>
+<li><p><strong>状态管理:</strong></p>
+<ul>
+<li><code>sudo ufw enable</code>: 启用防火墙 (并设置开机自启)。</li>
+<li><code>sudo ufw disable</code>: 禁用防火墙。</li>
+<li><code>sudo ufw status</code>: 查看防火墙状态和规则。</li>
+<li><code>sudo ufw status numbered</code>: 查看规则并显示编号。</li>
+<li><code>sudo ufw status verbose</code>: 查看详细状态。</li>
+<li><code>sudo ufw reload</code>: 重载防火墙规则 (不中断现有连接)。</li>
+<li><code>sudo ufw reset</code>: 重置防火墙到默认状态 (会禁用防火墙)。</li>
+</ul>
+</li>
+<li><p><strong>默认策略:</strong></p>
+<ul>
+<li><code>sudo ufw default deny incoming</code>: 拒绝所有入站连接 (推荐)。</li>
+<li><code>sudo ufw default allow outgoing</code>: 允许所有出站连接 (推荐)。</li>
+<li><code>sudo ufw default deny outgoing</code>: 拒绝所有出站连接。</li>
+<li><code>sudo ufw default deny routed</code>: 拒绝所有转发的包。</li>
+</ul>
+</li>
+<li><p><strong>规则管理 (allow/deny/reject/limit):</strong></p>
+<ul>
+<li><p><code>sudo ufw allow &lt;端口号&gt;[/协议]</code></p>
+<ul>
+<li>示例: <code>sudo ufw allow 22/tcp</code> (允许TCP 22端口)</li>
+<li>示例: <code>sudo ufw allow 53</code> (允许TCP和UDP 53端口)</li>
+</ul>
+</li>
+<li><p><code>sudo ufw allow &lt;服务名&gt;</code></p>
+<p> (服务名在 <code>/etc/services</code>中定义)</p>
+<ul>
+<li>示例: <code>sudo ufw allow ssh</code></li>
+<li>示例: <code>sudo ufw allow http</code></li>
+<li>示例: <code>sudo ufw allow https</code></li>
+</ul>
+</li>
+<li><p><code>sudo ufw deny &lt;端口号&gt;[/协议]</code></p>
+<ul>
+<li>示例: <code>sudo ufw deny 3306</code> (拒绝访问MySQL端口)</li>
+</ul>
+</li>
+<li><p><code>sudo ufw reject &lt;端口号&gt;[/协议]</code> (拒绝并返回消息)</p>
+</li>
+<li><p><code>sudo ufw limit &lt;端口号&gt;[/协议]</code></p>
+<p> (限制连接频率，如SSH，防止暴力破解：如果在30秒内尝试连接6次以上，则拒绝连接)</p>
+<ul>
+<li>示例: <code>sudo ufw limit ssh</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于源/目标IP的规则:</strong></p>
+<ul>
+<li><code>sudo ufw allow from &lt;IP地址&gt;</code><ul>
+<li>示例: <code>sudo ufw allow from 192.168.1.100</code></li>
+</ul>
+</li>
+<li><code>sudo ufw allow from &lt;IP地址&gt; to any port &lt;端口号&gt;</code><ul>
+<li>示例: <code>sudo ufw allow from 192.168.1.100 to any port 22 proto tcp</code></li>
+</ul>
+</li>
+<li><code>sudo ufw deny from &lt;IP地址&gt;</code><ul>
+<li>示例: <code>sudo ufw deny from 1.2.3.4</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于网络接口的规则:</strong></p>
+<ul>
+<li><code>sudo ufw allow in on &lt;接口名&gt; to any port &lt;端口号&gt;</code><ul>
+<li>示例: <code>sudo ufw allow in on eth1 to any port 80</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>删除规则:</strong></p>
+<ul>
+<li><p><code>sudo ufw delete &lt;规则定义&gt;</code></p>
+<ul>
+<li>示例: <code>sudo ufw delete allow 80</code></li>
+<li>示例: <code>sudo ufw delete allow from 1.2.3.4</code></li>
+</ul>
+</li>
+<li><p><code>sudo ufw delete &lt;规则编号&gt;</code></p>
+<p> (通过 <code>sudo ufw status numbered</code> 获取编号)</p>
+<ul>
+<li>示例: <code>sudo ufw delete 3</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>应用程序配置文件:</strong></p>
+<ul>
+<li><p><code>ufw</code> 可以使用应用程序配置文件 (位于 <code>/etc/ufw/applications.d</code>)。</p>
+</li>
+<li><p><code>sudo ufw app list</code>: 列出可用的应用程序配置文件。</p>
+</li>
+<li><p><code>sudo ufw app info &lt;应用名&gt;</code>: 显示应用程序配置文件的详细信息。</p>
+</li>
+<li><p><code>sudo ufw allow &lt;应用名&gt;</code></p>
+<p>: 允许应用程序配置文件中定义的所有规则。</p>
+<ul>
+<li>示例: <code>sudo ufw allow 'Nginx Full'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>日志:</strong></p>
+<ul>
+<li><code>sudo ufw logging on [low|medium|high|full]</code></li>
+<li><code>sudo ufw logging off</code></li>
+<li>日志通常记录在 <code>/var/log/ufw.log</code>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例流程:</strong></p>
+<ol>
+<li><code>sudo ufw default deny incoming</code></li>
+<li><code>sudo ufw default allow outgoing</code></li>
+<li><code>sudo ufw allow ssh</code> (或 <code>sudo ufw allow 22/tcp</code>)</li>
+<li><code>sudo ufw allow http</code> (或 <code>sudo ufw allow 80/tcp</code>)</li>
+<li><code>sudo ufw allow https</code> (或 <code>sudo ufw allow 443/tcp</code>)</li>
+<li><code>sudo ufw enable</code></li>
+<li><code>sudo ufw status</code></li>
+</ol>
+<hr>
+<h3 id="firewall-cmd-Firewalld-Command-Line-Client-🔥-Zones"><a href="#firewall-cmd-Firewalld-Command-Line-Client-🔥-Zones" class="headerlink" title="firewall-cmd (Firewalld Command Line Client) 🔥 Zones"></a><code>firewall-cmd</code> (Firewalld Command Line Client) 🔥 Zones</h3><p><strong>用途:</strong> <code>firewalld</code> 服务的命令行客户端，是 RHEL/CentOS 7+ 和 Fedora 等发行版的默认防火墙管理工具。它使用 “区域 (zones)” 和 “服务 (services)” 的概念。</p>
+<p><strong>基本概念:</strong></p>
+<ul>
+<li><strong>Zones (区域):</strong> 网络连接可以被分配到不同的区域，每个区域有自己独立的防火墙规则集。预定义区域如 <code>public</code>, <code>home</code>, <code>work</code>, <code>dmz</code>, <code>internal</code>, <code>external</code>, <code>block</code>, <code>drop</code>, <code>trusted</code>。</li>
+<li><strong>Services (服务):</strong> 预定义的 XML 文件，描述了服务所需的端口和协议 (如 <code>ssh</code>, <code>http</code>)。</li>
+<li>Permanent vs Runtime Configuration:<ul>
+<li>默认情况下，<code>firewall-cmd</code> 修改的是运行时配置，重启后失效。</li>
+<li>添加 <code>--permanent</code> 选项可以修改永久配置，但需要 <code>firewall-cmd --reload</code> 或重启 <code>firewalld</code> 服务才能生效。</li>
+</ul>
+</li>
+</ul>
+<p><strong>语法:</strong> <code>sudo firewall-cmd [选项] [操作]</code></p>
+<p><strong>常用命令与选项:</strong></p>
+<ul>
+<li><p><strong>状态与管理:</strong></p>
+<ul>
+<li><code>sudo systemctl status firewalld</code>: 查看 <code>firewalld</code> 服务状态。</li>
+<li><code>sudo systemctl start firewalld</code>: 启动服务。</li>
+<li><code>sudo systemctl stop firewalld</code>: 停止服务。</li>
+<li><code>sudo systemctl enable firewalld</code>: 设置开机自启。</li>
+<li><code>sudo systemctl disable firewalld</code>: 禁止开机自启。</li>
+<li><code>sudo firewall-cmd --state</code>: 查看防火墙运行状态。</li>
+<li><code>sudo firewall-cmd --reload</code>: 重载防火墙规则 (不中断现有连接，使永久配置生效)。</li>
+<li><code>sudo firewall-cmd --complete-reload</code>: 完全重载 (中断现有连接)。</li>
+</ul>
+</li>
+<li><p><strong>区域管理:</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --get-default-zone</code>: 获取默认区域。</li>
+<li><code>sudo firewall-cmd --set-default-zone=&lt;区域名&gt;</code>: 设置默认区域。</li>
+<li><code>sudo firewall-cmd --get-active-zones</code>: 获取当前活动的区域及其绑定的接口。</li>
+<li><code>sudo firewall-cmd --get-zones</code>: 列出所有可用区域。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --list-all</code>: 列出指定区域的所有配置。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-interface=&lt;接口名&gt;</code>: 将接口添加到指定区域 (运行时)。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-interface=&lt;接口名&gt; --permanent</code>: 永久添加。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --change-interface=&lt;接口名&gt;</code>: 修改接口所属区域。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --remove-interface=&lt;接口名&gt;</code>: 从区域移除接口。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-source=&lt;IP或子网&gt;</code>: 将源IP/子网添加到区域。</li>
+</ul>
+</li>
+<li><p><strong>服务管理:</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --get-services</code>: 列出所有预定义的服务。</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-service=&lt;服务名&gt;</code> (运行时)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-service=&lt;服务名&gt; --permanent</code> (永久)<ul>
+<li>示例: <code>sudo firewall-cmd --permanent --zone=public --add-service=http</code></li>
+</ul>
+</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --remove-service=&lt;服务名&gt;</code> (运行时)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --remove-service=&lt;服务名&gt; --permanent</code> (永久)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --list-services</code>: 列出区域中允许的服务。</li>
+</ul>
+<p><strong>端口管理:</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-port=&lt;端口号&gt;/&lt;协议&gt;</code> (运行时)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --add-port=&lt;端口号&gt;/&lt;协议&gt; --permanent</code>(永久)<ul>
+<li>示例: <code>sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp</code></li>
+</ul>
+</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --remove-port=&lt;端口号&gt;/&lt;协议&gt;</code> (运行时)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --remove-port=&lt;端口号&gt;/&lt;协议&gt; --permanent</code> (永久)</li>
+<li><code>sudo firewall-cmd --zone=&lt;区域名&gt; --list-ports</code>: 列出区域中允许的端口。</li>
+</ul>
+</li>
+<li><p><strong>Panic Mode:</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --panic-on</code>: 紧急模式，丢弃所有入站和出站数据包。</li>
+<li><code>sudo firewall-cmd --panic-off</code>: 关闭紧急模式。</li>
+<li><code>sudo firewall-cmd --query-panic</code>: 查询紧急模式状态。</li>
+</ul>
+</li>
+<li><p><strong>Direct Rules (直接规则 - 类似iptables语法，不推荐常规使用):</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --direct --add-rule ipv4 filter INPUT 0 -p tcp --dport 22 -j ACCEPT</code></li>
+</ul>
+</li>
+<li><p><strong>Rich Rules (富规则 - 更灵活的规则定义):</strong></p>
+<ul>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="192.168.1.0/24" service name="ssh" accept'</code></li>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="1.2.3.4" reject'</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>示例流程 (public区域):</strong></p>
+<ol>
+<li><code>sudo systemctl start firewalld</code></li>
+<li><code>sudo systemctl enable firewalld</code></li>
+<li><code>sudo firewall-cmd --set-default-zone=public</code> (通常public是默认)</li>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-service=ssh</code></li>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-service=http</code></li>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-service=https</code></li>
+<li><code>sudo firewall-cmd --permanent --zone=public --add-port=8080-8090/tcp</code> (允许一个端口范围)</li>
+<li><code>sudo firewall-cmd --reload</code></li>
+<li><code>sudo firewall-cmd --zone=public --list-all</code></li>
+</ol>
+<hr>
+<h2 id="八、常用配置文件与文本编辑器"><a href="#八、常用配置文件与文本编辑器" class="headerlink" title="八、常用配置文件与文本编辑器"></a>八、常用配置文件与文本编辑器</h2><h3 id="常见重要配置文件-⚙️"><a href="#常见重要配置文件-⚙️" class="headerlink" title="常见重要配置文件 ⚙️"></a>常见重要配置文件 ⚙️</h3><p>以下是一些Linux系统中常见的配置文件及其典型路径和用途：</p>
+<ul>
+<li><p><strong>/etc/passwd</strong>:</p>
+<ul>
+<li><strong>用途</strong>: 存储用户账户信息（如用户名、用户ID (UID)、组ID (GID)、用户描述、家目录路径、默认shell）。密码字段通常是一个<code>x</code>，表示加密后的密码存储在<code>/etc/shadow</code>中。</li>
+<li><strong>格式</strong>: <code>username:password_placeholder:UID:GID:comment:home_directory:login_shell</code></li>
+</ul>
+</li>
+<li><p><strong>/etc/shadow</strong>:</p>
+<ul>
+<li><p><strong>用途</strong>: 安全地存储用户加密后的密码和密码老化信息。此文件通常只有root用户可读。</p>
+</li>
+<li><p>格式: </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">username:encrypted_password:last_password_change_date:min_password_age:max_password_age:warning_period:inactivity_period:expiration_date:reserved_field<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><code>encrypted_password</code>: <code>!</code> 或 <code>*</code> 表示账户被锁定或没有密码。</li>
+<li>日期字段通常是从1970年1月1日开始的天数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>/etc/group</strong>:</p>
+<ul>
+<li><strong>用途</strong>: 存储用户组信息（组名、组ID (GID)、组成员列表）。</li>
+<li><strong>格式</strong>: <code>group_name:password_placeholder:GID:user_list_comma_separated</code></li>
+</ul>
+</li>
+<li><p><strong>/etc/fstab</strong> (Filesystem Table):</p>
+<ul>
+<li><p><strong>用途</strong>: 定义磁盘分区、各种块设备或远程文件系统如何在系统启动时挂载到文件系统中，或者在需要时由 <code>mount -a</code> 命令挂载。</p>
+</li>
+<li><p>格式: </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">device_spec mount_point fstype options dump pass_num<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><code>device_spec</code>: 设备（如<code>/dev/sda1</code>）或UUID（如<code>UUID=xxxxxxxx-xxxx...</code>）</li>
+<li><code>mount_point</code>: 挂载点（如<code>/</code>、<code>/home</code>、<code>/var</code>）</li>
+<li><code>fstype</code>: 文件系统类型（如<code>ext4</code>、<code>xfs</code>、<code>ntfs</code>、<code>nfs</code>）</li>
+<li><code>options</code>: 挂载选项（如<code>defaults</code>、<code>rw</code>、<code>ro</code>、<code>noatime</code>）</li>
+<li><code>dump</code>: <code>dump</code>工具是否备份（0或1）</li>
+<li><code>pass_num</code>: <code>fsck</code>检查文件系统的顺序（0表示不检查，1表示根文件系统，2表示其他）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>/etc/hosts</strong>:</p>
+<ul>
+<li><p><strong>用途</strong>: 提供静态的IP地址到主机名的映射。在DNS解析之前，系统会检查此文件。常用于本地测试或强制解析特定域名到特定IP。</p>
+</li>
+<li><p>格式: </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">IP_address canonical_hostname <span class="token punctuation">[</span>aliases<span class="token punctuation">..</span>.<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>示例: <code>127.0.0.1 localhost loopback</code></li>
+<li>示例: <code>192.168.1.100 myserver myapp.local</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>/etc/resolv.conf</strong>:</p>
+<ul>
+<li><strong>用途</strong>: 配置DNS解析器，指定域名服务器（nameserver）的IP地址以及搜索域（search domain）。在许多现代发行版中，此文件可能由网络管理服务（如NetworkManager或systemd-resolved）动态生成和管理，不建议手动编辑。</li>
+<li>格式:<ul>
+<li><code>nameserver IP_address_of_DNS_server</code></li>
+<li><code>search domain1.com domain2.net</code></li>
+<li><code>options timeout:1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>~/.bashrc</strong> (用户特定):</p>
+<ul>
+<li><strong>用途</strong>: Bash shell的用户特定配置文件。当用户启动一个新的交互式非登录shell时（如打开一个新的终端窗口），此文件中的命令会被执行。常用于设置别名、环境变量、自定义提示符等。</li>
+<li><strong>位置</strong>: 用户家目录下 (<code>~</code> 表示家目录，如 <code>/home/username/.bashrc</code>)</li>
+</ul>
+</li>
+<li><p><strong>/etc/profile</strong> (系统全局):</p>
+<ul>
+<li><strong>用途</strong>: Bash (及其他Bourne兼容shell) 的系统全局配置文件。当任何用户登录系统时（登录shell），此文件中的命令会被执行。它通常会调用 <code>/etc/profile.d/</code> 目录下的脚本。</li>
+<li><strong>注意</strong>: 修改此文件会影响系统所有用户。</li>
+</ul>
+</li>
+<li><p><strong>/etc/profile.d/*.sh</strong>:</p>
+<ul>
+<li><strong>用途</strong>: <code>/etc/profile</code> 通常会执行此目录下的所有 <code>.sh</code> 脚本，用于模块化地配置系统范围的环境变量和启动程序。</li>
+</ul>
+</li>
+<li><p><strong>/etc/bash.bashrc</strong> (系统全局，某些发行版):</p>
+<ul>
+<li><strong>用途</strong>: 系统全局的bashrc文件，为所有用户的交互式非登录shell执行。</li>
+</ul>
+</li>
+<li><p><strong>/var/log/syslog</strong> (Debian/Ubuntu) 或 <strong>/var/log/messages</strong> (RHEL/CentOS):</p>
+<ul>
+<li><strong>用途</strong>: 系统主要的日志文件，记录了内核消息、系统服务消息、以及各种应用程序的日志。是故障排除的重要来源。</li>
+<li><strong>管理</strong>: 通常由 <code>rsyslogd</code> 或 <code>syslog-ng</code> 服务管理。</li>
+</ul>
+</li>
+<li><p><strong>/etc/ssh/sshd_config</strong>:</p>
+<ul>
+<li><strong>用途</strong>: OpenSSH服务器 (sshd) 的配置文件。控制SSH服务的行为，如监听端口、是否允许root登录、认证方法等。</li>
+</ul>
+</li>
+<li><p><strong>/etc/sysctl.conf</strong>:</p>
+<ul>
+<li><strong>用途</strong>: 用于在系统启动时配置内核参数。<code>sysctl -p</code> 可以加载此文件中的设置。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="常用文本编辑器-📝"><a href="#常用文本编辑器-📝" class="headerlink" title="常用文本编辑器 📝"></a>常用文本编辑器 📝</h3><p>在Linux命令行下，最常用的文本编辑器是 <code>vi</code> (或其增强版 <code>vim</code>) 和 <code>nano</code>。</p>
+<h4 id="nano"><a href="#nano" class="headerlink" title="nano"></a><code>nano</code></h4><p><code>nano</code> 是一个简单易用的命令行文本编辑器，适合初学者。屏幕底部会显示常用快捷键。</p>
+<p><strong>启动:</strong></p>
+<ul>
+<li><code>nano 文件名</code> (如果文件不存在，则创建新文件)</li>
+<li><code>nano</code> (不带文件名，之后可保存为新文件)</li>
+</ul>
+<p><strong>常用快捷键 (Ctrl 代表 Control 键):</strong></p>
+<ul>
+<li><code>Ctrl + G</code>: 获取帮助 (显示所有快捷键)。</li>
+<li><code>Ctrl + O</code>: 保存文件 (Write Out)。会提示输入文件名，回车确认。</li>
+<li><code>Ctrl + X</code>: 退出 <code>nano</code>。如果文件已修改但未保存，会提示是否保存。</li>
+<li><code>Ctrl + W</code>: 搜索文本 (Where is)。</li>
+<li><code>Ctrl + \</code>: 替换文本 (Replace)。</li>
+<li><code>Ctrl + K</code>:剪切当前行 (Cut Text)。</li>
+<li><code>Ctrl + U</code>: 粘贴剪切的文本 (Uncut Text)。</li>
+<li><code>Ctrl + C</code>: 显示当前光标位置 (行号、列号)。</li>
+<li><code>Ctrl + J</code>: 对齐当前段落 (Justify)。</li>
+<li><code>Ctrl + T</code>: 检查拼写 (需要安装 <code>spell</code> 包)。</li>
+<li><code>Alt + U</code>: 撤销上一次操作。</li>
+<li><code>Alt + E</code>: 重做上一次撤销的操作。</li>
+<li>方向键: 移动光标。</li>
+<li><code>PageUp / PageDown</code>: 上下翻页。</li>
+<li><code>Home / End</code>: 移动到行首/行尾。</li>
+</ul>
+<p><strong>示例:</strong> <code>sudo nano /etc/hosts</code> (编辑hosts文件，需要sudo权限)</p>
+<h4 id="vi-vim-Vi-IMproved"><a href="#vi-vim-Vi-IMproved" class="headerlink" title="vi / vim (Vi IMproved)"></a><code>vi</code> / <code>vim</code> (Vi IMproved)</h4><p><code>vi</code> 是一个功能强大的模态编辑器，学习曲线较陡峭，但熟练后效率极高。<code>vim</code> 是 <code>vi</code> 的增强版，提供了更多功能（如语法高亮、多级撤销等）。大多数现代系统实际上的 <code>vi</code> 命令是指向 <code>vim</code> 的。</p>
+<p><strong>模式:</strong></p>
+<ol>
+<li><strong>命令模式 (Command Mode):</strong> 默认模式。用于移动光标、删除文本、复制粘贴等操作。按键不会直接输入文本。</li>
+<li><strong>插入模式 (Insert Mode):</strong> 用于输入文本。从命令模式按 <code>i</code>, <code>a</code>, <code>o</code> 等键进入。按 <code>Esc</code> 键返回命令模式。</li>
+<li><strong>末行模式 (Last Line Mode / Ex Mode):</strong> 在命令模式下按 <code>:</code> 进入。用于执行保存、退出、搜索替换等命令。</li>
+</ol>
+<p><strong>启动:</strong></p>
+<ul>
+<li><code>vi 文件名</code> 或 <code>vim 文件名</code></li>
+</ul>
+<p><strong>基本操作 (命令模式下):</strong></p>
+<ul>
+<li>移动光标:<ul>
+<li><code>h</code>: 左</li>
+<li><code>j</code>: 下</li>
+<li><code>k</code>: 上</li>
+<li><code>l</code>: 右</li>
+<li><code>w</code>: 移动到下一个单词的开头</li>
+<li><code>b</code>: 移动到上一个单词的开头</li>
+<li><code>0</code> (零): 移动到当前行行首</li>
+<li><code>^</code>: 移动到当前行第一个非空白字符</li>
+<li><code>$</code>: 移动到当前行行尾</li>
+<li><code>gg</code>: 移动到文件第一行</li>
+<li><code>G</code>: 移动到文件最后一行</li>
+<li><code>行号G</code>: 移动到指定行号 (例如 <code>10G</code> 到第10行)</li>
+</ul>
+</li>
+<li>进入插入模式:<ul>
+<li><code>i</code>: 在当前光标前插入</li>
+<li><code>I</code>: 在当前行首插入</li>
+<li><code>a</code>: 在当前光标后追加</li>
+<li><code>A</code>: 在当前行尾追加</li>
+<li><code>o</code>: 在当前行下方插入一个新行</li>
+<li><code>O</code>: 在当前行上方插入一个新行</li>
+</ul>
+</li>
+<li>删除文本:<ul>
+<li><code>x</code>: 删除当前光标处的字符</li>
+<li><code>dw</code>: 删除一个单词 (从光标处到词尾)</li>
+<li><code>dd</code>: 删除当前行</li>
+<li><code>数字dd</code>: 删除从当前行开始的指定数量的行 (例如 <code>3dd</code> 删除3行)</li>
+<li><code>D</code>: 删除从光标到行尾的内容</li>
+</ul>
+</li>
+<li>复制 (Yank) 与粘贴 (Put):<ul>
+<li><code>yw</code>: 复制一个单词</li>
+<li><code>yy</code>: 复制当前行 (y 代表 yank)</li>
+<li><code>数字yy</code>: 复制多行</li>
+<li><code>p</code>: 在光标后粘贴 (小写p)</li>
+<li><code>P</code>: 在光标前粘贴 (大写P)</li>
+</ul>
+</li>
+<li>撤销与重做:<ul>
+<li><code>u</code>: 撤销上一次操作 (undo)</li>
+<li><code>Ctrl + r</code>: 重做上一次撤销的操作 (redo)</li>
+</ul>
+</li>
+<li>搜索:<ul>
+<li><code>/模式</code>: 向下搜索 “模式” (按 <code>n</code> 查找下一个, <code>N</code> 查找上一个)</li>
+<li><code>?模式</code>: 向上搜索 “模式”</li>
+</ul>
+</li>
+</ul>
+<p><strong>末行模式命令 (按 <code>:</code> 后输入):</strong></p>
+<ul>
+<li><code>:w</code>: 保存文件 (write)。</li>
+<li><code>:w 文件名</code>:另存为指定文件名。</li>
+<li><code>:q</code>: 退出 (quit)。如果文件已修改但未保存，会阻止退出。</li>
+<li><code>:q!</code>: 强制退出，不保存修改。</li>
+<li><code>:wq</code> 或 <code>:x</code>: 保存并退出。</li>
+<li><code>:e 文件名</code>: 编辑另一个文件。</li>
+<li><code>:set number</code> 或 <code>:set nu</code>: 显示行号。</li>
+<li><code>:set nonumber</code> 或 <code>:set nonu</code>: 关闭行号。</li>
+<li><code>:%s/旧字符串/新字符串/g</code>: 全局替换 (g代表global)。</li>
+<li><code>:%s/旧字符串/新字符串/gc</code>: 全局替换，每次替换前确认 (c代表confirm)。</li>
+<li><code>:!外部命令</code>: 执行外部shell命令 (例如 <code>:!ls -l</code>)。</li>
+</ul>
+<p><strong>示例:</strong> <code>sudo vim /etc/ssh/sshd_config</code></p>
+<p><strong>学习 <code>vim</code>:</strong></p>
+<ul>
+<li>可以在终端中运行 <code>vimtutor</code> 命令，这是一个交互式的 <code>vim</code> 教程。</li>
+</ul>
+<p>这只是 <code>vim</code> 功能的冰山一角，但足以应付日常的配置文件编辑。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/">https://0xdadream.github.io/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">教程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/35.jpg" class="responsive-img" alt="Linux 常用命令详解教程">
+                        
+                        <span class="card-title">Linux 常用命令详解教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux 常用命令详解教程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/06/01/ji-yu-x-ui-yu-cloudflare-da-jian-jie-dian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/39.jpg" class="responsive-img" alt="Sing-box 科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南">
+                        
+                        <span class="card-title">Sing-box 科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">293k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

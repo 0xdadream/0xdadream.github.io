@@ -1,0 +1,2428 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Sing-box 科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南, 逐梦">
+    <meta name="description" content="科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Sing-box 科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南 | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/39.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Sing-box 科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">教程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                网络
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-06-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-06-01
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    17.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    67 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="科学上网节点技术与实践：基于-X-UI-与-Cloudflare-的全面指南"><a href="#科学上网节点技术与实践：基于-X-UI-与-Cloudflare-的全面指南" class="headerlink" title="科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南"></a>科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</h1><h2 id="第一部分：科学上网节点与核心概念概述"><a href="#第一部分：科学上网节点与核心概念概述" class="headerlink" title="第一部分：科学上网节点与核心概念概述"></a>第一部分：科学上网节点与核心概念概述</h2><h3 id="1-1-科学上网概述及其重要性"><a href="#1-1-科学上网概述及其重要性" class="headerlink" title="1.1 科学上网概述及其重要性"></a>1.1 科学上网概述及其重要性</h3><p>“科学上网”，通常指通过技术手段绕过互联网审查和地理限制，以访问全球开放信息资源的过程。在当前信息高度互联的时代，获取未经审查的、多元化的信息对于学术研究、技术创新以及文化交流至关重要。然而，常见的网络封锁技术，如IP地址封锁、域名系统 (DNS) 污染和深度包检测 (Deep Packet Inspection, DPI)，对信息的自由流通构成了挑战 。因此，理解和掌握科学上网技术，对于需要无障碍访问全球互联网资源的用户而言，具有实际意义。</p>
+<h3 id="1-2-核心技术：Xray-与-x-ui-面板"><a href="#1-2-核心技术：Xray-与-x-ui-面板" class="headerlink" title="1.2 核心技术：Xray 与 x-ui 面板"></a>1.2 核心技术：Xray 与 x-ui 面板</h3><p>Xray 是一个功能强大且灵活的网络代理核心，被广泛用于构建科学上网节点。它支持多种代理协议和复杂的路由功能，能够有效地帮助用户绕过网络审查 。与 Xray 配合使用的 x-ui (特别是 MHSanaei 维护的 3x-ui 分支) 是一个用户友好的图形化管理面板，它极大地简化了 Xray 节点的配置和管理过程，支持多用户、多协议管理，并提供流量统计、到期时间限制等功能 。</p>
+<h3 id="1-3-Cloudflare-的角色"><a href="#1-3-Cloudflare-的角色" class="headerlink" title="1.3 Cloudflare 的角色"></a>1.3 Cloudflare 的角色</h3><p>Cloudflare 是一家全球性的网络基础设施和安全公司，其提供的服务如内容分发网络 (CDN)、Workers（边缘计算）和 Tunnel（安全隧道）可以被巧妙地用于增强科学上网节点的隐蔽性和稳定性 。通过 Cloudflare，用户可以隐藏其代理服务器的真实IP地址，抵御分布式拒绝服务 (DDoS) 攻击，并在某些情况下改善连接速度和可靠性 。</p>
+<h3 id="1-4-关键术语解析"><a href="#1-4-关键术语解析" class="headerlink" title="1.4 关键术语解析"></a>1.4 关键术语解析</h3><p>理解以下术语对于掌握本教程至关重要：</p>
+<ul>
+<li><strong>TLS (Transport Layer Security) / SSL (Secure Sockets Layer):</strong> TLS 及其前身 SSL 是保障网络通信安全和数据完整性的加密协议 。它们通过在客户端和服务器之间建立加密通道，确保数据传输不被窃听或篡改。在科学上网中，TLS 常用于伪装代理流量，使其看起来像正常的 HTTPS 流量。</li>
+<li><strong>CDN (Content Delivery Network):</strong> 内容分发网络通过在全球部署边缘服务器来缓存网站内容，使用户可以从最近的服务器获取数据，从而提高网站加载速度并减少源服务器负载 。对于代理节点，CDN 可以隐藏源服务器 IP，并可能分散流量特征。</li>
+<li><strong>WebSocket:</strong> 一种在单个 TCP 连接上进行全双工通信的协议 。它允许服务器和客户端之间进行持续的、低延迟的双向数据交换。在代理中，WebSocket 常被用作一种传输方式，可以将代理流量封装在标准的 HTTP/HTTPS 端口（如 80 或 443）上传输，从而更好地伪装流量，并兼容 CDN 。</li>
+<li><strong>gRPC (Google Remote Procedure Call):</strong> 一个高性能、开源的通用 RPC 框架，使用 HTTP/2 作为传输协议，支持多种语言 。gRPC 因其高效的序列化（Protocol Buffers）和多路复用特性，在代理应用中可以提供较低的延迟和带宽消耗，尤其适合移动端应用。Cloudflare 支持 gRPC 流量的代理 。</li>
+<li><strong>REALITY:</strong> Xray 引入的一种新的出站/入站协议特性，旨在通过借用目标网站的 TLS 证书指纹来消除服务器端 TLS 指纹特征，从而增强抗检测能力，同时保持前向保密性 。它允许用户在不购买域名或配置 TLS 服务器的情况下，向审查者呈现一个真实可信的 SNI (Server Name Indication)。</li>
+<li><strong>XTLS:</strong> 一种旨在减少 VLESS 和 Trojan 等协议中 TLS 加密层级所带来性能开销的技术 。它通过在特定条件下（如 <code>flow</code> 设置为 <code>xtls-rprx-vision</code>）直接处理内层数据，避免了多次 TLS 加解密，从而提升传输效率。</li>
+<li><strong>uTLS (μTLS):</strong> 一个 TLS 库，允许应用程序模仿不同浏览器或操作系统的 TLS 指纹 。在代理客户端中使用 uTLS 可以帮助伪装连接发起者的真实身份，使其流量特征更接近普通浏览器行为，从而降被识别的风险。</li>
+</ul>
+<h2 id="第二部分：代理协议深度解析"><a href="#第二部分：代理协议深度解析" class="headerlink" title="第二部分：代理协议深度解析"></a>第二部分：代理协议深度解析</h2><p>本部分将详细探讨几种主流的科学上网代理协议的原理、特性、优缺点及其在 x-ui 中的应用。</p>
+<h3 id="2-1-Shadowsocks-SS"><a href="#2-1-Shadowsocks-SS" class="headerlink" title="2.1 Shadowsocks (SS)"></a>2.1 Shadowsocks (SS)</h3><ul>
+<li><strong>原理与工作机制:</strong> Shadowsocks 是一种基于 SOCKS5 代理的加密传输协议，最初由 clowwindy 于 2012 年为绕过中国的防火长城 (GFW) 而设计 。它通过在客户端和远程服务器之间创建一个加密隧道来工作。客户端将流量通过本地 SOCKS5 代理发送到 Shadowsocks 客户端软件，该软件对流量进行加密后发送到 Shadowsocks 服务器，服务器解密后再将流量转发至目标地址 。</li>
+<li><strong>安全特性:</strong> Shadowsocks 使用用户选择的加密算法（如 AES-256-GCM, ChaCha20-Poly1305）对数据进行加密 。较新的 Shadowsocks AEAD (Authenticated Encryption with Associated Data) 密码套件（如 2022-blake3-aes-256-gcm）提供了更强的安全性和抗重放攻击能力 。</li>
+<li><strong>性能特点:</strong> Shadowsocks 以其轻量级和高效率著称，对网络速度影响较小，能够提供较快的浏览和流媒体体验 。</li>
+<li><strong>混淆能力:</strong> Shadowsocks 本身并不侧重于复杂的流量混淆，其主要目标是加密。然而，由于其流量模式与标准协议不同，在早期能够有效绕过基于简单规则的检测。随着 DPI 技术的发展，单纯的 Shadowsocks 流量可能被识别。</li>
+<li>优缺点:<ul>
+<li><strong>优点:</strong> 设置相对简单，速度快，资源占用低，兼容性广（支持 Windows, macOS, Linux, Android, iOS）。</li>
+<li><strong>缺点:</strong> 协议特征相对明显，容易被高级 DPI 检测；不具备传统 VPN 的所有网络流量封装能力，仅代理通过其 SOCKS5 接口的流量 。</li>
+</ul>
+</li>
+<li><strong>x-ui 中的配置:</strong> 在 x-ui 中配置 Shadowsocks 时，主要参数包括加密方法、密码、监听端口和传输协议（通常是 TCP 和 UDP）。</li>
+</ul>
+<h3 id="2-2-VMess-Virtual-Mess"><a href="#2-2-VMess-Virtual-Mess" class="headerlink" title="2.2 VMess (Virtual Mess)"></a>2.2 VMess (Virtual Mess)</h3><ul>
+<li><strong>原理与工作机制:</strong> VMess 是 V2Ray 项目（Xray 的前身和兼容核心）设计的一种主要代理协议，旨在提供比 Shadowsocks 更强的安全性和混淆性 。它在客户端和服务器之间建立加密连接，并通过动态改变数据包结构来增加流量分析的难度 。</li>
+<li><strong>安全特性:</strong> VMess 使用对称加密（如 AES-128-GCM）和动态生成的会话 ID。它要求客户端和服务器共享精确的用户 ID (UUID) 和 alterId（用于改变加密方式）进行身份验证和加密 。</li>
+<li><strong>性能特点:</strong> VMess 由于其加密和动态特性，相比 Shadowsocks 会有一定的性能开销，但通常仍能提供良好的速度 。</li>
+<li><strong>混淆能力:</strong> VMess 的设计目标之一就是抗检测。其动态协议特性使得流量难以被简单模式匹配。结合 TLS 和 WebSocket 等传输方式可以进一步增强混淆效果 。</li>
+<li>传输方式:<ul>
+<li><strong>TCP:</strong> 基础的 TCP 传输，可配合 TLS 加密。</li>
+<li><strong>WebSocket (WS):</strong> 将 VMess 流量封装在 WebSocket 连接中，通常与 TLS 结合（VMess+WS+TLS），使其看起来像 HTTPS 流量，便于通过 CDN 中转和伪装 。</li>
+<li><strong>gRPC:</strong> 将 VMess 流量封装在 gRPC 连接中，利用 HTTP/2 的多路复用特性，可以提供高效的传输，同样可以结合 TLS 。</li>
+</ul>
+</li>
+<li>优缺点:<ul>
+<li><strong>优点:</strong> 安全性高，抗检测能力强于 Shadowsocks，支持多种传输方式，配置灵活 。</li>
+<li><strong>缺点:</strong> 配置相对复杂，性能开销略高于 Shadowsocks 和 VLESS 。</li>
+</ul>
+</li>
+<li><strong>x-ui 中的配置:</strong> 在 x-ui 中配置 VMess 时，需要设置用户 UUID、alterId、监听端口、传输方式（TCP, WS, gRPC 等），以及相应的 TLS 设置（域名、证书路径）或 WebSocket 设置（路径、Host）。</li>
+</ul>
+<h3 id="2-3-VLESS-Virtual-Less"><a href="#2-3-VLESS-Virtual-Less" class="headerlink" title="2.3 VLESS (Virtual Less)"></a>2.3 VLESS (Virtual Less)</h3><ul>
+<li><p><strong>原理与工作机制:</strong> VLESS 是在 VMess 基础上发展而来的一种更轻量级的传输协议，旨在简化协议本身并提高效率 。与 VMess 不同，VLESS 本身不包含加密和身份验证机制，而是依赖于外部传输层（如 TLS）来提供这些功能 。</p>
+</li>
+<li><p><strong>安全特性:</strong> VLESS 的安全性主要依赖于其底层的传输协议，如 TLS (XTLS) 或 REALITY。当与这些技术结合时，它可以提供非常高的安全性 。VLESS 本身不进行加密，这使得其头部特征更少，更难被检测。</p>
+</li>
+<li><p><strong>性能特点:</strong> 由于其极简设计和无内置加密，VLESS 的性能开销非常低，通常比 VMess 更快，延迟更低，尤其适合对速度要求高的场景 。</p>
+</li>
+<li><p>混淆能力:</p>
+<p> VLESS 的核心优势在于其简洁性，这使得其流量本身更难被识别。当结合 XTLS 或 REALITY 时，其混淆能力非常出色。</p>
+<ul>
+<li><strong>XTLS (XTLS-Vision, XTLS-RPRX-Direct):</strong> XTLS 是一种专为 VLESS 和 Trojan 设计的 TLS 增强技术，旨在通过优化 TLS 握手和数据传输路径，减少加密层级，从而显著提高性能，同时保持强大的安全性 。<code>xtls-rprx-vision</code> 是 XTLS 的一种流控模式。</li>
+<li><strong>REALITY:</strong> 如前所述，REALITY 通过借用真实网站的 TLS 证书指纹来消除服务器端的 TLS 特征，极大地增强了抗检测能力 。VLESS 是 REALITY 的理想搭配协议。</li>
+</ul>
+</li>
+<li><p>传输方式:</p>
+<ul>
+<li><strong>TCP:</strong> VLESS 可以直接通过 TCP 传输，通常与 XTLS 或 REALITY 结合使用。</li>
+<li><strong>WebSocket (WS):</strong> VLESS 同样可以封装在 WebSocket 中，并结合 TLS (VLESS+WS+TLS)，以利用 CDN 和伪装流量 。</li>
+<li><strong>gRPC:</strong> VLESS 也可以通过 gRPC 传输，并结合 TLS (VLESS+gRPC+TLS)，提供高效的多路复用连接。</li>
+</ul>
+</li>
+<li><p>优缺点:</p>
+<ul>
+<li><strong>优点:</strong> 性能极高，延迟低，配置相对 VMess 简单（当不考虑复杂的 XTLS/REALITY 时），灵活性强，抗检测能力强（尤其配合 REALITY）。</li>
+<li><strong>缺点:</strong> 依赖外部加密，如果底层传输（如裸 TCP）未加密则不安全；高级配置（如 REALITY）对理解有一定要求 。</li>
+</ul>
+</li>
+<li><p><strong>x-ui 中的配置:</strong> 在 x-ui 中配置 VLESS 时，主要设置用户 UUID、监听端口、传输方式（TCP, WS, gRPC），以及流控模式（如 <code>xtls-rprx-vision</code> for XTLS，或不设置流控用于普通 TLS/WS）。如果使用 TLS，需要配置域名和证书路径。如果使用 REALITY，需要配置 <code>dest</code>（目标伪装域名:端口）、<code>serverNames</code>（SNI）、<code>privateKey</code>、<code>shortIds</code> 等参数 。</p>
+</li>
+</ul>
+<h3 id="2-4-Trojan"><a href="#2-4-Trojan" class="headerlink" title="2.4 Trojan"></a>2.4 Trojan</h3><ul>
+<li><strong>原理与工作机制:</strong> Trojan 协议的设计目标是模仿互联网上最常见的 HTTPS 流量，使其难以被检测和干扰 。它通过在服务器上监听一个端口（通常是 443），并处理进来的 TLS 连接。如果连接是合法的 Trojan 请求（通过密码验证），则代理流量；否则，将流量转发到服务器上预设的真实网站（如本地 Nginx 服务），从而使服务器在外部探测下表现得像一个普通的 HTTPS 网站 。</li>
+<li><strong>安全特性:</strong> Trojan 强制使用 TLS 对所有流量进行加密，确保了传输的机密性和完整性。身份验证通过预共享的密码完成 。</li>
+<li><strong>性能特点:</strong> 由于其设计直接利用 TLS，避免了额外的封装层，Trojan 通常具有较好的性能，接近于直接的 HTTPS 连接 。</li>
+<li><strong>混淆能力:</strong> Trojan 的核心优势在于其出色的混淆能力。它通过完全模拟 HTTPS 行为，包括 TLS 握手和数据传输，使得 DPI 系统很难将其与正常的 HTTPS 流量区分开来 。</li>
+<li>传输方式:<ul>
+<li><strong>TCP (over TLS):</strong> 这是 Trojan 的标准工作方式，直接在 TLS 加密的 TCP 连接上传输代理数据。</li>
+<li><strong>gRPC:</strong> Trojan 也可以通过 gRPC 传输，并结合 TLS (Trojan+gRPC+TLS)，这可以利用 gRPC 的特性，同时保持 Trojan 的 HTTPS 伪装。</li>
+</ul>
+</li>
+<li>优缺点:<ul>
+<li><strong>优点:</strong> 伪装性极好，抗检测能力强，性能较好，设置相对简单（相比 VMess 的复杂配置）。</li>
+<li><strong>缺点:</strong> 依赖于有效的 TLS 证书和域名配置；如果密码泄露或配置不当，安全性会受影响。</li>
+</ul>
+</li>
+<li><strong>x-ui 中的配置:</strong> 在 x-ui 中配置 Trojan 时，需要设置密码、监听端口（通常 443）、域名（用于 TLS 证书）、证书和私钥路径。对于 gRPC 传输，还需要配置 <code>serviceName</code> 。</li>
+</ul>
+<h3 id="2-5-WireGuard"><a href="#2-5-WireGuard" class="headerlink" title="2.5 WireGuard"></a>2.5 WireGuard</h3><ul>
+<li><strong>原理与工作机制:</strong> WireGuard 是一种现代、高性能的 VPN 协议，旨在提供比传统 VPN 协议（如 OpenVPN, IPsec）更简单、更快速、更安全的解决方案 。它使用最先进的密码学技术，通过 UDP 传输数据，并在内核空间运行以提高效率 。WireGuard 通过公钥加密进行身份验证和密钥交换 。</li>
+<li><strong>安全特性:</strong> WireGuard 使用固定的密码套件，包括 ChaCha20进行对称加密，Poly1305进行消息认证，Curve25519进行椭圆曲线 Diffie-Hellman 密钥交换，BLAKE2s进行哈希 。这种固定的选择减少了因密码套件协商错误导致的安全风险。它还提供完美前向保密。</li>
+<li><strong>性能特点:</strong> WireGuard 以其极高的性能和低延迟著称，代码量小（Linux 内核模块约 4000 行代码），易于审计，且资源消耗低，非常适合移动设备和嵌入式系统 。</li>
+<li><strong>混淆能力:</strong> WireGuard 本身不以流量混淆为主要设计目标。其流量特征（基于 UDP）相对固定，虽然不像 HTTPS 那样普遍，但在某些网络环境下可能被识别或限制。它不具备像 Trojan 或 VLESS+REALITY 那样的 HTTPS 伪装能力。</li>
+<li>优缺点:<ul>
+<li><strong>优点:</strong> 速度极快，延迟低，安全性高，配置简单，代码量小，跨平台支持良好 。</li>
+<li><strong>缺点:</strong> 基于 UDP，可能在对 UDP 不友好的网络中表现不佳；协议相对较新，虽然经过广泛审计，但历史积淀不如 OpenVPN；隐私方面，默认配置下服务器会记录对端 IP，需要服务提供商额外处理以保护用户隐私 。</li>
+</ul>
+</li>
+<li><strong>x-ui 中的配置:</strong> 3x-ui 面板支持 WireGuard 作为一种入站协议 。配置通常涉及设置监听端口、服务器私钥、客户端公钥、分配给客户端的 IP 地址以及允许的 IP 范围等。x-ui 简化了这个过程，但具体的界面选项需要参考面板本身 。</li>
+</ul>
+<h3 id="协议资源消耗与演进趋势"><a href="#协议资源消耗与演进趋势" class="headerlink" title="协议资源消耗与演进趋势"></a>协议资源消耗与演进趋势</h3><p>在资源消耗方面，一般而言，VLESS 由于其极简设计，通常比 VMess 更轻量，CPU 和内存占用更低 。Shadowsocks 也是一种非常轻量级的协议 。WireGuard 因其内核态实现和高效密码学，资源消耗极低 。Trojan 协议由于直接利用 TLS，其资源消耗主要取决于 TLS 的实现，通常也比较高效。相比之下，VMess 由于其内置的加密和动态特性，可能会有稍高的资源占用。实际的资源消耗会受到并发连接数、流量大小、服务器硬件配置以及具体实现（如 Xray 核心的优化程度）等多种因素影响。根据 Istio（使用 Envoy 代理，与 Xray 角色类似）的数据，代理本身每秒处理 1000 个请求大约消耗 0.2 至 0.5 vCPU 和 40MB 至 60MB 内存 ，这可以作为一个大致的参考，但 Xray 的具体表现会有所不同。</p>
+<p>科学上网协议的演进清晰地反映了审查技术与反审查技术之间的持续博弈。最初的 Shadowsocks 提供了基础的加密代理功能。随着 DPI 技术对 Shadowsocks 特征的识别，V2Ray 项目及其核心协议 VMess 应运而生，提供了更强的混淆和灵活性。然而，VMess 的复杂性也带来了一定的性能开销和配置难度。随后，VLESS 协议以其“更少即是更多”的理念出现，通过剥离内置加密，依赖底层传输（如 TLS/XTLS/REALITY）来保证安全，从而实现了更高的性能和更强的隐蔽性 。XTLS 和 REALITY 等技术的出现，进一步提升了 VLESS 和 Trojan 等协议的性能与抗检测能力，代表了当前协议发展的前沿方向 。这种演进趋势表明，未来的协议发展将更加注重性能、安全性和伪装性的平衡，以及对不断变化的审查策略的适应能力。</p>
+<h2 id="第三部分：使用-x-ui-与-Cloudflare-搭建节点"><a href="#第三部分：使用-x-ui-与-Cloudflare-搭建节点" class="headerlink" title="第三部分：使用 x-ui 与 Cloudflare 搭建节点"></a>第三部分：使用 x-ui 与 Cloudflare 搭建节点</h2><p>本部分将详细指导如何在 VPS 上安装 x-ui 面板，并结合 Cloudflare 服务搭建各类型的科学上网节点。</p>
+<h3 id="3-1-VPS-与域名准备"><a href="#3-1-VPS-与域名准备" class="headerlink" title="3.1 VPS 与域名准备"></a>3.1 VPS 与域名准备</h3><ol>
+<li>选择 VPS (Virtual Private Server):<ul>
+<li>选择一个位于审查区域之外的 VPS 提供商。考虑因素包括服务器位置（影响延迟）、带宽、CPU、内存、价格以及提供商的声誉。建议选择 KVM 虚拟化的 VPS 。</li>
+<li>操作系统推荐选择较新的稳定版 Linux 发行版，如 Ubuntu 20.04/22.04, Debian 10/11, CentOS 7+ (尽管 CentOS 7 即将 EOL) 。</li>
+</ul>
+</li>
+<li>注册域名:<ul>
+<li>你需要一个域名用于配置 TLS 加密，特别是当使用 WebSocket、gRPC 或 REALITY 等需要域名验证的场景时。可以选择如 Namecheap, Porkbun 等域名注册商 。</li>
+</ul>
+</li>
+<li>基础服务器设置:<ul>
+<li>通过 SSH 连接到你的 VPS。</li>
+<li>更新系统软件包：<code>sudo apt update &amp;&amp; sudo apt upgrade -y</code> (以 Debian/Ubuntu 为例) 。</li>
+<li>安装必要工具，如 <code>curl</code> 和 <code>socat</code>：<code>sudo apt install curl socat -y</code> 。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-2-安装-x-ui-面板-MHSanaei-3x-ui"><a href="#3-2-安装-x-ui-面板-MHSanaei-3x-ui" class="headerlink" title="3.2 安装 x-ui 面板 (MHSanaei/3x-ui)"></a>3.2 安装 x-ui 面板 (MHSanaei/3x-ui)</h3><p>MHSanaei 的 3x-ui 是一个功能丰富的 Xray 管理面板。</p>
+<ol>
+<li><p>执行安装脚本:</p>
+<p>通过 SSH 连接到 VPS 后，运行以下命令安装最新版本的 3x-ui ：</p>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">bash &lt;(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装过程中，脚本可能会提示你设置面板的用户名、密码和访问端口 。如果选择不自定义，可能会随机生成。请务必记录这些信息。</p>
+</li>
+<li><p><strong>访问 x-ui 面板:</strong> 安装完成后，通过浏览器访问 <code>http://&lt;你的VPS_IP&gt;:&lt;面板端口&gt;</code> 来打开 x-ui 登录界面 。</p>
+</li>
+<li><p><strong>初始登录与安全设置:</strong> 使用安装时设置或脚本生成的用户名和密码登录。首次登录后，强烈建议立即修改默认的用户名和密码，并考虑修改面板的访问端口和一个随机的 URL 根路径（Web Base Path）以增强安全性 。这些设置通常在 x-ui 的“面板设置”中可以找到。可以通过在 VPS 终端运行 <code>x-ui</code> 命令来访问管理菜单，其中包括重置 Web Base Path 等选项 。</p>
+</li>
+</ol>
+<h3 id="3-3-SSL-证书管理"><a href="#3-3-SSL-证书管理" class="headerlink" title="3.3 SSL 证书管理"></a>3.3 SSL 证书管理</h3><p>为了启用 TLS 加密（对于 HTTPS 伪装和安全至关重要），你需要为你的域名获取 SSL 证书。</p>
+<ol>
+<li><p><strong>使用 x-ui 内置的 ACME 功能 (推荐):</strong></p>
+<ul>
+<li>确保你的域名已正确解析到 VPS 的 IP 地址（A 记录）。</li>
+<li>在 VPS 终端运行 <code>x-ui</code> 命令，选择“SSL 证书管理” (SSL Certificate Management) 。</li>
+<li>按照提示选择“获取 SSL”(Get SSL)，输入你的域名，脚本会自动尝试通过 Let’s Encrypt 等 ACME 提供商申请证书。</li>
+<li>申请成功后，证书和私钥文件通常会保存在服务器的特定路径（如 <code>/root/.acme.sh/yourdomain.com/</code> 或由 x-ui 指定的路径），并在 x-ui 面板中配置入站规则时引用这些路径。</li>
+<li>x-ui 通常支持自动续签申请到的证书 。</li>
+</ul>
+</li>
+<li><p><strong>使用 Certbot 手动申请 (备选方案):</strong></p>
+<ul>
+<li><p>在 VPS 上安装 Certbot ：</p>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">sudo apt install certbot python3-certbot-nginx # (或相应的 Apache 插件)
+# 或者更通用的方式
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot -y # 可能需要确认
+sudo apt update
+sudo apt install certbot -y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>申请证书（以 standalone 模式为例，需要临时占用 80 端口；确保 Cloudflare DNS 记录此时为“DNS Only”）：</p>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">sudo certbot certonly --standalone --agree-tos --register-unsafely-without-email -d yourdomain.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>将 yourdomain.com 替换为你的域名。</p>
+</li>
+<li><p>成功后，证书和私钥路径通常为 <code>/etc/letsencrypt/live/yourdomain.com/fullchain.pem</code> 和 <code>/etc/letsencrypt/live/yourdomain.com/privkey.pem</code> 。</p>
+</li>
+<li><p>设置自动续签：Certbot 通常会自动创建 systemd timer 或 cron job 来处理续签。可以通过 <code>sudo certbot renew --dry-run</code> 测试续签。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>使用 Cloudflare 源服务器证书 (Origin Certificate):</strong></p>
+<ul>
+<li>在 Cloudflare 仪表盘的 “SSL/TLS” -&gt; “源服务器” 处创建源证书。Cloudflare 会提供证书和私钥。</li>
+<li>将这些证书和私钥内容上传到你的 VPS，并在 x-ui 中配置入站规则时直接粘贴内容或引用文件路径。</li>
+<li>这种方式下，Cloudflare 与你的源服务器之间的连接是加密的，但客户端到 Cloudflare 的连接仍需由 Cloudflare 提供的边缘证书处理。SSL/TLS 模式需设置为 “Full (Strict)”。</li>
+</ul>
+</li>
+<li><p><strong>通过 Cloudflare 获取 SSL (x-ui 功能):</strong></p>
+<ul>
+<li>如果你的域名通过 Cloudflare 解析，x-ui 的某些版本提供了通过 Cloudflare API 直接申请 SSL 证书的功能 。</li>
+<li>这需要你的 Cloudflare 注册邮箱和 Global API Key。在 x-ui 命令行菜单中选择“Cloudflare SSL 证书”并按提示操作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-4-x-ui-基础节点配置-不使用-Cloudflare-CDN-Tunnel"><a href="#3-4-x-ui-基础节点配置-不使用-Cloudflare-CDN-Tunnel" class="headerlink" title="3.4 x-ui 基础节点配置 (不使用 Cloudflare CDN/Tunnel)"></a>3.4 x-ui 基础节点配置 (不使用 Cloudflare CDN/Tunnel)</h3><p>登录 x-ui 面板后，进入“入站列表”(Inbounds) 页面，点击“添加入站”(Add Inbound) 来创建新的代理节点。以下是一些常见协议的配置要点：</p>
+<h4 id="3-4-1-VLESS-TCP-XTLS-Vision-REALITY"><a href="#3-4-1-VLESS-TCP-XTLS-Vision-REALITY" class="headerlink" title="3.4.1 VLESS + TCP + XTLS (Vision/REALITY)"></a>3.4.1 VLESS + TCP + XTLS (Vision/REALITY)</h4><p>这是目前推荐的高性能、高隐蔽性配置之一。</p>
+<ul>
+<li><strong>备注 (Remark):</strong> 给连接起一个描述性名称，如 <code>VLESS-XTLS-Direct</code>。</li>
+<li><strong>协议 (Protocol):</strong> 选择 <code>vless</code> 。</li>
+<li><strong>监听IP (Listen IP):</strong> 留空表示监听所有可用 IP 地址。</li>
+<li><strong>端口 (Port):</strong> 推荐使用 <code>443</code> 。</li>
+<li><strong>用户ID (ID / UUID):</strong> x-ui 会自动生成一个 UUID，保持默认即可。这是客户端连接的凭证。</li>
+<li>流控 (Flow):<ul>
+<li>对于 XTLS Vision: 选择 <code>xtls-rprx-vision</code> 。</li>
+</ul>
+</li>
+<li><strong>传输 (Transport / Network):</strong> 选择 <code>tcp</code> 。</li>
+<li>TLS 设置:<ul>
+<li><strong>启用 TLS (Enable TLS):</strong> <em>不勾选</em> (因为 XTLS/REALITY 有自己的 TLS 处理机制)。</li>
+<li><strong>启用 XTLS (Enable XTLS):</strong> <em>勾选</em> (如果使用 XTLS Vision)。</li>
+</ul>
+</li>
+<li>REALITY 设置 (如果选择 REALITY 而非 XTLS Vision):<ul>
+<li>在 x-ui 面板中，通常 VLESS 协议下会有专门的 REALITY 安全设置区域 。</li>
+<li><strong>接受代理协议 (Accept Proxy Protocol):</strong> 可能需要勾选此项或类似选项来启用 REALITY 特有的参数 。</li>
+<li><strong>目标地址 (Dest):</strong> 填写一个真实存在的、支持 TLSv1.3 和 H2 的境外网站域名和端口，例如 <code>www.microsoft.com:443</code> 或 <code>dl.google.com:443</code> 。</li>
+<li><strong>Server Names (SNI):</strong> 填写目标地址对应的域名，例如 <code>www.microsoft.com</code> 或 <code>dl.google.com</code> 。</li>
+<li><strong>私钥 (Private Key):</strong> 点击面板上的“生成新证书”或类似按钮生成 X25519 密钥对，这里填入私钥 1。公钥会自动生成或需要一并记录给客户端。</li>
+<li><strong>Short IDs:</strong> 可以留空或生成一个随机的 Short ID，用于区分客户端 。</li>
+<li><strong>uTLS 指纹 (uTLS):</strong> 选择一个浏览器指纹，如 <code>chrome</code> 或 <code>firefox</code> 。</li>
+</ul>
+</li>
+<li><strong>域名 (Domain name):</strong> 对于 XTLS Vision（非 REALITY），你需要填写真实申请过 SSL 证书的域名 。</li>
+<li><strong>证书公钥文件路径 (Certificate File Path / Public key file path):</strong> 填写 SSL 证书的 <code>fullchain.pem</code> 文件路径 。</li>
+<li><strong>证书私钥文件路径 (Key File Path / Private key file path):</strong> 填写 SSL 证书的 <code>privkey.pem</code> 文件路径 。</li>
+</ul>
+<h4 id="3-4-2-VMess-TCP-TLS"><a href="#3-4-2-VMess-TCP-TLS" class="headerlink" title="3.4.2 VMess + TCP + TLS"></a>3.4.2 VMess + TCP + TLS</h4><p>这种配置提供了较好的安全性和伪装性。</p>
+<ul>
+<li><strong>备注 (Remark):</strong> 例如 <code>VMess-TCP-TLS</code>。</li>
+<li><strong>协议 (Protocol):</strong> 选择 <code>vmess</code> 。</li>
+<li><strong>监听IP (Listen IP):</strong> 留空。</li>
+<li><strong>端口 (Port):</strong> 推荐 <code>443</code>。</li>
+<li><strong>用户ID (UUID):</strong> 自动生成，保持默认。</li>
+<li><strong>额外ID (AlterID):</strong> 设置一个数字，如 <code>0</code> (较新版本 Xray 中 alterId 作用减弱，可以设为0或较低值)。</li>
+<li><strong>加密方式 (Security):</strong> 通常保持默认（如 <code>auto</code> 或 <code>aes-128-gcm</code>）。</li>
+<li><strong>传输 (Transport / Network):</strong> 选择 <code>tcp</code>。</li>
+<li>TLS 设置:<ul>
+<li><strong>启用 TLS (Enable TLS):</strong> <em>勾选</em> 。</li>
+<li><strong>域名 (Domain name):</strong> 填写你拥有并已申请 SSL 证书的域名。</li>
+<li><strong>证书公钥文件路径 (Certificate File Path):</strong> 填写 SSL 证书的 <code>fullchain.pem</code> 文件路径。</li>
+<li><strong>证书私钥文件路径 (Key File Path):</strong> 填写 SSL 证书的 <code>privkey.pem</code> 文件路径。</li>
+<li><strong>ALPN:</strong> 可以留空或根据需要填写 (如 <code>h2,http/1.1</code>)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-4-3-Trojan-TCP-TLS"><a href="#3-4-3-Trojan-TCP-TLS" class="headerlink" title="3.4.3 Trojan + TCP + TLS"></a>3.4.3 Trojan + TCP + TLS</h4><p>Trojan 以其优秀的 HTTPS 伪装著称。</p>
+<ul>
+<li><strong>备注 (Remark):</strong> 例如 <code>Trojan-TCP-TLS</code>。</li>
+<li><strong>协议 (Protocol):</strong> 选择 <code>trojan</code> 。</li>
+<li><strong>监听IP (Listen IP):</strong> 留空。</li>
+<li><strong>端口 (Port):</strong> 必须是 <code>443</code> 以获得最佳伪装效果。</li>
+<li><strong>密码 (Password):</strong> 设置一个强密码，客户端连接时需要使用。</li>
+<li><strong>传输 (Transport / Network):</strong> 选择 <code>tcp</code>。</li>
+<li>TLS 设置:<ul>
+<li><strong>启用 TLS (Enable TLS):</strong> <em>勾选</em>。</li>
+<li><strong>域名 (Domain name):</strong> 填写你拥有并已申请 SSL 证书的域名。</li>
+<li><strong>证书公钥文件路径 (Certificate File Path):</strong> 填写 SSL 证书的 <code>fullchain.pem</code> 文件路径。</li>
+<li><strong>证书私钥文件路径 (Key File Path):</strong> 填写 SSL 证书的 <code>privkey.pem</code> 文件路径。</li>
+<li><strong>ALPN:</strong> 建议填写 <code>h2,http/1.1</code> 以更好地模拟 HTTPS 流量。</li>
+<li><strong>Fallback (回落):</strong> 可以配置一个回落地址（如本地运行的 Web 服务器 <code>127.0.0.1:80</code>），当非 Trojan 协议访问该端口时，流量会被转发到此地址，增强伪装性。x-ui 中可能有相应配置项。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-4-4-Shadowsocks-AEAD-Ciphers"><a href="#3-4-4-Shadowsocks-AEAD-Ciphers" class="headerlink" title="3.4.4 Shadowsocks (AEAD Ciphers)"></a>3.4.4 Shadowsocks (AEAD Ciphers)</h4><p>简单高效的选择。</p>
+<ul>
+<li><strong>备注 (Remark):</strong> 例如 <code>SS-AEAD</code>。</li>
+<li><strong>协议 (Protocol):</strong> 选择 <code>shadowsocks</code> 。</li>
+<li><strong>监听IP (Listen IP):</strong> 留空。</li>
+<li><strong>端口 (Port):</strong> 选择一个未被占用的端口。</li>
+<li><strong>密码 (Password):</strong> 设置一个强密码。</li>
+<li><strong>加密方式 (Encryption / Cipher):</strong> 强烈推荐使用 AEAD 加密，如 <code>2022-blake3-aes-256-gcm</code> (如果 x-ui 和客户端支持) 或 <code>aes-256-gcm</code>, <code>chacha20-ietf-poly1305</code> 。避免使用旧的非 AEAD 加密方式。</li>
+<li><strong>传输 (Network):</strong> 可以选择 <code>tcp</code> 或 <code>tcp,udp</code> 。</li>
+</ul>
+<h4 id="3-4-5-WireGuard"><a href="#3-4-5-WireGuard" class="headerlink" title="3.4.5 WireGuard"></a>3.4.5 WireGuard</h4><p>3x-ui 支持 WireGuard 作为入站协议 。</p>
+<ul>
+<li><strong>备注 (Remark):</strong> 例如 <code>WireGuard-VPN</code>。</li>
+<li><strong>协议 (Protocol):</strong> 选择 <code>wireguard</code>。</li>
+<li><strong>监听IP (Listen IP):</strong> 留空。</li>
+<li><strong>端口 (Port):</strong> WireGuard 默认使用 UDP 协议，端口通常为 <code>51820</code>，但可以自定义。</li>
+<li><strong>私钥 (Private Key):</strong> 服务器的 WireGuard 私钥。x-ui 可能会自动生成或提供生成按钮。</li>
+<li><strong>公钥 (Public Key):</strong> 服务器的 WireGuard 公钥（由私钥派生）。</li>
+<li><strong>IP 地址 (Addresses):</strong> 分配给 WireGuard 服务器接口的内部 IP 地址和子网掩码，例如 <code>10.0.8.1/24</code>。</li>
+<li><strong>MTU:</strong> 通常保持默认或根据网络情况调整。</li>
+<li><strong>DNS:</strong> 可以指定推送给客户端的 DNS 服务器。</li>
+<li>对等端 (Peers) / 用户 (Clients):<ul>
+<li>为每个客户端生成独立的密钥对（公钥和私钥）。</li>
+<li>在服务器端添加客户端的公钥。</li>
+<li>为客户端分配一个隧道内的 IP 地址（如 <code>10.0.8.2</code>）。</li>
+<li>配置 <code>AllowedIPs</code>：对于客户端，通常设为 <code>0.0.0.0/0, ::/0</code> 以路由所有流量通过 VPN。在服务器端，对应客户端的 <code>AllowedIPs</code> 设为其分配的隧道 IP (如 <code>10.0.8.2/32</code>)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>重要提示:</strong> 上述 x-ui 面板中的具体选项名称可能因 3x-ui 版本略有不同。请以你实际使用的面板界面为准。配置完成后，务必点击“添加”或“保存”并根据提示重启 Xray 服务使配置生效。</p>
+<h3 id="3-5-集成-Cloudflare-CDN-适用于-WebSocket-和-gRPC-节点"><a href="#3-5-集成-Cloudflare-CDN-适用于-WebSocket-和-gRPC-节点" class="headerlink" title="3.5 集成 Cloudflare CDN (适用于 WebSocket 和 gRPC 节点)"></a>3.5 集成 Cloudflare CDN (适用于 WebSocket 和 gRPC 节点)</h3><p>将 Cloudflare CDN 置于代理服务器之前，可以隐藏源服务器 IP、防御 DDoS 攻击，并可能为特定地区用户加速。这主要适用于基于 WebSocket 或 gRPC 的传输方式，因为它们能更好地兼容 HTTP/HTTPS 流量模式。</p>
+<ol>
+<li><strong>Cloudflare DNS 设置:</strong><ul>
+<li>登录 Cloudflare 账户，选择你的域名。</li>
+<li>进入 “DNS” 管理页面。</li>
+<li>添加一个 A 记录，将你的域名（或子域名，如 <code>proxy.yourdomain.com</code>）指向你的 VPS IP 地址 。</li>
+<li><strong>关键步骤 - SSL 证书申请期间:</strong> 在申请 SSL 证书（无论是通过 x-ui 的 ACME 还是手动用 Certbot）时，必须确保此 DNS 记录的“代理状态”(Proxy status) 为“仅限 DNS”(DNS Only)，即云朵图标为灰色 。这是因为 Let’s Encrypt 等 CA 需要直接验证你的服务器 IP。</li>
+<li><strong>关键步骤 - 启用 CDN:</strong> SSL 证书成功获取并配置到 x-ui 后，回到 Cloudflare DNS 设置页面，将该 A 记录的“代理状态”切换为“已代理”(Proxied)，即云朵图标变为橙色。这样流量才会经过 Cloudflare CDN 。</li>
+</ul>
+</li>
+<li><strong>Cloudflare SSL/TLS 模式:</strong><ul>
+<li>在 Cloudflare 仪表盘的 “SSL/TLS” -&gt; “概述” (Overview) 页面，将 SSL/TLS 加密模式设置为 <strong>“Full (Strict)”</strong> (完全（严格）) 。这确保浏览器到 Cloudflare 以及 Cloudflare 到源服务器的连接都是严格加密和验证的。</li>
+</ul>
+</li>
+<li><strong>在 Cloudflare 网络设置中启用 WebSocket 和 gRPC:</strong><ul>
+<li>在 Cloudflare 仪表盘的 “网络” (Network) 页面：<ul>
+<li>确保 “WebSockets” 开关已打开（通常默认开启）。</li>
+<li>如果使用 gRPC 传输，确保 “gRPC” 开关已打开 。</li>
+</ul>
+</li>
+<li><strong>gRPC 要求:</strong> 源服务器上的 gRPC 端点必须监听 443 端口，支持 TLS 和 HTTP/2，并通过 ALPN 广播 HTTP/2。请求的 <code>Content-Type</code> 头部应为 <code>application/grpc</code> 或 <code>application/grpc+&lt;message_type&gt;</code> 。</li>
+</ul>
+</li>
+<li><strong>x-ui 配置 VLESS + WebSocket + TLS + CDN:</strong><ul>
+<li>在 x-ui 中添加入站：<ul>
+<li><strong>协议 (Protocol):</strong> <code>vless</code>。</li>
+<li><strong>端口 (Port):</strong> 设置一个源服务器上的监听端口，例如 <code>8443</code> (或其他非 443 端口，因为 443 由 Cloudflare 面向公网)。</li>
+<li><strong>传输 (Transport / Network):</strong> 选择 <code>ws</code> (WebSocket) 。</li>
+<li><strong>路径 (Path):</strong> 设置一个 WebSocket 路径，例如 <code>/myvlessws</code>。这个路径需要隐蔽一些，不要使用过于常见的词汇。</li>
+<li><strong>Host (请求头):</strong> 填写你在 Cloudflare DNS 中设置并开启代理的域名（如 <code>proxy.yourdomain.com</code>）。</li>
+<li>TLS 设置:<ul>
+<li><strong>启用 TLS (Enable TLS):</strong> <em>勾选</em>。</li>
+<li><strong>域名 (Domain name):</strong> 填写你的域名（<code>proxy.yourdomain.com</code>）。</li>
+<li><strong>证书公钥文件路径 (Certificate File Path):</strong> 填写之前申请的 SSL 证书的 <code>fullchain.pem</code> 路径。</li>
+<li><strong>证书私钥文件路径 (Key File Path):</strong> 填写 SSL 证书的 <code>privkey.pem</code> 路径。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端连接时，地址填 <code>proxy.yourdomain.com</code>，端口填 <code>443</code> (Cloudflare 的端口)，传输选 WebSocket，路径填 <code>/myvlessws</code>，底层传输安全选 TLS，SNI/Host 填 <code>proxy.yourdomain.com</code>。</li>
+</ul>
+</li>
+<li><strong>x-ui 配置 VMess + WebSocket + TLS + CDN:</strong><ul>
+<li>配置方法与 VLESS+WS+TLS 类似 ：<ul>
+<li><strong>协议 (Protocol):</strong> <code>vmess</code>。</li>
+<li><strong>端口 (Port):</strong> 源服务器监听端口，如 <code>8443</code>。</li>
+<li><strong>传输 (Transport / Network):</strong> <code>ws</code>。</li>
+<li><strong>路径 (Path):</strong> 例如 <code>/myvmessws</code>。</li>
+<li><strong>Host (请求头):</strong> 你的 CDN 域名。</li>
+<li><strong>TLS 设置:</strong> 同上，使用你的域名和证书。</li>
+</ul>
+</li>
+<li>客户端连接参数类似，注意协议选择 VMess 并填写 UUID 和 AlterID。</li>
+</ul>
+</li>
+<li><strong>x-ui 配置 Trojan + gRPC + TLS + CDN:</strong><ul>
+<li><strong>协议 (Protocol):</strong> <code>trojan</code>。</li>
+<li><strong>端口 (Port):</strong> 源服务器监听端口，如 <code>8443</code>。</li>
+<li><strong>传输 (Transport / Network):</strong> <code>grpc</code>。</li>
+<li><strong>gRPC 服务名称 (serviceName / Service Name):</strong> 设置一个服务名称，例如 <code>mytrojangrpc</code>。客户端连接时需要匹配。</li>
+<li><strong>TLS 设置:</strong> 同上，使用你的域名和证书。</li>
+<li>客户端连接时，地址填 CDN 域名，端口 <code>443</code>，传输选 gRPC，服务名称填 <code>mytrojangrpc</code>，底层传输安全选 TLS，SNI 填 CDN 域名。</li>
+<li><strong>Cloudflare gRPC 注意事项:</strong> Cloudflare WAF 对 gRPC 内容的检查有限，主要在连接阶段进行头部检查 。</li>
+</ul>
+</li>
+<li><strong>x-ui 配置 VLESS + gRPC + TLS + CDN:</strong><ul>
+<li>配置方法与 Trojan+gRPC+TLS 类似：<ul>
+<li><strong>协议 (Protocol):</strong> <code>vless</code>。</li>
+<li><strong>端口 (Port):</strong> 源服务器监听端口，如 <code>8443</code>。</li>
+<li><strong>传输 (Transport / Network):</strong> <code>grpc</code>。</li>
+<li><strong>gRPC 服务名称 (serviceName / Service Name):</strong> 例如 <code>myvlessgrpc</code>。</li>
+<li><strong>TLS 设置:</strong> 同上。</li>
+</ul>
+</li>
+<li>客户端连接参数类似。</li>
+</ul>
+</li>
+</ol>
+<p>使用 Cloudflare CDN 的主要好处是隐藏了源服务器的真实 IP 地址，这对于防止 IP 被直接攻击或封锁至关重要。此外，Cloudflare 的全球网络节点可以为地理位置较远的用户提供一定的访问速度优化（通过缓存静态内容和更优的路由，尽管对于动态代理流量，缓存效果有限）。同时，Cloudflare 也提供了基础的 DDoS 防护。然而，所有流量都经过 Cloudflare 网络，意味着 Cloudflare 有能力检查（在一定程度上，特别是对于未加密或解密后的流量）和记录这些流量，并且其自身也可能因为合规原因对特定类型的流量进行限制或阻断 。这是一个需要在便利性和潜在风险之间进行权衡的因素。</p>
+<h3 id="3-6-使用-Cloudflare-Workers-作为代理层"><a href="#3-6-使用-Cloudflare-Workers-作为代理层" class="headerlink" title="3.6 使用 Cloudflare Workers 作为代理层"></a>3.6 使用 Cloudflare Workers 作为代理层</h3><p>Cloudflare Workers 允许在 Cloudflare 的边缘节点上运行 JavaScript (或其他编译到 WebAssembly 的语言) 代码，可以用来拦截和修改请求/响应，或将请求代理到后端服务。</p>
+<ol>
+<li><p><strong>基本原理:</strong> 创建一个 Worker 脚本，该脚本接收来自客户端的请求，然后将这些请求转发到你的 Xray 源服务器。对于 WebSocket 流量，Worker 需要特殊处理以正确建立和维持双向连接。</p>
+</li>
+<li><p>Worker 脚本示例 (通用 WebSocket 代理):</p>
+<p>以下是一个非常基础的通用 WebSocket 代理 Worker 脚本的逻辑框架。请注意，直接代理任意 Xray 协议流量可能违反 Cloudflare 服务条款 ，且此脚本需要根据实际 Xray 配置（如路径、头部）进行调整。</p>
+<pre class="line-numbers language-JavaScript" data-language="JavaScript"><code class="language-JavaScript">//addEventListener("fetch", event =&gt; {
+//  event.respondWith(handleRequest(event.request))
+//})
+//
+//async function handleRequest(request) {
+//  const url = new URL(request.url);
+//  const upgradeHeader = request.headers.get('Upgrade');
+//
+//  // 后端 Xray 服务器地址和端口，以及预期的 WebSocket 路径
+//  const backendHost = 'your_vps_ip_or_hidden_domain'; // 不应是 Cloudflare CDN 域名
+//  const backendPort = your_xray_ws_listen_port; // Xray WS 入站监听的真实端口
+//  const backendPath = '/your_xray_ws_path'; // Xray WS 入站配置的路径
+//
+//  // 构建后端 URL
+//  let backendUrl = `wss://&lt;span class="math-inline"&gt;\{backendHost\}\:&lt;/span&gt;{backendPort}${backendPath}`;
+//  if (url.protocol === 'http:') {
+//      backendUrl = `ws://&lt;span class="math-inline"&gt;\{backendHost\}\:&lt;/span&gt;{backendPort}${backendPath}`;
+//  }
+//
+//  if (upgradeHeader &amp;&amp; upgradeHeader.toLowerCase() === 'websocket') {
+//    // 处理 WebSocket 升级请求
+//    const [client, server] = Object.values(new WebSocketPair());
+//    server.accept();
+//
+//    try {
+//      const wsBackend = new WebSocket(backendUrl, request.headers); // 将原始请求头传给后端
+//
+//      wsBackend.addEventListener('open', () =&gt; {
+//        // 后端连接打开
+//      });
+//
+//      wsBackend.addEventListener('message', event =&gt; {
+//        server.send(event.data); // 从后端收到消息，转发给客户端
+//      });
+//
+//      wsBackend.addEventListener('close', event =&gt; {
+//        server.close(event.code, event.reason); // 后端关闭，关闭客户端连接
+//      });
+//
+//      wsBackend.addEventListener('error', event =&gt; {
+//        server.close(1011, 'Backend WebSocket error'); // 后端错误
+//      });
+//
+//      server.addEventListener('message', event =&gt; {
+//        wsBackend.send(event.data); // 从客户端收到消息，转发给后端
+//      });
+//
+//      server.addEventListener('close', event =&gt; {
+//        wsBackend.close(event.code, event.reason); // 客户端关闭，关闭后端连接
+//      });
+//
+//      server.addEventListener('error', event =&gt; {
+//        wsBackend.close(1011, 'Client WebSocket error'); // 客户端错误
+//      });
+//
+//      return new Response(null, { status: 101, webSocket: client });
+//    } catch (e) {
+//      return new Response('WebSocket backend connection failed: ' + e.toString(), { status: 502 });
+//    }
+//  } else {
+//    // 对于非 WebSocket 请求，可以直接转发或返回错误
+//    // 如果 Xray 配置了 HTTP 回落，这里可以尝试转发 HTTP 请求
+//    // url.hostname = backendHost; // 注意：这仅适用于 HTTP 代理，不适用于 Xray 协议本身
+//    // url.port = backendPort.toString();
+//    // return fetch(new Request(url, request));
+//    return new Response('This Worker is for WebSocket proxying.', { status: 400 });
+//  }
+//}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意:</p>
+<p> 上述脚本是一个高度简化的示例，用于说明概念。实际用于 Xray 的 Worker 脚本可能需要更复杂的逻辑来处理特定的 Xray WebSocket 路径、头部信息（如 Host头部需要正确设置为 Xray 配置中的值）以及可能的认证。</p>
+<p><code>keivanipchihagh/x-ui</code> 仓库中可能包含更具体的 Worker 脚本 (scripts/worker.js)，建议参考其实现 。Cloudflare 官方文档也提供了 WebSocket 处理的示例 。</p>
+</li>
+<li><p>部署和路由设置:</p>
+<ul>
+<li>在 Cloudflare 仪表盘创建 Worker，将上述脚本（或适配后的脚本）粘贴进去并部署 。</li>
+<li>为 Worker 配置一个路由，例如 <code>worker.yourdomain.com/</code>，这样访问此路径的流量会由 Worker 处理。</li>
+</ul>
+</li>
+<li><p>Xray 入站配置:</p>
+<ul>
+<li>Xray 的 WebSocket 入站配置应监听一个本地端口（或可被 Worker 访问的地址），其路径和 Host 设置需要与 Worker 脚本转发时的目标一致。TLS 可以在源服务器上配置，也可以由 Worker 到源服务器的连接处理（如果源服务器配置了 TLS）。</li>
+</ul>
+</li>
+<li><p>优缺点:</p>
+<ul>
+<li><strong>优点:</strong> 灵活性高，可以自定义请求处理逻辑，实现更复杂的伪装。IP 地址由 Cloudflare Worker 提供。</li>
+<li><strong>缺点:</strong> Worker 有执行时间、CPU 时间和内存限制。配置比 CDN 复杂。同样存在 Cloudflare 服务条款的适用问题。</li>
+</ul>
+</li>
+</ol>
+<p>Cloudflare Workers 提供了一种比传统 CDN 更细致的流量控制和伪装能力。例如，Worker 可以根据请求的特定头部或路径，将流量路由到不同的后端 Xray 服务，甚至可以动态修改请求/响应内容以增强混淆。这种可编程性使得 Workers 成为一种强大的工具，但也要求用户具备一定的编程知识。然而，需要强调的是，滥用 Cloudflare 服务（包括 Workers）进行违反其服务条款的活动是被禁止的。</p>
+<h3 id="3-7-使用-Cloudflare-Tunnel-Argo-Tunnel-代理-TCP-节点"><a href="#3-7-使用-Cloudflare-Tunnel-Argo-Tunnel-代理-TCP-节点" class="headerlink" title="3.7 使用 Cloudflare Tunnel (Argo Tunnel) 代理 TCP 节点"></a>3.7 使用 Cloudflare Tunnel (Argo Tunnel) 代理 TCP 节点</h3><p>Cloudflare Tunnel (以前称为 Argo Tunnel) 可以安全地将你的本地服务（包括运行在 VPS 上的 Xray 服务）暴露到互联网，而无需在防火墙上打开入站端口。它通过在你的服务器上运行一个轻量级守护进程 <code>cloudflared</code>，该进程会与 Cloudflare 的边缘网络建立一个持久的、仅出站的加密连接。</p>
+<ol>
+<li><p><strong>基本原理:</strong> <code>cloudflared</code> 守护进程将本地 Xray 服务（如 VLESS+TCP、Trojan+TCP、Shadowsocks+TCP）的流量通过这个安全隧道发送到 Cloudflare 边缘，Cloudflare 再将公网用户的请求通过隧道转发给你的 Xray 服务。</p>
+</li>
+<li><p>安装和配置 <code>cloudflared</code>:</p>
+<ul>
+<li>在你的 VPS 上下载并安装 <code>cloudflared</code> 。</li>
+<li>登录 <code>cloudflared</code>：<code>cloudflared tunnel login</code>，这会在浏览器中打开 Cloudflare 登录页面，授权后 <code>cloudflared</code> 会下载一个证书文件。</li>
+<li>创建隧道：<code>cloudflared tunnel create &lt;your_tunnel_name&gt;</code>。记下返回的隧道 UUID。</li>
+<li>为隧道创建 DNS 记录（指向公共主机名）：<code>cloudflared tunnel route dns &lt;your_tunnel_name_or_UUID&gt; &lt;proxy.yourdomain.com&gt;</code>。</li>
+</ul>
+</li>
+<li><p>配置 <code>cloudflared</code> 以暴露 TCP 服务:</p>
+<ul>
+<li><p>创建一个配置文件（通常是 </p>
+<pre class="line-numbers language-none"><code class="language-none">~/.cloudflared/config.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 或在 </p>
+<pre class="line-numbers language-none"><code class="language-none">/etc/cloudflared/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 目录），内容类似如下 ：</p>
+<pre class="line-numbers language-YAML" data-language="YAML"><code class="language-YAML">tunnel: &lt;your_tunnel_UUID&gt; # 从 'cloudflared tunnel create' 命令获取
+credentials-file: /root/.cloudflared/&lt;your_tunnel_UUID&gt;.json # 证书文件路径
+
+ingress:
+  - hostname: proxy.yourdomain.com # 你希望用户连接的公共域名
+    service: tcp://localhost:&lt;xray_listen_port&gt; # Xray 服务监听的本地地址和端口
+  - service: http_status:404 # 捕获所有其他未匹配的请求<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将 <code>&lt;your_tunnel_UUID&gt;</code>、<code>&lt;proxy.yourdomain.com&gt;</code> 和 <code>&lt;xray_listen_port&gt;</code>替换为实际值。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>运行隧道:</strong> <code>cloudflared tunnel run &lt;your_tunnel_name_or_UUID&gt;</code> 或者，将 <code>cloudflared</code> 安装为系统服务以便开机自启：<code>sudo cloudflared service install</code> (需要先有配置文件)。</p>
+</li>
+<li><p>Xray 入站配置:</p>
+<ul>
+<li>Xray 的 TCP 类型入站（如 VLESS+TCP, Trojan+TCP, Shadowsocks+TCP）应配置为监听 <code>localhost:&lt;xray_listen_port&gt;</code>，与 <code>cloudflared</code> 配置文件中的 <code>service</code> 地址对应。</li>
+<li>由于 TLS 终结发生在 Cloudflare 边缘，Xray 源服务器上的这些 TCP 入站通常不需要再配置 TLS。客户端连接时，地址填写 <code>proxy.yourdomain.com</code>，端口为 Cloudflare 支持的端口（如 443，Cloudflare 会处理 TLS）。</li>
+</ul>
+</li>
+<li><p>优缺点与限制:</p>
+<ul>
+<li><strong>优点:</strong> 无需公网 IP 或开放防火墙端口即可安全暴露服务，IP 地址由 Cloudflare 提供。</li>
+<li>缺点:<ul>
+<li><strong>gRPC 限制:</strong> 通过公共主机名的 Cloudflare Tunnel 目前不支持 gRPC 流量 。gRPC 可以通过隧道的私网路由功能与 WARP 客户端结合使用。</li>
+<li><strong>UDP 限制:</strong> 通过公共主机名代理任意 UDP 流量不是标准功能。UDP 通常需要结合 Cloudflare WARP 客户端和私网路由 。对于 WireGuard (UDP)，直接通过 Tunnel 的公共主机名暴露可能不可行或效果不佳。</li>
+<li><strong>性能:</strong> 相比直接连接或 CDN，Tunnel 增加了一个 <code>cloudflared</code> 进程和到 Cloudflare 边缘的额外网络跃点，可能会引入一些延迟。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Cloudflare Tunnel 为那些不适合通过 CDN（如原始 TCP 协议）或不希望直接暴露服务器 IP 的场景提供了一个有价值的解决方案。它特别适用于隐藏家庭网络或动态 IP 环境下的服务器。然而，用户必须清楚其对 gRPC 和 UDP 等协议在公共主机名模式下的限制。</p>
+<h3 id="3-8-必备表格：Cloudflare-服务用于代理的对比"><a href="#3-8-必备表格：Cloudflare-服务用于代理的对比" class="headerlink" title="3.8 必备表格：Cloudflare 服务用于代理的对比"></a>3.8 必备表格：Cloudflare 服务用于代理的对比</h3><p>为了帮助用户根据自身需求选择最合适的 Cloudflare 服务来增强其 Xray 节点，下表对 Cloudflare CDN、Workers 和 Tunnel 的关键特性进行了对比：</p>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>Cloudflare CDN (Orange Cloud DNS)</strong></th>
+<th><strong>Cloudflare Workers</strong></th>
+<th><strong>Cloudflare Tunnel (Public Hostname)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>主要优势</strong></td>
+<td>隐藏源 IP, DDoS 防护, 静态内容缓存, 广泛的 HTTP(S) 兼容性</td>
+<td>高度灵活, 边缘计算, 可自定义请求/响应逻辑, 动态路由, IP 来自 CF</td>
+<td>无需公网 IP/开放端口, 安全暴露本地服务, IP 来自 CF</td>
+</tr>
+<tr>
+<td><strong>适用协议/传输</strong></td>
+<td>HTTP, HTTPS, WebSocket, gRPC (有限制)</td>
+<td>HTTP, HTTPS, WebSocket (可编程处理)</td>
+<td>TCP, HTTP, HTTPS (gRPC, UDP 在公共主机名模式下受限)</td>
+</tr>
+<tr>
+<td><strong>IP 隐藏</strong></td>
+<td>是 (源服务器 IP)</td>
+<td>是 (源服务器 IP, Worker 本身 IP 是 CF 的)</td>
+<td>是 (源服务器 IP)</td>
+</tr>
+<tr>
+<td><strong>TLS 处理</strong></td>
+<td>浏览器 &lt;-&gt; CF (CF 证书), CF &lt;-&gt; 源服务器 (源服务器证书, 需 Full Strict)</td>
+<td>可自定义 (浏览器 &lt;-&gt; Worker &lt;-&gt; 源)</td>
+<td>浏览器 &lt;-&gt; CF (CF 证书), Tunnel 内部加密, CF &lt;-&gt; 源 (通常无需 TLS)</td>
+</tr>
+<tr>
+<td><strong>性能影响</strong></td>
+<td>取决于地理位置和缓存, 可能增加延迟, Argo 可优化</td>
+<td>Worker 执行有开销, 但边缘执行可减少延迟</td>
+<td>增加 <code>cloudflared</code> 跃点, 可能有额外延迟</td>
+</tr>
+<tr>
+<td><strong>配置复杂度</strong></td>
+<td>较低 (DNS 切换)</td>
+<td>中到高 (需要编写和部署脚本)</td>
+<td>中等 (安装和配置 <code>cloudflared</code>)</td>
+</tr>
+<tr>
+<td><strong>主要限制</strong></td>
+<td>对非 HTTP(S) 协议支持不佳, 可能被 WAF/Bot 管理误判</td>
+<td>执行时间/资源限制, 服务条款约束</td>
+<td>gRPC/UDP 在公共主机名模式下支持不佳</td>
+</tr>
+</tbody></table>
+<p><strong>选择考量:</strong></p>
+<ul>
+<li>如果你的 Xray 节点使用 <strong>WebSocket 或 gRPC</strong> 传输，并且希望利用 CDN 的 IP 隐藏和 DDoS 防护，<strong>Cloudflare CDN</strong> 是首选，配置也最简单。</li>
+<li>如果你需要更高级的流量伪装、自定义路由逻辑，或者希望在边缘处理一些逻辑（例如，根据特定条件选择后端），并且不介意编写代码，<strong>Cloudflare Workers</strong> 提供了极大的灵活性。</li>
+<li>如果你的 Xray 节点使用 <strong>纯 TCP 协议</strong> (如 VLESS/Trojan/SS over TCP)，或者你的服务器没有公网 IP / 不想开放入站端口，<strong>Cloudflare Tunnel</strong> 是一个很好的选择，但要注意其对 gRPC 和 UDP 的限制。</li>
+</ul>
+<h2 id="第四部分：安全与优化"><a href="#第四部分：安全与优化" class="headerlink" title="第四部分：安全与优化"></a>第四部分：安全与优化</h2><p>搭建和使用科学上网节点时，安全性和性能优化是不可忽视的重要环节。</p>
+<h3 id="4-1-VPS-服务器安全基础"><a href="#4-1-VPS-服务器安全基础" class="headerlink" title="4.1 VPS 服务器安全基础"></a>4.1 VPS 服务器安全基础</h3><p>保护承载 Xray 服务的 VPS 是首要任务。</p>
+<ul>
+<li>防火墙配置 (UFW/iptables):<ul>
+<li>UFW (Uncomplicated Firewall) 是一个用户友好的 iptables 前端。启用 UFW 并配置规则可以有效控制服务器的网络访问 。</li>
+<li>基本操作:<ul>
+<li>启用 UFW: <code>sudo ufw enable</code></li>
+<li>查看状态: <code>sudo ufw status verbose</code></li>
+<li>允许特定端口: <code>sudo ufw allow &lt;port&gt;/&lt;protocol&gt;</code></li>
+<li>拒绝特定端口: <code>sudo ufw deny &lt;port&gt;/&lt;protocol&gt;</code></li>
+</ul>
+</li>
+<li>推荐规则 (详见文末表格):<ul>
+<li>默认拒绝所有入站连接: <code>sudo ufw default deny incoming</code></li>
+<li>默认允许所有出站连接: <code>sudo ufw default allow outgoing</code></li>
+<li>允许 SSH 连接（建议使用非标准端口，并限制来源 IP）: <code>sudo ufw allow from &lt;your_trusted_IP&gt; to any port &lt;ssh_port&gt; proto tcp</code> 。</li>
+<li>允许 x-ui 面板访问端口（强烈建议限制来源 IP）: <code>sudo ufw allow from &lt;your_trusted_IP&gt; to any port &lt;xui_panel_port&gt; proto tcp</code>。</li>
+<li>允许代理服务端口（通常是 443/TCP 用于 TLS 节点，以及 WireGuard 的 UDP 端口）: <code>sudo ufw allow 443/tcp</code>, <code>sudo ufw allow &lt;wireguard_udp_port&gt;/udp</code> 。</li>
+<li>如果使用 Certbot 的 HTTP-01 验证，需要临时允许 80/TCP: <code>sudo ufw allow 80/tcp</code> (验证后可考虑移除或限制)。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SSH 加固:<ul>
+<li><strong>禁用 root 用户密码登录:</strong> 编辑 <code>/etc/ssh/sshd_config</code>，设置 <code>PermitRootLogin prohibit-password</code> (或 <code>no</code>)。</li>
+<li><strong>使用密钥对认证:</strong> 推荐禁用密码认证 (<code>PasswordAuthentication no</code>)，仅使用 SSH 密钥对登录 。</li>
+<li><strong>更改默认 SSH 端口:</strong> 将默认的 22 端口更改为一个不常用的高位端口，以减少自动扫描攻击 。</li>
+</ul>
+</li>
+<li>定期更新:<ul>
+<li>保持操作系统和所有已安装软件包的最新状态，以修复已知的安全漏洞：<code>sudo apt update &amp;&amp; sudo apt upgrade -y</code> 。</li>
+</ul>
+</li>
+<li>其他安全措施:<ul>
+<li><strong>Fail2ban:</strong> 安装并配置 Fail2ban 可以监控日志文件（如 SSH 登录失败、x-ui 面板登录尝试），并在检测到恶意行为（如暴力破解）时自动封禁来源 IP 。3x-ui 面板本身也集成了 IP 限制功能，需要安装 Fail2ban 配合使用 。</li>
+<li><strong>禁用不必要的服务:</strong> 关闭服务器上所有不需要运行的网络服务，以减少攻击面。</li>
+</ul>
+</li>
+</ul>
+<p>采取多层次的安全措施至关重要。仅仅依赖 Cloudflare 的保护或一个强密码是不够的。VPS 自身的安全（防火墙、SSH加固、及时更新）、x-ui 面板的安全（强密码、HTTPS访问、访问IP限制）以及代理协议自身的安全性（如TLS、REALITY）共同构成了一个纵深防御体系。每一层都针对不同类型的威胁提供防护，从而整体上提升节点的安全性。</p>
+<h3 id="4-2-Cloudflare-安全设置"><a href="#4-2-Cloudflare-安全设置" class="headerlink" title="4.2 Cloudflare 安全设置"></a>4.2 Cloudflare 安全设置</h3><p>Cloudflare 提供了多种安全功能，但在用于代理节点时，某些设置可能需要调整以避免对代理流量的干扰。</p>
+<ul>
+<li>WAF 自定义规则 (Web Application Firewall):<ul>
+<li>Cloudflare WAF 可能会将某些代理流量模式识别为可疑并进行拦截。如果遇到这种情况，可以尝试在 Cloudflare WAF 设置中创建自定义规则，针对代理节点的特定路径（如 WebSocket 路径）或来源（如果固定）选择“跳过”(Skip) WAF 的部分或全部分析模块 。</li>
+<li>例如，如果 WebSocket 路径是 <code>/secretpath</code>，可以创建规则：<code>If URI Path equals /secretpath Then Skip (All WAF managed rules, Cloudflare OWASP Core Ruleset)</code>。</li>
+<li><strong>重要警示:</strong> Cloudflare 的服务条款明确禁止未经授权使用其网络提供代理或 VPN 服务 68。虽然技术上可以通过 WAF 规则绕过检查，但这并不意味着这种用法符合服务条款。用户应自行承担相关风险。</li>
+</ul>
+</li>
+<li>页面规则 (Page Rules) (主要用于 WebSocket 优化/绕过):<ul>
+<li>对于 WebSocket 连接使用的特定路径，可以考虑设置页面规则 ：<ul>
+<li>将“缓存级别”(Cache Level) 设置为“绕过”(Bypass)，因为代理流量通常是动态的，不应被缓存。</li>
+<li>在极端情况下，如果 Cloudflare 的安全级别过高导致连接问题，可以考虑将该路径的“安全级别”(Security Level) 设置为“基本关闭”(Essentially Off) 或“禁用安全性”(Disable Security)。但这样做会降低该路径的安全防护，务必谨慎使用，并尽可能缩小规则匹配范围。</li>
+</ul>
+</li>
+<li>确保 Cloudflare “网络” (Network) 设置中的 “WebSockets” 功能已开启（通常默认开启）。</li>
+</ul>
+</li>
+<li>机器人管理 (Bot Management) 注意事项:<ul>
+<li>Cloudflare 的“机器人战斗模式”(Bot Fight Mode) 或“超级机器人战斗模式”(Super Bot Fight Mode) 可能会将代理客户端的连接行为归类为“可能是自动程序”并进行质询或阻止 。</li>
+<li>如果代理连接因此受阻，可能需要禁用机器人战斗模式，或者（如果可能且符合服务条款）创建 WAF 规则来跳过对特定代理主机名或路径的机器人检测。</li>
+</ul>
+</li>
+<li>SSL/TLS 优化器 (SSL/TLS Recommender) 与自动 HTTPS 重写:<ul>
+<li>这些功能通常是有益的，但务必确保最终的 SSL/TLS 加密模式保持在 “Full (Strict)” 。</li>
+</ul>
+</li>
+<li>HTTP/2 到源站 与 HTTP/3:<ul>
+<li>在 Cloudflare “网络” 设置中启用 “HTTP/2 到源站” 通常是推荐的，特别是当源服务器（Xray）也支持 HTTP/2 时（例如使用 gRPC 传输）。HTTP/3 (QUIC) 也可以考虑启用，但要确保 Xray 和客户端都支持。</li>
+</ul>
+</li>
+</ul>
+<p>Cloudflare 的安全功能是一把双刃剑。它们在保护网站免受恶意攻击方面非常有效 7，但其某些启发式检测机制也可能将正常的代理流量误判为可疑活动，从而导致连接问题。因此，用户需要理解这些设置如何工作，并学会在 Cloudflare 仪表盘中进行细致调整，以便在获得 Cloudflare 保护的同时，确保代理服务的顺畅运行。这通常需要在安全性和可用性之间找到一个平衡点。</p>
+<h3 id="4-3-进阶抗封锁技巧"><a href="#4-3-进阶抗封锁技巧" class="headerlink" title="4.3 进阶抗封锁技巧"></a>4.3 进阶抗封锁技巧</h3><p>随着审查技术的不断发展，单一的代理协议和配置可能不足以保证长期稳定。以下是一些进阶的抗封锁思路和技术：</p>
+<ul>
+<li><strong>域名伪装 (Domain Fronting - 概念性):</strong> 传统意义上的域名伪装（通过在 TLS ClientHello 中使用一个 SNI，而在 HTTP Host 头中使用另一个域名，并依赖 CDN 的路由行为）在很大程度上已被主流 CDN 提供商（包括 Cloudflare）限制。然而，Cloudflare Workers 可以在一定程度上实现类似效果：Worker 脚本可以接收来自一个“干净”域名的请求，然后根据内部逻辑（如特定路径或头部）将请求转发到实际的、可能被审查的后端代理服务器。这需要精心设计的 Worker 脚本和 Xray 配置。</li>
+<li><strong>使用“干净”的 IP 地址和信誉良好的 VPS 提供商:</strong> 某些 IP 地址段（例如来自大型、知名云服务商的 IP）可能受到更严格的审查或更容易被列入黑名单。选择一些较小众、信誉良好或专门针对此类应用的 VPS 提供商，并获取相对“干净”的 IP 地址，可能有助于提高节点的存活率 。</li>
+<li><strong>IP 地址轮换 (高级):</strong> 这是一项更复杂的技术，通常涉及拥有多个 VPS 或使用支持 IP 轮换的服务。通过定期更换代理服务器的出口 IP 地址，可以降低单个 IP 因长时间暴露而被封锁的风险。</li>
+<li>模仿真实网站流量:<ul>
+<li><strong>真实的回落网站:</strong> 对于 Trojan 或其他配置了回落 (Fallback) 功能的协议，确保回落指向一个真实、内容丰富且在目标审查区域内访问正常的网站。这个网站应该有合法的 TLS 证书。</li>
+<li><strong>WebSocket 路径与 Host:</strong> 对于 WebSocket 类型的节点，其连接路径 (Path) 和 Host 头部应尽量模仿正常 Web 应用的 API 请求。避免使用过于简单或可识别的路径。</li>
+</ul>
+</li>
+<li><strong>TLS 指纹伪装 (uTLS):</strong> 许多审查系统会分析 TLS 握手过程中的客户端指纹（Client Hello），以识别可疑的非浏览器流量。Xray 核心及其客户端（如 Nekoray, V2RayNG, ShadowRocket 等）通常支持 uTLS 功能，允许客户端在发起 TLS 连接时模仿特定浏览器（如 Chrome, Firefox）或操作系统的 TLS 指纹 。在客户端配置中启用并选择合适的 uTLS 指纹，是增强伪装性的重要手段。对于 REALITY 协议，服务器端也会参与指纹的伪装。</li>
+<li><strong>避免使用常见代理端口 (有限效果):</strong> 虽然将代理服务运行在非标准端口（而不是常见的 80, 443, 1080 等）可能避开一些非常初级的端口扫描，但这对于能够进行深度包检测的审查系统来说几乎没有作用。对于基于 TLS 的代理协议（如 VLESS/VMess/Trojan + TLS/WS/gRPC/REALITY），使用标准的 HTTPS 端口 <code>443</code> 通常是最佳选择，因为它最符合伪装成正常 HTTPS 流量的目的。</li>
+<li><strong>流量分割与分流:</strong> 不在所有流量上都使用代理。例如，可以使用 PAC 文件、浏览器扩展或客户端的路由规则，仅对需要访问受限资源的域名或 IP 地址启用代理，而国内或其他可直连的流量则直接访问。这不仅可以节省代理服务器的带宽，减少不必要的性能开销，还能降低代理服务器因大量非敏感流量通过而被注意到的风险。</li>
+</ul>
+<p>网络审查与反审查技术始终处于动态的“军备竞赛”之中。没有任何一种技术或配置可以保证永久有效。审查方会不断分析和封锁已知的协议特征和服务器 IP，而开发者和用户则会不断寻找新的协议、传输方式和伪装技巧来应对。因此，保持对新技术和封锁动态的关注，并准备好根据需要调整和更新自己的节点配置，是维持科学上网连接稳定的关键。</p>
+<h3 id="4-4-性能优化与资源消耗考量"><a href="#4-4-性能优化与资源消耗考量" class="headerlink" title="4.4 性能优化与资源消耗考量"></a>4.4 性能优化与资源消耗考量</h3><p>节点的性能直接影响用户体验，而资源消耗则关系到 VPS 的成本和承载能力。</p>
+<ul>
+<li>协议选择对性能的影响:<ul>
+<li><strong>VLESS vs VMess:</strong> VLESS 由于其无内置加密和更简洁的头部设计，通常比 VMess 具有更低的延迟和更高的吞吐量，资源消耗也更少 。</li>
+<li><strong>WireGuard:</strong> 以其极高的速度和低资源占用著称，是性能优先场景下的优秀选择，但其基于 UDP，可能受网络环境影响 。</li>
+<li><strong>Shadowsocks:</strong> 作为一种轻量级协议，性能表现良好，资源占用低 。</li>
+<li><strong>Trojan:</strong> 性能接近原生 HTTPS，通常表现不错 。</li>
+</ul>
+</li>
+<li>传输方式对性能的影响:<ul>
+<li><strong>TCP:</strong> 作为基础传输协议，稳定可靠，但纯 TCP 传输（即使套了 TLS）的特征相对容易被识别。</li>
+<li><strong>WebSocket (WS):</strong> 为代理流量增加了额外的 HTTP 头部和 WebSocket 帧封装，会带来一定的性能开销。然而，它是通过 CDN 转发流量的常用方式。Xray 的一些配置（如 VLESS 的回落分流到 WS）据称性能优于传统的 Nginx 反代 WS 。</li>
+<li><strong>gRPC:</strong> 基于 HTTP/2，支持多路复用，可以减少连接建立的开销，对移动端和需要频繁短连接的场景友好，性能通常优于 WebSocket。</li>
+<li><strong>XTLS:</strong> 专门为 VLESS 和 Trojan 设计，通过减少 TLS 加密层级来优化性能，理论上可以达到接近或优于裸 TCP+TLS 的性能 。</li>
+</ul>
+</li>
+<li><strong>服务器硬件配置:</strong> CPU 的核心数和主频、内存大小以及网络带宽都会直接影响 Xray 服务器能处理的并发连接数和总吞吐量。高负载情况下，性能瓶颈可能出现在 CPU（加解密和协议处理）或网络I/O上 47。虽然难以给出精确的 Xray 资源消耗数据，但可以参考类似代理软件（如 Envoy）的指标：每秒处理 1000 个请求（1KB负载）大约需要 0.2-0.5 vCPU 和 40-60MB 内存 。</li>
+<li><strong>Cloudflare 引入的延迟:</strong> 使用 Cloudflare CDN、Workers 或 Tunnel 会在客户端和源服务器之间增加额外的网络跃点，这不可避免地会引入一定的延迟。Cloudflare 的 Argo Smart Routing (付费功能) 声称可以优化路由，减少延迟。对于 WebSocket 流量，Cloudflare 本身对连接的处理也可能影响性能。</li>
+<li><strong>Keepalives (连接保持):</strong> 对于长时间活动的连接，特别是 WebSocket，配置适当的 Keepalive 机制非常重要，可以防止连接因网络中间设备（如 NAT、防火墙）的超时而意外断开 。Xray 和客户端通常都有相关配置。</li>
+<li><strong>启用 BBR 拥塞控制算法:</strong> 在 VPS 服务器上启用 TCP BBR 拥塞控制算法，通常可以显著改善高延迟、有一定丢包率网络环境下的 TCP 连接吞吐量。</li>
+<li><strong>内核参数优化:</strong> 调整 Linux 内核参数，如最大文件描述符数 (<code>ulimit -n</code>)、TCP 连接队列大小 (<code>net.core.somaxconn</code>, <code>net.ipv4.tcp_max_syn_backlog</code>) 等，在高并发场景下可能有助于提升性能。</li>
+</ul>
+<p>性能并非单一因素决定的，而是协议、传输方式、加密强度、服务器负载、网络路径（包括 Cloudflare 的参与）、客户端与服务器硬件，乃至操作系统内核调优等多种因素综合作用的结果。例如，VLESS+XTLS+REALITY 在直连情况下可能速度最快，但对于与服务器地理位置遥远的用户，VLESS+WS+TLS+CDN 由于 CDN 的边缘节点效应，尽管 WebSocket 自身有开销，却可能带来更好的实际访问体验。因此，优化是一个需要综合考虑并根据具体场景进行调整的过程。</p>
+<h3 id="必备表格：推荐的-UFW-防火墙规则"><a href="#必备表格：推荐的-UFW-防火墙规则" class="headerlink" title="必备表格：推荐的 UFW 防火墙规则"></a>必备表格：推荐的 UFW 防火墙规则</h3><p>以下表格提供了一组针对运行 x-ui 和 Xray 代理服务的 VPS 的推荐 UFW 防火墙规则。请根据你的实际端口配置进行调整。</p>
+<table>
+<thead>
+<tr>
+<th><strong>规则描述</strong></th>
+<th><strong>UFW 命令 (示例)</strong></th>
+<th><strong>端口 (示例)</strong></th>
+<th><strong>协议</strong></th>
+<th><strong>注意事项</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>允许来自特定 IP 的 SSH 访问</td>
+<td><code>sudo ufw allow from 1.2.3.4 to any port 2222 proto tcp</code></td>
+<td>2222</td>
+<td>TCP</td>
+<td>将 <code>1.2.3.4</code> 替换为你的可信管理 IP，<code>2222</code> 替换为你的 SSH 端口。</td>
+</tr>
+<tr>
+<td>允许来自特定 IP 的 x-ui 面板访问</td>
+<td><code>sudo ufw allow from 1.2.3.4 to any port 54321 proto tcp</code></td>
+<td>54321</td>
+<td>TCP</td>
+<td>将 <code>1.2.3.4</code> 替换为你的可信管理 IP，<code>54321</code> 替换为你的 x-ui 面板端口。</td>
+</tr>
+<tr>
+<td>允许 HTTPS/TLS 代理流量 (通用)</td>
+<td><code>sudo ufw allow 443/tcp</code></td>
+<td>443</td>
+<td>TCP</td>
+<td>用于 VLESS/VMess/Trojan 等协议的 TLS, WS+TLS, gRPC+TLS, REALITY。</td>
+</tr>
+<tr>
+<td>允许 HTTP 流量 (SSL 证书验证)</td>
+<td><code>sudo ufw allow 80/tcp</code></td>
+<td>80</td>
+<td>TCP</td>
+<td>主要用于 Let’s Encrypt HTTP-01 验证。验证完成后可考虑限制或移除此规则。</td>
+</tr>
+<tr>
+<td>允许 WireGuard 流量</td>
+<td><code>sudo ufw allow 51820/udp</code></td>
+<td>51820</td>
+<td>UDP</td>
+<td>将 <code>51820</code> 替换为你的 WireGuard 监听端口。</td>
+</tr>
+<tr>
+<td>允许 Xray 源服务器监听端口 (如果使用 CDN/Tunnel)</td>
+<td><code>sudo ufw allow 8443/tcp</code></td>
+<td>8443</td>
+<td>TCP</td>
+<td>示例端口，用于 CDN/Tunnel 回源。应仅允许来自 Cloudflare IP 段的访问。</td>
+</tr>
+<tr>
+<td>默认拒绝所有其他入站连接</td>
+<td><code>sudo ufw default deny incoming</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>重要的安全基线。</td>
+</tr>
+<tr>
+<td>默认允许所有出站连接</td>
+<td><code>sudo ufw default allow outgoing</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>允许服务器主动向外发起连接。</td>
+</tr>
+<tr>
+<td>启用 UFW</td>
+<td><code>sudo ufw enable</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>在所有规则配置完成后执行。</td>
+</tr>
+</tbody></table>
+<p><strong>注意:</strong></p>
+<ul>
+<li>在执行 <code>sudo ufw enable</code> 之前，务必确保已添加允许 SSH 访问的规则，否则可能导致无法远程连接服务器。</li>
+<li>对于通过 CDN 或 Tunnel 回源的端口（如上例中的 8443/TCP），更安全的做法是仅允许来自 Cloudflare IP 地址段的流量访问这些端口。Cloudflare 公布了其 IP 范围列表，可以用于配置更精细的防火墙规则。</li>
+<li>定期审查和更新防火墙规则，确保其符合当前的安全需求。</li>
+</ul>
+<p>防火墙是服务器安全的第一道防线，正确配置 UFW 对于保护你的 Xray 节点免受未经授权的访问和潜在攻击至关重要 54。上述规则提供了一个基础模板，用户应根据自己的具体服务端口和安全策略进行调整。</p>
+<h2 id="第五部分：客户端配置与使用"><a href="#第五部分：客户端配置与使用" class="headerlink" title="第五部分：客户端配置与使用"></a>第五部分：客户端配置与使用</h2><p>成功搭建节点后，需要在客户端设备上进行相应配置才能连接和使用。</p>
+<h3 id="5-1-主流客户端介绍"><a href="#5-1-主流客户端介绍" class="headerlink" title="5.1 主流客户端介绍"></a>5.1 主流客户端介绍</h3><p>市面上有众多支持 Xray 核心及其协议的客户端软件，覆盖各类操作系统平台。</p>
+<ul>
+<li>跨平台:<ul>
+<li><strong>Nekoray / Nekobox:</strong> 支持 Windows, Linux, Android，并有非官方 macOS 版本。功能强大，支持 Shadowsocks (包括 SS-2022), VLESS, VMess, Trojan, XTLS-Reality 等多种协议和特性 。</li>
+</ul>
+</li>
+<li>Android:<ul>
+<li><strong>V2RayNG:</strong> 基于 Xray 核心，支持 Xray 的所有协议和功能，界面简洁，广受欢迎 。</li>
+<li><strong>Hiddify (FoXray Hiddify):</strong> 提及与 3X-UI VLESS REALITY 配合使用，可能基于 FoXray 或类似核心 。</li>
+<li><strong>SagerNet / Matsuri:</strong> 同样是功能丰富的 Android 客户端。</li>
+</ul>
+</li>
+<li>iOS:<ul>
+<li><strong>FoXray:</strong> 基于 Xray 核心，支持 Shadowsocks, VLESS, Socks, VMess, XTLS, REALITY, Trojan 以及 TCP, HTTP/2, WebSocket, mKCP, gRPC, QUIC 等多种传输方式 。</li>
+<li><strong>ShadowRocket (小火箭):</strong> 付费应用，功能强大，支持 Shadowsocks (包括 SS-2022), VMess, VLESS, Trojan, TUIC, Hysteria, WireGuard, XTLS-Vision, uTLS 等多种协议和特性 。</li>
+<li><strong>V2BOX:</strong> 支持 Xray 核心的免费 iOS 客户端 。</li>
+<li><strong>Streisand:</strong> 提及与 3x-ui VLESS 配合使用 。</li>
+<li><strong>Quantumult X / Loon / Surge:</strong> 均为功能强大的付费网络工具，支持多种代理协议。</li>
+</ul>
+</li>
+<li>Windows:<ul>
+<li><strong>V2RayN:</strong> 流行的 Windows 客户端，支持 Xray/V2Ray 核心，界面直观 。</li>
+<li><strong>Nekoray / Nekobox:</strong> 如上所述，也支持 Windows。</li>
+<li><strong>Qv2ray:</strong> (项目已停止维护，但仍有用户使用) 跨平台客户端，基于 Qt。</li>
+</ul>
+</li>
+<li>macOS:<ul>
+<li><strong>V2RayX:</strong> (项目可能更新较慢) 针对 macOS 的 V2Ray 客户端。</li>
+<li><strong>Nekoray / Nekobox (非官方):</strong> 如上所述。</li>
+<li><strong>V2BOX:</strong> 如上所述，也支持 macOS 。</li>
+<li><strong>ClashX / Clash for Windows (CFW) (macOS 版本):</strong> 基于 Clash 核心的客户端，支持多种协议，通过配置文件进行管理。</li>
+</ul>
+</li>
+<li>Linux:<ul>
+<li><strong>Nekoray / Nekobox:</strong> 如上所述。</li>
+<li><strong>Qv2ray:</strong> (项目已停止维护)。</li>
+<li><strong>Clash (命令行) / Clash Verge (图形界面):</strong> 基于 Clash 核心。</li>
+</ul>
+</li>
+<li>WireGuard 客户端:<ul>
+<li>WireGuard 官方为各主流平台（Windows, macOS, Linux, Android, iOS）均提供了客户端软件 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-各协议客户端配置示例"><a href="#5-2-各协议客户端配置示例" class="headerlink" title="5.2 各协议客户端配置示例"></a>5.2 各协议客户端配置示例</h3><p>从 x-ui 面板导出配置通常是最便捷的方式，支持通过分享链接、二维码或复制配置信息。如果需要手动配置，以下是一些关键参数说明：</p>
+<ul>
+<li>通用参数:<ul>
+<li><strong>地址 (Address/Server):</strong> 填写你的服务器域名（如 <code>proxy.yourdomain.com</code>，如果使用 CDN 或 Worker 域名）或服务器 IP 地址（如果直连）。</li>
+<li><strong>端口 (Port):</strong> 填写服务器监听的端口。对于 CDN/Worker 后的 TLS 节点，通常是 <code>443</code>。对于直连节点，填写 x-ui 中设置的监听端口。</li>
+<li><strong>用户ID (ID/UUID):</strong> 对应 VLESS/VMess 协议中 x-ui 生成的 UUID。</li>
+<li><strong>密码 (Password):</strong> 对应 Trojan 或 Shadowsocks 协议中设置的密码。</li>
+</ul>
+</li>
+<li>VMess 特定参数:<ul>
+<li><strong>额外ID (AlterID):</strong> 对应 x-ui 中设置的 AlterID。</li>
+<li><strong>加密方式 (Security/Cipher):</strong> 客户端选择的加密方式需与服务器端兼容，通常选 <code>auto</code> 或服务器指定的。</li>
+</ul>
+</li>
+<li>VLESS 特定参数:<ul>
+<li><strong>流控 (Flow):</strong> 如果服务器端 VLESS 配置了 <code>flow</code> (如 <code>xtls-rprx-vision</code>)，客户端需要相应配置。对于 REALITY，此项通常不直接配置，而是通过 REALITY 的特定参数。</li>
+</ul>
+</li>
+<li>TLS 相关参数 (适用于 VLESS/VMess/Trojan + TLS/XTLS/REALITY):<ul>
+<li><strong>传输层安全 (TLS/Security):</strong> 选择 <code>tls</code> 或 <code>xtls</code> 或 <code>reality</code>。</li>
+<li><strong>SNI (Server Name Indication) / Peer / Host:</strong> 填写用于 TLS 握手的域名，通常是你的服务器域名或 CDN/Worker 域名。对于 REALITY，这里填写的是你伪装的目标网站域名 。</li>
+<li><strong>允许不安全连接 (Allow Insecure):</strong> 通常应设为 <code>false</code> (不勾选)，除非特殊调试目的且了解风险。</li>
+<li><strong>ALPN (Application-Layer Protocol Negotiation):</strong> 客户端可以指定 ALPN，如 <code>h2,http/1.1</code>，以更好地模拟浏览器行为。</li>
+<li><strong>证书验证 (Skip Cert Verify):</strong> 通常不应跳过证书验证。</li>
+</ul>
+</li>
+<li>WebSocket (WS) 特定参数 (适用于 VLESS/VMess/Trojan + WS):<ul>
+<li><strong>传输协议 (Network/Transport):</strong> 选择 <code>ws</code>。</li>
+<li><strong>路径 (Path):</strong> 填写与 x-ui 中 WebSocket 配置一致的路径 (如 <code>/myvlessws</code>)。</li>
+<li><strong>Host (请求头):</strong> 填写你的服务器域名或 CDN/Worker 域名。</li>
+</ul>
+</li>
+<li>gRPC 特定参数 (适用于 VLESS/VMess/Trojan + gRPC):<ul>
+<li><strong>传输协议 (Network/Transport):</strong> 选择 <code>grpc</code>。</li>
+<li><strong>gRPC 服务名称 (serviceName):</strong> 填写与 x-ui 中 gRPC 配置一致的服务名称 (如 <code>mytrojangrpc</code>)。</li>
+<li><strong>模式 (Mode):</strong> <code>multi</code> (多路复用) 模式通常性能更好。</li>
+</ul>
+</li>
+<li>REALITY 特定参数 (VLESS + REALITY):<ul>
+<li><strong>公钥 (PublicKey):</strong> 填写服务器端 x-ui 生成的 X25519 公钥 。</li>
+<li><strong>ShortID:</strong> 填写服务器端配置的 ShortID (可以为空，如果服务器允许) 。</li>
+<li><strong>SpiderX / Fingerprint:</strong> 客户端通常会自动选择或允许用户选择一个 TLS 指纹 (uTLS) 来模仿，如 <code>chrome</code> 或 <code>firefox</code> 。</li>
+</ul>
+</li>
+<li>Shadowsocks 特定参数:<ul>
+<li><strong>加密方法 (Cipher/Method):</strong> 选择与服务器端一致的 AEAD 加密方法。</li>
+</ul>
+</li>
+<li>WireGuard 特定参数:<ul>
+<li><strong>私钥 (PrivateKey):</strong> 客户端的私钥。</li>
+<li><strong>地址 (Address):</strong> 分配给客户端的隧道内 IP 地址 (如 <code>10.0.8.2/32</code>)。</li>
+<li><strong>DNS:</strong> 可选，指定通过 VPN 使用的 DNS 服务器。</li>
+<li>[Peer] 部分:<ul>
+<li><strong>公钥 (PublicKey):</strong> 服务器的 WireGuard 公钥。</li>
+<li><strong>预共享密钥 (PresharedKey):</strong> 可选，用于增强安全性。</li>
+<li><strong>端点 (Endpoint):</strong> 服务器的公网 IP 地址和 WireGuard 监听端口 (如 <code>your_vps_ip:51820</code>)。</li>
+<li><strong>允许的 IP (AllowedIPs):</strong> 通常设为 <code>0.0.0.0/0, ::/0</code>，表示所有流量都通过 VPN。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>许多现代客户端，特别是那些支持 Xray 核心的，都允许用户精细调整 TLS 握手行为，例如通过 uTLS 设置来模仿特定浏览器的 TLS 指纹 。这对于增强连接的隐蔽性，特别是在连接到使用 REALITY 或其他高级伪装技术的服务器时，非常重要。用户应在客户端设置中寻找类似“TLS 指纹”、“uTLS”、“Fingerprint”或“SpiderX”的选项，并选择一个常见浏览器的指纹（如 Chrome 或 Firefox），以使代理流量更难与普通网页浏览流量区分开来。</p>
+<h2 id="结论与展望"><a href="#结论与展望" class="headerlink" title="结论与展望"></a>结论与展望</h2><p>本教程详细介绍了多种主流科学上网代理协议的原理、特性，并逐步指导了如何使用 x-ui (MHSanaei 3x-ui) 面板在 VPS 上搭建这些节点，以及如何结合 Cloudflare CDN、Workers 和 Tunnel 服务来增强节点的隐蔽性和可用性。同时，也涵盖了服务器安全、Cloudflare 安全配置、进阶抗封锁技巧、性能优化和客户端配置等关键方面。</p>
+<p><strong>核心结论包括：</strong></p>
+<ol>
+<li><strong>协议多样性与演进:</strong> 从 Shadowsocks 的简洁高效，到 VMess 的安全灵活，再到 VLESS 的极致性能与 REALITY 的卓越伪装，以及 Trojan 的 HTTPS 模拟和 WireGuard 的现代高速，用户可以根据自身对安全性、性能、抗检测能力和配置复杂度的不同需求选择合适的协议。协议的演进体现了与审查技术持续对抗的趋势。</li>
+<li><strong>x-ui 的便捷性:</strong> x-ui 面板极大地简化了 Xray 节点的部署和管理，使得即便是初学者也能相对容易地配置和维护多种复杂的代理协议。</li>
+<li><strong>Cloudflare 的双重角色:</strong> Cloudflare 的 CDN、Workers 和 Tunnel 服务为代理节点提供了强大的 IP 隐藏、DDoS 防护和流量中转能力。然而，其安全机制也可能对代理流量造成干扰，需要用户仔细配置 WAF、页面规则和机器人管理等设置。同时，用户需注意 Cloudflare 的服务条款。</li>
+<li><strong>安全是基础:</strong> 无论是 VPS 服务器自身的安全加固（防火墙、SSH 安全、系统更新、Fail2ban），还是 x-ui 面板和代理协议的安全配置（强密码、TLS 加密、uTLS 指纹），都是确保节点稳定和用户数据安全不可或缺的环节。分层安全策略是抵御潜在风险的关键。</li>
+<li><strong>性能与伪装的权衡:</strong> 极致的性能（如 VLESS+XTLS）和极致的伪装（如 VLESS+REALITY 或 Trojan）往往需要更精细的配置。通过 CDN 或 Tunnel 虽然能隐藏 IP，但也可能引入额外延迟。用户需要在这些因素之间做出权衡。</li>
+<li><strong>客户端的重要性:</strong> 选择功能全面、支持最新协议特性（如 uTLS）的客户端，并正确配置，对于发挥节点的全部潜力至关重要。</li>
+</ol>
+<p><strong>未来展望：</strong></p>
+<p>网络审查技术和科学上网技术之间的博弈仍将持续。未来可能会出现更智能、更难被检测的审查手段，同时也会催生出更先进、更具适应性的代理协议和混淆技术。对于用户而言，持续学习、关注技术动态、灵活调整配置策略，将是长期维持稳定、安全科学上网能力的关键。</p>
+<p>希望本教程能为读者在理解和实践科学上网技术方面提供有价值的参考。请务必在遵守当地法律法规的前提下使用相关技术。</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="常见问题解答-FAQ"><a href="#常见问题解答-FAQ" class="headerlink" title="常见问题解答 (FAQ)"></a>常见问题解答 (FAQ)</h3><ul>
+<li><p><strong>问：连接节点时遇到问题（如超时、无法连接）怎么办？</strong></p>
+<ul>
+<li><p>答：</p>
+<p> 首先检查：</p>
+<ul>
+<li>VPS 服务器是否在线，x-ui 和 Xray 服务是否正常运行 (<code>systemctl status x-ui</code>, <code>systemctl status xray</code>)。</li>
+<li>VPS 防火墙 (UFW) 是否允许了相应的代理端口和 x-ui 面板端口的入站连接。</li>
+<li>x-ui 面板中的入站配置是否正确（协议、端口、ID/密码、域名、证书路径、传输设置等）。</li>
+<li>客户端配置是否与服务器端完全一致。</li>
+<li>域名是否正确解析到 VPS IP（如果直连）或 Cloudflare IP（如果使用 CDN）。</li>
+<li>Cloudflare 相关设置：DNS 代理状态（橙色云朵）、SSL/TLS 模式（应为 Full Strict）、WAF 或机器人管理是否拦截了流量（查看 Cloudflare 事件日志）。</li>
+<li>服务器和客户端的时间是否同步。</li>
+<li>尝试更换客户端或网络环境测试。</li>
+<li>查看 x-ui 和 Xray 的日志（通过 x-ui 面板或服务器命令 <code>journalctl -u xray -f</code>）获取错误信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>问：如何更新 x-ui 面板和 Xray 核心？</strong></p>
+<ul>
+<li>答：<ul>
+<li><strong>更新 x-ui 面板 (MHSanaei/3x-ui):</strong> 通常可以再次运行官方安装脚本 <code>bash &lt;(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)</code>，脚本会自动检测已安装版本并进行升级 。也可以在 x-ui 命令行菜单中选择更新选项。</li>
+<li><strong>更新 Xray 核心:</strong> 3x-ui 面板通常会捆绑特定版本的 Xray 核心。一些 x-ui 分支可能在面板内提供一键更新 Xray 核心的功能。或者，可以从 Xray-core 的 GitHub Releases 页面下载最新的二进制文件，手动替换 VPS 上 x-ui 使用的 Xray 执行文件（通常位于 <code>/usr/local/x-ui/bin/xray-core</code> 或类似路径，请先备份旧版）。替换后需要重启 Xray 服务。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>问：我的 VPS IP 地址被封锁了怎么办？</strong></p>
+<ul>
+<li>答：<ul>
+<li><strong>更换 IP:</strong> 联系 VPS 提供商更换 IP 地址（可能需要额外费用）。</li>
+<li><strong>使用 Cloudflare 隐藏 IP:</strong> 如果之前是直连，可以尝试将节点配置为通过 Cloudflare CDN、Workers 或 Tunnel 接入，这样暴露给外界的是 Cloudflare 的 IP。</li>
+<li><strong>迁移服务器:</strong> 将 x-ui 数据备份后，在新的 VPS 上重新部署。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>问：Cloudflare 是否允许使用其网络进行代理？</strong></p>
+<ul>
+<li><strong>答：</strong> Cloudflare 的服务条款（ToS Section 2.8）通常禁止使用其网络（特别是免费计划）作为大规模、未经授权的代理或 VPN 服务出口 68。虽然技术上可以通过 CDN、Workers 或 Tunnel 搭建代理，但如果流量模式被 Cloudflare 识别为滥用，账户或相关域名可能会受到限制。用户应了解并自行承担此风险。使用 Cloudflare WARP 是其官方推荐的个人安全上网方式。</li>
+</ul>
+</li>
+<li><p><strong>问：REALITY 和 XTLS 有什么区别？</strong></p>
+<ul>
+<li><strong>答：</strong> XTLS 是一种旨在减少 VLESS/Trojan 协议中 TLS 加密层级开销的技术，核心在于优化数据传输路径，提高性能。REALITY 则是一种更侧重于消除服务器端 TLS 指纹、增强抗检测能力的协议特性，它通过“借用”真实网站的 TLS 证书指纹来实现伪装。两者可以独立使用（VLESS+XTLS+TLS 或 VLESS+TCP+REALITY），也可以在某些配置下（如 VLESS over TCP with XTLS-Vision and REALITY）协同工作，但 REALITY 本身通常不与传统的 TLS 证书配置同时用于同一入站。</li>
+</ul>
+</li>
+</ul>
+<h3 id="相关资源链接"><a href="#相关资源链接" class="headerlink" title="相关资源链接"></a>相关资源链接</h3><ul>
+<li><strong>Xray-core GitHub:</strong>(<a target="_blank" rel="noopener" href="https://github.com/XTLS/Xray-core">https://github.com/XTLS/Xray-core</a>)</li>
+<li><strong>3x-ui (MHSanaei) GitHub:</strong>(<a target="_blank" rel="noopener" href="https://github.com/MHSanaei/3x-ui">https://github.com/MHSanaei/3x-ui</a>) 6</li>
+<li><strong>Cloudflare 官方文档:</strong> <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/">https://developers.cloudflare.com/</a></li>
+<li><strong>Nekoray 客户端:</strong>(<a target="_blank" rel="noopener" href="https://github.com/MatsuriDayo/nekoray">https://github.com/MatsuriDayo/nekoray</a>)</li>
+<li><strong>V2RayNG 客户端 (Android):</strong> <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">https://github.com/2dust/v2rayNG</a></li>
+<li><strong>ShadowRocket (iOS):</strong> App Store (付费应用)</li>
+<li><strong>FoXray (iOS):</strong> App Store</li>
+<li><strong>WireGuard 官方网站:</strong> <a target="_blank" rel="noopener" href="https://www.wireguard.com/">https://www.wireguard.com/</a></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2025/06/01/ji-yu-x-ui-yu-cloudflare-da-jian-jie-dian/">https://0xdadream.github.io/2025/06/01/ji-yu-x-ui-yu-cloudflare-da-jian-jie-dian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">教程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/35.jpg" class="responsive-img" alt="Linux 常用命令详解教程">
+                        
+                        <span class="card-title">Linux 常用命令详解教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux 常用命令详解教程
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-06-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/05/31/cloudflare-dai-li-pei-zhi-duan-kou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/40.jpg" class="responsive-img" alt="Cloudflare代理配置端口">
+                        
+                        <span class="card-title">Cloudflare代理配置端口</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Cloudflare代理配置端口
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/cloudflare/">
+                        <span class="chip bg-color">cloudflare</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">293k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

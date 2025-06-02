@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;cloudflare&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 31 May 2025 16:25:00 +0800</pubDate>
+        <lastBuildDate>Sat, 31 May 2025 16:25:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>intel</category>
+        <category>cloudflare</category>
+        <category>tips</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>conda</category>
+        <category>linux</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>bug</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>powershell</category>
+        <category>comfyui</category>
+        <category>wall</category>
+        <category>tools</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>emby</category>
+        <category>google</category>
+        <category>python</category>
+        <category>git</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>学习</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/31/cloudflare-dai-li-pei-zhi-duan-kou/</guid>
+            <title>Cloudflare代理配置端口</title>
+            <link>https://0xdadream.github.io/2025/05/31/cloudflare-dai-li-pei-zhi-duan-kou/</link>
+            <category>cloudflare</category>
+            <pubDate>Sat, 31 May 2025 16:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Cloudflare代理配置端口&#34;&gt;&lt;a href=&#34;#Cloudflare代理配置端口&#34; class=&#34;headerlink&#34; title=&#34;Cloudflare代理配置端口&#34;&gt;&lt;/a&gt;Cloudflare代理配置端口&lt;/h1&gt;&lt;h2 id=&#34;一、前提条件&#34;&gt;&lt;a href=&#34;#一、前提条件&#34; class=&#34;headerlink&#34; title=&#34;一、前提条件&#34;&gt;&lt;/a&gt;一、前提条件&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;已有注册好的Cloudflare账号（免费即可）。&lt;/li&gt;
+&lt;li&gt;已将你的域名成功接入Cloudflare（DNS已指向Cloudflare的Name Server）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、Cloudflare可用端口概述&#34;&gt;&lt;a href=&#34;#二、Cloudflare可用端口概述&#34; class=&#34;headerlink&#34; title=&#34;二、Cloudflare可用端口概述&#34;&gt;&lt;/a&gt;二、Cloudflare可用端口概述&lt;/h2&gt;&lt;p&gt;Cloudflare 仅能代理特定的HTTP和HTTPS端口。常用端口总结如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;协议&lt;/th&gt;
+&lt;th&gt;可用端口&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;td&gt;80, 8080, 8880, 2052, 2082, 2086, 2095&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HTTPS&lt;/td&gt;
+&lt;td&gt;443, 8443, 2053, 2083, 2087, 2096&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;如果你的应用需要使用其他端口（如SSH、FTP），则必须使用Cloudflare的Spectrum服务（通常为付费企业版服务）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三、具体配置流程&#34;&gt;&lt;a href=&#34;#三、具体配置流程&#34; class=&#34;headerlink&#34; title=&#34;三、具体配置流程&#34;&gt;&lt;/a&gt;三、具体配置流程&lt;/h2&gt;&lt;p&gt;以将服务器的&lt;code&gt;8080&lt;/code&gt;端口通过Cloudflare实现域名访问为例：&lt;/p&gt;
+&lt;h3 id=&#34;①-服务器端准备&#34;&gt;&lt;a href=&#34;#①-服务器端准备&#34; class=&#34;headerlink&#34; title=&#34;① 服务器端准备&#34;&gt;&lt;/a&gt;① 服务器端准备&lt;/h3&gt;&lt;p&gt;确保你的服务器端应用正常监听指定端口：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 例如：测试8080端口是否开启&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-tunlp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;8080&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;②-Cloudflare-DNS设置&#34;&gt;&lt;a href=&#34;#②-Cloudflare-DNS设置&#34; class=&#34;headerlink&#34; title=&#34;② Cloudflare DNS设置&#34;&gt;&lt;/a&gt;② Cloudflare DNS设置&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录Cloudflare后台：&lt;a href=&#34;https://dash.cloudflare.com/&#34;&gt;https://dash.cloudflare.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;选择已接入Cloudflare的域名。&lt;/li&gt;
+&lt;li&gt;点击菜单栏中的&lt;code&gt;DNS&lt;/code&gt;选项卡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;添加DNS记录：&#34;&gt;&lt;a href=&#34;#添加DNS记录：&#34; class=&#34;headerlink&#34; title=&#34;添加DNS记录：&#34;&gt;&lt;/a&gt;添加DNS记录：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;点击 &lt;code&gt;Add record&lt;/code&gt;（添加记录）。&lt;/li&gt;
+&lt;li&gt;类型选择 &lt;code&gt;A&lt;/code&gt; 或 &lt;code&gt;CNAME&lt;/code&gt;：&lt;ul&gt;
+&lt;li&gt;若为IP地址（例如服务器IP），选择&lt;code&gt;A&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;若为其他域名，选择&lt;code&gt;CNAME&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字段&lt;/th&gt;
+&lt;th&gt;示例值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Type&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;example&lt;/code&gt; （即你希望访问的子域名）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IPv4 address&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;你的服务器IP&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxy status&lt;/td&gt;
+&lt;td&gt;选择橙色云图标（✅代理）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;最终访问域名形式如：&lt;code&gt;example.yourdomain.com&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;③-服务端口访问说明&#34;&gt;&lt;a href=&#34;#③-服务端口访问说明&#34; class=&#34;headerlink&#34; title=&#34;③ 服务端口访问说明&#34;&gt;&lt;/a&gt;③ 服务端口访问说明&lt;/h3&gt;&lt;p&gt;Cloudflare不会直接显示端口号在URL中。因此：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你的服务器使用Cloudflare默认支持的端口（如8080），你在访问时&lt;strong&gt;不需要明确指定端口号&lt;/strong&gt;。&lt;ul&gt;
+&lt;li&gt;实际请求如：&lt;code&gt;http://example.yourdomain.com&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你的服务器上仍然监听的是8080端口，Cloudflare则自动将访问请求代理至此端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;示例场景&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;用户访问URL&lt;/th&gt;
+&lt;th&gt;实际服务器监听端口&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;http://example.yourdomain.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;8080&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;https://example.yourdomain.com&lt;/code&gt;（HTTPS）&lt;/td&gt;
+&lt;td&gt;8443、443等（按需设置）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四、HTTPS-配置&#34;&gt;&lt;a href=&#34;#四、HTTPS-配置&#34; class=&#34;headerlink&#34; title=&#34;四、HTTPS 配置&#34;&gt;&lt;/a&gt;四、HTTPS 配置&lt;/h2&gt;&lt;p&gt;若你希望使用HTTPS访问：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;到Cloudflare后台 → &lt;code&gt;SSL/TLS&lt;/code&gt; 选项：&lt;ul&gt;
+&lt;li&gt;推荐设置为&lt;code&gt;Flexible&lt;/code&gt;（最简单）或&lt;code&gt;Full&lt;/code&gt;模式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果是&lt;code&gt;Full&lt;/code&gt;模式（推荐）：&lt;ul&gt;
+&lt;li&gt;服务器上需要配置SSL证书（可以使用免费的证书如Let’s Encrypt）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;示例-Nginx-配置（Full-模式）：&#34;&gt;&lt;a href=&#34;#示例-Nginx-配置（Full-模式）：&#34; class=&#34;headerlink&#34; title=&#34;示例 Nginx 配置（Full 模式）：&#34;&gt;&lt;/a&gt;示例 Nginx 配置（Full 模式）：&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-nginx&#34; data-language=&#34;nginx&#34;&gt;&lt;code class=&#34;language-nginx&#34;&gt;&lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;server&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;listen&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;8443&lt;/span&gt; ssl&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; 
+    &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;server_name&lt;/span&gt; example.yourdomain.com&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;ssl_certificate&lt;/span&gt;     /path/to/cert.pem&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;ssl_certificate_key&lt;/span&gt; /path/to/key.pem&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+
+    &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;location&lt;/span&gt; /&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;proxy_pass&lt;/span&gt; http://localhost:8080&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;proxy_set_header&lt;/span&gt; Host &lt;span class=&#34;token variable&#34;&gt;$host&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;proxy_set_header&lt;/span&gt; X-Forwarded-For &lt;span class=&#34;token variable&#34;&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;proxy_set_header&lt;/span&gt; X-Real-IP &lt;span class=&#34;token variable&#34;&gt;$remote_addr&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cloudflare → 8443（HTTPS）→ Nginx → 8080（HTTP内网服务）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;五、其他非标准端口（如SSH、FTP）支持方法&#34;&gt;&lt;a href=&#34;#五、其他非标准端口（如SSH、FTP）支持方法&#34; class=&#34;headerlink&#34; title=&#34;五、其他非标准端口（如SSH、FTP）支持方法&#34;&gt;&lt;/a&gt;五、其他非标准端口（如SSH、FTP）支持方法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;默认Cloudflare免费版不支持SSH、FTP等非HTTP端口代理。&lt;/li&gt;
+&lt;li&gt;若有这类需求，可以购买Cloudflare Spectrum服务：&lt;ul&gt;
+&lt;li&gt;在Cloudflare后台，进入Spectrum（频谱）服务，选择协议和端口映射到你的服务器IP地址即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六、常见问题与解决办法&#34;&gt;&lt;a href=&#34;#六、常见问题与解决办法&#34; class=&#34;headerlink&#34; title=&#34;六、常见问题与解决办法&#34;&gt;&lt;/a&gt;六、常见问题与解决办法&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;访问失败或返回522错误&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;检查服务器端防火墙是否允许Cloudflare IP段访问服务器端口。&lt;/li&gt;
+&lt;li&gt;检查服务器程序是否正常运行，端口是否已开启。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSL问题&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;Flexible模式下，无需服务器端SSL证书（Cloudflare自动处理）。&lt;/li&gt;
+&lt;li&gt;Full模式必须安装SSL证书。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

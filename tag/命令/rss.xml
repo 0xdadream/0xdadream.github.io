@@ -5,47 +5,98 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Wed, 12 Mar 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Wed, 12 Mar 2025 12:25:00 +0800</lastBuildDate>
-        <category>intel</category>
+        <pubDate>Sun, 25 May 2025 09:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 25 May 2025 09:25:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>intel</category>
+        <category>cloudflare</category>
         <category>tips</category>
-        <category>re</category>
-        <category>工具</category>
         <category>安装</category>
         <category>Java</category>
+        <category>conda</category>
         <category>linux</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>bug</category>
         <category>教程</category>
         <category>环境</category>
-        <category>bug</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
         <category>windows</category>
         <category>BUUCTF</category>
         <category>server</category>
-        <category>wall</category>
-        <category>comfyui</category>
-        <category>conda</category>
         <category>powershell</category>
+        <category>comfyui</category>
+        <category>wall</category>
         <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
         <category>emby</category>
+        <category>google</category>
         <category>python</category>
         <category>git</category>
-        <category>google</category>
         <category>java</category>
         <category>命令</category>
         <category>学习</category>
         <category>文件上传</category>
         <category>php</category>
         <category>命令行</category>
+        <category>下载</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
         <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/05/25/sha-si-ju-ti-jin-cheng/</guid>
+            <title>杀死具体进程</title>
+            <link>https://0xdadream.github.io/2025/05/25/sha-si-ju-ti-jin-cheng/</link>
+            <category>命令</category>
+            <pubDate>Sun, 25 May 2025 09:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;杀死具体进程&#34;&gt;&lt;a href=&#34;#杀死具体进程&#34; class=&#34;headerlink&#34; title=&#34;杀死具体进程&#34;&gt;&lt;/a&gt;杀死具体进程&lt;/h1&gt;&lt;p&gt;执行了 &lt;code&gt;systemctl stop httpd&lt;/code&gt; 来关闭 &lt;code&gt;httpd&lt;/code&gt;（Apache）服务，但仍然看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;httpd &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;pid &lt;span class=&#34;token number&#34;&gt;1785910&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; already running&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;表示进程还在运行，说明 &lt;strong&gt;&lt;code&gt;httpd&lt;/code&gt; 没有被完全停止&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-解决步骤如下：&#34;&gt;&lt;a href=&#34;#✅-解决步骤如下：&#34; class=&#34;headerlink&#34; title=&#34;✅ 解决步骤如下：&#34;&gt;&lt;/a&gt;✅ 解决步骤如下：&lt;/h2&gt;&lt;h3 id=&#34;🔍-第一步：确认并查找-httpd-是否仍有残留进程&#34;&gt;&lt;a href=&#34;#🔍-第一步：确认并查找-httpd-是否仍有残留进程&#34; class=&#34;headerlink&#34; title=&#34;🔍 第一步：确认并查找 httpd 是否仍有残留进程&#34;&gt;&lt;/a&gt;🔍 第一步：确认并查找 &lt;code&gt;httpd&lt;/code&gt; 是否仍有残留进程&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; httpd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;示例输出：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;root     &lt;span class=&#34;token number&#34;&gt;1785910&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;0.0&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;0.2&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;123456&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;7890&lt;/span&gt; ?        Ss   &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;:34   &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;:00 /usr/sbin/httpd &lt;span class=&#34;token parameter variable&#34;&gt;-DFOREGROUND&lt;/span&gt;
+apache   &lt;span class=&#34;token number&#34;&gt;1785911&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;0.0&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;0.1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;123456&lt;/span&gt;  &lt;span class=&#34;token number&#34;&gt;4567&lt;/span&gt; ?        S    &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;:34   &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;:00 /usr/sbin/httpd &lt;span class=&#34;token parameter variable&#34;&gt;-DFOREGROUND&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;🧨-第二步：强制杀死所有-httpd-相关进程&#34;&gt;&lt;a href=&#34;#🧨-第二步：强制杀死所有-httpd-相关进程&#34; class=&#34;headerlink&#34; title=&#34;🧨 第二步：强制杀死所有 httpd 相关进程&#34;&gt;&lt;/a&gt;🧨 第二步：强制杀死所有 httpd 相关进程&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;pkill&lt;/span&gt; httpd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者使用 &lt;code&gt;killall&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;killall&lt;/span&gt; httpd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果仍然存在僵尸进程，可以手动 kill：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;kill&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-9&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1785910&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1785911&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;🔁-第三步：再次确认是否彻底关闭&#34;&gt;&lt;a href=&#34;#🔁-第三步：再次确认是否彻底关闭&#34; class=&#34;headerlink&#34; title=&#34;🔁 第三步：再次确认是否彻底关闭&#34;&gt;&lt;/a&gt;🔁 第三步：再次确认是否彻底关闭&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; httpd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果没有输出（或只有 grep 本身），说明服务已完全停止。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;🧪-第四步：确认端口是否仍被占用（例如-80-端口）&#34;&gt;&lt;a href=&#34;#🧪-第四步：确认端口是否仍被占用（例如-80-端口）&#34; class=&#34;headerlink&#34; title=&#34;🧪 第四步：确认端口是否仍被占用（例如 80 端口）&#34;&gt;&lt;/a&gt;🧪 第四步：确认端口是否仍被占用（例如 80 端口）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;lsof&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; :80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果发现仍有服务监听 80 端口，你可以确认是哪个程序占用了：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-tulnp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; :80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ss &lt;span class=&#34;token parameter variable&#34;&gt;-tulnp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; :80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;p&gt;如你希望彻底禁用 &lt;code&gt;httpd&lt;/code&gt;，可以执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl disable httpd
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl mask httpd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;mask&lt;/code&gt; 会阻止任何方式启动它，包括依赖项。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/03/12/wen-jian-lian-jie-quan-jiao-cheng/</guid>
             <title>文件链接全教程</title>
