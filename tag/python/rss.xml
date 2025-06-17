@@ -5,30 +5,30 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Fri, 02 May 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Fri, 02 May 2025 12:25:00 +0800</lastBuildDate>
+        <pubDate>Tue, 17 Jun 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Tue, 17 Jun 2025 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
         <category>intel</category>
         <category>cloudflare</category>
-        <category>安装</category>
         <category>tips</category>
+        <category>安装</category>
         <category>re</category>
         <category>工具</category>
         <category>Java</category>
-        <category>conda</category>
-        <category>linux</category>
         <category>教程</category>
+        <category>linux</category>
         <category>环境</category>
+        <category>conda</category>
         <category>bug</category>
+        <category>windows</category>
         <category>web</category>
         <category>wp</category>
         <category>BUUCTF</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>server</category>
+        <category>wall</category>
         <category>comfyui</category>
         <category>powershell</category>
-        <category>wall</category>
         <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
@@ -50,6 +50,246 @@
         <category>密码学</category>
         <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/17/python-bao-guan-li/</guid>
+            <title>Python 包管理与导入全方位教程</title>
+            <link>https://0xdadream.github.io/2025/06/17/python-bao-guan-li/</link>
+            <category>python</category>
+            <pubDate>Tue, 17 Jun 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Python-包管理与导入全方位教程&#34;&gt;&lt;a href=&#34;#Python-包管理与导入全方位教程&#34; class=&#34;headerlink&#34; title=&#34;Python 包管理与导入全方位教程&#34;&gt;&lt;/a&gt;Python 包管理与导入全方位教程&lt;/h1&gt;&lt;p&gt;在 Python 开发中，代码的组织、复用和分发都离不开模块（Module）和包（Package）。掌握好它们的导入机制以及如何管理项目依赖，是从新手走向专业的必经之路。&lt;/p&gt;
+&lt;p&gt;本教程将涵盖四个核心部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;模块与导入：基础篇&lt;/strong&gt; - 理解 Python 如何导入单个文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;包的创建与内部导入：进阶篇&lt;/strong&gt; - 如何组织你自己的项目代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;pip&lt;/code&gt; 管理外部包：工具篇&lt;/strong&gt; - 如何安装和使用社区的优秀代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;虚拟环境：最佳实践&lt;/strong&gt; - 为什么需要以及如何使用虚拟环境来隔离项目。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Part-1-模块与导入：基础篇&#34;&gt;&lt;a href=&#34;#Part-1-模块与导入：基础篇&#34; class=&#34;headerlink&#34; title=&#34;Part 1: 模块与导入：基础篇&#34;&gt;&lt;/a&gt;Part 1: 模块与导入：基础篇&lt;/h3&gt;&lt;h4 id=&#34;1-1-什么是模块-Module-？&#34;&gt;&lt;a href=&#34;#1-1-什么是模块-Module-？&#34; class=&#34;headerlink&#34; title=&#34;1.1 什么是模块 (Module)？&#34;&gt;&lt;/a&gt;1.1 什么是模块 (Module)？&lt;/h4&gt;&lt;p&gt;在 Python 中，&lt;strong&gt;任何一个 &lt;code&gt;.py&lt;/code&gt; 文件都可以被看作一个模块&lt;/strong&gt;。模块能让你将相关的代码（函数、类、变量）组织在一起，方便在其他地方复用。&lt;/p&gt;
+&lt;p&gt;例如，我们创建一个 &lt;code&gt;math_utils.py&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# math_utils.py
+PI = 3.14159
+
+def add(a, b):
+    return a + b
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def area(self):
+        return PI * self.radius * self.radius&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;1-2-import-语句的基本用法&#34;&gt;&lt;a href=&#34;#1-2-import-语句的基本用法&#34; class=&#34;headerlink&#34; title=&#34;1.2 import 语句的基本用法&#34;&gt;&lt;/a&gt;1.2 &lt;code&gt;import&lt;/code&gt; 语句的基本用法&lt;/h4&gt;&lt;p&gt;&lt;code&gt;import&lt;/code&gt; 语句用于将其他模块的功能引入到当前文件中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方式一：导入整个模块&lt;/strong&gt; 这是最常见的方式。你需要通过 &lt;code&gt;模块名.&lt;/code&gt; 的前缀来访问其内容。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# main.py
+import math_utils
+
+print(math_utils.PI)  # 输出: 3.14159
+
+sum_result = math_utils.add(3, 5)
+print(sum_result) # 输出: 8
+
+my_circle = math_utils.Circle(10)
+print(my_circle.area()) # 输出: 314.159&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;方式二：使用 &lt;code&gt;as&lt;/code&gt; 设置别名&lt;/strong&gt; 如果模块名太长或者容易混淆，可以给它设置一个简短的别名。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import math_utils as mu
+
+print(mu.PI)
+print(mu.add(3, 5))&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;方式三：使用 &lt;code&gt;from...import...&lt;/code&gt; 导入特定内容&lt;/strong&gt; 如果你只需要模块中的某几个部分，可以使用 &lt;code&gt;from&lt;/code&gt; 关键字直接导入它们。这样，在使用时就不需要加模块名前缀了。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from math_utils import add, Circle
+
+sum_result = add(4, 6) # 直接调用 add，无需前缀
+print(sum_result) # 输出: 10
+
+my_circle = Circle(5)
+print(my_circle.area()) # 输出: 78.53975&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以为导入的特定内容设置别名：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from math_utils import add as sum_func
+
+result = sum_func(1, 2)
+print(result) # 输出: 3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;方式四：&lt;code&gt;from...import \*&lt;/code&gt;（不推荐）&lt;/strong&gt; 这会导入模块中所有非下划线开头的内容。&lt;strong&gt;强烈不推荐&lt;/strong&gt;在大型项目中使用，因为它会污染当前文件的命名空间，你可能不知道哪些函数和变量被导入了，容易导致名称冲突和代码可读性下降。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 谨慎使用！
+from math_utils import *
+
+print(PI) # 直接可用
+print(add(1, 1)) # 直接可用&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;Part-2-包的创建与内部导入：进阶篇&#34;&gt;&lt;a href=&#34;#Part-2-包的创建与内部导入：进阶篇&#34; class=&#34;headerlink&#34; title=&#34;Part 2: 包的创建与内部导入：进阶篇&#34;&gt;&lt;/a&gt;Part 2: 包的创建与内部导入：进阶篇&lt;/h3&gt;&lt;p&gt;当项目变得复杂，一个文件已经不够用时，我们就需要用“包”（Package）来组织模块。&lt;/p&gt;
+&lt;h4 id=&#34;2-1-什么是包-Package-？&#34;&gt;&lt;a href=&#34;#2-1-什么是包-Package-？&#34; class=&#34;headerlink&#34; title=&#34;2.1 什么是包 (Package)？&#34;&gt;&lt;/a&gt;2.1 什么是包 (Package)？&lt;/h4&gt;&lt;p&gt;简单来说，&lt;strong&gt;一个包含 &lt;code&gt;__init__.py&lt;/code&gt; 文件的目录就是一个包&lt;/strong&gt;。这个目录里可以存放多个模块（&lt;code&gt;.py&lt;/code&gt; 文件）或者子包。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__init__.py&lt;/code&gt; 文件有几个作用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;标记作用&lt;/strong&gt;：它的存在告诉 Python 这个目录应该被当作一个包来对待。在 Python 3.3+ 版本中，即使没有这个文件，也可能被当作“命名空间包”，但为了兼容性和清晰性，&lt;strong&gt;强烈建议总是创建它&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;初始化操作&lt;/strong&gt;：可以在这个文件中编写代码，当包被导入时，这些代码会自动执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;简化导入&lt;/strong&gt;：可以在 &lt;code&gt;__init__.py&lt;/code&gt; 中使用 &lt;code&gt;from .module import func&lt;/code&gt; 的方式，将包深处的函数或类暴露到包的顶层，方便外部调用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;2-2-项目结构示例&#34;&gt;&lt;a href=&#34;#2-2-项目结构示例&#34; class=&#34;headerlink&#34; title=&#34;2.2 项目结构示例&#34;&gt;&lt;/a&gt;2.2 项目结构示例&lt;/h4&gt;&lt;p&gt;让我们构建一个清晰的项目结构作为例子：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;my_project/
+├── main.py             &lt;span class=&#34;token comment&#34;&gt;# 项目主入口文件&lt;/span&gt;
+└── my_app/             &lt;span class=&#34;token comment&#34;&gt;# 我们的主应用包&lt;/span&gt;
+    ├── __init__.py
+    ├── core/           &lt;span class=&#34;token comment&#34;&gt;# 子包：核心功能&lt;/span&gt;
+    │   ├── __init__.py
+    │   └── calculator.py
+    └── utils/          &lt;span class=&#34;token comment&#34;&gt;# 子包：工具函数&lt;/span&gt;
+        ├── __init__.py
+        └── formatter.py&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;calculator.py&lt;/code&gt; 内容:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# my_app/core/calculator.py
+def add(a, b):
+    return a + b&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;formatter.py&lt;/code&gt; 内容:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# my_app/utils/formatter.py
+def format_as_json(data):
+    # 这是一个简化的例子
+    return f&#39;{{&#34;result&#34;: {data}}}&#39;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-3-包内导入：绝对导入-vs-相对导入&#34;&gt;&lt;a href=&#34;#2-3-包内导入：绝对导入-vs-相对导入&#34; class=&#34;headerlink&#34; title=&#34;2.3 包内导入：绝对导入 vs 相对导入&#34;&gt;&lt;/a&gt;2.3 包内导入：绝对导入 vs 相对导入&lt;/h4&gt;&lt;p&gt;现在，假设我们想在 &lt;code&gt;calculator.py&lt;/code&gt; 中使用 &lt;code&gt;formatter.py&lt;/code&gt; 的功能（虽然这个例子不太合逻辑，但很适合演示）。这就要用到包内导入。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 绝对导入 (Absolute Import) - 推荐&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;绝对导入总是从项目的&lt;strong&gt;根目录&lt;/strong&gt;（可以被 Python 找到的路径，通常是你运行命令的目录）开始。它路径清晰，不容易出错，是 PEP 8 规范推荐的方式。&lt;/p&gt;
+&lt;p&gt;假设我们在 &lt;code&gt;main.py&lt;/code&gt; 中想使用 &lt;code&gt;calculator&lt;/code&gt; 和 &lt;code&gt;formatter&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# main.py
+from my_app.core import calculator
+from my_app.utils import formatter
+
+result = calculator.add(10, 20)
+print(formatter.format_as_json(result))
+# 输出: {&#34;result&#34;: 30}&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 相对导入 (Relative Import)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;相对导入使用 &lt;code&gt;.&lt;/code&gt; 或 &lt;code&gt;..&lt;/code&gt; 来表示相对位置，它&lt;strong&gt;只能在包内部使用&lt;/strong&gt;，不能在顶级脚本中使用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt;：表示当前目录。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;..&lt;/code&gt;：表示上级目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在，假设我们的 &lt;code&gt;calculator.py&lt;/code&gt; 需要调用 &lt;code&gt;formatter.py&lt;/code&gt;。这在不同目录，&lt;code&gt;calculator.py&lt;/code&gt; 需要先回到父级目录 &lt;code&gt;my_app&lt;/code&gt;，再进入 &lt;code&gt;utils&lt;/code&gt; 目录。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# my_app/core/calculator.py
+
+# &#39;..&#39; 代表回到 calculator.py 的上级目录 (core -&amp;gt; my_app)
+# 然后从 my_app 进入 utils 包，导入 formatter 模块
+from ..utils import formatter
+
+def add_and_format(a, b):
+    sum_val = a + b
+    return formatter.format_as_json(sum_val)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;⚠️ 常见的陷阱：&lt;code&gt;ImportError&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果你直接运行一个使用了相对导入的文件，就会触发 &lt;code&gt;ImportError: attempted relative import with no known parent package&lt;/code&gt; 错误。&lt;/p&gt;
+&lt;p&gt;例如，直接在终端里运行： &lt;code&gt;python my_app/core/calculator.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这会失败！因为 Python 将 &lt;code&gt;calculator.py&lt;/code&gt; 当作顶级脚本，它不知道自己的“父包”是谁。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正确的运行方式&lt;/strong&gt;是从项目的根目录 &lt;code&gt;my_project/&lt;/code&gt; 执行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果你要运行 main.py（它使用绝对导入），直接运行即可：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;cd my_project/
+python main.py&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果你想把某个子模块当作脚本运行（例如测试），请使用 -m 标志：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;cd my_project/
+python -m my_app.core.calculator&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Part-3-使用-pip-管理外部包：工具篇&#34;&gt;&lt;a href=&#34;#Part-3-使用-pip-管理外部包：工具篇&#34; class=&#34;headerlink&#34; title=&#34;Part 3: 使用 pip 管理外部包：工具篇&#34;&gt;&lt;/a&gt;Part 3: 使用 &lt;code&gt;pip&lt;/code&gt; 管理外部包：工具篇&lt;/h3&gt;&lt;p&gt;当项目需要用到第三方库（如 &lt;code&gt;requests&lt;/code&gt; 用于网络请求，&lt;code&gt;pandas&lt;/code&gt; 用于数据分析）时，就需要包管理器。Python 的标准包管理器是 &lt;code&gt;pip&lt;/code&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;3-1-pip-基础命令&#34;&gt;&lt;a href=&#34;#3-1-pip-基础命令&#34; class=&#34;headerlink&#34; title=&#34;3.1 pip 基础命令&#34;&gt;&lt;/a&gt;3.1 &lt;code&gt;pip&lt;/code&gt; 基础命令&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装包&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install requests&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;安装指定版本的包&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install requests==2.28.1
+pip install &#34;requests&amp;gt;=2.25.0&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;卸载包&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip uninstall requests&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看已安装的包&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip list&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;查看某个包的详细信息&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip show requests&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-2-使用-requirements-txt-管理项目依赖&#34;&gt;&lt;a href=&#34;#3-2-使用-requirements-txt-管理项目依赖&#34; class=&#34;headerlink&#34; title=&#34;3.2 使用 requirements.txt 管理项目依赖&#34;&gt;&lt;/a&gt;3.2 使用 &lt;code&gt;requirements.txt&lt;/code&gt; 管理项目依赖&lt;/h4&gt;&lt;p&gt;当你的项目依赖多个包，或者你需要与他人协作时，手动一个一个安装包是不可行的。最佳实践是使用 &lt;code&gt;requirements.txt&lt;/code&gt; 文件来记录所有依赖。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 &lt;code&gt;requirements.txt&lt;/code&gt;&lt;/strong&gt;: 当你完成开发，将当前环境中所有包及其版本信息冻结（freeze）到一个文件中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip freeze &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; requirements.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;文件内容可能如下：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;certifi&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2022.9&lt;/span&gt;.24
+charset-normalizer&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.1&lt;/span&gt;.1
+&lt;span class=&#34;token assign-left variable&#34;&gt;idna&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3.4&lt;/span&gt;
+&lt;span class=&#34;token assign-left variable&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2.28&lt;/span&gt;.1
+&lt;span class=&#34;token assign-left variable&#34;&gt;urllib3&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1.26&lt;/span&gt;.12&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;从 &lt;code&gt;requirements.txt&lt;/code&gt; 安装&lt;/strong&gt;: 当另一个开发者拿到你的项目后，只需一条命令就可以安装所有必需的依赖：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; requirements.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Part-4-虚拟环境：最佳实践&#34;&gt;&lt;a href=&#34;#Part-4-虚拟环境：最佳实践&#34; class=&#34;headerlink&#34; title=&#34;Part 4: 虚拟环境：最佳实践&#34;&gt;&lt;/a&gt;Part 4: 虚拟环境：最佳实践&lt;/h3&gt;&lt;h4 id=&#34;4-1-为什么需要虚拟环境？&#34;&gt;&lt;a href=&#34;#4-1-为什么需要虚拟环境？&#34; class=&#34;headerlink&#34; title=&#34;4.1 为什么需要虚拟环境？&#34;&gt;&lt;/a&gt;4.1 为什么需要虚拟环境？&lt;/h4&gt;&lt;p&gt;想象一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目 A 需要 &lt;code&gt;requests&lt;/code&gt; 的 1.0 版本。&lt;/li&gt;
+&lt;li&gt;项目 B 需要 &lt;code&gt;requests&lt;/code&gt; 的 2.0 版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你将它们都安装在全局的 Python环境中，就会产生版本冲突，导致一个项目无法正常工作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;虚拟环境（Virtual Environment）&lt;/strong&gt; 就是为了解决这个问题而生的。它能为每个项目创建一个独立的、隔离的 Python 环境。你在其中安装的所有包都只属于这个项目，不会影响到全局环境或其他项目。&lt;/p&gt;
+&lt;h4 id=&#34;4-2-使用-venv（Python-内置工具）&#34;&gt;&lt;a href=&#34;#4-2-使用-venv（Python-内置工具）&#34; class=&#34;headerlink&#34; title=&#34;4.2 使用 venv（Python 内置工具）&#34;&gt;&lt;/a&gt;4.2 使用 &lt;code&gt;venv&lt;/code&gt;（Python 内置工具）&lt;/h4&gt;&lt;p&gt;从 Python 3.3 开始，&lt;code&gt;venv&lt;/code&gt; 模块成为创建虚拟环境的标准工具。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 创建虚拟环境&lt;/strong&gt;: 在你的项目根目录下，运行以下命令。&lt;code&gt;venv&lt;/code&gt; 是你给这个环境起的名字，这是一个通用惯例。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 在 my_project/ 目录下
+python -m venv venv&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行后，会创建一个 &lt;code&gt;venv&lt;/code&gt; 目录，里面包含了独立的 Python 解释器和包安装目录。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 激活虚拟环境&lt;/strong&gt;: 在使用前，你必须“激活”它。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;.\venv\Scripts\activate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;macOS / Linux:&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;source venv/bin/activate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;激活后，你会发现你的命令行提示符前面多了 &lt;code&gt;(venv)&lt;/code&gt; 的字样，表示你正处于这个虚拟环境中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 在虚拟环境中工作&lt;/strong&gt;: 激活后，你使用的 &lt;code&gt;python&lt;/code&gt; 和 &lt;code&gt;pip&lt;/code&gt; 命令都将是该环境内的版本。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# (venv) D:\path\to\my_project&amp;gt;
+pip install requests
+pip freeze &amp;gt; requirements.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在 &lt;code&gt;requests&lt;/code&gt; 被安装到了 &lt;code&gt;my_project/venv/Lib/site-packages&lt;/code&gt; 目录下，而不是全局。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. 停用虚拟环境&lt;/strong&gt;: 当你工作完成，想回到全局环境时，只需运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;deactivate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;4-3-结合-gitignore&#34;&gt;&lt;a href=&#34;#4-3-结合-gitignore&#34; class=&#34;headerlink&#34; title=&#34;4.3 结合 .gitignore&#34;&gt;&lt;/a&gt;4.3 结合 &lt;code&gt;.gitignore&lt;/code&gt;&lt;/h4&gt;&lt;p&gt;虚拟环境目录 (&lt;code&gt;venv&lt;/code&gt;) 不应该被提交到 Git 等版本控制系统中。它包含了大量文件，并且可以在任何地方通过 &lt;code&gt;requirements.txt&lt;/code&gt; 重建。&lt;/p&gt;
+&lt;p&gt;因此，请务必在你的 &lt;code&gt;.gitignore&lt;/code&gt; 文件中添加 &lt;code&gt;venv/&lt;/code&gt; 这一行。&lt;/p&gt;
+&lt;h3 id=&#34;总结：专业的开发流程&#34;&gt;&lt;a href=&#34;#总结：专业的开发流程&#34; class=&#34;headerlink&#34; title=&#34;总结：专业的开发流程&#34;&gt;&lt;/a&gt;总结：专业的开发流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;项目启动&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;创建项目主目录（如 &lt;code&gt;my_project&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd my_project&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;创建虚拟环境：&lt;code&gt;python -m venv venv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;激活环境：&lt;code&gt;source venv/bin/activate&lt;/code&gt; (或 Windows 对应命令)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开发过程&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;pip install &amp;lt;package_name&amp;gt;&lt;/code&gt; 安装所需第三方库。&lt;/li&gt;
+&lt;li&gt;按照包的结构组织你的代码（创建 &lt;code&gt;my_app&lt;/code&gt;, &lt;code&gt;__init__.py&lt;/code&gt; 等）。&lt;/li&gt;
+&lt;li&gt;在包内部优先使用&lt;strong&gt;绝对导入&lt;/strong&gt;，或在必要时使用相对导入。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;依赖管理&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;定期更新 &lt;code&gt;requirements.txt&lt;/code&gt; 文件：&lt;code&gt;pip freeze &amp;gt; requirements.txt&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;项目交付/协作&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;其他人获取你的代码后，只需重复第一步创建并激活虚拟环境，然后运行 &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; 即可搭建出完全一致的开发环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/05/02/whl-wen-jian-ming-hou-zhui/</guid>
             <title>whl文件名后缀</title>
