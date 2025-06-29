@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;ai&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Thu, 26 Jun 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 26 Jun 2025 12:25:00 +0800</lastBuildDate>
+        <category>cloudflare</category>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
+        <category>安装</category>
+        <category>email</category>
+        <category>tips</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>教程</category>
+        <category>linux</category>
+        <category>Java</category>
+        <category>conda</category>
+        <category>环境</category>
+        <category>bug</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>windows</category>
+        <category>net</category>
+        <category>server</category>
+        <category>comfyui</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>tools</category>
+        <category>emby</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>google</category>
+        <category>git</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>python</category>
+        <category>命令</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>远程</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>mcp</category>
+        <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/</guid>
+            <title>Arc A770 Ollama WebUI 教程</title>
+            <link>https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/</link>
+            <category>AI</category>
+            <pubDate>Thu, 26 Jun 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Arc-A770-Ollama-WebUI-教程&#34;&gt;&lt;a href=&#34;#Arc-A770-Ollama-WebUI-教程&#34; class=&#34;headerlink&#34; title=&#34;Arc A770 Ollama WebUI 教程&#34;&gt;&lt;/a&gt;Arc A770 Ollama WebUI 教程&lt;/h1&gt;&lt;p&gt;在 Windows 上利用 Arc A770 16G 和 IPEX-LLM 运行 Ollama 大语言模型的终极指南&lt;/p&gt;
+&lt;h2 id=&#34;第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能&#34;&gt;&lt;a href=&#34;#第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能&#34; class=&#34;headerlink&#34; title=&#34;第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能&#34;&gt;&lt;/a&gt;第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能&lt;/h2&gt;&lt;h3 id=&#34;1-1-前景与挑战&#34;&gt;&lt;a href=&#34;#1-1-前景与挑战&#34; class=&#34;headerlink&#34; title=&#34;1.1. 前景与挑战&#34;&gt;&lt;/a&gt;1.1. 前景与挑战&lt;/h3&gt;&lt;p&gt;英特尔锐炫 Arc A770 16G 显卡凭借其高达 16 GB 的海量显存，为在本地运行大型语言模型（LLM）提供了一个极具性价比和吸引力的硬件平台。充足的显存意味着可以流畅运行更大、更复杂的模型，这对于追求高质量本地 AI 体验的用户而言至关重要。&lt;/p&gt;
+&lt;p&gt;然而，一个核心挑战阻碍了这条道路：标准的、从官方网站下载的 Windows 版 Ollama 应用程序，其默认配置并不能直接利用英特尔 Arc GPU 进行硬件加速 。这是因为其标准后端主要依赖于为英伟达（NVIDIA）设计的 CUDA 技术，或是为其他硬件设计的 DirectML 技术，而这些技术在标准 Ollama 的框架内并未对英特尔的 Xe HPG 架构提供原生支持 。直接安装标准版 Ollama 会导致模型推理任务完全由 CPU 执行，无法发挥 Arc A770 强大的并行计算能力。  &lt;/p&gt;
+&lt;h3 id=&#34;1-2-解决方案：英特尔-IPEX-LLM-这座桥梁&#34;&gt;&lt;a href=&#34;#1-2-解决方案：英特尔-IPEX-LLM-这座桥梁&#34; class=&#34;headerlink&#34; title=&#34;1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁&#34;&gt;&lt;/a&gt;1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁&lt;/h3&gt;&lt;p&gt;解决这一挑战的关键在于英特尔官方推出的“英特尔 PyTorch LLM 扩展库”（Intel® Extension for PyTorch* for LLM），简称 IPEX-LLM。它并非一个简单的插件，而是一个全面的加速库，为 Ollama 等框架提供了一个基于 oneAPI 和 SYCL 编程模型构建的、为英特尔 GPU 量身定制的后端 。  &lt;/p&gt;
+&lt;p&gt;本指南的核心，正是利用一个由英特尔提供、经过特殊编译的 Ollama 版本。该版本将默认的推理引擎替换为了 IPEX-LLM，从而打通了软件与 Arc 显卡之间的加速通道。这并非一个脆弱或不稳定的社区项目，而是由硬件制造商官方支持的解决方案。英特尔通过其官方 GitHub 仓库积极开发并推广此方案，发布了易于使用的“便携式压缩包”（Portable Zips），并提供了详尽的快速入门文档，这为方案的可靠性和未来更新提供了有力保障 。  &lt;/p&gt;
+&lt;h3 id=&#34;1-3-我们的路线图&#34;&gt;&lt;a href=&#34;#1-3-我们的路线图&#34; class=&#34;headerlink&#34; title=&#34;1.3. 我们的路线图&#34;&gt;&lt;/a&gt;1.3. 我们的路线图&lt;/h3&gt;&lt;p&gt;本教程将遵循一条清晰的路径，引导您完成从零到一的全部署过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;系统基础准备&lt;/strong&gt;：安装并配置必要的驱动程序和软件环境。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心引擎部署&lt;/strong&gt;：安装并启动经过 IPEX-LLM 加速的 Ollama 后端服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;前端界面搭建&lt;/strong&gt;：安装并连接用户友好的 Open WebUI，提供图形化交互界面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证与排错&lt;/strong&gt;：确认 GPU 加速已成功启用，并提供常见问题的解决方案。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第二部分：基础设置-准备您的-Windows-系统&#34;&gt;&lt;a href=&#34;#第二部分：基础设置-准备您的-Windows-系统&#34; class=&#34;headerlink&#34; title=&#34;第二部分：基础设置 - 准备您的 Windows 系统&#34;&gt;&lt;/a&gt;第二部分：基础设置 - 准备您的 Windows 系统&lt;/h2&gt;&lt;p&gt;在开始部署之前，确保系统环境符合要求是成功的先决条件。下面的清单和步骤将帮助您准备好一切。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;系统必备组件清单&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组件&lt;/th&gt;
+&lt;th&gt;推荐版本/要求&lt;/th&gt;
+&lt;th&gt;下载地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;英特尔 Arc 显卡驱动&lt;/td&gt;
+&lt;td&gt;最新 WHQL 认证版 (例如 32.0.101.6881 或更高)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/downloads.html&#34;&gt;英特尔官方下载中心&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Miniforge (Conda)&lt;/td&gt;
+&lt;td&gt;最新版&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&#34;https://github.com/conda-forge/miniforge/releases/latest&#34;&gt;https://github.com/conda-forge/miniforge/releases/latest&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Windows Terminal&lt;/td&gt;
+&lt;td&gt;最新版&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&#34;https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701&#34;&gt;https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;2-1-英特尔-Arc-显卡驱动：性能的基石&#34;&gt;&lt;a href=&#34;#2-1-英特尔-Arc-显卡驱动：性能的基石&#34; class=&#34;headerlink&#34; title=&#34;2.1. 英特尔 Arc 显卡驱动：性能的基石&#34;&gt;&lt;/a&gt;2.1. 英特尔 Arc 显卡驱动：性能的基石&lt;/h3&gt;&lt;p&gt;整个技术栈依赖于最新的显卡驱动程序通过英特尔 oneAPI Level Zero 接口与 GPU 进行通信。过时、损坏或由 Windows Update 自动安装的通用驱动程序是导致失败的主要原因。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：识别当前驱动版本&lt;/strong&gt; 打开英特尔锐炫控制中心（Intel Arc Control）软件，或通过设备管理器查看当前安装的显卡驱动程序版本 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：下载正确的驱动程序&lt;/strong&gt; 访问上表中提供的英特尔官方下载中心链接，下载适用于 Arc A770 16GB 的最新 WHQL 认证驱动程序。根据资料，一个可靠的版本是 &lt;code&gt;32.0.101.6881&lt;/code&gt;，对应的安装文件名为 &lt;code&gt;gfx_win_101.6881.exe&lt;/code&gt; 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：执行一次“清洁安装”（推荐的最佳实践）&lt;/strong&gt; 为了从根源上避免潜在的、难以诊断的故障，强烈建议执行一次“清洁安装”。在驱动安装过程中，选择“自定义安装”，然后勾选“执行清洁安装”选项。这将移除所有旧的驱动文件和配置，避免新旧文件冲突。&lt;/p&gt;
+&lt;p&gt;对于追求极致稳定或在后续步骤中遇到蓝屏错误（如 &lt;code&gt;VIDEO_SCHEDULER_INTERNAL_ERROR&lt;/code&gt; ）的用户，可以采用更彻底的方法：使用 Display Driver Uninstaller (DDU) 工具。这是英特尔官方支持文档中也提及的高级方法，可以确保完全清除旧驱动的残留 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：验证安装&lt;/strong&gt; 安装完成后，重启计算机。再次打开英特尔锐炫控制中心，确认驱动程序版本已更新为最新版本。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-命令行与环境设置&#34;&gt;&lt;a href=&#34;#2-2-命令行与环境设置&#34; class=&#34;headerlink&#34; title=&#34;2.2. 命令行与环境设置&#34;&gt;&lt;/a&gt;2.2. 命令行与环境设置&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;第一步：安装 Miniforge&lt;/strong&gt; 相比于完整的 Anaconda 发行版，Miniforge 更为轻量，是搭建 Python 环境的更优选择。运行 Miniforge 安装程序，在安装过程中，建议勾选“Add Miniforge3 to my PATH environment variable”选项，这将简化后续的命令行操作 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：安装与配置 Windows Terminal&lt;/strong&gt; 从 Microsoft Store 安装 Windows Terminal，它提供了现代化的多标签页和强大的 PowerShell 支持，是执行后续所有命令的推荐工具。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：为 PowerShell 初始化 Conda&lt;/strong&gt; 这是一个常见的障碍点。打开 Windows Terminal (PowerShell)，运行以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda init powershell&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会修改您的 PowerShell 配置文件，使其能够识别 &lt;code&gt;conda&lt;/code&gt; 命令 。完成后，必须关闭并重新打开 Windows Terminal 才能使更改生效。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：设置 PowerShell 执行策略&lt;/strong&gt; 出于安全考虑，PowerShell 的默认执行策略可能会阻止 Conda 激活脚本的运行。在新的 PowerShell 窗口中，运行以下命令以允许这些脚本执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Set-ExecutionPolicy RemoteSigned -Scope CurrentUser&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在提示时，输入 &lt;code&gt;Y&lt;/code&gt; 并按回车确认 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步：验证 Conda 安装&lt;/strong&gt; 在 PowerShell 口中输入 &lt;code&gt;conda --version&lt;/code&gt;。如果安装正确，将显示 Conda 的版本号，表明您的命令行环境已准备就绪。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第三部分：核心引擎-部署加速的-Ollama-后端&#34;&gt;&lt;a href=&#34;#第三部分：核心引擎-部署加速的-Ollama-后端&#34; class=&#34;headerlink&#34; title=&#34;第三部分：核心引擎 - 部署加速的 Ollama 后端&#34;&gt;&lt;/a&gt;第三部分：核心引擎 - 部署加速的 Ollama 后端&lt;/h2&gt;&lt;h3 id=&#34;3-1-为何选择-IPEX-LLM-定制版-Ollama&#34;&gt;&lt;a href=&#34;#3-1-为何选择-IPEX-LLM-定制版-Ollama&#34; class=&#34;headerlink&#34; title=&#34;3.1. 为何选择 IPEX-LLM 定制版 Ollama&#34;&gt;&lt;/a&gt;3.1. 为何选择 IPEX-LLM 定制版 Ollama&lt;/h3&gt;&lt;p&gt;在此必须明确：从 &lt;code&gt;ollama.com&lt;/code&gt; 官方网站下载的标准版 Ollama 安装程序 &lt;strong&gt;无法&lt;/strong&gt; 用于本教程的目标。如果您已经安装了标准版，请先将其卸载。&lt;/p&gt;
+&lt;p&gt;我们将使用的是英特尔提供的、内建了 IPEX-LLM 支持的特殊版本。它通过 oneAPI 和 SYCL 技术栈，将推理任务直接交由英特尔 GPU 处理，从而实现硬件加速 。英特尔提供的“便携式压缩包”方案，极大地降低了用户的配置门槛，是目前最推荐、最便捷的部署方式，避免了早期版本中复杂的依赖安装和初始化脚本步骤 。  &lt;/p&gt;
+&lt;h3 id=&#34;3-2-创建专用的-AI-后端环境&#34;&gt;&lt;a href=&#34;#3-2-创建专用的-AI-后端环境&#34; class=&#34;headerlink&#34; title=&#34;3.2. 创建专用的 AI 后端环境&#34;&gt;&lt;/a&gt;3.2. 创建专用的 AI 后端环境&lt;/h3&gt;&lt;p&gt;为了避免不同软件间的依赖冲突，我们将为 Ollama 后端创建一个独立的、干净的 Conda 环境。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 PowerShell 中，运行以下命令创建环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda create -n ipex-ollama python=3.11 -y&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会创建一个名为 &lt;code&gt;ipex-ollama&lt;/code&gt; 的环境，并指定 Python 版本为 3.11，这是经过验证的兼容版本 。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;激活该环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda activate ipex-ollama&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;激活后，PowerShell 提示符前会显示 &lt;code&gt;(ipex-ollama)&lt;/code&gt;，表示您当前正工作在此环境中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-3-安装-IPEX-LLM-版-Ollama&#34;&gt;&lt;a href=&#34;#3-3-安装-IPEX-LLM-版-Ollama&#34; class=&#34;headerlink&#34; title=&#34;3.3. 安装 IPEX-LLM 版 Ollama&#34;&gt;&lt;/a&gt;3.3. 安装 IPEX-LLM 版 Ollama&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;第一步：下载便携式软件包&lt;/strong&gt; 访问(&lt;a href=&#34;https://github.com/intel/ipex-llm/releases)%EF%BC%8C%E6%89%BE%E5%88%B0%E6%9C%80%E6%96%B0%E7%9A%84%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%8C%E5%B9%B6%E4%B8%8B%E8%BD%BD%E9%80%82%E7%94%A8%E4%BA%8E&#34;&gt;https://github.com/intel/ipex-llm/releases)，找到最新的发行版，并下载适用于&lt;/a&gt; Windows 的 &lt;code&gt;Ollama-Portable-Zip&lt;/code&gt; 文件 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：解压软件包&lt;/strong&gt; 在您的硬盘上创建一个专用于 AI 工具的文件夹，例如 &lt;code&gt;C:\ai-tools\&lt;/code&gt;。然后在此文件夹下再创建一个 &lt;code&gt;ipex-ollama&lt;/code&gt; 文件夹，并将下载的压缩包内容完整地解压到这里。最终路径应类似于 &lt;code&gt;C:\ai-tools\ipex-ollama&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：在终端中导航至该目录&lt;/strong&gt; 在已激活 &lt;code&gt;ipex-ollama&lt;/code&gt; 环境的 PowerShell 窗口中，使用 &lt;code&gt;cd&lt;/code&gt; 命令进入您刚刚创建的文件夹：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd C:\ai-tools\ipex-ollama&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-4-启动-GPU-加速的-Ollama-服务器&#34;&gt;&lt;a href=&#34;#3-4-启动-GPU-加速的-Ollama-服务器&#34; class=&#34;headerlink&#34; title=&#34;3.4. 启动 GPU 加速的 Ollama 服务器&#34;&gt;&lt;/a&gt;3.4. 启动 GPU 加速的 Ollama 服务器&lt;/h3&gt;&lt;p&gt;这是整个流程中最关键的一步。我们需要通过设置特定的环境变量来“指挥”Ollama 使用 GPU。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键环境变量解析&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;环境变量&lt;/th&gt;
+&lt;th&gt;推荐值&lt;/th&gt;
+&lt;th&gt;目的与解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;OLLAMA_NUM_GPU&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;999&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;最核心的设置&lt;/strong&gt;。此变量告知 Ollama 将模型的多少层卸载到 GPU。设置为一个非常大的数字（如 999）等同于“全部卸载”，以最大化利用 GPU 资源 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ZES_ENABLE_SYSMAN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用 Level Zero 驱动程序栈中的 Sysman 库。IPEX-LLM 需要此库来进行 GPU 监控和内存管理 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SYCL_CACHE_PERSISTENT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用持久化 SYCL 内核缓存。当模型第一次加载时，SYCL 会将编译后的 GPU 内核代码缓存到硬盘。这会显著加快后续加载相同或不同模型的速度 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;启动服务器的命令&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 PowerShell 中，逐行运行以下命令来设置环境变量。这些设置仅对当前终端会话有效。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;$env:OLLAMA_NUM_GPU=&#34;999&#34;
+$env:ZES_ENABLE_SYSMAN=&#34;1&#34;
+$env:SYCL_CACHE_PERSISTENT=&#34;1&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置完毕后，运行以下命令启动 Ollama 服务器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;.\ollama serve
+or
+start-ollama.bat&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;服务器成功启动后，您会看到类似 &lt;code&gt;time=... level=INFO source=server.go:.. msg=&#34;starting server...&#34;&lt;/code&gt; 的日志输出。&lt;strong&gt;请务必保持此终端窗口处于打开状态&lt;/strong&gt;，因为它就是您的 AI 推理引擎。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第四部分：用户体验-安装并连接-Open-WebUI&#34;&gt;&lt;a href=&#34;#第四部分：用户体验-安装并连接-Open-WebUI&#34; class=&#34;headerlink&#34; title=&#34;第四部分：用户体验 - 安装并连接 Open WebUI&#34;&gt;&lt;/a&gt;第四部分：用户体验 - 安装并连接 Open WebUI&lt;/h2&gt;&lt;p&gt;Ollama 后端已经运行，但它只提供了一个命令行接口。为了获得类似 ChatGPT 的图形化聊天体验，我们需要安装一个前端界面——Open WebUI。&lt;/p&gt;
+&lt;h3 id=&#34;4-1-准备前端环境&#34;&gt;&lt;a href=&#34;#4-1-准备前端环境&#34; class=&#34;headerlink&#34; title=&#34;4.1. 准备前端环境&#34;&gt;&lt;/a&gt;4.1. 准备前端环境&lt;/h3&gt;&lt;p&gt;同样地，我们将为 Open WebUI 创建一个独立的环境，以确保其依赖项不会与后端环境发生冲突。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开一个新的 Windows Terminal 标签页或窗口&lt;/strong&gt;。不要在运行着 Ollama 服务器的窗口中操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建新的 Conda 环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda create -n open-webui python=3.11 -y&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;激活此新环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda activate open-webui&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-2-安装并启动-Web-界面&#34;&gt;&lt;a href=&#34;#4-2-安装并启动-Web-界面&#34; class=&#34;headerlink&#34; title=&#34;4.2. 安装并启动 Web 界面&#34;&gt;&lt;/a&gt;4.2. 安装并启动 Web 界面&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在已激活 &lt;code&gt;open-webui&lt;/code&gt; 环境的 PowerShell 窗口中，使用 &lt;code&gt;pip&lt;/code&gt; 命令安装 Open WebUI：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;pip install open-webui&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装完成后，运行以下命令启动其 Web 服务器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;open-webui serve&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;服务器启动后，您会看到日志输出，并提示服务正在 &lt;code&gt;http://localhost:8080&lt;/code&gt; 上运行 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;同样，这个终端窗口也必须保持打开状态&lt;/strong&gt;。至此，您应该有两个持续运行的终端窗口：一个用于 Ollama 后端，一个用于 Open WebUI 前端。&lt;/p&gt;
+&lt;h3 id=&#34;4-3-首次设置与连接&#34;&gt;&lt;a href=&#34;#4-3-首次设置与连接&#34; class=&#34;headerlink&#34; title=&#34;4.3. 首次设置与连接&#34;&gt;&lt;/a&gt;4.3. 首次设置与连接&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开您的网页浏览器（如 Chrome, Edge, Firefox），访问地址：&lt;code&gt;http://localhost:8080&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;首次访问时，Open WebUI 会引导您创建一个管理员账户。请按提示完成注册 。  &lt;/li&gt;
+&lt;li&gt;登录后，Open WebUI 通常会自动检测到在本地 &lt;code&gt;http://localhost:11434&lt;/code&gt; 端口上运行的 Ollama 服务并建立连接 。  &lt;/li&gt;
+&lt;li&gt;如果连接失败或未自动识别，可以手动进行配置。点击左侧边栏的“设置”图标，进入“连接”选项卡，确认 Ollama API 的 URL 地址已正确设置为 &lt;code&gt;http://localhost:11434&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第五部分：验证与首次使用-对系统进行测试&#34;&gt;&lt;a href=&#34;#第五部分：验证与首次使用-对系统进行测试&#34; class=&#34;headerlink&#34; title=&#34;第五部分：验证与首次使用 - 对系统进行测试&#34;&gt;&lt;/a&gt;第五部分：验证与首次使用 - 对系统进行测试&lt;/h2&gt;&lt;p&gt;现在，万事俱备，是时候验证我们的成果并运行第一个大语言模型了。&lt;/p&gt;
+&lt;h3 id=&#34;5-1-运行您的第一个-LLM&#34;&gt;&lt;a href=&#34;#5-1-运行您的第一个-LLM&#34; class=&#34;headerlink&#34; title=&#34;5.1. 运行您的第一个 LLM&#34;&gt;&lt;/a&gt;5.1. 运行您的第一个 LLM&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在 Open WebUI 的主界面，点击顶部的模型选择框。&lt;/li&gt;
+&lt;li&gt;在输入框中键入一个模型名称，例如 &lt;code&gt;phi3:medium&lt;/code&gt; 或 &lt;code&gt;llama3:8b&lt;/code&gt;。由于模型尚未在本地安装，WebUI 会提示您下载它。点击确认后，Open WebUI 会向后端发送指令，开始下载模型 。  &lt;/li&gt;
+&lt;li&gt;此时，您可以切换到运行着 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口，观察模型的下载进度条。&lt;/li&gt;
+&lt;li&gt;模型下载完成后，在 WebUI 的聊天框中输入一个简单的问题，例如“天空为什么是蓝色的？”，然后按回车。片刻之后，您应该就能看到由您的 Arc A770 显卡驱动生成的回答。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;5-2-确认真正的-GPU-加速&#34;&gt;&lt;a href=&#34;#5-2-确认真正的-GPU-加速&#34; class=&#34;headerlink&#34; title=&#34;5.2. 确认真正的 GPU 加速&#34;&gt;&lt;/a&gt;5.2. 确认真正的 GPU 加速&lt;/h3&gt;&lt;p&gt;如何确定模型确实是由 GPU 而非 CPU 运行的？Windows 任务管理器可以给我们明确的答案。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：打开任务管理器&lt;/strong&gt; 按下 &lt;code&gt;Ctrl+Shift+Esc&lt;/code&gt; 组合键。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：导航至“性能”选项卡&lt;/strong&gt; 在任务管理器窗口中，点击“性能”选项卡，然后在左侧边栏中找到并点击您的“Intel Arc(TM) Graphics” GPU。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：更改引擎视图（关键步骤）&lt;/strong&gt; 任务管理器默认显示的 GPU 利用率图表是“3D”引擎，这主要用于游戏和图形渲染，与我们的计算任务无关。您需要点击图表上方的下拉菜单（默认为“3D”），然后将其更改为 &lt;strong&gt;Compute_0&lt;/strong&gt; 或 &lt;strong&gt;Graphics_1&lt;/strong&gt; 。这是 DirectML 和 SYCL 等计算 API 使用的引擎。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：观察利用率&lt;/strong&gt; 回到 Open WebUI，再次向模型提问，并密切关注任务管理器。在模型生成回答的几秒钟内，您应该能看到“Compute_0”或“Graphics_1”图表出现明显的、尖锐的峰值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步：观察显存（VRAM）使用情况&lt;/strong&gt; 在同一性能页面下，找到“专用 GPU 内存”图表。当您加载并运行模型时，该图表的占用率会显著上升，并维持在一个较高的水平，这表明模型权重已被成功加载到显卡的 VRAM 中 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;计算引擎的活动和专用显存的高占用率，是 GPU 加速已成功启用的确凿证据&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;5-3-性能健全性检查：CPU-vs-GPU-对比&#34;&gt;&lt;a href=&#34;#5-3-性能健全性检查：CPU-vs-GPU-对比&#34; class=&#34;headerlink&#34; title=&#34;5.3. 性能健全性检查：CPU vs. GPU 对比&#34;&gt;&lt;/a&gt;5.3. 性能健全性检查：CPU vs. GPU 对比&lt;/h3&gt;&lt;p&gt;为了更直观地感受性能差异，可以进行一个简单的对比测试。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在运行着 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口中，按 &lt;code&gt;Ctrl+C&lt;/code&gt; 停止服务器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不设置&lt;/strong&gt; &lt;code&gt;OLLAMA_NUM_GPU&lt;/code&gt; 环境变量，直接运行 &lt;code&gt;.\ollama serve&lt;/code&gt; 启动服务器。这将强制 Ollama 使用 CPU 进行推理。&lt;/li&gt;
+&lt;li&gt;回到 Open WebUI，使用相同的模型提出相同的问题。您会发现回答的生成速度（以 tokens/秒计）明显变慢。&lt;/li&gt;
+&lt;li&gt;同时观察任务管理器，此时您会看到 CPU 利用率飙升，而 GPU 的计算引擎则处于空闲状态。这个鲜明的对比无可辩驳地证明了我们之前配置的价值 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第六部分：深度排错与高级主题&#34;&gt;&lt;a href=&#34;#第六部分：深度排错与高级主题&#34; class=&#34;headerlink&#34; title=&#34;第六部分：深度排错与高级主题&#34;&gt;&lt;/a&gt;第六部分：深度排错与高级主题&lt;/h2&gt;&lt;h3 id=&#34;6-1-常见问题与解决方案&#34;&gt;&lt;a href=&#34;#6-1-常见问题与解决方案&#34; class=&#34;headerlink&#34; title=&#34;6.1. 常见问题与解决方案&#34;&gt;&lt;/a&gt;6.1. 常见问题与解决方案&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;症状&lt;/th&gt;
+&lt;th&gt;可能原因&lt;/th&gt;
+&lt;th&gt;解决方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;加载模型时出现 &lt;code&gt;VIDEO_SCHEDULER_INTERNAL_ERROR&lt;/code&gt; 蓝屏死机 (BSOD)&lt;/td&gt;
+&lt;td&gt;显卡驱动程序不稳定或存在冲突。&lt;/td&gt;
+&lt;td&gt;按照第二部分 2.1 节的指导，执行一次驱动程序的“清洁安装”。如果问题依旧，使用 DDU 工具彻底卸载后重装 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;模型运行缓慢，任务管理器显示 CPU 占用高，GPU 计算引擎无活动。&lt;/td&gt;
+&lt;td&gt;启动 &lt;code&gt;ollama serve&lt;/code&gt; 之前，未正确设置 &lt;code&gt;$env:OLLAMA_NUM_GPU=&#34;999&#34;&lt;/code&gt; 环境变量。&lt;/td&gt;
+&lt;td&gt;停止服务器 (&lt;code&gt;Ctrl+C&lt;/code&gt;)，在 PowerShell 中正确设置该环境变量后，再重新启动服务器 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PowerShell 中提示 &lt;code&gt;conda activate&lt;/code&gt; 命令未找到。&lt;/td&gt;
+&lt;td&gt;Conda 未针对 PowerShell 进行初始化。&lt;/td&gt;
+&lt;td&gt;运行 &lt;code&gt;conda init powershell&lt;/code&gt; 命令，然后关闭并重新打开 Windows Terminal 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Open WebUI 界面显示“服务器连接错误”。&lt;/td&gt;
+&lt;td&gt;Ollama 后端服务器未运行，或网络配置问题。&lt;/td&gt;
+&lt;td&gt;确保运行 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口没有关闭且无错误。在 Open WebUI 的“设置 &amp;gt; 连接”中，检查 API URL 是否为 &lt;code&gt;http://localhost:11434&lt;/code&gt; 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Conda 安装 (&lt;code&gt;pip install&lt;/code&gt; 或 &lt;code&gt;conda create&lt;/code&gt;) 失败或卡在“Solving environment”。&lt;/td&gt;
+&lt;td&gt;Conda 频道冲突或网络连接问题。&lt;/td&gt;
+&lt;td&gt;确保网络连接稳定。尝试在终端运行 &lt;code&gt;conda clean -a -y&lt;/code&gt; 清理缓存。作为最后的手段，可以尝试 &lt;code&gt;conda config --set channel_priority flexible&lt;/code&gt; 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;6-2-定位与阅读日志文件&#34;&gt;&lt;a href=&#34;#6-2-定位与阅读日志文件&#34; class=&#34;headerlink&#34; title=&#34;6.2. 定位与阅读日志文件&#34;&gt;&lt;/a&gt;6.2. 定位与阅读日志文件&lt;/h3&gt;&lt;p&gt;当遇到更复杂的问题时，日志文件是您的最佳帮手。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;日志文件位置&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;服务器日志&lt;/strong&gt;：&lt;code&gt;%LOCALAPPDATA%\Ollama&lt;/code&gt; 目录下的 &lt;code&gt;server.log&lt;/code&gt; 文件包含了最新的服务器运行日志 。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;模型存储位置&lt;/strong&gt;：&lt;code&gt;%HOMEPATH%\.ollama&lt;/code&gt; 目录，这里存放着您下载的所有模型文件 。  &lt;/p&gt;
+&lt;p&gt;您可以在文件资源管理器的地址栏直接输入以上路径（包括百分号）来快速访问。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启用调试日志&lt;/strong&gt;： 为了获得更详细的排错信息，可以停止 Ollama 服务器，然后使用以下命令重启，这将启用调试模式：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;$env:OLLAMA_DEBUG=&#34;1&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-3-高级自定义：更改模型存储位置&#34;&gt;&lt;a href=&#34;#6-3-高级自定义：更改模型存储位置&#34; class=&#34;headerlink&#34; title=&#34;6.3. 高级自定义：更改模型存储位置&#34;&gt;&lt;/a&gt;6.3. 高级自定义：更改模型存储位置&lt;/h3&gt;&lt;p&gt;LLM 模型文件通常体积巨大，很多用户希望将它们存储在非系统盘（如 D 盘）上。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 Windows 的“高级系统设置”（可以在开始菜单中搜索）。&lt;/li&gt;
+&lt;li&gt;点击“环境变量”按钮。&lt;/li&gt;
+&lt;li&gt;在“用户变量”区域，点击“新建”。&lt;/li&gt;
+&lt;li&gt;变量名填写 &lt;code&gt;OLLAMA_MODELS&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;变量值填写您希望存储模型的新路径，例如 &lt;code&gt;D:\OllamaModels&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;逐级点击“确定”保存设置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;此更改需要完全退出并重新启动 Ollama 应用程序（包括后台服务）才能生效&lt;/strong&gt; 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过遵循本指南的详尽步骤，您已成功将您的英特尔 Arc A770 16G 显卡打造成一个强大的本地 AI 推理平台。享受探索大型语言模型世界的乐趣吧！&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

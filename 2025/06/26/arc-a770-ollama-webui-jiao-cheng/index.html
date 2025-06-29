@@ -1,0 +1,1710 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Arc A770 Ollama WebUI 教程, 逐梦">
+    <meta name="description" content="Arc A770 Ollama WebUI 教程">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Arc A770 Ollama WebUI 教程 | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/46.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Arc A770 Ollama WebUI 教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                教程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-06-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-06-26
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Arc-A770-Ollama-WebUI-教程"><a href="#Arc-A770-Ollama-WebUI-教程" class="headerlink" title="Arc A770 Ollama WebUI 教程"></a>Arc A770 Ollama WebUI 教程</h1><p>在 Windows 上利用 Arc A770 16G 和 IPEX-LLM 运行 Ollama 大语言模型的终极指南</p>
+<h2 id="第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能"><a href="#第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能" class="headerlink" title="第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能"></a>第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能</h2><h3 id="1-1-前景与挑战"><a href="#1-1-前景与挑战" class="headerlink" title="1.1. 前景与挑战"></a>1.1. 前景与挑战</h3><p>英特尔锐炫 Arc A770 16G 显卡凭借其高达 16 GB 的海量显存，为在本地运行大型语言模型（LLM）提供了一个极具性价比和吸引力的硬件平台。充足的显存意味着可以流畅运行更大、更复杂的模型，这对于追求高质量本地 AI 体验的用户而言至关重要。</p>
+<p>然而，一个核心挑战阻碍了这条道路：标准的、从官方网站下载的 Windows 版 Ollama 应用程序，其默认配置并不能直接利用英特尔 Arc GPU 进行硬件加速 。这是因为其标准后端主要依赖于为英伟达（NVIDIA）设计的 CUDA 技术，或是为其他硬件设计的 DirectML 技术，而这些技术在标准 Ollama 的框架内并未对英特尔的 Xe HPG 架构提供原生支持 。直接安装标准版 Ollama 会导致模型推理任务完全由 CPU 执行，无法发挥 Arc A770 强大的并行计算能力。  </p>
+<h3 id="1-2-解决方案：英特尔-IPEX-LLM-这座桥梁"><a href="#1-2-解决方案：英特尔-IPEX-LLM-这座桥梁" class="headerlink" title="1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁"></a>1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁</h3><p>解决这一挑战的关键在于英特尔官方推出的“英特尔 PyTorch LLM 扩展库”（Intel® Extension for PyTorch* for LLM），简称 IPEX-LLM。它并非一个简单的插件，而是一个全面的加速库，为 Ollama 等框架提供了一个基于 oneAPI 和 SYCL 编程模型构建的、为英特尔 GPU 量身定制的后端 。  </p>
+<p>本指南的核心，正是利用一个由英特尔提供、经过特殊编译的 Ollama 版本。该版本将默认的推理引擎替换为了 IPEX-LLM，从而打通了软件与 Arc 显卡之间的加速通道。这并非一个脆弱或不稳定的社区项目，而是由硬件制造商官方支持的解决方案。英特尔通过其官方 GitHub 仓库积极开发并推广此方案，发布了易于使用的“便携式压缩包”（Portable Zips），并提供了详尽的快速入门文档，这为方案的可靠性和未来更新提供了有力保障 。  </p>
+<h3 id="1-3-我们的路线图"><a href="#1-3-我们的路线图" class="headerlink" title="1.3. 我们的路线图"></a>1.3. 我们的路线图</h3><p>本教程将遵循一条清晰的路径，引导您完成从零到一的全部署过程：</p>
+<ol>
+<li><strong>系统基础准备</strong>：安装并配置必要的驱动程序和软件环境。</li>
+<li><strong>核心引擎部署</strong>：安装并启动经过 IPEX-LLM 加速的 Ollama 后端服务。</li>
+<li><strong>前端界面搭建</strong>：安装并连接用户友好的 Open WebUI，提供图形化交互界面。</li>
+<li><strong>验证与排错</strong>：确认 GPU 加速已成功启用，并提供常见问题的解决方案。</li>
+</ol>
+<hr>
+<h2 id="第二部分：基础设置-准备您的-Windows-系统"><a href="#第二部分：基础设置-准备您的-Windows-系统" class="headerlink" title="第二部分：基础设置 - 准备您的 Windows 系统"></a>第二部分：基础设置 - 准备您的 Windows 系统</h2><p>在开始部署之前，确保系统环境符合要求是成功的先决条件。下面的清单和步骤将帮助您准备好一切。</p>
+<p><strong>系统必备组件清单</strong></p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>推荐版本/要求</th>
+<th>下载地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>英特尔 Arc 显卡驱动</td>
+<td>最新 WHQL 认证版 (例如 32.0.101.6881 或更高)</td>
+<td><a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/downloads.html">英特尔官方下载中心</a></td>
+</tr>
+<tr>
+<td>Miniforge (Conda)</td>
+<td>最新版</td>
+<td>(<a target="_blank" rel="noopener" href="https://github.com/conda-forge/miniforge/releases/latest">https://github.com/conda-forge/miniforge/releases/latest</a>)</td>
+</tr>
+<tr>
+<td>Windows Terminal</td>
+<td>最新版</td>
+<td>(<a target="_blank" rel="noopener" href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701">https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701</a>)</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-英特尔-Arc-显卡驱动：性能的基石"><a href="#2-1-英特尔-Arc-显卡驱动：性能的基石" class="headerlink" title="2.1. 英特尔 Arc 显卡驱动：性能的基石"></a>2.1. 英特尔 Arc 显卡驱动：性能的基石</h3><p>整个技术栈依赖于最新的显卡驱动程序通过英特尔 oneAPI Level Zero 接口与 GPU 进行通信。过时、损坏或由 Windows Update 自动安装的通用驱动程序是导致失败的主要原因。</p>
+<p><strong>第一步：识别当前驱动版本</strong> 打开英特尔锐炫控制中心（Intel Arc Control）软件，或通过设备管理器查看当前安装的显卡驱动程序版本 。  </p>
+<p><strong>第二步：下载正确的驱动程序</strong> 访问上表中提供的英特尔官方下载中心链接，下载适用于 Arc A770 16GB 的最新 WHQL 认证驱动程序。根据资料，一个可靠的版本是 <code>32.0.101.6881</code>，对应的安装文件名为 <code>gfx_win_101.6881.exe</code> 。  </p>
+<p><strong>第三步：执行一次“清洁安装”（推荐的最佳实践）</strong> 为了从根源上避免潜在的、难以诊断的故障，强烈建议执行一次“清洁安装”。在驱动安装过程中，选择“自定义安装”，然后勾选“执行清洁安装”选项。这将移除所有旧的驱动文件和配置，避免新旧文件冲突。</p>
+<p>对于追求极致稳定或在后续步骤中遇到蓝屏错误（如 <code>VIDEO_SCHEDULER_INTERNAL_ERROR</code> ）的用户，可以采用更彻底的方法：使用 Display Driver Uninstaller (DDU) 工具。这是英特尔官方支持文档中也提及的高级方法，可以确保完全清除旧驱动的残留 。  </p>
+<p><strong>第四步：验证安装</strong> 安装完成后，重启计算机。再次打开英特尔锐炫控制中心，确认驱动程序版本已更新为最新版本。</p>
+<h3 id="2-2-命令行与环境设置"><a href="#2-2-命令行与环境设置" class="headerlink" title="2.2. 命令行与环境设置"></a>2.2. 命令行与环境设置</h3><p><strong>第一步：安装 Miniforge</strong> 相比于完整的 Anaconda 发行版，Miniforge 更为轻量，是搭建 Python 环境的更优选择。运行 Miniforge 安装程序，在安装过程中，建议勾选“Add Miniforge3 to my PATH environment variable”选项，这将简化后续的命令行操作 。  </p>
+<p><strong>第二步：安装与配置 Windows Terminal</strong> 从 Microsoft Store 安装 Windows Terminal，它提供了现代化的多标签页和强大的 PowerShell 支持，是执行后续所有命令的推荐工具。</p>
+<p><strong>第三步：为 PowerShell 初始化 Conda</strong> 这是一个常见的障碍点。打开 Windows Terminal (PowerShell)，运行以下命令：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">conda init powershell<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>此命令会修改您的 PowerShell 配置文件，使其能够识别 <code>conda</code> 命令 。完成后，必须关闭并重新打开 Windows Terminal 才能使更改生效。  </p>
+<p><strong>第四步：设置 PowerShell 执行策略</strong> 出于安全考虑，PowerShell 的默认执行策略可能会阻止 Conda 激活脚本的运行。在新的 PowerShell 窗口中，运行以下命令以允许这些脚本执行：</p>
+<pre class="line-numbers language-none"><code class="language-none">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在提示时，输入 <code>Y</code> 并按回车确认 。  </p>
+<p><strong>第五步：验证 Conda 安装</strong> 在 PowerShell 口中输入 <code>conda --version</code>。如果安装正确，将显示 Conda 的版本号，表明您的命令行环境已准备就绪。</p>
+<hr>
+<h2 id="第三部分：核心引擎-部署加速的-Ollama-后端"><a href="#第三部分：核心引擎-部署加速的-Ollama-后端" class="headerlink" title="第三部分：核心引擎 - 部署加速的 Ollama 后端"></a>第三部分：核心引擎 - 部署加速的 Ollama 后端</h2><h3 id="3-1-为何选择-IPEX-LLM-定制版-Ollama"><a href="#3-1-为何选择-IPEX-LLM-定制版-Ollama" class="headerlink" title="3.1. 为何选择 IPEX-LLM 定制版 Ollama"></a>3.1. 为何选择 IPEX-LLM 定制版 Ollama</h3><p>在此必须明确：从 <code>ollama.com</code> 官方网站下载的标准版 Ollama 安装程序 <strong>无法</strong> 用于本教程的目标。如果您已经安装了标准版，请先将其卸载。</p>
+<p>我们将使用的是英特尔提供的、内建了 IPEX-LLM 支持的特殊版本。它通过 oneAPI 和 SYCL 技术栈，将推理任务直接交由英特尔 GPU 处理，从而实现硬件加速 。英特尔提供的“便携式压缩包”方案，极大地降低了用户的配置门槛，是目前最推荐、最便捷的部署方式，避免了早期版本中复杂的依赖安装和初始化脚本步骤 。  </p>
+<h3 id="3-2-创建专用的-AI-后端环境"><a href="#3-2-创建专用的-AI-后端环境" class="headerlink" title="3.2. 创建专用的 AI 后端环境"></a>3.2. 创建专用的 AI 后端环境</h3><p>为了避免不同软件间的依赖冲突，我们将为 Ollama 后端创建一个独立的、干净的 Conda 环境。</p>
+<ol>
+<li><p>在 PowerShell 中，运行以下命令创建环境：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">conda create -n ipex-ollama python=3.11 -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这会创建一个名为 <code>ipex-ollama</code> 的环境，并指定 Python 版本为 3.11，这是经过验证的兼容版本 。  </p>
+</li>
+<li><p>激活该环境：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">conda activate ipex-ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>激活后，PowerShell 提示符前会显示 <code>(ipex-ollama)</code>，表示您当前正工作在此环境中。</p>
+</li>
+</ol>
+<h3 id="3-3-安装-IPEX-LLM-版-Ollama"><a href="#3-3-安装-IPEX-LLM-版-Ollama" class="headerlink" title="3.3. 安装 IPEX-LLM 版 Ollama"></a>3.3. 安装 IPEX-LLM 版 Ollama</h3><p><strong>第一步：下载便携式软件包</strong> 访问(<a target="_blank" rel="noopener" href="https://github.com/intel/ipex-llm/releases)%EF%BC%8C%E6%89%BE%E5%88%B0%E6%9C%80%E6%96%B0%E7%9A%84%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%8C%E5%B9%B6%E4%B8%8B%E8%BD%BD%E9%80%82%E7%94%A8%E4%BA%8E">https://github.com/intel/ipex-llm/releases)，找到最新的发行版，并下载适用于</a> Windows 的 <code>Ollama-Portable-Zip</code> 文件 。  </p>
+<p><strong>第二步：解压软件包</strong> 在您的硬盘上创建一个专用于 AI 工具的文件夹，例如 <code>C:\ai-tools\</code>。然后在此文件夹下再创建一个 <code>ipex-ollama</code> 文件夹，并将下载的压缩包内容完整地解压到这里。最终路径应类似于 <code>C:\ai-tools\ipex-ollama</code>。</p>
+<p><strong>第三步：在终端中导航至该目录</strong> 在已激活 <code>ipex-ollama</code> 环境的 PowerShell 窗口中，使用 <code>cd</code> 命令进入您刚刚创建的文件夹：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">cd C:\ai-tools\ipex-ollama<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-4-启动-GPU-加速的-Ollama-服务器"><a href="#3-4-启动-GPU-加速的-Ollama-服务器" class="headerlink" title="3.4. 启动 GPU 加速的 Ollama 服务器"></a>3.4. 启动 GPU 加速的 Ollama 服务器</h3><p>这是整个流程中最关键的一步。我们需要通过设置特定的环境变量来“指挥”Ollama 使用 GPU。</p>
+<p><strong>关键环境变量解析</strong></p>
+<table>
+<thead>
+<tr>
+<th>环境变量</th>
+<th>推荐值</th>
+<th>目的与解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>OLLAMA_NUM_GPU</code></td>
+<td><code>999</code></td>
+<td><strong>最核心的设置</strong>。此变量告知 Ollama 将模型的多少层卸载到 GPU。设置为一个非常大的数字（如 999）等同于“全部卸载”，以最大化利用 GPU 资源 。</td>
+</tr>
+<tr>
+<td><code>ZES_ENABLE_SYSMAN</code></td>
+<td><code>1</code></td>
+<td>启用 Level Zero 驱动程序栈中的 Sysman 库。IPEX-LLM 需要此库来进行 GPU 监控和内存管理 。</td>
+</tr>
+<tr>
+<td><code>SYCL_CACHE_PERSISTENT</code></td>
+<td><code>1</code></td>
+<td>启用持久化 SYCL 内核缓存。当模型第一次加载时，SYCL 会将编译后的 GPU 内核代码缓存到硬盘。这会显著加快后续加载相同或不同模型的速度 。</td>
+</tr>
+</tbody></table>
+<p><strong>启动服务器的命令</strong></p>
+<ol>
+<li><p>在 PowerShell 中，逐行运行以下命令来设置环境变量。这些设置仅对当前终端会话有效。</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">$env:OLLAMA_NUM_GPU="999"
+$env:ZES_ENABLE_SYSMAN="1"
+$env:SYCL_CACHE_PERSISTENT="1"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>设置完毕后，运行以下命令启动 Ollama 服务器：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">.\ollama serve
+or
+start-ollama.bat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p>服务器成功启动后，您会看到类似 <code>time=... level=INFO source=server.go:.. msg="starting server..."</code> 的日志输出。<strong>请务必保持此终端窗口处于打开状态</strong>，因为它就是您的 AI 推理引擎。</p>
+<hr>
+<h2 id="第四部分：用户体验-安装并连接-Open-WebUI"><a href="#第四部分：用户体验-安装并连接-Open-WebUI" class="headerlink" title="第四部分：用户体验 - 安装并连接 Open WebUI"></a>第四部分：用户体验 - 安装并连接 Open WebUI</h2><p>Ollama 后端已经运行，但它只提供了一个命令行接口。为了获得类似 ChatGPT 的图形化聊天体验，我们需要安装一个前端界面——Open WebUI。</p>
+<h3 id="4-1-准备前端环境"><a href="#4-1-准备前端环境" class="headerlink" title="4.1. 准备前端环境"></a>4.1. 准备前端环境</h3><p>同样地，我们将为 Open WebUI 创建一个独立的环境，以确保其依赖项不会与后端环境发生冲突。</p>
+<ol>
+<li><p><strong>打开一个新的 Windows Terminal 标签页或窗口</strong>。不要在运行着 Ollama 服务器的窗口中操作。</p>
+</li>
+<li><p>创建新的 Conda 环境：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">conda create -n open-webui python=3.11 -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>激活此新环境：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">conda activate open-webui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h3 id="4-2-安装并启动-Web-界面"><a href="#4-2-安装并启动-Web-界面" class="headerlink" title="4.2. 安装并启动 Web 界面"></a>4.2. 安装并启动 Web 界面</h3><ol>
+<li><p>在已激活 <code>open-webui</code> 环境的 PowerShell 窗口中，使用 <code>pip</code> 命令安装 Open WebUI：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">pip install open-webui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>安装完成后，运行以下命令启动其 Web 服务器：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">open-webui serve<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>服务器启动后，您会看到日志输出，并提示服务正在 <code>http://localhost:8080</code> 上运行 。  </p>
+<p><strong>同样，这个终端窗口也必须保持打开状态</strong>。至此，您应该有两个持续运行的终端窗口：一个用于 Ollama 后端，一个用于 Open WebUI 前端。</p>
+<h3 id="4-3-首次设置与连接"><a href="#4-3-首次设置与连接" class="headerlink" title="4.3. 首次设置与连接"></a>4.3. 首次设置与连接</h3><ol>
+<li>打开您的网页浏览器（如 Chrome, Edge, Firefox），访问地址：<code>http://localhost:8080</code>。</li>
+<li>首次访问时，Open WebUI 会引导您创建一个管理员账户。请按提示完成注册 。  </li>
+<li>登录后，Open WebUI 通常会自动检测到在本地 <code>http://localhost:11434</code> 端口上运行的 Ollama 服务并建立连接 。  </li>
+<li>如果连接失败或未自动识别，可以手动进行配置。点击左侧边栏的“设置”图标，进入“连接”选项卡，确认 Ollama API 的 URL 地址已正确设置为 <code>http://localhost:11434</code> 。</li>
+</ol>
+<hr>
+<h2 id="第五部分：验证与首次使用-对系统进行测试"><a href="#第五部分：验证与首次使用-对系统进行测试" class="headerlink" title="第五部分：验证与首次使用 - 对系统进行测试"></a>第五部分：验证与首次使用 - 对系统进行测试</h2><p>现在，万事俱备，是时候验证我们的成果并运行第一个大语言模型了。</p>
+<h3 id="5-1-运行您的第一个-LLM"><a href="#5-1-运行您的第一个-LLM" class="headerlink" title="5.1. 运行您的第一个 LLM"></a>5.1. 运行您的第一个 LLM</h3><ol>
+<li>在 Open WebUI 的主界面，点击顶部的模型选择框。</li>
+<li>在输入框中键入一个模型名称，例如 <code>phi3:medium</code> 或 <code>llama3:8b</code>。由于模型尚未在本地安装，WebUI 会提示您下载它。点击确认后，Open WebUI 会向后端发送指令，开始下载模型 。  </li>
+<li>此时，您可以切换到运行着 <code>ollama serve</code> 的终端窗口，观察模型的下载进度条。</li>
+<li>模型下载完成后，在 WebUI 的聊天框中输入一个简单的问题，例如“天空为什么是蓝色的？”，然后按回车。片刻之后，您应该就能看到由您的 Arc A770 显卡驱动生成的回答。</li>
+</ol>
+<h3 id="5-2-确认真正的-GPU-加速"><a href="#5-2-确认真正的-GPU-加速" class="headerlink" title="5.2. 确认真正的 GPU 加速"></a>5.2. 确认真正的 GPU 加速</h3><p>如何确定模型确实是由 GPU 而非 CPU 运行的？Windows 任务管理器可以给我们明确的答案。</p>
+<p><strong>第一步：打开任务管理器</strong> 按下 <code>Ctrl+Shift+Esc</code> 组合键。</p>
+<p><strong>第二步：导航至“性能”选项卡</strong> 在任务管理器窗口中，点击“性能”选项卡，然后在左侧边栏中找到并点击您的“Intel Arc(TM) Graphics” GPU。</p>
+<p><strong>第三步：更改引擎视图（关键步骤）</strong> 任务管理器默认显示的 GPU 利用率图表是“3D”引擎，这主要用于游戏和图形渲染，与我们的计算任务无关。您需要点击图表上方的下拉菜单（默认为“3D”），然后将其更改为 <strong>Compute_0</strong> 或 <strong>Graphics_1</strong> 。这是 DirectML 和 SYCL 等计算 API 使用的引擎。  </p>
+<p><strong>第四步：观察利用率</strong> 回到 Open WebUI，再次向模型提问，并密切关注任务管理器。在模型生成回答的几秒钟内，您应该能看到“Compute_0”或“Graphics_1”图表出现明显的、尖锐的峰值。</p>
+<p><strong>第五步：观察显存（VRAM）使用情况</strong> 在同一性能页面下，找到“专用 GPU 内存”图表。当您加载并运行模型时，该图表的占用率会显著上升，并维持在一个较高的水平，这表明模型权重已被成功加载到显卡的 VRAM 中 。  </p>
+<p><strong>计算引擎的活动和专用显存的高占用率，是 GPU 加速已成功启用的确凿证据</strong>。</p>
+<h3 id="5-3-性能健全性检查：CPU-vs-GPU-对比"><a href="#5-3-性能健全性检查：CPU-vs-GPU-对比" class="headerlink" title="5.3. 性能健全性检查：CPU vs. GPU 对比"></a>5.3. 性能健全性检查：CPU vs. GPU 对比</h3><p>为了更直观地感受性能差异，可以进行一个简单的对比测试。</p>
+<ol>
+<li>在运行着 <code>ollama serve</code> 的终端窗口中，按 <code>Ctrl+C</code> 停止服务器。</li>
+<li><strong>不设置</strong> <code>OLLAMA_NUM_GPU</code> 环境变量，直接运行 <code>.\ollama serve</code> 启动服务器。这将强制 Ollama 使用 CPU 进行推理。</li>
+<li>回到 Open WebUI，使用相同的模型提出相同的问题。您会发现回答的生成速度（以 tokens/秒计）明显变慢。</li>
+<li>同时观察任务管理器，此时您会看到 CPU 利用率飙升，而 GPU 的计算引擎则处于空闲状态。这个鲜明的对比无可辩驳地证明了我们之前配置的价值 。</li>
+</ol>
+<hr>
+<h2 id="第六部分：深度排错与高级主题"><a href="#第六部分：深度排错与高级主题" class="headerlink" title="第六部分：深度排错与高级主题"></a>第六部分：深度排错与高级主题</h2><h3 id="6-1-常见问题与解决方案"><a href="#6-1-常见问题与解决方案" class="headerlink" title="6.1. 常见问题与解决方案"></a>6.1. 常见问题与解决方案</h3><table>
+<thead>
+<tr>
+<th>症状</th>
+<th>可能原因</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>加载模型时出现 <code>VIDEO_SCHEDULER_INTERNAL_ERROR</code> 蓝屏死机 (BSOD)</td>
+<td>显卡驱动程序不稳定或存在冲突。</td>
+<td>按照第二部分 2.1 节的指导，执行一次驱动程序的“清洁安装”。如果问题依旧，使用 DDU 工具彻底卸载后重装 。</td>
+</tr>
+<tr>
+<td>模型运行缓慢，任务管理器显示 CPU 占用高，GPU 计算引擎无活动。</td>
+<td>启动 <code>ollama serve</code> 之前，未正确设置 <code>$env:OLLAMA_NUM_GPU="999"</code> 环境变量。</td>
+<td>停止服务器 (<code>Ctrl+C</code>)，在 PowerShell 中正确设置该环境变量后，再重新启动服务器 。</td>
+</tr>
+<tr>
+<td>PowerShell 中提示 <code>conda activate</code> 命令未找到。</td>
+<td>Conda 未针对 PowerShell 进行初始化。</td>
+<td>运行 <code>conda init powershell</code> 命令，然后关闭并重新打开 Windows Terminal 。</td>
+</tr>
+<tr>
+<td>Open WebUI 界面显示“服务器连接错误”。</td>
+<td>Ollama 后端服务器未运行，或网络配置问题。</td>
+<td>确保运行 <code>ollama serve</code> 的终端窗口没有关闭且无错误。在 Open WebUI 的“设置 &gt; 连接”中，检查 API URL 是否为 <code>http://localhost:11434</code> 。</td>
+</tr>
+<tr>
+<td>Conda 安装 (<code>pip install</code> 或 <code>conda create</code>) 失败或卡在“Solving environment”。</td>
+<td>Conda 频道冲突或网络连接问题。</td>
+<td>确保网络连接稳定。尝试在终端运行 <code>conda clean -a -y</code> 清理缓存。作为最后的手段，可以尝试 <code>conda config --set channel_priority flexible</code> 。</td>
+</tr>
+</tbody></table>
+<h3 id="6-2-定位与阅读日志文件"><a href="#6-2-定位与阅读日志文件" class="headerlink" title="6.2. 定位与阅读日志文件"></a>6.2. 定位与阅读日志文件</h3><p>当遇到更复杂的问题时，日志文件是您的最佳帮手。</p>
+<ul>
+<li><p><strong>日志文件位置</strong>：</p>
+<ul>
+<li><p><strong>服务器日志</strong>：<code>%LOCALAPPDATA%\Ollama</code> 目录下的 <code>server.log</code> 文件包含了最新的服务器运行日志 。  </p>
+</li>
+<li><p><strong>模型存储位置</strong>：<code>%HOMEPATH%\.ollama</code> 目录，这里存放着您下载的所有模型文件 。  </p>
+<p>您可以在文件资源管理器的地址栏直接输入以上路径（包括百分号）来快速访问。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>启用调试日志</strong>： 为了获得更详细的排错信息，可以停止 Ollama 服务器，然后使用以下命令重启，这将启用调试模式：</p>
+<pre class="line-numbers language-PowerShell" data-language="PowerShell"><code class="language-PowerShell">$env:OLLAMA_DEBUG="1"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h3 id="6-3-高级自定义：更改模型存储位置"><a href="#6-3-高级自定义：更改模型存储位置" class="headerlink" title="6.3. 高级自定义：更改模型存储位置"></a>6.3. 高级自定义：更改模型存储位置</h3><p>LLM 模型文件通常体积巨大，很多用户希望将它们存储在非系统盘（如 D 盘）上。</p>
+<ol>
+<li>打开 Windows 的“高级系统设置”（可以在开始菜单中搜索）。</li>
+<li>点击“环境变量”按钮。</li>
+<li>在“用户变量”区域，点击“新建”。</li>
+<li>变量名填写 <code>OLLAMA_MODELS</code>。</li>
+<li>变量值填写您希望存储模型的新路径，例如 <code>D:\OllamaModels</code>。</li>
+<li>逐级点击“确定”保存设置。</li>
+<li><strong>此更改需要完全退出并重新启动 Ollama 应用程序（包括后台服务）才能生效</strong> 。</li>
+</ol>
+<p>通过遵循本指南的详尽步骤，您已成功将您的英特尔 Arc A770 16G 显卡打造成一个强大的本地 AI 推理平台。享受探索大型语言模型世界的乐趣吧！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/">https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="在WSL中将python3命令别名为python">
+                        
+                        <span class="card-title">在WSL中将python3命令别名为python</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在WSL中将python3命令别名为python
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-06-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/06/21/dai-li-jia-su-you-xi-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="代理加速游戏教程">
+                        
+                        <span class="card-title">代理加速游戏教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            代理加速游戏教程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/net/">
+                        <span class="chip bg-color">net</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">310.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

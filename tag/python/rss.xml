@@ -5,51 +5,98 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 17 Jun 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Tue, 17 Jun 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
-        <category>intel</category>
+        <pubDate>Thu, 26 Jun 2025 22:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 26 Jun 2025 22:25:00 +0800</lastBuildDate>
         <category>cloudflare</category>
-        <category>tips</category>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
         <category>安装</category>
+        <category>email</category>
+        <category>tips</category>
         <category>re</category>
         <category>工具</category>
-        <category>Java</category>
         <category>教程</category>
         <category>linux</category>
-        <category>环境</category>
+        <category>Java</category>
         <category>conda</category>
+        <category>环境</category>
         <category>bug</category>
-        <category>windows</category>
         <category>web</category>
         <category>wp</category>
-        <category>BUUCTF</category>
         <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>windows</category>
+        <category>net</category>
         <category>server</category>
-        <category>wall</category>
         <category>comfyui</category>
         <category>powershell</category>
+        <category>wall</category>
         <category>tools</category>
+        <category>emby</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>emby</category>
-        <category>python</category>
-        <category>git</category>
         <category>google</category>
-        <category>java</category>
+        <category>git</category>
         <category>学习</category>
+        <category>java</category>
+        <category>python</category>
         <category>命令</category>
-        <category>远程</category>
-        <category>php</category>
         <category>文件上传</category>
+        <category>php</category>
+        <category>远程</category>
         <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
+        <category>mcp</category>
         <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/</guid>
+            <title>在WSL中将python3命令别名为python</title>
+            <link>https://0xdadream.github.io/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/</link>
+            <category>python</category>
+            <pubDate>Thu, 26 Jun 2025 22:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;在WSL中将-python3-命令别名为-python&#34;&gt;&lt;a href=&#34;#在WSL中将-python3-命令别名为-python&#34; class=&#34;headerlink&#34; title=&#34;在WSL中将 python3 命令别名为 python&#34;&gt;&lt;/a&gt;在WSL中将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;在 Windows Subsystem for Linux (WSL) 环境中，默认情况下，Python 3.x 版本通常通过 &lt;code&gt;python3&lt;/code&gt; 命令调用，而 &lt;code&gt;python&lt;/code&gt; 命令可能未定义或指向老旧的 Python 2.x 版本。为了方便起见，您可以将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;，从而直接使用 &lt;code&gt;python&lt;/code&gt; 命令来执行 Python 3.x。&lt;/p&gt;
+&lt;p&gt;最常用且推荐的方法是创建一个永久性的别名，这通过修改您 shell 的配置文件（通常是 &lt;code&gt;.bashrc&lt;/code&gt;）来实现。这样，每次启动新的 WSL 终端时，该别名都会自动生效。&lt;/p&gt;
+&lt;p&gt;以下是详细的步骤：&lt;/p&gt;
+&lt;h3 id=&#34;1-打开您的-shell-配置文件&#34;&gt;&lt;a href=&#34;#1-打开您的-shell-配置文件&#34; class=&#34;headerlink&#34; title=&#34;1. 打开您的 shell 配置文件&#34;&gt;&lt;/a&gt;1. 打开您的 shell 配置文件&lt;/h3&gt;&lt;p&gt;您需要使用一个命令行文本编辑器（如 &lt;code&gt;nano&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt; 或 &lt;code&gt;emacs&lt;/code&gt;）来编辑位于您用户主目录下的 &lt;code&gt;.bashrc&lt;/code&gt; 文件。对于大多数用户来说，默认的 shell 是 Bash。&lt;/p&gt;
+&lt;p&gt;打开终端并输入以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果您使用的是 Zsh，则应编辑 &lt;code&gt;.zshrc&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; ~/.zshrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-添加别名设置&#34;&gt;&lt;a href=&#34;#2-添加别名设置&#34; class=&#34;headerlink&#34; title=&#34;2. 添加别名设置&#34;&gt;&lt;/a&gt;2. 添加别名设置&lt;/h3&gt;&lt;p&gt;在打开的文件中，滚动到文件末尾，并添加以下这行代码：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;python3&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这一行代码的作用是告诉 shell，当您输入 &lt;code&gt;python&lt;/code&gt; 时，实际上应该执行 &lt;code&gt;python3&lt;/code&gt; 命令。&lt;/p&gt;
+&lt;p&gt;您还可以选择为 &lt;code&gt;pip&lt;/code&gt; 创建一个类似的别名：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;pip&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;pip3&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-保存并关闭文件&#34;&gt;&lt;a href=&#34;#3-保存并关闭文件&#34; class=&#34;headerlink&#34; title=&#34;3. 保存并关闭文件&#34;&gt;&lt;/a&gt;3. 保存并关闭文件&lt;/h3&gt;&lt;p&gt;如果您使用的是 &lt;code&gt;nano&lt;/code&gt; 编辑器，请按 &lt;code&gt;Ctrl + O&lt;/code&gt; 来保存文件，然后按 &lt;code&gt;Enter&lt;/code&gt; 确认。接着按 &lt;code&gt;Ctrl + X&lt;/code&gt; 退出编辑器。&lt;/p&gt;
+&lt;h3 id=&#34;4-使更改生效&#34;&gt;&lt;a href=&#34;#4-使更改生效&#34; class=&#34;headerlink&#34; title=&#34;4. 使更改生效&#34;&gt;&lt;/a&gt;4. 使更改生效&lt;/h3&gt;&lt;p&gt;新添加的别名不会立即在当前的终端会话中生效。您需要让 shell 重新加载配置文件。您可以通过以下任一方式实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;关闭并重新打开您的 WSL 终端。&lt;/strong&gt; 这是最简单直接的方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;在当前终端会话中执行以下命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者，如果您使用的是 Zsh：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.zshrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-验证别名是否生效&#34;&gt;&lt;a href=&#34;#5-验证别名是否生效&#34; class=&#34;headerlink&#34; title=&#34;5. 验证别名是否生效&#34;&gt;&lt;/a&gt;5. 验证别名是否生效&lt;/h3&gt;&lt;p&gt;现在，您可以在终端中输入以下命令来验证 &lt;code&gt;python&lt;/code&gt; 命令是否已成功指向 Python 3：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果一切顺利，输出结果应该显示您的 Python 3.x 版本号，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Python &lt;span class=&#34;token number&#34;&gt;3.10&lt;/span&gt;.6&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上步骤，您已经成功地在 WSL 中将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;，这将为您在开发过程中提供更便捷的体验。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/06/17/python-bao-guan-li/</guid>
             <title>Python 包管理与导入全方位教程</title>
@@ -1319,8 +1366,8 @@ print&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sys.path&lt;spa
             <guid isPermalink="true">https://0xdadream.github.io/2021/10/10/python-study/</guid>
             <title>python学习</title>
             <link>https://0xdadream.github.io/2021/10/10/python-study/</link>
-            <category>python</category>
             <category>学习</category>
+            <category>python</category>
             <pubDate>Sun, 10 Oct 2021 02:11:00 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;python学习&#34;&gt;&lt;a href=&#34;#python学习&#34; class=&#34;headerlink&#34; title=&#34;python学习&#34;&gt;&lt;/a&gt;python学习&lt;/h1&gt;&lt;h2 id=&#34;基础语法&#34;&gt;&lt;a href=&#34;#基础语法&#34; class=&#34;headerlink&#34; title=&#34;基础语法&#34;&gt;&lt;/a&gt;基础语法&lt;/h2&gt;&lt;h3 id=&#34;标识符&#34;&gt;&lt;a href=&#34;#标识符&#34; class=&#34;headerlink&#34; title=&#34;标识符&#34;&gt;&lt;/a&gt;标识符&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;首字母必须是字母或者下划线&lt;code&gt;_&lt;/code&gt;&lt;/li&gt;

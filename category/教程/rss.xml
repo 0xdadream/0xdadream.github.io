@@ -5,51 +5,955 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 17 Jun 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Tue, 17 Jun 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
-        <category>intel</category>
+        <pubDate>Sun, 29 Jun 2025 03:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 29 Jun 2025 03:25:00 +0800</lastBuildDate>
         <category>cloudflare</category>
-        <category>tips</category>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
         <category>安装</category>
+        <category>email</category>
+        <category>tips</category>
         <category>re</category>
         <category>工具</category>
-        <category>Java</category>
         <category>教程</category>
         <category>linux</category>
-        <category>环境</category>
+        <category>Java</category>
         <category>conda</category>
+        <category>环境</category>
         <category>bug</category>
-        <category>windows</category>
         <category>web</category>
         <category>wp</category>
-        <category>BUUCTF</category>
         <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>windows</category>
+        <category>net</category>
         <category>server</category>
-        <category>wall</category>
         <category>comfyui</category>
         <category>powershell</category>
+        <category>wall</category>
         <category>tools</category>
+        <category>emby</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>emby</category>
-        <category>python</category>
-        <category>git</category>
         <category>google</category>
-        <category>java</category>
+        <category>git</category>
         <category>学习</category>
+        <category>java</category>
+        <category>python</category>
         <category>命令</category>
-        <category>远程</category>
-        <category>php</category>
         <category>文件上传</category>
+        <category>php</category>
+        <category>远程</category>
         <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
         <category>汇编</category>
         <category>密码学</category>
+        <category>mcp</category>
         <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/29/ben-di-bu-shu-yu-pei-zhi-mcp-fu-wu-qi/</guid>
+            <title>本地部署与配置 MCP 服务器</title>
+            <link>https://0xdadream.github.io/2025/06/29/ben-di-bu-shu-yu-pei-zhi-mcp-fu-wu-qi/</link>
+            <category>mcp</category>
+            <pubDate>Sun, 29 Jun 2025 03:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;本地部署与配置-MCP-服务器&#34;&gt;&lt;a href=&#34;#本地部署与配置-MCP-服务器&#34; class=&#34;headerlink&#34; title=&#34;本地部署与配置 MCP 服务器&#34;&gt;&lt;/a&gt;本地部署与配置 MCP 服务器&lt;/h1&gt;&lt;p&gt;本指南将根据您提供的专业指令，演示如何为两个不同技术栈的 MCP 服务器（一个基于 Python/uv，一个基于 Bun/TypeScript）设置项目、运行服务，并在 Cursor 中进行配置。主要针对wsl。&lt;/p&gt;
+&lt;h3 id=&#34;项目一：mcp-sequential-thinking-Python-环境&#34;&gt;&lt;a href=&#34;#项目一：mcp-sequential-thinking-Python-环境&#34; class=&#34;headerlink&#34; title=&#34;项目一：mcp_sequential_thinking (Python 环境)&#34;&gt;&lt;/a&gt;&lt;strong&gt;项目一：&lt;code&gt;mcp_sequential_thinking&lt;/code&gt; (Python 环境)&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;这是一个使用 &lt;code&gt;uv&lt;/code&gt; 作为包管理器的 Python 项目。&lt;/p&gt;
+&lt;h4 id=&#34;1-设置项目&#34;&gt;&lt;a href=&#34;#1-设置项目&#34; class=&#34;headerlink&#34; title=&#34;1. 设置项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 设置项目&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;首先，克隆项目仓库（此处使用占位符，请替换为实际仓库地址），并创建虚拟环境。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 克隆你的项目
+git clone &amp;lt;your-python-mcp-repo-url&amp;gt;
+cd &amp;lt;project-folder&amp;gt;
+
+# 创建并激活虚拟环境
+uv venv
+
+# 激活环境
+# Windows
+.venv\Scripts\activate
+# Unix/Linux/macOS
+source .venv/bin/activate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-安装依赖&#34;&gt;&lt;a href=&#34;#2-安装依赖&#34; class=&#34;headerlink&#34; title=&#34;2. 安装依赖&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 安装依赖&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;&lt;code&gt;uv&lt;/code&gt; 提供了灵活的依赖安装选项。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 仅安装核心依赖
+uv pip install -e .
+
+# (推荐开发) 安装核心及测试工具
+uv pip install -e &#34;.[dev]&#34;
+
+# 安装所有可选依赖
+uv pip install -e &#34;.[all]&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;3-运行服务器&#34;&gt;&lt;a href=&#34;#3-运行服务器&#34; class=&#34;headerlink&#34; title=&#34;3. 运行服务器&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 运行服务器&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;您可以通过两种方式启动本地服务器。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 方式一：直接通过模块运行
+uv run -m mcp_sequential_thinking.server
+
+# 方式二：使用安装后生成的脚本
+mcp-sequential-thinking&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动后，请留意终端输出，确认服务器正在监听的 &lt;strong&gt;IP 地址和端口号&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;4-可选-运行测试&#34;&gt;&lt;a href=&#34;#4-可选-运行测试&#34; class=&#34;headerlink&#34; title=&#34;4. (可选) 运行测试&#34;&gt;&lt;/a&gt;&lt;strong&gt;4. (可选) 运行测试&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;确保代码质量，可以运行单元测试。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 运行所有测试
+pytest
+
+# 运行测试并生成覆盖率报告
+pytest --cov=mcp_sequential_thinking&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;项目二：context7-mcp-Bun-环境&#34;&gt;&lt;a href=&#34;#项目二：context7-mcp-Bun-环境&#34; class=&#34;headerlink&#34; title=&#34;项目二：context7-mcp (Bun 环境)&#34;&gt;&lt;/a&gt;&lt;strong&gt;项目二：&lt;code&gt;context7-mcp&lt;/code&gt; (Bun 环境)&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;这是一个使用 &lt;code&gt;Bun&lt;/code&gt; 作为运行时和工具链的 TypeScript/JavaScript 项目。&lt;/p&gt;
+&lt;h4 id=&#34;1-设置项目-1&#34;&gt;&lt;a href=&#34;#1-设置项目-1&#34; class=&#34;headerlink&#34; title=&#34;1. 设置项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 设置项目&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;克隆 &lt;code&gt;context7&lt;/code&gt; 的仓库并使用 &lt;code&gt;bun&lt;/code&gt; 安装依赖。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 克隆 context7 项目
+git clone &amp;lt;your-bun-mcp-repo-url&amp;gt;
+cd &amp;lt;project-folder&amp;gt;
+
+# 安装依赖
+bun i&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-构建项目&#34;&gt;&lt;a href=&#34;#2-构建项目&#34; class=&#34;headerlink&#34; title=&#34;2. 构建项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 构建项目&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;&lt;code&gt;bun&lt;/code&gt; 用于将 TypeScript 源代码编译为可执行的 JavaScript。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;bun run build&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令通常会在 &lt;code&gt;dist&lt;/code&gt; 目录下生成输出文件。&lt;/p&gt;
+&lt;h4 id=&#34;3-运行服务器-1&#34;&gt;&lt;a href=&#34;#3-运行服务器-1&#34; class=&#34;headerlink&#34; title=&#34;3. 运行服务器&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 运行服务器&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;构建完成后，运行服务器并可指定参数。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 基本运行方式
+bun run dist/index.js
+
+# 高级运行方式：指定传输协议和端口
+# 下例将使用 http 协议并在 8080 端口上运行
+bun run dist/index.js --transport http --port 8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;在-Cursor-中配置本地服务器&#34;&gt;&lt;a href=&#34;#在-Cursor-中配置本地服务器&#34; class=&#34;headerlink&#34; title=&#34;在 Cursor 中配置本地服务器&#34;&gt;&lt;/a&gt;&lt;strong&gt;在 Cursor 中配置本地服务器&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;将本地运行的服务器接入 Cursor 有两种主要方式：&lt;/p&gt;
+&lt;h4 id=&#34;方式一：HTTP-连接-推荐&#34;&gt;&lt;a href=&#34;#方式一：HTTP-连接-推荐&#34; class=&#34;headerlink&#34; title=&#34;方式一：HTTP 连接 (推荐)&#34;&gt;&lt;/a&gt;&lt;strong&gt;方式一：HTTP 连接 (推荐)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;当您的服务器已经在本地终端中成功运行时，可以使用此方法。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 Cursor 设置，进入 &lt;code&gt;MCP&lt;/code&gt; 配置页。&lt;/li&gt;
+&lt;li&gt;点击 “Add Server”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对于 &lt;code&gt;context7-mcp&lt;/code&gt; (假设运行在 8080 端口):&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name (名称):&lt;/strong&gt; &lt;code&gt;context7-local-http&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type (类型):&lt;/strong&gt; &lt;code&gt;http&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;URL (地址):&lt;/strong&gt; &lt;code&gt;http://localhost:8080&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对于 &lt;code&gt;mcp_sequential_thinking&lt;/code&gt;:&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name (名称):&lt;/strong&gt; &lt;code&gt;sequential-thinking-local-http&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type (类型):&lt;/strong&gt; &lt;code&gt;http&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;URL (地址):&lt;/strong&gt; &lt;code&gt;http://localhost:&amp;lt;YOUR_PYTHON_PORT&amp;gt;&lt;/code&gt; (请替换为 Python 服务器实际监听的端口号)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;方式二：Command-命令-由-Cursor-启动&#34;&gt;&lt;a href=&#34;#方式二：Command-命令-由-Cursor-启动&#34; class=&#34;headerlink&#34; title=&#34;方式二：Command 命令 (由 Cursor 启动)&#34;&gt;&lt;/a&gt;&lt;strong&gt;方式二：Command 命令 (由 Cursor 启动)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;这种方式让 Cursor 在需要时自动执行命令来启动服务器。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开 Cursor 设置，进入 &lt;code&gt;MCP&lt;/code&gt; 配置页。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;点击 “Add Server”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;配置示例 (适用于 TypeScript 项目):&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name (名称):&lt;/strong&gt; &lt;code&gt;context7-local-cmd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type (类型):&lt;/strong&gt; &lt;code&gt;command&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Command (命令):&lt;/strong&gt; &lt;code&gt;npx tsx /path/to/folder/context7-mcp/src/index.ts&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;重要提示&lt;/strong&gt;: 您必须将 &lt;code&gt;/path/to/folder/context7-mcp/src/index.ts&lt;/code&gt; 替换为您本地存放 &lt;code&gt;context7&lt;/code&gt; 项目的&lt;strong&gt;绝对路径&lt;/strong&gt;。这种方式更适合直接运行源文件，无需手动 &lt;code&gt;build&lt;/code&gt; 和 &lt;code&gt;run&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;书写形式&#34;&gt;&lt;a href=&#34;#书写形式&#34; class=&#34;headerlink&#34; title=&#34;书写形式&#34;&gt;&lt;/a&gt;书写形式&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;{
+  &#34;mcpServers&#34;: {
+    &#34;sequential-thinking&#34;: {
+      &#34;command&#34;: &#34;/home/hero/mcp-sequential-thinking/.venv/bin/mcp-sequential-thinking&#34;,
+      &#34;cwd&#34;: &#34;/home/hero/mcp-sequential-thinking&#34;
+    },
+    &#34;context7&#34;: {
+      &#34;command&#34;: &#34;bun&#34;,
+      &#34;args&#34;: [&#34;run&#34;, &#34;/home/hero/context7/src/index.ts&#34;]
+    }
+  }
+} &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自行理解&lt;/p&gt;
+&lt;h4 id=&#34;提示词&#34;&gt;&lt;a href=&#34;#提示词&#34; class=&#34;headerlink&#34; title=&#34;提示词&#34;&gt;&lt;/a&gt;提示词&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;你是一位具备顺序逻辑推理能力与跨文件代码理解能力的 AI 助手。我希望你结合 Sequential Thinking 插件的多步骤推理能力，以及 Context7 插件的跨上下文代码理解能力，帮助我更清晰、精准地完成以下任务。
+
+请执行以下策略：
+1. 拆分任务为合理的多个思维步骤，并依次处理（Sequential Thinking）。
+2. 若任务涉及多个文件或函数，自动调用 Context7 插件提取和关联上下文。
+3. 在必要时提供逐步思路、函数关系图、模块依赖路径，并解释推理过程。
+4. 保持逻辑清晰，输出建议时标明每一步对应的推理依据。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/</guid>
+            <title>WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)</title>
+            <link>https://0xdadream.github.io/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/</link>
+            <category>net</category>
+            <pubDate>Sun, 29 Jun 2025 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;WSL-2-通过-Windows-V2RayN-代理上网权威指南-2025版&#34;&gt;&lt;a href=&#34;#WSL-2-通过-Windows-V2RayN-代理上网权威指南-2025版&#34; class=&#34;headerlink&#34; title=&#34;WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)&#34;&gt;&lt;/a&gt;WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)&lt;/h1&gt;&lt;p&gt;本指南为最终版本，包含了所有验证成功的步骤，旨在提供最清晰、最可靠的配置流程。&lt;/p&gt;
+&lt;h2 id=&#34;第一部分：配置-WSL-2&#34;&gt;&lt;a href=&#34;#第一部分：配置-WSL-2&#34; class=&#34;headerlink&#34; title=&#34;第一部分：配置 WSL 2&#34;&gt;&lt;/a&gt;&lt;strong&gt;第一部分：配置 WSL 2&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;核心原理&lt;/strong&gt;：WSL 2 拥有独立的虚拟网络，需要将 Windows 主机视为一个“局域网”设备。我们通过获取 Windows 在该网络中的 IP，并在 WSL 中设置带认证的代理来将网络流量导向它。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：配置 V2RayN (确保设置无误)&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;开放局域网连接&lt;/strong&gt;：在 V2RayN 的 &lt;code&gt;设置 -&amp;gt; 参数设置 -&amp;gt; V2RayN 设置&lt;/code&gt; 中，&lt;strong&gt;必须勾选“允许来自局域网的连接”&lt;/strong&gt;。这是整个方案的前提，还要打开为局域网开放端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确认代理参数&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;监听端口&lt;/strong&gt;：&lt;code&gt;10810&lt;/code&gt; (根据您的设置)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;认证用户&lt;/strong&gt;：&lt;code&gt;v2rayn填写的用户名&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;认证密码&lt;/strong&gt;：&lt;code&gt;v2rayn填写的密码&lt;/code&gt; (不含特殊字符的最终版密码)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows 防火墙&lt;/strong&gt;：确保在首次开启“允许局域网连接”时，您已在弹出的 Windows Defender 防火墙窗口中，为 V2RayN (或其核心 &lt;code&gt;v2ray.exe&lt;/code&gt; / &lt;code&gt;xray.exe&lt;/code&gt;) 勾选“专用网络”和“公用网络”并点击了“允许访问”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第二步：在 WSL 中获取 Windows 主机 IP&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开您的 WSL 终端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行以下命令来获取作为默认网关的 Windows 主机 IP 地址。这是最稳定、最推荐的方法。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;ip route show | grep default | awk &#39;{print $3}&#39;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;您会得到一个 &lt;code&gt;172.x.x.x&lt;/code&gt; 格式的 IP，请记下它（虽然下面的脚本会自动获取）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第三步：配置 WSL 终端代理&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;编辑您的 Shell 配置文件 (如果文件不存在，nano 会自动创建)。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 如果您使用 bash (默认)
+nano ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将以下&lt;strong&gt;最终版配置代码块&lt;/strong&gt;完整地复制并粘贴到文件末尾。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# --- V2RayN Proxy Configuration for WSL (Final Version) ---
+
+# 1. 自动获取作为默认网关的主机 IP (推荐方法)
+export HOST_IP=$(ip route show | grep default | awk &#39;{print $3}&#39;)
+
+# 2. 您的 V2RayN 代理参数
+PROXY_PORT=&#34;10810&#34;
+PROXY_USER=&#34;v2rayn填写的用户名&#34;
+PROXY_PASS=&#34;v2rayn填写的密码&#34;
+
+# 3. 构建包含认证信息的代理 URL
+PROXY_URL=&#34;http://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}&#34;
+
+# 4. 设置系统环境变量
+export http_proxy=&#34;${PROXY_URL}&#34;
+export https_proxy=&#34;${PROXY_URL}&#34;
+export all_proxy=&#34;socks5://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}&#34;
+
+# 5. 设置不走代理的本地地址
+export no_proxy=&#34;localhost,127.0.0.1,*.local,${HOST_IP}&#34;
+
+echo &#34;✅ Proxy enabled for WSL via host ${HOST_IP}&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;保存并退出 (&lt;code&gt;Ctrl+O&lt;/code&gt;, &lt;code&gt;Enter&lt;/code&gt;, &lt;code&gt;Ctrl+X&lt;/code&gt;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第四步：配置 APT 包管理器&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;为 &lt;code&gt;apt&lt;/code&gt; 创建专门的代理配置文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;sudo nano /etc/apt/apt.conf.d/99proxy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将以下内容粘贴进去。&lt;strong&gt;请注意&lt;/strong&gt;：您需要将 &lt;code&gt;172.x.x.x&lt;/code&gt; &lt;strong&gt;手动替换&lt;/strong&gt;为第二步中获取到的具体 IP 地址。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;Acquire::http::Proxy &#34;http://0xdadream:Qsc100366@172.x.x.x:10810/&#34;;
+Acquire::https::Proxy &#34;http://0xdadream:Qsc100366@172.x.x.x:10810/&#34;;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;保存并退出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第五步：生效与验证&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;让终端配置立即生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;source ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;用 &lt;code&gt;curl&lt;/code&gt; 命令测试网络连接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;curl -I https://www.google.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看到 &lt;code&gt;HTTP/2 200&lt;/code&gt; 或类似成功响应，即代表 WSL 部分已完美配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;附：手机连接-Windows-V2RayN-代理教程&#34;&gt;&lt;a href=&#34;#附：手机连接-Windows-V2RayN-代理教程&#34; class=&#34;headerlink&#34; title=&#34;附：手机连接 Windows V2RayN 代理教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;附：手机连接 Windows V2RayN 代理教程&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;本教程将指导您如何将手机（安卓或iPhone）通过 Wi-Fi 连接到您电脑上正在运行的 V2RayN 代理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心原理&lt;/strong&gt;：手机和电脑必须在同一个局域网（连接同一个Wi-Fi）。手机将电脑视为一个代理服务器，通过电脑的局域网IP地址和V2RayN端口进行连接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：查找您 Windows 电脑的局域网 IP 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个 IP &lt;strong&gt;不是&lt;/strong&gt; WSL 里的那个 &lt;code&gt;172.x.x.x&lt;/code&gt;，而是您家或办公室路由器分配给电脑的 IP，通常是 &lt;code&gt;192.168.x.x&lt;/code&gt; 的格式。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 Windows 上，按下 &lt;code&gt;Win + R&lt;/code&gt; 键，输入 &lt;code&gt;cmd&lt;/code&gt; 并回车，打开命令提示符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;输入以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ipconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在输出信息中找到 “&lt;strong&gt;无线局域网适配器 WLAN&lt;/strong&gt;” 或 “&lt;strong&gt;Wireless LAN adapter Wi-Fi&lt;/strong&gt;” 部分。记下其 “&lt;strong&gt;IPv4 地址&lt;/strong&gt;”，例如 &lt;code&gt;192.168.1.105&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第二步：在手机上配置代理&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;对于-iPhone-iOS&#34;&gt;&lt;a href=&#34;#对于-iPhone-iOS&#34; class=&#34;headerlink&#34; title=&#34;对于 iPhone (iOS)&#34;&gt;&lt;/a&gt;&lt;strong&gt;对于 iPhone (iOS)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;iOS 系统原生支持带认证的 HTTP 代理，配置非常简单。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确保您的 iPhone 已连接到和电脑&lt;strong&gt;相同的 Wi-Fi&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;进入 **设置 -&amp;gt; 无线局域网 (Wi-Fi)**。&lt;/li&gt;
+&lt;li&gt;点击您当前连接的 Wi-Fi 名称右边的 &lt;strong&gt;“i”&lt;/strong&gt; 图标。&lt;/li&gt;
+&lt;li&gt;滑到页面最底部，找到并点击 &lt;strong&gt;“配置代理”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;“手动”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“服务器”&lt;/strong&gt; 栏，输入您电脑的局域网 IP (例如 &lt;code&gt;192.168.1.105&lt;/code&gt;)。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“端口”&lt;/strong&gt; 栏，输入 V2RayN 的端口 &lt;code&gt;10810&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开启 “鉴定” (Authentication) 开关&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“用户名”&lt;/strong&gt; 中输入 &lt;code&gt;0xdadream&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“密码”&lt;/strong&gt; 中输入 &lt;code&gt;Qsc100366&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;点击右上角的 &lt;strong&gt;“存储”&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;对于安卓-Android&#34;&gt;&lt;a href=&#34;#对于安卓-Android&#34; class=&#34;headerlink&#34; title=&#34;对于安卓 (Android)&#34;&gt;&lt;/a&gt;&lt;strong&gt;对于安卓 (Android)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;安卓系统的原生 Wi-Fi 代理设置&lt;strong&gt;不支持&lt;/strong&gt;用户名和密码认证。您需要借助第三方 App。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**原生方法 (如果您的代理无需认证)**：&lt;ul&gt;
+&lt;li&gt;进入 &lt;strong&gt;设置 -&amp;gt; WLAN&lt;/strong&gt;，长按您连接的 Wi-Fi，选择“修改网络”。&lt;/li&gt;
+&lt;li&gt;在高级选项中找到“代理”，设为“手动”。&lt;/li&gt;
+&lt;li&gt;输入电脑的IP和端口。&lt;/li&gt;
+&lt;li&gt;(此方法对您当前带认证的设置无效，仅供参考)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;**推荐方法 (使用第三方App，支持认证)**：&lt;ul&gt;
+&lt;li&gt;在 Google Play 商店或其它应用市场搜索并安装一个支持 HTTP/SOCKS 认证代理的 App，例如 &lt;strong&gt;ProxyDroid&lt;/strong&gt; 或 &lt;strong&gt;V2rayNG&lt;/strong&gt; (V2rayNG 本身就可以作为客户端，功能更强大)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以 V2rayNG 为例&lt;/strong&gt; (更推荐，因为它本身就是 V2Ray 客户端)：&lt;ol&gt;
+&lt;li&gt;打开 V2rayNG，点击右上角的 &lt;strong&gt;“+”&lt;/strong&gt; 号，选择 &lt;strong&gt;“手动输入[Socks]”或“[Http]”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：随便填，例如 &lt;code&gt;公司电脑&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;**地址(服务器)**：输入您电脑的局域网 IP (例如 &lt;code&gt;192.168.1.105&lt;/code&gt;)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;端口&lt;/strong&gt;：输入 &lt;code&gt;10810&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户名&lt;/strong&gt;：输入 &lt;code&gt;0xdadream&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;密码&lt;/strong&gt;：输入 &lt;code&gt;Qsc100366&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;其他设置可保持默认，点击右上角的 &lt;strong&gt;“√”&lt;/strong&gt; 保存。&lt;/li&gt;
+&lt;li&gt;回到主界面，点击您刚创建的配置将其选中，然后点击屏幕底部的 V 形图标启动连接。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第三步：验证手机连接&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在手机上配置好代理后，打开手机浏览器，访问 &lt;a href=&#34;https://ipinfo.io/&#34;&gt;ipinfo.io&lt;/a&gt; 或 &lt;code&gt;whatismyip.com&lt;/code&gt; 这类网站。如果显示的 IP 地址是您 V2RayN 代理服务器的公网 IP，而不是您家宽带的 IP，那么恭喜您，手机也已成功通过电脑代理上网！&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/27/cloudflare-wu-xian-you-xiang-jian-yi-jiao-cheng/</guid>
+            <title>Cloudflare无限邮箱简易教程</title>
+            <link>https://0xdadream.github.io/2025/06/27/cloudflare-wu-xian-you-xiang-jian-yi-jiao-cheng/</link>
+            <category>email</category>
+            <pubDate>Fri, 27 Jun 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Cloudflare无限邮箱简易教程&#34;&gt;&lt;a href=&#34;#Cloudflare无限邮箱简易教程&#34; class=&#34;headerlink&#34; title=&#34;Cloudflare无限邮箱简易教程&#34;&gt;&lt;/a&gt;Cloudflare无限邮箱简易教程&lt;/h1&gt;&lt;p&gt;通过Cloudflare实现无限邮箱：一份详尽的设置与策略指南&lt;/p&gt;
+&lt;h2 id=&#34;第一部分：现代邮箱革命：低成本实现专业级电子邮件&#34;&gt;&lt;a href=&#34;#第一部分：现代邮箱革命：低成本实现专业级电子邮件&#34; class=&#34;headerlink&#34; title=&#34;第一部分：现代邮箱革命：低成本实现专业级电子邮件&#34;&gt;&lt;/a&gt;第一部分：现代邮箱革命：低成本实现专业级电子邮件&lt;/h2&gt;&lt;p&gt;在当今的数字世界中，拥有一个单一的电子邮件地址来处理所有事务——从关键的财务通信到无关紧g要的时事通讯订阅——已经成为一种普遍现象。然而，这种便利性带来了不可忽视的代价：垃圾邮件泛滥、隐私泄露风险增加，以及在专业场合中品牌形象的缺失。一个通用的Gmail或Outlook地址在个人生活中无可厚wifi，但在商业或个人品牌建设中，一个自定义域名的邮箱（如&lt;code&gt;contact@yourdomain.com&lt;/code&gt;）能显著提升专业度和可信度。&lt;/p&gt;
+&lt;p&gt;Cloudflare电子邮件路由（Email Routing）服务的出现，为解决这一困境提供了革命性的方案。该服务本质上是一个功能强大且免费的电子邮件&lt;em&gt;转发&lt;/em&gt;工具 。它的核心优势在于其设计理念：首先，它将隐私保护放在首位，Cloudflare承诺不会存储或访问通过其系统转发的任何电子邮件内容，确保了通信的机密性 。其次，它的配置过程极其简单，并且完全免费，这极大地降低了技术和财务门槛 。  &lt;/p&gt;
+&lt;h3 id=&#34;解码“无限邮箱”&#34;&gt;&lt;a href=&#34;#解码“无限邮箱”&#34; class=&#34;headerlink&#34; title=&#34;解码“无限邮箱”&#34;&gt;&lt;/a&gt;解码“无限邮箱”&lt;/h3&gt;&lt;p&gt;用户常常寻求“无限邮箱”的解决方案，而Cloudflare提供的正是实现这一目标的有效途径。需要明确的是，这并非指拥有无限个独立的、带存储空间的收件箱。相反，它指的是创建无限数量的&lt;em&gt;别名&lt;/em&gt;（aliases）或&lt;em&gt;转发地址&lt;/em&gt; 。例如，用户可以为自己的域名  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yourdomain.com&lt;/code&gt;创建&lt;code&gt;support@yourdomain.com&lt;/code&gt;、&lt;code&gt;billing@yourdomain.com&lt;/code&gt;、&lt;code&gt;newsletter.signup@yourdomain.com&lt;/code&gt;等无数个地址。所有发送到这些地址的邮件，都会被自动、即时地转发到一个或多个用户预先设定的主收件箱中，例如个人的Gmail或Outlook账户。&lt;/p&gt;
+&lt;h3 id=&#34;核心用例：为谁而设？&#34;&gt;&lt;a href=&#34;#核心用例：为谁而设？&#34; class=&#34;headerlink&#34; title=&#34;核心用例：为谁而设？&#34;&gt;&lt;/a&gt;核心用例：为谁而设？&lt;/h3&gt;&lt;p&gt;该服务的灵活性使其适用于广泛的用户群体 ：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;个人用户&lt;/strong&gt;：可以为注册的每一个在线服务创建独一无二的别名。这不仅能有效保护主要邮箱地址不被泄露，还能在某个别名开始收到垃圾邮件时，精确地追踪到是哪个服务泄露或出售了数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;家庭用户&lt;/strong&gt;：可以为每个家庭成员分配一个专属的邮箱地址（如&lt;code&gt;father@familydomain.com&lt;/code&gt;），或为特定用途设立公共地址（如&lt;code&gt;household.bills@familydomain.com&lt;/code&gt;），从而实现家庭事务的有序管理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;小型企业与初创公司&lt;/strong&gt;：无需承担传统企业邮箱套件的高昂费用，即可拥有基于角色的专业地址（如&lt;code&gt;sales@yourcompany.com&lt;/code&gt;、&lt;code&gt;info@yourcompany.com&lt;/code&gt;），从而在客户面前建立起专业、可信的品牌形象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工作原理：一个简单的类比&#34;&gt;&lt;a href=&#34;#工作原理：一个简单的类比&#34; class=&#34;headerlink&#34; title=&#34;工作原理：一个简单的类比&#34;&gt;&lt;/a&gt;工作原理：一个简单的类比&lt;/h3&gt;&lt;p&gt;为了更好地理解其工作机制，可以将Cloudflare电子邮件路由想象成一个数字化的邮局 。当一封邮件发送到您的自定义域名地址（相当于一个专属的邮政信箱）时，Cloudflare扮演了邮件分拣员的角色。它会查看邮件的“信封”（SMTP Envelope），这是简单邮件传输协议的一部分，标明了邮件的来源和目的地 。Cloudflare会智能地修改这个信封，将原始收件人地址替换为您指定的最终收件箱地址，然后立即将邮件投递出去。整个过程中，邮件的“信头”（Header，包含技术元数据）和“正文”（Body，实际内容）保持完整无损，Cloudflare不会拆开信件阅读内容 。  &lt;/p&gt;
+&lt;p&gt;这一机制的出现，其深远意义在于它实现了专业身份的“民主化”。过去，拥有自定义域名邮箱是付费企业服务（如G Suite旧版套餐）或具备高深技术能力（如自建邮件服务器）的象征 。Cloudflare通过提供免费的入站邮件处理  和全自动的DNS记录配置 ，彻底移除了成本和技术的双重壁垒。这使得任何拥有域名的个人、自由职业者或微型企业，都能以零成本享受到与大型企业同等级别的专业电子邮件身份，这对于零工经济、个人品牌塑造以及小型在线项目的合法性感知具有重大影响。  &lt;/p&gt;
+&lt;h2 id=&#34;第二部分：奠定基石：将您的域名接入Cloudflare&#34;&gt;&lt;a href=&#34;#第二部分：奠定基石：将您的域名接入Cloudflare&#34; class=&#34;headerlink&#34; title=&#34;第二部分：奠定基石：将您的域名接入Cloudflare&#34;&gt;&lt;/a&gt;第二部分：奠定基石：将您的域名接入Cloudflare&lt;/h2&gt;&lt;p&gt;在启用电子邮件路由之前，一个至关重要且不可跳过的前提步骤是：将您的域名交由Cloudflare进行管理。这意味着Cloudflare必须成为您域名的权威DNS（域名系统）提供商。简而言之，互联网上任何关于您域名的查询（无论是网站访问还是邮件发送），都将由Cloudflare来应答和指引方向。&lt;/p&gt;
+&lt;h3 id=&#34;接入域名的分步指南&#34;&gt;&lt;a href=&#34;#接入域名的分步指南&#34; class=&#34;headerlink&#34; title=&#34;接入域名的分步指南&#34;&gt;&lt;/a&gt;接入域名的分步指南&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;创建Cloudflare账户&lt;/strong&gt;：访问Cloudflare官网并注册一个免费账户。这是一个简单直接的过程 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;添加您的站点/域名&lt;/strong&gt;：登录后，点击“添加站点”按钮，并输入您希望配置的根域名（例如&lt;code&gt;yourdomain.com&lt;/code&gt;） 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;选择套餐&lt;/strong&gt;：在套餐选择页面，选择“Free”（免费）套餐。该套餐已完整包含电子邮件路由功能 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNS记录扫描&lt;/strong&gt;：Cloudflare会自动扫描您域名当前所有的DNS记录。这是一个关键步骤，因为它会尝试复制您现有的网站、子域名等配置。作为一项最佳实践，强烈建议在此步骤完成时，对扫描出的记录列表进行截图或备份，以防后续出现任何问题 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关键操作：更新您的域名服务器&#34;&gt;&lt;a href=&#34;#关键操作：更新您的域名服务器&#34; class=&#34;headerlink&#34; title=&#34;关键操作：更新您的域名服务器&#34;&gt;&lt;/a&gt;关键操作：更新您的域名服务器&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;理解域名服务器（Nameservers）&lt;/strong&gt;：域名服务器就像是互联网上针对您域名的“地址簿总管”。您需要通知您的域名注册商（即您购买域名的地方，如GoDaddy、Namecheap等），告知他们从现在起，Cloudflare将全权负责管理您域名的这本“地址簿”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;查找Cloudflare的域名服务器地址&lt;/strong&gt;：在Cloudflare仪表板的指引页面上，系统会提供两个专属的域名服务器地址。这两个地址通常以&lt;code&gt;.ns.cloudflare.com&lt;/code&gt;结尾。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在您的域名注册商处更改域名服务器&lt;/strong&gt;：登录到您域名注册商的管理后台，找到域名管理或DNS管理的区域，将当前的域名服务器地址替换为Cloudflare提供的那两个地址。这是一个标准操作，大多数注册商都有详细的帮助文档 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耐心等待生效&lt;/strong&gt;：域名服务器的变更需要在全球互联网范围内传播和同步，这个过程被称为“DNS传播”。它可能在几分钟内完成，也可能需要长达24小时 。在此期间，您的网站和邮件服务可能会短暂中断。当Cloudflare检测到变更已成功生效时，您会收到一封确认邮件，并且您在Cloudflare上的域名状态会变为“有效”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;将域服务器指向Cloudflare，是一个具有深远影响的决定。用户最初的目标可能仅仅是实现简单的邮件转发，但这一操作实际上是将该域名下的所有网络流量（包括网站、API等）都引导至Cloudflare的全球网络进行处理 。这为用户解锁了一系列强大的免费增值服务，如DDoS攻击防护、全球CDN加速和安全规则等。然而，这也意味着Cloudflare成为了用户整个在线业务的关键路径节点。这是一种信任的托付，也是一种平台依赖的开始。因此，用户在执行此操作时，应充分理解其不仅仅是在配置一个邮件工具，而是在将其数字资产全面地整合进一个更广泛、更强大的平台生态系统中。  &lt;/p&gt;
+&lt;h2 id=&#34;第三部分：激活私人邮件转发器：配置入站电子邮件&#34;&gt;&lt;a href=&#34;#第三部分：激活私人邮件转发器：配置入站电子邮件&#34; class=&#34;headerlink&#34; title=&#34;第三部分：激活私人邮件转发器：配置入站电子邮件&#34;&gt;&lt;/a&gt;第三部分：激活私人邮件转发器：配置入站电子邮件&lt;/h2&gt;&lt;p&gt;完成域名接入后，下一步就是激活Cloudflare电子邮件路由功能，实现接收自定义地址邮件的核心目标。&lt;/p&gt;
+&lt;h3 id=&#34;导航至电子邮件路由仪表板&#34;&gt;&lt;a href=&#34;#导航至电子邮件路由仪表板&#34; class=&#34;headerlink&#34; title=&#34;导航至电子邮件路由仪表板&#34;&gt;&lt;/a&gt;导航至电子邮件路由仪表板&lt;/h3&gt;&lt;p&gt;登录Cloudflare仪表板，选择您已激活的域名。在左侧的导航菜单中，找到并点击“电子邮件”选项卡，进入电子邮件路由的管理界面 。  &lt;/p&gt;
+&lt;h3 id=&#34;一键启用：自动配置DNS&#34;&gt;&lt;a href=&#34;#一键启用：自动配置DNS&#34; class=&#34;headerlink&#34; title=&#34;一键启用：自动配置DNS&#34;&gt;&lt;/a&gt;一键启用：自动配置DNS&lt;/h3&gt;&lt;p&gt;首次进入该界面时，系统会引导您完成启用过程。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;添加记录并启用&lt;/strong&gt;：您会看到一个清晰的按钮，通常標示為“添加记录并启用” 。点击此按钮，Cloudflare将开始为您自动配置所有必需的DNS记录。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;幕后工作：自动化的DNS魔法&lt;/strong&gt;：这个看似简单的点击操作，背后是Cloudflare强大自动化能力的体现。系统会自动为您的域名添加三条&lt;code&gt;MX&lt;/code&gt;（Mail Exchanger）记录，并设置不同的优先级。&lt;code&gt;MX&lt;/code&gt;记录的作用是指示全球的邮件服务器，将发送到您域名的邮件投递给Cloudflare的接收服务器 。同时，它还会添加一条  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;TXT&lt;/code&gt;记录用于SPF（Sender Policy Framework）验证。这种自动化极大地简化了配置，避免了因手动输入错误而导致的邮件丢失问题 。值得注意的是，如果您的域名上已存在其他  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MX&lt;/code&gt;记录（例如来自之前的邮件服务商），Cloudflare会提示您将其删除。电子邮件路由服务无法与同一域名上的其他邮件服务共存，必须确保Cloudflare是唯一的邮件接收方 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;创建您的第一个自定义地址&#34;&gt;&lt;a href=&#34;#创建您的第一个自定义地址&#34; class=&#34;headerlink&#34; title=&#34;创建您的第一个自定义地址&#34;&gt;&lt;/a&gt;创建您的第一个自定义地址&lt;/h3&gt;&lt;p&gt;启用服务后，您就可以开始创建转发规则了。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在“路由规则”选项卡下，点击“创建地址” 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自定义地址&lt;/strong&gt;：在输入框中填入您想要的地址前缀，例如&lt;code&gt;hello&lt;/code&gt;，系统会自动补全为&lt;code&gt;hello@yourdomain.com&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标地址&lt;/strong&gt;：在“目标地址”字段中，输入您希望接收这些邮件的完整主邮箱地址，例如&lt;code&gt;your.personal.email@gmail.com&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;至关重要的验证步骤&#34;&gt;&lt;a href=&#34;#至关重要的验证步骤&#34; class=&#34;headerlink&#34; title=&#34;至关重要的验证步骤&#34;&gt;&lt;/a&gt;至关重要的验证步骤&lt;/h3&gt;&lt;p&gt;为了防止服务被滥用（例如，被用于恶意转发或发送垃圾邮件），Cloudflare设置了强制的验证流程。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;接收验证邮件&lt;/strong&gt;：在您添加目标地址后，Cloudflare会立即向该地址发送一封验证邮件 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;点击验证链接&lt;/strong&gt;：您需要登录到您的主邮箱（&lt;code&gt;your.personal.email@gmail.com&lt;/code&gt;），找到这封来自Cloudflare的邮件，并点击其中的验证链接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态更新&lt;/strong&gt;：完成验证后，回到Cloudflare仪表板，您会看到该目标地址的状态从“待验证”变为“已验证”或“有效”。只有经过验证的目标地址，其关联的转发规则才会生效 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个看似普通的验证步骤，实际上是一种精心设计的安全机制，体现了“为安全而设的有意摩擦”。如果没有这一环节，恶意行为者可以轻易地将邮件转发到任意第三方邮箱，从而进行骚扰或钓鱼攻击。通过要求目标邮箱的所有者进行主动确认，Cloudflare确保了所有邮件转发都是在接收方知情并同意的情况下进行的。这不仅保护了无辜的第三方免受垃圾邮件的困扰，也维护了Cloudflare平台自身的声誉和服务的可靠性。&lt;/p&gt;
+&lt;h2 id=&#34;第四部分：“无限”引擎：精通“全域地址”功能&#34;&gt;&lt;a href=&#34;#第四部分：“无限”引擎：精通“全域地址”功能&#34; class=&#34;headerlink&#34; title=&#34;第四部分：“无限”引擎：精通“全域地址”功能&#34;&gt;&lt;/a&gt;第四部分：“无限”引擎：精通“全域地址”功能&lt;/h2&gt;&lt;p&gt;这一部分将直接解决用户关于“无限”邮箱的核心诉求，通过掌握“全域地址”（Catch-all）功能，释放Cloudflare电子邮件路由的全部潜力。&lt;/p&gt;
+&lt;h3 id=&#34;什么是全域地址？&#34;&gt;&lt;a href=&#34;#什么是全域地址？&#34; class=&#34;headerlink&#34; title=&#34;什么是全域地址？&#34;&gt;&lt;/a&gt;什么是全域地址？&lt;/h3&gt;&lt;p&gt;全域地址是一条特殊的路由规则。它的作用是“捕获”所有发送到您域名下、但又没有被任何特定自定义地址规则匹配的电子邮件 。举例来说，如果您只设置了  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sales@yourdomain.com&lt;/code&gt;的转发规则，但有人错误地将邮件发送到了&lt;code&gt;sale@yourdomain.com&lt;/code&gt;，在没有启用全域地址的情况下，这封邮件将会被退回，发件人会收到投递失败的通知。而启用了全域地址后，这封邮件会被成功“捕获”并转发到您指定的邮箱。&lt;/p&gt;
+&lt;h3 id=&#34;启用“无限”功能的步骤&#34;&gt;&lt;a href=&#34;#启用“无限”功能的步骤&#34; class=&#34;headerlink&#34; title=&#34;启用“无限”功能的步骤&#34;&gt;&lt;/a&gt;启用“无限”功能的步骤&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在Cloudflare仪表板的“电子邮件” &amp;gt; “电子邮件路由” &amp;gt; “路由规则”页面中，找到“全域地址”这个选项 。  &lt;/li&gt;
+&lt;li&gt;将该功能的开关切换至“启用”或“有效”状态。&lt;/li&gt;
+&lt;li&gt;在下方的“操作”下拉菜单中，选择一个处理方式。通常，您会选择“转发至”并将邮件路由到您已经验证过的那个主邮箱地址 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实践用例与即时别名的威力&#34;&gt;&lt;a href=&#34;#实践用例与即时别名的威力&#34; class=&#34;headerlink&#34; title=&#34;实践用例与即时别名的威力&#34;&gt;&lt;/a&gt;实践用例与即时别名的威力&lt;/h3&gt;&lt;p&gt;启用全域地址后，“无限邮箱”的设想便得以实现。用户在任何网站或服务注册时，都可以即时“发明”一个全新的、独一无二的邮箱别名，而无需预先在Cloudflare仪表板中进行任何配置。&lt;/p&gt;
+&lt;p&gt;例如，在注册Netflix时，可以随手输入&lt;code&gt;netflix.2024@yourdomain.com&lt;/code&gt;；在订阅某份电子报时，使用&lt;code&gt;newsletter.xyz@yourdomain.com&lt;/code&gt;。所有发送到这些地址的邮件，都会被全域地址规则捕获并准确无误地送达您的主收件箱。这为隐私保护和垃圾邮件溯源提供了极大的便利。如果&lt;code&gt;netflix.2024@yourdomain.com&lt;/code&gt;这个地址开始收到不相关的垃圾邮件，那么用户就可以百分之百确定是Netflix或其合作伙伴泄露了数据。&lt;/p&gt;
+&lt;p&gt;然而，强大的功能往往伴随着相应的责任和潜在的风险。全域地址在提供便利的同时，也使您的域名成为了垃圾邮件发送者的一个极具吸引力的目标。垃圾邮件机器人常常使用“字典攻击”的方式，尝试向&lt;code&gt;admin@&lt;/code&gt;、&lt;code&gt;contact@&lt;/code&gt;、&lt;code&gt;test@&lt;/code&gt;、&lt;code&gt;info@&lt;/code&gt;等常见地址发送邮件。启用全域地址意味着所有这些猜测性的邮件都会被您的服务器接收并转发，这可能会导致您的主收件箱收到的垃圾邮件数量显著增加。&lt;/p&gt;
+&lt;p&gt;尽管Cloudflare内置了反垃圾邮件和钓鱼检测机制 ，但没有任何系统能做到100%的拦截。因此，一种更成熟、更具策略性的使用方法是采用混合模式。Cloudflare允许用户创建多达200条特定的路由规则 ，而这些特定规则的优先级高于全域地址规则。这意味着，如果一封邮件同时匹配了特定规则（如  &lt;code&gt;sales@yourdomain.com&lt;/code&gt;）和全域地址规则，系统将优先执行特定规则。&lt;/p&gt;
+&lt;p&gt;最佳实践是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;为重要、长期的通信创建特定规则&lt;/strong&gt;：例如，为工作、家庭、财务等创建&lt;code&gt;work@&lt;/code&gt;、&lt;code&gt;family@&lt;/code&gt;、&lt;code&gt;billing@&lt;/code&gt;等特定地址。这不仅能确保邮件的稳定接收，也为未来提供了更大的灵活性（例如，日后可以将&lt;code&gt;work@&lt;/code&gt;的邮件转发到另一个专门的工作邮箱）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将全域地址用于一次性或非关键性的注册&lt;/strong&gt;：对于那些您不完全信任或只需要临时使用的服务，可以充分利用全域地址的便利性，即时创建别名。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过这种混合策略，用户可以在享受“无限”便利的同时，最大限度地控制垃圾邮件，并保持对重要邮件流的清晰管理。&lt;/p&gt;
+&lt;h2 id=&#34;第五部分：闭合回路：如何以您的自定义别名发送和回复邮件&#34;&gt;&lt;a href=&#34;#第五部分：闭合回路：如何以您的自定义别名发送和回复邮件&#34; class=&#34;headerlink&#34; title=&#34;第五部分：闭合回路：如何以您的自定义别名发送和回复邮件&#34;&gt;&lt;/a&gt;第五部分：闭合回路：如何以您的自定义别名发送和回复邮件&lt;/h2&gt;&lt;p&gt;这是本指南中最为关键和深入的部分。它解决了Cloudflare电子邮件路由本身最大的局限性，并提供了一套完整、可行的解决方案，使您的自定义邮箱地址实现真正的双向通信。&lt;/p&gt;
+&lt;h3 id=&#34;关键前提：Cloudflare是一条单行道（仅限入站）&#34;&gt;&lt;a href=&#34;#关键前提：Cloudflare是一条单行道（仅限入站）&#34; class=&#34;headerlink&#34; title=&#34;关键前提：Cloudflare是一条单行道（仅限入站）&#34;&gt;&lt;/a&gt;关键前提：Cloudflare是一条单行道（仅限入站）&lt;/h3&gt;&lt;p&gt;必须明确指出，Cloudflare电子邮件路由服务本身只处理&lt;em&gt;接收&lt;/em&gt;邮件的流程。它不提供用于发送邮件的出站SMTP（Simple Mail Transfer Protocol）服务器 。这意味着，当您回复一封通过Cloudflare转发来的邮件时，默认情况下，回复将从您的主邮箱地址（如  &lt;code&gt;your.personal.email@gmail.com&lt;/code&gt;）发出，这会向收件人暴露您的真实邮箱地址，从而违背了使用别名的初衷 。  &lt;/p&gt;
+&lt;p&gt;这一设计决策背后有着深刻的运营考量。运营一个出站邮件服务是一项极其复杂且成本高昂的任务，服务商需要持续不断地管理其IP地址的信誉，以防止被各大邮件服务商列入黑名单。任何滥用行为都可能导致整个平台的发送能力受损。通过专注于提供入站转发服务，Cloudflare规避了这一巨大的运营负担和滥用风险，这也是该服务能够免费提供的重要原因之一 。  &lt;/p&gt;
+&lt;h3 id=&#34;解决方案：利用Gmail作为您的免费出站SMTP服务器&#34;&gt;&lt;a href=&#34;#解决方案：利用Gmail作为您的免费出站SMTP服务器&#34; class=&#34;headerlink&#34; title=&#34;解决方案：利用Gmail作为您的免费出站SMTP服务器&#34;&gt;&lt;/a&gt;解决方案：利用Gmail作为您的免费出站SMTP服务器&lt;/h3&gt;&lt;p&gt;最为主流且易于访问的解决方案是，配置您现有的Gmail账户，使其能够以您的自定义别名来发送邮件。这样便能构建一个功能完整、免费且双向的电子邮件系统。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤一：安全第一 - 在Google账户中启用两步验证（2FA）&lt;/strong&gt; 这是后续步骤的强制性前提，也是保护您账户安全的关键最佳实践 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤二：创建Google应用专用密码&lt;/strong&gt; 应用专用密码是一个16位的、一次性生成的代码，它授权某个应用程序或设备访问您的Google账户，而无需通过常规的两步验证提示。这把“钥匙”将用于授权Gmail自己的SMTP服务器代表您发送邮件。请访问Google账户的安全设置页面，生成一个用于“邮件”应用的应用专用密码，并为它指定一个自定义名称（如“Cloudflare别名发送”）。请务必妥善保管这个16位的密码 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;步骤三：在Gmail中配置“用这个地址发送邮件”&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;登录Gmail，进入&lt;code&gt;设置 &amp;gt; 查看所有设置 &amp;gt; 帐号和导入&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在“用这个地址发送邮件”部分，点击“添加其他电子邮件地址” 。  &lt;/li&gt;
+&lt;li&gt;在弹出的窗口中，输入您的发件人姓名和您希望使用的自定义别名（例如&lt;code&gt;hello@yourdomain.com&lt;/code&gt;）。根据不同的指南，是否勾选“视为别名”选项有不同的建议，通常建议勾选以简化管理。&lt;/li&gt;
+&lt;li&gt;点击“下一步”，进入SMTP服务器配置页面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;Gmail-SMTP配置参数&#34;&gt;&lt;a href=&#34;#Gmail-SMTP配置参数&#34; class=&#34;headerlink&#34; title=&#34;Gmail SMTP配置参数&#34;&gt;&lt;/a&gt;Gmail SMTP配置参数&lt;/h3&gt;&lt;p&gt;为了减少配置过程中的错误，以下表格清晰地列出了所有必需的参数。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;设置项&lt;/th&gt;
+&lt;th&gt;值&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;SMTP 服务器&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;smtp.gmail.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Google官方的对外发信服务器地址 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;端口&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;587&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;推荐使用的TLS加密连接端口 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;用户名&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;your.personal.email@gmail.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;您的完整Gmail地址 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;密码&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;[您的16位应用专用密码]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;您在第二步中生成的16位应用专用密码，&lt;strong&gt;不是&lt;/strong&gt;您的Gmail登录密码 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;安全连接&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;TLS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;推荐使用的安全协议 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;输入完毕后点击“添加帐户”。Gmail会向您的自定义别名（&lt;code&gt;hello@yourdomain.com&lt;/code&gt;）发送一封验证邮件。由于您已经配置好了Cloudflare的转发，这封邮件会出现在您的主收件箱中。打开邮件，点击其中的确认链接或输入验证码，即可完成设置。&lt;/p&gt;
+&lt;h3 id=&#34;确保您的邮件不被当作垃圾邮件：SPF与DMARC配置指南&#34;&gt;&lt;a href=&#34;#确保您的邮件不被当作垃圾邮件：SPF与DMARC配置指南&#34; class=&#34;headerlink&#34; title=&#34;确保您的邮件不被当作垃圾邮件：SPF与DMARC配置指南&#34;&gt;&lt;/a&gt;确保您的邮件不被当作垃圾邮件：SPF与DMARC配置指南&lt;/h3&gt;&lt;p&gt;仅仅完成上述设置还不够。直接这样发送的邮件可能会因为身份验证问题而被收件方服务器标记为垃圾邮件，或者在发件人处显示恼人的“由gmail.com代发”字样 。这是因为，邮件实际上是从Google的服务器发出的，但却声称自己来自  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;yourdomain.com&lt;/code&gt;。为了解决这个问题，您必须在您域名的DNS记录中明确授权Google可以代表您发送邮件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;修改您的SPF记录&lt;/strong&gt;：Cloudflare自动创建的SPF记录只授权了Cloudflare自己。您需要编辑这条&lt;code&gt;TXT&lt;/code&gt;记录，将Google也加入授权列表。修改后的内容应如下：&lt;code&gt;v=spf1 include:_spf.mx.cloudflare.net include:_spf.google.com ~all&lt;/code&gt;。这个小小的改动至关重要，它同时授权了Cloudflare（用于处理转发邮件的合法性）和Google（用于发送邮件） 。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;创建DMARC记录&lt;/strong&gt;：DMARC（基于域的消息认证、报告和一致性）是一种电子邮件验证策略，它告诉接收邮件的服务器，当一封声称来自您域名的邮件未能通过SPF或DKIM检查时应该如何处理。它还能向您发送报告，让您了解全球有哪些服务器在尝试以您的域名发送邮件。对于初学者，建议使用一个最安全的“仅监控”策略：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;类型&lt;/strong&gt;: &lt;code&gt;TXT&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;: &lt;code&gt;_dmarc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容&lt;/strong&gt;: &lt;code&gt;v=DMARC1; p=none; rua=mailto:your.personal.email@gmail.com&lt;/code&gt; 。  &lt;/li&gt;
+&lt;li&gt;这里的&lt;code&gt;p=none&lt;/code&gt;意味着“无操作”，即即使验证失败，也请正常接收邮件，但请将情况记录在报告中发送给我。&lt;code&gt;rua&lt;/code&gt;指定了接收这些汇总报告的邮箱地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;最终DNS记录配置总览&#34;&gt;&lt;a href=&#34;#最终DNS记录配置总览&#34; class=&#34;headerlink&#34; title=&#34;最终DNS记录配置总览&#34;&gt;&lt;/a&gt;最终DNS记录配置总览&lt;/h3&gt;&lt;p&gt;为了确保您的电子邮件系统完整、可靠地运行，以下表格汇总了所有必需的DNS记录。您可以将其作为最终检查和未来排错的参考。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;记录类型&lt;/th&gt;
+&lt;th&gt;名称 (主机)&lt;/th&gt;
+&lt;th&gt;内容 (值)&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;MX&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;route1.mx.cloudflare.net&lt;/code&gt; (优先级 10)&lt;/td&gt;
+&lt;td&gt;将入站邮件指向Cloudflare的主接收服务器 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MX&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;route2.mx.cloudflare.net&lt;/code&gt; (优先级 20)&lt;/td&gt;
+&lt;td&gt;Cloudflare的备用入站邮件服务器 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MX&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;route3.mx.cloudflare.net&lt;/code&gt; (优先级 30)&lt;/td&gt;
+&lt;td&gt;Cloudflare的备用入站邮件服务器 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TXT&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;v=spf1 include:_spf.mx.cloudflare.net include:_spf.google.com ~all&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;授权Cloudflare和Google为您的域名处理邮件 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TXT&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;_dmarc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;v=DMARC1; p=none; rua=mailto:your.email@gmail.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置DMARC监控策略并指定报告接收地址 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;第六部分：规则与限制：最佳实践与服务边界&#34;&gt;&lt;a href=&#34;#第六部分：规则与限制：最佳实践与服务边界&#34; class=&#34;headerlink&#34; title=&#34;第六部分：规则与限制：最佳实践与服务边界&#34;&gt;&lt;/a&gt;第六部分：规则与限制：最佳实践与服务边界&lt;/h2&gt;&lt;p&gt;为了长期、稳定地使用这套系统，用户需要对其服务边界有清晰的认识，并遵循一些最佳实践。本部分旨在管理用户期望，并提供最终的策略性建议。&lt;/p&gt;
+&lt;h3 id=&#34;“无限”背后的真实限制&#34;&gt;&lt;a href=&#34;#“无限”背后的真实限制&#34; class=&#34;headerlink&#34; title=&#34;“无限”背后的真实限制&#34;&gt;&lt;/a&gt;“无限”背后的真实限制&lt;/h3&gt;&lt;p&gt;尽管“全域地址”功能提供了创建无限别名的能力，但Cloudflare电子邮件路由服务本身存在一些明确的硬性限制，用户应当知晓：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;规则与地址数量&lt;/strong&gt;：每个Cloudflare账户最多可以创建200条自定义路由规则和200个已验证的目标地址 。需要再次强调的是，全域地址本身只算作一条规则，这使其成为绕过200个地址限制、满足绝大多数日常需求的关键。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邮件大小&lt;/strong&gt;：通过此服务转发的单封电子邮件，其大小不能超过25 MiB 。这对于日常文本和常规附件的邮件来说绰绰有余，但可能不适用于发送大型文件。  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;其他已知限制&lt;/strong&gt;：服务在推出初期，曾不支持国际化域名（IDN）。尽管Cloudflare不断更新其服务，但用户在遇到特殊需求时，仍应查阅最新的官方文档以获取最准确的信息 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;超越Gmail：关于其他出站SMTP服务的说明&#34;&gt;&lt;a href=&#34;#超越Gmail：关于其他出站SMTP服务的说明&#34; class=&#34;headerlink&#34; title=&#34;超越Gmail：关于其他出站SMTP服务的说明&#34;&gt;&lt;/a&gt;超越Gmail：关于其他出站SMTP服务的说明&lt;/h3&gt;&lt;p&gt;本指南以Gmail作为出站SMTP服务的范例，主要是因为它免费、普及且易于配置。然而，其底层架构——即“Cloudflare负责入站，第三方服务负责出站”——是一个高度灵活和可扩展的模式。用户完全可以选择其他专业的出站SMTP服务，如SMTP2Go、SendGrid、Brevo（前Sendinblue）或Purelymail 。这些服务通常提供更高的发送额度、更详细的分析报告和更专业的客户支持，但可能需要支付一定的费用。配置原理与Gmail类似：获取SMTP凭据，然后在您的邮件客户端（或Gmail的“用这个地址发送邮件”功能）中进行设置，并相应地更新您域名的SPF和DKIM记录以授权该服务商。  &lt;/p&gt;
+&lt;h3 id=&#34;结论与最终建议&#34;&gt;&lt;a href=&#34;#结论与最终建议&#34; class=&#34;headerlink&#34; title=&#34;结论与最终建议&#34;&gt;&lt;/a&gt;结论与最终建议&lt;/h3&gt;&lt;p&gt;通过结合Cloudflare的入站转发和第三方SMTP服务的出站能力，任何拥有域名的个人或组织都可以构建一个功能强大、高度私密且成本极低的专业电子邮件系统。为了确保该系统的长期健康运行，以下是最终的建议：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;从&lt;code&gt;p=none&lt;/code&gt;开始您的DMARC之旅&lt;/strong&gt;：在设置DMARC记录时，务必从&lt;code&gt;p=none&lt;/code&gt;（仅监控）策略开始。这可以防止因配置错误而意外地导致合法邮件被拒绝或隔离。在运行一段时间并分析收到的&lt;code&gt;rua&lt;/code&gt;报告，确认所有合法邮件源都已正确配置SPF/DKIM后，再考虑升级到更严格的策略（如&lt;code&gt;p=quarantine&lt;/code&gt;或&lt;code&gt;p=reject&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定期审阅DMARC报告&lt;/strong&gt;：养成偶尔查看DMARC汇总报告的习惯。这些报告是XML格式的，可以使用在线工具进行解析。它们能告诉您，除了您授权的服务外，是否还有其他未知的服务器在尝试以您的域名发送邮件，这可能是欺诈或配置错误的信号。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平衡特定规则与全域地址&lt;/strong&gt;：再次强调混合策略的重要性。为长期、重要的通信角色（如&lt;code&gt;contact@&lt;/code&gt;, &lt;code&gt;billing@&lt;/code&gt;）创建特定的转发规则，为一次性的、风险较高的注册场景（如注册不知名论坛、下载免费资源）利用全域地址的便利性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;将隐私视为一个持续的过程&lt;/strong&gt;：建立这套系统是迈向掌控个人数字身份的重要一步。然而，真正的隐私保护是一个持续的、主动的过程。它要求用户在分享信息时保持警惕，并善用这些工具来区隔自己的数字足迹，从而在一个日益互联的世界中更好地保护自己。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/</guid>
+            <title>在WSL中将python3命令别名为python</title>
+            <link>https://0xdadream.github.io/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/</link>
+            <category>python</category>
+            <pubDate>Thu, 26 Jun 2025 22:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;在WSL中将-python3-命令别名为-python&#34;&gt;&lt;a href=&#34;#在WSL中将-python3-命令别名为-python&#34; class=&#34;headerlink&#34; title=&#34;在WSL中将 python3 命令别名为 python&#34;&gt;&lt;/a&gt;在WSL中将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;在 Windows Subsystem for Linux (WSL) 环境中，默认情况下，Python 3.x 版本通常通过 &lt;code&gt;python3&lt;/code&gt; 命令调用，而 &lt;code&gt;python&lt;/code&gt; 命令可能未定义或指向老旧的 Python 2.x 版本。为了方便起见，您可以将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;，从而直接使用 &lt;code&gt;python&lt;/code&gt; 命令来执行 Python 3.x。&lt;/p&gt;
+&lt;p&gt;最常用且推荐的方法是创建一个永久性的别名，这通过修改您 shell 的配置文件（通常是 &lt;code&gt;.bashrc&lt;/code&gt;）来实现。这样，每次启动新的 WSL 终端时，该别名都会自动生效。&lt;/p&gt;
+&lt;p&gt;以下是详细的步骤：&lt;/p&gt;
+&lt;h3 id=&#34;1-打开您的-shell-配置文件&#34;&gt;&lt;a href=&#34;#1-打开您的-shell-配置文件&#34; class=&#34;headerlink&#34; title=&#34;1. 打开您的 shell 配置文件&#34;&gt;&lt;/a&gt;1. 打开您的 shell 配置文件&lt;/h3&gt;&lt;p&gt;您需要使用一个命令行文本编辑器（如 &lt;code&gt;nano&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt; 或 &lt;code&gt;emacs&lt;/code&gt;）来编辑位于您用户主目录下的 &lt;code&gt;.bashrc&lt;/code&gt; 文件。对于大多数用户来说，默认的 shell 是 Bash。&lt;/p&gt;
+&lt;p&gt;打开终端并输入以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果您使用的是 Zsh，则应编辑 &lt;code&gt;.zshrc&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; ~/.zshrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-添加别名设置&#34;&gt;&lt;a href=&#34;#2-添加别名设置&#34; class=&#34;headerlink&#34; title=&#34;2. 添加别名设置&#34;&gt;&lt;/a&gt;2. 添加别名设置&lt;/h3&gt;&lt;p&gt;在打开的文件中，滚动到文件末尾，并添加以下这行代码：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;python&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;python3&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这一行代码的作用是告诉 shell，当您输入 &lt;code&gt;python&lt;/code&gt; 时，实际上应该执行 &lt;code&gt;python3&lt;/code&gt; 命令。&lt;/p&gt;
+&lt;p&gt;您还可以选择为 &lt;code&gt;pip&lt;/code&gt; 创建一个类似的别名：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;pip&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;pip3&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-保存并关闭文件&#34;&gt;&lt;a href=&#34;#3-保存并关闭文件&#34; class=&#34;headerlink&#34; title=&#34;3. 保存并关闭文件&#34;&gt;&lt;/a&gt;3. 保存并关闭文件&lt;/h3&gt;&lt;p&gt;如果您使用的是 &lt;code&gt;nano&lt;/code&gt; 编辑器，请按 &lt;code&gt;Ctrl + O&lt;/code&gt; 来保存文件，然后按 &lt;code&gt;Enter&lt;/code&gt; 确认。接着按 &lt;code&gt;Ctrl + X&lt;/code&gt; 退出编辑器。&lt;/p&gt;
+&lt;h3 id=&#34;4-使更改生效&#34;&gt;&lt;a href=&#34;#4-使更改生效&#34; class=&#34;headerlink&#34; title=&#34;4. 使更改生效&#34;&gt;&lt;/a&gt;4. 使更改生效&lt;/h3&gt;&lt;p&gt;新添加的别名不会立即在当前的终端会话中生效。您需要让 shell 重新加载配置文件。您可以通过以下任一方式实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;关闭并重新打开您的 WSL 终端。&lt;/strong&gt; 这是最简单直接的方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;在当前终端会话中执行以下命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者，如果您使用的是 Zsh：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;source&lt;/span&gt; ~/.zshrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-验证别名是否生效&#34;&gt;&lt;a href=&#34;#5-验证别名是否生效&#34; class=&#34;headerlink&#34; title=&#34;5. 验证别名是否生效&#34;&gt;&lt;/a&gt;5. 验证别名是否生效&lt;/h3&gt;&lt;p&gt;现在，您可以在终端中输入以下命令来验证 &lt;code&gt;python&lt;/code&gt; 命令是否已成功指向 Python 3：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果一切顺利，输出结果应该显示您的 Python 3.x 版本号，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Python &lt;span class=&#34;token number&#34;&gt;3.10&lt;/span&gt;.6&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过以上步骤，您已经成功地在 WSL 中将 &lt;code&gt;python3&lt;/code&gt; 命令别名为 &lt;code&gt;python&lt;/code&gt;，这将为您在开发过程中提供更便捷的体验。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/</guid>
+            <title>Arc A770 Ollama WebUI 教程</title>
+            <link>https://0xdadream.github.io/2025/06/26/arc-a770-ollama-webui-jiao-cheng/</link>
+            <category>AI</category>
+            <pubDate>Thu, 26 Jun 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Arc-A770-Ollama-WebUI-教程&#34;&gt;&lt;a href=&#34;#Arc-A770-Ollama-WebUI-教程&#34; class=&#34;headerlink&#34; title=&#34;Arc A770 Ollama WebUI 教程&#34;&gt;&lt;/a&gt;Arc A770 Ollama WebUI 教程&lt;/h1&gt;&lt;p&gt;在 Windows 上利用 Arc A770 16G 和 IPEX-LLM 运行 Ollama 大语言模型的终极指南&lt;/p&gt;
+&lt;h2 id=&#34;第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能&#34;&gt;&lt;a href=&#34;#第一部分：简介-为本地-AI-释放您的-Arc-A770-显卡潜能&#34; class=&#34;headerlink&#34; title=&#34;第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能&#34;&gt;&lt;/a&gt;第一部分：简介 - 为本地 AI 释放您的 Arc A770 显卡潜能&lt;/h2&gt;&lt;h3 id=&#34;1-1-前景与挑战&#34;&gt;&lt;a href=&#34;#1-1-前景与挑战&#34; class=&#34;headerlink&#34; title=&#34;1.1. 前景与挑战&#34;&gt;&lt;/a&gt;1.1. 前景与挑战&lt;/h3&gt;&lt;p&gt;英特尔锐炫 Arc A770 16G 显卡凭借其高达 16 GB 的海量显存，为在本地运行大型语言模型（LLM）提供了一个极具性价比和吸引力的硬件平台。充足的显存意味着可以流畅运行更大、更复杂的模型，这对于追求高质量本地 AI 体验的用户而言至关重要。&lt;/p&gt;
+&lt;p&gt;然而，一个核心挑战阻碍了这条道路：标准的、从官方网站下载的 Windows 版 Ollama 应用程序，其默认配置并不能直接利用英特尔 Arc GPU 进行硬件加速 。这是因为其标准后端主要依赖于为英伟达（NVIDIA）设计的 CUDA 技术，或是为其他硬件设计的 DirectML 技术，而这些技术在标准 Ollama 的框架内并未对英特尔的 Xe HPG 架构提供原生支持 。直接安装标准版 Ollama 会导致模型推理任务完全由 CPU 执行，无法发挥 Arc A770 强大的并行计算能力。  &lt;/p&gt;
+&lt;h3 id=&#34;1-2-解决方案：英特尔-IPEX-LLM-这座桥梁&#34;&gt;&lt;a href=&#34;#1-2-解决方案：英特尔-IPEX-LLM-这座桥梁&#34; class=&#34;headerlink&#34; title=&#34;1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁&#34;&gt;&lt;/a&gt;1.2. 解决方案：英特尔 IPEX-LLM 这座桥梁&lt;/h3&gt;&lt;p&gt;解决这一挑战的关键在于英特尔官方推出的“英特尔 PyTorch LLM 扩展库”（Intel® Extension for PyTorch* for LLM），简称 IPEX-LLM。它并非一个简单的插件，而是一个全面的加速库，为 Ollama 等框架提供了一个基于 oneAPI 和 SYCL 编程模型构建的、为英特尔 GPU 量身定制的后端 。  &lt;/p&gt;
+&lt;p&gt;本指南的核心，正是利用一个由英特尔提供、经过特殊编译的 Ollama 版本。该版本将默认的推理引擎替换为了 IPEX-LLM，从而打通了软件与 Arc 显卡之间的加速通道。这并非一个脆弱或不稳定的社区项目，而是由硬件制造商官方支持的解决方案。英特尔通过其官方 GitHub 仓库积极开发并推广此方案，发布了易于使用的“便携式压缩包”（Portable Zips），并提供了详尽的快速入门文档，这为方案的可靠性和未来更新提供了有力保障 。  &lt;/p&gt;
+&lt;h3 id=&#34;1-3-我们的路线图&#34;&gt;&lt;a href=&#34;#1-3-我们的路线图&#34; class=&#34;headerlink&#34; title=&#34;1.3. 我们的路线图&#34;&gt;&lt;/a&gt;1.3. 我们的路线图&lt;/h3&gt;&lt;p&gt;本教程将遵循一条清晰的路径，引导您完成从零到一的全部署过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;系统基础准备&lt;/strong&gt;：安装并配置必要的驱动程序和软件环境。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心引擎部署&lt;/strong&gt;：安装并启动经过 IPEX-LLM 加速的 Ollama 后端服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;前端界面搭建&lt;/strong&gt;：安装并连接用户友好的 Open WebUI，提供图形化交互界面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证与排错&lt;/strong&gt;：确认 GPU 加速已成功启用，并提供常见问题的解决方案。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第二部分：基础设置-准备您的-Windows-系统&#34;&gt;&lt;a href=&#34;#第二部分：基础设置-准备您的-Windows-系统&#34; class=&#34;headerlink&#34; title=&#34;第二部分：基础设置 - 准备您的 Windows 系统&#34;&gt;&lt;/a&gt;第二部分：基础设置 - 准备您的 Windows 系统&lt;/h2&gt;&lt;p&gt;在开始部署之前，确保系统环境符合要求是成功的先决条件。下面的清单和步骤将帮助您准备好一切。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;系统必备组件清单&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;组件&lt;/th&gt;
+&lt;th&gt;推荐版本/要求&lt;/th&gt;
+&lt;th&gt;下载地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;英特尔 Arc 显卡驱动&lt;/td&gt;
+&lt;td&gt;最新 WHQL 认证版 (例如 32.0.101.6881 或更高)&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.intel.com/content/www/us/en/products/sku/229151/intel-arc-a770-graphics-16gb/downloads.html&#34;&gt;英特尔官方下载中心&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Miniforge (Conda)&lt;/td&gt;
+&lt;td&gt;最新版&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&#34;https://github.com/conda-forge/miniforge/releases/latest&#34;&gt;https://github.com/conda-forge/miniforge/releases/latest&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Windows Terminal&lt;/td&gt;
+&lt;td&gt;最新版&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&#34;https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701&#34;&gt;https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;2-1-英特尔-Arc-显卡驱动：性能的基石&#34;&gt;&lt;a href=&#34;#2-1-英特尔-Arc-显卡驱动：性能的基石&#34; class=&#34;headerlink&#34; title=&#34;2.1. 英特尔 Arc 显卡驱动：性能的基石&#34;&gt;&lt;/a&gt;2.1. 英特尔 Arc 显卡驱动：性能的基石&lt;/h3&gt;&lt;p&gt;整个技术栈依赖于最新的显卡驱动程序通过英特尔 oneAPI Level Zero 接口与 GPU 进行通信。过时、损坏或由 Windows Update 自动安装的通用驱动程序是导致失败的主要原因。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：识别当前驱动版本&lt;/strong&gt; 打开英特尔锐炫控制中心（Intel Arc Control）软件，或通过设备管理器查看当前安装的显卡驱动程序版本 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：下载正确的驱动程序&lt;/strong&gt; 访问上表中提供的英特尔官方下载中心链接，下载适用于 Arc A770 16GB 的最新 WHQL 认证驱动程序。根据资料，一个可靠的版本是 &lt;code&gt;32.0.101.6881&lt;/code&gt;，对应的安装文件名为 &lt;code&gt;gfx_win_101.6881.exe&lt;/code&gt; 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：执行一次“清洁安装”（推荐的最佳实践）&lt;/strong&gt; 为了从根源上避免潜在的、难以诊断的故障，强烈建议执行一次“清洁安装”。在驱动安装过程中，选择“自定义安装”，然后勾选“执行清洁安装”选项。这将移除所有旧的驱动文件和配置，避免新旧文件冲突。&lt;/p&gt;
+&lt;p&gt;对于追求极致稳定或在后续步骤中遇到蓝屏错误（如 &lt;code&gt;VIDEO_SCHEDULER_INTERNAL_ERROR&lt;/code&gt; ）的用户，可以采用更彻底的方法：使用 Display Driver Uninstaller (DDU) 工具。这是英特尔官方支持文档中也提及的高级方法，可以确保完全清除旧驱动的残留 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：验证安装&lt;/strong&gt; 安装完成后，重启计算机。再次打开英特尔锐炫控制中心，确认驱动程序版本已更新为最新版本。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-命令行与环境设置&#34;&gt;&lt;a href=&#34;#2-2-命令行与环境设置&#34; class=&#34;headerlink&#34; title=&#34;2.2. 命令行与环境设置&#34;&gt;&lt;/a&gt;2.2. 命令行与环境设置&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;第一步：安装 Miniforge&lt;/strong&gt; 相比于完整的 Anaconda 发行版，Miniforge 更为轻量，是搭建 Python 环境的更优选择。运行 Miniforge 安装程序，在安装过程中，建议勾选“Add Miniforge3 to my PATH environment variable”选项，这将简化后续的命令行操作 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：安装与配置 Windows Terminal&lt;/strong&gt; 从 Microsoft Store 安装 Windows Terminal，它提供了现代化的多标签页和强大的 PowerShell 支持，是执行后续所有命令的推荐工具。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：为 PowerShell 初始化 Conda&lt;/strong&gt; 这是一个常见的障碍点。打开 Windows Terminal (PowerShell)，运行以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda init powershell&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会修改您的 PowerShell 配置文件，使其能够识别 &lt;code&gt;conda&lt;/code&gt; 命令 。完成后，必须关闭并重新打开 Windows Terminal 才能使更改生效。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：设置 PowerShell 执行策略&lt;/strong&gt; 出于安全考虑，PowerShell 的默认执行策略可能会阻止 Conda 激活脚本的运行。在新的 PowerShell 窗口中，运行以下命令以允许这些脚本执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Set-ExecutionPolicy RemoteSigned -Scope CurrentUser&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在提示时，输入 &lt;code&gt;Y&lt;/code&gt; 并按回车确认 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步：验证 Conda 安装&lt;/strong&gt; 在 PowerShell 口中输入 &lt;code&gt;conda --version&lt;/code&gt;。如果安装正确，将显示 Conda 的版本号，表明您的命令行环境已准备就绪。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第三部分：核心引擎-部署加速的-Ollama-后端&#34;&gt;&lt;a href=&#34;#第三部分：核心引擎-部署加速的-Ollama-后端&#34; class=&#34;headerlink&#34; title=&#34;第三部分：核心引擎 - 部署加速的 Ollama 后端&#34;&gt;&lt;/a&gt;第三部分：核心引擎 - 部署加速的 Ollama 后端&lt;/h2&gt;&lt;h3 id=&#34;3-1-为何选择-IPEX-LLM-定制版-Ollama&#34;&gt;&lt;a href=&#34;#3-1-为何选择-IPEX-LLM-定制版-Ollama&#34; class=&#34;headerlink&#34; title=&#34;3.1. 为何选择 IPEX-LLM 定制版 Ollama&#34;&gt;&lt;/a&gt;3.1. 为何选择 IPEX-LLM 定制版 Ollama&lt;/h3&gt;&lt;p&gt;在此必须明确：从 &lt;code&gt;ollama.com&lt;/code&gt; 官方网站下载的标准版 Ollama 安装程序 &lt;strong&gt;无法&lt;/strong&gt; 用于本教程的目标。如果您已经安装了标准版，请先将其卸载。&lt;/p&gt;
+&lt;p&gt;我们将使用的是英特尔提供的、内建了 IPEX-LLM 支持的特殊版本。它通过 oneAPI 和 SYCL 技术栈，将推理任务直接交由英特尔 GPU 处理，从而实现硬件加速 。英特尔提供的“便携式压缩包”方案，极大地降低了用户的配置门槛，是目前最推荐、最便捷的部署方式，避免了早期版本中复杂的依赖安装和初始化脚本步骤 。  &lt;/p&gt;
+&lt;h3 id=&#34;3-2-创建专用的-AI-后端环境&#34;&gt;&lt;a href=&#34;#3-2-创建专用的-AI-后端环境&#34; class=&#34;headerlink&#34; title=&#34;3.2. 创建专用的 AI 后端环境&#34;&gt;&lt;/a&gt;3.2. 创建专用的 AI 后端环境&lt;/h3&gt;&lt;p&gt;为了避免不同软件间的依赖冲突，我们将为 Ollama 后端创建一个独立的、干净的 Conda 环境。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 PowerShell 中，运行以下命令创建环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda create -n ipex-ollama python=3.11 -y&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会创建一个名为 &lt;code&gt;ipex-ollama&lt;/code&gt; 的环境，并指定 Python 版本为 3.11，这是经过验证的兼容版本 。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;激活该环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda activate ipex-ollama&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;激活后，PowerShell 提示符前会显示 &lt;code&gt;(ipex-ollama)&lt;/code&gt;，表示您当前正工作在此环境中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-3-安装-IPEX-LLM-版-Ollama&#34;&gt;&lt;a href=&#34;#3-3-安装-IPEX-LLM-版-Ollama&#34; class=&#34;headerlink&#34; title=&#34;3.3. 安装 IPEX-LLM 版 Ollama&#34;&gt;&lt;/a&gt;3.3. 安装 IPEX-LLM 版 Ollama&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;第一步：下载便携式软件包&lt;/strong&gt; 访问(&lt;a href=&#34;https://github.com/intel/ipex-llm/releases)%EF%BC%8C%E6%89%BE%E5%88%B0%E6%9C%80%E6%96%B0%E7%9A%84%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%8C%E5%B9%B6%E4%B8%8B%E8%BD%BD%E9%80%82%E7%94%A8%E4%BA%8E&#34;&gt;https://github.com/intel/ipex-llm/releases)，找到最新的发行版，并下载适用于&lt;/a&gt; Windows 的 &lt;code&gt;Ollama-Portable-Zip&lt;/code&gt; 文件 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：解压软件包&lt;/strong&gt; 在您的硬盘上创建一个专用于 AI 工具的文件夹，例如 &lt;code&gt;C:\ai-tools\&lt;/code&gt;。然后在此文件夹下再创建一个 &lt;code&gt;ipex-ollama&lt;/code&gt; 文件夹，并将下载的压缩包内容完整地解压到这里。最终路径应类似于 &lt;code&gt;C:\ai-tools\ipex-ollama&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：在终端中导航至该目录&lt;/strong&gt; 在已激活 &lt;code&gt;ipex-ollama&lt;/code&gt; 环境的 PowerShell 窗口中，使用 &lt;code&gt;cd&lt;/code&gt; 命令进入您刚刚创建的文件夹：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd C:\ai-tools\ipex-ollama&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-4-启动-GPU-加速的-Ollama-服务器&#34;&gt;&lt;a href=&#34;#3-4-启动-GPU-加速的-Ollama-服务器&#34; class=&#34;headerlink&#34; title=&#34;3.4. 启动 GPU 加速的 Ollama 服务器&#34;&gt;&lt;/a&gt;3.4. 启动 GPU 加速的 Ollama 服务器&lt;/h3&gt;&lt;p&gt;这是整个流程中最关键的一步。我们需要通过设置特定的环境变量来“指挥”Ollama 使用 GPU。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关键环境变量解析&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;环境变量&lt;/th&gt;
+&lt;th&gt;推荐值&lt;/th&gt;
+&lt;th&gt;目的与解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;OLLAMA_NUM_GPU&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;999&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;最核心的设置&lt;/strong&gt;。此变量告知 Ollama 将模型的多少层卸载到 GPU。设置为一个非常大的数字（如 999）等同于“全部卸载”，以最大化利用 GPU 资源 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ZES_ENABLE_SYSMAN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用 Level Zero 驱动程序栈中的 Sysman 库。IPEX-LLM 需要此库来进行 GPU 监控和内存管理 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SYCL_CACHE_PERSISTENT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用持久化 SYCL 内核缓存。当模型第一次加载时，SYCL 会将编译后的 GPU 内核代码缓存到硬盘。这会显著加快后续加载相同或不同模型的速度 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;启动服务器的命令&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 PowerShell 中，逐行运行以下命令来设置环境变量。这些设置仅对当前终端会话有效。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;$env:OLLAMA_NUM_GPU=&#34;999&#34;
+$env:ZES_ENABLE_SYSMAN=&#34;1&#34;
+$env:SYCL_CACHE_PERSISTENT=&#34;1&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置完毕后，运行以下命令启动 Ollama 服务器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;.\ollama serve
+or
+start-ollama.bat&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;服务器成功启动后，您会看到类似 &lt;code&gt;time=... level=INFO source=server.go:.. msg=&#34;starting server...&#34;&lt;/code&gt; 的日志输出。&lt;strong&gt;请务必保持此终端窗口处于打开状态&lt;/strong&gt;，因为它就是您的 AI 推理引擎。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第四部分：用户体验-安装并连接-Open-WebUI&#34;&gt;&lt;a href=&#34;#第四部分：用户体验-安装并连接-Open-WebUI&#34; class=&#34;headerlink&#34; title=&#34;第四部分：用户体验 - 安装并连接 Open WebUI&#34;&gt;&lt;/a&gt;第四部分：用户体验 - 安装并连接 Open WebUI&lt;/h2&gt;&lt;p&gt;Ollama 后端已经运行，但它只提供了一个命令行接口。为了获得类似 ChatGPT 的图形化聊天体验，我们需要安装一个前端界面——Open WebUI。&lt;/p&gt;
+&lt;h3 id=&#34;4-1-准备前端环境&#34;&gt;&lt;a href=&#34;#4-1-准备前端环境&#34; class=&#34;headerlink&#34; title=&#34;4.1. 准备前端环境&#34;&gt;&lt;/a&gt;4.1. 准备前端环境&lt;/h3&gt;&lt;p&gt;同样地，我们将为 Open WebUI 创建一个独立的环境，以确保其依赖项不会与后端环境发生冲突。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开一个新的 Windows Terminal 标签页或窗口&lt;/strong&gt;。不要在运行着 Ollama 服务器的窗口中操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;创建新的 Conda 环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda create -n open-webui python=3.11 -y&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;激活此新环境：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;conda activate open-webui&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-2-安装并启动-Web-界面&#34;&gt;&lt;a href=&#34;#4-2-安装并启动-Web-界面&#34; class=&#34;headerlink&#34; title=&#34;4.2. 安装并启动 Web 界面&#34;&gt;&lt;/a&gt;4.2. 安装并启动 Web 界面&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在已激活 &lt;code&gt;open-webui&lt;/code&gt; 环境的 PowerShell 窗口中，使用 &lt;code&gt;pip&lt;/code&gt; 命令安装 Open WebUI：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;pip install open-webui&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装完成后，运行以下命令启动其 Web 服务器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;open-webui serve&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;服务器启动后，您会看到日志输出，并提示服务正在 &lt;code&gt;http://localhost:8080&lt;/code&gt; 上运行 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;同样，这个终端窗口也必须保持打开状态&lt;/strong&gt;。至此，您应该有两个持续运行的终端窗口：一个用于 Ollama 后端，一个用于 Open WebUI 前端。&lt;/p&gt;
+&lt;h3 id=&#34;4-3-首次设置与连接&#34;&gt;&lt;a href=&#34;#4-3-首次设置与连接&#34; class=&#34;headerlink&#34; title=&#34;4.3. 首次设置与连接&#34;&gt;&lt;/a&gt;4.3. 首次设置与连接&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;打开您的网页浏览器（如 Chrome, Edge, Firefox），访问地址：&lt;code&gt;http://localhost:8080&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;首次访问时，Open WebUI 会引导您创建一个管理员账户。请按提示完成注册 。  &lt;/li&gt;
+&lt;li&gt;登录后，Open WebUI 通常会自动检测到在本地 &lt;code&gt;http://localhost:11434&lt;/code&gt; 端口上运行的 Ollama 服务并建立连接 。  &lt;/li&gt;
+&lt;li&gt;如果连接失败或未自动识别，可以手动进行配置。点击左侧边栏的“设置”图标，进入“连接”选项卡，确认 Ollama API 的 URL 地址已正确设置为 &lt;code&gt;http://localhost:11434&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第五部分：验证与首次使用-对系统进行测试&#34;&gt;&lt;a href=&#34;#第五部分：验证与首次使用-对系统进行测试&#34; class=&#34;headerlink&#34; title=&#34;第五部分：验证与首次使用 - 对系统进行测试&#34;&gt;&lt;/a&gt;第五部分：验证与首次使用 - 对系统进行测试&lt;/h2&gt;&lt;p&gt;现在，万事俱备，是时候验证我们的成果并运行第一个大语言模型了。&lt;/p&gt;
+&lt;h3 id=&#34;5-1-运行您的第一个-LLM&#34;&gt;&lt;a href=&#34;#5-1-运行您的第一个-LLM&#34; class=&#34;headerlink&#34; title=&#34;5.1. 运行您的第一个 LLM&#34;&gt;&lt;/a&gt;5.1. 运行您的第一个 LLM&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;在 Open WebUI 的主界面，点击顶部的模型选择框。&lt;/li&gt;
+&lt;li&gt;在输入框中键入一个模型名称，例如 &lt;code&gt;phi3:medium&lt;/code&gt; 或 &lt;code&gt;llama3:8b&lt;/code&gt;。由于模型尚未在本地安装，WebUI 会提示您下载它。点击确认后，Open WebUI 会向后端发送指令，开始下载模型 。  &lt;/li&gt;
+&lt;li&gt;此时，您可以切换到运行着 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口，观察模型的下载进度条。&lt;/li&gt;
+&lt;li&gt;模型下载完成后，在 WebUI 的聊天框中输入一个简单的问题，例如“天空为什么是蓝色的？”，然后按回车。片刻之后，您应该就能看到由您的 Arc A770 显卡驱动生成的回答。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;5-2-确认真正的-GPU-加速&#34;&gt;&lt;a href=&#34;#5-2-确认真正的-GPU-加速&#34; class=&#34;headerlink&#34; title=&#34;5.2. 确认真正的 GPU 加速&#34;&gt;&lt;/a&gt;5.2. 确认真正的 GPU 加速&lt;/h3&gt;&lt;p&gt;如何确定模型确实是由 GPU 而非 CPU 运行的？Windows 任务管理器可以给我们明确的答案。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：打开任务管理器&lt;/strong&gt; 按下 &lt;code&gt;Ctrl+Shift+Esc&lt;/code&gt; 组合键。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步：导航至“性能”选项卡&lt;/strong&gt; 在任务管理器窗口中，点击“性能”选项卡，然后在左侧边栏中找到并点击您的“Intel Arc(TM) Graphics” GPU。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步：更改引擎视图（关键步骤）&lt;/strong&gt; 任务管理器默认显示的 GPU 利用率图表是“3D”引擎，这主要用于游戏和图形渲染，与我们的计算任务无关。您需要点击图表上方的下拉菜单（默认为“3D”），然后将其更改为 &lt;strong&gt;Compute_0&lt;/strong&gt; 或 &lt;strong&gt;Graphics_1&lt;/strong&gt; 。这是 DirectML 和 SYCL 等计算 API 使用的引擎。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步：观察利用率&lt;/strong&gt; 回到 Open WebUI，再次向模型提问，并密切关注任务管理器。在模型生成回答的几秒钟内，您应该能看到“Compute_0”或“Graphics_1”图表出现明显的、尖锐的峰值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步：观察显存（VRAM）使用情况&lt;/strong&gt; 在同一性能页面下，找到“专用 GPU 内存”图表。当您加载并运行模型时，该图表的占用率会显著上升，并维持在一个较高的水平，这表明模型权重已被成功加载到显卡的 VRAM 中 。  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;计算引擎的活动和专用显存的高占用率，是 GPU 加速已成功启用的确凿证据&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;5-3-性能健全性检查：CPU-vs-GPU-对比&#34;&gt;&lt;a href=&#34;#5-3-性能健全性检查：CPU-vs-GPU-对比&#34; class=&#34;headerlink&#34; title=&#34;5.3. 性能健全性检查：CPU vs. GPU 对比&#34;&gt;&lt;/a&gt;5.3. 性能健全性检查：CPU vs. GPU 对比&lt;/h3&gt;&lt;p&gt;为了更直观地感受性能差异，可以进行一个简单的对比测试。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在运行着 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口中，按 &lt;code&gt;Ctrl+C&lt;/code&gt; 停止服务器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不设置&lt;/strong&gt; &lt;code&gt;OLLAMA_NUM_GPU&lt;/code&gt; 环境变量，直接运行 &lt;code&gt;.\ollama serve&lt;/code&gt; 启动服务器。这将强制 Ollama 使用 CPU 进行推理。&lt;/li&gt;
+&lt;li&gt;回到 Open WebUI，使用相同的模型提出相同的问题。您会发现回答的生成速度（以 tokens/秒计）明显变慢。&lt;/li&gt;
+&lt;li&gt;同时观察任务管理器，此时您会看到 CPU 利用率飙升，而 GPU 的计算引擎则处于空闲状态。这个鲜明的对比无可辩驳地证明了我们之前配置的价值 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第六部分：深度排错与高级主题&#34;&gt;&lt;a href=&#34;#第六部分：深度排错与高级主题&#34; class=&#34;headerlink&#34; title=&#34;第六部分：深度排错与高级主题&#34;&gt;&lt;/a&gt;第六部分：深度排错与高级主题&lt;/h2&gt;&lt;h3 id=&#34;6-1-常见问题与解决方案&#34;&gt;&lt;a href=&#34;#6-1-常见问题与解决方案&#34; class=&#34;headerlink&#34; title=&#34;6.1. 常见问题与解决方案&#34;&gt;&lt;/a&gt;6.1. 常见问题与解决方案&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;症状&lt;/th&gt;
+&lt;th&gt;可能原因&lt;/th&gt;
+&lt;th&gt;解决方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;加载模型时出现 &lt;code&gt;VIDEO_SCHEDULER_INTERNAL_ERROR&lt;/code&gt; 蓝屏死机 (BSOD)&lt;/td&gt;
+&lt;td&gt;显卡驱动程序不稳定或存在冲突。&lt;/td&gt;
+&lt;td&gt;按照第二部分 2.1 节的指导，执行一次驱动程序的“清洁安装”。如果问题依旧，使用 DDU 工具彻底卸载后重装 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;模型运行缓慢，任务管理器显示 CPU 占用高，GPU 计算引擎无活动。&lt;/td&gt;
+&lt;td&gt;启动 &lt;code&gt;ollama serve&lt;/code&gt; 之前，未正确设置 &lt;code&gt;$env:OLLAMA_NUM_GPU=&#34;999&#34;&lt;/code&gt; 环境变量。&lt;/td&gt;
+&lt;td&gt;停止服务器 (&lt;code&gt;Ctrl+C&lt;/code&gt;)，在 PowerShell 中正确设置该环境变量后，再重新启动服务器 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PowerShell 中提示 &lt;code&gt;conda activate&lt;/code&gt; 命令未找到。&lt;/td&gt;
+&lt;td&gt;Conda 未针对 PowerShell 进行初始化。&lt;/td&gt;
+&lt;td&gt;运行 &lt;code&gt;conda init powershell&lt;/code&gt; 命令，然后关闭并重新打开 Windows Terminal 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Open WebUI 界面显示“服务器连接错误”。&lt;/td&gt;
+&lt;td&gt;Ollama 后端服务器未运行，或网络配置问题。&lt;/td&gt;
+&lt;td&gt;确保运行 &lt;code&gt;ollama serve&lt;/code&gt; 的终端窗口没有关闭且无错误。在 Open WebUI 的“设置 &amp;gt; 连接”中，检查 API URL 是否为 &lt;code&gt;http://localhost:11434&lt;/code&gt; 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Conda 安装 (&lt;code&gt;pip install&lt;/code&gt; 或 &lt;code&gt;conda create&lt;/code&gt;) 失败或卡在“Solving environment”。&lt;/td&gt;
+&lt;td&gt;Conda 频道冲突或网络连接问题。&lt;/td&gt;
+&lt;td&gt;确保网络连接稳定。尝试在终端运行 &lt;code&gt;conda clean -a -y&lt;/code&gt; 清理缓存。作为最后的手段，可以尝试 &lt;code&gt;conda config --set channel_priority flexible&lt;/code&gt; 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;6-2-定位与阅读日志文件&#34;&gt;&lt;a href=&#34;#6-2-定位与阅读日志文件&#34; class=&#34;headerlink&#34; title=&#34;6.2. 定位与阅读日志文件&#34;&gt;&lt;/a&gt;6.2. 定位与阅读日志文件&lt;/h3&gt;&lt;p&gt;当遇到更复杂的问题时，日志文件是您的最佳帮手。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;日志文件位置&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;服务器日志&lt;/strong&gt;：&lt;code&gt;%LOCALAPPDATA%\Ollama&lt;/code&gt; 目录下的 &lt;code&gt;server.log&lt;/code&gt; 文件包含了最新的服务器运行日志 。  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;模型存储位置&lt;/strong&gt;：&lt;code&gt;%HOMEPATH%\.ollama&lt;/code&gt; 目录，这里存放着您下载的所有模型文件 。  &lt;/p&gt;
+&lt;p&gt;您可以在文件资源管理器的地址栏直接输入以上路径（包括百分号）来快速访问。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启用调试日志&lt;/strong&gt;： 为了获得更详细的排错信息，可以停止 Ollama 服务器，然后使用以下命令重启，这将启用调试模式：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;$env:OLLAMA_DEBUG=&#34;1&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-3-高级自定义：更改模型存储位置&#34;&gt;&lt;a href=&#34;#6-3-高级自定义：更改模型存储位置&#34; class=&#34;headerlink&#34; title=&#34;6.3. 高级自定义：更改模型存储位置&#34;&gt;&lt;/a&gt;6.3. 高级自定义：更改模型存储位置&lt;/h3&gt;&lt;p&gt;LLM 模型文件通常体积巨大，很多用户希望将它们存储在非系统盘（如 D 盘）上。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 Windows 的“高级系统设置”（可以在开始菜单中搜索）。&lt;/li&gt;
+&lt;li&gt;点击“环境变量”按钮。&lt;/li&gt;
+&lt;li&gt;在“用户变量”区域，点击“新建”。&lt;/li&gt;
+&lt;li&gt;变量名填写 &lt;code&gt;OLLAMA_MODELS&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;变量值填写您希望存储模型的新路径，例如 &lt;code&gt;D:\OllamaModels&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;逐级点击“确定”保存设置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;此更改需要完全退出并重新启动 Ollama 应用程序（包括后台服务）才能生效&lt;/strong&gt; 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过遵循本指南的详尽步骤，您已成功将您的英特尔 Arc A770 16G 显卡打造成一个强大的本地 AI 推理平台。享受探索大型语言模型世界的乐趣吧！&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/21/dai-li-jia-su-you-xi-jiao-cheng/</guid>
+            <title>代理加速游戏教程</title>
+            <link>https://0xdadream.github.io/2025/06/21/dai-li-jia-su-you-xi-jiao-cheng/</link>
+            <category>net</category>
+            <pubDate>Sat, 21 Jun 2025 00:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;代理加速游戏教程&#34;&gt;&lt;a href=&#34;#代理加速游戏教程&#34; class=&#34;headerlink&#34; title=&#34;代理加速游戏教程&#34;&gt;&lt;/a&gt;代理加速游戏教程&lt;/h1&gt;&lt;h2 id=&#34;✅-目标&#34;&gt;&lt;a href=&#34;#✅-目标&#34; class=&#34;headerlink&#34; title=&#34;✅ 目标&#34;&gt;&lt;/a&gt;✅ 目标&lt;/h2&gt;&lt;p&gt;在 Windows PC 上，通过 &lt;code&gt;v2rayN&lt;/code&gt; + &lt;code&gt;Proxifier&lt;/code&gt;，让《NIKKE》PC 客户端通过你自己的代理节点（如 VLESS/Vmess/Trojan/Reality）连接港台服务器，加速游戏。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🧰-准备工具&#34;&gt;&lt;a href=&#34;#🧰-准备工具&#34; class=&#34;headerlink&#34; title=&#34;🧰 准备工具&#34;&gt;&lt;/a&gt;🧰 准备工具&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;下载地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;✅ v2rayN&lt;/td&gt;
+&lt;td&gt;连接你的代理节点并提供本地代理端口&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/2dust/v2rayN/releases&#34;&gt;GitHub&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;✅ Proxifier&lt;/td&gt;
+&lt;td&gt;把指定程序的流量强制送入代理&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.proxifier.com/&#34;&gt;官网&lt;/a&gt; 或吾爱破解&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🪜-配置步骤&#34;&gt;&lt;a href=&#34;#🪜-配置步骤&#34; class=&#34;headerlink&#34; title=&#34;🪜 配置步骤&#34;&gt;&lt;/a&gt;🪜 配置步骤&lt;/h2&gt;&lt;hr&gt;
+&lt;h3 id=&#34;①-安装并配置-v2rayN&#34;&gt;&lt;a href=&#34;#①-安装并配置-v2rayN&#34; class=&#34;headerlink&#34; title=&#34;① 安装并配置 v2rayN&#34;&gt;&lt;/a&gt;① 安装并配置 v2rayN&lt;/h3&gt;&lt;h4 id=&#34;✦-步骤：&#34;&gt;&lt;a href=&#34;#✦-步骤：&#34; class=&#34;headerlink&#34; title=&#34;✦ 步骤：&#34;&gt;&lt;/a&gt;✦ 步骤：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;解压 v2rayN，运行 &lt;code&gt;v2rayN.exe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;添加你的代理节点（VLESS / Vmess / Trojan / Reality）&lt;ul&gt;
+&lt;li&gt;右键左下角空白 → “添加节点”&lt;/li&gt;
+&lt;li&gt;粘贴你从机场获取的节点链接或手动填写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;启用节点&lt;ul&gt;
+&lt;li&gt;右键该节点 → &lt;code&gt;设为活动服务器&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;启用代理服务：&lt;ul&gt;
+&lt;li&gt;点工具栏“启用 HTTP 代理”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;查看本地监听端口：&lt;ul&gt;
+&lt;li&gt;默认 SOCKS5 地址：&lt;code&gt;127.0.0.1:10808&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可在设置 → 本地代理设置中修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;开启多路复用（mux）提升传输效率，参数设置里面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;✅ 到这里，v2rayN 已在本地开启 SOCKS5 代理服务。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;②-安装并配置-Proxifier（代理-NIKKE-游戏）&#34;&gt;&lt;a href=&#34;#②-安装并配置-Proxifier（代理-NIKKE-游戏）&#34; class=&#34;headerlink&#34; title=&#34;② 安装并配置 Proxifier（代理 NIKKE 游戏）&#34;&gt;&lt;/a&gt;② 安装并配置 Proxifier（代理 NIKKE 游戏）&lt;/h3&gt;&lt;h4 id=&#34;✦-步骤：-1&#34;&gt;&lt;a href=&#34;#✦-步骤：-1&#34; class=&#34;headerlink&#34; title=&#34;✦ 步骤：&#34;&gt;&lt;/a&gt;✦ 步骤：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;安装 Proxifier（或使用绿色版）&lt;/li&gt;
+&lt;li&gt;启动 Proxifier，点击菜单 &lt;code&gt;Profile → Proxy Servers&lt;/code&gt; → 添加代理：&lt;ul&gt;
+&lt;li&gt;地址：&lt;code&gt;127.0.0.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;端口：&lt;code&gt;10808&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;类型：&lt;code&gt;SOCKS5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;点击 &lt;code&gt;Check&lt;/code&gt; 检查是否成功&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;点击菜单 &lt;code&gt;Profile → Proxification Rules&lt;/code&gt; → 添加新规则：&lt;ul&gt;
+&lt;li&gt;Rule name: &lt;code&gt;NIKKE&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Applications: 浏览选择 &lt;code&gt;NIKKE.exe&lt;/code&gt;（PC 客户端主程序）&lt;ul&gt;
+&lt;li&gt;默认路径例如：&lt;code&gt;C:\Program Files\NIKKE\NIKKE.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Action: 选择你刚才添加的代理（SOCKS5）&lt;/li&gt;
+&lt;li&gt;勾选启用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;✅ 此时，&lt;strong&gt;只有 NIKKE.exe 会走代理，其它软件保持直连&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;③-启动流程&#34;&gt;&lt;a href=&#34;#③-启动流程&#34; class=&#34;headerlink&#34; title=&#34;③ 启动流程&#34;&gt;&lt;/a&gt;③ 启动流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;启动 v2rayN，确保节点连接正常（看到“已连接”或有流量日志）&lt;/li&gt;
+&lt;li&gt;启动 Proxifier（确认规则已启用）&lt;/li&gt;
+&lt;li&gt;启动 NIKKE 游戏客户端&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-验证代理是否生效&#34;&gt;&lt;a href=&#34;#✅-验证代理是否生效&#34; class=&#34;headerlink&#34; title=&#34;✅ 验证代理是否生效&#34;&gt;&lt;/a&gt;✅ 验证代理是否生效&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;检查内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;v2rayN 日志窗口&lt;/td&gt;
+&lt;td&gt;是否显示 NIKKE 的请求记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxifier 日志&lt;/td&gt;
+&lt;td&gt;是否显示 &lt;code&gt;NIKKE.exe → 通过代理连接&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;游戏体验&lt;/td&gt;
+&lt;td&gt;加速生效，港澳台服连接更快、不卡顿&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🧱-常见问题&#34;&gt;&lt;a href=&#34;#🧱-常见问题&#34; class=&#34;headerlink&#34; title=&#34;🧱 常见问题&#34;&gt;&lt;/a&gt;🧱 常见问题&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;问题&lt;/th&gt;
+&lt;th&gt;原因与解决方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;游戏无网络 / 卡加载&lt;/td&gt;
+&lt;td&gt;节点不可用或不支持 UDP → 换节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxifier 没生效&lt;/td&gt;
+&lt;td&gt;没正确添加 &lt;code&gt;NIKKE.exe&lt;/code&gt; 路径或端口错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;v2rayN 没有日志输出&lt;/td&gt;
+&lt;td&gt;节点未连接成功 / 规则没匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;担心 DNS 泄露&lt;/td&gt;
+&lt;td&gt;Proxifier → 设置 → 勾选 “通过代理解析 DNS”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-教程总结&#34;&gt;&lt;a href=&#34;#✅-教程总结&#34; class=&#34;headerlink&#34; title=&#34;✅ 教程总结&#34;&gt;&lt;/a&gt;✅ 教程总结&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;步骤&lt;/th&gt;
+&lt;th&gt;工具&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;设置代理节点&lt;/td&gt;
+&lt;td&gt;v2rayN&lt;/td&gt;
+&lt;td&gt;接入你的港台/国际节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定程序走代理&lt;/td&gt;
+&lt;td&gt;Proxifier&lt;/td&gt;
+&lt;td&gt;精确代理 NIKKE.exe 流量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;启动顺序&lt;/td&gt;
+&lt;td&gt;v2rayN → Proxifier → NIKKE&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-附加建议（可选）&#34;&gt;&lt;a href=&#34;#✅-附加建议（可选）&#34; class=&#34;headerlink&#34; title=&#34;✅ 附加建议（可选）&#34;&gt;&lt;/a&gt;✅ 附加建议（可选）&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;✅ 开启 v2rayN 的“日志记录”便于排错&lt;/li&gt;
+&lt;li&gt;✅ 使用 &lt;code&gt;Reality&lt;/code&gt; / &lt;code&gt;VLESS TCP-XTLS&lt;/code&gt; 等新协议节点，延迟更低&lt;/li&gt;
+&lt;li&gt;✅ 使用干净无劫持的 DNS（如 &lt;code&gt;8.8.8.8&lt;/code&gt;、&lt;code&gt;1.1.1.1&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.lvruan.com/app/44066&#34;&gt;Proxifier 4.14汉化版_统一代理所有流量出口 | 绿软下载 | 绿色软件联盟&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/06/17/python-bao-guan-li/</guid>
             <title>Python 包管理与导入全方位教程</title>
@@ -2745,680 +3649,6 @@ df&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pipe&lt;span class
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/01/10/liang-tai-dian-nao-shi-yong-github-pycharm-tong-bu-kai-fa/</guid>
-            <title>两台电脑使用github+pycharm同步开发</title>
-            <link>https://0xdadream.github.io/2025/01/10/liang-tai-dian-nao-shi-yong-github-pycharm-tong-bu-kai-fa/</link>
-            <category>tools</category>
-            <pubDate>Fri, 10 Jan 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;两台电脑使用github-pycharm同步开发&#34;&gt;&lt;a href=&#34;#两台电脑使用github-pycharm同步开发&#34; class=&#34;headerlink&#34; title=&#34;两台电脑使用github+pycharm同步开发&#34;&gt;&lt;/a&gt;两台电脑使用github+pycharm同步开发&lt;/h1&gt;&lt;p&gt;本文介绍如何在两台电脑之间通过 GitHub 和 PyCharm 实现项目的同步开发。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;一、准备工作&#34;&gt;&lt;a href=&#34;#一、准备工作&#34; class=&#34;headerlink&#34; title=&#34;一、准备工作&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、准备工作&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-在两台电脑上安装必要工具&#34;&gt;&lt;a href=&#34;#1-在两台电脑上安装必要工具&#34; class=&#34;headerlink&#34; title=&#34;1. 在两台电脑上安装必要工具&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 在两台电脑上安装必要工具&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Git&lt;/strong&gt;：下载并安装 &lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PyCharm&lt;/strong&gt;：下载并安装 &lt;a href=&#34;https://www.jetbrains.com/pycharm/&#34;&gt;PyCharm&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GitHub 账号&lt;/strong&gt;：确保已经注册并拥有 GitHub 账号。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-配置-Git-环境&#34;&gt;&lt;a href=&#34;#2-配置-Git-环境&#34; class=&#34;headerlink&#34; title=&#34;2. 配置 Git 环境&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 配置 Git 环境&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在两台电脑上分别配置 Git：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置用户名和邮箱&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.name &lt;span class=&#34;token string&#34;&gt;&#34;你的用户名&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; user.email &lt;span class=&#34;token string&#34;&gt;&#34;你的邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;生成 SSH 密钥&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&#34;token parameter variable&#34;&gt;-C&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;你的邮箱&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;按提示生成密钥（存储在 &lt;code&gt;~/.ssh/id_ed25519&lt;/code&gt;）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;使用以下命令查看并复制公钥内容：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; ~/.ssh/id_ed25519.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;登录 GitHub，进入 &lt;strong&gt;Settings &amp;gt; SSH and GPG keys&lt;/strong&gt;，点击 &lt;strong&gt;New SSH key&lt;/strong&gt;，将公钥粘贴并保存。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;测试连接&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-T&lt;/span&gt; git@github.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果返回：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-vbnet&#34; data-language=&#34;vbnet&#34;&gt;&lt;code class=&#34;language-vbnet&#34;&gt;Hi &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;! You&#39;ve successfully authenticated, but GitHub does not provide shell access.&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;表示配置成功。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;二、创建远程仓库并上传项目&#34;&gt;&lt;a href=&#34;#二、创建远程仓库并上传项目&#34; class=&#34;headerlink&#34; title=&#34;二、创建远程仓库并上传项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、创建远程仓库并上传项目&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-创建远程仓库&#34;&gt;&lt;a href=&#34;#1-创建远程仓库&#34; class=&#34;headerlink&#34; title=&#34;1. 创建远程仓库&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建远程仓库&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;登录 GitHub，点击右上角的 &lt;strong&gt;+&lt;/strong&gt; &amp;gt; &lt;strong&gt;New repository&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;填写仓库名称（例如 &lt;code&gt;my_project&lt;/code&gt;），选择 &lt;strong&gt;Public&lt;/strong&gt; 或 &lt;strong&gt;Private&lt;/strong&gt;，然后点击 &lt;strong&gt;Create repository&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;2-将本地项目上传到远程仓库&#34;&gt;&lt;a href=&#34;#2-将本地项目上传到远程仓库&#34; class=&#34;headerlink&#34; title=&#34;2. 将本地项目上传到远程仓库&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 将本地项目上传到远程仓库&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在已存在的项目目录中初始化 Git，并推送到远程仓库：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; /path/to/your/project
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; init  &lt;span class=&#34;token comment&#34;&gt;# 初始化&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 提交所有文件到暂存区&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Initial commit&#34;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 提交到当前分支&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch &lt;span class=&#34;token parameter variable&#34;&gt;-M&lt;/span&gt; main &lt;span class=&#34;token comment&#34;&gt;# 将当前分支重命名为main，github默认分支为main&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; remote &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; origin git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git  &lt;span class=&#34;token comment&#34;&gt;# 绑定远程仓库&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; origin main &lt;span class=&#34;token comment&#34;&gt;# 将 main 分支推送到远程仓库，并建立本地与远程分支的关联，添加 -u 参数后，本地的 main 分支会与远程的 main 分支关联起来。这样，后续执行 git pull 或 git push 时，不需要再指定分支名称&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;三、在两台电脑上同步项目&#34;&gt;&lt;a href=&#34;#三、在两台电脑上同步项目&#34; class=&#34;headerlink&#34; title=&#34;三、在两台电脑上同步项目&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、在两台电脑上同步项目&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;电脑-A-操作&#34;&gt;&lt;a href=&#34;#电脑-A-操作&#34; class=&#34;headerlink&#34; title=&#34;电脑 A 操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;电脑 A 操作&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;克隆远程仓库&lt;/strong&gt;： 如果电脑 A 尚未有项目代码：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; my_project&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果电脑 A 已有代码并已推送到远程仓库，则跳过此步骤。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;用 PyCharm 打开项目&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;打开 PyCharm，点击 &lt;strong&gt;File &amp;gt; Open&lt;/strong&gt;，选择项目目录。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;电脑-B-操作&#34;&gt;&lt;a href=&#34;#电脑-B-操作&#34; class=&#34;headerlink&#34; title=&#34;电脑 B 操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;电脑 B 操作&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;克隆远程仓库&lt;/strong&gt;： 在电脑 B 的终端中运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git
-&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; my_project&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;用 PyCharm 打开项目&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;打开 PyCharm，点击 &lt;strong&gt;File &amp;gt; Open&lt;/strong&gt;，选择项目目录。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;四、日常开发流程&#34;&gt;&lt;a href=&#34;#四、日常开发流程&#34; class=&#34;headerlink&#34; title=&#34;四、日常开发流程&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、日常开发流程&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-在电脑-A-或-B-上修改代码&#34;&gt;&lt;a href=&#34;#1-在电脑-A-或-B-上修改代码&#34; class=&#34;headerlink&#34; title=&#34;1. 在电脑 A 或 B 上修改代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 在电脑 A 或 B 上修改代码&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;使用 PyCharm 编辑代码。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在终端或 PyCharm 的 Git 工具窗口中提交更改：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;描述本次更改的内容&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;2-在另一台电脑同步代码&#34;&gt;&lt;a href=&#34;#2-在另一台电脑同步代码&#34; class=&#34;headerlink&#34; title=&#34;2. 在另一台电脑同步代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 在另一台电脑同步代码&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在另一台电脑上拉取最新代码：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后继续开发。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;五、解决冲突&#34;&gt;&lt;a href=&#34;#五、解决冲突&#34; class=&#34;headerlink&#34; title=&#34;五、解决冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;五、解决冲突&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果两台电脑同时修改了同一个文件并提交，可能会出现冲突。解决方法如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;拉取代码时提示冲突&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Git 会提示冲突的文件。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;手动解决冲突&lt;/strong&gt;： 打开冲突文件，按照以下格式解决冲突：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; HEAD
-你的修改
-=======
-另一台电脑的修改
-&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; commit-hash&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改为期望的代码并保存。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;标记冲突已解决并提交&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;解决冲突&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;六、PyCharm-中内置-Git-工具的使用&#34;&gt;&lt;a href=&#34;#六、PyCharm-中内置-Git-工具的使用&#34; class=&#34;headerlink&#34; title=&#34;六、PyCharm 中内置 Git 工具的使用&#34;&gt;&lt;/a&gt;&lt;strong&gt;六、PyCharm 中内置 Git 工具的使用&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;提交代码&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;在 PyCharm 界面右上角，点击 &lt;strong&gt;Commit&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;勾选修改的文件，填写提交信息，然后点击 &lt;strong&gt;Commit&lt;/strong&gt; 或 &lt;strong&gt;Commit and Push&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;拉取代码&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;点击 &lt;strong&gt;Git &amp;gt; Pull&lt;/strong&gt;，选择远程分支，点击 &lt;strong&gt;OK&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;查看分支和日志&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;点击 &lt;strong&gt;Git &amp;gt; Log&lt;/strong&gt;，查看提交历史和分支结构。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;七、注意事项&#34;&gt;&lt;a href=&#34;#七、注意事项&#34; class=&#34;headerlink&#34; title=&#34;七、注意事项&#34;&gt;&lt;/a&gt;&lt;strong&gt;七、注意事项&lt;/strong&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;保持代码同步&lt;/strong&gt;：每次在另一台电脑开发前，先执行 &lt;code&gt;git pull&lt;/code&gt; 拉取最新代码。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;频繁提交&lt;/strong&gt;：尽量将每次修改后的小更新提交到远程仓库，避免产生冲突。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多人协作时注意分支管理&lt;/strong&gt;：可以为不同功能创建分支，完成后再合并到主分支。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;八、分支管理&#34;&gt;&lt;a href=&#34;#八、分支管理&#34; class=&#34;headerlink&#34; title=&#34;八、分支管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;八、分支管理&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;当开发新功能或进行实验时，可以使用分支来避免影响主分支。&lt;/p&gt;
-&lt;h4 id=&#34;1-创建和切换分支&#34;&gt;&lt;a href=&#34;#1-创建和切换分支&#34; class=&#34;headerlink&#34; title=&#34;1. 创建和切换分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建和切换分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;创建新分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;切换到新分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或直接创建并切换：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout &lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-合并分支&#34;&gt;&lt;a href=&#34;#2-合并分支&#34; class=&#34;headerlink&#34; title=&#34;2. 合并分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 合并分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;切换到主分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; checkout main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;合并新功能分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; merge feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-删除分支&#34;&gt;&lt;a href=&#34;#3-删除分支&#34; class=&#34;headerlink&#34; title=&#34;3. 删除分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 删除分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;删除本地分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; branch &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;删除远程分支：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push origin &lt;span class=&#34;token parameter variable&#34;&gt;--delete&lt;/span&gt; feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;九、处理多人协作的冲突&#34;&gt;&lt;a href=&#34;#九、处理多人协作的冲突&#34; class=&#34;headerlink&#34; title=&#34;九、处理多人协作的冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;九、处理多人协作的冲突&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果你在两台电脑之外，还与其他人协作开发，可以通过以下方式优化工作流。&lt;/p&gt;
-&lt;h4 id=&#34;1-定期拉取最新代码&#34;&gt;&lt;a href=&#34;#1-定期拉取最新代码&#34; class=&#34;headerlink&#34; title=&#34;1. 定期拉取最新代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 定期拉取最新代码&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在本地开发前，确保代码是最新的：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-使用-rebase-整理提交历史&#34;&gt;&lt;a href=&#34;#2-使用-rebase-整理提交历史&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 rebase 整理提交历史&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 使用 &lt;code&gt;rebase&lt;/code&gt; 整理提交历史&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在同步远程分支时，你可以选择 &lt;code&gt;rebase&lt;/code&gt; 方式，使提交历史更加整洁：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull &lt;span class=&#34;token parameter variable&#34;&gt;--rebase&lt;/span&gt; origin main&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用标签管理版本&#34;&gt;&lt;a href=&#34;#3-使用标签管理版本&#34; class=&#34;headerlink&#34; title=&#34;3. 使用标签管理版本&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用标签管理版本&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;当一个功能开发完成后，可以添加一个标签：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; tag &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; v1.0 &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Version 1.0 release&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push origin v1.0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;十、PyCharm-的一些高级-Git-功能&#34;&gt;&lt;a href=&#34;#十、PyCharm-的一些高级-Git-功能&#34; class=&#34;headerlink&#34; title=&#34;十、PyCharm 的一些高级 Git 功能&#34;&gt;&lt;/a&gt;&lt;strong&gt;十、PyCharm 的一些高级 Git 功能&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-可视化查看分支&#34;&gt;&lt;a href=&#34;#1-可视化查看分支&#34; class=&#34;headerlink&#34; title=&#34;1. 可视化查看分支&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 可视化查看分支&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 界面右下角，点击 &lt;strong&gt;Git 分支名称&lt;/strong&gt;，可以查看和切换分支。&lt;/li&gt;
-&lt;li&gt;打开 &lt;strong&gt;Git &amp;gt; Log&lt;/strong&gt;，可以看到分支结构图和提交历史。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-解决冲突&#34;&gt;&lt;a href=&#34;#2-解决冲突&#34; class=&#34;headerlink&#34; title=&#34;2. 解决冲突&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 解决冲突&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;当拉取代码遇到冲突时，PyCharm 提供了图形化工具：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;点击 &lt;strong&gt;Merge Conflicts&lt;/strong&gt; 提示框。&lt;/li&gt;
-&lt;li&gt;使用 PyCharm 的三栏界面，直观地合并冲突。&lt;/li&gt;
-&lt;li&gt;合并完成后，保存并提交。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;3-使用变基（Rebase）&#34;&gt;&lt;a href=&#34;#3-使用变基（Rebase）&#34; class=&#34;headerlink&#34; title=&#34;3. 使用变基（Rebase）&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用变基（Rebase）&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 中，选择 &lt;strong&gt;VCS &amp;gt; Git &amp;gt; Rebase&lt;/strong&gt;，可以直观地重新整理提交。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十一、优化开发体验&#34;&gt;&lt;a href=&#34;#十一、优化开发体验&#34; class=&#34;headerlink&#34; title=&#34;十一、优化开发体验&#34;&gt;&lt;/a&gt;&lt;strong&gt;十一、优化开发体验&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-配置-gitignore&#34;&gt;&lt;a href=&#34;#1-配置-gitignore&#34; class=&#34;headerlink&#34; title=&#34;1. 配置 .gitignore&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 配置 &lt;code&gt;.gitignore&lt;/code&gt;&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;避免将不必要的文件推送到远程仓库。比如 Python 项目常用的 &lt;code&gt;.gitignore&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;__pycache__/
-*.pyc
-*.pyo
-*.log
-.idea/
-.vscode/
-.DS_Store&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将 &lt;code&gt;.gitignore&lt;/code&gt; 文件添加到项目根目录，然后提交：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; .gitignore
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; commit &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Add .gitignore&#34;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-提高拉取速度&#34;&gt;&lt;a href=&#34;#2-提高拉取速度&#34; class=&#34;headerlink&#34; title=&#34;2. 提高拉取速度&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 提高拉取速度&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果仓库较大，可以通过浅克隆（仅克隆最近的提交历史）加快速度：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone &lt;span class=&#34;token parameter variable&#34;&gt;--depth&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project.git&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;3-使用-SSH-配置多个远程地址&#34;&gt;&lt;a href=&#34;#3-使用-SSH-配置多个远程地址&#34; class=&#34;headerlink&#34; title=&#34;3. 使用 SSH 配置多个远程地址&#34;&gt;&lt;/a&gt;&lt;strong&gt;3. 使用 SSH 配置多个远程地址&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;如果有多个远程仓库，可以配置多个 &lt;code&gt;remote&lt;/code&gt; 地址：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; remote &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; backup git@github.com:&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;你的用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/my_project_backup.git&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;十二、代码评审（Code-Review）和协作工具&#34;&gt;&lt;a href=&#34;#十二、代码评审（Code-Review）和协作工具&#34; class=&#34;headerlink&#34; title=&#34;十二、代码评审（Code Review）和协作工具&#34;&gt;&lt;/a&gt;&lt;strong&gt;十二、代码评审（Code Review）和协作工具&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果需要团队协作，可以用 GitHub 的 Pull Request 功能：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;创建一个新分支进行开发。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;推送分支到远程：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; push &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; origin feature-branch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在 GitHub 上发起 **Pull Request (PR)**，让团队成员进行代码审查。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;审查通过后，合并分支。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十三、备份与恢复操作&#34;&gt;&lt;a href=&#34;#十三、备份与恢复操作&#34; class=&#34;headerlink&#34; title=&#34;十三、备份与恢复操作&#34;&gt;&lt;/a&gt;&lt;strong&gt;十三、备份与恢复操作&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-创建仓库副本（Fork）&#34;&gt;&lt;a href=&#34;#1-创建仓库副本（Fork）&#34; class=&#34;headerlink&#34; title=&#34;1. 创建仓库副本（Fork）&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 创建仓库副本（Fork）&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;如果你想备份项目或创建自己的分支，可以直接在 GitHub 上点击 &lt;strong&gt;Fork&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-恢复代码&#34;&gt;&lt;a href=&#34;#2-恢复代码&#34; class=&#34;headerlink&#34; title=&#34;2. 恢复代码&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 恢复代码&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;如果需要回滚到某次提交：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; reset &lt;span class=&#34;token parameter variable&#34;&gt;--hard&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;commit-id&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看历史提交记录：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; log&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;十四、自动化工作流&#34;&gt;&lt;a href=&#34;#十四、自动化工作流&#34; class=&#34;headerlink&#34; title=&#34;十四、自动化工作流&#34;&gt;&lt;/a&gt;&lt;strong&gt;十四、自动化工作流&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&#34;1-使用-GitHub-Actions-自动化任务&#34;&gt;&lt;a href=&#34;#1-使用-GitHub-Actions-自动化任务&#34; class=&#34;headerlink&#34; title=&#34;1. 使用 GitHub Actions 自动化任务&#34;&gt;&lt;/a&gt;&lt;strong&gt;1. 使用 GitHub Actions 自动化任务&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;你可以在 GitHub 上配置 &lt;strong&gt;GitHub Actions&lt;/strong&gt;，实现以下功能：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;自动运行测试代码。&lt;/li&gt;
-&lt;li&gt;部署代码到服务器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;示例 &lt;code&gt;.github/workflows/main.yml&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; CI/CD Pipeline
-
-&lt;span class=&#34;token key atrule&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-  &lt;span class=&#34;token key atrule&#34;&gt;push&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token key atrule&#34;&gt;branches&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; main
-
-&lt;span class=&#34;token key atrule&#34;&gt;jobs&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-  &lt;span class=&#34;token key atrule&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token key atrule&#34;&gt;runs-on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ubuntu&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;latest
-    &lt;span class=&#34;token key atrule&#34;&gt;steps&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Checkout code
-        &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/checkout@v3
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Setup Python
-        &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/setup&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;python@v4
-        &lt;span class=&#34;token key atrule&#34;&gt;with&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-          &lt;span class=&#34;token key atrule&#34;&gt;python-version&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;3.8&#39;&lt;/span&gt;
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Install dependencies
-        &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; pip install &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;r requirements.txt
-
-      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Run tests
-        &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; pytest&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-使用-PyCharm-的任务管理&#34;&gt;&lt;a href=&#34;#2-使用-PyCharm-的任务管理&#34; class=&#34;headerlink&#34; title=&#34;2. 使用 PyCharm 的任务管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;2. 使用 PyCharm 的任务管理&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;在 PyCharm 中配置 &lt;strong&gt;Tasks &amp;amp; Contexts&lt;/strong&gt;，跟踪开发任务和环境状态。&lt;/li&gt;
-&lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</guid>
-            <title>更改 Windows PowerShell 的执行策略</title>
-            <link>https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</link>
-            <category>windows</category>
-            <category>powershell</category>
-            <pubDate>Sat, 21 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;更改-Windows-PowerShell-的执行策略&#34;&gt;&lt;a href=&#34;#更改-Windows-PowerShell-的执行策略&#34; class=&#34;headerlink&#34; title=&#34;更改 Windows PowerShell 的执行策略&#34;&gt;&lt;/a&gt;更改 Windows PowerShell 的执行策略&lt;/h1&gt;&lt;h3 id=&#34;1-打开-PowerShell-以管理员身份运行&#34;&gt;&lt;a href=&#34;#1-打开-PowerShell-以管理员身份运行&#34; class=&#34;headerlink&#34; title=&#34;1. 打开 PowerShell 以管理员身份运行&#34;&gt;&lt;/a&gt;1. 打开 PowerShell 以管理员身份运行&lt;/h3&gt;&lt;p&gt;首先，您需要以管理员身份运行 PowerShell：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;按 &lt;code&gt;Win + X&lt;/code&gt; 并选择“Windows PowerShell (管理员)”。&lt;/li&gt;
-&lt;li&gt;如果您使用的是较新的 Windows 版本，也可以搜索“PowerShell”，右键点击并选择“以管理员身份运行”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-检查当前执行策略&#34;&gt;&lt;a href=&#34;#2-检查当前执行策略&#34; class=&#34;headerlink&#34; title=&#34;2. 检查当前执行策略&#34;&gt;&lt;/a&gt;2. 检查当前执行策略&lt;/h3&gt;&lt;p&gt;在更改执行策略之前，您可以查看当前的执行策略设置，执行以下命令：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;该命令将返回当前的执行策略，可能的输出包括：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;（默认策略，不允许执行任何脚本）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;（本地脚本可以运行，下载的脚本需要签名）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;（允许所有脚本运行）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ByPass&lt;/code&gt;（完全忽略执行策略）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-修改执行策略&#34;&gt;&lt;a href=&#34;#3-修改执行策略&#34; class=&#34;headerlink&#34; title=&#34;3. 修改执行策略&#34;&gt;&lt;/a&gt;3. 修改执行策略&lt;/h3&gt;&lt;p&gt;要更改执行策略，可以使用 &lt;code&gt;Set-ExecutionPolicy&lt;/code&gt; 命令。例如，您可以将执行策略更改为 &lt;code&gt;RemoteSigned&lt;/code&gt;，这样可以运行本地脚本并允许下载的签名脚本运行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; RemoteSigned&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果您希望设置为不限制脚本执行，可以使用 &lt;code&gt;Unrestricted&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Unrestricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者，如果您希望脚本完全不受限制（但存在安全风险），可以使用 &lt;code&gt;Bypass&lt;/code&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Bypass&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-确认更改&#34;&gt;&lt;a href=&#34;#4-确认更改&#34; class=&#34;headerlink&#34; title=&#34;4. 确认更改&#34;&gt;&lt;/a&gt;4. 确认更改&lt;/h3&gt;&lt;p&gt;更改执行策略后，系统会要求您确认。输入 &lt;code&gt;Y&lt;/code&gt; 进行确认并按回车。&lt;/p&gt;
-&lt;h3 id=&#34;5-检查执行策略更改是否生效&#34;&gt;&lt;a href=&#34;#5-检查执行策略更改是否生效&#34; class=&#34;headerlink&#34; title=&#34;5. 检查执行策略更改是否生效&#34;&gt;&lt;/a&gt;5. 检查执行策略更改是否生效&lt;/h3&gt;&lt;p&gt;再次执行以下命令来确保策略已更新：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ExecutionPolicy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6-了解不同的执行策略&#34;&gt;&lt;a href=&#34;#6-了解不同的执行策略&#34; class=&#34;headerlink&#34; title=&#34;6. 了解不同的执行策略&#34;&gt;&lt;/a&gt;6. 了解不同的执行策略&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Restricted&lt;/code&gt;：不允许运行任何脚本（这是默认设置）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;RemoteSigned&lt;/code&gt;：允许本地脚本运行，但从互联网下载的脚本需要有效的签名才能运行。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Unrestricted&lt;/code&gt;：允许所有脚本运行，但会在运行下载的脚本时给出警告。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Bypass&lt;/code&gt;：完全忽略执行策略（适用于临时需求，但有安全隐患）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;AllSigned&lt;/code&gt;：要求所有脚本必须由可信的发布者签名，适用于更严格的安全要求。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;7-恢复默认执行策略&#34;&gt;&lt;a href=&#34;#7-恢复默认执行策略&#34; class=&#34;headerlink&#34; title=&#34;7. 恢复默认执行策略&#34;&gt;&lt;/a&gt;7. 恢复默认执行策略&lt;/h3&gt;&lt;p&gt;如果您希望恢复默认的执行策略，只需执行：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; Restricted&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/13/parsec-jiao-cheng/</guid>
-            <title>parsec教程</title>
-            <link>https://0xdadream.github.io/2024/12/13/parsec-jiao-cheng/</link>
-            <category>tools</category>
-            <pubDate>Fri, 13 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;parsec教程&#34;&gt;&lt;a href=&#34;#parsec教程&#34; class=&#34;headerlink&#34; title=&#34;parsec教程&#34;&gt;&lt;/a&gt;parsec教程&lt;/h1&gt;&lt;h2 id=&#34;修改代理&#34;&gt;&lt;a href=&#34;#修改代理&#34; class=&#34;headerlink&#34; title=&#34;修改代理&#34;&gt;&lt;/a&gt;修改代理&lt;/h2&gt;&lt;p&gt;找到文件&lt;code&gt;C:\Users\用户名\AppData\Roaming\Parsec\config.josn&lt;/code&gt;，修改&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,
-&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy_address&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;127.0.0.1&#34;&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,
-&lt;span class=&#34;token string&#34;&gt;&#34;app_proxy_port&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
-	&lt;span class=&#34;token string&#34;&gt;&#34;value&#34;&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10808&lt;/span&gt;
-&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;,&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参照你的代理端口修改&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/11/pycharm-kuai-jie-jian/</guid>
-            <title>pycharm快捷键</title>
-            <link>https://0xdadream.github.io/2024/12/11/pycharm-kuai-jie-jian/</link>
-            <category>tools</category>
-            <pubDate>Wed, 11 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;pycharm快捷键&#34;&gt;&lt;a href=&#34;#pycharm快捷键&#34; class=&#34;headerlink&#34; title=&#34;pycharm快捷键&#34;&gt;&lt;/a&gt;pycharm快捷键&lt;/h1&gt;&lt;p&gt;pycharm快捷键&lt;/p&gt;
-&lt;p&gt;以下是 PyCharm 在 Windows 上高效开发常用的快捷键列表，按照功能分类：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;文件与项目管理&#34;&gt;&lt;a href=&#34;#文件与项目管理&#34; class=&#34;headerlink&#34; title=&#34;文件与项目管理&#34;&gt;&lt;/a&gt;&lt;strong&gt;文件与项目管理&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;打开文件/最近文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + E&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + N&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;切换到项目视图&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示/隐藏工具窗口&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + #[1-9]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;代码导航&#34;&gt;&lt;a href=&#34;#代码导航&#34; class=&#34;headerlink&#34; title=&#34;代码导航&#34;&gt;&lt;/a&gt;&lt;strong&gt;代码导航&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;跳转到声明/定义&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + B&lt;/code&gt; 或 &lt;code&gt;Ctrl + 鼠标左键&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;返回到上一个位置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + 左箭头&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;前进到下一个位置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + 右箭头&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;快速导航到符号（类、方法等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + Alt + N&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示方法列表&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F12&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;代码编辑&#34;&gt;&lt;a href=&#34;#代码编辑&#34; class=&#34;headerlink&#34; title=&#34;代码编辑&#34;&gt;&lt;/a&gt;&lt;strong&gt;代码编辑&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;格式化代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + L&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;智能补全（代码补全）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + 空格&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;自动导入&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + Enter&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;多光标选择&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 鼠标左键&lt;/code&gt; 或 &lt;code&gt;Ctrl + Alt + Shift + J&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;快速重构（重命名、提取变量等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F6&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;注释/取消注释行代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + /&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;注释/取消注释块代码&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + /&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;运行与调试&#34;&gt;&lt;a href=&#34;#运行与调试&#34; class=&#34;headerlink&#34; title=&#34;运行与调试&#34;&gt;&lt;/a&gt;&lt;strong&gt;运行与调试&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;运行当前文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F10&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;调试当前文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F9&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;添加断点&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;步入（Step Into）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F7&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;步过（Step Over）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;跳出（Step Out）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F8&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;搜索与替换&#34;&gt;&lt;a href=&#34;#搜索与替换&#34; class=&#34;headerlink&#34; title=&#34;搜索与替换&#34;&gt;&lt;/a&gt;&lt;strong&gt;搜索与替换&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;全局搜索&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + F&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;替换&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + R&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;在文件中搜索&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + F&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找下一个&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;F3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;查找上一个&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Shift + F3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;版本控制&#34;&gt;&lt;a href=&#34;#版本控制&#34; class=&#34;headerlink&#34; title=&#34;版本控制&#34;&gt;&lt;/a&gt;&lt;strong&gt;版本控制&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;查看版本历史（当前文件）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + A&lt;/code&gt; 然后输入 &lt;code&gt;File History&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;提交变更&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + K&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;更新项目&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + T&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示版本控制窗口&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Alt + 9&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;通用快捷键&#34;&gt;&lt;a href=&#34;#通用快捷键&#34; class=&#34;headerlink&#34; title=&#34;通用快捷键&#34;&gt;&lt;/a&gt;&lt;strong&gt;通用快捷键&lt;/strong&gt;&lt;/h3&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;功能&lt;/th&gt;
-&lt;th&gt;快捷键&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;搜索动作（如功能、设置等）&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + A&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;打开设置&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Alt + S&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;切换全屏模式&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Shift + F11&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;显示代码提示信息&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;Ctrl + Q&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/12/01/wsl-he-windows-hu-xiang-fang-wen/</guid>
-            <title>WSL 与 Windows 互相访问教程</title>
-            <link>https://0xdadream.github.io/2024/12/01/wsl-he-windows-hu-xiang-fang-wen/</link>
-            <category>tools</category>
-            <pubDate>Sun, 01 Dec 2024 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;WSL-与-Windows-互相访问教程&#34;&gt;&lt;a href=&#34;#WSL-与-Windows-互相访问教程&#34; class=&#34;headerlink&#34; title=&#34;WSL 与 Windows 互相访问教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;WSL 与 Windows 互相访问教程&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;以下教程将介绍如何在 WSL 和 Windows 系统之间互相访问文件并实现无缝交互。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;一、Windows-访问-WSL-文件&#34;&gt;&lt;a href=&#34;#一、Windows-访问-WSL-文件&#34; class=&#34;headerlink&#34; title=&#34;一、Windows 访问 WSL 文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;一、Windows 访问 WSL 文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;方法-1：通过网络路径访问&#34;&gt;&lt;a href=&#34;#方法-1：通过网络路径访问&#34; class=&#34;headerlink&#34; title=&#34;方法 1：通过网络路径访问&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 1：通过网络路径访问&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;WSL 文件系统挂载在 Windows 网络路径 &lt;code&gt;\\wsl$&lt;/code&gt; 下，可以直接访问。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开文件资源管理器或命令行：&lt;/strong&gt; 在地址栏或命令行输入以下路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;wsl$&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;发行版名称&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;例如：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;wsl$&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Ubuntu&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;home&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;直接访问 WSL 文件：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;文件资源管理器中可以像操作普通文件夹一样管理文件。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在命令行中可以使用：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;wsl$&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Ubuntu&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;home&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;token function&#34;&gt;dir&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;直接访问，无需额外配置。&lt;/li&gt;
-&lt;li&gt;文件路径自动挂载，无权限问题。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;方法-2：通过挂载路径访问&#34;&gt;&lt;a href=&#34;#方法-2：通过挂载路径访问&#34; class=&#34;headerlink&#34; title=&#34;方法 2：通过挂载路径访问&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 2：通过挂载路径访问&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;WSL 的文件系统实际上存储在 Windows 用户目录下：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;C:&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Users&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;AppData&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Local&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Packages&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;WSL发行版ID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;LocalState&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;rootfs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;操作步骤：&#34;&gt;&lt;a href=&#34;#操作步骤：&#34; class=&#34;headerlink&#34; title=&#34;操作步骤：&#34;&gt;&lt;/a&gt;&lt;strong&gt;操作步骤：&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;定位路径：&lt;/strong&gt; 打开资源管理器，导航到上述路径。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;通过命令行访问：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;C:\Users\&amp;lt;用户名&amp;gt;\AppData\Local\Packages\&amp;lt;发行版ID&amp;gt;\LocalState&lt;span class=&#34;token entity&#34; title=&#34;\r&#34;&gt;\r&lt;/span&gt;ootfs&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;不要直接修改&lt;/strong&gt; &lt;code&gt;LocalState&lt;/code&gt; 下的文件，可能导致 WSL 文件系统损坏。&lt;/li&gt;
-&lt;li&gt;尽量使用 &lt;code&gt;\\wsl$&lt;/code&gt; 路径，安全可靠。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;方法-3：通过-WSL-挂载目录&#34;&gt;&lt;a href=&#34;#方法-3：通过-WSL-挂载目录&#34; class=&#34;headerlink&#34; title=&#34;方法 3：通过 WSL 挂载目录&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 3：通过 WSL 挂载目录&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;WSL 可以直接挂载 Windows 文件系统，访问路径为 &lt;code&gt;/mnt/&amp;lt;盘符&amp;gt;&lt;/code&gt;。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在 WSL 中访问：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;常见操作：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;列出文件：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;复制文件到 WSL：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents/文件.txt ~/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;二、WSL-访问-Windows-文件&#34;&gt;&lt;a href=&#34;#二、WSL-访问-Windows-文件&#34; class=&#34;headerlink&#34; title=&#34;二、WSL 访问 Windows 文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;二、WSL 访问 Windows 文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;默认挂载的文件路径&#34;&gt;&lt;a href=&#34;#默认挂载的文件路径&#34; class=&#34;headerlink&#34; title=&#34;默认挂载的文件路径&#34;&gt;&lt;/a&gt;&lt;strong&gt;默认挂载的文件路径&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;WSL 会自动挂载 Windows 的文件系统，所有分区挂载在 &lt;code&gt;/mnt/&amp;lt;盘符&amp;gt;&lt;/code&gt; 下。例如：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;C:\&lt;/code&gt; 对应 &lt;code&gt;/mnt/c&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;D:\&lt;/code&gt; 对应 &lt;code&gt;/mnt/d&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;列出 Windows 文件：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;复制文件到 WSL：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents/文件.txt ~/wsl目录/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;移动文件到 Windows：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; ~/wsl目录/文件.txt /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Desktop/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;三、实现-WSL-和-Windows-共享目录&#34;&gt;&lt;a href=&#34;#三、实现-WSL-和-Windows-共享目录&#34; class=&#34;headerlink&#34; title=&#34;三、实现 WSL 和 Windows 共享目录&#34;&gt;&lt;/a&gt;&lt;strong&gt;三、实现 WSL 和 Windows 共享目录&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;方法-1：在-WSL-中创建软链接&#34;&gt;&lt;a href=&#34;#方法-1：在-WSL-中创建软链接&#34; class=&#34;headerlink&#34; title=&#34;方法 1：在 WSL 中创建软链接&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 1：在 WSL 中创建软链接&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如果频繁需要访问某些 Windows 目录，可以通过软链接简化路径。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;创建链接：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ln&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Documents ~/windows-documents&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;访问链接：&lt;/strong&gt; 直接进入：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; ~/windows-documents&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;方法-2：共享-WSL-的目录给-Windows&#34;&gt;&lt;a href=&#34;#方法-2：共享-WSL-的目录给-Windows&#34; class=&#34;headerlink&#34; title=&#34;方法 2：共享 WSL 的目录给 Windows&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 2：共享 WSL 的目录给 Windows&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;可以通过设置 WSL 中的目录，让 Windows 使用 &lt;code&gt;\\wsl$&lt;/code&gt; 访问。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;在 WSL 中创建目录：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; ~/shared-folder&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;在 Windows 中访问：&lt;/strong&gt; 打开资源管理器，导航到：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;wsl$&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;Ubuntu&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;home&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;shared-folder&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;四、在-WSL-和-Windows-间传输文件&#34;&gt;&lt;a href=&#34;#四、在-WSL-和-Windows-间传输文件&#34; class=&#34;headerlink&#34; title=&#34;四、在 WSL 和 Windows 间传输文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;四、在 WSL 和 Windows 间传输文件&lt;/strong&gt;&lt;/h2&gt;&lt;h3 id=&#34;方法-1：直接复制文件&#34;&gt;&lt;a href=&#34;#方法-1：直接复制文件&#34; class=&#34;headerlink&#34; title=&#34;方法 1：直接复制文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 1：直接复制文件&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;可以使用 &lt;code&gt;cp&lt;/code&gt; 或 &lt;code&gt;mv&lt;/code&gt; 命令实现文件复制或移动。&lt;/p&gt;
-&lt;h4 id=&#34;从-WSL-复制文件到-Windows：&#34;&gt;&lt;a href=&#34;#从-WSL-复制文件到-Windows：&#34; class=&#34;headerlink&#34; title=&#34;从 WSL 复制文件到 Windows：&#34;&gt;&lt;/a&gt;&lt;strong&gt;从 WSL 复制文件到 Windows：&lt;/strong&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; ~/文件.txt /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Desktop/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;从-Windows-复制文件到-WSL：&#34;&gt;&lt;a href=&#34;#从-Windows-复制文件到-WSL：&#34; class=&#34;headerlink&#34; title=&#34;从 Windows 复制文件到 WSL：&#34;&gt;&lt;/a&gt;&lt;strong&gt;从 Windows 复制文件到 WSL：&lt;/strong&gt;&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; /mnt/c/Users/&lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/Desktop/文件.txt ~/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;方法-2：使用-explorer-exe-打开-WSL-文件夹&#34;&gt;&lt;a href=&#34;#方法-2：使用-explorer-exe-打开-WSL-文件夹&#34; class=&#34;headerlink&#34; title=&#34;方法 2：使用 explorer.exe 打开 WSL 文件夹&#34;&gt;&lt;/a&gt;&lt;strong&gt;方法 2：使用 &lt;code&gt;explorer.exe&lt;/code&gt; 打开 WSL 文件夹&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;在 WSL 中可以直接使用 Windows 的资源管理器访问当前目录：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;在 WSL 终端中输入：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;explorer.exe &lt;span class=&#34;token builtin class-name&#34;&gt;.&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Windows 文件资源管理器会打开 WSL 当前路径。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2024/11/28/latex-jiao-cheng/</guid>
-            <title>latex教程</title>
-            <link>https://0xdadream.github.io/2024/11/28/latex-jiao-cheng/</link>
-            <category>tools</category>
-            <pubDate>Thu, 28 Nov 2024 21:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;latex教程&#34;&gt;&lt;a href=&#34;#latex教程&#34; class=&#34;headerlink&#34; title=&#34;latex教程&#34;&gt;&lt;/a&gt;latex教程&lt;/h1&gt;&lt;p&gt;latex教程&lt;/p&gt;
-&lt;p&gt;参考网站：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://zilutian.github.io/latex-tutorial-chinese/&#34;&gt;LaTeX 教程&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.latexstudio.net/LearnLaTeX/basic/01.html&#34;&gt;LaTeX 基础 | LaTeX 知识库&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.latexlive.com/&#34;&gt;在线LaTeX公式编辑器-编辑器&lt;/a&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

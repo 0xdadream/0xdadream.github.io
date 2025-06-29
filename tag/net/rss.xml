@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;net&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 29 Jun 2025 02:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 29 Jun 2025 02:25:00 +0800</lastBuildDate>
+        <category>cloudflare</category>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
+        <category>安装</category>
+        <category>email</category>
+        <category>tips</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>教程</category>
+        <category>linux</category>
+        <category>Java</category>
+        <category>conda</category>
+        <category>环境</category>
+        <category>bug</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>windows</category>
+        <category>net</category>
+        <category>server</category>
+        <category>comfyui</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>tools</category>
+        <category>emby</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>google</category>
+        <category>git</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>python</category>
+        <category>命令</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>远程</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>mcp</category>
+        <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/</guid>
+            <title>WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)</title>
+            <link>https://0xdadream.github.io/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/</link>
+            <category>net</category>
+            <pubDate>Sun, 29 Jun 2025 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;WSL-2-通过-Windows-V2RayN-代理上网权威指南-2025版&#34;&gt;&lt;a href=&#34;#WSL-2-通过-Windows-V2RayN-代理上网权威指南-2025版&#34; class=&#34;headerlink&#34; title=&#34;WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)&#34;&gt;&lt;/a&gt;WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)&lt;/h1&gt;&lt;p&gt;本指南为最终版本，包含了所有验证成功的步骤，旨在提供最清晰、最可靠的配置流程。&lt;/p&gt;
+&lt;h2 id=&#34;第一部分：配置-WSL-2&#34;&gt;&lt;a href=&#34;#第一部分：配置-WSL-2&#34; class=&#34;headerlink&#34; title=&#34;第一部分：配置 WSL 2&#34;&gt;&lt;/a&gt;&lt;strong&gt;第一部分：配置 WSL 2&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;核心原理&lt;/strong&gt;：WSL 2 拥有独立的虚拟网络，需要将 Windows 主机视为一个“局域网”设备。我们通过获取 Windows 在该网络中的 IP，并在 WSL 中设置带认证的代理来将网络流量导向它。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：配置 V2RayN (确保设置无误)&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;开放局域网连接&lt;/strong&gt;：在 V2RayN 的 &lt;code&gt;设置 -&amp;gt; 参数设置 -&amp;gt; V2RayN 设置&lt;/code&gt; 中，&lt;strong&gt;必须勾选“允许来自局域网的连接”&lt;/strong&gt;。这是整个方案的前提，还要打开为局域网开放端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确认代理参数&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;监听端口&lt;/strong&gt;：&lt;code&gt;10810&lt;/code&gt; (根据您的设置)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;认证用户&lt;/strong&gt;：&lt;code&gt;v2rayn填写的用户名&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;认证密码&lt;/strong&gt;：&lt;code&gt;v2rayn填写的密码&lt;/code&gt; (不含特殊字符的最终版密码)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Windows 防火墙&lt;/strong&gt;：确保在首次开启“允许局域网连接”时，您已在弹出的 Windows Defender 防火墙窗口中，为 V2RayN (或其核心 &lt;code&gt;v2ray.exe&lt;/code&gt; / &lt;code&gt;xray.exe&lt;/code&gt;) 勾选“专用网络”和“公用网络”并点击了“允许访问”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第二步：在 WSL 中获取 Windows 主机 IP&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;打开您的 WSL 终端。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行以下命令来获取作为默认网关的 Windows 主机 IP 地址。这是最稳定、最推荐的方法。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;ip route show | grep default | awk &#39;{print $3}&#39;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;您会得到一个 &lt;code&gt;172.x.x.x&lt;/code&gt; 格式的 IP，请记下它（虽然下面的脚本会自动获取）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第三步：配置 WSL 终端代理&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;编辑您的 Shell 配置文件 (如果文件不存在，nano 会自动创建)。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# 如果您使用 bash (默认)
+nano ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将以下&lt;strong&gt;最终版配置代码块&lt;/strong&gt;完整地复制并粘贴到文件末尾。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;# --- V2RayN Proxy Configuration for WSL (Final Version) ---
+
+# 1. 自动获取作为默认网关的主机 IP (推荐方法)
+export HOST_IP=$(ip route show | grep default | awk &#39;{print $3}&#39;)
+
+# 2. 您的 V2RayN 代理参数
+PROXY_PORT=&#34;10810&#34;
+PROXY_USER=&#34;v2rayn填写的用户名&#34;
+PROXY_PASS=&#34;v2rayn填写的密码&#34;
+
+# 3. 构建包含认证信息的代理 URL
+PROXY_URL=&#34;http://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}&#34;
+
+# 4. 设置系统环境变量
+export http_proxy=&#34;${PROXY_URL}&#34;
+export https_proxy=&#34;${PROXY_URL}&#34;
+export all_proxy=&#34;socks5://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}&#34;
+
+# 5. 设置不走代理的本地地址
+export no_proxy=&#34;localhost,127.0.0.1,*.local,${HOST_IP}&#34;
+
+echo &#34;✅ Proxy enabled for WSL via host ${HOST_IP}&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;保存并退出 (&lt;code&gt;Ctrl+O&lt;/code&gt;, &lt;code&gt;Enter&lt;/code&gt;, &lt;code&gt;Ctrl+X&lt;/code&gt;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第四步：配置 APT 包管理器&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;为 &lt;code&gt;apt&lt;/code&gt; 创建专门的代理配置文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;sudo nano /etc/apt/apt.conf.d/99proxy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将以下内容粘贴进去。&lt;strong&gt;请注意&lt;/strong&gt;：您需要将 &lt;code&gt;172.x.x.x&lt;/code&gt; &lt;strong&gt;手动替换&lt;/strong&gt;为第二步中获取到的具体 IP 地址。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;Acquire::http::Proxy &#34;http://0xdadream:Qsc100366@172.x.x.x:10810/&#34;;
+Acquire::https::Proxy &#34;http://0xdadream:Qsc100366@172.x.x.x:10810/&#34;;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;保存并退出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第五步：生效与验证&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;让终端配置立即生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;source ~/.bashrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;用 &lt;code&gt;curl&lt;/code&gt; 命令测试网络连接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;curl -I https://www.google.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看到 &lt;code&gt;HTTP/2 200&lt;/code&gt; 或类似成功响应，即代表 WSL 部分已完美配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;附：手机连接-Windows-V2RayN-代理教程&#34;&gt;&lt;a href=&#34;#附：手机连接-Windows-V2RayN-代理教程&#34; class=&#34;headerlink&#34; title=&#34;附：手机连接 Windows V2RayN 代理教程&#34;&gt;&lt;/a&gt;&lt;strong&gt;附：手机连接 Windows V2RayN 代理教程&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;本教程将指导您如何将手机（安卓或iPhone）通过 Wi-Fi 连接到您电脑上正在运行的 V2RayN 代理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心原理&lt;/strong&gt;：手机和电脑必须在同一个局域网（连接同一个Wi-Fi）。手机将电脑视为一个代理服务器，通过电脑的局域网IP地址和V2RayN端口进行连接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步：查找您 Windows 电脑的局域网 IP 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个 IP &lt;strong&gt;不是&lt;/strong&gt; WSL 里的那个 &lt;code&gt;172.x.x.x&lt;/code&gt;，而是您家或办公室路由器分配给电脑的 IP，通常是 &lt;code&gt;192.168.x.x&lt;/code&gt; 的格式。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在 Windows 上，按下 &lt;code&gt;Win + R&lt;/code&gt; 键，输入 &lt;code&gt;cmd&lt;/code&gt; 并回车，打开命令提示符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;输入以下命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ipconfig&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在输出信息中找到 “&lt;strong&gt;无线局域网适配器 WLAN&lt;/strong&gt;” 或 “&lt;strong&gt;Wireless LAN adapter Wi-Fi&lt;/strong&gt;” 部分。记下其 “&lt;strong&gt;IPv4 地址&lt;/strong&gt;”，例如 &lt;code&gt;192.168.1.105&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第二步：在手机上配置代理&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;对于-iPhone-iOS&#34;&gt;&lt;a href=&#34;#对于-iPhone-iOS&#34; class=&#34;headerlink&#34; title=&#34;对于 iPhone (iOS)&#34;&gt;&lt;/a&gt;&lt;strong&gt;对于 iPhone (iOS)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;iOS 系统原生支持带认证的 HTTP 代理，配置非常简单。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确保您的 iPhone 已连接到和电脑&lt;strong&gt;相同的 Wi-Fi&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;进入 **设置 -&amp;gt; 无线局域网 (Wi-Fi)**。&lt;/li&gt;
+&lt;li&gt;点击您当前连接的 Wi-Fi 名称右边的 &lt;strong&gt;“i”&lt;/strong&gt; 图标。&lt;/li&gt;
+&lt;li&gt;滑到页面最底部，找到并点击 &lt;strong&gt;“配置代理”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;“手动”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“服务器”&lt;/strong&gt; 栏，输入您电脑的局域网 IP (例如 &lt;code&gt;192.168.1.105&lt;/code&gt;)。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“端口”&lt;/strong&gt; 栏，输入 V2RayN 的端口 &lt;code&gt;10810&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开启 “鉴定” (Authentication) 开关&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“用户名”&lt;/strong&gt; 中输入 &lt;code&gt;0xdadream&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;“密码”&lt;/strong&gt; 中输入 &lt;code&gt;Qsc100366&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;点击右上角的 &lt;strong&gt;“存储”&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;对于安卓-Android&#34;&gt;&lt;a href=&#34;#对于安卓-Android&#34; class=&#34;headerlink&#34; title=&#34;对于安卓 (Android)&#34;&gt;&lt;/a&gt;&lt;strong&gt;对于安卓 (Android)&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;安卓系统的原生 Wi-Fi 代理设置&lt;strong&gt;不支持&lt;/strong&gt;用户名和密码认证。您需要借助第三方 App。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**原生方法 (如果您的代理无需认证)**：&lt;ul&gt;
+&lt;li&gt;进入 &lt;strong&gt;设置 -&amp;gt; WLAN&lt;/strong&gt;，长按您连接的 Wi-Fi，选择“修改网络”。&lt;/li&gt;
+&lt;li&gt;在高级选项中找到“代理”，设为“手动”。&lt;/li&gt;
+&lt;li&gt;输入电脑的IP和端口。&lt;/li&gt;
+&lt;li&gt;(此方法对您当前带认证的设置无效，仅供参考)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;**推荐方法 (使用第三方App，支持认证)**：&lt;ul&gt;
+&lt;li&gt;在 Google Play 商店或其它应用市场搜索并安装一个支持 HTTP/SOCKS 认证代理的 App，例如 &lt;strong&gt;ProxyDroid&lt;/strong&gt; 或 &lt;strong&gt;V2rayNG&lt;/strong&gt; (V2rayNG 本身就可以作为客户端，功能更强大)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以 V2rayNG 为例&lt;/strong&gt; (更推荐，因为它本身就是 V2Ray 客户端)：&lt;ol&gt;
+&lt;li&gt;打开 V2rayNG，点击右上角的 &lt;strong&gt;“+”&lt;/strong&gt; 号，选择 &lt;strong&gt;“手动输入[Socks]”或“[Http]”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：随便填，例如 &lt;code&gt;公司电脑&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;**地址(服务器)**：输入您电脑的局域网 IP (例如 &lt;code&gt;192.168.1.105&lt;/code&gt;)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;端口&lt;/strong&gt;：输入 &lt;code&gt;10810&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户名&lt;/strong&gt;：输入 &lt;code&gt;0xdadream&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;密码&lt;/strong&gt;：输入 &lt;code&gt;Qsc100366&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;其他设置可保持默认，点击右上角的 &lt;strong&gt;“√”&lt;/strong&gt; 保存。&lt;/li&gt;
+&lt;li&gt;回到主界面，点击您刚创建的配置将其选中，然后点击屏幕底部的 V 形图标启动连接。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;第三步：验证手机连接&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在手机上配置好代理后，打开手机浏览器，访问 &lt;a href=&#34;https://ipinfo.io/&#34;&gt;ipinfo.io&lt;/a&gt; 或 &lt;code&gt;whatismyip.com&lt;/code&gt; 这类网站。如果显示的 IP 地址是您 V2RayN 代理服务器的公网 IP，而不是您家宽带的 IP，那么恭喜您，手机也已成功通过电脑代理上网！&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/06/21/dai-li-jia-su-you-xi-jiao-cheng/</guid>
+            <title>代理加速游戏教程</title>
+            <link>https://0xdadream.github.io/2025/06/21/dai-li-jia-su-you-xi-jiao-cheng/</link>
+            <category>net</category>
+            <pubDate>Sat, 21 Jun 2025 00:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;代理加速游戏教程&#34;&gt;&lt;a href=&#34;#代理加速游戏教程&#34; class=&#34;headerlink&#34; title=&#34;代理加速游戏教程&#34;&gt;&lt;/a&gt;代理加速游戏教程&lt;/h1&gt;&lt;h2 id=&#34;✅-目标&#34;&gt;&lt;a href=&#34;#✅-目标&#34; class=&#34;headerlink&#34; title=&#34;✅ 目标&#34;&gt;&lt;/a&gt;✅ 目标&lt;/h2&gt;&lt;p&gt;在 Windows PC 上，通过 &lt;code&gt;v2rayN&lt;/code&gt; + &lt;code&gt;Proxifier&lt;/code&gt;，让《NIKKE》PC 客户端通过你自己的代理节点（如 VLESS/Vmess/Trojan/Reality）连接港台服务器，加速游戏。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🧰-准备工具&#34;&gt;&lt;a href=&#34;#🧰-准备工具&#34; class=&#34;headerlink&#34; title=&#34;🧰 准备工具&#34;&gt;&lt;/a&gt;🧰 准备工具&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;工具&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;下载地址&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;✅ v2rayN&lt;/td&gt;
+&lt;td&gt;连接你的代理节点并提供本地代理端口&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/2dust/v2rayN/releases&#34;&gt;GitHub&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;✅ Proxifier&lt;/td&gt;
+&lt;td&gt;把指定程序的流量强制送入代理&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.proxifier.com/&#34;&gt;官网&lt;/a&gt; 或吾爱破解&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🪜-配置步骤&#34;&gt;&lt;a href=&#34;#🪜-配置步骤&#34; class=&#34;headerlink&#34; title=&#34;🪜 配置步骤&#34;&gt;&lt;/a&gt;🪜 配置步骤&lt;/h2&gt;&lt;hr&gt;
+&lt;h3 id=&#34;①-安装并配置-v2rayN&#34;&gt;&lt;a href=&#34;#①-安装并配置-v2rayN&#34; class=&#34;headerlink&#34; title=&#34;① 安装并配置 v2rayN&#34;&gt;&lt;/a&gt;① 安装并配置 v2rayN&lt;/h3&gt;&lt;h4 id=&#34;✦-步骤：&#34;&gt;&lt;a href=&#34;#✦-步骤：&#34; class=&#34;headerlink&#34; title=&#34;✦ 步骤：&#34;&gt;&lt;/a&gt;✦ 步骤：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;解压 v2rayN，运行 &lt;code&gt;v2rayN.exe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;添加你的代理节点（VLESS / Vmess / Trojan / Reality）&lt;ul&gt;
+&lt;li&gt;右键左下角空白 → “添加节点”&lt;/li&gt;
+&lt;li&gt;粘贴你从机场获取的节点链接或手动填写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;启用节点&lt;ul&gt;
+&lt;li&gt;右键该节点 → &lt;code&gt;设为活动服务器&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;启用代理服务：&lt;ul&gt;
+&lt;li&gt;点工具栏“启用 HTTP 代理”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;查看本地监听端口：&lt;ul&gt;
+&lt;li&gt;默认 SOCKS5 地址：&lt;code&gt;127.0.0.1:10808&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可在设置 → 本地代理设置中修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;开启多路复用（mux）提升传输效率，参数设置里面&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;✅ 到这里，v2rayN 已在本地开启 SOCKS5 代理服务。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;②-安装并配置-Proxifier（代理-NIKKE-游戏）&#34;&gt;&lt;a href=&#34;#②-安装并配置-Proxifier（代理-NIKKE-游戏）&#34; class=&#34;headerlink&#34; title=&#34;② 安装并配置 Proxifier（代理 NIKKE 游戏）&#34;&gt;&lt;/a&gt;② 安装并配置 Proxifier（代理 NIKKE 游戏）&lt;/h3&gt;&lt;h4 id=&#34;✦-步骤：-1&#34;&gt;&lt;a href=&#34;#✦-步骤：-1&#34; class=&#34;headerlink&#34; title=&#34;✦ 步骤：&#34;&gt;&lt;/a&gt;✦ 步骤：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;安装 Proxifier（或使用绿色版）&lt;/li&gt;
+&lt;li&gt;启动 Proxifier，点击菜单 &lt;code&gt;Profile → Proxy Servers&lt;/code&gt; → 添加代理：&lt;ul&gt;
+&lt;li&gt;地址：&lt;code&gt;127.0.0.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;端口：&lt;code&gt;10808&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;类型：&lt;code&gt;SOCKS5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;点击 &lt;code&gt;Check&lt;/code&gt; 检查是否成功&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;点击菜单 &lt;code&gt;Profile → Proxification Rules&lt;/code&gt; → 添加新规则：&lt;ul&gt;
+&lt;li&gt;Rule name: &lt;code&gt;NIKKE&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Applications: 浏览选择 &lt;code&gt;NIKKE.exe&lt;/code&gt;（PC 客户端主程序）&lt;ul&gt;
+&lt;li&gt;默认路径例如：&lt;code&gt;C:\Program Files\NIKKE\NIKKE.exe&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Action: 选择你刚才添加的代理（SOCKS5）&lt;/li&gt;
+&lt;li&gt;勾选启用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;✅ 此时，&lt;strong&gt;只有 NIKKE.exe 会走代理，其它软件保持直连&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;③-启动流程&#34;&gt;&lt;a href=&#34;#③-启动流程&#34; class=&#34;headerlink&#34; title=&#34;③ 启动流程&#34;&gt;&lt;/a&gt;③ 启动流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;启动 v2rayN，确保节点连接正常（看到“已连接”或有流量日志）&lt;/li&gt;
+&lt;li&gt;启动 Proxifier（确认规则已启用）&lt;/li&gt;
+&lt;li&gt;启动 NIKKE 游戏客户端&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-验证代理是否生效&#34;&gt;&lt;a href=&#34;#✅-验证代理是否生效&#34; class=&#34;headerlink&#34; title=&#34;✅ 验证代理是否生效&#34;&gt;&lt;/a&gt;✅ 验证代理是否生效&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;检查内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;v2rayN 日志窗口&lt;/td&gt;
+&lt;td&gt;是否显示 NIKKE 的请求记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxifier 日志&lt;/td&gt;
+&lt;td&gt;是否显示 &lt;code&gt;NIKKE.exe → 通过代理连接&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;游戏体验&lt;/td&gt;
+&lt;td&gt;加速生效，港澳台服连接更快、不卡顿&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;🧱-常见问题&#34;&gt;&lt;a href=&#34;#🧱-常见问题&#34; class=&#34;headerlink&#34; title=&#34;🧱 常见问题&#34;&gt;&lt;/a&gt;🧱 常见问题&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;问题&lt;/th&gt;
+&lt;th&gt;原因与解决方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;游戏无网络 / 卡加载&lt;/td&gt;
+&lt;td&gt;节点不可用或不支持 UDP → 换节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Proxifier 没生效&lt;/td&gt;
+&lt;td&gt;没正确添加 &lt;code&gt;NIKKE.exe&lt;/code&gt; 路径或端口错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;v2rayN 没有日志输出&lt;/td&gt;
+&lt;td&gt;节点未连接成功 / 规则没匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;担心 DNS 泄露&lt;/td&gt;
+&lt;td&gt;Proxifier → 设置 → 勾选 “通过代理解析 DNS”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-教程总结&#34;&gt;&lt;a href=&#34;#✅-教程总结&#34; class=&#34;headerlink&#34; title=&#34;✅ 教程总结&#34;&gt;&lt;/a&gt;✅ 教程总结&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;步骤&lt;/th&gt;
+&lt;th&gt;工具&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;设置代理节点&lt;/td&gt;
+&lt;td&gt;v2rayN&lt;/td&gt;
+&lt;td&gt;接入你的港台/国际节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定程序走代理&lt;/td&gt;
+&lt;td&gt;Proxifier&lt;/td&gt;
+&lt;td&gt;精确代理 NIKKE.exe 流量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;启动顺序&lt;/td&gt;
+&lt;td&gt;v2rayN → Proxifier → NIKKE&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;✅-附加建议（可选）&#34;&gt;&lt;a href=&#34;#✅-附加建议（可选）&#34; class=&#34;headerlink&#34; title=&#34;✅ 附加建议（可选）&#34;&gt;&lt;/a&gt;✅ 附加建议（可选）&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;✅ 开启 v2rayN 的“日志记录”便于排错&lt;/li&gt;
+&lt;li&gt;✅ 使用 &lt;code&gt;Reality&lt;/code&gt; / &lt;code&gt;VLESS TCP-XTLS&lt;/code&gt; 等新协议节点，延迟更低&lt;/li&gt;
+&lt;li&gt;✅ 使用干净无劫持的 DNS（如 &lt;code&gt;8.8.8.8&lt;/code&gt;、&lt;code&gt;1.1.1.1&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;&lt;a href=&#34;#参考链接&#34; class=&#34;headerlink&#34; title=&#34;参考链接&#34;&gt;&lt;/a&gt;参考链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&#34;https://www.lvruan.com/app/44066&#34;&gt;Proxifier 4.14汉化版_统一代理所有流量出口 | 绿软下载 | 绿色软件联盟&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2024/01/28/v2rayn-lu-you-gui-ze/</guid>
+            <title>v2rayn路由规则</title>
+            <link>https://0xdadream.github.io/2024/01/28/v2rayn-lu-you-gui-ze/</link>
+            <category>net</category>
+            <pubDate>Sun, 28 Jan 2024 23:41:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;v2rayn路由规则&#34;&gt;&lt;a href=&#34;#v2rayn路由规则&#34; class=&#34;headerlink&#34; title=&#34;v2rayn路由规则&#34;&gt;&lt;/a&gt;v2rayn路由规则&lt;/h1&gt;&lt;p&gt;大体可以看这篇文章&lt;a href=&#34;https://www.v2fly.org/config/routing.html&#34;&gt;Routing 路由 | V2Fly.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本次测试所用版本为6.33&lt;/p&gt;
+&lt;p&gt;设置-&amp;gt;路由设置-&amp;gt;启用高级功能-&amp;gt;高级功能-&amp;gt;添加规则集-&amp;gt;(随便写个别名)添加规则&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;proxy  &lt;span class=&#34;token comment&#34;&gt;# 代理的domain和IP&lt;/span&gt;
+direct &lt;span class=&#34;token comment&#34;&gt;# 直连的&lt;/span&gt;
+block &lt;span class=&#34;token comment&#34;&gt;# 阻塞的，一般为屏蔽广告IP&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;假如我想代理一些domain和IP，选择proxy，端口不写应该就是全部，写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token number&#34;&gt;80&lt;/span&gt;
+&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;-1234&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;enabled启用，勾选保存时Domain，IP，进程名自动排序&lt;/p&gt;
+&lt;p&gt;domain写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;domain:完整域名
+keyword:域名关键字
+regexp:正则表达式
+full:完全匹配字符串
+geosite:域名集 &lt;span class=&#34;token comment&#34;&gt;# 官方网站查看&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Loyalsoldier/v2ray-rules-dat&#34;&gt;Loyalsoldier/v2ray-rules-dat: 🦄 🎃 👻 V2Ray 路由规则文件加强版，可代替 V2Ray 官方 geoip.dat 和 geosite.dat，兼容 Shadowsocks-windows、Xray-core、Trojan-Go、leaf 和 hysteria。Enhanced edition of V2Ray rules dat files, compatible with Xray-core, Shadowsocks-windows, Trojan-Go, leaf and hysteria. (github.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IP写法&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;geoip:IP集 &lt;span class=&#34;token comment&#34;&gt;# 官方网站查看&lt;/span&gt;
+单个IP
+IP段,如:192.166.23.22/23&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;Tun模式&#34;&gt;&lt;a href=&#34;#Tun模式&#34; class=&#34;headerlink&#34; title=&#34;Tun模式&#34;&gt;&lt;/a&gt;Tun模式&lt;/h2&gt;&lt;p&gt;打开tun模式时，需要关闭系统代理，即不使用系统代理，才能正常访问其他网页，路由仍然使用上面配置的&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
