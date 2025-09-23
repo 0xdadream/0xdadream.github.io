@@ -61,9 +61,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
@@ -499,16 +499,21 @@ PROXY_PASS="v2rayn填写的密码"
 
 # 3. 构建包含认证信息的代理 URL
 PROXY_URL="http://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}"
+PROXYS_URL="http://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}"
 
 # 4. 设置系统环境变量
 export http_proxy="${PROXY_URL}"
-export https_proxy="${PROXY_URL}"
+export https_proxy="${PROXYS_URL}"
 export all_proxy="socks5://${PROXY_USER}:${PROXY_PASS}@${HOST_IP}:${PROXY_PORT}"
+
+# git
+git config --global http.proxy "${PROXY_URL}"
+git config --global https.proxy "${PROXYS_URL}"
 
 # 5. 设置不走代理的本地地址
 export no_proxy="localhost,127.0.0.1,*.local,${HOST_IP}"
 
-echo "✅ Proxy enabled for WSL via host ${HOST_IP}"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+echo "✅ Proxy enabled for WSL via host ${HOST_IP}"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>保存并退出 (<code>Ctrl+O</code>, <code>Enter</code>, <code>Ctrl+X</code>)。</p>
 </li>
@@ -1326,7 +1331,7 @@ Acquire::https::Proxy "http://v2rayn填写的用户名:v2rayn填写的密码@172
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">310.9k</span>
+                        class="white-color">312.9k</span>
             
             
             

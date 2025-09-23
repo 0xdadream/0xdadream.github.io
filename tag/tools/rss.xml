@@ -8,12 +8,13 @@
         <pubDate>Tue, 08 Apr 2025 12:25:00 +0800</pubDate>
         <lastBuildDate>Tue, 08 Apr 2025 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
-        <category>intel</category>
-        <category>cloudflare</category>
-        <category>email</category>
-        <category>安装</category>
         <category>AI</category>
+        <category>intel</category>
+        <category>ssh</category>
+        <category>cloudflare</category>
+        <category>安装</category>
         <category>tips</category>
+        <category>email</category>
         <category>re</category>
         <category>工具</category>
         <category>conda</category>
@@ -22,33 +23,34 @@
         <category>教程</category>
         <category>环境</category>
         <category>bug</category>
+        <category>windows</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
         <category>net</category>
         <category>BUUCTF</category>
         <category>server</category>
         <category>wall</category>
         <category>comfyui</category>
-        <category>tools</category>
         <category>powershell</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
         <category>emby</category>
         <category>python</category>
-        <category>google</category>
         <category>git</category>
-        <category>学习</category>
+        <category>google</category>
         <category>java</category>
         <category>命令</category>
-        <category>远程</category>
-        <category>php</category>
+        <category>学习</category>
         <category>文件上传</category>
+        <category>php</category>
+        <category>远程</category>
         <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
+        <category>word</category>
         <category>汇编</category>
         <category>密码学</category>
         <category>mcp</category>
@@ -125,26 +127,14 @@
             <pubDate>Fri, 17 Jan 2025 12:25:00 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;linux设置matplotlib中文字体&#34;&gt;&lt;a href=&#34;#linux设置matplotlib中文字体&#34; class=&#34;headerlink&#34; title=&#34;linux设置matplotlib中文字体&#34;&gt;&lt;/a&gt;linux设置matplotlib中文字体&lt;/h1&gt;&lt;p&gt;在Linux上设置Matplotlib使用中文字体的步骤如下：&lt;/p&gt;
 &lt;h3 id=&#34;步骤-1-安装中文字体&#34;&gt;&lt;a href=&#34;#步骤-1-安装中文字体&#34; class=&#34;headerlink&#34; title=&#34;步骤 1: 安装中文字体&#34;&gt;&lt;/a&gt;步骤 1: 安装中文字体&lt;/h3&gt;&lt;p&gt;去&lt;a href=&#34;https://github.com/StellarCN/scp_zh/blob/master/fonts/SimHei.ttf&#34;&gt;scp_zh/fonts/SimHei.ttf at master · StellarCN/scp_zh&lt;/a&gt;下载中文字体&lt;/p&gt;
-&lt;h4 id=&#34;安装SimHei字体&#34;&gt;&lt;a href=&#34;#安装SimHei字体&#34; class=&#34;headerlink&#34; title=&#34;安装SimHei字体&#34;&gt;&lt;/a&gt;安装SimHei字体&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;import matplotlib.pyplot as plt
-from matplotlib import rcParams
-import pandas as pd
+&lt;h4 id=&#34;安装SimHei字体&#34;&gt;&lt;a href=&#34;#安装SimHei字体&#34; class=&#34;headerlink&#34; title=&#34;安装SimHei字体&#34;&gt;&lt;/a&gt;安装SimHei字体&lt;/h4&gt;&lt;p&gt;查看已安装字体&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; matplotlib&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;font_manager &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; fm
+&lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; font &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; fm&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;findSystemFonts&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fontpaths&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token boolean&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; fontext&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;ttf&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fm&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;FontProperties&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fname&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;font&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;get_name&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
-# 设置中文字体
-rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]  # 或者使用 &#39;Microsoft YaHei&#39;
-rcParams[&#39;axes.unicode_minus&#39;] = False  # 解决负号显示问题
-
-# 示例数据
-data = {&#39;日期&#39;: [&#39;2024-01-01&#39;, &#39;2024-01-02&#39;, &#39;2024-01-03&#39;],
-        &#39;销售额&#39;: [150, 200, 250]}
-df = pd.DataFrame(data)
-
-# 绘制图表
-plt.plot(df[&#39;日期&#39;], df[&#39;销售额&#39;])
-plt.title(&#39;销售额趋势&#39;)
-plt.xlabel(&#39;日期&#39;)
-plt.ylabel(&#39;销售额&#39;)
-plt.xticks(rotation=45)
-plt.show()&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; matplotlib&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pyplot &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; plt
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rcParams&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;font.family&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;WenQuanYi Micro Hei&#39;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 或 Noto Sans CJK SC&lt;/span&gt;
+plt&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rcParams&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;axes.unicode_minus&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;False&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;执行命令找到配置目录&lt;/p&gt;
 &lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; matplotlib
@@ -153,7 +143,7 @@ matplotlib&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;matplotlib
 &lt;span class=&#34;token comment&#34;&gt;# xxx/matplotlib/matplotlibrc&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;修改文件&lt;code&gt;matplotlibrc&lt;/code&gt;，找到&lt;code&gt;font.sans-serif: DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif, SimHei&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;vim matplotlibrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; matplotlibrc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;SimHei&lt;/code&gt;就是我添加的中文字体&lt;/p&gt;
 &lt;p&gt;删除缓存&lt;/p&gt;
