@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;数据库&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 20 Oct 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Mon, 20 Oct 2025 12:25:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>intel</category>
+        <category>AI</category>
+        <category>ssh</category>
+        <category>cloudflare</category>
+        <category>email</category>
+        <category>安装</category>
+        <category>tips</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>Java</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>conda</category>
+        <category>linux</category>
+        <category>bug</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>windows</category>
+        <category>net</category>
+        <category>BUUCTF</category>
+        <category>server</category>
+        <category>wall</category>
+        <category>comfyui</category>
+        <category>powershell</category>
+        <category>tools</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>emby</category>
+        <category>python</category>
+        <category>google</category>
+        <category>git</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>学习</category>
+        <category>远程</category>
+        <category>文件上传</category>
+        <category>php</category>
+        <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>word</category>
+        <category>汇编</category>
+        <category>密码学</category>
+        <category>mcp</category>
+        <category>i春秋</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/</guid>
+            <title>psycopg2 详细使用教程：从入门到精通</title>
+            <link>https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/</link>
+            <category>python</category>
+            <category>数据库</category>
+            <pubDate>Mon, 20 Oct 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;psycopg2-详细使用教程：从入门到精通&#34;&gt;&lt;a href=&#34;#psycopg2-详细使用教程：从入门到精通&#34; class=&#34;headerlink&#34; title=&#34;psycopg2 详细使用教程：从入门到精通&#34;&gt;&lt;/a&gt;psycopg2 详细使用教程：从入门到精通&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-psycopg2？&#34;&gt;&lt;a href=&#34;#1-什么是-psycopg2？&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 psycopg2？&#34;&gt;&lt;/a&gt;1. 什么是 psycopg2？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PostgreSQL:&lt;/strong&gt; 一款功能极其强大的开源对象-关系型数据库系统。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;psycopg2:&lt;/strong&gt; 一个 Python 库，充当 Python 应用程序和 PostgreSQL 数据库之间的“驱动”或“适配器”。它实现了 Python DB-API 2.0 规范，允许你使用标准的 Python 代码来执行 SQL 命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-安装&#34;&gt;&lt;a href=&#34;#2-安装&#34; class=&#34;headerlink&#34; title=&#34;2. 安装&#34;&gt;&lt;/a&gt;2. 安装&lt;/h3&gt;&lt;p&gt;安装 &lt;code&gt;psycopg2&lt;/code&gt; 有两种常见方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;推荐 (用于开发和学习):&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install psycopg2-binary&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个包预编译了所有必需的库，安装最简单，开箱即用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;用于生产环境 (需要编译):&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install psycopg2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这需要你在系统上安装了 &lt;code&gt;libpq&lt;/code&gt;（PostgreSQL 的 C 库）和相关的开发工具。它性能更好，但安装更复杂。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;对于本教程，我们假设你已使用 &lt;code&gt;psycopg2-binary&lt;/code&gt;。&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-核心工作流：连接与游标-Cursor&#34;&gt;&lt;a href=&#34;#3-核心工作流：连接与游标-Cursor&#34; class=&#34;headerlink&#34; title=&#34;3. 核心工作流：连接与游标 (Cursor)&#34;&gt;&lt;/a&gt;3. 核心工作流：连接与游标 (Cursor)&lt;/h3&gt;&lt;p&gt;与数据库的所有交互都遵循以下模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;连接 (Connect):&lt;/strong&gt; 建立到 PostgreSQL 服务器的连接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;游标 (Cursor):&lt;/strong&gt; 创建一个游标对象。游标是执行 SQL 命令的“手柄”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行 (Execute):&lt;/strong&gt; 使用游标执行 SQL 语句。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;获取 (Fetch):&lt;/strong&gt; (如果是 &lt;code&gt;SELECT&lt;/code&gt; 语句) 从游标中取出结果。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提交 (Commit):&lt;/strong&gt; (如果是 &lt;code&gt;INSERT&lt;/code&gt;, &lt;code&gt;UPDATE&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;) 提交事务，使更改永久生效。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关闭 (Close):&lt;/strong&gt; 关闭游标和连接，释放资源。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-【重要】最佳实践：使用-with-语句&#34;&gt;&lt;a href=&#34;#4-【重要】最佳实践：使用-with-语句&#34; class=&#34;headerlink&#34; title=&#34;4. 【重要】最佳实践：使用 with 语句&#34;&gt;&lt;/a&gt;4. 【重要】最佳实践：使用 &lt;code&gt;with&lt;/code&gt; 语句&lt;/h3&gt;&lt;p&gt;手动管理 &lt;code&gt;connect()&lt;/code&gt; 和 &lt;code&gt;close()&lt;/code&gt; 非常容易出错（比如程序崩溃时连接未关闭）。&lt;code&gt;psycopg2&lt;/code&gt; 的连接和游标对象都是&lt;strong&gt;上下文管理器&lt;/strong&gt;，必须使用 &lt;code&gt;with&lt;/code&gt; 语句来自动管理资源。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是本教程推荐的标准模式：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import psycopg2
+import sys
+
+# 数据库连接参数
+# 强烈建议使用环境变量或配置文件，不要硬编码
+DB_PARAMS = {
+    &#39;host&#39;: &#39;localhost&#39;,      # 数据库主机
+    &#39;port&#39;: 5432,             # 端口 (默认 5432)
+    &#39;user&#39;: &#39;postgres&#39;,       # 你的用户名
+    &#39;password&#39;: &#39;your_password&#39;, # 你的密码
+    &#39;dbname&#39;: &#39;test_db&#39;       # 你要连接的数据库
+}
+
+try:
+    # 1. 建立连接
+    # with 语句确保连接在使用后自动关闭
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        
+        # 2. 创建游标
+        # with 语句确保游标在使用后自动关闭
+        with conn.cursor() as cur:
+            
+            # 3. 执行 SQL
+            cur.execute(&#34;SELECT version();&#34;)
+            
+            # 4. 获取结果
+            db_version = cur.fetchone() # fetchone() 获取一条结果
+            print(f&#34;数据库版本: {db_version[0]}&#34;)
+
+            # 5. 提交 (对于 SELECT 不是必需的, 但对于 DML 是必需的)
+            # conn.commit() # 在这里，with conn 会自动处理
+            
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;连接数据库时出错: {error}&#34;)
+    sys.exit(1)
+    
+# 6. 关闭
+# 在 &#39;with&#39; 块结束时，cur.close() 和 conn.close() 已自动调用
+print(&#34;连接已自动关闭。&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;5-【极其重要】防止-SQL-注入：参数化查询&#34;&gt;&lt;a href=&#34;#5-【极其重要】防止-SQL-注入：参数化查询&#34; class=&#34;headerlink&#34; title=&#34;5. 【极其重要】防止 SQL 注入：参数化查询&#34;&gt;&lt;/a&gt;5. 【极其重要】防止 SQL 注入：参数化查询&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;永远不要&lt;/strong&gt;使用 Python 的字符串格式化（如 &lt;code&gt;f-string&lt;/code&gt; 或 &lt;code&gt;%&lt;/code&gt;）来构建 SQL 查询。这会导致严重的安全漏洞（SQL 注入）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;错误的方式 (危险!)：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 千万不要这样做！
+user_id = &#34;105 OR 1=1&#34;
+cur.execute(f&#34;SELECT * FROM users WHERE id = {user_id}&#34;) &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;正确的方式 (安全)：&lt;/strong&gt; &lt;code&gt;psycopg2&lt;/code&gt; 会自动为你处理所有特殊字符的转义。你需要在 SQL 语句中使用 &lt;code&gt;%s&lt;/code&gt; 作为占位符，然后将一个&lt;strong&gt;元组 (tuple)&lt;/strong&gt; 作为第二个参数传递给 &lt;code&gt;execute()&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 正确的方式：使用占位符
+user_id = &#34;105&#34;
+query = &#34;SELECT * FROM users WHERE id = %s&#34;
+
+# 注意：即使只有一个参数，也必须将其放在元组中 (user_id,)
+cur.execute(query, (user_id,))&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;psycopg2&lt;/code&gt; 统一使用 &lt;code&gt;%s&lt;/code&gt; 作为占位符，&lt;strong&gt;无论数据类型是字符串、数字还是日期&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;6-CRUD-操作详解&#34;&gt;&lt;a href=&#34;#6-CRUD-操作详解&#34; class=&#34;headerlink&#34; title=&#34;6. CRUD 操作详解&#34;&gt;&lt;/a&gt;6. CRUD 操作详解&lt;/h3&gt;&lt;p&gt;让我们创建一个 &lt;code&gt;employees&lt;/code&gt; 表并对其进行操作。&lt;/p&gt;
+&lt;h4 id=&#34;A-创建表-CREATE&#34;&gt;&lt;a href=&#34;#A-创建表-CREATE&#34; class=&#34;headerlink&#34; title=&#34;A. 创建表 (CREATE)&#34;&gt;&lt;/a&gt;A. 创建表 (CREATE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;create_table_query = &#34;&#34;&#34;
+CREATE TABLE IF NOT EXISTS employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    salary NUMERIC(10, 2),
+    hire_date DATE
+);
+&#34;&#34;&#34;
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(create_table_query)
+            # DDL (如 CREATE TABLE) 语句也需要提交
+            conn.commit() 
+            print(&#34;表 &#39;employees&#39; 创建成功 (如果它不存在的话)。&#34;)
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;**&lt;code&gt;conn.commit()&lt;/code&gt;*&lt;em&gt;：这是关键。任何修改数据库结构 (DDL) 或数据 (DML) 的操作，都必须调用 &lt;code&gt;conn.commit()&lt;/code&gt; 才能生效。&lt;code&gt;with conn:&lt;/code&gt; 块在&lt;/em&gt;成功退出时*会自动提交。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;B-插入数据-INSERT&#34;&gt;&lt;a href=&#34;#B-插入数据-INSERT&#34; class=&#34;headerlink&#34; title=&#34;B. 插入数据 (INSERT)&#34;&gt;&lt;/a&gt;B. 插入数据 (INSERT)&lt;/h4&gt;&lt;h5 id=&#34;插入单行&#34;&gt;&lt;a href=&#34;#插入单行&#34; class=&#34;headerlink&#34; title=&#34;插入单行&#34;&gt;&lt;/a&gt;插入单行&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
+data = (&#34;Alice Green&#34;, &#34;Engineering&#34;, 75000.00, &#34;2023-01-15&#34;)
+
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(query, data)
+            # conn.commit() 在 with 块结束时自动调用
+    print(&#34;单行插入成功。&#34;)
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;插入失败: {error}&#34;)
+    # 如果出错，with conn 块会引发异常，自动执行 conn.rollback()&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;插入多行-高效&#34;&gt;&lt;a href=&#34;#插入多行-高效&#34; class=&#34;headerlink&#34; title=&#34;插入多行 (高效)&#34;&gt;&lt;/a&gt;插入多行 (高效)&lt;/h5&gt;&lt;p&gt;使用 &lt;code&gt;cur.executemany()&lt;/code&gt; 来批量插入，这比在 &lt;code&gt;for&lt;/code&gt; 循环中调用 &lt;code&gt;execute()&lt;/code&gt; 高效得多。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
+data_list = [
+    (&#34;Bob White&#34;, &#34;Sales&#34;, 60000.00, &#34;2023-03-01&#34;),
+    (&#34;Charlie Black&#34;, &#34;Engineering&#34;, 80000.00, &#34;2022-11-20&#34;),
+    (&#34;David Brown&#34;, &#34;Marketing&#34;, 55000.00, &#34;2023-05-10&#34;)
+]
+
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.executemany(query, data_list)
+            # 自动提交
+    print(&#34;批量插入成功。&#34;)
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;批量插入失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;获取插入的-ID-RETURNING&#34;&gt;&lt;a href=&#34;#获取插入的-ID-RETURNING&#34; class=&#34;headerlink&#34; title=&#34;获取插入的 ID (RETURNING)&#34;&gt;&lt;/a&gt;获取插入的 ID (RETURNING)&lt;/h5&gt;&lt;p&gt;插入后经常需要获取新生成的 &lt;code&gt;PRIMARY KEY&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department) VALUES (%s, %s) RETURNING id&#34;
+data = (&#34;Eva Blue&#34;, &#34;HR&#34;)
+
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(query, data)
+            new_id = cur.fetchone()[0] # 获取 RETURNING 的值
+            print(f&#34;成功插入新员工，ID: {new_id}&#34;)
+            # 自动提交
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;插入失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;C-查询数据-SELECT&#34;&gt;&lt;a href=&#34;#C-查询数据-SELECT&#34; class=&#34;headerlink&#34; title=&#34;C. 查询数据 (SELECT)&#34;&gt;&lt;/a&gt;C. 查询数据 (SELECT)&lt;/h4&gt;&lt;h5 id=&#34;获取单条记录-fetchone&#34;&gt;&lt;a href=&#34;#获取单条记录-fetchone&#34; class=&#34;headerlink&#34; title=&#34;获取单条记录 fetchone()&#34;&gt;&lt;/a&gt;获取单条记录 &lt;code&gt;fetchone()&lt;/code&gt;&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(&#34;SELECT * FROM employees WHERE department = %s&#34;, (&#34;Engineering&#34;,))
+            
+            print(&#34;正在获取一名工程师:&#34;)
+            record = cur.fetchone() # 获取第一条
+            if record:
+                print(record) # (1, &#39;Alice Green&#39;, &#39;Engineering&#39;, 75000.00, datetime.date(2023, 1, 15))
+
+            # 再次调用 fetchone() 会获取下一条
+            record2 = cur.fetchone()
+            if record2:
+                print(record2)
+
+            # 如果没有更多数据，fetchone() 返回 None
+            record3 = cur.fetchone()
+            print(f&#34;第三条记录: {record3}&#34;) # None
+
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;结果格式：&lt;/strong&gt; 默认情况下，&lt;code&gt;psycopg2&lt;/code&gt; 返回的数据是**元组 (tuple)**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;获取所有记录-fetchall&#34;&gt;&lt;a href=&#34;#获取所有记录-fetchall&#34; class=&#34;headerlink&#34; title=&#34;获取所有记录 fetchall()&#34;&gt;&lt;/a&gt;获取所有记录 &lt;code&gt;fetchall()&lt;/code&gt;&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(&#34;SELECT name, salary FROM employees WHERE salary &amp;gt; %s&#34;, (58000,))
+            
+            print(&#34;\n薪水 &amp;gt; 58000 的所有员工:&#34;)
+            records = cur.fetchall() # 获取所有剩余结果
+            
+            if records:
+                for row in records:
+                    print(f&#34;姓名: {row[0]}, 薪水: {row[1]}&#34;)
+            else:
+                print(&#34;未找到记录。&#34;)
+                
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;注意：&lt;/strong&gt; 如果结果集非常大，&lt;code&gt;fetchall()&lt;/code&gt; 可能会消耗大量内存。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;迭代游标-内存高效&#34;&gt;&lt;a href=&#34;#迭代游标-内存高效&#34; class=&#34;headerlink&#34; title=&#34;迭代游标 (内存高效)&#34;&gt;&lt;/a&gt;迭代游标 (内存高效)&lt;/h5&gt;&lt;p&gt;对于大数据集，最好的方式是直接迭代游标：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            # 游标充当了迭代器
+            cur.execute(&#34;SELECT * FROM employees&#34;)
+            print(&#34;\n--- 迭代所有员工 ---&#34;)
+            for row in cur:
+                print(f&#34;ID: {row[0]}, 姓名: {row[1]}&#34;)
+                
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;D-更新数据-UPDATE&#34;&gt;&lt;a href=&#34;#D-更新数据-UPDATE&#34; class=&#34;headerlink&#34; title=&#34;D. 更新数据 (UPDATE)&#34;&gt;&lt;/a&gt;D. 更新数据 (UPDATE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            query = &#34;UPDATE employees SET salary = salary * 1.10 WHERE department = %s&#34;
+            cur.execute(query, (&#34;Engineering&#34;,))
+            
+            # cur.rowcount 包含受影响的行数
+            updated_rows = cur.rowcount
+            print(f&#34;Engineering 部门 {updated_rows} 名员工已加薪。&#34;)
+            # 自动提交
+            
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;更新失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;E-删除数据-DELETE&#34;&gt;&lt;a href=&#34;#E-删除数据-DELETE&#34; class=&#34;headerlink&#34; title=&#34;E. 删除数据 (DELETE)&#34;&gt;&lt;/a&gt;E. 删除数据 (DELETE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            query = &#34;DELETE FROM employees WHERE name = %s&#34;
+            cur.execute(query, (&#34;David Brown&#34;,))
+            
+            deleted_rows = cur.rowcount
+            print(f&#34;成功删除 {deleted_rows} 名员工。&#34;)
+            # 自动提交
+            
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;删除失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;7-事务管理-Transaction&#34;&gt;&lt;a href=&#34;#7-事务管理-Transaction&#34; class=&#34;headerlink&#34; title=&#34;7. 事务管理 (Transaction)&#34;&gt;&lt;/a&gt;7. 事务管理 (Transaction)&lt;/h3&gt;&lt;p&gt;数据库事务是一组“要么全做，要么全不做”的操作。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;with psycopg2.connect(...) as conn:&lt;/code&gt; 块本身就构成了一个事务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果 &lt;code&gt;with&lt;/code&gt; 块中的代码&lt;strong&gt;成功执行完毕&lt;/strong&gt;（没有抛出异常），&lt;code&gt;conn.commit()&lt;/code&gt; 会在块退出时自动调用。&lt;/li&gt;
+&lt;li&gt;如果 &lt;code&gt;with&lt;/code&gt; 块中的代码&lt;strong&gt;抛出了异常&lt;/strong&gt;，&lt;code&gt;conn.rollback()&lt;/code&gt; 会自动调用，撤销块中已执行的所有 SQL 操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;示例：转账（原子操作）&lt;/strong&gt; 假设 Alice 给 Bob 转账 1000。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;def transfer_money(from_id, to_id, amount):
+    try:
+        with psycopg2.connect(**DB_PARAMS) as conn:
+            # conn 现在处于一个事务中
+            with conn.cursor() as cur:
+                
+                # 1. 从 Alice 账户扣款
+                cur.execute(
+                    &#34;UPDATE employees SET salary = salary - %s WHERE id = %s&#34;, 
+                    (amount, from_id)
+                )
+                
+                # (模拟一个错误)
+                # if from_id == 1:
+                #     raise Exception(&#34;网络故障!&#34;)
+
+                # 2. 向 Bob 账户加款
+                cur.execute(
+                    &#34;UPDATE employees SET salary = salary + %s WHERE id = %s&#34;,
+                    (amount, to_id)
+                )
+            
+            # 3. 退出 with conn 块，自动 commit
+            print(&#34;转账成功！&#34;)
+            
+    except (Exception, psycopg2.DatabaseError) as error:
+        # 4. 发生异常，自动 rollback
+        print(f&#34;转账失败! 错误: {error}&#34;)
+        print(&#34;事务已回滚。&#34;)
+
+# 假设 Alice (id=1) 给 Bob (id=2) 转账 1000
+transfer_money(1, 2, 1000.00) &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你取消上面“模拟一个错误”的注释，Alice 的扣款和 Bob 的加款 &lt;em&gt;都不会&lt;/em&gt; 发生，数据库将保持原样。这就是事务的威力。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;8-高级技巧&#34;&gt;&lt;a href=&#34;#8-高级技巧&#34; class=&#34;headerlink&#34; title=&#34;8. 高级技巧&#34;&gt;&lt;/a&gt;8. 高级技巧&lt;/h3&gt;&lt;h4 id=&#34;A-将结果作为字典获取-RealDictCursor&#34;&gt;&lt;a href=&#34;#A-将结果作为字典获取-RealDictCursor&#34; class=&#34;headerlink&#34; title=&#34;A. 将结果作为字典获取 (RealDictCursor)&#34;&gt;&lt;/a&gt;A. 将结果作为字典获取 (RealDictCursor)&lt;/h4&gt;&lt;p&gt;默认返回元组 &lt;code&gt;(1, &#39;Alice&#39;)&lt;/code&gt; 不太方便。我们通常想要字典 &lt;code&gt;{&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice&#39;}&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;你需要导入 &lt;code&gt;psycopg2.extras&lt;/code&gt; 并指定 &lt;code&gt;cursor_factory&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from psycopg2.extras import RealDictCursor
+
+try:
+    # 1. 在 connect 时指定 cursor_factory
+    with psycopg2.connect(**DB_PARAMS, cursor_factory=RealDictCursor) as conn:
+        
+        # 2. 也可以在创建 cursor 时指定
+        # with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        
+        with conn.cursor() as cur: # cur 现在是 RealDictCursor
+            cur.execute(&#34;SELECT id, name, salary FROM employees WHERE id = %s&#34;, (1,))
+            record = cur.fetchone()
+            
+            if record:
+                print(&#34;\n--- 字典游标结果 ---&#34;)
+                print(record)
+                # 输出: {&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice Green&#39;, &#39;salary&#39;: 82500.00}
+                print(f&#34;姓名: {record[&#39;name&#39;]}&#34;) # 可以通过键名访问
+            
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;B-处理-NULL-值&#34;&gt;&lt;a href=&#34;#B-处理-NULL-值&#34; class=&#34;headerlink&#34; title=&#34;B. 处理 NULL 值&#34;&gt;&lt;/a&gt;B. 处理 &lt;code&gt;NULL&lt;/code&gt; 值&lt;/h4&gt;&lt;p&gt;&lt;code&gt;psycopg2&lt;/code&gt; 会自动处理 Python 的 &lt;code&gt;None&lt;/code&gt; 和 SQL 的 &lt;code&gt;NULL&lt;/code&gt; 之间的转换。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这是你之前（在聊天记录中）遇到 &lt;code&gt;invalid input syntax for &#34;None&#34;&lt;/code&gt; 错误的原因：&lt;/strong&gt; 如果你使用 &lt;code&gt;f-string&lt;/code&gt; (错误方式)，&lt;code&gt;None&lt;/code&gt; 会被转成字符串 &lt;code&gt;&#34;None&#34;&lt;/code&gt;。 &lt;code&gt;INSERT ... VALUES (&#39;None&#39;)&lt;/code&gt; -&amp;gt; 数据库试图将字符串 “None” 存入 &lt;code&gt;double precision&lt;/code&gt; 字段，导致失败。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;正确方式 (使用参数化):&lt;/strong&gt; &lt;code&gt;psycopg2&lt;/code&gt; 会将 Python 的 &lt;code&gt;None&lt;/code&gt; 正确转换为 SQL 的 &lt;code&gt;NULL&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 插入一个 hire_date 为 NULL 的记录
+query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
+data = (&#34;Frank Nullman&#34;, &#34;IT&#34;, 62000.00, None) # Python 的 None
+
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            cur.execute(query, data)
+    print(&#34;成功插入带 NULL 值的记录。&#34;)
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;插入 NULL 失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;C-处理-JSON-JSONB-数据&#34;&gt;&lt;a href=&#34;#C-处理-JSON-JSONB-数据&#34; class=&#34;headerlink&#34; title=&#34;C. 处理 JSON/JSONB 数据&#34;&gt;&lt;/a&gt;C. 处理 &lt;code&gt;JSON/JSONB&lt;/code&gt; 数据&lt;/h4&gt;&lt;p&gt;PostgreSQ 对 &lt;code&gt;JSON&lt;/code&gt; 有很好的支持。&lt;code&gt;psycopg2&lt;/code&gt; 可以自动序列化和反序列化 Python 的 &lt;code&gt;dict&lt;/code&gt; 和 &lt;code&gt;list&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from psycopg2.extras import Json
+
+# 假设表有
+# ALTER TABLE employees ADD COLUMN metadata JSONB;
+
+# 写入 JSON
+meta_data = {
+    &#39;skills&#39;: [&#39;Python&#39;, &#39;SQL&#39;, &#39;OPC-UA&#39;],
+    &#39;manager_id&#39;: 10
+}
+
+try:
+    with psycopg2.connect(**DB_PARAMS) as conn:
+        with conn.cursor() as cur:
+            # 使用 extras.Json 包装一下
+            query = &#34;UPDATE employees SET metadata = %s WHERE name = %s&#34;
+            cur.execute(query, (Json(meta_data), &#34;Alice Green&#34;))
+            
+            # 读取 JSON
+            cur.execute(&#34;SELECT metadata FROM employees WHERE name = %s&#34;, (&#34;Alice Green&#34;,))
+            result = cur.fetchone()[0]
+            
+            print(f&#34;\n读取到的 JSONB 数据: {result}&#34;)
+            print(f&#34;数据类型: {type(result)}&#34;) # &amp;lt;class &#39;dict&#39;&amp;gt;
+            print(f&#34;技能: {result[&#39;skills&#39;][0]}&#34;) # &#39;Python&#39;
+            
+except (Exception, psycopg2.DatabaseError) as error:
+    print(f&#34;JSON 操作失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;9-总结：最佳实践清单&#34;&gt;&lt;a href=&#34;#9-总结：最佳实践清单&#34; class=&#34;headerlink&#34; title=&#34;9. 总结：最佳实践清单&#34;&gt;&lt;/a&gt;9. 总结：最佳实践清单&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;始终使用 &lt;code&gt;with&lt;/code&gt; 语句&lt;/strong&gt; 管理连接 (&lt;code&gt;conn&lt;/code&gt;) 和游标 (&lt;code&gt;cur&lt;/code&gt;)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;永远使用参数化查询&lt;/strong&gt; (&lt;code&gt;cur.execute(query, (params,))&lt;/code&gt;) 来防止 SQL 注入。&lt;code&gt;%s&lt;/code&gt; 是唯一的占位符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;conn.commit()&lt;/code&gt;&lt;/strong&gt; 提交更改。依赖 &lt;code&gt;with conn:&lt;/code&gt; 块的自动提交/回滚功能是最安全的方式。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;cur.executemany()&lt;/code&gt;&lt;/strong&gt; 进行批量插入。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;psycopg2.extras.RealDictCursor&lt;/code&gt;&lt;/strong&gt; 来获取字典形式的结果。&lt;/li&gt;
+&lt;li&gt;**正确处理 &lt;code&gt;None&lt;/code&gt;**：参数化查询会自动将 &lt;code&gt;None&lt;/code&gt; 转为 &lt;code&gt;NULL&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;捕获 &lt;code&gt;psycopg2.DatabaseError&lt;/code&gt;&lt;/strong&gt; 来处理数据库相关的特定异常。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

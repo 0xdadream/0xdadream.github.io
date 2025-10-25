@@ -5,28 +5,28 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 21 Dec 2024 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sat, 21 Dec 2024 12:25:00 +0800</lastBuildDate>
+        <pubDate>Wed, 22 Oct 2025 02:25:00 +0800</pubDate>
+        <lastBuildDate>Wed, 22 Oct 2025 02:25:00 +0800</lastBuildDate>
         <category>tip</category>
-        <category>AI</category>
         <category>intel</category>
+        <category>AI</category>
         <category>ssh</category>
         <category>cloudflare</category>
+        <category>email</category>
         <category>安装</category>
         <category>tips</category>
-        <category>email</category>
         <category>re</category>
         <category>工具</category>
-        <category>conda</category>
         <category>Java</category>
-        <category>linux</category>
         <category>教程</category>
         <category>环境</category>
+        <category>conda</category>
+        <category>linux</category>
         <category>bug</category>
-        <category>windows</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
+        <category>windows</category>
         <category>net</category>
         <category>BUUCTF</category>
         <category>server</category>
@@ -39,15 +39,17 @@
         <category>漏洞复现</category>
         <category>emby</category>
         <category>python</category>
-        <category>git</category>
         <category>google</category>
+        <category>git</category>
         <category>java</category>
         <category>命令</category>
         <category>学习</category>
+        <category>远程</category>
         <category>文件上传</category>
         <category>php</category>
-        <category>远程</category>
         <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
         <category>下载</category>
         <category>区块链</category>
         <category>word</category>
@@ -56,6 +58,297 @@
         <category>mcp</category>
         <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/10/22/windows-qi-dong-zi-dong-yun-xing-duo-ge-python-jiao-ben/</guid>
+            <title>Windows — 极其完整的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）</title>
+            <link>https://0xdadream.github.io/2025/10/22/windows-qi-dong-zi-dong-yun-xing-duo-ge-python-jiao-ben/</link>
+            <category>windows</category>
+            <pubDate>Wed, 22 Oct 2025 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Windows-—-极其完整-的：开机-启动时自动运行多个-Python-脚本（详细逐步教程）&#34;&gt;&lt;a href=&#34;#Windows-—-极其完整-的：开机-启动时自动运行多个-Python-脚本（详细逐步教程）&#34; class=&#34;headerlink&#34; title=&#34;Windows — 极其完整 的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）&#34;&gt;&lt;/a&gt;Windows — &lt;strong&gt;极其完整&lt;/strong&gt; 的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）&lt;/h1&gt;&lt;p&gt;下面是一份「从零到可运行、包含多种方案、含所有脚本/命令/注意点」的详细指南。按你需要的场景选择或同时使用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A. &lt;strong&gt;开机（系统启动）就运行（登录前可后台运行）&lt;/strong&gt; → 用 &lt;strong&gt;Windows Service（推荐 nssm）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;B. &lt;strong&gt;用户登录后立即运行并可见窗口（前台）&lt;/strong&gt; → 用 &lt;strong&gt;任务计划程序 + .bat / VBS&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;C. &lt;strong&gt;混合（服务后台 + 登录后弹出窗口）&lt;/strong&gt; → 同时配置 A + B&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我会用你之前给出的示例路径（你可以直接复制/替换）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Python (conda env) : D:\ProgramData\anaconda3\envs\csyh\python.exe
+脚本目录           : D:\opcua\csyh
+脚本文件           : OPCUA_1R_A.py OPCUA_1R.py OPCUA_2R_A.py OPCUA_2R.py OPCUA_KP_A.py OPCUA_KP.py&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h1 id=&#34;0-先决准备（必做）&#34;&gt;&lt;a href=&#34;#0-先决准备（必做）&#34; class=&#34;headerlink&#34; title=&#34;0. 先决准备（必做）&#34;&gt;&lt;/a&gt;0. 先决准备（必做）&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;确认 Python 路径正确（在命令提示符中）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;where &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果路径不存在，改为你系统上的真实绝对路径。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;确认脚本能在命令行单独正常运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;&#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_1R_A.py&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在 &lt;code&gt;D:\opcua\csyh&lt;/code&gt; 下创建一个 &lt;code&gt;logs&lt;/code&gt; 文件夹：用于写入日志（服务模式强烈建议）。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;mkdir D:\opcua\csyh\logs&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;为所有脚本前加日志输出（示例，放在每个 .py 的最前面）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# 放在每个脚本最开头（示例）
+import os, sys, datetime
+logdir = r&#34;D:\opcua\csyh\logs&#34;
+os.makedirs(logdir, exist_ok=True)
+logfile = os.path.join(logdir, os.path.basename(__file__) + &#34;.log&#34;)
+sys.stdout = open(logfile, &#34;a&#34;, encoding=&#34;utf-8&#34;)
+sys.stderr = sys.stdout
+print(f&#34;\n[{datetime.datetime.now().isoformat()}] SCRIPT STARTED&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;A-开机立即运行（登录前）——使用-Windows-服务（nssm）&#34;&gt;&lt;a href=&#34;#A-开机立即运行（登录前）——使用-Windows-服务（nssm）&#34; class=&#34;headerlink&#34; title=&#34;A. 开机立即运行（登录前）——使用 Windows 服务（nssm）&#34;&gt;&lt;/a&gt;A. &lt;strong&gt;开机立即运行（登录前）——使用 Windows 服务（nssm）&lt;/strong&gt;&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;优点：电脑上电 / 系统启动后就运行；不依赖用户登录；适合守护进程。&lt;br&gt; 缺点：系统服务&lt;strong&gt;不能&lt;/strong&gt;显示 GUI / 控制台窗口到用户桌面（安全限制）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;A-1-下载并安装-nssm（Non-Sucking-Service-Manager）&#34;&gt;&lt;a href=&#34;#A-1-下载并安装-nssm（Non-Sucking-Service-Manager）&#34; class=&#34;headerlink&#34; title=&#34;A.1 下载并安装 nssm（Non-Sucking Service Manager）&#34;&gt;&lt;/a&gt;A.1 下载并安装 nssm（Non-Sucking Service Manager）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;下载后把 &lt;code&gt;nssm.exe&lt;/code&gt;（64-bit 对应）复制到 &lt;code&gt;C:\Windows\System32\&lt;/code&gt;（管理员权限）。&lt;/li&gt;
+&lt;li&gt;确认在管理员 cmd 可以运行 &lt;code&gt;nssm&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;A-2-注册服务（为每个脚本建服务）&#34;&gt;&lt;a href=&#34;#A-2-注册服务（为每个脚本建服务）&#34; class=&#34;headerlink&#34; title=&#34;A.2 注册服务（为每个脚本建服务）&#34;&gt;&lt;/a&gt;A.2 注册服务（为每个脚本建服务）&lt;/h3&gt;&lt;p&gt;以 &lt;strong&gt;管理员&lt;/strong&gt; 身份打开命令提示符（右键“以管理员身份运行”），然后对每个脚本运行：&lt;/p&gt;
+&lt;p&gt;示例（为 &lt;code&gt;OPCUA_1R_A.py&lt;/code&gt; 注册）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;nssm install OPCUA_1R_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;会弹出 GUI 输入框，填写：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Path&lt;/strong&gt;: &lt;code&gt;D:\ProgramData\anaconda3\envs\csyh\python.exe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Startup directory&lt;/strong&gt;: &lt;code&gt;D:\opcua\csyh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Arguments&lt;/strong&gt;: &lt;code&gt;D:\opcua\csyh\OPCUA_1R_A.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;（按 &lt;code&gt;Install service&lt;/code&gt; 保存）&lt;/p&gt;
+&lt;p&gt;对其他脚本重复（用不同服务名，如 &lt;code&gt;OPCUA_1R&lt;/code&gt; 等）。&lt;/p&gt;
+&lt;h3 id=&#34;A-3-设置自动启动（开机自动）&#34;&gt;&lt;a href=&#34;#A-3-设置自动启动（开机自动）&#34; class=&#34;headerlink&#34; title=&#34;A.3 设置自动启动（开机自动）&#34;&gt;&lt;/a&gt;A.3 设置自动启动（开机自动）&lt;/h3&gt;&lt;p&gt;在管理员 cmd 中运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;sc config OPCUA_1R_A start= auto
+sc config OPCUA_1R start= auto
+sc config OPCUA_2R_A start= auto
+sc config OPCUA_2R start= auto
+sc config OPCUA_KP_A start= auto
+sc config OPCUA_KP start= auto&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;A-4-启动-停止-查看服务状态&#34;&gt;&lt;a href=&#34;#A-4-启动-停止-查看服务状态&#34; class=&#34;headerlink&#34; title=&#34;A.4 启动 / 停止 / 查看服务状态&#34;&gt;&lt;/a&gt;A.4 启动 / 停止 / 查看服务状态&lt;/h3&gt;&lt;p&gt;启动某服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;net start OPCUA_1R_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;停止：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;net stop OPCUA_1R_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看服务状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;sc query OPCUA_1R_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;A-5-日志与调试&#34;&gt;&lt;a href=&#34;#A-5-日志与调试&#34; class=&#34;headerlink&#34; title=&#34;A.5 日志与调试&#34;&gt;&lt;/a&gt;A.5 日志与调试&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;因为服务没有窗口，检查 &lt;code&gt;D:\opcua\csyh\logs\OPCUA_1R_A.py.log&lt;/code&gt;（参考上面 Python 日志写法）。&lt;/li&gt;
+&lt;li&gt;若想捕获更多输出，在 nssm 的 &lt;code&gt;I/O&lt;/code&gt; 页可以配置 Stdout/Err 重定向文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;B-用户登录后自动弹出窗口（可见）——任务计划程序-bat-VBS&#34;&gt;&lt;a href=&#34;#B-用户登录后自动弹出窗口（可见）——任务计划程序-bat-VBS&#34; class=&#34;headerlink&#34; title=&#34;B. 用户登录后自动弹出窗口（可见）——任务计划程序 + .bat / VBS&#34;&gt;&lt;/a&gt;B. &lt;strong&gt;用户登录后自动弹出窗口（可见）——任务计划程序 + .bat / VBS&lt;/strong&gt;&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;目标：用户一登录后立刻看到控制台窗口或 GUI（比如你想观察输出）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键点：若想&lt;strong&gt;显示窗口&lt;/strong&gt;，计划任务应以&lt;strong&gt;当前用户会话&lt;/strong&gt;运行（选择“仅当用户登录时运行”），并&lt;strong&gt;不要&lt;/strong&gt;勾选“以最高权限运行”（勾选会把任务放到 session 0，有时不显示前台）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;B-1-在脚本目录下创建-run-all-bat&#34;&gt;&lt;a href=&#34;#B-1-在脚本目录下创建-run-all-bat&#34; class=&#34;headerlink&#34; title=&#34;B.1 在脚本目录下创建 run_all.bat&#34;&gt;&lt;/a&gt;B.1 在脚本目录下创建 &lt;code&gt;run_all.bat&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;路径：&lt;code&gt;D:\opcua\csyh\run_all.bat&lt;/code&gt;，内容（详尽版：含延时、工作目录、窗口标题）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;@echo off
+title OPCUA 启动脚本总控
+REM 延时等待桌面完全加载（必要时调整秒数）
+timeout /t 10 &amp;gt;nul
+
+REM 切换到脚本目录
+cd /d &#34;D:\opcua\csyh&#34;
+
+REM 逐个启动并让窗口最大化显示（每个窗口标题有区分）
+start &#34;OPCUA_1R_A&#34; cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_1R_A.py&#34;
+start &#34;OPCUA_1R&#34;   cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_1R.py&#34;
+start &#34;OPCUA_2R_A&#34; cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_2R_A.py&#34;
+start &#34;OPCUA_2R&#34;   cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_2R.py&#34;
+start &#34;OPCUA_KP_A&#34; cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_KP_A.py&#34;
+start &#34;OPCUA_KP&#34;   cmd /k &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe D:\opcua\csyh\OPCUA_KP.py&#34;
+
+REM 可选：暂停以防窗口马上关闭（仅当脚本本身结束时需要）
+REM pause
+exit&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;start &#34;title&#34; cmd /k &#34;python ...&#34;&lt;/code&gt;：用 cmd 打开并保持窗口（不立即关闭）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;timeout /t 10&lt;/code&gt;：建议延时 10 秒，可根据机器速度调整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;B-2-（可选）用-VBS-强制置顶窗口（如果需要）&#34;&gt;&lt;a href=&#34;#B-2-（可选）用-VBS-强制置顶窗口（如果需要）&#34; class=&#34;headerlink&#34; title=&#34;B.2 （可选）用 VBS 强制置顶窗口（如果需要）&#34;&gt;&lt;/a&gt;B.2 （可选）用 VBS 强制置顶窗口（如果需要）&lt;/h3&gt;&lt;p&gt;创建 &lt;code&gt;D:\opcua\csyh\bring_front.vbs&lt;/code&gt; 用于启动并激活窗口：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Set WshShell = CreateObject(&#34;WScript.Shell&#34;)
+WshShell.Run &#34;D:\opcua\csyh\run_all.bat&#34;, 1, False  &#39; 1 = normale window
+WScript.Sleep 2000  &#39; 等 2 秒让窗口出现
+&#39; 激活各个窗口（按窗口标题）
+On Error Resume Next
+WshShell.AppActivate &#34;OPCUA_1R_A&#34;
+WScript.Sleep 500
+WshShell.AppActivate &#34;OPCUA_1R&#34;
+WScript.Sleep 500
+WshShell.AppActivate &#34;OPCUA_2R_A&#34;
+&#39; 根据需要继续 AppActivate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意：AppActivate 用标题匹配窗口标题（上面 &lt;code&gt;start &#34;OPCUA_1R_A&#34;&lt;/code&gt; 的标题）——若匹配失败，可使用更精确的标题或程序名。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;B-3-在“任务计划程序”中创建任务（非常详细步骤）&#34;&gt;&lt;a href=&#34;#B-3-在“任务计划程序”中创建任务（非常详细步骤）&#34; class=&#34;headerlink&#34; title=&#34;B.3 在“任务计划程序”中创建任务（非常详细步骤）&#34;&gt;&lt;/a&gt;B.3 在“任务计划程序”中创建任务（非常详细步骤）&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;打开&lt;/strong&gt;：&lt;code&gt;Win + R&lt;/code&gt; → 输入 &lt;code&gt;taskschd.msc&lt;/code&gt; → 回车。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;右侧&lt;/strong&gt; 点击：**创建任务…**（不是“创建基本任务”）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;常规（General）选项卡&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;名称：&lt;code&gt;OPCUA Login Launch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;描述：&lt;code&gt;登录后启动 OPCUA 脚本&lt;/code&gt;（任选）&lt;/li&gt;
+&lt;li&gt;安全选项：选择你的用户账户（默认你的当前用户）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;选择&lt;/strong&gt;：&lt;code&gt;仅当用户登录时运行&lt;/code&gt;（非常关键，保证窗口可见）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要勾选&lt;/strong&gt;：&lt;code&gt;以最高权限运行&lt;/code&gt;（否则可能在 session 0，不显示）&lt;/li&gt;
+&lt;li&gt;配置为：Windows 10/11。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;触发器（Triggers）&lt;/strong&gt; → 新建（New…）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开始任务：&lt;code&gt;At log on&lt;/code&gt;（登录时）&lt;/li&gt;
+&lt;li&gt;用户：&lt;code&gt;Any user&lt;/code&gt; 或指定用户&lt;/li&gt;
+&lt;li&gt;高级设置：&lt;strong&gt;延迟任务执行：&lt;/strong&gt;10 秒（建议）&lt;/li&gt;
+&lt;li&gt;点击 确定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;操作（Actions）&lt;/strong&gt; → 新建（New…）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;操作：&lt;code&gt;Start a program&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;程序或脚本（Program/script）：&lt;code&gt;cmd.exe&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;添加参数（Add arguments）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/c &#34;D:\opcua\csyh\run_all.bat&#34;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（使用 /c 会运行并关闭 cmd；如果你想保留 master 窗口也可以直接填写 bat 路径，但用 cmd /c 更可靠用于显示）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;起始于（Start in）：&lt;code&gt;D:\opcua\csyh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;确定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;条件（Conditions）&lt;/strong&gt;：取消不必要限制，如“仅在使用交流电时”等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;设置（Settings）&lt;/strong&gt;：勾选“如果任务失败，重试”等按需设置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;保存&lt;/strong&gt; → 系统可能提示输入你的用户密码（任务需要凭据）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;测试：右键任务 → &lt;strong&gt;运行&lt;/strong&gt;，应该立即在桌面看到多个窗口弹出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;B-4-验证&#34;&gt;&lt;a href=&#34;#B-4-验证&#34; class=&#34;headerlink&#34; title=&#34;B.4 验证&#34;&gt;&lt;/a&gt;B.4 验证&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;退出当前账户并重新登录或重启并登录，等待大约 10 秒，观察窗口是否自动弹出。&lt;/li&gt;
+&lt;li&gt;若没有弹出，检查任务历史（在任务上右键 -&amp;gt; 查看历史）和 &lt;code&gt;run_all.bat&lt;/code&gt; 是否有错误输出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;C-混合方案（推荐：服务-登录前台显示）&#34;&gt;&lt;a href=&#34;#C-混合方案（推荐：服务-登录前台显示）&#34; class=&#34;headerlink&#34; title=&#34;C. 混合方案（推荐：服务 + 登录前台显示）&#34;&gt;&lt;/a&gt;C. 混合方案（推荐：服务 + 登录前台显示）&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;用 &lt;strong&gt;nssm&lt;/strong&gt; 把关键后端脚本注册为服务（A），保证&lt;strong&gt;开机就运行后台任务&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;用 &lt;strong&gt;任务计划程序&lt;/strong&gt; 在用户登录时运行 &lt;code&gt;run_all.bat&lt;/code&gt;（B），弹出前台窗口（用于可视/监控）。&lt;/li&gt;
+&lt;li&gt;两边脚本应设计为&lt;strong&gt;幂等&lt;/strong&gt;或在启动时检测已有进程（避免重复运行）。&lt;ul&gt;
+&lt;li&gt;在 Python 脚本中可以用 PID 文件或端口占用检测来避免重复启动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;示例（检测端口的简单做法）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;import socket, sys
+def is_port_in_use(port=12345):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        s.bind((&#39;127.0.0.1&#39;, port))
+    except Exception:
+        return True
+    finally:
+        s.close()
+    return False
+if is_port_in_use(5000):
+    print(&#34;Another instance running, exit.&#34;)
+    sys.exit(0)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h1 id=&#34;D-备用方法（注册表、Startup-folder）简要说明&#34;&gt;&lt;a href=&#34;#D-备用方法（注册表、Startup-folder）简要说明&#34; class=&#34;headerlink&#34; title=&#34;D. 备用方法（注册表、Startup folder）简要说明&#34;&gt;&lt;/a&gt;D. 备用方法（注册表、Startup folder）简要说明&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Startup folder&lt;/strong&gt;（&lt;code&gt;shell:startup&lt;/code&gt;）: 把 &lt;code&gt;.bat&lt;/code&gt; 或快捷方式放进去，用户登录后会运行（等同于 B 的 simpler 版本）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注册表&lt;/strong&gt;：&lt;code&gt;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run&lt;/code&gt; 可添加启动项（专业但不推荐用于复杂脚本）。&lt;br&gt; 这些方法都&lt;strong&gt;需要用户登录&lt;/strong&gt;才能显示前台。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;E-常见问题与排错清单（贴心逐项）&#34;&gt;&lt;a href=&#34;#E-常见问题与排错清单（贴心逐项）&#34; class=&#34;headerlink&#34; title=&#34;E. 常见问题与排错清单（贴心逐项）&#34;&gt;&lt;/a&gt;E. 常见问题与排错清单（贴心逐项）&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;脚本运行但看不到任何输出&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;检查是否为服务（服务不会显示窗口）。&lt;/li&gt;
+&lt;li&gt;检查日志文件 &lt;code&gt;D:\opcua\csyh\logs\*.log&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;计划任务运行但窗口不显示&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;确保任务“仅当用户登录时运行”。&lt;/li&gt;
+&lt;li&gt;确保没有勾选“以最高权限运行”或如果勾选了用 VBS/&lt;code&gt;AppActivate&lt;/code&gt;激活窗口。&lt;/li&gt;
+&lt;li&gt;确保“操作”使用 &lt;code&gt;cmd.exe /c &#34;path\to\run_all.bat&#34;&lt;/code&gt; 并设置正确的 “起始于” 路径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;“操作目录无效”错误&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 .bat 中使用 &lt;code&gt;cd /d &#34;D:\opcua\csyh&#34;&lt;/code&gt; 或 在任务的 “起始于” 填写目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;脚本重复启动&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务 + 登录脚本同时启动同一脚本会重复。用端口或 PID 文件防重复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;权限 / 环境变量问题（conda 环境）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果脚本依赖 conda 环境包，建议使用环境中 &lt;code&gt;python.exe&lt;/code&gt; 的绝对路径，或在 .bat 中先激活环境（复杂），例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;call &#34;D:\ProgramData\anaconda3\Scripts\activate.bat&#34; csyh
+python D:\opcua\csyh\OPCUA_1R_A.py&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注意：在服务下激活 conda 有时会失败，直接使用 env 的 &lt;code&gt;python.exe&lt;/code&gt; 更稳。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;启动顺序 / 依赖（网络/盘未挂载）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果脚本依赖网络驱动器或云盘，同步尚未完成可能失败。为计划任务设置延迟（30s 或更长），或在脚本中重试逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;F-最终「一键部署」文件清单（建议你把这些文件放到-D-opcua-csyh）&#34;&gt;&lt;a href=&#34;#F-最终「一键部署」文件清单（建议你把这些文件放到-D-opcua-csyh）&#34; class=&#34;headerlink&#34; title=&#34;F. 最终「一键部署」文件清单（建议你把这些文件放到 D:\opcua\csyh）&#34;&gt;&lt;/a&gt;F. 最终「一键部署」文件清单（建议你把这些文件放到 &lt;code&gt;D:\opcua\csyh&lt;/code&gt;）&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;run_all.bat&lt;/code&gt;（前文给出）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bring_front.vbs&lt;/code&gt;（可选，用于激活窗口）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;startup_opcua_service_setup.cmd&lt;/code&gt;（管理员运行，一次性注册服务的模板脚本）——&lt;strong&gt;示例内容&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;@echo off
+REM ---- 请以管理员身份运行此脚本，需事先把 nssm.exe 放到 C:\Windows\System32 ----
+
+nssm install OPCUA_1R_A &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_1R_A.py&#34;
+nssm install OPCUA_1R   &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_1R.py&#34;
+nssm install OPCUA_2R_A &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_2R_A.py&#34;
+nssm install OPCUA_2R   &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_2R.py&#34;
+nssm install OPCUA_KP_A &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_KP_A.py&#34;
+nssm install OPCUA_KP   &#34;D:\ProgramData\anaconda3\envs\csyh\python.exe&#34; &#34;D:\opcua\csyh\OPCUA_KP.py&#34;
+
+sc config OPCUA_1R_A start= auto
+sc config OPCUA_1R start= auto
+sc config OPCUA_2R_A start= auto
+sc config OPCUA_2R start= auto
+sc config OPCUA_KP_A start= auto
+sc config OPCUA_KP start= auto
+
+echo Services created. You can start them via: net start OPCUA_1R_A
+pause&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注意：上面 &lt;code&gt;nssm install &amp;lt;name&amp;gt; &amp;lt;path&amp;gt; &amp;lt;args&amp;gt;&lt;/code&gt; 的命令行语法在部分 nssm 版本上可能需要打开 GUI 填写。若命令行无效，请直接运行 &lt;code&gt;nssm install &amp;lt;name&amp;gt;&lt;/code&gt; 用 GUI 填值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;G-推荐顺序（快速部署建议）&#34;&gt;&lt;a href=&#34;#G-推荐顺序（快速部署建议）&#34; class=&#34;headerlink&#34; title=&#34;G. 推荐顺序（快速部署建议）&#34;&gt;&lt;/a&gt;G. 推荐顺序（快速部署建议）&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;在本地命令行测试每个脚本能否正常运行并写日志。&lt;/li&gt;
+&lt;li&gt;若需要“开机就运行（登录前）”，先用 nssm 注册服务（A）。测试并查看日志。&lt;/li&gt;
+&lt;li&gt;若需要“登录后可见”，再设置任务计划程序运行 &lt;code&gt;run_all.bat&lt;/code&gt;（B）。测试并确认窗口弹出。&lt;/li&gt;
+&lt;li&gt;最后优化：延时、错误重试、日志轮转、避免重复启动。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/</guid>
             <title>更改 Windows PowerShell 的执行策略</title>
