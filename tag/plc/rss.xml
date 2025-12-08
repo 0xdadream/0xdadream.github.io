@@ -7,56 +7,59 @@
         <language>zh-CN</language>
         <pubDate>Thu, 23 Oct 2025 12:25:00 +0800</pubDate>
         <lastBuildDate>Thu, 23 Oct 2025 12:25:00 +0800</lastBuildDate>
-        <category>tip</category>
-        <category>intel</category>
         <category>AI</category>
-        <category>ssh</category>
+        <category>intel</category>
         <category>cloudflare</category>
-        <category>email</category>
+        <category>tip</category>
         <category>安装</category>
-        <category>tips</category>
         <category>re</category>
         <category>工具</category>
+        <category>ssh</category>
+        <category>linux</category>
+        <category>tips</category>
         <category>Java</category>
+        <category>email</category>
         <category>教程</category>
         <category>环境</category>
         <category>conda</category>
-        <category>linux</category>
+        <category>python</category>
         <category>bug</category>
+        <category>net</category>
+        <category>windows</category>
+        <category>wsl2</category>
         <category>web</category>
         <category>wp</category>
-        <category>攻防世界</category>
-        <category>windows</category>
-        <category>net</category>
         <category>BUUCTF</category>
+        <category>攻防世界</category>
+        <category>XGBoost</category>
         <category>server</category>
-        <category>wall</category>
         <category>comfyui</category>
+        <category>wall</category>
         <category>powershell</category>
-        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
+        <category>tools</category>
         <category>emby</category>
-        <category>python</category>
-        <category>google</category>
         <category>git</category>
-        <category>java</category>
+        <category>google</category>
         <category>命令</category>
+        <category>java</category>
         <category>学习</category>
         <category>远程</category>
-        <category>文件上传</category>
         <category>php</category>
-        <category>命令行</category>
+        <category>文件上传</category>
         <category>数据库</category>
         <category>plc</category>
+        <category>proxy</category>
+        <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
         <category>word</category>
-        <category>汇编</category>
         <category>密码学</category>
-        <category>mcp</category>
+        <category>汇编</category>
         <category>i春秋</category>
+        <category>mcp</category>
         <category>证书</category>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/10/23/python-zhong-shi-yong-snap7/</guid>
@@ -782,6 +785,203 @@ if __name__ == &#34;__main__&#34;:
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/</guid>
+            <title>从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战</title>
+            <link>https://0xdadream.github.io/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/</link>
+            <category>plc</category>
+            <pubDate>Tue, 14 Oct 2025 02:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;从-PLC-读取-STRING-WSTRING：UCS-2、GBK-与-Python-实战&#34;&gt;&lt;a href=&#34;#从-PLC-读取-STRING-WSTRING：UCS-2、GBK-与-Python-实战&#34; class=&#34;headerlink&#34; title=&#34;从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战&#34;&gt;&lt;/a&gt;从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-PLC中-STRING-WSTRING-的内存布局&#34;&gt;&lt;a href=&#34;#1-PLC中-STRING-WSTRING-的内存布局&#34; class=&#34;headerlink&#34; title=&#34;1. PLC中 STRING / WSTRING 的内存布局&#34;&gt;&lt;/a&gt;1. PLC中 STRING / WSTRING 的内存布局&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;以西门子 S7 系列为例，PLC 中 &lt;code&gt;STRING&lt;/code&gt; 类型通常在 DB（Data Block）内以固定结构存储：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;byte offset: 0        1         2 ...
+            +--------+--------+-----------------
+field       | MaxLen | ActLen | Data (payload)
+size        | 1 byte | 1 byte | MaxLen * (char_size)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MaxLen（第 0 字节）&lt;/strong&gt;：定义时指定的最大字符数（例如 &lt;code&gt;STRING[20]&lt;/code&gt; 则为 20）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ActLen（第 1 字节）&lt;/strong&gt;：当前字符串占用的字符数（不是字节数！）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data（从第 2 字节开始）&lt;/strong&gt;：字符数据。对 &lt;code&gt;STRING&lt;/code&gt; 来说，旧型号可能用单字节编码（ASCII 或 GBK 的双字节区），新型号与 &lt;code&gt;WSTRING&lt;/code&gt; 会用 2 字节/字符（UCS-2 / UTF-16LE）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;：&lt;code&gt;ActLen&lt;/code&gt; 保存的是字符个数，而非字节数。因此读取字节区间时需根据每字符的字节数做乘法，例如 UCS-2/UTF-16LE 为 &lt;code&gt;ActLen * 2&lt;/code&gt; 字节。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-UCS-2（UTF-16LE）与-GBK-的本质区别&#34;&gt;&lt;a href=&#34;#2-UCS-2（UTF-16LE）与-GBK-的本质区别&#34; class=&#34;headerlink&#34; title=&#34;2. UCS-2（UTF-16LE）与 GBK 的本质区别&#34;&gt;&lt;/a&gt;2. UCS-2（UTF-16LE）与 GBK 的本质区别&lt;/h2&gt;&lt;h3 id=&#34;UCS-2-UTF-16LE&#34;&gt;&lt;a href=&#34;#UCS-2-UTF-16LE&#34; class=&#34;headerlink&#34; title=&#34;UCS-2 / UTF-16LE&#34;&gt;&lt;/a&gt;UCS-2 / UTF-16LE&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体系&lt;/strong&gt;：Unicode 的早期实现（UCS-2）与更通用的 UTF-16（两者在基本平面 BMP 区相同）。S7-1500 等设备通常按小端序存储，因此用 &lt;code&gt;utf-16le&lt;/code&gt; 解码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每字符字节数&lt;/strong&gt;：固定 &lt;strong&gt;2 字节/字符&lt;/strong&gt;（UCS-2 基本平面）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：支持广泛字符集（全球语言），编码稳定一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;GBK&#34;&gt;&lt;a href=&#34;#GBK&#34; class=&#34;headerlink&#34; title=&#34;GBK&#34;&gt;&lt;/a&gt;GBK&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体系&lt;/strong&gt;：中国国家标准的扩展（在 GB2312 基础上扩展），主要用于中文环境。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每字符字节数&lt;/strong&gt;：&lt;strong&gt;1 或 2 字节&lt;/strong&gt;（英文 ASCII 占 1 字节，中文字符占 2 字节）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：在老旧或本地化 Windows/PLC 工程中常见，文本体积相对小。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;对比要点&#34;&gt;&lt;a href=&#34;#对比要点&#34; class=&#34;headerlink&#34; title=&#34;对比要点&#34;&gt;&lt;/a&gt;对比要点&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;UCS-2 固定 2 字节，ActLen * 2 即为字节长度；GBK 则是可变的，无法直接用 ActLen 乘以固定系数得到字节数（但 PLC 的 &lt;code&gt;ActLen&lt;/code&gt; 在 GBK 场景通常表示字符个数，而 payload 区按最大长度分配字节空间）。&lt;/li&gt;
+&lt;li&gt;解码时：UCS-2 用 &lt;code&gt;&#39;utf-16le&#39;&lt;/code&gt;；GBK 用 &lt;code&gt;&#39;gbk&#39;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-如何判断-PLC-存储的是哪种编码（理论与实践）&#34;&gt;&lt;a href=&#34;#3-如何判断-PLC-存储的是哪种编码（理论与实践）&#34; class=&#34;headerlink&#34; title=&#34;3. 如何判断 PLC 存储的是哪种编码（理论与实践）&#34;&gt;&lt;/a&gt;3. 如何判断 PLC 存储的是哪种编码（理论与实践）&lt;/h2&gt;&lt;h3 id=&#34;理论判断&#34;&gt;&lt;a href=&#34;#理论判断&#34; class=&#34;headerlink&#34; title=&#34;理论判断&#34;&gt;&lt;/a&gt;理论判断&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;查看 PLC 程序或工程文件（TIA Portal）中字符串变量的类型和属性：&lt;code&gt;STRING&lt;/code&gt;、&lt;code&gt;WSTRING&lt;/code&gt; 或有没有明确选择 Unicode。新型号/多语言工程通常使用 Unicode。&lt;/li&gt;
+&lt;li&gt;查阅 PLC 文档：S7-300/400 旧系列更多使用 OEM 编码或 ASCII，S7-1200/1500 更多支持 Unicode（UCS-2/UTF-16LE）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实践检测（字节探测法）&#34;&gt;&lt;a href=&#34;#实践检测（字节探测法）&#34; class=&#34;headerlink&#34; title=&#34;实践检测（字节探测法）&#34;&gt;&lt;/a&gt;实践检测（字节探测法）&lt;/h3&gt;&lt;p&gt;当无法直接查看工程时，可以通过读取字节并尝试解码判断：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读取 &lt;code&gt;MaxLen&lt;/code&gt; 与 &lt;code&gt;ActLen&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;提取 &lt;code&gt;payload = data[offset+2 : offset+2 + MaxLen * char_bytes]&lt;/code&gt;（若不清楚 &lt;code&gt;char_bytes&lt;/code&gt;，先取 &lt;code&gt;MaxLen*2&lt;/code&gt; 作为上限）&lt;/li&gt;
+&lt;li&gt;尝试按 &lt;code&gt;utf-16le&lt;/code&gt; 解码 &lt;code&gt;payload[:ActLen*2]&lt;/code&gt;：若输出为合法文本（没有大量替代字符或异常码点），则很可能为 UCS-2/UTF-16LE。&lt;/li&gt;
+&lt;li&gt;若失败，尝试按 &lt;code&gt;gbk&lt;/code&gt; 解码 &lt;code&gt;payload[:ActLen*1?]&lt;/code&gt;（GBK 的字节长度不固定，需小心边界）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;常用 heuristic：若 &lt;code&gt;payload[0]&lt;/code&gt; 为 ASCII 可打印字符或序列中每隔一字节有 &lt;code&gt;0x00&lt;/code&gt;（常见于 UTF-16LE 小端），那通常是 UTF-16LE；若高位字节不规则，但符合 GBK 两字节中文区间（0x81-0xFE 等），则可能为 GBK。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;代码自动检测思路（后面会有实现）&#34;&gt;&lt;a href=&#34;#代码自动检测思路（后面会有实现）&#34; class=&#34;headerlink&#34; title=&#34;代码自动检测思路（后面会有实现）&#34;&gt;&lt;/a&gt;代码自动检测思路（后面会有实现）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;优先尝试 &lt;code&gt;utf-16le&lt;/code&gt;（在新 PLC 上更常见且安全性高），失败后回退到 &lt;code&gt;gbk&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;使用错误替换策略或严格检测（例如检查解码后包含多少不可打印字符或替代字符 &lt;code&gt;�&lt;/code&gt;），并据此决定编码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-Python-实战：可靠读取与解码函数（含自动检测）&#34;&gt;&lt;a href=&#34;#4-Python-实战：可靠读取与解码函数（含自动检测）&#34; class=&#34;headerlink&#34; title=&#34;4. Python 实战：可靠读取与解码函数（含自动检测）&#34;&gt;&lt;/a&gt;4. Python 实战：可靠读取与解码函数（含自动检测）&lt;/h2&gt;&lt;p&gt;下面给出两个函数：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;get_string_ucs2_raw&lt;/code&gt;：明确 UTF-16LE&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get_string_auto_decode&lt;/code&gt;：自动检测 UTF-16LE 与 GBK 并返回最可信结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; Tuple
+
+&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;get_string_ucs2_raw&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; max_length&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;
+    假定 PLC 存储为 UCS-2 / UTF-16LE：
+    - data: 从 plc.db_read() 得到的 bytes
+    - byte_offset: 字符串的起始偏移
+    - max_length: STRING 定义的最大字符数（用于边界检查）
+    &#34;&#34;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;# 读取 MaxLen 与 ActLen（按字节偏移）&lt;/span&gt;
+        max_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+        actual_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
+
+        &lt;span class=&#34;token comment&#34;&gt;# 每个字符 2 字节（UCS-2 / UTF-16LE）&lt;/span&gt;
+        start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
+        end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
+
+        &lt;span class=&#34;token comment&#34;&gt;# 边界保护&lt;/span&gt;
+        end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;end&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+        str_bytes &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; str_bytes&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;strict&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; e&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;# 若 strict 抛错，可改为 &#39;replace&#39; 或 &#39;ignore&#39;，但应该记录日志&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;UCS-2 解码失败: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
+
+
+&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;_is_likely_utf16le&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;b&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bool&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;简单启发式判断：检查在前 N 字节中，是否大量出现偶数位为 0x00（小端UTF-16的常见特点）&#34;&#34;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;b&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;token comment&#34;&gt;# 检查前 8 字节中偶数位是否有较多 0x00&lt;/span&gt;
+    sample &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+    zeros &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sample&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; sample&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; zeros &lt;span class=&#34;token operator&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sample&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;get_string_auto_decode&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; max_length&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; Tuple&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;
+    自动检测编码并返回 (decoded_str, encoding_used)
+    返回示例: (&#34;你好&#34;, &#39;utf-16le&#39;) 或 (&#34;中文&#34;, &#39;gbk&#39;)
+    &#34;&#34;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+        max_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+        actual_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;unknown&#39;&lt;/span&gt;
+
+        &lt;span class=&#34;token comment&#34;&gt;# 尝试用 utf-16le 解码&lt;/span&gt;
+        start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;# 先取一个上限区域（实际长度*2 或者 max_len*2，取边界）&lt;/span&gt;
+        utf16_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
+        utf16_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;utf16_end&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        candidate &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;utf16_end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token comment&#34;&gt;# 启发式快速判断&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; _is_likely_utf16le&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;candidate&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+                s &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; candidate&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+                &lt;span class=&#34;token comment&#34;&gt;# 可做额外校验：是否包含大量不可打印字符&lt;/span&gt;
+                &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;�&#39;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+                    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+                &lt;span class=&#34;token keyword&#34;&gt;pass&lt;/span&gt;
+
+        &lt;span class=&#34;token comment&#34;&gt;# 回退到 GBK 解码：按实际长度取字节&lt;/span&gt;
+        &lt;span class=&#34;token comment&#34;&gt;# GBK 是可变字节，因此我们尽量取 max_len*2 作为安全上限&lt;/span&gt;
+        gbk_start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start
+        gbk_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; max_length &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        gbk_bytes &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;gbk_start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; gbk_end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+            s2 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; gbk_bytes&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;gbk&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;strict&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;token comment&#34;&gt;# 取前 actual_len 个字符（因为 gbk_bytes 可能包含后续空白）&lt;/span&gt;
+            s2 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; s2&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;actual_len&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; s2&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;gbk&#39;&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;token comment&#34;&gt;# 最后保底：尝试 latin1 显示原始字节（避免崩溃）&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;start&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;actual_len&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;latin1&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;replace&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;latin1&#39;&lt;/span&gt;
+
+    &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; e&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;读取字符串失败: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;error&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用示例&#34;&gt;&lt;a href=&#34;#使用示例&#34; class=&#34;headerlink&#34; title=&#34;使用示例&#34;&gt;&lt;/a&gt;使用示例&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 假设 plc.db_read() 返回如下模拟数据&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# MaxLen=254, ActLen=3, 内容为 UTF-16LE 编码的 &#39;你好!&#39;&lt;/span&gt;
+sim &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;你好!&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;encode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;b&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;20&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;get_string_auto_decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sim&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;5-与常见库的交互（snap7-python-snap7-opcua）&#34;&gt;&lt;a href=&#34;#5-与常见库的交互（snap7-python-snap7-opcua）&#34; class=&#34;headerlink&#34; title=&#34;5. 与常见库的交互（snap7 / python-snap7 / opcua）&#34;&gt;&lt;/a&gt;5. 与常见库的交互（snap7 / python-snap7 / opcua）&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;python-snap7 / snap7&lt;/strong&gt;：常用于直接从 S7 PLC 的 DB 读取 raw bytes。&lt;code&gt;client.db_read(db_number, start, size)&lt;/code&gt; 返回 &lt;code&gt;bytes&lt;/code&gt;，可传入到上面函数中。注意 &lt;code&gt;start&lt;/code&gt; 与 &lt;code&gt;size&lt;/code&gt; 的计算需根据变量在 DB 中的偏移计算。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;opcua / open62541 等&lt;/strong&gt;：若通过 OPC UA 读取字符串字段，服务器端通常已经做了解码（返回 Python &lt;code&gt;str&lt;/code&gt;），但也可能返回 &lt;code&gt;byte[]&lt;/code&gt;，需按实际情况处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;示例（snap7）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; snap7
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; snap7&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;util &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
+
+client &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; snap7&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Client&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;connect&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;192.168.0.10&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+raw &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;db_read&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;260&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 读取 DB1 前 260 字节&lt;/span&gt;
+s&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; enc &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; get_string_auto_decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;raw&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;结果&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; enc&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;disconnect&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;6-常见陷阱与调试方法&#34;&gt;&lt;a href=&#34;#6-常见陷阱与调试方法&#34; class=&#34;headerlink&#34; title=&#34;6. 常见陷阱与调试方法&#34;&gt;&lt;/a&gt;6. 常见陷阱与调试方法&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;偏移错误&lt;/strong&gt;：变量的 DB 偏移并非总是 0。使用 TIA Portal 看变量在 DB 中的偏移地址，或在 PLC 程序里把字符串变量放在已知位置做测试。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;误把 ActLen 当字节长度&lt;/strong&gt;：记住 ActLen 是字符数；UCS-2 场景下字节数是 &lt;code&gt;ActLen * 2&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;编码混用&lt;/strong&gt;：工程中不同字符串变量可能用不同编码（历史遗留问题）。对关键字段做编码检测或在 PLC 端统一编码策略。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;截断问题&lt;/strong&gt;：读取的字节长度需保证覆盖 &lt;code&gt;MaxLen&lt;/code&gt;，否则可能截断或丢失数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Endian（字节序）问题&lt;/strong&gt;：S7 系列通常是小端（LE）；若看见 &lt;code&gt;0x00&lt;/code&gt; 在高位，优先考虑 UTF-16LE。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;空值与填充&lt;/strong&gt;：PLC 的字符串区可能被 &lt;code&gt;0x00&lt;/code&gt; 填充，解码后使用 &lt;code&gt;.rstrip(&#39;\x00&#39;)&lt;/code&gt; 清除尾部空字符。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;调试小技巧：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 hexdump（或 &lt;code&gt;raw.hex()&lt;/code&gt;）观察前 32 字节，判断 0x00 分布；&lt;/li&gt;
+&lt;li&gt;在 PLC 端写已知 ASCII / 中文样本进行对比；&lt;/li&gt;
+&lt;li&gt;若使用 snap7，可先把 DB 整体导出并在本地做分析。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-性能与安全注意事项&#34;&gt;&lt;a href=&#34;#7-性能与安全注意事项&#34; class=&#34;headerlink&#34; title=&#34;7. 性能与安全注意事项&#34;&gt;&lt;/a&gt;7. 性能与安全注意事项&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;性能&lt;/strong&gt;：字符串解码本身开销小，但若你频繁读取大量 DB（例如每 100ms 读取数百个字符串），应当合理缓存、合并读取请求以减少网络负载。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;边界检查&lt;/strong&gt;：任何从 PLC 读取的偏移与长度都应做边界检查以防止 &lt;code&gt;IndexError&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;错误记录&lt;/strong&gt;：在自动检测解码失败时应记录日志（包含原始 bytes 的 hex），便于回溯。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注入风险&lt;/strong&gt;：PLC 字符串通常不是攻击面，但若上层系统将这些字符串直接用于命令或脚本，应对特殊字符做清洗与验证。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
  ]]></description>
         </item>
     </channel>

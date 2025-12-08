@@ -1,0 +1,455 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;proxy&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 08 Dec 2025 22:25:00 +0800</pubDate>
+        <lastBuildDate>Mon, 08 Dec 2025 22:25:00 +0800</lastBuildDate>
+        <category>AI</category>
+        <category>intel</category>
+        <category>cloudflare</category>
+        <category>tip</category>
+        <category>安装</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>ssh</category>
+        <category>linux</category>
+        <category>tips</category>
+        <category>Java</category>
+        <category>email</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>conda</category>
+        <category>python</category>
+        <category>bug</category>
+        <category>net</category>
+        <category>windows</category>
+        <category>wsl2</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>BUUCTF</category>
+        <category>攻防世界</category>
+        <category>XGBoost</category>
+        <category>server</category>
+        <category>comfyui</category>
+        <category>wall</category>
+        <category>powershell</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>tools</category>
+        <category>emby</category>
+        <category>git</category>
+        <category>google</category>
+        <category>命令</category>
+        <category>java</category>
+        <category>学习</category>
+        <category>远程</category>
+        <category>php</category>
+        <category>文件上传</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>汇编</category>
+        <category>i春秋</category>
+        <category>mcp</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/12/08/s-ui-shi-yong-jiao-cheng/</guid>
+            <title>S-UI + sing-box 节点配置教程</title>
+            <link>https://0xdadream.github.io/2025/12/08/s-ui-shi-yong-jiao-cheng/</link>
+            <category>net</category>
+            <category>proxy</category>
+            <pubDate>Mon, 08 Dec 2025 22:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;S-UI-sing-box-节点配置教程&#34;&gt;&lt;a href=&#34;#S-UI-sing-box-节点配置教程&#34; class=&#34;headerlink&#34; title=&#34;S-UI + sing-box 节点配置教程&#34;&gt;&lt;/a&gt;S-UI + sing-box 节点配置教程&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;第 1 章：S-UI 基础概念（入站、出站、用户、TLS）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 2 章：证书（Let’s Encrypt、Cloudflare、Origin CA、Hy2 要求）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 3 章：VLESS + WS + TLS 节点（最常用，支持优选 IP）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 4 章：VLESS + Reality 节点（最高隐蔽性）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 5 章：Hy2（Hysteria2）节点（UDP 极速协议）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 6 章：TUIC 节点（高性能 + UDP）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 7 章：Trojan(TLS) 节点&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 8 章：Cloudflare 使用规则（优选 IP、全加密模式、伪装规则）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 9 章：服务端 / 客户端参数映射表（最重要）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第 10 章：常见问题排查（非常实用）&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🌈-第-1-章：S-UI-面板结构（sing-box-管理器）&#34;&gt;&lt;a href=&#34;#🌈-第-1-章：S-UI-面板结构（sing-box-管理器）&#34; class=&#34;headerlink&#34; title=&#34;🌈 第 1 章：S-UI 面板结构（sing-box 管理器）&#34;&gt;&lt;/a&gt;🌈 &lt;strong&gt;第 1 章：S-UI 面板结构（sing-box 管理器）&lt;/strong&gt;&lt;/h1&gt;&lt;h2 id=&#34;⭐-S-UI-的三个核心区块：&#34;&gt;&lt;a href=&#34;#⭐-S-UI-的三个核心区块：&#34; class=&#34;headerlink&#34; title=&#34;⭐ S-UI 的三个核心区块：&#34;&gt;&lt;/a&gt;⭐ S-UI 的三个核心区块：&lt;/h2&gt;&lt;h3 id=&#34;1）入站（Inbound）&#34;&gt;&lt;a href=&#34;#1）入站（Inbound）&#34; class=&#34;headerlink&#34; title=&#34;1）入站（Inbound）&#34;&gt;&lt;/a&gt;1）&lt;strong&gt;入站（Inbound）&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;服务器“监听”的节点，客户端连接的入口。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VLESS+WS → 443&lt;/li&gt;
+&lt;li&gt;Reality → 443 / 8443&lt;/li&gt;
+&lt;li&gt;Hy2 → 8443(UDP)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2）用户（Clients）&#34;&gt;&lt;a href=&#34;#2）用户（Clients）&#34; class=&#34;headerlink&#34; title=&#34;2）用户（Clients）&#34;&gt;&lt;/a&gt;2）&lt;strong&gt;用户（Clients）&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;对于 VLESS 入站，每个用户包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UUID&lt;/li&gt;
+&lt;li&gt;Flow（Reality 必须 vision）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3）TLS-区域（Reality-TLS-模板）&#34;&gt;&lt;a href=&#34;#3）TLS-区域（Reality-TLS-模板）&#34; class=&#34;headerlink&#34; title=&#34;3）TLS 区域（Reality / TLS 模板）&#34;&gt;&lt;/a&gt;3）&lt;strong&gt;TLS 区域（Reality / TLS 模板）&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;不同协议的 TLS 配置不同：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;协议&lt;/th&gt;
+&lt;th&gt;TLS 区域作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;VLESS+TLS&lt;/td&gt;
+&lt;td&gt;普通证书（Let’s Encrypt）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VLESS+Reality&lt;/td&gt;
+&lt;td&gt;生成 Reality keypair（非证书）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hy2&lt;/td&gt;
+&lt;td&gt;必须使用证书 fullchain.pem / privkey.pem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🌐-第-2-章：证书系统详解（必须理解）&#34;&gt;&lt;a href=&#34;#🌐-第-2-章：证书系统详解（必须理解）&#34; class=&#34;headerlink&#34; title=&#34;🌐 第 2 章：证书系统详解（必须理解）&#34;&gt;&lt;/a&gt;🌐 &lt;strong&gt;第 2 章：证书系统详解（必须理解）&lt;/strong&gt;&lt;/h1&gt;&lt;h2 id=&#34;1）真正可用于客户端直连的证书种类：&#34;&gt;&lt;a href=&#34;#1）真正可用于客户端直连的证书种类：&#34; class=&#34;headerlink&#34; title=&#34;1）真正可用于客户端直连的证书种类：&#34;&gt;&lt;/a&gt;1）真正可用于客户端直连的证书种类：&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;证书类型&lt;/th&gt;
+&lt;th&gt;可用于 Hy2 / Trojan / VLESS+TLS？&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Let’s Encrypt（推荐）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;ZeroSSL&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Google Trust Services&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2）不能用于客户端直连的证书：&#34;&gt;&lt;a href=&#34;#2）不能用于客户端直连的证书：&#34; class=&#34;headerlink&#34; title=&#34;2）不能用于客户端直连的证书：&#34;&gt;&lt;/a&gt;2）不能用于客户端直连的证书：&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;来源&lt;/th&gt;
+&lt;th&gt;原因&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Cloudflare Origin Certificate（Origin CA）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;❌ 客户端不信任，仅 Cloudflare→VPS 间可用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;自签证书（Self-signed）&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;❌ 客户端不信任&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3）OpenSSL-查询证书&#34;&gt;&lt;a href=&#34;#3）OpenSSL-查询证书&#34; class=&#34;headerlink&#34; title=&#34;3）OpenSSL 查询证书&#34;&gt;&lt;/a&gt;3）OpenSSL 查询证书&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;openssl x509 -in cert.crt -noout -issuer -subject&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常证书示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;issuer=Let&#39;s Encrypt R3
+subject=CN=your.domain.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;4）Cloudflare-SSL-模式解释（很多人搞错）&#34;&gt;&lt;a href=&#34;#4）Cloudflare-SSL-模式解释（很多人搞错）&#34; class=&#34;headerlink&#34; title=&#34;4）Cloudflare SSL 模式解释（很多人搞错）&#34;&gt;&lt;/a&gt;4）Cloudflare SSL 模式解释（很多人搞错）&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;模式&lt;/th&gt;
+&lt;th&gt;Cloudflare → VPS&lt;/th&gt;
+&lt;th&gt;客户端直连 VPS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Flexible&lt;/td&gt;
+&lt;td&gt;❌ 不安全&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Full&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔ 信任任意证书&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Full(strict)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔ 要求正规证书&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Origin CA&lt;/td&gt;
+&lt;td&gt;✔ Cloudflare 信任&lt;/td&gt;
+&lt;td&gt;❌ 客户端不信任&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Hy2 不走 Cloudflare，不受这些影响。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🧩-第-3-章：VLESS-WS-TLS（最兼容，支持-Cloudflare-优选-IP）&#34;&gt;&lt;a href=&#34;#🧩-第-3-章：VLESS-WS-TLS（最兼容，支持-Cloudflare-优选-IP）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 3 章：VLESS + WS + TLS（最兼容，支持 Cloudflare 优选 IP）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 3 章：VLESS + WS + TLS（最兼容，支持 Cloudflare 优选 IP）&lt;/strong&gt;&lt;/h1&gt;&lt;h2 id=&#34;⭐-入站设置&#34;&gt;&lt;a href=&#34;#⭐-入站设置&#34; class=&#34;headerlink&#34; title=&#34;⭐ 入站设置&#34;&gt;&lt;/a&gt;⭐ 入站设置&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;类型：VLESS
+端口：443
+启用传输：是
+传输方式：ws
+WebSocket 路径：/ws（自定义）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-TLS-设置&#34;&gt;&lt;a href=&#34;#⭐-TLS-设置&#34; class=&#34;headerlink&#34; title=&#34;⭐ TLS 设置&#34;&gt;&lt;/a&gt;⭐ TLS 设置&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;模板：tls
+证书：fullchain.pem
+私钥：privkey.pem
+SNI：你的域名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-客户端配置注意：&#34;&gt;&lt;a href=&#34;#⭐-客户端配置注意：&#34; class=&#34;headerlink&#34; title=&#34;⭐ 客户端配置注意：&#34;&gt;&lt;/a&gt;⭐ 客户端配置注意：&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;server → Cloudflare 优选 IP 或 your.domain.com&lt;/li&gt;
+&lt;li&gt;SNI → your.domain.com&lt;/li&gt;
+&lt;li&gt;path → /ws&lt;/li&gt;
+&lt;li&gt;port → 443&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-必须关闭-Cloudflare-代理才能用于-Hy2，但-WebSocket-节点可以开启代理。&#34;&gt;&lt;a href=&#34;#⭐-必须关闭-Cloudflare-代理才能用于-Hy2，但-WebSocket-节点可以开启代理。&#34; class=&#34;headerlink&#34; title=&#34;⭐ 必须关闭 Cloudflare 代理才能用于 Hy2，但 WebSocket 节点可以开启代理。&#34;&gt;&lt;/a&gt;⭐ 必须关闭 Cloudflare 代理才能用于 Hy2，但 WebSocket 节点可以开启代理。&lt;/h2&gt;&lt;p&gt;这意味着一个域名可以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WS 走 Cloudflare 优选&lt;/li&gt;
+&lt;li&gt;Hy2 用另一个二级域名直连&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;我的配置&#34;&gt;&lt;a href=&#34;#我的配置&#34; class=&#34;headerlink&#34; title=&#34;我的配置&#34;&gt;&lt;/a&gt;我的配置&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/e1f158f2c58f53777d2c8f5a7460f1eb.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/250c3cfcd7d6917d0a410ef32f6466ec.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里端口需要是CF支持的端口，这样才能套CF，注意用户管理-&amp;gt;编辑-&amp;gt;配置-&amp;gt;把vless的flow删了&lt;/p&gt;
+&lt;h1 id=&#34;🧩-第-4-章：VLESS-Reality（无证书，高隐蔽性）&#34;&gt;&lt;a href=&#34;#🧩-第-4-章：VLESS-Reality（无证书，高隐蔽性）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 4 章：VLESS + Reality（无证书，高隐蔽性）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 4 章：VLESS + Reality（无证书，高隐蔽性）&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;Reality 专用规则：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;填法&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;SNI&lt;/td&gt;
+&lt;td&gt;真实网站（如 &lt;a href=&#34;http://www.microsoft.com)/&#34;&gt;www.microsoft.com）&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;握手服务器&lt;/td&gt;
+&lt;td&gt;同 SNI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;服务器端口&lt;/td&gt;
+&lt;td&gt;443&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_key&lt;/td&gt;
+&lt;td&gt;自动生成&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;public_key&lt;/td&gt;
+&lt;td&gt;客户端必填&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;short_id&lt;/td&gt;
+&lt;td&gt;1~16 字节 hex&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flow&lt;/td&gt;
+&lt;td&gt;vision（必须）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;传输&lt;/td&gt;
+&lt;td&gt;reality&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Reality-入站配置&#34;&gt;&lt;a href=&#34;#⭐-Reality-入站配置&#34; class=&#34;headerlink&#34; title=&#34;⭐ Reality 入站配置&#34;&gt;&lt;/a&gt;⭐ Reality 入站配置&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;协议：VLESS
+端口：443/8443/任意
+传输：Reality&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Reality-TLS-区域（重要）&#34;&gt;&lt;a href=&#34;#⭐-Reality-TLS-区域（重要）&#34; class=&#34;headerlink&#34; title=&#34;⭐ Reality TLS 区域（重要）&#34;&gt;&lt;/a&gt;⭐ Reality TLS 区域（重要）&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;SNI：www.microsoft.com
+握手服务器：www.microsoft.com
+端口：443&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-用户配置：flow-必须设置为-vision&#34;&gt;&lt;a href=&#34;#⭐-用户配置：flow-必须设置为-vision&#34; class=&#34;headerlink&#34; title=&#34;⭐ 用户配置：flow 必须设置为 vision&#34;&gt;&lt;/a&gt;⭐ 用户配置：flow 必须设置为 vision&lt;/h2&gt;&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Reality-客户端&#34;&gt;&lt;a href=&#34;#⭐-Reality-客户端&#34; class=&#34;headerlink&#34; title=&#34;⭐ Reality 客户端&#34;&gt;&lt;/a&gt;⭐ Reality 客户端&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;public_key：服务器现实公钥
+short_id：从服务器选一个
+server_name：与 SNI 一致
+flow：vision&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/85c9e6d02ae0790994e0761e009b152c.png&#34;&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/a657169905eeb384c66081e4e4561e44.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;🧩-第-5-章：Hy2（Hysteria-2）——-UDP-加速协议&#34;&gt;&lt;a href=&#34;#🧩-第-5-章：Hy2（Hysteria-2）——-UDP-加速协议&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 5 章：Hy2（Hysteria 2）—— UDP 加速协议&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 5 章：Hy2（Hysteria 2）—— UDP 加速协议&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;Hy2 的重点：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;项目&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;基于 QUIC（UDP）&lt;/td&gt;
+&lt;td&gt;❗ Cloudflare 不代理 UDP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;必须直连 VPS IP&lt;/td&gt;
+&lt;td&gt;不走优选 IP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;必须使用有效证书&lt;/td&gt;
+&lt;td&gt;Let’s Encrypt&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;端口建议使用大端口&lt;/td&gt;
+&lt;td&gt;8443 / 10443 / 30000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Hy2-入站配置&#34;&gt;&lt;a href=&#34;#⭐-Hy2-入站配置&#34; class=&#34;headerlink&#34; title=&#34;⭐ Hy2 入站配置&#34;&gt;&lt;/a&gt;⭐ Hy2 入站配置&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;类型：hysteria2
+端口：8443（推荐）
+协议密码：任意 strong password&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Hy2-TLS&#34;&gt;&lt;a href=&#34;#⭐-Hy2-TLS&#34; class=&#34;headerlink&#34; title=&#34;⭐ Hy2 TLS&#34;&gt;&lt;/a&gt;⭐ Hy2 TLS&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;证书：fullchain.pem
+私钥：privkey.pem
+server_name：证书 CN 完全一致！&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;⭐-Hy2-客户端&#34;&gt;&lt;a href=&#34;#⭐-Hy2-客户端&#34; class=&#34;headerlink&#34; title=&#34;⭐ Hy2 客户端&#34;&gt;&lt;/a&gt;⭐ Hy2 客户端&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;server_name = your.domain.com
+alpn = h3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;❗-Hy2-不通的最大原因&#34;&gt;&lt;a href=&#34;#❗-Hy2-不通的最大原因&#34; class=&#34;headerlink&#34; title=&#34;❗ Hy2 不通的最大原因&#34;&gt;&lt;/a&gt;❗ Hy2 不通的最大原因&lt;/h2&gt;&lt;p&gt;1）Cloudflare 代理（必须灰云）&lt;br&gt; 2）SNI 与证书 CN 不一致&lt;br&gt; 3）没有放行 UDP&lt;br&gt; 4）端口无监听&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/cd75642c0712fdc711a366b076a71fe8.png&#34;&gt;&lt;img src=&#34;https://images.dadream.eu.org/images/2025/12/e231a39ba937124286f8534cebda6d85.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我这里是没使用vps证书，因为我要套CF&lt;/p&gt;
+&lt;h1 id=&#34;🧩-第-6-章：TUIC（高性能-UDP-协议）&#34;&gt;&lt;a href=&#34;#🧩-第-6-章：TUIC（高性能-UDP-协议）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 6 章：TUIC（高性能 UDP 协议）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 6 章：TUIC（高性能 UDP 协议）&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;和 Hy2 类似，也是 UDP，需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直连 VPS&lt;/li&gt;
+&lt;li&gt;不走 Cloudflare&lt;/li&gt;
+&lt;li&gt;需要证书&lt;/li&gt;
+&lt;li&gt;不需要 flow&lt;/li&gt;
+&lt;li&gt;不需要 Reality&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🧩-第-7-章：Trojan-TLS&#34;&gt;&lt;a href=&#34;#🧩-第-7-章：Trojan-TLS&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 7 章：Trojan(TLS)&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 7 章：Trojan(TLS)&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;协议规则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须用证书（不能用 origin cert）&lt;/li&gt;
+&lt;li&gt;支持 Cloudflare（TCP）&lt;/li&gt;
+&lt;li&gt;与 VLESS+TLS 类似&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🧩-第-8-章：Cloudflare-使用规则（最容易误解）&#34;&gt;&lt;a href=&#34;#🧩-第-8-章：Cloudflare-使用规则（最容易误解）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 8 章：Cloudflare 使用规则（最容易误解）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 8 章：Cloudflare 使用规则（最容易误解）&lt;/strong&gt;&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;协议&lt;/th&gt;
+&lt;th&gt;能否使用优选 IP&lt;/th&gt;
+&lt;th&gt;必须满足&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;VLESS+WS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔ 能用&lt;/td&gt;
+&lt;td&gt;Cloudflare Proxy ON&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;VLESS+TLS&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔ 能用&lt;/td&gt;
+&lt;td&gt;Cloudflare Proxy ON&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Reality&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔ 能用&lt;/td&gt;
+&lt;td&gt;只能做“伪装”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Trojan&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;✔&lt;/td&gt;
+&lt;td&gt;443 TCP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Hy2&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;❌ 不能用&lt;/td&gt;
+&lt;td&gt;需要直连 VPS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;TUIC&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;❌ 不能用&lt;/td&gt;
+&lt;td&gt;UDP 不走 CF&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🧩-第-9-章：客户端—服务端参数映射（终极表）&#34;&gt;&lt;a href=&#34;#🧩-第-9-章：客户端—服务端参数映射（终极表）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 9 章：客户端—服务端参数映射（终极表）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 9 章：客户端—服务端参数映射（终极表）&lt;/strong&gt;&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;服务端参数&lt;/th&gt;
+&lt;th&gt;客户端必须对应&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;port&lt;/td&gt;
+&lt;td&gt;server_port&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;uuid&lt;/td&gt;
+&lt;td&gt;uuid&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;flow=vision&lt;/td&gt;
+&lt;td&gt;flow=vision&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;public_key&lt;/td&gt;
+&lt;td&gt;reality.public_key&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;short_id&lt;/td&gt;
+&lt;td&gt;reality.short_id&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SNI&lt;/td&gt;
+&lt;td&gt;tls.server_name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;WS path&lt;/td&gt;
+&lt;td&gt;ws.path&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;证书 CN&lt;/td&gt;
+&lt;td&gt;client tls.server_name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;握手服务器&lt;/td&gt;
+&lt;td&gt;client server_name&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;🧩-第-10-章：常见问题排查（非常实用）&#34;&gt;&lt;a href=&#34;#🧩-第-10-章：常见问题排查（非常实用）&#34; class=&#34;headerlink&#34; title=&#34;🧩 第 10 章：常见问题排查（非常实用）&#34;&gt;&lt;/a&gt;🧩 &lt;strong&gt;第 10 章：常见问题排查（非常实用）&lt;/strong&gt;&lt;/h1&gt;&lt;h3 id=&#34;❗-Reality-不通&#34;&gt;&lt;a href=&#34;#❗-Reality-不通&#34; class=&#34;headerlink&#34; title=&#34;❗ Reality 不通&#34;&gt;&lt;/a&gt;❗ Reality 不通&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;没设置 flow=vision&lt;/li&gt;
+&lt;li&gt;serverName 和 dest 不一致&lt;/li&gt;
+&lt;li&gt;客户端 server_name 错误&lt;/li&gt;
+&lt;li&gt;short_id 不匹配&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;❗-Hy2-不通&#34;&gt;&lt;a href=&#34;#❗-Hy2-不通&#34; class=&#34;headerlink&#34; title=&#34;❗ Hy2 不通&#34;&gt;&lt;/a&gt;❗ Hy2 不通&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Cloudflare Proxy 开启（永远不能开启）&lt;/li&gt;
+&lt;li&gt;SNI ≠ 证书 CN&lt;/li&gt;
+&lt;li&gt;防火墙没放行 UDP&lt;/li&gt;
+&lt;li&gt;端口被占用&lt;/li&gt;
+&lt;li&gt;证书是 Origin CA 或自签名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;❗-VLESS-WS-不通&#34;&gt;&lt;a href=&#34;#❗-VLESS-WS-不通&#34; class=&#34;headerlink&#34; title=&#34;❗ VLESS+WS 不通&#34;&gt;&lt;/a&gt;❗ VLESS+WS 不通&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;WS 路径不一致&lt;/li&gt;
+&lt;li&gt;Cloudflare 强制 HTTP2 → 需关闭 Brotli&lt;/li&gt;
+&lt;li&gt;Nginx 伪装冲突&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;❗-VLESS-TLS-不通&#34;&gt;&lt;a href=&#34;#❗-VLESS-TLS-不通&#34; class=&#34;headerlink&#34; title=&#34;❗ VLESS+TLS 不通&#34;&gt;&lt;/a&gt;❗ VLESS+TLS 不通&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;证书失效&lt;/li&gt;
+&lt;li&gt;SNI 错误&lt;/li&gt;
+&lt;li&gt;没开启 TLS 模板&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

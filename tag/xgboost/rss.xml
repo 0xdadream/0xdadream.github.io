@@ -1,0 +1,903 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;xgboost&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 10 Nov 2025 23:25:00 +0800</pubDate>
+        <lastBuildDate>Mon, 10 Nov 2025 23:25:00 +0800</lastBuildDate>
+        <category>AI</category>
+        <category>intel</category>
+        <category>cloudflare</category>
+        <category>tip</category>
+        <category>安装</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>ssh</category>
+        <category>linux</category>
+        <category>tips</category>
+        <category>Java</category>
+        <category>email</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>conda</category>
+        <category>python</category>
+        <category>bug</category>
+        <category>net</category>
+        <category>windows</category>
+        <category>wsl2</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>BUUCTF</category>
+        <category>攻防世界</category>
+        <category>XGBoost</category>
+        <category>server</category>
+        <category>comfyui</category>
+        <category>wall</category>
+        <category>powershell</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>tools</category>
+        <category>emby</category>
+        <category>git</category>
+        <category>google</category>
+        <category>命令</category>
+        <category>java</category>
+        <category>学习</category>
+        <category>远程</category>
+        <category>php</category>
+        <category>文件上传</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>命令行</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>汇编</category>
+        <category>i春秋</category>
+        <category>mcp</category>
+        <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/11/10/xgboost-can-shu/</guid>
+            <title>XGBoost 参数详解</title>
+            <link>https://0xdadream.github.io/2025/11/10/xgboost-can-shu/</link>
+            <category>XGBoost</category>
+            <pubDate>Mon, 10 Nov 2025 23:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;XGBoost-参数详解（中文版）&#34;&gt;&lt;a href=&#34;#XGBoost-参数详解（中文版）&#34; class=&#34;headerlink&#34; title=&#34;XGBoost 参数详解（中文版）&#34;&gt;&lt;/a&gt;XGBoost 参数详解（中文版）&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;原文地址&lt;/strong&gt;：&lt;a href=&#34;https://xgboost.readthedocs.io/en/stable/parameter.html&#34;&gt;https://xgboost.readthedocs.io/en/stable/parameter.html&lt;/a&gt;  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;目录&#34;&gt;&lt;a href=&#34;#目录&#34; class=&#34;headerlink&#34; title=&#34;目录&#34;&gt;&lt;/a&gt;目录&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#1-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F&#34;&gt;1. 参数配置方式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-%E5%8F%82%E6%95%B0%E6%80%BB%E8%A7%88%E8%A1%A8%E6%A0%BC&#34;&gt;2. 参数总览表格&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-%E8%AF%A6%E7%BB%86%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E&#34;&gt;3. 详细参数说明&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#31-%E9%80%9A%E7%94%A8%E5%8F%82%E6%95%B0&#34;&gt;3.1 通用参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#32-%E6%A0%91%E6%8F%90%E5%8D%87%E5%99%A8%E5%8F%82%E6%95%B0&#34;&gt;3.2 树提升器参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#33-%E7%BA%BF%E6%80%A7%E6%8F%90%E5%8D%87%E5%99%A8%E5%8F%82%E6%95%B0&#34;&gt;3.3 线性提升器参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#34-dart-%E6%8F%90%E5%8D%87%E5%99%A8%E5%8F%82%E6%95%B0&#34;&gt;3.4 DART 提升器参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#35-%E5%AD%A6%E4%B9%A0%E4%BB%BB%E5%8A%A1%E5%8F%82%E6%95%B0&#34;&gt;3.5 学习任务参数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#36-%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%93%E7%94%A8%E5%8F%82%E6%95%B0&#34;&gt;3.6 命令行专用参数&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#4-%E5%8F%82%E6%95%B0%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%9B%BE&#34;&gt;4. 参数依赖关系图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#5-%E8%B0%83%E5%8F%82%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97&#34;&gt;5. 调参实战指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#6-%E5%B8%B8%E8%A7%81%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E4%B8%8E%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87%E5%AF%B9%E7%85%A7%E8%A1%A8&#34;&gt;6. 常见目标函数与评估指标对照表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#7-%E4%B8%AD%E8%8B%B1%E6%96%87%E6%9C%AF%E8%AF%AD%E5%AF%B9%E7%85%A7%E8%A1%A8&#34;&gt;7. 中英文术语对照表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#8-%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B&#34;&gt;8. 代码示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-参数配置方式&#34;&gt;&lt;a href=&#34;#1-参数配置方式&#34; class=&#34;headerlink&#34; title=&#34;1. 参数配置方式&#34;&gt;&lt;/a&gt;1. 参数配置方式&lt;/h2&gt;&lt;p&gt;XGBoost 支持多种参数传入方式：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;接口&lt;/th&gt;
+&lt;th&gt;配置方式&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;xgboost.train&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;字典 &lt;code&gt;param&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;param = {&#39;max_depth&#39;: 6, &#39;eta&#39;: 0.1}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;XGBClassifier&lt;/code&gt; / &lt;code&gt;XGBRegressor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;构造函数参数&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;XGBClassifier(max_depth=6, eta=0.1)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;命令行&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;key=value&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;xgboost config.conf eta=0.1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;配置文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.conf&lt;/code&gt; 文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;eta = 0.1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;推荐&lt;/strong&gt;：使用 Python API 时，优先使用 &lt;code&gt;XGBClassifier&lt;/code&gt; 的 scikit-learn 接口，便于与 &lt;code&gt;GridSearchCV&lt;/code&gt;、&lt;code&gt;Optuna&lt;/code&gt; 等集成。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-参数总览表格&#34;&gt;&lt;a href=&#34;#2-参数总览表格&#34; class=&#34;headerlink&#34; title=&#34;2. 参数总览表格&#34;&gt;&lt;/a&gt;2. 参数总览表格&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;别名&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;默认值&lt;/th&gt;
+&lt;th&gt;适用提升器&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;通用参数&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;booster&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gbtree&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;提升器类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;verbosity&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;silent&lt;/code&gt;（弃用）&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;日志级别&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;validate_parameters&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;False&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;参数合法性检查&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;nthread&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;None&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;并行线程数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;disable_default_eval_metric&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;禁用默认评估指标&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;树提升器参数&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;eta&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;learning_rate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;学习率&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;gamma&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;min_split_loss&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;最小分割损失&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_depth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;6&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;树最大深度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;min_child_weight&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;子节点最小权重和&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_delta_step&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;权重最大步长&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;subsample&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;样本采样比例&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sampling_method&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;uniform&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;采样方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bytree&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;特征列采样（按树）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bylevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;特征列采样（按层）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bynode&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;特征列采样（按节点）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;lambda&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;reg_lambda&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;L2 正则化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;alpha&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;reg_alpha&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;L1 正则化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;tree_method&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;auto&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;树构建算法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sketch_eps&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.03&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;approx&lt;/td&gt;
+&lt;td&gt;近似误差&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;scale_pos_weight&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;正负样本权重比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;grow_policy&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;depthwise&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;hist&lt;/td&gt;
+&lt;td&gt;树生长策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_leaves&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;lossguide&lt;/td&gt;
+&lt;td&gt;最大叶子数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_bin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;256&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;hist, gpu_hist&lt;/td&gt;
+&lt;td&gt;直方图 bin 数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;predictor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cpu_predictor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;预测器类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;num_parallel_tree&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gbtree, dart&lt;/td&gt;
+&lt;td&gt;每轮并行树数（随机森林）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;线性提升器参数&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;updater&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;shotgun&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;gblinear&lt;/td&gt;
+&lt;td&gt;坐标下降策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;DART 提升器参数&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sample_type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;uniform&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;dart&lt;/td&gt;
+&lt;td&gt;dropout 采样类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;normalize_type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;tree&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;dart&lt;/td&gt;
+&lt;td&gt;归一化方式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;rate_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;dart&lt;/td&gt;
+&lt;td&gt;dropout 比例&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;one_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;dart&lt;/td&gt;
+&lt;td&gt;强制至少 dropout 一棵树&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;skip_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;dart&lt;/td&gt;
+&lt;td&gt;跳过 dropout 概率&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;学习任务参数&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;objective&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;reg:squarederror&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;目标函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;base_score&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.5&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;初始预测分数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;eval_metric&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;str/list&lt;/td&gt;
+&lt;td&gt;自动&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;评估指标&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;seed&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;random_state&lt;/code&gt;（推荐）&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;全部&lt;/td&gt;
+&lt;td&gt;随机种子（弃用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-详细参数说明&#34;&gt;&lt;a href=&#34;#3-详细参数说明&#34; class=&#34;headerlink&#34; title=&#34;3. 详细参数说明&#34;&gt;&lt;/a&gt;3. 详细参数说明&lt;/h2&gt;&lt;h3 id=&#34;3-1-通用参数&#34;&gt;&lt;a href=&#34;#3-1-通用参数&#34; class=&#34;headerlink&#34; title=&#34;3.1 通用参数&#34;&gt;&lt;/a&gt;3.1 通用参数&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;详细说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;booster&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;选择提升器类型：&lt;br&gt;• &lt;code&gt;gbtree&lt;/code&gt;：树模型（默认，推荐）&lt;br&gt;• &lt;code&gt;gblinear&lt;/code&gt;：线性模型（高维稀疏数据）&lt;br&gt;• &lt;code&gt;dart&lt;/code&gt;：带 dropout 的树模型（防过拟合）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;verbosity&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;日志级别：&lt;br&gt;• &lt;code&gt;0&lt;/code&gt;：静默&lt;br&gt;• &lt;code&gt;1&lt;/code&gt;：警告（默认）&lt;br&gt;• &lt;code&gt;2&lt;/code&gt;：信息&lt;br&gt;• &lt;code&gt;3&lt;/code&gt;：调试（打印每棵树）&lt;br&gt;&lt;strong&gt;注意&lt;/strong&gt;：旧版 &lt;code&gt;silent=1&lt;/code&gt; 表示静默，已弃用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;validate_parameters&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是否检查参数合法性。scikit-learn 接口默认 &lt;code&gt;True&lt;/code&gt;。&lt;br&gt;&lt;strong&gt;建议&lt;/strong&gt;：生产环境开启，避免拼写错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;nthread&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;并行线程数。&lt;code&gt;None&lt;/code&gt; 使用所有可用核心。&lt;br&gt;&lt;strong&gt;最佳实践&lt;/strong&gt;：显式设置（如 &lt;code&gt;nthread=8&lt;/code&gt;），保证跨机器结果一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;disable_default_eval_metric&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt; 表示不使用默认指标（如 RMSE）。适用于自定义指标&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-2-树提升器参数&#34;&gt;&lt;a href=&#34;#3-2-树提升器参数&#34; class=&#34;headerlink&#34; title=&#34;3.2 树提升器参数&#34;&gt;&lt;/a&gt;3.2 树提升器参数&lt;/h3&gt;&lt;h4 id=&#34;学习率与正则化&#34;&gt;&lt;a href=&#34;#学习率与正则化&#34; class=&#34;headerlink&#34; title=&#34;学习率与正则化&#34;&gt;&lt;/a&gt;学习率与正则化&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;调参建议&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;eta&lt;/code&gt; (&lt;code&gt;learning_rate&lt;/code&gt;)&lt;/td&gt;
+&lt;td&gt;每次提升的步长收缩。范围 &lt;code&gt;[0, 1]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;初始 &lt;code&gt;0.1~0.3&lt;/code&gt;，后期可降至 &lt;code&gt;0.01&lt;/code&gt; + 增加 &lt;code&gt;num_boost_round&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;gamma&lt;/code&gt; (&lt;code&gt;min_split_loss&lt;/code&gt;)&lt;/td&gt;
+&lt;td&gt;分割所需最小损失减少。越大越保守&lt;/td&gt;
+&lt;td&gt;从 &lt;code&gt;0&lt;/code&gt; 开始，过拟合时增大至 &lt;code&gt;0.1~1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;lambda&lt;/code&gt; (&lt;code&gt;reg_lambda&lt;/code&gt;)&lt;/td&gt;
+&lt;td&gt;L2 正则化（权重平方和）&lt;/td&gt;
+&lt;td&gt;默认 &lt;code&gt;1&lt;/code&gt;，过拟合时增大至 &lt;code&gt;5~100&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;alpha&lt;/code&gt; (&lt;code&gt;reg_alpha&lt;/code&gt;)&lt;/td&gt;
+&lt;td&gt;L1 正则化（权重绝对值和）&lt;/td&gt;
+&lt;td&gt;特征冗余时设 &lt;code&gt;0.1~1&lt;/code&gt;，促进稀疏&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;树结构控制&#34;&gt;&lt;a href=&#34;#树结构控制&#34; class=&#34;headerlink&#34; title=&#34;树结构控制&#34;&gt;&lt;/a&gt;树结构控制&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;典型值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_depth&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;树最大深度。&lt;code&gt;0&lt;/code&gt; 表示无限制&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;3~10&lt;/code&gt;，从 &lt;code&gt;6&lt;/code&gt; 开始&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;min_child_weight&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子节点权重和最小值&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1~10&lt;/code&gt;，大数据集可设 &lt;code&gt;5&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_delta_step&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;权重最大步长。不平衡分类时设 &lt;code&gt;1~10&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通常 &lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;max_leaves&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;最大叶子数（与 &lt;code&gt;grow_policy=lossguide&lt;/code&gt; 配合）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;（无限制）或 &lt;code&gt;32~128&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h4 id=&#34;采样参数（引入随机性）&#34;&gt;&lt;a href=&#34;#采样参数（引入随机性）&#34; class=&#34;headerlink&#34; title=&#34;采样参数（引入随机性）&#34;&gt;&lt;/a&gt;采样参数（引入随机性）&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;推荐值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;subsample&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;每棵树采样样本比例&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.6~1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bytree&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;每棵树采样特征比例&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.6~1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bylevel&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;每层采样特征比例&lt;/td&gt;
+&lt;td&gt;通常与 &lt;code&gt;colsample_bytree&lt;/code&gt; 一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;colsample_bynode&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;每个节点采样特征比例&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.6~1.0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;组合建议&lt;/strong&gt;：&lt;code&gt;subsample=0.8, colsample_bytree=0.8&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;树构建算法&#34;&gt;&lt;a href=&#34;#树构建算法&#34; class=&#34;headerlink&#34; title=&#34;树构建算法&#34;&gt;&lt;/a&gt;树构建算法&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;code&gt;tree_method&lt;/code&gt;&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;适用场景&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;auto&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自动选择（数据 &amp;lt; 10k 用 &lt;code&gt;exact&lt;/code&gt;，否则 &lt;code&gt;hist&lt;/code&gt;）&lt;/td&gt;
+&lt;td&gt;通用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;exact&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;精确贪心（遍历所有分割点）&lt;/td&gt;
+&lt;td&gt;小数据，追求极致精度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;approx&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;近似贪心（分位数 sketch）&lt;/td&gt;
+&lt;td&gt;中等数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;hist&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;直方图算法（推荐）&lt;/td&gt;
+&lt;td&gt;大数据，速度快&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;gpu_hist&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;GPU 直方图&lt;/td&gt;
+&lt;td&gt;GPU 环境，超大数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;推荐&lt;/strong&gt;：&lt;code&gt;tree_method=&#39;hist&#39;&lt;/code&gt;（CPU）或 &lt;code&gt;&#39;gpu_hist&#39;&lt;/code&gt;（GPU）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-3-线性提升器参数&#34;&gt;&lt;a href=&#34;#3-3-线性提升器参数&#34; class=&#34;headerlink&#34; title=&#34;3.3 线性提升器参数&#34;&gt;&lt;/a&gt;3.3 线性提升器参数&lt;/h3&gt;&lt;p&gt;适用于 &lt;code&gt;booster=gblinear&lt;/code&gt;：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;updater&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;shotgun&lt;/code&gt;（随机坐标下降，适合稀疏数据）&lt;br&gt;&lt;code&gt;coord_descent&lt;/code&gt;（全坐标下降，适合稠密数据）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;lambda&lt;/code&gt;, &lt;code&gt;alpha&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同树模型，控制权重正则化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：文本分类（TF-IDF）、推荐系统（高维稀疏特征）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-4-DART-提升器参数&#34;&gt;&lt;a href=&#34;#3-4-DART-提升器参数&#34; class=&#34;headerlink&#34; title=&#34;3.4 DART 提升器参数&#34;&gt;&lt;/a&gt;3.4 DART 提升器参数&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;推荐&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;rate_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;每轮 dropout 树比例&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.1~0.3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;one_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt; 表示至少 dropout 一棵树&lt;/td&gt;
+&lt;td&gt;配合 &lt;code&gt;rate_drop&amp;gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;skip_drop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;跳过 dropout 的概率（动态控制）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.2~0.5&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;normalize_type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;tree&lt;/code&gt;（每树归一化）或 &lt;code&gt;forest&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通常 &lt;code&gt;tree&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;使用场景&lt;/strong&gt;：深度树 + 易过拟合任务&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-5-学习任务参数&#34;&gt;&lt;a href=&#34;#3-5-学习任务参数&#34; class=&#34;headerlink&#34; title=&#34;3.5 学习任务参数&#34;&gt;&lt;/a&gt;3.5 学习任务参数&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;objective&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;目标函数&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;binary:logistic&lt;/code&gt;, &lt;code&gt;reg:squarederror&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;base_score&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;初始预测值&lt;/td&gt;
+&lt;td&gt;分类 &lt;code&gt;0.5&lt;/code&gt;，回归 &lt;code&gt;y.mean()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;eval_metric&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;评估指标&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;[&#39;auc&#39;, &#39;logloss&#39;]&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;scale_pos_weight&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;正负样本权重比&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sum(neg) / sum(pos)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-6-命令行专用参数&#34;&gt;&lt;a href=&#34;#3-6-命令行专用参数&#34; class=&#34;headerlink&#34; title=&#34;3.6 命令行专用参数&#34;&gt;&lt;/a&gt;3.6 命令行专用参数&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;num_round&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;提升轮数（必需）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;data&lt;/code&gt; / &lt;code&gt;test:data&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;数据路径&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;watchlist&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;监控集：&lt;code&gt;train:data/train.txt,val:data/val.txt&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;model_in&lt;/code&gt; / &lt;code&gt;model_out&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;模型加载/保存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-参数依赖关系图&#34;&gt;&lt;a href=&#34;#4-参数依赖关系图&#34; class=&#34;headerlink&#34; title=&#34;4. 参数依赖关系图&#34;&gt;&lt;/a&gt;4. 参数依赖关系图&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-mermaid&#34; data-language=&#34;mermaid&#34;&gt;&lt;code class=&#34;language-mermaid&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;graph&lt;/span&gt; TD
+    A&lt;span class=&#34;token text string&#34;&gt;[booster]&lt;/span&gt; &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; B&lt;span class=&#34;token text string&#34;&gt;[gbtree]&lt;/span&gt;
+    A &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; C&lt;span class=&#34;token text string&#34;&gt;[gblinear]&lt;/span&gt;
+    A &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; D&lt;span class=&#34;token text string&#34;&gt;[dart]&lt;/span&gt;
+    B &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; E&lt;span class=&#34;token text string&#34;&gt;[tree_method]&lt;/span&gt;
+    E &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; F&lt;span class=&#34;token text string&#34;&gt;[hist]&lt;/span&gt;
+    E &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; G&lt;span class=&#34;token text string&#34;&gt;[gpu_hist]&lt;/span&gt;
+    F &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; H&lt;span class=&#34;token text string&#34;&gt;[max_bin]&lt;/span&gt;
+    B &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; I&lt;span class=&#34;token text string&#34;&gt;[subsample]&lt;/span&gt;
+    B &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; J&lt;span class=&#34;token text string&#34;&gt;[colsample_bytree]&lt;/span&gt;
+    B &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; K&lt;span class=&#34;token text string&#34;&gt;[max_depth]&lt;/span&gt;
+    D &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; L&lt;span class=&#34;token text string&#34;&gt;[rate_drop]&lt;/span&gt;
+    A &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; M&lt;span class=&#34;token text string&#34;&gt;[objective]&lt;/span&gt;
+    M &lt;span class=&#34;token arrow operator&#34;&gt;--&amp;gt;&lt;/span&gt; N&lt;span class=&#34;token text string&#34;&gt;[eval_metric]&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;5-调参实战指南（推荐流程）&#34;&gt;&lt;a href=&#34;#5-调参实战指南（推荐流程）&#34; class=&#34;headerlink&#34; title=&#34;5. 调参实战指南（推荐流程）&#34;&gt;&lt;/a&gt;5. 调参实战指南（推荐流程）&lt;/h2&gt;&lt;p&gt;text&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;1. 固定学习率：eta = 0.1
+2. 调树复杂度：
+   - max_depth: 3~10
+   - min_child_weight: 1~10
+   - gamma: 0~1
+3. 调正则化：
+   - lambda: 1~100
+   - alpha: 0~1
+4. 调采样：
+   - subsample: 0.6~1.0
+   - colsample_bytree: 0.6~1.0
+5. 降低 eta（如 0.05）+ 增加 num_boost_round
+6. 使用早停（early_stopping_rounds=50）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;6-常见目标函数与评估指标对照表&#34;&gt;&lt;a href=&#34;#6-常见目标函数与评估指标对照表&#34; class=&#34;headerlink&#34; title=&#34;6. 常见目标函数与评估指标对照表&#34;&gt;&lt;/a&gt;6. 常见目标函数与评估指标对照表&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;任务&lt;/th&gt;
+&lt;th&gt;objective&lt;/th&gt;
+&lt;th&gt;默认 eval_metric&lt;/th&gt;
+&lt;th&gt;推荐指标&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;回归&lt;/td&gt;
+&lt;td&gt;reg:squarederror&lt;/td&gt;
+&lt;td&gt;rmse&lt;/td&gt;
+&lt;td&gt;rmse, mae&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;回归（对数）&lt;/td&gt;
+&lt;td&gt;reg:squaredlogerror&lt;/td&gt;
+&lt;td&gt;rmsle&lt;/td&gt;
+&lt;td&gt;rmsle&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;二分类&lt;/td&gt;
+&lt;td&gt;binary:logistic&lt;/td&gt;
+&lt;td&gt;logloss&lt;/td&gt;
+&lt;td&gt;auc, logloss&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;多分类&lt;/td&gt;
+&lt;td&gt;multi:softmax&lt;/td&gt;
+&lt;td&gt;merror&lt;/td&gt;
+&lt;td&gt;merror, mlogloss&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;多分类（概率）&lt;/td&gt;
+&lt;td&gt;multi:softprob&lt;/td&gt;
+&lt;td&gt;merror&lt;/td&gt;
+&lt;td&gt;同上&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;排序&lt;/td&gt;
+&lt;td&gt;rank:pairwise&lt;/td&gt;
+&lt;td&gt;auc&lt;/td&gt;
+&lt;td&gt;ndcg, map&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-中英文术语对照表&#34;&gt;&lt;a href=&#34;#7-中英文术语对照表&#34; class=&#34;headerlink&#34; title=&#34;7. 中英文术语对照表&#34;&gt;&lt;/a&gt;7. 中英文术语对照表&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;英文&lt;/th&gt;
+&lt;th&gt;中文&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;booster&lt;/td&gt;
+&lt;td&gt;提升器&lt;/td&gt;
+&lt;td&gt;模型类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;learning rate&lt;/td&gt;
+&lt;td&gt;学习率&lt;/td&gt;
+&lt;td&gt;eta&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;regularization&lt;/td&gt;
+&lt;td&gt;正则化&lt;/td&gt;
+&lt;td&gt;L1/L2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;subsample&lt;/td&gt;
+&lt;td&gt;子采样&lt;/td&gt;
+&lt;td&gt;样本采样&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;colsample&lt;/td&gt;
+&lt;td&gt;列采样&lt;/td&gt;
+&lt;td&gt;特征采样&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;histogram&lt;/td&gt;
+&lt;td&gt;直方图&lt;/td&gt;
+&lt;td&gt;hist 算法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dropout&lt;/td&gt;
+&lt;td&gt;丢弃&lt;/td&gt;
+&lt;td&gt;DART 机制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;early stopping&lt;/td&gt;
+&lt;td&gt;早停&lt;/td&gt;
+&lt;td&gt;防止过拟合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-代码示例&#34;&gt;&lt;a href=&#34;#8-代码示例&#34; class=&#34;headerlink&#34; title=&#34;8. 代码示例&#34;&gt;&lt;/a&gt;8. 代码示例&lt;/h2&gt;&lt;h3 id=&#34;Python-API（推荐）&#34;&gt;&lt;a href=&#34;#Python-API（推荐）&#34; class=&#34;headerlink&#34; title=&#34;Python API（推荐）&#34;&gt;&lt;/a&gt;Python API（推荐）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; xgboost &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; xgb
+&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; sklearn&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;model_selection &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; train_test_split
+
+&lt;span class=&#34;token comment&#34;&gt;# 数据准备&lt;/span&gt;
+X_train&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; X_val&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_train&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_val &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; train_test_split&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;X&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; test_size&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+dtrain &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; xgb&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DMatrix&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;X_train&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_train&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+dval &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; xgb&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DMatrix&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;X_val&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_val&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+params &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;objective&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;binary:logistic&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;eval_metric&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;auc&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;logloss&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;eta&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0.1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;max_depth&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;subsample&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;colsample_bytree&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;tree_method&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;hist&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;verbosity&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token string&#34;&gt;&#39;scale_pos_weight&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2.0&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+bst &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; xgb&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;train&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    params&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    dtrain&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    num_boost_round&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    evals&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;dtrain&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;train&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;dval&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;val&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    early_stopping_rounds&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    verbose_eval&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;scikit-learn-接口&#34;&gt;&lt;a href=&#34;#scikit-learn-接口&#34; class=&#34;headerlink&#34; title=&#34;scikit-learn 接口&#34;&gt;&lt;/a&gt;scikit-learn 接口&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; xgboost &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; XGBClassifier
+
+model &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; XGBClassifier&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    n_estimators&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    max_depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    learning_rate&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    subsample&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    colsample_bytree&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    eval_metric&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;auc&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    early_stopping_rounds&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    n_jobs&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+model&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;fit&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;X_train&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_train&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+          eval_set&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;X_val&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; y_val&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+          verbose&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; ]]></description>
+        </item>
+    </channel>
+</rss>
