@@ -5,62 +5,276 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 08 Dec 2025 22:25:00 +0800</pubDate>
-        <lastBuildDate>Mon, 08 Dec 2025 22:25:00 +0800</lastBuildDate>
-        <category>AI</category>
-        <category>intel</category>
-        <category>cloudflare</category>
+        <pubDate>Tue, 13 Jan 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Tue, 13 Jan 2026 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>intel</category>
+        <category>AI</category>
+        <category>ssh</category>
+        <category>email</category>
+        <category>cloudflare</category>
         <category>安装</category>
+        <category>tips</category>
+        <category>linux</category>
         <category>re</category>
         <category>工具</category>
-        <category>ssh</category>
-        <category>linux</category>
-        <category>tips</category>
+        <category>conda</category>
         <category>Java</category>
-        <category>email</category>
         <category>教程</category>
         <category>环境</category>
-        <category>conda</category>
-        <category>python</category>
         <category>bug</category>
+        <category>python</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
         <category>net</category>
         <category>windows</category>
         <category>wsl2</category>
-        <category>web</category>
-        <category>wp</category>
-        <category>BUUCTF</category>
-        <category>攻防世界</category>
         <category>XGBoost</category>
+        <category>BUUCTF</category>
         <category>server</category>
-        <category>comfyui</category>
         <category>wall</category>
         <category>powershell</category>
+        <category>comfyui</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tools</category>
         <category>emby</category>
-        <category>git</category>
         <category>google</category>
-        <category>命令</category>
+        <category>git</category>
         <category>java</category>
         <category>学习</category>
+        <category>命令</category>
         <category>远程</category>
-        <category>php</category>
         <category>文件上传</category>
+        <category>php</category>
         <category>数据库</category>
+        <category>命令行</category>
         <category>plc</category>
         <category>proxy</category>
-        <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
         <category>word</category>
-        <category>密码学</category>
         <category>汇编</category>
-        <category>i春秋</category>
+        <category>密码学</category>
         <category>mcp</category>
+        <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/01/13/nei-wang-chuan-tou/</guid>
+            <title>内网穿透</title>
+            <link>https://0xdadream.github.io/2026/01/13/nei-wang-chuan-tou/</link>
+            <category>net</category>
+            <pubDate>Tue, 13 Jan 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;内网穿透&#34;&gt;&lt;a href=&#34;#内网穿透&#34; class=&#34;headerlink&#34; title=&#34;内网穿透&#34;&gt;&lt;/a&gt;内网穿透&lt;/h1&gt;&lt;p&gt;这是一份从&lt;strong&gt;底层原理&lt;/strong&gt;到&lt;strong&gt;实操落地&lt;/strong&gt;的「内网穿透」终极教程。为了让你彻底掌握，我将教程分为三个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;原理篇&lt;/strong&gt;：它到底是怎么实现的？&lt;/li&gt;
+&lt;li&gt;**小白篇 (Tailscale)**：5分钟搞定，无需公网IP（推荐）。&lt;/li&gt;
+&lt;li&gt;**极客篇 (FRP)**：自建服务器，全速、可控、适合建站。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第一部分：原理篇-——-“隧道”是如何打通的？&#34;&gt;&lt;a href=&#34;#第一部分：原理篇-——-“隧道”是如何打通的？&#34; class=&#34;headerlink&#34; title=&#34;第一部分：原理篇 —— “隧道”是如何打通的？&#34;&gt;&lt;/a&gt;第一部分：原理篇 —— “隧道”是如何打通的？&lt;/h2&gt;&lt;p&gt;内网穿透的核心技术叫 &lt;strong&gt;NAT穿透 (NAT Traversal)&lt;/strong&gt; 和 **隧道技术 (Tunneling)**。&lt;/p&gt;
+&lt;h3 id=&#34;1-为什么会有“墙”？-NAT&#34;&gt;&lt;a href=&#34;#1-为什么会有“墙”？-NAT&#34; class=&#34;headerlink&#34; title=&#34;1. 为什么会有“墙”？(NAT)&#34;&gt;&lt;/a&gt;1. 为什么会有“墙”？(NAT)&lt;/h3&gt;&lt;p&gt;你家里的光猫/路由器像一个&lt;strong&gt;传达室&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;内网 IP&lt;/strong&gt;（如 &lt;code&gt;192.168.1.x&lt;/code&gt;）是你房间号，只有传达室大爷知道。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公网 IP&lt;/strong&gt; 是大楼的地址。&lt;/li&gt;
+&lt;li&gt;互联网只能把信送到大楼（公网IP），传达室大爷（路由器NAT）如果没看到你主动寄信出去的记录，就会把外面寄来的信直接扔掉。这就是为什么外面连不进你家。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-解决方案：打洞与隧道&#34;&gt;&lt;a href=&#34;#2-解决方案：打洞与隧道&#34; class=&#34;headerlink&#34; title=&#34;2. 解决方案：打洞与隧道&#34;&gt;&lt;/a&gt;2. 解决方案：打洞与隧道&lt;/h3&gt;&lt;p&gt;我们刚才聊过 Tailscale 的 P2P 打洞（让路由器放行），这里重点讲讲更通用的 **“反向代理隧道” (FRP/Ngrok 原理)**：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;找个接头人：&lt;/strong&gt; 你需要一台有公网 IP 的服务器（VPS），它就像一个矗立在广场上的&lt;strong&gt;中转站&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主动出击：&lt;/strong&gt; 你家里的电脑（内网）主动去连接这个中转站。因为是你主动连出去的，家里的路由器（传达室）会放行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;保持通话：&lt;/strong&gt; 这条连接一旦建立，就一直保持不断（长连接）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;借道传输：&lt;/strong&gt; 当你在外地想连回家时，你其实是连到了“中转站”。中转站通过那条早就建立好的“长连接”，把数据&lt;strong&gt;转发&lt;/strong&gt;给你家里的电脑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第二部分：小白篇-——-Tailscale-无需公网IP，最稳&#34;&gt;&lt;a href=&#34;#第二部分：小白篇-——-Tailscale-无需公网IP，最稳&#34; class=&#34;headerlink&#34; title=&#34;第二部分：小白篇 —— Tailscale (无需公网IP，最稳)&#34;&gt;&lt;/a&gt;第二部分：小白篇 —— Tailscale (无需公网IP，最稳)&lt;/h2&gt;&lt;p&gt;这是目前体验最好的方案，适合个人远程办公、访问家里 NAS。&lt;/p&gt;
+&lt;h3 id=&#34;1-准备工作&#34;&gt;&lt;a href=&#34;#1-准备工作&#34; class=&#34;headerlink&#34; title=&#34;1. 准备工作&#34;&gt;&lt;/a&gt;1. 准备工作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;一台家里的设备（Windows/Mac/Linux/NAS 都可以）。&lt;/li&gt;
+&lt;li&gt;一台外面的设备（手机/笔记本）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-操作步骤&#34;&gt;&lt;a href=&#34;#2-操作步骤&#34; class=&#34;headerlink&#34; title=&#34;2. 操作步骤&#34;&gt;&lt;/a&gt;2. 操作步骤&lt;/h3&gt;&lt;h4 id=&#34;第一步：注册与安装&#34;&gt;&lt;a href=&#34;#第一步：注册与安装&#34; class=&#34;headerlink&#34; title=&#34;第一步：注册与安装&#34;&gt;&lt;/a&gt;第一步：注册与安装&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;进入 &lt;a href=&#34;https://tailscale.com/&#34;&gt;Tailscale 官网&lt;/a&gt;，点击 “Get Started”，使用 Google/Microsoft/GitHub 账号登录。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在家里电脑上&lt;/strong&gt;：下载并安装 Tailscale 客户端，登录刚才的账号。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在外地设备上&lt;/strong&gt;：同样下载安装，登录&lt;strong&gt;同一个&lt;/strong&gt;账号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第二步：连接与验证&#34;&gt;&lt;a href=&#34;#第二步：连接与验证&#34; class=&#34;headerlink&#34; title=&#34;第二步：连接与验证&#34;&gt;&lt;/a&gt;第二步：连接与验证&lt;/h4&gt;&lt;p&gt;登录后，你会发现两台设备列表里都亮起了绿灯。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;机器名&lt;/strong&gt;：Tailscale 会自动分配一个名字（如 &lt;code&gt;my-desktop&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tailscale IP&lt;/strong&gt;：分配一个 &lt;code&gt;100.x.y.z&lt;/code&gt; 的固定内网 IP。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如何测试？&lt;/p&gt;
+&lt;p&gt;在外地电脑的终端（CMD）里输入：ping 100.x.y.z (家里电脑的 Tailscale IP)。如果通了，说明组网成功。&lt;/p&gt;
+&lt;h4 id=&#34;第三步：实际使用场景&#34;&gt;&lt;a href=&#34;#第三步：实际使用场景&#34; class=&#34;headerlink&#34; title=&#34;第三步：实际使用场景&#34;&gt;&lt;/a&gt;第三步：实际使用场景&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;**远程桌面 (Windows)**：打开“远程桌面连接”，输入家里电脑的 &lt;code&gt;100.x.y.z&lt;/code&gt;，直接连接。&lt;/li&gt;
+&lt;li&gt;**访问文件 (SMB)**：在文件资源管理器地址栏输入 &lt;code&gt;\\100.x.y.z&lt;/code&gt;，像在局域网一样访问共享文件夹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-进阶玩法：开启“出口节点”-Exit-Node&#34;&gt;&lt;a href=&#34;#3-进阶玩法：开启“出口节点”-Exit-Node&#34; class=&#34;headerlink&#34; title=&#34;3. 进阶玩法：开启“出口节点” (Exit Node)&#34;&gt;&lt;/a&gt;3. 进阶玩法：开启“出口节点” (Exit Node)&lt;/h3&gt;&lt;p&gt;这招非常厉害。它可以让你在外地上网时，&lt;strong&gt;所有流量都绕回家里走&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;场景&lt;/strong&gt;：你在公共 WiFi 不安全，或者公司网络屏蔽了某些网站，你想伪装成在家里上网。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设置&lt;/strong&gt;：&lt;ol&gt;
+&lt;li&gt;家里电脑（作为服务端）开启 Exit Node 功能。&lt;/li&gt;
+&lt;li&gt;外地手机（客户端）在 Tailscale App 里点击 “Exit Node”，选择家里电脑。&lt;/li&gt;
+&lt;li&gt;现在，你手机的所有流量都会先加密传回家里，再从家里宽带出去。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第三部分：极客篇-——-FRP-高性能自建，推荐有-VPS-的用户&#34;&gt;&lt;a href=&#34;#第三部分：极客篇-——-FRP-高性能自建，推荐有-VPS-的用户&#34; class=&#34;headerlink&#34; title=&#34;第三部分：极客篇 —— FRP (高性能自建，推荐有 VPS 的用户)&#34;&gt;&lt;/a&gt;第三部分：极客篇 —— FRP (高性能自建，推荐有 VPS 的用户)&lt;/h2&gt;&lt;p&gt;如果你想搭建一个网站给别人看，或者 Tailscale 的速度满足不了你，你需要 FRP。&lt;/p&gt;
+&lt;h3 id=&#34;1-准备工作-1&#34;&gt;&lt;a href=&#34;#1-准备工作-1&#34; class=&#34;headerlink&#34; title=&#34;1. 准备工作&#34;&gt;&lt;/a&gt;1. 准备工作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;**一台 VPS (云服务器)**：购买阿里云、腾讯云或国外 VPS（作为中转站），假设公网 IP 为 &lt;code&gt;1.2.3.4&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一台内网电脑&lt;/strong&gt;：你想暴露的那台机器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件&lt;/strong&gt;：去 &lt;a href=&#34;https://github.com/fatedier/frp/releases&#34;&gt;GitHub 下载 FRP&lt;/a&gt;。(注意：服务器和客户端都要下载，通常 Linux 用 &lt;code&gt;frp_..._linux_amd64&lt;/code&gt;，Windows 用 &lt;code&gt;frp_..._windows_amd64&lt;/code&gt;)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-服务端配置-在-VPS-上&#34;&gt;&lt;a href=&#34;#2-服务端配置-在-VPS-上&#34; class=&#34;headerlink&#34; title=&#34;2. 服务端配置 (在 VPS 上)&#34;&gt;&lt;/a&gt;2. 服务端配置 (在 VPS 上)&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;解压文件，找到 &lt;code&gt;frps&lt;/code&gt; (s代表server) 和 &lt;code&gt;frps.toml&lt;/code&gt; (新版配置文件，旧版为 .ini)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编辑 &lt;code&gt;frps.toml&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token key attr-name&#34;&gt;bindPort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;7000          # 必填，FRP 核心通讯端口&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;vhostHTTPPort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;8080     # 选填，如果你要穿透网页，这是对外访问的端口&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;auth.token&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;mypassword123&#34; # 必填，这是连接密码，防止别人蹭你服务器&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动服务端：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;./frps -c frps.toml&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;(记得去云服务器控制台的安全组，放行 7000 和 8080 端口)&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-客户端配置-在家里电脑上&#34;&gt;&lt;a href=&#34;#3-客户端配置-在家里电脑上&#34; class=&#34;headerlink&#34; title=&#34;3. 客户端配置 (在家里电脑上)&#34;&gt;&lt;/a&gt;3. 客户端配置 (在家里电脑上)&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;解压文件，找到 &lt;code&gt;frpc&lt;/code&gt; (c代表client) 和 &lt;code&gt;frpc.toml&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编辑 &lt;code&gt;frpc.toml&lt;/code&gt;，告诉它你要穿透什么服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token key attr-name&#34;&gt;serverAddr&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;1.2.3.4&#34;   # 你的 VPS 公网 IP&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;serverPort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;7000        # 对应服务端的 bindPort&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;auth.token&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;mypassword123&#34; # 必须和服务端一致&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 配置 1：穿透 Windows 远程桌面&lt;/span&gt;
+&lt;span class=&#34;token section&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token section-name selector&#34;&gt;[proxies&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;]
+&lt;span class=&#34;token key attr-name&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;rdp-home&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;tcp&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;localIP&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;127.0.0.1&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;localPort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;3389         # Windows 远程桌面默认端口&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;remotePort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;6000        # 在公网访问的端口&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# 配置 2：穿透一个网页服务 (比如 NAS 管理页)&lt;/span&gt;
+&lt;span class=&#34;token section&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token section-name selector&#34;&gt;[proxies&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;]
+&lt;span class=&#34;token key attr-name&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;nas-web&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;tcp&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;localIP&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;127.0.0.1&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;localPort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;5000         # 你内网服务的端口&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;remotePort&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token value attr-value&#34;&gt;6001        # 在公网访问的端口&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动客户端 (Windows 下用 CMD 运行)：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cmd&#34; data-language=&#34;cmd&#34;&gt;&lt;code class=&#34;language-cmd&#34;&gt;frpc.exe -c frpc.toml&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-最终效果&#34;&gt;&lt;a href=&#34;#4-最终效果&#34; class=&#34;headerlink&#34; title=&#34;4. 最终效果&#34;&gt;&lt;/a&gt;4. 最终效果&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;远程桌面&lt;/strong&gt;：在外网打开远程桌面工具，输入 &lt;code&gt;1.2.3.4:6000&lt;/code&gt; -&amp;gt; 直接连回家里。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网页访问&lt;/strong&gt;：浏览器输入 &lt;code&gt;http://1.2.3.4:6001&lt;/code&gt; -&amp;gt; 看到家里的 NAS 网页。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结与安全建议&#34;&gt;&lt;a href=&#34;#总结与安全建议&#34; class=&#34;headerlink&#34; title=&#34;总结与安全建议&#34;&gt;&lt;/a&gt;总结与安全建议&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;方案&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;适合人群&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;优点&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;缺点&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Tailscale&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;虚拟局域网 + 打洞&lt;/td&gt;
+&lt;td&gt;90% 的普通用户&lt;/td&gt;
+&lt;td&gt;简单、零配置、安全&lt;/td&gt;
+&lt;td&gt;无法让陌生人访问你的服务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;FRP&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;反向代理&lt;/td&gt;
+&lt;td&gt;有 VPS 的折腾党&lt;/td&gt;
+&lt;td&gt;极速、完全可控、可建站&lt;/td&gt;
+&lt;td&gt;配置麻烦、需要花钱买 VPS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;⚠️-致命安全警告-必读&#34;&gt;&lt;a href=&#34;#⚠️-致命安全警告-必读&#34; class=&#34;headerlink&#34; title=&#34;⚠️ 致命安全警告 (必读)&#34;&gt;&lt;/a&gt;⚠️ 致命安全警告 (必读)&lt;/h3&gt;&lt;p&gt;当你把 &lt;code&gt;3389&lt;/code&gt; (远程桌面) 或 &lt;code&gt;22&lt;/code&gt; (SSH) 暴露到公网时，你就在“裸奔”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;不要用弱密码！&lt;/strong&gt; 只要你暴露端口，全球的黑客脚本 24 小时都在爆破你的密码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改端口：&lt;/strong&gt; 不要直接映射到公网的 3389，改成 &lt;code&gt;remotePort = 12580&lt;/code&gt; 这种不常用的端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加防火墙：&lt;/strong&gt; 如果用 FRP，尽量只穿透必要的端口。如果可能，&lt;strong&gt;首选 Tailscale，因为它是 VPN 内网访问，对外不开放端口，最安全。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/01/01/xiao-yuan-wang-lu-you-qi-bu-fen-wang-ye-da-bu-kai-zhuan-quan-jie-jue-fang-an/</guid>
+            <title>校园网路由器部分网页打不开/转圈解决方案</title>
+            <link>https://0xdadream.github.io/2026/01/01/xiao-yuan-wang-lu-you-qi-bu-fen-wang-ye-da-bu-kai-zhuan-quan-jie-jue-fang-an/</link>
+            <category>net</category>
+            <pubDate>Thu, 01 Jan 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;校园网路由器部分网页打不开-转圈解决方案&#34;&gt;&lt;a href=&#34;#校园网路由器部分网页打不开-转圈解决方案&#34; class=&#34;headerlink&#34; title=&#34;校园网路由器部分网页打不开/转圈解决方案&#34;&gt;&lt;/a&gt;校园网路由器部分网页打不开/转圈解决方案&lt;/h1&gt;&lt;h3 id=&#34;适用症状&#34;&gt;&lt;a href=&#34;#适用症状&#34; class=&#34;headerlink&#34; title=&#34;适用症状&#34;&gt;&lt;/a&gt;适用症状&lt;/h3&gt;&lt;p&gt;如果你遇到了以下情况，那么本教程 99% 能救你：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;直连电脑正常：&lt;/strong&gt; 把墙上的网线直接插在电脑上，上网完全正常。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接路由器异常：&lt;/strong&gt; 把网线插到路由器 WAN 口，再连 Wi-Fi 时，出现&lt;strong&gt;“灵异现象”&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;微信能发消息，但朋友圈图片加载不出来。&lt;/li&gt;
+&lt;li&gt;百度能打开，但淘宝、B站、游戏加载一直转圈。&lt;/li&gt;
+&lt;li&gt;部分网页秒开，部分网页彻底打不开。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;核心原理&#34;&gt;&lt;a href=&#34;#核心原理&#34; class=&#34;headerlink&#34; title=&#34;核心原理&#34;&gt;&lt;/a&gt;核心原理&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;校园网“认生”：&lt;/strong&gt; 很多校园网会将上网权限绑定在你第一次认证的那台电脑的“身份证号”（MAC地址）上。当你换上路由器时，校园网发现“身份证”变了（变成了路由器的 MAC），就会限制流量或拦截部分数据，导致网络半通不通。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方法：&lt;/strong&gt; 让路由器“戴上面具”，伪装成那台能正常上网的电脑（即 &lt;strong&gt;MAC地址克隆&lt;/strong&gt;）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;操作步骤（只需-3-步）&#34;&gt;&lt;a href=&#34;#操作步骤（只需-3-步）&#34; class=&#34;headerlink&#34; title=&#34;操作步骤（只需 3 步）&#34;&gt;&lt;/a&gt;操作步骤（只需 3 步）&lt;/h3&gt;&lt;h4 id=&#34;第一步：准备工作&#34;&gt;&lt;a href=&#34;#第一步：准备工作&#34; class=&#34;headerlink&#34; title=&#34;第一步：准备工作&#34;&gt;&lt;/a&gt;第一步：准备工作&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;先用&lt;strong&gt;电脑&lt;/strong&gt;直接插墙上的网口，确保电脑能正常上网（这一步是为了确认电脑的 MAC 地址是被学校认可的）。&lt;/li&gt;
+&lt;li&gt;拔掉墙上的网线。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接方式：&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;墙上的网线 ➡️ 插路由器的 &lt;strong&gt;WAN口&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;你的电脑 ➡️ 用网线插路由器的 &lt;strong&gt;LAN口&lt;/strong&gt;（或者连接路由器的 Wi-Fi）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第二步：进入路由器后台&#34;&gt;&lt;a href=&#34;#第二步：进入路由器后台&#34; class=&#34;headerlink&#34; title=&#34;第二步：进入路由器后台&#34;&gt;&lt;/a&gt;第二步：进入路由器后台&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;打开浏览器，在地址栏输入路由器的管理地址。&lt;ul&gt;
+&lt;li&gt;通常是 &lt;code&gt;192.168.1.1&lt;/code&gt; 或 &lt;code&gt;192.168.0.1&lt;/code&gt;，或者 &lt;code&gt;tplogin.cn&lt;/code&gt; 等（具体看路由器背面贴纸）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输入管理员密码登录。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第三步：一键克隆-MAC-地址&#34;&gt;&lt;a href=&#34;#第三步：一键克隆-MAC-地址&#34; class=&#34;headerlink&#34; title=&#34;第三步：一键克隆 MAC 地址&#34;&gt;&lt;/a&gt;第三步：一键克隆 MAC 地址&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在菜单中找到 &lt;strong&gt;“外部网络”&lt;/strong&gt;、&lt;strong&gt;“上网设置”&lt;/strong&gt; 或 &lt;strong&gt;“WAN口设置”&lt;/strong&gt;（不同品牌位置不同，但逻辑一样）。&lt;/li&gt;
+&lt;li&gt;找到 &lt;strong&gt;“MAC地址设置”&lt;/strong&gt; 或 &lt;strong&gt;“MAC地址克隆”&lt;/strong&gt; 选项。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;“使用当前管理PC的MAC地址”&lt;/strong&gt; 或点击 &lt;strong&gt;“克隆MAC地址”&lt;/strong&gt; 按钮。&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;注意：此时路由器显示的 MAC 地址应该会变动，变成和你电脑一样的地址。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;“保存”&lt;/strong&gt;。路由器通常会重启或重新拨号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;补充方案（如果克隆后还有小卡顿）&#34;&gt;&lt;a href=&#34;#补充方案（如果克隆后还有小卡顿）&#34; class=&#34;headerlink&#34; title=&#34;补充方案（如果克隆后还有小卡顿）&#34;&gt;&lt;/a&gt;补充方案（如果克隆后还有小卡顿）&lt;/h3&gt;&lt;p&gt;如果克隆 MAC 后，大部分网页好了，但极个别图片还是慢，请检查以下两项“校园网水土不服”的设置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;修改 MTU 值（防止数据包过大被丢弃）：&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;位置：路由器后台 -&amp;gt; WAN口设置 -&amp;gt; 高级设置。&lt;/li&gt;
+&lt;li&gt;操作：将默认的 &lt;code&gt;1500&lt;/code&gt; 改为 &lt;strong&gt;&lt;code&gt;1480&lt;/code&gt;&lt;/strong&gt; 或 **&lt;code&gt;1400&lt;/code&gt;**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关闭 IPv6（防止协议冲突）：&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;位置：路由器后台 -&amp;gt; IPv6 设置。&lt;/li&gt;
+&lt;li&gt;操作：将开关拨到 &lt;strong&gt;“OFF/关闭”&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;常见问答-Q-A&#34;&gt;&lt;a href=&#34;#常见问答-Q-A&#34; class=&#34;headerlink&#34; title=&#34;常见问答 (Q&amp;amp;A)&#34;&gt;&lt;/a&gt;常见问答 (Q&amp;amp;A)&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Q: 克隆后，我的电脑和路由器的 MAC 一样了，会冲突吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;A: 不会。&lt;/strong&gt; 路由器对外（给学校看）用的是电脑的 MAC，对内（给你的设备看）依然能区分所有设备。这在网络工程中是标准操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Q: 以后我把路由器带回家用，需要改回来吗？&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;A: 建议改回。&lt;/strong&gt; 如果离开校园网环境，建议在路由器后台点击“恢复出厂MAC”，以免在其他网络环境下产生不必要的识别问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/12/08/s-ui-shi-yong-jiao-cheng/</guid>
             <title>S-UI + sing-box 节点配置教程</title>

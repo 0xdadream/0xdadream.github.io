@@ -5,62 +5,122 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Thu, 10 Apr 2025 12:25:00 +0800</pubDate>
-        <lastBuildDate>Thu, 10 Apr 2025 12:25:00 +0800</lastBuildDate>
-        <category>AI</category>
-        <category>intel</category>
-        <category>cloudflare</category>
+        <pubDate>Sat, 13 Dec 2025 12:25:00 +0800</pubDate>
+        <lastBuildDate>Sat, 13 Dec 2025 12:25:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>intel</category>
+        <category>AI</category>
+        <category>ssh</category>
+        <category>email</category>
+        <category>cloudflare</category>
         <category>安装</category>
+        <category>tips</category>
+        <category>linux</category>
         <category>re</category>
         <category>工具</category>
-        <category>ssh</category>
-        <category>linux</category>
-        <category>tips</category>
+        <category>conda</category>
         <category>Java</category>
-        <category>email</category>
         <category>教程</category>
         <category>环境</category>
-        <category>conda</category>
-        <category>python</category>
         <category>bug</category>
+        <category>python</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
         <category>net</category>
         <category>windows</category>
         <category>wsl2</category>
-        <category>web</category>
-        <category>wp</category>
-        <category>BUUCTF</category>
-        <category>攻防世界</category>
         <category>XGBoost</category>
+        <category>BUUCTF</category>
         <category>server</category>
-        <category>comfyui</category>
         <category>wall</category>
         <category>powershell</category>
+        <category>comfyui</category>
+        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>tools</category>
         <category>emby</category>
-        <category>git</category>
         <category>google</category>
-        <category>命令</category>
+        <category>git</category>
         <category>java</category>
         <category>学习</category>
+        <category>命令</category>
         <category>远程</category>
-        <category>php</category>
         <category>文件上传</category>
+        <category>php</category>
         <category>数据库</category>
+        <category>命令行</category>
         <category>plc</category>
         <category>proxy</category>
-        <category>命令行</category>
         <category>下载</category>
         <category>区块链</category>
         <category>word</category>
-        <category>密码学</category>
         <category>汇编</category>
-        <category>i春秋</category>
+        <category>密码学</category>
         <category>mcp</category>
+        <category>i春秋</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2025/12/13/gcp-kai-qi-ssh-deng-lu/</guid>
+            <title>GCP开启SSH登录</title>
+            <link>https://0xdadream.github.io/2025/12/13/gcp-kai-qi-ssh-deng-lu/</link>
+            <category>linux</category>
+            <pubDate>Sat, 13 Dec 2025 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;GCP开启SSH登录&#34;&gt;&lt;a href=&#34;#GCP开启SSH登录&#34; class=&#34;headerlink&#34; title=&#34;GCP开启SSH登录&#34;&gt;&lt;/a&gt;GCP开启SSH登录&lt;/h1&gt;&lt;p&gt;这是一份针对 &lt;strong&gt;Google Cloud (GCP)&lt;/strong&gt; 服务器开启 &lt;strong&gt;Root 密码登录&lt;/strong&gt; 的完整操作教程。&lt;/p&gt;
+&lt;p&gt;这个问题之所以顽固，是因为 SSH 的配置文件采取 &lt;strong&gt;“先入为主”&lt;/strong&gt; 原则。你虽然在主文件里改了 &lt;code&gt;yes&lt;/code&gt;，但文件头部引入（Include）的云平台默认配置先加载了 &lt;code&gt;no&lt;/code&gt;，导致你的修改无效。&lt;/p&gt;
+&lt;p&gt;请严格按照以下步骤操作，100% 解决问题。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;第一阶段：通过网页后台进入服务器&#34;&gt;&lt;a href=&#34;#第一阶段：通过网页后台进入服务器&#34; class=&#34;headerlink&#34; title=&#34;第一阶段：通过网页后台进入服务器&#34;&gt;&lt;/a&gt;第一阶段：通过网页后台进入服务器&lt;/h3&gt;&lt;p&gt;因为 SSH 目前连不上，必须走“后门”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 &lt;a href=&#34;https://console.cloud.google.com/compute/instances&#34;&gt;Google Cloud Console&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;找到你的 VM 实例列表。&lt;/li&gt;
+&lt;li&gt;点击该实例所在行的 &lt;strong&gt;“SSH”&lt;/strong&gt; 按钮。&lt;/li&gt;
+&lt;li&gt;这会弹出一个新的浏览器窗口（Web Terminal）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;第二阶段：强制覆盖配置（核心步骤）&#34;&gt;&lt;a href=&#34;#第二阶段：强制覆盖配置（核心步骤）&#34; class=&#34;headerlink&#34; title=&#34;第二阶段：强制覆盖配置（核心步骤）&#34;&gt;&lt;/a&gt;第二阶段：强制覆盖配置（核心步骤）&lt;/h3&gt;&lt;p&gt;在弹出的 Web Terminal 黑色窗口中操作：&lt;/p&gt;
+&lt;h4 id=&#34;1-切换到-Root-身份&#34;&gt;&lt;a href=&#34;#1-切换到-Root-身份&#34; class=&#34;headerlink&#34; title=&#34;1. 切换到 Root 身份&#34;&gt;&lt;/a&gt;1. 切换到 Root 身份&lt;/h4&gt;&lt;p&gt;为了避免权限不足，先切换成超级管理员：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;sudo -i&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-创建一个高优先级的配置文件&#34;&gt;&lt;a href=&#34;#2-创建一个高优先级的配置文件&#34; class=&#34;headerlink&#34; title=&#34;2. 创建一个高优先级的配置文件&#34;&gt;&lt;/a&gt;2. 创建一个高优先级的配置文件&lt;/h4&gt;&lt;p&gt;我们不去改动复杂的原文件，而是新建一个文件名以 &lt;code&gt;01-&lt;/code&gt; 开头的配置。SSH 会按字母顺序加载，这样我们的配置就会&lt;strong&gt;最先生效&lt;/strong&gt;，从而无视后面的限制。&lt;/p&gt;
+&lt;p&gt;复制并运行以下整段命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;echo -e &#34;PasswordAuthentication yes\nPermitRootLogin yes&#34; &amp;gt; /etc/ssh/sshd_config.d/01-custom-force.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;原理说明&lt;/strong&gt;：我们在 &lt;code&gt;/etc/ssh/sshd_config.d/&lt;/code&gt; 下创建了一个文件。因为文件名是 &lt;code&gt;01&lt;/code&gt; 开头，它会比默认的 &lt;code&gt;50-cloud-init.conf&lt;/code&gt; 更早被读取。SSH 只要读到了第一条 &lt;code&gt;PasswordAuthentication yes&lt;/code&gt;，就会忽略后面所有的 &lt;code&gt;no&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;3-设置-Root-密码&#34;&gt;&lt;a href=&#34;#3-设置-Root-密码&#34; class=&#34;headerlink&#34; title=&#34;3. 设置 Root 密码&#34;&gt;&lt;/a&gt;3. 设置 Root 密码&lt;/h4&gt;&lt;p&gt;既然要用密码登录，你必须给 root 账户设置一个密码：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;passwd root&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;(输入时屏幕不会显示字符，输入完回车，再次输入确认。)&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;4-重启-SSH-服务&#34;&gt;&lt;a href=&#34;#4-重启-SSH-服务&#34; class=&#34;headerlink&#34; title=&#34;4. 重启 SSH 服务&#34;&gt;&lt;/a&gt;4. 重启 SSH 服务&lt;/h4&gt;&lt;p&gt;让刚才的修改生效：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;service sshd restart&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;第三阶段：回到本地电脑验证&#34;&gt;&lt;a href=&#34;#第三阶段：回到本地电脑验证&#34; class=&#34;headerlink&#34; title=&#34;第三阶段：回到本地电脑验证&#34;&gt;&lt;/a&gt;第三阶段：回到本地电脑验证&lt;/h3&gt;&lt;p&gt;现在，关闭网页窗口，回到你自己电脑的终端（Terminal/PowerShell），执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;ssh root@IP&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;预期结果：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;系统不再提示 &lt;code&gt;Permission denied (publickey)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;系统提示 &lt;code&gt;root@IP&#39;s password:&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;输入你在第二阶段设置的密码，回车即可登录。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;⚠️-安全警告（必读）&#34;&gt;&lt;a href=&#34;#⚠️-安全警告（必读）&#34; class=&#34;headerlink&#34; title=&#34;⚠️ 安全警告（必读）&#34;&gt;&lt;/a&gt;⚠️ 安全警告（必读）&lt;/h3&gt;&lt;p&gt;你现在的操作（开启 Root 远程登录 + 开启密码认证）是&lt;strong&gt;最不安全&lt;/strong&gt;的配置组合，尤其你的 IP 是公开暴露的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;建议后续加固措施：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;设置极复杂的密码&lt;/strong&gt;：包含大小写、数字、符号，长度 16 位以上。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安装 Fail2Ban&lt;/strong&gt;：防止暴力破解。&lt;ul&gt;
+&lt;li&gt;Debian/Ubuntu: &lt;code&gt;apt update &amp;amp;&amp;amp; apt install fail2ban -y&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;CentOS: &lt;code&gt;yum install fail2ban -y&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要长期开放&lt;/strong&gt;：测试完或配置完环境后，建议把 &lt;code&gt;/etc/ssh/sshd_config.d/01-custom-force.conf&lt;/code&gt; 里的 &lt;code&gt;PasswordAuthentication yes&lt;/code&gt; 改回 &lt;code&gt;no&lt;/code&gt;，改回使用密钥登录。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/</guid>
             <title>安装WSL子系统教程</title>
