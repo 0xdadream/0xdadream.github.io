@@ -5,62 +5,233 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 13 Jan 2026 23:25:00 +0800</pubDate>
-        <lastBuildDate>Tue, 13 Jan 2026 23:25:00 +0800</lastBuildDate>
+        <pubDate>Sun, 01 Mar 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Sun, 01 Mar 2026 12:25:00 +0800</lastBuildDate>
+        <category>AI</category>
         <category>tip</category>
         <category>intel</category>
-        <category>AI</category>
-        <category>ssh</category>
         <category>email</category>
-        <category>cloudflare</category>
         <category>安装</category>
-        <category>tips</category>
+        <category>cloudflare</category>
         <category>linux</category>
-        <category>re</category>
-        <category>工具</category>
-        <category>conda</category>
+        <category>ssh</category>
+        <category>tips</category>
         <category>Java</category>
+        <category>conda</category>
         <category>教程</category>
         <category>环境</category>
-        <category>bug</category>
+        <category>re</category>
+        <category>工具</category>
         <category>python</category>
+        <category>bug</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>net</category>
-        <category>windows</category>
         <category>wsl2</category>
-        <category>XGBoost</category>
+        <category>windows</category>
+        <category>net</category>
         <category>BUUCTF</category>
+        <category>XGBoost</category>
         <category>server</category>
         <category>wall</category>
         <category>powershell</category>
         <category>comfyui</category>
-        <category>tools</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
+        <category>tools</category>
         <category>emby</category>
-        <category>google</category>
         <category>git</category>
-        <category>java</category>
+        <category>google</category>
         <category>学习</category>
+        <category>java</category>
         <category>命令</category>
-        <category>远程</category>
         <category>文件上传</category>
+        <category>远程</category>
         <category>php</category>
-        <category>数据库</category>
         <category>命令行</category>
+        <category>数据库</category>
         <category>plc</category>
         <category>proxy</category>
         <category>下载</category>
         <category>区块链</category>
-        <category>word</category>
         <category>汇编</category>
+        <category>word</category>
         <category>密码学</category>
-        <category>mcp</category>
         <category>i春秋</category>
+        <category>mcp</category>
         <category>证书</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/03/01/wang-luo-dai-li-jia-gou-yu-cdn-liu-liang-gong-cheng-quan-jie-xi/</guid>
+            <title>网络代理架构与 CDN 流量工程全解析</title>
+            <link>https://0xdadream.github.io/2026/03/01/wang-luo-dai-li-jia-gou-yu-cdn-liu-liang-gong-cheng-quan-jie-xi/</link>
+            <category>proxy</category>
+            <pubDate>Sun, 01 Mar 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;网络代理架构与-CDN-流量工程全解析&#34;&gt;&lt;a href=&#34;#网络代理架构与-CDN-流量工程全解析&#34; class=&#34;headerlink&#34; title=&#34;网络代理架构与 CDN 流量工程全解析&#34;&gt;&lt;/a&gt;网络代理架构与 CDN 流量工程全解析&lt;/h1&gt;&lt;p&gt;在深入之前，我们需要统一一个核心概念：&lt;strong&gt;CDN 的本质是基于 Anycast（任播）技术的 HTTP/HTTPS 反向代理集群&lt;/strong&gt;。它只认应用层（七层）的 Web 流量，这也是为什么所有的代理协议想要套 CDN，都必须先进行伪装。&lt;/p&gt;
+&lt;h2 id=&#34;第一层：协议与伪装（为什么一定要用-WebSocket-gRPC？）&#34;&gt;&lt;a href=&#34;#第一层：协议与伪装（为什么一定要用-WebSocket-gRPC？）&#34; class=&#34;headerlink&#34; title=&#34;第一层：协议与伪装（为什么一定要用 WebSocket/gRPC？）&#34;&gt;&lt;/a&gt;第一层：协议与伪装（为什么一定要用 WebSocket/gRPC？）&lt;/h2&gt;&lt;p&gt;很多人搭建节点失败，第一步就栽在协议上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;直连协议的局限&lt;/strong&gt;：传统的 Shadowsocks、VLESS/VMess 直接跑在 TCP/UDP 上。当这种纯四层流量撞上 Cloudflare 的边缘节点时，CDN 的网关发现这不是标准的 HTTP 请求，会直接丢弃（Drop）数据包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;WebSocket (WS) 的降维打击&lt;/strong&gt;：WebSocket 是一种在单个 TCP 连接上进行全双工通信的协议。最重要的是，它的&lt;strong&gt;握手阶段完全复用了 HTTP 请求&lt;/strong&gt;。&lt;ul&gt;
+&lt;li&gt;你的客户端向 CDN 发送一个标准的 &lt;code&gt;HTTP GET&lt;/code&gt; 请求，带上 &lt;code&gt;Upgrade: websocket&lt;/code&gt; 请求头。&lt;/li&gt;
+&lt;li&gt;CDN 网关一看，是合法的 Web 请求，于是放行，并代理转发给你的源站。&lt;/li&gt;
+&lt;li&gt;握手成功后，这条 HTTP 通道就会“升级”为双向传输的数据管道，你的代理流量就顺理成章地包裹在里面传输了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;gRPC&lt;/strong&gt;：类似 WS，它是基于 HTTP/2 协议的，天然被现代 CDN 支持，且在多路复用上性能更好，但配置稍显复杂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;结论&lt;/strong&gt;：想要接入 CDN，源站 VPS 的入站协议必须配置为 &lt;strong&gt;TCP + TLS + WebSocket/gRPC&lt;/strong&gt;，监听端口通常设为 &lt;strong&gt;443&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第二层：源站与-CDN-的桥接方式（常规-vs-Worker）&#34;&gt;&lt;a href=&#34;#第二层：源站与-CDN-的桥接方式（常规-vs-Worker）&#34; class=&#34;headerlink&#34; title=&#34;第二层：源站与 CDN 的桥接方式（常规 vs. Worker）&#34;&gt;&lt;/a&gt;第二层：源站与 CDN 的桥接方式（常规 vs. Worker）&lt;/h2&gt;&lt;h3 id=&#34;方案-A：常规-CDN（DNS-路由接管）&#34;&gt;&lt;a href=&#34;#方案-A：常规-CDN（DNS-路由接管）&#34; class=&#34;headerlink&#34; title=&#34;方案 A：常规 CDN（DNS 路由接管）&#34;&gt;&lt;/a&gt;方案 A：常规 CDN（DNS 路由接管）&lt;/h3&gt;&lt;p&gt;这是最正统的架构。你将域名的权威 DNS 服务器修改为 Cloudflare。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;解析记录配置&lt;/strong&gt;：在 CF 的 DNS 页面，添加一条 &lt;code&gt;A 记录&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;**Name (名称)**：填你的前缀，比如 &lt;code&gt;proxy&lt;/code&gt;（此时完整域名是 &lt;code&gt;proxy.yourdomain.com&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IPv4 address&lt;/strong&gt;：填你 VPS 的真实公网 IP。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy status&lt;/strong&gt;：开启**橙色云朵 (Proxied)**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;流量拓扑&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;客户端 $\rightarrow$ DNS 查询 &lt;code&gt;proxy.yourdomain.com&lt;/code&gt; $\rightarrow$ CF 返回任意边缘节点 IP $\rightarrow$ 客户端发起 TLS 握手 (SNI: &lt;code&gt;proxy.yourdomain.com&lt;/code&gt;) $\rightarrow$ CF 边缘节点接收 $\rightarrow$ CF 回源到你的 VPS。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;优缺点&lt;/strong&gt;：最稳定，完全符合 CDN 规范；但强依赖你购买的域名，且默认分配的 CF 节点在晚高峰可能拥堵丢包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方案-B：Worker-边缘计算反代（代码级路由）&#34;&gt;&lt;a href=&#34;#方案-B：Worker-边缘计算反代（代码级路由）&#34; class=&#34;headerlink&#34; title=&#34;方案 B：Worker 边缘计算反代（代码级路由）&#34;&gt;&lt;/a&gt;方案 B：Worker 边缘计算反代（代码级路由）&lt;/h3&gt;&lt;p&gt;利用 Cloudflare 的无服务器环境（V8 Isolates），在边缘节点执行一段 JavaScript 代码，截获并重定向流量。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;代码核心逻辑&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;JavaScript&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;export default {
+  async fetch(request, env) {
+    let url = new URL(request.url);
+    // 强制修改请求头中的目标主机，指向你的真实 VPS 或 未套 CDN 的域名
+    url.hostname = &#34;你的真实源站IP或域名&#34;; 
+    let new_request = new Request(url, request);
+    return fetch(new_request); // 发起回源请求
+  }
+};&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;流量拓扑&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;客户端 $\rightarrow$ DNS 查询 &lt;code&gt;xxx.workers.dev&lt;/code&gt; $\rightarrow$ 连接 CF 边缘节点 $\rightarrow$ 边缘节点触发代码 $\rightarrow$ 代码执行 &lt;code&gt;fetch&lt;/code&gt; 指令拉取真实源站数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;优缺点&lt;/strong&gt;：灵活性极高，自带免费域名；但部分地区的运营商会对 &lt;code&gt;.workers.dev&lt;/code&gt; 域名进行 DNS 污染（可通过在 Worker 绑定自定义域名解决）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第三层：流量工程与优选-IP（打破-Anycast-限制）&#34;&gt;&lt;a href=&#34;#第三层：流量工程与优选-IP（打破-Anycast-限制）&#34; class=&#34;headerlink&#34; title=&#34;第三层：流量工程与优选 IP（打破 Anycast 限制）&#34;&gt;&lt;/a&gt;第三层：流量工程与优选 IP（打破 Anycast 限制）&lt;/h2&gt;&lt;p&gt;Cloudflare 使用 Anycast 技术，理论上会自动把你路由到物理距离最近的节点。但由于跨国运营商的对等互联（Peering）策略和商业博弈，&lt;strong&gt;地理最近不等于网络最快&lt;/strong&gt;。有时直连香港节点反而卡顿，绕道美西节点反而流畅。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优选 IP 的本质，是在本地进行四层（传输层）强制路由，同时保留七层（应用层）的域名特征。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;核心参数拆解与客户端配置&#34;&gt;&lt;a href=&#34;#核心参数拆解与客户端配置&#34; class=&#34;headerlink&#34; title=&#34;核心参数拆解与客户端配置&#34;&gt;&lt;/a&gt;核心参数拆解与客户端配置&lt;/h3&gt;&lt;p&gt;无论你用什么代理客户端（v2rayN, Clash, Sing-box），以下参数的逻辑是通用的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Address / Server (服务器地址)&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;这里填：优选出来的优质 CF IP 地址（如 &lt;code&gt;104.16.x.x&lt;/code&gt;）。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;底层原理&lt;/strong&gt;：TCP 握手阶段，你的系统会直接向这个 IP 发起 SYN 报文，完全跳过 DNS 查询。这保证了你的数据包走的是你测试出的最优物理链路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port (端口)&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;填：&lt;code&gt;443&lt;/code&gt;（如果套了 TLS）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Host / 伪装域名 (HTTP 请求头)&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;这里填：你的 CF 域名或 Worker 域名。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;底层原理&lt;/strong&gt;：这是在第七层（HTTP 层）告诉目标服务器，“我想访问这个网站”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SNI (服务器名指示)&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;这里填：你的 CF 域名或 Worker 域名。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;底层原理&lt;/strong&gt;：这是 TLS 握手阶段（Client Hello 报文）极度关键的字段。 虽然你连接的是 &lt;code&gt;104.16.x.x&lt;/code&gt; 这个公共 IP，但当你的流量到达 CF 边缘网关时，网关是通过读取 SNI 字段，才知道去哪个客户的配置里拿 SSL 证书，以及该把流量回源给哪个服务器的。&lt;strong&gt;如果你不填 SNI 或者填错，CF 网关会直接拒绝连接（Error 1000/1003）。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络 / 传输（传输协议）&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;填：&lt;code&gt;ws&lt;/code&gt; 或 &lt;code&gt;websocket&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;**Path (路径)**：填写你源站 VPS 配置的 WebSocket 路径（例如 &lt;code&gt;/api/v1/sync&lt;/code&gt;）。这个路径必须和源站严格一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第四层：安全、防爆破与细节收尾&#34;&gt;&lt;a href=&#34;#第四层：安全、防爆破与细节收尾&#34; class=&#34;headerlink&#34; title=&#34;第四层：安全、防爆破与细节收尾&#34;&gt;&lt;/a&gt;第四层：安全、防爆破与细节收尾&lt;/h2&gt;&lt;p&gt;将节点暴露在公网，尤其是套了 CDN 后，会有新的安全挑战：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;源站真实 IP 保护&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;既然使用了 CDN，你的 VPS 就不应该再接收除了 Cloudflare 以外的任何流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;防火墙策略（iptables/UFW）&lt;/strong&gt;：强烈建议在 Linux 源站配置防火墙，仅允许 Cloudflare 的 IP 段（CF 官网有公布）访问你的 443 端口，丢弃所有其他来源的 TCP 握手。这能彻底杜绝针对真实 IP 的主动探测和恶意扫描。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TLS 指纹特征（Client Hello）&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;在极度严格的网络审查环境下，纯粹的 TLS + WS 流量依然可能因为 TLS 指纹（如 JA3 指纹）被识别出是代理客户端而非正常浏览器。&lt;/li&gt;
+&lt;li&gt;如果你追求极致的隐蔽性，可以考虑在源站采用更新的协议（如 Xray 的 VLESS + REALITY），但注意，&lt;strong&gt;REALITY 协议本身是为直连设计的，不适合也不需要套 CDN&lt;/strong&gt;。 CDN 玩法目前最成熟的依然是 WS/gRPC + TLS。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;现在，整个 CDN 反代、协议封装和流量路由的底层逻辑已经彻底铺开。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/02/01/v2rayn-lu-you-gui-ze/</guid>
+            <title>v2rayn路由规则详解与分流教程</title>
+            <link>https://0xdadream.github.io/2026/02/01/v2rayn-lu-you-gui-ze/</link>
+            <category>net</category>
+            <pubDate>Sun, 01 Feb 2026 23:41:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;基础说明&#34;&gt;&lt;a href=&#34;#基础说明&#34; class=&#34;headerlink&#34; title=&#34;基础说明&#34;&gt;&lt;/a&gt;基础说明&lt;/h2&gt;&lt;p&gt;v2rayN 路由规则大体可以参考这篇文章 &lt;a href=&#34;https://www.v2fly.org/config/routing.html&#34;&gt;Routing 路由 | V2Fly.org&lt;/a&gt;。&lt;br&gt;本次测试所用版本为 6.33+。&lt;/p&gt;
+&lt;h2 id=&#34;基础操作流程&#34;&gt;&lt;a href=&#34;#基础操作流程&#34; class=&#34;headerlink&#34; title=&#34;基础操作流程&#34;&gt;&lt;/a&gt;基础操作流程&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;设置 -&amp;gt; 路由设置 -&amp;gt; 基础设置 -&amp;gt; 添加规则集 -&amp;gt; 添加规则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在基础配置中，最常用的 &lt;code&gt;outboundTag&lt;/code&gt; (出站标签) 有三种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;proxy&lt;/strong&gt;: 走代理的 domain 和 IP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;direct&lt;/strong&gt;: 直连的，不经过代理&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;block&lt;/strong&gt;: 阻塞的，一般用于屏蔽广告或恶意 IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;假如我想代理一些 domain 和 IP，选择 &lt;code&gt;proxy&lt;/code&gt;，端口不写默认就是全部端口，若需指定端口写法如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;80&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1-1234&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;勾选 &lt;code&gt;enabled&lt;/code&gt; 启用，保存时勾选“Domain, IP, 进程名自动排序”可以让列表更整洁。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;进阶：指定特定网站走特定节点-7-17版本&#34;&gt;&lt;a href=&#34;#进阶：指定特定网站走特定节点-7-17版本&#34; class=&#34;headerlink&#34; title=&#34;进阶：指定特定网站走特定节点(7.17版本)&#34;&gt;&lt;/a&gt;进阶：指定特定网站走特定节点(7.17版本)&lt;/h2&gt;&lt;p&gt;这是最实用的功能之一，例如：你希望 &lt;code&gt;OpenAI&lt;/code&gt; 走美国节点，而 &lt;code&gt;Netflix&lt;/code&gt; 走新加坡节点，或者某个特定游戏走专线节点。&lt;/p&gt;
+&lt;h3 id=&#34;操作步骤&#34;&gt;&lt;a href=&#34;#操作步骤&#34; class=&#34;headerlink&#34; title=&#34;操作步骤&#34;&gt;&lt;/a&gt;操作步骤&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;准备工作&lt;/strong&gt;：在 v2rayN 主界面，找到你想使用的那个特定节点（例如一个“美国-高速”节点）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;进入设置&lt;/strong&gt;：打开 &lt;code&gt;设置&lt;/code&gt; -&amp;gt; &lt;code&gt;路由设置&lt;/code&gt; -&amp;gt; &lt;code&gt;简易路由/高级功能&lt;/code&gt; -&amp;gt; &lt;code&gt;添加规则&lt;/code&gt;（或者编辑现有的规则集）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置规则详情&lt;/strong&gt;（关键步骤）：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;别名&lt;/strong&gt;：起一个好记的名字，例如 &lt;code&gt;Special_OpenAI&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;**outboundTag (出站标签)**：&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不要&lt;/strong&gt;手动输入 &lt;code&gt;proxy&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;点击右侧的 &lt;strong&gt;[选择配置]&lt;/strong&gt; 按钮。&lt;/li&gt;
+&lt;li&gt;在弹出的列表中，选中你刚才看好的那个“美国-高速”节点。&lt;/li&gt;
+&lt;li&gt;系统会自动填入该节点的 ID 或 Tag。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;**Domain (域名)**：&lt;ul&gt;
+&lt;li&gt;在左下角的 Domain 区域输入你想分流的网站。&lt;/li&gt;
+&lt;li&gt;推荐使用 &lt;code&gt;keyword&lt;/code&gt; 或 &lt;code&gt;domain&lt;/code&gt; 写法，例如：&lt;code&gt;domain:openai.com&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调整优先级&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;保存规则后，在规则列表界面，务必将这条新规则&lt;strong&gt;上移&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原则&lt;/strong&gt;：路由匹配是&lt;strong&gt;从上到下&lt;/strong&gt;进行的。特定规则必须在通用规则（如“绕过大陆”或“全局代理”）的上面，否则会被通用规则拦截。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;规则写法参考&#34;&gt;&lt;a href=&#34;#规则写法参考&#34; class=&#34;headerlink&#34; title=&#34;规则写法参考&#34;&gt;&lt;/a&gt;规则写法参考&lt;/h2&gt;&lt;h3 id=&#34;Domain-写法&#34;&gt;&lt;a href=&#34;#Domain-写法&#34; class=&#34;headerlink&#34; title=&#34;Domain 写法&#34;&gt;&lt;/a&gt;Domain 写法&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;domain:完整域名&lt;/code&gt; -&amp;gt; 例如 &lt;code&gt;domain:www.google.com&lt;/code&gt; (匹配该域名及其子域名)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;keyword:域名关键字&lt;/code&gt; -&amp;gt; 例如 &lt;code&gt;keyword:google&lt;/code&gt; (包含该关键字的都匹配)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;regexp:正则表达式&lt;/code&gt; -&amp;gt; 高级用法，用于复杂匹配&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;full:完全匹配字符串&lt;/code&gt; -&amp;gt; 必须完全一致，极少使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;geosite:域名集&lt;/code&gt; -&amp;gt; 引用预定义列表，例如 &lt;code&gt;geosite:cn&lt;/code&gt; (中国境内域名)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;推荐资源&lt;/strong&gt;：&lt;br&gt;&lt;a href=&#34;https://github.com/Loyalsoldier/v2ray-rules-dat&#34;&gt;Loyalsoldier/v2ray-rules-dat&lt;/a&gt;: 🦄 🎃 👻 V2Ray 路由规则文件加强版，可代替 V2Ray 官方 geoip.dat 和 geosite.dat，兼容 Shadowsocks-windows、Xray-core、Trojan-Go、leaf 和 hysteria。&lt;/p&gt;
+&lt;h3 id=&#34;IP-写法&#34;&gt;&lt;a href=&#34;#IP-写法&#34; class=&#34;headerlink&#34; title=&#34;IP 写法&#34;&gt;&lt;/a&gt;IP 写法&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;geoip:IP集&lt;/code&gt; -&amp;gt; 例如 &lt;code&gt;geoip:cn&lt;/code&gt; (中国 IP)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;单个IP&lt;/code&gt; -&amp;gt; 例如 &lt;code&gt;8.8.8.8&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IP段&lt;/code&gt; -&amp;gt; CIDR 格式，例如 &lt;code&gt;192.168.1.0/24&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;Tun-模式注意事项&#34;&gt;&lt;a href=&#34;#Tun-模式注意事项&#34; class=&#34;headerlink&#34; title=&#34;Tun 模式注意事项&#34;&gt;&lt;/a&gt;Tun 模式注意事项&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;打开 Tun 模式时，建议关闭系统代理（System Proxy），即任务栏图标变蓝但不开启“自动配置系统代理”。&lt;/li&gt;
+&lt;li&gt;Tun 模式接管系统层面的流量，路由规则依然生效。&lt;/li&gt;
+&lt;li&gt;如果是特定进程需要代理，可以在规则中的 &lt;code&gt;process&lt;/code&gt; (进程) 栏填写进程名称（如 &lt;code&gt;chrome.exe&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2026/01/13/windows11-xi-tong-wen-jian/</guid>
             <title>windows11系统文件</title>
@@ -5346,691 +5517,6 @@ pause&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&l
 &lt;li&gt;若需要“登录后可见”，再设置任务计划程序运行 &lt;code&gt;run_all.bat&lt;/code&gt;（B）。测试并确认窗口弹出。&lt;/li&gt;
 &lt;li&gt;最后优化：延时、错误重试、日志轮转、避免重复启动。&lt;/li&gt;
 &lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/</guid>
-            <title>psycopg2 详细使用教程：从入门到精通</title>
-            <link>https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/</link>
-            <category>python</category>
-            <category>数据库</category>
-            <pubDate>Mon, 20 Oct 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;psycopg2-详细使用教程：从入门到精通&#34;&gt;&lt;a href=&#34;#psycopg2-详细使用教程：从入门到精通&#34; class=&#34;headerlink&#34; title=&#34;psycopg2 详细使用教程：从入门到精通&#34;&gt;&lt;/a&gt;psycopg2 详细使用教程：从入门到精通&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-psycopg2？&#34;&gt;&lt;a href=&#34;#1-什么是-psycopg2？&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 psycopg2？&#34;&gt;&lt;/a&gt;1. 什么是 psycopg2？&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PostgreSQL:&lt;/strong&gt; 一款功能极其强大的开源对象-关系型数据库系统。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;psycopg2:&lt;/strong&gt; 一个 Python 库，充当 Python 应用程序和 PostgreSQL 数据库之间的“驱动”或“适配器”。它实现了 Python DB-API 2.0 规范，允许你使用标准的 Python 代码来执行 SQL 命令。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-安装&#34;&gt;&lt;a href=&#34;#2-安装&#34; class=&#34;headerlink&#34; title=&#34;2. 安装&#34;&gt;&lt;/a&gt;2. 安装&lt;/h3&gt;&lt;p&gt;安装 &lt;code&gt;psycopg2&lt;/code&gt; 有两种常见方式：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;推荐 (用于开发和学习):&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install psycopg2-binary&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这个包预编译了所有必需的库，安装最简单，开箱即用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;用于生产环境 (需要编译):&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install psycopg2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这需要你在系统上安装了 &lt;code&gt;libpq&lt;/code&gt;（PostgreSQL 的 C 库）和相关的开发工具。它性能更好，但安装更复杂。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;对于本教程，我们假设你已使用 &lt;code&gt;psycopg2-binary&lt;/code&gt;。&lt;/strong&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;3-核心工作流：连接与游标-Cursor&#34;&gt;&lt;a href=&#34;#3-核心工作流：连接与游标-Cursor&#34; class=&#34;headerlink&#34; title=&#34;3. 核心工作流：连接与游标 (Cursor)&#34;&gt;&lt;/a&gt;3. 核心工作流：连接与游标 (Cursor)&lt;/h3&gt;&lt;p&gt;与数据库的所有交互都遵循以下模式：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;连接 (Connect):&lt;/strong&gt; 建立到 PostgreSQL 服务器的连接。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;游标 (Cursor):&lt;/strong&gt; 创建一个游标对象。游标是执行 SQL 命令的“手柄”。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;执行 (Execute):&lt;/strong&gt; 使用游标执行 SQL 语句。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;获取 (Fetch):&lt;/strong&gt; (如果是 &lt;code&gt;SELECT&lt;/code&gt; 语句) 从游标中取出结果。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;提交 (Commit):&lt;/strong&gt; (如果是 &lt;code&gt;INSERT&lt;/code&gt;, &lt;code&gt;UPDATE&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;) 提交事务，使更改永久生效。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关闭 (Close):&lt;/strong&gt; 关闭游标和连接，释放资源。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;4-【重要】最佳实践：使用-with-语句&#34;&gt;&lt;a href=&#34;#4-【重要】最佳实践：使用-with-语句&#34; class=&#34;headerlink&#34; title=&#34;4. 【重要】最佳实践：使用 with 语句&#34;&gt;&lt;/a&gt;4. 【重要】最佳实践：使用 &lt;code&gt;with&lt;/code&gt; 语句&lt;/h3&gt;&lt;p&gt;手动管理 &lt;code&gt;connect()&lt;/code&gt; 和 &lt;code&gt;close()&lt;/code&gt; 非常容易出错（比如程序崩溃时连接未关闭）。&lt;code&gt;psycopg2&lt;/code&gt; 的连接和游标对象都是&lt;strong&gt;上下文管理器&lt;/strong&gt;，必须使用 &lt;code&gt;with&lt;/code&gt; 语句来自动管理资源。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;这是本教程推荐的标准模式：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import psycopg2
-import sys
-
-# 数据库连接参数
-# 强烈建议使用环境变量或配置文件，不要硬编码
-DB_PARAMS = {
-    &#39;host&#39;: &#39;localhost&#39;,      # 数据库主机
-    &#39;port&#39;: 5432,             # 端口 (默认 5432)
-    &#39;user&#39;: &#39;postgres&#39;,       # 你的用户名
-    &#39;password&#39;: &#39;your_password&#39;, # 你的密码
-    &#39;dbname&#39;: &#39;test_db&#39;       # 你要连接的数据库
-}
-
-try:
-    # 1. 建立连接
-    # with 语句确保连接在使用后自动关闭
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        
-        # 2. 创建游标
-        # with 语句确保游标在使用后自动关闭
-        with conn.cursor() as cur:
-            
-            # 3. 执行 SQL
-            cur.execute(&#34;SELECT version();&#34;)
-            
-            # 4. 获取结果
-            db_version = cur.fetchone() # fetchone() 获取一条结果
-            print(f&#34;数据库版本: {db_version[0]}&#34;)
-
-            # 5. 提交 (对于 SELECT 不是必需的, 但对于 DML 是必需的)
-            # conn.commit() # 在这里，with conn 会自动处理
-            
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;连接数据库时出错: {error}&#34;)
-    sys.exit(1)
-    
-# 6. 关闭
-# 在 &#39;with&#39; 块结束时，cur.close() 和 conn.close() 已自动调用
-print(&#34;连接已自动关闭。&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;5-【极其重要】防止-SQL-注入：参数化查询&#34;&gt;&lt;a href=&#34;#5-【极其重要】防止-SQL-注入：参数化查询&#34; class=&#34;headerlink&#34; title=&#34;5. 【极其重要】防止 SQL 注入：参数化查询&#34;&gt;&lt;/a&gt;5. 【极其重要】防止 SQL 注入：参数化查询&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;永远不要&lt;/strong&gt;使用 Python 的字符串格式化（如 &lt;code&gt;f-string&lt;/code&gt; 或 &lt;code&gt;%&lt;/code&gt;）来构建 SQL 查询。这会导致严重的安全漏洞（SQL 注入）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;错误的方式 (危险!)：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 千万不要这样做！
-user_id = &#34;105 OR 1=1&#34;
-cur.execute(f&#34;SELECT * FROM users WHERE id = {user_id}&#34;) &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;正确的方式 (安全)：&lt;/strong&gt; &lt;code&gt;psycopg2&lt;/code&gt; 会自动为你处理所有特殊字符的转义。你需要在 SQL 语句中使用 &lt;code&gt;%s&lt;/code&gt; 作为占位符，然后将一个&lt;strong&gt;元组 (tuple)&lt;/strong&gt; 作为第二个参数传递给 &lt;code&gt;execute()&lt;/code&gt;。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 正确的方式：使用占位符
-user_id = &#34;105&#34;
-query = &#34;SELECT * FROM users WHERE id = %s&#34;
-
-# 注意：即使只有一个参数，也必须将其放在元组中 (user_id,)
-cur.execute(query, (user_id,))&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;psycopg2&lt;/code&gt; 统一使用 &lt;code&gt;%s&lt;/code&gt; 作为占位符，&lt;strong&gt;无论数据类型是字符串、数字还是日期&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;6-CRUD-操作详解&#34;&gt;&lt;a href=&#34;#6-CRUD-操作详解&#34; class=&#34;headerlink&#34; title=&#34;6. CRUD 操作详解&#34;&gt;&lt;/a&gt;6. CRUD 操作详解&lt;/h3&gt;&lt;p&gt;让我们创建一个 &lt;code&gt;employees&lt;/code&gt; 表并对其进行操作。&lt;/p&gt;
-&lt;h4 id=&#34;A-创建表-CREATE&#34;&gt;&lt;a href=&#34;#A-创建表-CREATE&#34; class=&#34;headerlink&#34; title=&#34;A. 创建表 (CREATE)&#34;&gt;&lt;/a&gt;A. 创建表 (CREATE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;create_table_query = &#34;&#34;&#34;
-CREATE TABLE IF NOT EXISTS employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    department VARCHAR(50),
-    salary NUMERIC(10, 2),
-    hire_date DATE
-);
-&#34;&#34;&#34;
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(create_table_query)
-            # DDL (如 CREATE TABLE) 语句也需要提交
-            conn.commit() 
-            print(&#34;表 &#39;employees&#39; 创建成功 (如果它不存在的话)。&#34;)
-except (Exception, psycopg2.DatabaseError) as error:
-    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;**&lt;code&gt;conn.commit()&lt;/code&gt;*&lt;em&gt;：这是关键。任何修改数据库结构 (DDL) 或数据 (DML) 的操作，都必须调用 &lt;code&gt;conn.commit()&lt;/code&gt; 才能生效。&lt;code&gt;with conn:&lt;/code&gt; 块在&lt;/em&gt;成功退出时*会自动提交。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;B-插入数据-INSERT&#34;&gt;&lt;a href=&#34;#B-插入数据-INSERT&#34; class=&#34;headerlink&#34; title=&#34;B. 插入数据 (INSERT)&#34;&gt;&lt;/a&gt;B. 插入数据 (INSERT)&lt;/h4&gt;&lt;h5 id=&#34;插入单行&#34;&gt;&lt;a href=&#34;#插入单行&#34; class=&#34;headerlink&#34; title=&#34;插入单行&#34;&gt;&lt;/a&gt;插入单行&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
-data = (&#34;Alice Green&#34;, &#34;Engineering&#34;, 75000.00, &#34;2023-01-15&#34;)
-
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-            # conn.commit() 在 with 块结束时自动调用
-    print(&#34;单行插入成功。&#34;)
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;插入失败: {error}&#34;)
-    # 如果出错，with conn 块会引发异常，自动执行 conn.rollback()&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;插入多行-高效&#34;&gt;&lt;a href=&#34;#插入多行-高效&#34; class=&#34;headerlink&#34; title=&#34;插入多行 (高效)&#34;&gt;&lt;/a&gt;插入多行 (高效)&lt;/h5&gt;&lt;p&gt;使用 &lt;code&gt;cur.executemany()&lt;/code&gt; 来批量插入，这比在 &lt;code&gt;for&lt;/code&gt; 循环中调用 &lt;code&gt;execute()&lt;/code&gt; 高效得多。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
-data_list = [
-    (&#34;Bob White&#34;, &#34;Sales&#34;, 60000.00, &#34;2023-03-01&#34;),
-    (&#34;Charlie Black&#34;, &#34;Engineering&#34;, 80000.00, &#34;2022-11-20&#34;),
-    (&#34;David Brown&#34;, &#34;Marketing&#34;, 55000.00, &#34;2023-05-10&#34;)
-]
-
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.executemany(query, data_list)
-            # 自动提交
-    print(&#34;批量插入成功。&#34;)
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;批量插入失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;获取插入的-ID-RETURNING&#34;&gt;&lt;a href=&#34;#获取插入的-ID-RETURNING&#34; class=&#34;headerlink&#34; title=&#34;获取插入的 ID (RETURNING)&#34;&gt;&lt;/a&gt;获取插入的 ID (RETURNING)&lt;/h5&gt;&lt;p&gt;插入后经常需要获取新生成的 &lt;code&gt;PRIMARY KEY&lt;/code&gt;。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;query = &#34;INSERT INTO employees (name, department) VALUES (%s, %s) RETURNING id&#34;
-data = (&#34;Eva Blue&#34;, &#34;HR&#34;)
-
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-            new_id = cur.fetchone()[0] # 获取 RETURNING 的值
-            print(f&#34;成功插入新员工，ID: {new_id}&#34;)
-            # 自动提交
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;插入失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;C-查询数据-SELECT&#34;&gt;&lt;a href=&#34;#C-查询数据-SELECT&#34; class=&#34;headerlink&#34; title=&#34;C. 查询数据 (SELECT)&#34;&gt;&lt;/a&gt;C. 查询数据 (SELECT)&lt;/h4&gt;&lt;h5 id=&#34;获取单条记录-fetchone&#34;&gt;&lt;a href=&#34;#获取单条记录-fetchone&#34; class=&#34;headerlink&#34; title=&#34;获取单条记录 fetchone()&#34;&gt;&lt;/a&gt;获取单条记录 &lt;code&gt;fetchone()&lt;/code&gt;&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(&#34;SELECT * FROM employees WHERE department = %s&#34;, (&#34;Engineering&#34;,))
-            
-            print(&#34;正在获取一名工程师:&#34;)
-            record = cur.fetchone() # 获取第一条
-            if record:
-                print(record) # (1, &#39;Alice Green&#39;, &#39;Engineering&#39;, 75000.00, datetime.date(2023, 1, 15))
-
-            # 再次调用 fetchone() 会获取下一条
-            record2 = cur.fetchone()
-            if record2:
-                print(record2)
-
-            # 如果没有更多数据，fetchone() 返回 None
-            record3 = cur.fetchone()
-            print(f&#34;第三条记录: {record3}&#34;) # None
-
-except (Exception, psycopg2.DatabaseError) as error:
-    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;结果格式：&lt;/strong&gt; 默认情况下，&lt;code&gt;psycopg2&lt;/code&gt; 返回的数据是**元组 (tuple)**。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;获取所有记录-fetchall&#34;&gt;&lt;a href=&#34;#获取所有记录-fetchall&#34; class=&#34;headerlink&#34; title=&#34;获取所有记录 fetchall()&#34;&gt;&lt;/a&gt;获取所有记录 &lt;code&gt;fetchall()&lt;/code&gt;&lt;/h5&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(&#34;SELECT name, salary FROM employees WHERE salary &amp;gt; %s&#34;, (58000,))
-            
-            print(&#34;\n薪水 &amp;gt; 58000 的所有员工:&#34;)
-            records = cur.fetchall() # 获取所有剩余结果
-            
-            if records:
-                for row in records:
-                    print(f&#34;姓名: {row[0]}, 薪水: {row[1]}&#34;)
-            else:
-                print(&#34;未找到记录。&#34;)
-                
-except (Exception, psycopg2.DatabaseError) as error:
-    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;注意：&lt;/strong&gt; 如果结果集非常大，&lt;code&gt;fetchall()&lt;/code&gt; 可能会消耗大量内存。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;迭代游标-内存高效&#34;&gt;&lt;a href=&#34;#迭代游标-内存高效&#34; class=&#34;headerlink&#34; title=&#34;迭代游标 (内存高效)&#34;&gt;&lt;/a&gt;迭代游标 (内存高效)&lt;/h5&gt;&lt;p&gt;对于大数据集，最好的方式是直接迭代游标：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            # 游标充当了迭代器
-            cur.execute(&#34;SELECT * FROM employees&#34;)
-            print(&#34;\n--- 迭代所有员工 ---&#34;)
-            for row in cur:
-                print(f&#34;ID: {row[0]}, 姓名: {row[1]}&#34;)
-                
-except (Exception, psycopg2.DatabaseError) as error:
-    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;D-更新数据-UPDATE&#34;&gt;&lt;a href=&#34;#D-更新数据-UPDATE&#34; class=&#34;headerlink&#34; title=&#34;D. 更新数据 (UPDATE)&#34;&gt;&lt;/a&gt;D. 更新数据 (UPDATE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            query = &#34;UPDATE employees SET salary = salary * 1.10 WHERE department = %s&#34;
-            cur.execute(query, (&#34;Engineering&#34;,))
-            
-            # cur.rowcount 包含受影响的行数
-            updated_rows = cur.rowcount
-            print(f&#34;Engineering 部门 {updated_rows} 名员工已加薪。&#34;)
-            # 自动提交
-            
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;更新失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;E-删除数据-DELETE&#34;&gt;&lt;a href=&#34;#E-删除数据-DELETE&#34; class=&#34;headerlink&#34; title=&#34;E. 删除数据 (DELETE)&#34;&gt;&lt;/a&gt;E. 删除数据 (DELETE)&lt;/h4&gt;&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            query = &#34;DELETE FROM employees WHERE name = %s&#34;
-            cur.execute(query, (&#34;David Brown&#34;,))
-            
-            deleted_rows = cur.rowcount
-            print(f&#34;成功删除 {deleted_rows} 名员工。&#34;)
-            # 自动提交
-            
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;删除失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h3 id=&#34;7-事务管理-Transaction&#34;&gt;&lt;a href=&#34;#7-事务管理-Transaction&#34; class=&#34;headerlink&#34; title=&#34;7. 事务管理 (Transaction)&#34;&gt;&lt;/a&gt;7. 事务管理 (Transaction)&lt;/h3&gt;&lt;p&gt;数据库事务是一组“要么全做，要么全不做”的操作。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;with psycopg2.connect(...) as conn:&lt;/code&gt; 块本身就构成了一个事务：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果 &lt;code&gt;with&lt;/code&gt; 块中的代码&lt;strong&gt;成功执行完毕&lt;/strong&gt;（没有抛出异常），&lt;code&gt;conn.commit()&lt;/code&gt; 会在块退出时自动调用。&lt;/li&gt;
-&lt;li&gt;如果 &lt;code&gt;with&lt;/code&gt; 块中的代码&lt;strong&gt;抛出了异常&lt;/strong&gt;，&lt;code&gt;conn.rollback()&lt;/code&gt; 会自动调用，撤销块中已执行的所有 SQL 操作。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;示例：转账（原子操作）&lt;/strong&gt; 假设 Alice 给 Bob 转账 1000。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;def transfer_money(from_id, to_id, amount):
-    try:
-        with psycopg2.connect(**DB_PARAMS) as conn:
-            # conn 现在处于一个事务中
-            with conn.cursor() as cur:
-                
-                # 1. 从 Alice 账户扣款
-                cur.execute(
-                    &#34;UPDATE employees SET salary = salary - %s WHERE id = %s&#34;, 
-                    (amount, from_id)
-                )
-                
-                # (模拟一个错误)
-                # if from_id == 1:
-                #     raise Exception(&#34;网络故障!&#34;)
-
-                # 2. 向 Bob 账户加款
-                cur.execute(
-                    &#34;UPDATE employees SET salary = salary + %s WHERE id = %s&#34;,
-                    (amount, to_id)
-                )
-            
-            # 3. 退出 with conn 块，自动 commit
-            print(&#34;转账成功！&#34;)
-            
-    except (Exception, psycopg2.DatabaseError) as error:
-        # 4. 发生异常，自动 rollback
-        print(f&#34;转账失败! 错误: {error}&#34;)
-        print(&#34;事务已回滚。&#34;)
-
-# 假设 Alice (id=1) 给 Bob (id=2) 转账 1000
-transfer_money(1, 2, 1000.00) &lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果你取消上面“模拟一个错误”的注释，Alice 的扣款和 Bob 的加款 &lt;em&gt;都不会&lt;/em&gt; 发生，数据库将保持原样。这就是事务的威力。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;8-高级技巧&#34;&gt;&lt;a href=&#34;#8-高级技巧&#34; class=&#34;headerlink&#34; title=&#34;8. 高级技巧&#34;&gt;&lt;/a&gt;8. 高级技巧&lt;/h3&gt;&lt;h4 id=&#34;A-将结果作为字典获取-RealDictCursor&#34;&gt;&lt;a href=&#34;#A-将结果作为字典获取-RealDictCursor&#34; class=&#34;headerlink&#34; title=&#34;A. 将结果作为字典获取 (RealDictCursor)&#34;&gt;&lt;/a&gt;A. 将结果作为字典获取 (RealDictCursor)&lt;/h4&gt;&lt;p&gt;默认返回元组 &lt;code&gt;(1, &#39;Alice&#39;)&lt;/code&gt; 不太方便。我们通常想要字典 &lt;code&gt;{&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice&#39;}&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;你需要导入 &lt;code&gt;psycopg2.extras&lt;/code&gt; 并指定 &lt;code&gt;cursor_factory&lt;/code&gt;。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from psycopg2.extras import RealDictCursor
-
-try:
-    # 1. 在 connect 时指定 cursor_factory
-    with psycopg2.connect(**DB_PARAMS, cursor_factory=RealDictCursor) as conn:
-        
-        # 2. 也可以在创建 cursor 时指定
-        # with conn.cursor(cursor_factory=RealDictCursor) as cur:
-        
-        with conn.cursor() as cur: # cur 现在是 RealDictCursor
-            cur.execute(&#34;SELECT id, name, salary FROM employees WHERE id = %s&#34;, (1,))
-            record = cur.fetchone()
-            
-            if record:
-                print(&#34;\n--- 字典游标结果 ---&#34;)
-                print(record)
-                # 输出: {&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice Green&#39;, &#39;salary&#39;: 82500.00}
-                print(f&#34;姓名: {record[&#39;name&#39;]}&#34;) # 可以通过键名访问
-            
-except (Exception, psycopg2.DatabaseError) as error:
-    print(error)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;B-处理-NULL-值&#34;&gt;&lt;a href=&#34;#B-处理-NULL-值&#34; class=&#34;headerlink&#34; title=&#34;B. 处理 NULL 值&#34;&gt;&lt;/a&gt;B. 处理 &lt;code&gt;NULL&lt;/code&gt; 值&lt;/h4&gt;&lt;p&gt;&lt;code&gt;psycopg2&lt;/code&gt; 会自动处理 Python 的 &lt;code&gt;None&lt;/code&gt; 和 SQL 的 &lt;code&gt;NULL&lt;/code&gt; 之间的转换。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;这是你之前（在聊天记录中）遇到 &lt;code&gt;invalid input syntax for &#34;None&#34;&lt;/code&gt; 错误的原因：&lt;/strong&gt; 如果你使用 &lt;code&gt;f-string&lt;/code&gt; (错误方式)，&lt;code&gt;None&lt;/code&gt; 会被转成字符串 &lt;code&gt;&#34;None&#34;&lt;/code&gt;。 &lt;code&gt;INSERT ... VALUES (&#39;None&#39;)&lt;/code&gt; -&amp;gt; 数据库试图将字符串 “None” 存入 &lt;code&gt;double precision&lt;/code&gt; 字段，导致失败。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;正确方式 (使用参数化):&lt;/strong&gt; &lt;code&gt;psycopg2&lt;/code&gt; 会将 Python 的 &lt;code&gt;None&lt;/code&gt; 正确转换为 SQL 的 &lt;code&gt;NULL&lt;/code&gt;。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# 插入一个 hire_date 为 NULL 的记录
-query = &#34;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&#34;
-data = (&#34;Frank Nullman&#34;, &#34;IT&#34;, 62000.00, None) # Python 的 None
-
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-    print(&#34;成功插入带 NULL 值的记录。&#34;)
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;插入 NULL 失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;C-处理-JSON-JSONB-数据&#34;&gt;&lt;a href=&#34;#C-处理-JSON-JSONB-数据&#34; class=&#34;headerlink&#34; title=&#34;C. 处理 JSON/JSONB 数据&#34;&gt;&lt;/a&gt;C. 处理 &lt;code&gt;JSON/JSONB&lt;/code&gt; 数据&lt;/h4&gt;&lt;p&gt;PostgreSQ 对 &lt;code&gt;JSON&lt;/code&gt; 有很好的支持。&lt;code&gt;psycopg2&lt;/code&gt; 可以自动序列化和反序列化 Python 的 &lt;code&gt;dict&lt;/code&gt; 和 &lt;code&gt;list&lt;/code&gt;。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;from psycopg2.extras import Json
-
-# 假设表有
-# ALTER TABLE employees ADD COLUMN metadata JSONB;
-
-# 写入 JSON
-meta_data = {
-    &#39;skills&#39;: [&#39;Python&#39;, &#39;SQL&#39;, &#39;OPC-UA&#39;],
-    &#39;manager_id&#39;: 10
-}
-
-try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            # 使用 extras.Json 包装一下
-            query = &#34;UPDATE employees SET metadata = %s WHERE name = %s&#34;
-            cur.execute(query, (Json(meta_data), &#34;Alice Green&#34;))
-            
-            # 读取 JSON
-            cur.execute(&#34;SELECT metadata FROM employees WHERE name = %s&#34;, (&#34;Alice Green&#34;,))
-            result = cur.fetchone()[0]
-            
-            print(f&#34;\n读取到的 JSONB 数据: {result}&#34;)
-            print(f&#34;数据类型: {type(result)}&#34;) # &amp;lt;class &#39;dict&#39;&amp;gt;
-            print(f&#34;技能: {result[&#39;skills&#39;][0]}&#34;) # &#39;Python&#39;
-            
-except (Exception, psycopg2.DatabaseError) as error:
-    print(f&#34;JSON 操作失败: {error}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;9-总结：最佳实践清单&#34;&gt;&lt;a href=&#34;#9-总结：最佳实践清单&#34; class=&#34;headerlink&#34; title=&#34;9. 总结：最佳实践清单&#34;&gt;&lt;/a&gt;9. 总结：最佳实践清单&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;始终使用 &lt;code&gt;with&lt;/code&gt; 语句&lt;/strong&gt; 管理连接 (&lt;code&gt;conn&lt;/code&gt;) 和游标 (&lt;code&gt;cur&lt;/code&gt;)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;永远使用参数化查询&lt;/strong&gt; (&lt;code&gt;cur.execute(query, (params,))&lt;/code&gt;) 来防止 SQL 注入。&lt;code&gt;%s&lt;/code&gt; 是唯一的占位符。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;conn.commit()&lt;/code&gt;&lt;/strong&gt; 提交更改。依赖 &lt;code&gt;with conn:&lt;/code&gt; 块的自动提交/回滚功能是最安全的方式。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;cur.executemany()&lt;/code&gt;&lt;/strong&gt; 进行批量插入。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用 &lt;code&gt;psycopg2.extras.RealDictCursor&lt;/code&gt;&lt;/strong&gt; 来获取字典形式的结果。&lt;/li&gt;
-&lt;li&gt;**正确处理 &lt;code&gt;None&lt;/code&gt;**：参数化查询会自动将 &lt;code&gt;None&lt;/code&gt; 转为 &lt;code&gt;NULL&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;捕获 &lt;code&gt;psycopg2.DatabaseError&lt;/code&gt;&lt;/strong&gt; 来处理数据库相关的特定异常。&lt;/li&gt;
-&lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/</guid>
-            <title>OPC-UA 与 Python 详细使用教程</title>
-            <link>https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/</link>
-            <category>python</category>
-            <pubDate>Sun, 19 Oct 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;OPC-UA-与-Python-详细使用教程&#34;&gt;&lt;a href=&#34;#OPC-UA-与-Python-详细使用教程&#34; class=&#34;headerlink&#34; title=&#34;OPC-UA 与 Python 详细使用教程&#34;&gt;&lt;/a&gt;OPC-UA 与 Python 详细使用教程&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-OPC-UA？&#34;&gt;&lt;a href=&#34;#1-什么是-OPC-UA？&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 OPC-UA？&#34;&gt;&lt;/a&gt;1. 什么是 OPC-UA？&lt;/h3&gt;&lt;p&gt;OPC-UA (Open Platform Communications Unified Architecture) 是一种独立于平台、面向服务的机器对机器（M2M）通信协议。它被广泛应用于工业自动化领域，用于在不同厂商的设备、控制器和软件应用之间实现安全、可靠的数据交换。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;核心概念：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;服务器 (Server):&lt;/strong&gt; 通常是设备（如 PLC、DCS）或网关，它持有数据并将其暴露给网络。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;客户端 (Client):&lt;/strong&gt; 通常是监控软件（如 SCADA、HMI）或数据采集程序，它连接到服务器以读取、写入或订阅数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;地址空间 (Address Space):&lt;/strong&gt; 服务器内部所有数据的分层结构。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;节点 (Node):&lt;/strong&gt; 地址空间中的一个元素，可以是对象 (Object)、变量 (Variable)、方法 (Method) 等。每个节点都有一个唯一的 &lt;code&gt;NodeId&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;变量 (Variable):&lt;/strong&gt; 存放实际数据的节点，例如温度、压力、开关状态等。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-安装-python-opcua&#34;&gt;&lt;a href=&#34;#2-安装-python-opcua&#34; class=&#34;headerlink&#34; title=&#34;2. 安装 python-opcua&#34;&gt;&lt;/a&gt;2. 安装 &lt;code&gt;python-opcua&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;安装非常简单，使用 pip 即可：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install opcua&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-第一部分：创建一个简单的-OPC-UA-服务器&#34;&gt;&lt;a href=&#34;#3-第一部分：创建一个简单的-OPC-UA-服务器&#34; class=&#34;headerlink&#34; title=&#34;3. 第一部分：创建一个简单的 OPC-UA 服务器&#34;&gt;&lt;/a&gt;3. 第一部分：创建一个简单的 OPC-UA 服务器&lt;/h3&gt;&lt;p&gt;我们将创建一个服务器，它会暴露一个模拟的温度传感器变量。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import ua, Server
-
-# 1. 创建服务器实例
-server = Server()
-
-# 2. 设置服务器端点 (Endpoint)
-#    客户端将通过这个 URL 连接
-url = &#34;opc.tcp://0.0.0.0:4840/freeopcua/server/&#34;
-server.set_endpoint(url)
-
-# 3. 设置服务器名称（可选）
-server.set_server_name(&#34;Python OPC-UA 示例服务器&#34;)
-
-# 4. 设置安全策略（这里使用最不安全的，方便测试）
-#    实际应用中应使用更安全的策略
-server.set_security_policy([
-    ua.SecurityPolicyType.NoSecurity,
-    ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt,
-    ua.SecurityPolicyType.Basic256Sha256_Sign
-])
-
-# 5. 注册一个唯一的命名空间 (Namespace)
-#    命名空间用于组织你自己的节点，防止与标准节点冲突
-ns_name = &#34;http://examples.freeopcua.github.io&#34;
-idx = server.register_namespace(ns_name)
-
-# 6. 在服务器的 Objects 节点下创建一个“MyObjects”文件夹
-objects = server.get_objects_node()
-my_folder = objects.add_object(idx, &#34;MyObjects&#34;)
-
-# 7. 在“MyObjects”文件夹下创建变量
-#    idx: 命名空间索引
-#    &#34;MyVariable&#34;: 节点的浏览名称 (BrowseName)
-#    0: 变量的初始值
-my_var = my_folder.add_variable(idx, &#34;MyVariable&#34;, 0)
-my_temp_sensor = my_folder.add_variable(idx, &#34;TemperatureSensor&#34;, 20.0)
-
-# 8. 使变量可被客户端写入
-#    默认情况下，变量是只读的
-my_var.set_writable()
-my_temp_sensor.set_writable()
-
-# 9. 启动服务器
-try:
-    print(f&#34;启动服务器于 {url}&#34;)
-    server.start()
-    
-    # 让服务器持续运行，并模拟温度变化
-    temperature = 20.0
-    delta = 0.5
-    
-    while True:
-        time.sleep(2)  # 每2秒更新一次
-        
-        temperature += delta
-        if temperature &amp;gt; 30 or temperature &amp;lt; 19:
-            delta = -delta # 调转方向
-            
-        print(f&#34;设置新温度值为: {temperature:.1f}&#34;)
-        my_temp_sensor.set_value(temperature)
-
-except KeyboardInterrupt:
-    print(&#34;\n服务器正在停止...&#34;)
-finally:
-    # 10. 关闭服务器
-    server.stop()
-    print(&#34;服务器已关闭&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 将以上代码保存为 &lt;code&gt;server.py&lt;/code&gt; 并运行 &lt;code&gt;python server.py&lt;/code&gt;。你现在就有了一个正在运行的 OPC-UA 服务器。&lt;/p&gt;
-&lt;h3 id=&#34;4-第二部分：创建一个-OPC-UA-客户端（读写）&#34;&gt;&lt;a href=&#34;#4-第二部分：创建一个-OPC-UA-客户端（读写）&#34; class=&#34;headerlink&#34; title=&#34;4. 第二部分：创建一个 OPC-UA 客户端（读写）&#34;&gt;&lt;/a&gt;4. 第二部分：创建一个 OPC-UA 客户端（读写）&lt;/h3&gt;&lt;p&gt;现在我们创建另一个脚本来连接服务器、读取和写入数据。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import Client, ua
-
-# 服务器的 URL，与 server.py 中设置的保持一致
-url = &#34;opc.tcp://localhost:4840/freeopcua/server/&#34;
-
-# 1. 创建客户端实例
-client = Client(url)
-
-try:
-    # 2. 连接到服务器
-    print(f&#34;正在连接到 {url} ...&#34;)
-    client.connect()
-    print(&#34;连接成功！&#34;)
-
-    # 3. 浏览节点 (可选, 但有助于理解结构)
-    #    获取根节点
-    root = client.get_root_node()
-    print(f&#34;根节点: {root}&#34;)
-    print(f&#34;根节点的子节点: {root.get_children()}&#34;)
-
-    # 4. 获取我们感兴趣的特定节点
-    #    方法a: 通过浏览路径 (Browse Path)
-    #    路径: Root -&amp;gt; Objects (0:Objects) -&amp;gt; 命名空间2 (2:MyObjects) -&amp;gt; 变量 (2:TemperatureSensor)
-    #    &#39;2&#39; 是我们自己注册的命名空间的索引 (idx)
-    #    注意: 命名空间索引 (ns) 可能会变化，通常 0 是标准，1 是服务器内部，我们注册的从 2 开始
-    temp_node = client.get_node(&#34;ns=2;s=TemperatureSensor&#34;)
-    my_var_node = client.get_node(&#34;ns=2;s=MyVariable&#34;)
-
-    #    方法b: 通过 NodeId (如果已知)
-    #    node_id_str = &#34;ns=2;i=2&#34; # 假设你知道它的 NodeId
-    #    temp_node = client.get_node(node_id_str)
-    
-    print(&#34;-&#34; * 30)
-    
-    # 5. 读取节点的值
-    current_temp = temp_node.get_value()
-    print(f&#34;读取到当前温度: {current_temp}&#34;)
-    
-    current_var = my_var_node.get_value()
-    print(f&#34;读取到 MyVariable: {current_var}&#34;)
-    
-    print(&#34;-&#34; * 30)
-
-    # 6. 写入节点的值
-    new_value = 99.9
-    print(f&#34;正在向 MyVariable 写入新值: {new_value}&#34;)
-    
-    # 构造 ua.DataValue 和 ua.Variant
-    data_value = ua.DataValue(ua.Variant(new_value, ua.VariantType.Double))
-    my_var_node.set_value(data_value)
-    
-    # 验证写入
-    time.sleep(1)
-    read_back = my_var_node.get_value()
-    print(f&#34;回读 MyVariable 的值: {read_back}&#34;)
-    
-    # 尝试写入只读节点（如果 TemperatureSensor 没设置 set_writable()，这里会报错）
-    try:
-        temp_node.set_value(ua.DataValue(ua.Variant(100.0, ua.VariantType.Float)))
-        print(&#34;成功写入温度值 (服务器端允许写入)&#34;)
-    except ua.UaError as e:
-        print(f&#34;写入温度值失败 (可能是只读): {e}&#34;)
-
-
-finally:
-    # 7. 断开连接
-    if client:
-        client.disconnect()
-        print(&#34;客户端已断开连接&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 保持 &lt;code&gt;server.py&lt;/code&gt; 运行，打开一个新的终端，运行 &lt;code&gt;python client.py&lt;/code&gt;。你将看到客户端连接、读取、写入并断开连接的过程。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;5-第三部分：订阅数据变化&#34;&gt;&lt;a href=&#34;#5-第三部分：订阅数据变化&#34; class=&#34;headerlink&#34; title=&#34;5. 第三部分：订阅数据变化&#34;&gt;&lt;/a&gt;5. 第三部分：订阅数据变化&lt;/h3&gt;&lt;p&gt;OPC-UA 最强大的功能之一是订阅。客户端不需要（也不应该）频繁轮询数据，而是可以告诉服务器：“当这个变量变化时，请通知我。”&lt;/p&gt;
-&lt;p&gt;我们将修改客户端代码来实现订阅。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import Client
-
-# 1. 定义一个订阅处理器类 (Handler)
-class SubHandler(object):
-    &#34;&#34;&#34;
-    订阅处理器，用于处理来自服务器的数据变更通知。
-    &#34;&#34;&#34;
-    def datachange_notification(self, node, val, data):
-        &#34;&#34;&#34;
-        当订阅的节点数据发生变化时，此方法被调用。
-        &#34;&#34;&#34;
-        print(f&#34;[订阅] 节点 {node} 的值变为: {val}&#34;)
-
-    def event_notification(self, event):
-        &#34;&#34;&#34;
-        处理事件通知 (本例中未使用)
-        &#34;&#34;&#34;
-        print(f&#34;[订阅] 收到新事件: {event}&#34;)
-
-# --- 主程序 ---
-url = &#34;opc.tcp://localhost:4840/freeopcua/server/&#34;
-client = Client(url)
-
-try:
-    client.connect()
-    print(&#34;客户端已连接&#34;)
-
-    # 2. 获取要订阅的节点
-    temp_node = client.get_node(&#34;ns=2;s=TemperatureSensor&#34;)
-    print(f&#34;将要订阅的节点: {temp_node}&#34;)
-
-    # 3. 创建订阅处理器实例
-    handler = SubHandler()
-
-    # 4. 在客户端上创建订阅 (Subscription)
-    #    参数 1000: 订阅的发布间隔 (ms)。服务器将每1000ms检查一次是否有变化。
-    subscription = client.create_subscription(1000, handler)
-    print(&#34;已创建订阅&#34;)
-
-    # 5. 告诉订阅要监控哪个节点 (MonitoredItem)
-    #    参数 10: 队列大小 (QueueSize)
-    handle = subscription.subscribe_data_change(temp_node, queuesize=10)
-    print(f&#34;已订阅节点 {temp_node} 的数据变化&#34;)
-
-    # 6. 让客户端保持运行以接收通知
-    print(&#34;正在等待数据变化 (按 Ctrl+C 停止)...&#34;)
-    while True:
-        time.sleep(1)
-
-except KeyboardInterrupt:
-    print(&#34;\n正在停止订阅...&#34;)
-finally:
-    # 7. 删除订阅 (可选, 但良好实践)
-    if &#39;subscription&#39; in locals():
-        subscription.delete()
-        print(&#34;订阅已删除&#34;)
-    
-    # 8. 断开连接
-    client.disconnect()
-    print(&#34;客户端已断开&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 确保 &lt;code&gt;server.py&lt;/code&gt; 正在运行（它会每2秒更新一次温度）。然后运行这个新的订阅客户端脚本 &lt;code&gt;subscriber.py&lt;/code&gt;。你将看到它每2秒（或根据服务器的更新频率）打印一次 &lt;code&gt;[订阅] ...&lt;/code&gt; 的消息。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;6-第四部分：在服务器上创建并调用方法&#34;&gt;&lt;a href=&#34;#6-第四部分：在服务器上创建并调用方法&#34; class=&#34;headerlink&#34; title=&#34;6. 第四部分：在服务器上创建并调用方法&#34;&gt;&lt;/a&gt;6. 第四部分：在服务器上创建并调用方法&lt;/h3&gt;&lt;p&gt;OPC-UA 不仅能传输数据，还能执行命令（方法）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. 修改 &lt;code&gt;server.py&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;server.start()&lt;/code&gt; 之前，添加以下代码来定义一个方法：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# --- (接第 8 步之后, server.start() 之前) ---
-
-# 定义一个 Python 函数作为方法的实现
-def multiply_by_two(parent, variant_x):
-    &#34;&#34;&#34;
-    一个简单的 OPC-UA 方法，接收一个输入参数并返回其两倍。
-    &#34;&#34;&#34;
-    x = variant_x.Value
-    print(f&#34;服务器方法 &#39;multiply_by_two&#39; 被调用，输入: {x}&#34;)
-    
-    result = x * 2
-    
-    # 返回值必须是 ua.Variant
-    return [ua.Variant(result, ua.VariantType.Double)]
-
-# 9. 在 &#34;MyObjects&#34; 文件夹下注册这个方法
-#    输入参数定义
-in_arg = ua.Argument()
-in_arg.Name = &#34;InputX&#34;
-in_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-in_arg.ValueRank = -1
-in_arg.ArrayDimensions = []
-in_arg.Description = ua.LocalizedText(&#34;一个浮点数输入&#34;)
-
-# 输出参数定义
-out_arg = ua.Argument()
-out_arg.Name = &#34;ResultY&#34;
-out_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-out_arg.ValueRank = -1
-out_arg.ArrayDimensions = []
-out_arg.Description = ua.LocalizedText(&#34;返回 InputX * 2&#34;)
-
-# 将方法添加到地址空间
-my_folder.add_method(
-    idx,                          # 命名空间
-    &#34;MultiplyByTwo&#34;,              # 方法名称
-    multiply_by_two,              # 绑定的 Python 函数
-    [in_arg],                     # 输入参数列表
-    [out_arg]                     # 输出参数列表
-)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;2. 修改 &lt;code&gt;client.py&lt;/code&gt;（普通的读写客户端）：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;client.disconnect()&lt;/code&gt; 之前，添加以下代码来调用该方法：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# --- (接第 6 步之后, client.disconnect() 之前) ---
-
-print(&#34;-&#34; * 30)
-# 7. 调用服务器上的方法
-print(&#34;正在调用服务器方法 &#39;MultiplyByTwo&#39;...&#34;)
-
-# 获取方法节点
-method_node = my_folder_node.get_child(&#34;2:MultiplyByTwo&#34;)
-
-# 准备输入参数
-input_value = 10.5
-print(f&#34;输入参数为: {input_value}&#34;)
-
-# 调用方法 (父节点, 方法节点, 输入参数)
-# 父节点是 &#39;MyObjects&#39;
-my_folder_node = client.get_node(&#34;ns=2;s=MyObjects&#34;) 
-result = my_folder_node.call_method(method_node, input_value)
-# 或者: result = client.call_method(method_node, input_value) 
-
-print(f&#34;服务器返回结果: {result}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;注意：&lt;/em&gt; 你需要先在客户端代码中获取 &lt;code&gt;my_folder_node&lt;/code&gt;，例如 &lt;code&gt;my_folder_node = client.get_node(&#34;ns=2;s=MyObjects&#34;)&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 重启服务器 &lt;code&gt;server.py&lt;/code&gt;（现在它包含了方法）。运行 &lt;code&gt;client.py&lt;/code&gt;，你将看到客户端成功调用了服务器上的 &lt;code&gt;MultiplyByTwo&lt;/code&gt; 方法并获得了 &lt;code&gt;21.0&lt;/code&gt; 的返回结果。&lt;/p&gt;
-&lt;h3 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;本教程涵盖了 &lt;code&gt;python-opcua&lt;/code&gt; 最核心的三个功能：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;创建服务器&lt;/strong&gt; 并暴露变量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;创建客户端&lt;/strong&gt; 以读取和写入变量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用订阅&lt;/strong&gt; 来实时接收数据变更通知。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用方法&lt;/strong&gt; 来执行远程命令。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在实际应用中，你还需要深入了解：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;安全性：&lt;/strong&gt; 使用证书和用户认证来保护你的服务器。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;复杂数据类型：&lt;/strong&gt; 定义和使用自定义的结构体 (Structs)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;历史数据：&lt;/strong&gt; 查询历史数据 (Historical Access)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;事件 (Events)：&lt;/strong&gt; 订阅比数据变更更复杂的事件（如警报）。&lt;/li&gt;
-&lt;/ul&gt;
  ]]></description>
         </item>
     </channel>
