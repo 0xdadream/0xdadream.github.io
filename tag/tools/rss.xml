@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 15 Nov 2025 23:00:00 +0800</pubDate>
-        <lastBuildDate>Sat, 15 Nov 2025 23:00:00 +0800</lastBuildDate>
+        <pubDate>Thu, 16 Apr 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Thu, 16 Apr 2026 12:25:00 +0800</lastBuildDate>
         <category>AI</category>
         <category>tip</category>
         <category>intel</category>
@@ -61,6 +61,333 @@
         <category>i春秋</category>
         <category>mcp</category>
         <category>证书</category>
+        <category>ai</category>
+        <category>wsl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/04/16/nano-jiao-cheng/</guid>
+            <title>nano教程</title>
+            <link>https://0xdadream.github.io/2026/04/16/nano-jiao-cheng/</link>
+            <category>tools</category>
+            <pubDate>Thu, 16 Apr 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;nano教程&#34;&gt;&lt;a href=&#34;#nano教程&#34; class=&#34;headerlink&#34; title=&#34;nano教程&#34;&gt;&lt;/a&gt;nano教程&lt;/h1&gt;&lt;h3 id=&#34;1-安装（一次搞定）&#34;&gt;&lt;a href=&#34;#1-安装（一次搞定）&#34; class=&#34;headerlink&#34; title=&#34;1. 安装（一次搞定）&#34;&gt;&lt;/a&gt;1. 安装（一次搞定）&lt;/h3&gt;&lt;p&gt;大多数系统自带，没装就敲：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ubuntu/Debian：sudo apt install nano -y&lt;/li&gt;
+&lt;li&gt;Fedora/RHEL/CentOS：sudo dnf install nano -y&lt;/li&gt;
+&lt;li&gt;Arch：sudo pacman -S nano&lt;/li&gt;
+&lt;li&gt;macOS（Homebrew）：brew install nano&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;验证：nano –version&lt;/p&gt;
+&lt;h3 id=&#34;2-怎么打开&#34;&gt;&lt;a href=&#34;#2-怎么打开&#34; class=&#34;headerlink&#34; title=&#34;2. 怎么打开&#34;&gt;&lt;/a&gt;2. 怎么打开&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;nano 文件名          # 新建或打开
+nano /etc/nginx/nginx.conf   # 改系统文件建议加 sudo
+nano +行号 文件名     # 直接跳到某行（比如 nano +50 config.py）
+nano                  # 新建临时文件，退出时再命名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-界面和最常用操作（底部一直有提示）&#34;&gt;&lt;a href=&#34;#3-界面和最常用操作（底部一直有提示）&#34; class=&#34;headerlink&#34; title=&#34;3. 界面和最常用操作（底部一直有提示）&#34;&gt;&lt;/a&gt;3. 界面和最常用操作（底部一直有提示）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;保存&lt;/strong&gt;：Ctrl + S（最快）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;另存为&lt;/strong&gt;：Ctrl + O（改名用）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;退出&lt;/strong&gt;：Ctrl + X（改了会问你保存不）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;光标移动&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方向键 或 Ctrl + F/B/P/N（右左上下）&lt;/li&gt;
+&lt;li&gt;行首：Ctrl + A&lt;/li&gt;
+&lt;li&gt;行尾：Ctrl + E&lt;/li&gt;
+&lt;li&gt;文件头：Alt + \&lt;/li&gt;
+&lt;li&gt;文件尾：Alt + /&lt;/li&gt;
+&lt;li&gt;跳行：Ctrl + _（输入行号回车）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;编辑&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接打字&lt;/li&gt;
+&lt;li&gt;删一行：Ctrl + K&lt;/li&gt;
+&lt;li&gt;复制一行：Alt + 6&lt;/li&gt;
+&lt;li&gt;粘贴：Ctrl + U&lt;/li&gt;
+&lt;li&gt;撤销：Alt + U&lt;/li&gt;
+&lt;li&gt;重做：Alt + E&lt;/li&gt;
+&lt;li&gt;删前面字符：Backspace / Ctrl + H&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;删除全文&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Alt + \ → 文件头&lt;/li&gt;
+&lt;li&gt;Alt + A（设标记）&lt;/li&gt;
+&lt;li&gt;Alt + / → 文件尾（全选中反白）&lt;/li&gt;
+&lt;li&gt;Ctrl + K → 全删&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;删完直接 Ctrl + S 保存就空了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;选中文字&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;光标到起点 → Alt + A&lt;/li&gt;
+&lt;li&gt;移动光标选中&lt;/li&gt;
+&lt;li&gt;Ctrl + K 剪切 / Alt + 6 复制 / Ctrl + U 粘贴&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;鼠标能直接点选、拖拽（大部分终端都支持）。&lt;/p&gt;
+&lt;h3 id=&#34;4-搜索和替换&#34;&gt;&lt;a href=&#34;#4-搜索和替换&#34; class=&#34;headerlink&#34; title=&#34;4. 搜索和替换&#34;&gt;&lt;/a&gt;4. 搜索和替换&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;搜索：Ctrl + F（向前）或 Ctrl + B（向后）&lt;/li&gt;
+&lt;li&gt;下一个：Alt + F / Alt + B&lt;/li&gt;
+&lt;li&gt;替换：Alt + R（输入旧 → 回车 → 新 → 回车 → Y/N 确认）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;支持正则（^ 行首、$ 行尾）。&lt;/p&gt;
+&lt;h3 id=&#34;5-多文件同时编辑（日常神器）&#34;&gt;&lt;a href=&#34;#5-多文件同时编辑（日常神器）&#34; class=&#34;headerlink&#34; title=&#34;5. 多文件同时编辑（日常神器）&#34;&gt;&lt;/a&gt;5. 多文件同时编辑（日常神器）&lt;/h3&gt;&lt;p&gt;启动：nano 文件1 文件2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换：Alt + &amp;lt;（上一个） / Alt + &amp;gt;（下一个）&lt;/li&gt;
+&lt;li&gt;关当前文件：Ctrl + X（只关这一个）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-宏录制（重复操作一次搞定）&#34;&gt;&lt;a href=&#34;#6-宏录制（重复操作一次搞定）&#34; class=&#34;headerlink&#34; title=&#34;6. 宏录制（重复操作一次搞定）&#34;&gt;&lt;/a&gt;6. 宏录制（重复操作一次搞定）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;开始录制：Alt + :&lt;/li&gt;
+&lt;li&gt;做完操作&lt;/li&gt;
+&lt;li&gt;停止：Alt + ;&lt;/li&gt;
+&lt;li&gt;回放：Alt + :（再按一次）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;批量改变量名、加注释超快。&lt;/p&gt;
+&lt;h3 id=&#34;7-其他日常小技巧&#34;&gt;&lt;a href=&#34;#7-其他日常小技巧&#34; class=&#34;headerlink&#34; title=&#34;7. 其他日常小技巧&#34;&gt;&lt;/a&gt;7. 其他日常小技巧&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;执行命令并插入输出：Ctrl + T 然后输入 !date 或 !ls（前面加 !）&lt;/li&gt;
+&lt;li&gt;插入文件内容：Ctrl + R + 文件名&lt;/li&gt;
+&lt;li&gt;书签（大文件跳跃）：光标位置 Alt + B 设置，下一个 Alt + N&lt;/li&gt;
+&lt;li&gt;拼写检查：Ctrl + T（系统有 aspell 就行）&lt;/li&gt;
+&lt;li&gt;大小写转换：选中后 Alt + U（大写） / Alt + L（小写）&lt;/li&gt;
+&lt;li&gt;缩进：Tab / Shift + Tab&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-让-Nano-永久好用（配一次就行）&#34;&gt;&lt;a href=&#34;#8-让-Nano-永久好用（配一次就行）&#34; class=&#34;headerlink&#34; title=&#34;8. 让 Nano 永久好用（配一次就行）&#34;&gt;&lt;/a&gt;8. 让 Nano 永久好用（配一次就行）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;nano ~/.nanorc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;粘贴下面内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-nanorc&#34; data-language=&#34;nanorc&#34;&gt;&lt;code class=&#34;language-nanorc&#34;&gt;set linenumbers          # 显示行号 set tabsize 4 set tabstospaces         # Tab 转空格 set autoindent set smooth               # 丝滑滚动 set softwrap             # 自动换行 set mouse                # 鼠标支持 include &#34;/usr/share/nano/*.nanorc&#34;  # 自动语法高亮（Python、JSON 等）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后重开 nano 生效。想全局改就编辑 /etc/nanorc。&lt;/p&gt;
+&lt;h3 id=&#34;9-启动参数（懒人专用）&#34;&gt;&lt;a href=&#34;#9-启动参数（懒人专用）&#34; class=&#34;headerlink&#34; title=&#34;9. 启动参数（懒人专用）&#34;&gt;&lt;/a&gt;9. 启动参数（懒人专用）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;nano -w 文件：不自动换行（看日志用）&lt;/li&gt;
+&lt;li&gt;nano -v 文件：只读模式&lt;/li&gt;
+&lt;li&gt;nano -B 文件：自动备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;10-常见问题秒解决&#34;&gt;&lt;a href=&#34;#10-常见问题秒解决&#34; class=&#34;headerlink&#34; title=&#34;10. 常见问题秒解决&#34;&gt;&lt;/a&gt;10. 常见问题秒解决&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;保存不了：权限问题，加 sudo 或检查路径&lt;/li&gt;
+&lt;li&gt;快捷键不灵：终端里试 Esc 代替 Alt&lt;/li&gt;
+&lt;li&gt;中文乱码：终端敲 export LANG=zh_CN.UTF-8&lt;/li&gt;
+&lt;li&gt;文件太大：先用 less 文件 看，必要时再 nano&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;日常就这些，够你改配置、写脚本、看日志、临时笔记了。第一次用直接 Ctrl + G 看内置帮助，过一遍就全记住了。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/04/14/tdl-chang-qi-wei-hu-zhong-ji-wan-zheng-jiao-cheng/</guid>
+            <title>tdl 长期维护完整最终教程</title>
+            <link>https://0xdadream.github.io/2026/04/14/tdl-chang-qi-wei-hu-zhong-ji-wan-zheng-jiao-cheng/</link>
+            <category>tools</category>
+            <pubDate>Tue, 14 Apr 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;tdl-长期维护完整最终教程（Windows）&#34;&gt;&lt;a href=&#34;#tdl-长期维护完整最终教程（Windows）&#34; class=&#34;headerlink&#34; title=&#34;tdl 长期维护完整最终教程（Windows）&#34;&gt;&lt;/a&gt;tdl 长期维护完整最终教程（Windows）&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;一、tdl-的正确定位&#34;&gt;&lt;a href=&#34;#一、tdl-的正确定位&#34; class=&#34;headerlink&#34; title=&#34;一、tdl 的正确定位&#34;&gt;&lt;/a&gt;一、tdl 的正确定位&lt;/h2&gt;&lt;p&gt;✅ tdl 是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Telegram &lt;strong&gt;官方 API&lt;/strong&gt; 客户端&lt;/li&gt;
+&lt;li&gt;使用 &lt;strong&gt;你自己的账号（session）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;命令行工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;❌ tdl 不是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爬虫 / bot&lt;/li&gt;
+&lt;li&gt;破解工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工作模型（必须记住）&#34;&gt;&lt;a href=&#34;#工作模型（必须记住）&#34; class=&#34;headerlink&#34; title=&#34;工作模型（必须记住）&#34;&gt;&lt;/a&gt;工作模型（必须记住）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;Telegram Desktop（登录一次）
+        ↓
+本地 session（凭证）
+        ↓
+tdl 以“正常用户身份”下载&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;👉 &lt;strong&gt;是否打开软件不重要&lt;br&gt; 是否退出账号非常重要&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、长期维护前必须固定的-3-件事&#34;&gt;&lt;a href=&#34;#二、长期维护前必须固定的-3-件事&#34; class=&#34;headerlink&#34; title=&#34;二、长期维护前必须固定的 3 件事&#34;&gt;&lt;/a&gt;二、长期维护前必须固定的 3 件事&lt;/h2&gt;&lt;h3 id=&#34;✅-1️⃣-固定账号（建议一个专用老号）&#34;&gt;&lt;a href=&#34;#✅-1️⃣-固定账号（建议一个专用老号）&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 固定账号（建议一个专用老号）&#34;&gt;&lt;/a&gt;✅ 1️⃣ 固定账号（建议一个专用老号）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;用来下载&lt;/li&gt;
+&lt;li&gt;不频繁换设备 / IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-固定-namespace（这是下载历史的“身份证”）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-固定-namespace（这是下载历史的“身份证”）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 固定 namespace（这是下载历史的“身份证”）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 固定 namespace（这是下载历史的“身份证”）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl login -n archive&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以后所有命令 &lt;strong&gt;必须加&lt;/strong&gt;：&lt;code&gt;-n archive&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-固定目录结构（一定照做）&#34;&gt;&lt;a href=&#34;#✅-3️⃣-固定目录结构（一定照做）&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 固定目录结构（一定照做）&#34;&gt;&lt;/a&gt;✅ 3️⃣ 固定目录结构（一定照做）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\
+│
+├─ Channel_A\
+│  ├─ tdl-export.json
+│  └─ media\
+│
+├─ Channel_B\
+│  ├─ tdl-export.json
+│  └─ media\
+│
+└─ README.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 一个频道 = 一个目录&lt;br&gt; ❌ 永远不要混&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三、安装-登录（一次性）&#34;&gt;&lt;a href=&#34;#三、安装-登录（一次性）&#34; class=&#34;headerlink&#34; title=&#34;三、安装 &amp;amp; 登录（一次性）&#34;&gt;&lt;/a&gt;三、安装 &amp;amp; 登录（一次性）&lt;/h2&gt;&lt;h3 id=&#34;✅-1️⃣-安装-tdl&#34;&gt;&lt;a href=&#34;#✅-1️⃣-安装-tdl&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 安装 tdl&#34;&gt;&lt;/a&gt;✅ 1️⃣ 安装 tdl&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;iwr -useb https://docs.iyear.me/tdl/install.ps1 | iex&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证：&lt;code&gt;tdl version&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-安装-Telegram-Desktop（官网版）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-安装-Telegram-Desktop（官网版）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 安装 Telegram Desktop（官网版）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 安装 Telegram Desktop（官网版）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录一次账号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要退出登录&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-登录-tdl（一次即可）&#34;&gt;&lt;a href=&#34;#✅-3️⃣-登录-tdl（一次即可）&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 登录 tdl（一次即可）&#34;&gt;&lt;/a&gt;✅ 3️⃣ 登录 tdl（一次即可）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl login -n archive --proxy socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive chat ls&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;四、第一次完整下载（初始化）&#34;&gt;&lt;a href=&#34;#四、第一次完整下载（初始化）&#34; class=&#34;headerlink&#34; title=&#34;四、第一次完整下载（初始化）&#34;&gt;&lt;/a&gt;四、第一次完整下载（初始化）&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 只做一次&lt;br&gt;✅ 之后都是“追加”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-1：进入频道目录&#34;&gt;&lt;a href=&#34;#Step-1：进入频道目录&#34; class=&#34;headerlink&#34; title=&#34;Step 1：进入频道目录&#34;&gt;&lt;/a&gt;Step 1：进入频道目录&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd D:\TG-Archive\Channel_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-2：导出聊天清单（不下载）&#34;&gt;&lt;a href=&#34;#Step-2：导出聊天清单（不下载）&#34; class=&#34;headerlink&#34; title=&#34;Step 2：导出聊天清单（不下载）&#34;&gt;&lt;/a&gt;Step 2：导出聊天清单（不下载）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive chat export -c &amp;lt;频道ID或@username&amp;gt; --proxy socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成：&lt;code&gt;tdl-export.json&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;👉 &lt;strong&gt;这是一个“下载清单/快照”&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-3：按清单下载（长期维护核心命令）&#34;&gt;&lt;a href=&#34;#Step-3：按清单下载（长期维护核心命令）&#34; class=&#34;headerlink&#34; title=&#34;Step 3：按清单下载（长期维护核心命令）&#34;&gt;&lt;/a&gt;Step 3：按清单下载（长期维护核心命令）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive dl -f tdl-export.json --takeout --proxy socks5://127.0.0.1:10808 -t 12 -l 1 --continue -d media&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;🔍-五、补充：-d-media-是干什么的？&#34;&gt;&lt;a href=&#34;#🔍-五、补充：-d-media-是干什么的？&#34; class=&#34;headerlink&#34; title=&#34;🔍 五、补充：-d media 是干什么的？&#34;&gt;&lt;/a&gt;🔍 五、补充：&lt;code&gt;-d media&lt;/code&gt; 是干什么的？&lt;/h2&gt;&lt;h3 id=&#34;✅-结论&#34;&gt;&lt;a href=&#34;#✅-结论&#34; class=&#34;headerlink&#34; title=&#34;✅ 结论&#34;&gt;&lt;/a&gt;✅ 结论&lt;/h3&gt;&lt;p&gt;&lt;code&gt;-d media&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;表示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;把所有下载的图片/视频，统一放到当前目录下的 &lt;code&gt;media&lt;/code&gt; 文件夹中&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-不加-d-会怎样？&#34;&gt;&lt;a href=&#34;#✅-不加-d-会怎样？&#34; class=&#34;headerlink&#34; title=&#34;✅ 不加 -d 会怎样？&#34;&gt;&lt;/a&gt;✅ 不加 &lt;code&gt;-d&lt;/code&gt; 会怎样？&lt;/h3&gt;&lt;p&gt;默认行为是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;当前目录/
+└─ downloads/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-加了-d-media-后（推荐）&#34;&gt;&lt;a href=&#34;#✅-加了-d-media-后（推荐）&#34; class=&#34;headerlink&#34; title=&#34;✅ 加了 -d media 后（推荐）&#34;&gt;&lt;/a&gt;✅ 加了 &lt;code&gt;-d media&lt;/code&gt; 后（推荐）&lt;/h3&gt;&lt;p&gt;如果你在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\Channel_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果一定是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\Channel_A\
+├─ tdl-export.json
+└─ media\
+   ├─ -100xxx_12345_video.mp4
+   ├─ -100xxx_12346_photo.jpg&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;导出文件与媒体分离&lt;/li&gt;
+&lt;li&gt;目录长期不会乱&lt;/li&gt;
+&lt;li&gt;后期备份、迁移非常清晰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 &lt;strong&gt;长期维护必须用 &lt;code&gt;-d media&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（目录不存在会自动创建）&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六、长期维护：追加新内容&#34;&gt;&lt;a href=&#34;#六、长期维护：追加新内容&#34; class=&#34;headerlink&#34; title=&#34;六、长期维护：追加新内容&#34;&gt;&lt;/a&gt;六、长期维护：追加新内容&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;❗ tdl 不会自动追踪更新&lt;br&gt; ✅ &lt;strong&gt;追加 = 重新 export + continue&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;✅-标准追加流程（以后永远这样）&#34;&gt;&lt;a href=&#34;#✅-标准追加流程（以后永远这样）&#34; class=&#34;headerlink&#34; title=&#34;✅ 标准追加流程（以后永远这样）&#34;&gt;&lt;/a&gt;✅ 标准追加流程（以后永远这样）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd D:\TG-Archive\Channel_A
+
+tdl -n archive chat export -c &amp;lt;频道ID&amp;gt; --proxy socks5://127.0.0.1:10808
+
+tdl -n archive dl -f tdl-export.json --takeout --proxy socks5://127.0.0.1:10808 -t 12 -l 1 --continue -d media&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 老内容自动跳过&lt;br&gt;✅ 新视频自动追加&lt;br&gt;✅ 永不重复&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;七、直接下载“一条视频-图片”&#34;&gt;&lt;a href=&#34;#七、直接下载“一条视频-图片”&#34; class=&#34;headerlink&#34; title=&#34;七、直接下载“一条视频 / 图片”&#34;&gt;&lt;/a&gt;七、直接下载“一条视频 / 图片”&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 这是&lt;strong&gt;手动补漏 / 临时下载&lt;/strong&gt;必会用的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-1️⃣-下载一条视频-图片&#34;&gt;&lt;a href=&#34;#✅-1️⃣-下载一条视频-图片&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 下载一条视频 / 图片&#34;&gt;&lt;/a&gt;✅ 1️⃣ 下载一条视频 / 图片&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;国内环境常用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123 --proxy socks5://127.0.0.1:10808 --continue&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-下载相册-组合消息（一定要加）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-下载相册-组合消息（一定要加）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 下载相册 / 组合消息（一定要加）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 下载相册 / 组合消息（一定要加）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123 --group&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;否则只会下其中一个文件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-补漏神器：批量链接下载&#34;&gt;&lt;a href=&#34;#✅-3️⃣-补漏神器：批量链接下载&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 补漏神器：批量链接下载&#34;&gt;&lt;/a&gt;✅ 3️⃣ 补漏神器：批量链接下载&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;Get-Content links.txt | ForEach-Object {tdl dl -u $_ --continue}&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;八、tdl-dl-所有你会用到的重要选项（完整表）&#34;&gt;&lt;a href=&#34;#八、tdl-dl-所有你会用到的重要选项（完整表）&#34; class=&#34;headerlink&#34; title=&#34;八、tdl dl 所有你会用到的重要选项（完整表）&#34;&gt;&lt;/a&gt;八、&lt;code&gt;tdl dl&lt;/code&gt; 所有你会用到的重要选项（完整表）&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;选项&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-f tdl-export.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从导出清单批量下载&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-u &amp;lt;链接&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;直接下载某条消息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-d media&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定下载目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--takeout&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;官方导出模式（降风控）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--continue&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;断点续传 + 不重复&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--restart&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;忽略历史，全部重下&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--group&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;下载相册/组合消息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--skip-same&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;文件名+大小相同跳过&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-t &amp;lt;n&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;单文件线程数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-l &amp;lt;n&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同时下载多少个文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-i mp4,mkv&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只下载指定类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-e jpg,png&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;排除某些类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--template&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自定义文件名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--desc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从新到旧下载（不推荐长期用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;九、tdl-如何判断“已经下载过”（核心机制）&#34;&gt;&lt;a href=&#34;#九、tdl-如何判断“已经下载过”（核心机制）&#34; class=&#34;headerlink&#34; title=&#34;九、tdl 如何判断“已经下载过”（核心机制）&#34;&gt;&lt;/a&gt;九、tdl 如何判断“已经下载过”（核心机制）&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ &lt;strong&gt;tdl 不主要看文件在不在&lt;br&gt;tdl 看 MessageID + 本地状态&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;判断顺序：&lt;/p&gt;
+&lt;p&gt;1️⃣ MessageID + &lt;code&gt;.tdl&lt;/code&gt; 状态（核心）&lt;br&gt;2️⃣ 文件名 + 文件大小（&lt;code&gt;--skip-same&lt;/code&gt;）&lt;br&gt;3️⃣ 文件是否存在（最弱）&lt;/p&gt;
+&lt;p&gt;👉 所以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 改文件名不影响&lt;/li&gt;
+&lt;li&gt;❌ 删 &lt;code&gt;.tdl&lt;/code&gt; = tdl 失忆&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十、Telegram-Desktop-要不要打开？&#34;&gt;&lt;a href=&#34;#十、Telegram-Desktop-要不要打开？&#34; class=&#34;headerlink&#34; title=&#34;十、Telegram Desktop 要不要打开？&#34;&gt;&lt;/a&gt;十、Telegram Desktop 要不要打开？&lt;/h2&gt;&lt;p&gt;✅ &lt;strong&gt;不需要打开、不需要运行&lt;/strong&gt;&lt;br&gt;❌ &lt;strong&gt;不能退出账号&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;判断方法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl chat ls&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十一、长期维护三条铁律（一定记住）&#34;&gt;&lt;a href=&#34;#十一、长期维护三条铁律（一定记住）&#34; class=&#34;headerlink&#34; title=&#34;十一、长期维护三条铁律（一定记住）&#34;&gt;&lt;/a&gt;十一、长期维护三条铁律（一定记住）&lt;/h2&gt;&lt;p&gt;1️⃣ namespace 永远不换&lt;br&gt;2️⃣ 一个频道一个目录&lt;br&gt;3️⃣ 追加只用：&lt;code&gt;export + --continue&lt;/code&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2025/11/15/yong-vs-code-xie-python-de-cha-jian/</guid>
             <title>Vscode安装python插件</title>

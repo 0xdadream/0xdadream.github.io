@@ -1,0 +1,2685 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Windows 11 句柄审查与泄漏定位教程, 逐梦">
+    <meta name="description" content="Windows 11 句柄审查与泄漏定位教程">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Windows 11 句柄审查与泄漏定位教程 | 逐梦</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">逐梦</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">逐梦</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/26.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Windows 11 句柄审查与泄漏定位教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/windows/">
+                                <span class="chip bg-color">windows</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
+                                报错修复
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-06-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-06-10
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    20 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Windows-11-句柄审查与泄漏定位教程"><a href="#Windows-11-句柄审查与泄漏定位教程" class="headerlink" title="Windows 11 句柄审查与泄漏定位教程"></a>Windows 11 句柄审查与泄漏定位教程</h1><h2 id="纯-PowerShell-通用版"><a href="#纯-PowerShell-通用版" class="headerlink" title="纯 PowerShell 通用版"></a>纯 PowerShell 通用版</h2><blockquote>
+<p>适用系统：Windows 10 / Windows 11<br>适用环境：Windows PowerShell 5.1、PowerShell 7<br>建议：使用“管理员身份”打开 PowerShell</p>
+</blockquote>
+<hr>
+<h2 id="一、句柄是什么"><a href="#一、句柄是什么" class="headerlink" title="一、句柄是什么"></a>一、句柄是什么</h2><p>Windows 程序访问文件、注册表、进程、线程、设备等系统对象时，通常通过“句柄”完成访问。</p>
+<p>常见句柄对象包括：</p>
+<ul>
+<li>文件和目录</li>
+<li>注册表项</li>
+<li>进程和线程</li>
+<li>事件对象 Event</li>
+<li>互斥体 Mutex</li>
+<li>信号量 Semaphore</li>
+<li>管道 Pipe</li>
+<li>共享内存 Section</li>
+<li>访问令牌 Token</li>
+<li>网络和设备对象</li>
+</ul>
+<p>正常程序会打开对象、使用对象，再关闭句柄。程序持续创建句柄却没有正确关闭，就可能出现句柄泄漏。</p>
+<p>典型表现：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">10:00 Handles=3000
+10:05 Handles=5000
+10:10 Handles=8000
+10:15 Handles=12000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>判断句柄泄漏最重要的不是某一时刻的绝对值，而是：</p>
+<blockquote>
+<p>在系统空闲或相同工作负载下，句柄是否持续单向增长，并且长时间不回落。</p>
+</blockquote>
+<hr>
+<h2 id="二、句柄多少才算异常"><a href="#二、句柄多少才算异常" class="headerlink" title="二、句柄多少才算异常"></a>二、句柄多少才算异常</h2><p>Windows 没有适用于所有电脑的固定异常阈值。</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>参考判断</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总句柄几万</td>
+<td>轻度使用时常见</td>
+</tr>
+<tr>
+<td>总句柄十几万</td>
+<td>浏览器、IDE、虚拟机、后台软件较多时可能正常</td>
+</tr>
+<tr>
+<td>总句柄二三十万</td>
+<td>建议审查，但不代表一定泄漏</td>
+</tr>
+<tr>
+<td>总句柄持续上涨</td>
+<td>比绝对值更值得怀疑</td>
+</tr>
+<tr>
+<td>单个普通程序几千句柄</td>
+<td>需要结合程序类型判断</td>
+</tr>
+<tr>
+<td>单进程数万句柄且持续上涨</td>
+<td>高度可疑</td>
+</tr>
+<tr>
+<td>同名进程数量不断增加</td>
+<td>可能是进程增殖，不一定是单进程泄漏</td>
+</tr>
+<tr>
+<td>重启后恢复低位，随后持续上涨</td>
+<td>符合泄漏或后台任务堆积特征</td>
+</tr>
+</tbody></table>
+<p>浏览器、数据库、虚拟机、杀毒软件、IDE、WebView2 应用本来就可能持有较多句柄，因此不要仅凭“句柄很多”直接结束进程。</p>
+<hr>
+<h2 id="三、快速检查系统总量"><a href="#三、快速检查系统总量" class="headerlink" title="三、快速检查系统总量"></a>三、快速检查系统总量</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$processes</span> = <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue
+
+<span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+    Time      = <span class="token function">Get-Date</span>
+    Processes = <span class="token variable">$processes</span><span class="token punctuation">.</span>Count
+    Handles   = <span class="token punctuation">(</span><span class="token variable">$processes</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+    Threads   = <span class="token punctuation">(</span>
+        <span class="token variable">$processes</span> <span class="token punctuation">|</span>
+        <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+        <span class="token function">Measure-Object</span> <span class="token operator">-</span>Sum
+    <span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+    MemoryGB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+        <span class="token punctuation">(</span><span class="token variable">$processes</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> WorkingSet64 <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum <span class="token operator">/</span> 1GB<span class="token punctuation">,</span>
+        2
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span> <span class="token function">Format-List</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最简总句柄命令：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">(</span>
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum
+<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="四、单进程句柄排行榜"><a href="#四、单进程句柄排行榜" class="headerlink" title="四、单进程句柄排行榜"></a>四、单进程句柄排行榜</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        PID      = <span class="token variable">$_</span><span class="token punctuation">.</span>Id
+        <span class="token keyword">Process</span>  = <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessName
+        Handles  = <span class="token variable">$_</span><span class="token punctuation">.</span>HandleCount
+        Threads  = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        MemoryMB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>WorkingSet64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+        CPU      = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>CPU<span class="token punctuation">,</span> 1<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Handles <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>重点观察：</p>
+<ul>
+<li>是否有普通程序达到数万句柄；</li>
+<li>是否有进程线程数异常高；</li>
+<li>是否有进程内存、线程和句柄同步上涨；</li>
+<li>是否存在大量同名进程。</li>
+</ul>
+<hr>
+<h2 id="五、按程序名称汇总多实例"><a href="#五、按程序名称汇总多实例" class="headerlink" title="五、按程序名称汇总多实例"></a>五、按程序名称汇总多实例</h2><p>浏览器、WebView2、Electron、QQ、IDE、网盘等通常会拆分为大量子进程。单个进程不高，不代表程序族合计不高。</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+<span class="token function">Group-Object</span> ProcessName <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$group</span> = <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        <span class="token keyword">Process</span>   = <span class="token variable">$_</span><span class="token punctuation">.</span>Name
+        Instances = <span class="token variable">$group</span><span class="token punctuation">.</span>Count
+        Handles   = <span class="token punctuation">(</span><span class="token variable">$group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        Threads   = <span class="token punctuation">(</span>
+            <span class="token variable">$group</span> <span class="token punctuation">|</span>
+            <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+            <span class="token function">Measure-Object</span> <span class="token operator">-</span>Sum
+        <span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        MemoryMB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+            <span class="token punctuation">(</span><span class="token variable">$group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> WorkingSet64 <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum <span class="token operator">/</span> 1MB<span class="token punctuation">,</span>
+            1
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Handles <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="六、判断句柄泄漏还是进程增殖"><a href="#六、判断句柄泄漏还是进程增殖" class="headerlink" title="六、判断句柄泄漏还是进程增殖"></a>六、判断句柄泄漏还是进程增殖</h2><h3 id="单进程句柄泄漏"><a href="#单进程句柄泄漏" class="headerlink" title="单进程句柄泄漏"></a>单进程句柄泄漏</h3><p>特征：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">同一个 PID
+同一个启动时间
+HandleCount 持续增长<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="进程增殖"><a href="#进程增殖" class="headerlink" title="进程增殖"></a>进程增殖</h3><p>特征：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">单个进程句柄不高
+同名进程数量持续增加
+总句柄随之上涨<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">10:00 WebView2 实例=20
+10:30 WebView2 实例=45
+11:00 WebView2 实例=80<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>第二种情况应查明谁不断创建子进程，而不是只盯住某个 PID。</p>
+<hr>
+<h2 id="七、持续监控系统总句柄"><a href="#七、持续监控系统总句柄" class="headerlink" title="七、持续监控系统总句柄"></a>七、持续监控系统总句柄</h2><p>按 <code>Ctrl + C</code> 停止。</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">$true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$processes</span> = <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue
+
+    <span class="token variable">$handles</span> = <span class="token punctuation">(</span><span class="token variable">$processes</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+    <span class="token variable">$threads</span> = <span class="token punctuation">(</span>
+        <span class="token variable">$processes</span> <span class="token punctuation">|</span>
+        <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+        <span class="token function">Measure-Object</span> <span class="token operator">-</span>Sum
+    <span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+
+    <span class="token string">"{0:yyyy-MM-dd HH:mm:ss}  Processes={1}  Threads={2}  Handles={3}"</span> <span class="token operator">-</span>f `
+        <span class="token punctuation">(</span><span class="token function">Get-Date</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token variable">$processes</span><span class="token punctuation">.</span>Count<span class="token punctuation">,</span>
+        <span class="token variable">$threads</span><span class="token punctuation">,</span>
+        <span class="token variable">$handles</span>
+
+    <span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 10
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>正常情况通常会小幅上下波动。持续单向上涨且不回落才更可疑。</p>
+<hr>
+<h2 id="八、监控指定进程"><a href="#八、监控指定进程" class="headerlink" title="八、监控指定进程"></a>八、监控指定进程</h2><p>假设目标 PID 为 <code>12345</code>：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">$true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$process</span> = <span class="token function">Get-Process</span> <span class="token operator">-</span>Id <span class="token variable">$TargetProcessId</span> `
+        <span class="token operator">-</span>ErrorAction SilentlyContinue
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$null</span> <span class="token operator">-eq</span> <span class="token variable">$process</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Write-Host</span> <span class="token string">"目标进程已经退出。"</span>
+        <span class="token keyword">break</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        Time      = <span class="token function">Get-Date</span>
+        PID       = <span class="token variable">$process</span><span class="token punctuation">.</span>Id
+        <span class="token keyword">Process</span>   = <span class="token variable">$process</span><span class="token punctuation">.</span>ProcessName
+        Handles   = <span class="token variable">$process</span><span class="token punctuation">.</span>HandleCount
+        Threads   = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$process</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        MemoryMB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">.</span>WorkingSet64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+        PrivateMB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">.</span>PrivateMemorySize64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">|</span> <span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize
+
+    <span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 5
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>确认泄漏时要检查：</p>
+<ul>
+<li>PID 是否没有变化；</li>
+<li>进程启动时间是否没有变化；</li>
+<li>句柄是否持续增长；</li>
+<li>工作完成后句柄是否仍不释放。</li>
+</ul>
+<hr>
+<h2 id="九、比较一分钟内谁增长最快"><a href="#九、比较一分钟内谁增长最快" class="headerlink" title="九、比较一分钟内谁增长最快"></a>九、比较一分钟内谁增长最快</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">function</span> <span class="token function">Get-HandleSnapshot</span> <span class="token punctuation">{</span>
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+        <span class="token variable">$startTime</span> = <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>StartTime<span class="token punctuation">.</span>ToString<span class="token punctuation">(</span><span class="token string">"o"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">{</span>
+            <span class="token string">""</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            Key       = <span class="token string">"<span class="token function">$<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Id<span class="token punctuation">)</span></span>|<span class="token variable">$startTime</span>"</span>
+            PID       = <span class="token variable">$_</span><span class="token punctuation">.</span>Id
+            <span class="token keyword">Process</span>   = <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessName
+            StartTime = <span class="token variable">$startTime</span>
+            Handles   = <span class="token namespace">[int64]</span><span class="token variable">$_</span><span class="token punctuation">.</span>HandleCount
+            Threads   = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            MemoryMB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>WorkingSet64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"正在采集第一次快照……"</span>
+<span class="token variable">$before</span> = <span class="token function">Get-HandleSnapshot</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"等待 60 秒，请保持正常使用电脑……"</span>
+<span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 60
+
+<span class="token function">Write-Host</span> <span class="token string">"正在采集第二次快照……"</span>
+<span class="token variable">$after</span> = <span class="token function">Get-HandleSnapshot</span>
+
+<span class="token variable">$beforeMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$item</span> in <span class="token variable">$before</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$item</span><span class="token punctuation">.</span>Key<span class="token punctuation">]</span> = <span class="token variable">$item</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$after</span> <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$beforeMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$old</span> = <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$_</span><span class="token punctuation">.</span>Key<span class="token punctuation">]</span>
+
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            PID           = <span class="token variable">$_</span><span class="token punctuation">.</span>PID
+            <span class="token keyword">Process</span>       = <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span>
+            HandlesOld    = <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+            HandlesNow    = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+            HandleDelta   = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+            ThreadsDelta  = <span class="token variable">$_</span><span class="token punctuation">.</span>Threads <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Threads
+            MemoryDeltaMB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+                <span class="token variable">$_</span><span class="token punctuation">.</span>MemoryMB <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>MemoryMB<span class="token punctuation">,</span>
+                1
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> HandleDelta <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>经验判断：</p>
+<table>
+<thead>
+<tr>
+<th align="right">一分钟句柄增量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">几个到几十个</td>
+<td>常见正常波动</td>
+</tr>
+<tr>
+<td align="right">数百个</td>
+<td>建议连续观察</td>
+</tr>
+<tr>
+<td align="right">数千个</td>
+<td>高度可疑</td>
+</tr>
+<tr>
+<td align="right">连续多轮增长</td>
+<td>很可能存在泄漏</td>
+</tr>
+<tr>
+<td align="right">增长后明显回落</td>
+<td>可能是正常批量任务</td>
+</tr>
+</tbody></table>
+<p>建议连续执行三至五轮。</p>
+<hr>
+<h2 id="十、按程序族比较增长"><a href="#十、按程序族比较增长" class="headerlink" title="十、按程序族比较增长"></a>十、按程序族比较增长</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">function</span> <span class="token function">Get-GroupedHandleSnapshot</span> <span class="token punctuation">{</span>
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">Group-Object</span> ProcessName <span class="token punctuation">|</span>
+    <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            <span class="token keyword">Process</span>   = <span class="token variable">$_</span><span class="token punctuation">.</span>Name
+            Instances = <span class="token variable">$_</span><span class="token punctuation">.</span>Count
+            Handles   = <span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+            Threads   = <span class="token punctuation">(</span>
+                <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span>
+                <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+                <span class="token function">Measure-Object</span> <span class="token operator">-</span>Sum
+            <span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$before</span> = <span class="token function">Get-GroupedHandleSnapshot</span>
+<span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 60
+<span class="token variable">$after</span> = <span class="token function">Get-GroupedHandleSnapshot</span>
+
+<span class="token variable">$beforeMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$item</span> in <span class="token variable">$before</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$item</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">]</span> = <span class="token variable">$item</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$after</span> <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$old</span> = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$beforeMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$null</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        <span class="token keyword">Process</span>       = <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span>
+        InstancesNow  = <span class="token variable">$_</span><span class="token punctuation">.</span>Instances
+        InstanceDelta = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Instances <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Instances
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Instances
+        <span class="token punctuation">}</span>
+        HandlesNow    = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+        HandleDelta   = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Handles <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+        <span class="token punctuation">}</span>
+        ThreadDelta   = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Threads <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Threads
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Threads
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> HandleDelta <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>判断：</p>
+<ul>
+<li><code>HandleDelta</code> 很高、<code>InstanceDelta=0</code>：更像现有进程内部泄漏；</li>
+<li><code>HandleDelta</code> 和 <code>InstanceDelta</code> 都很高：更像不断产生新进程。</li>
+</ul>
+<hr>
+<h2 id="十一、查看进程路径、命令行和父进程"><a href="#十一、查看进程路径、命令行和父进程" class="headerlink" title="十一、查看进程路径、命令行和父进程"></a>十一、查看进程路径、命令行和父进程</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token function">Get-CimInstance</span> Win32_Process `
+    <span class="token operator">-</span><span class="token keyword">Filter</span> <span class="token string">"ProcessId=<span class="token variable">$TargetProcessId</span>"</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    ProcessId<span class="token punctuation">,</span>
+    ParentProcessId<span class="token punctuation">,</span>
+    Name<span class="token punctuation">,</span>
+    ExecutablePath<span class="token punctuation">,</span>
+    CreationDate<span class="token punctuation">,</span>
+    CommandLine <span class="token punctuation">|</span>
+<span class="token function">Format-List</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>父进程详情：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token variable">$process</span> = <span class="token function">Get-CimInstance</span> Win32_Process `
+    <span class="token operator">-</span><span class="token keyword">Filter</span> <span class="token string">"ProcessId=<span class="token variable">$TargetProcessId</span>"</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$parent</span> = <span class="token function">Get-CimInstance</span> Win32_Process `
+        <span class="token operator">-</span><span class="token keyword">Filter</span> <span class="token string">"ProcessId=<span class="token function">$<span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">.</span>ParentProcessId<span class="token punctuation">)</span></span>"</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        ChildPID      = <span class="token variable">$process</span><span class="token punctuation">.</span>ProcessId
+        ChildName     = <span class="token variable">$process</span><span class="token punctuation">.</span>Name
+        ParentPID     = <span class="token variable">$process</span><span class="token punctuation">.</span>ParentProcessId
+        ParentName    = <span class="token variable">$parent</span><span class="token punctuation">.</span>Name
+        ParentPath    = <span class="token variable">$parent</span><span class="token punctuation">.</span>ExecutablePath
+        ParentCommand = <span class="token variable">$parent</span><span class="token punctuation">.</span>CommandLine
+    <span class="token punctuation">}</span> <span class="token punctuation">|</span> <span class="token function">Format-List</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十二、查看完整进程祖先链"><a href="#十二、查看完整进程祖先链" class="headerlink" title="十二、查看完整进程祖先链"></a>十二、查看完整进程祖先链</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">function</span> <span class="token function">Get-ProcessParentChain</span> <span class="token punctuation">{</span>
+    <span class="token keyword">param</span><span class="token punctuation">(</span>
+        <span class="token namespace">[Parameter(Mandatory)]</span>
+        <span class="token namespace">[int]</span><span class="token variable">$ProcessId</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token variable">$allProcesses</span> = <span class="token function">Get-CimInstance</span> Win32_Process
+    <span class="token variable">$processMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$process</span> in <span class="token variable">$allProcesses</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$processMap</span><span class="token punctuation">[</span><span class="token namespace">[int]</span><span class="token variable">$process</span><span class="token punctuation">.</span>ProcessId<span class="token punctuation">]</span> = <span class="token variable">$process</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token variable">$currentId</span> = <span class="token variable">$ProcessId</span>
+    <span class="token variable">$level</span> = 0
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token variable">$processMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token variable">$currentId</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$current</span> = <span class="token variable">$processMap</span><span class="token punctuation">[</span><span class="token variable">$currentId</span><span class="token punctuation">]</span>
+
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            Level          = <span class="token variable">$level</span>
+            PID            = <span class="token variable">$current</span><span class="token punctuation">.</span>ProcessId
+            ParentPID      = <span class="token variable">$current</span><span class="token punctuation">.</span>ParentProcessId
+            Name           = <span class="token variable">$current</span><span class="token punctuation">.</span>Name
+            ExecutablePath = <span class="token variable">$current</span><span class="token punctuation">.</span>ExecutablePath
+            CommandLine    = <span class="token variable">$current</span><span class="token punctuation">.</span>CommandLine
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$current</span><span class="token punctuation">.</span>ParentProcessId <span class="token operator">-eq</span> 0<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">break</span> <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$current</span><span class="token punctuation">.</span>ParentProcessId <span class="token operator">-eq</span> <span class="token variable">$current</span><span class="token punctuation">.</span>ProcessId<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">break</span> <span class="token punctuation">}</span>
+
+        <span class="token variable">$currentId</span> = <span class="token namespace">[int]</span><span class="token variable">$current</span><span class="token punctuation">.</span>ParentProcessId
+        <span class="token variable">$level</span><span class="token operator">++</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">Get-ProcessParentChain</span> <span class="token operator">-</span>ProcessId 12345 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十三、查看子进程"><a href="#十三、查看子进程" class="headerlink" title="十三、查看子进程"></a>十三、查看子进程</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token function">Get-CimInstance</span> Win32_Process <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>ParentProcessId <span class="token operator">-eq</span> <span class="token variable">$TargetProcessId</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    ProcessId<span class="token punctuation">,</span>
+    ParentProcessId<span class="token punctuation">,</span>
+    Name<span class="token punctuation">,</span>
+    CreationDate<span class="token punctuation">,</span>
+    ExecutablePath<span class="token punctuation">,</span>
+    CommandLine <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十四、分析-svchost-exe"><a href="#十四、分析-svchost-exe" class="headerlink" title="十四、分析 svchost.exe"></a>十四、分析 svchost.exe</h2><p><code>svchost.exe</code> 是 Windows 服务宿主，不要看到句柄高就直接结束。</p>
+<p>查询指定 PID 承载的服务：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token function">Get-CimInstance</span> Win32_Service <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessId <span class="token operator">-eq</span> <span class="token variable">$TargetProcessId</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    Name<span class="token punctuation">,</span>
+    DisplayName<span class="token punctuation">,</span>
+    State<span class="token punctuation">,</span>
+    StartMode<span class="token punctuation">,</span>
+    ProcessId<span class="token punctuation">,</span>
+    PathName <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看所有运行中的服务和 PID：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-CimInstance</span> Win32_Service <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>State <span class="token operator">-eq</span> <span class="token string">"Running"</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> ProcessId<span class="token punctuation">,</span> Name <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    ProcessId<span class="token punctuation">,</span>
+    Name<span class="token punctuation">,</span>
+    DisplayName<span class="token punctuation">,</span>
+    StartMode <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>需要重启具体服务时：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Restart-Service</span> <span class="token operator">-</span>Name <span class="token string">"服务名"</span> <span class="token operator">-</span>Force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不要随意停止关键系统服务。</p>
+<hr>
+<h2 id="十五、分析-System-进程"><a href="#十五、分析-System-进程" class="headerlink" title="十五、分析 System 进程"></a>十五、分析 System 进程</h2><p><code>System</code> 通常为 PID 4，代表大量内核和驱动活动。</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Process</span> <span class="token operator">-</span>Id 4 <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    Id<span class="token punctuation">,</span>
+    ProcessName<span class="token punctuation">,</span>
+    HandleCount<span class="token punctuation">,</span>
+    Threads<span class="token punctuation">,</span>
+    NonpagedSystemMemorySize64<span class="token punctuation">,</span>
+    PagedSystemMemorySize64 <span class="token punctuation">|</span>
+<span class="token function">Format-List</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果 <code>System</code> 句柄持续增长，常见嫌疑包括：</p>
+<ul>
+<li>存储或 USB 驱动；</li>
+<li>网卡、蓝牙、显卡驱动；</li>
+<li>文件系统过滤驱动；</li>
+<li>杀毒软件；</li>
+<li>VPN、虚拟网卡；</li>
+<li>虚拟机；</li>
+<li>磁盘或文件系统异常。</li>
+</ul>
+<p>查看运行中的驱动：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-CimInstance</span> Win32_SystemDriver <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>State <span class="token operator">-eq</span> <span class="token string">"Running"</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    Name<span class="token punctuation">,</span>
+    DisplayName<span class="token punctuation">,</span>
+    StartMode<span class="token punctuation">,</span>
+    State<span class="token punctuation">,</span>
+    PathName <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> DisplayName <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>纯 PowerShell 可以判断 PID 4 是否持续增长，但不能可靠显示每个内核句柄究竟属于哪个驱动对象。</p>
+<hr>
+<h2 id="十六、检查系统事件日志"><a href="#十六、检查系统事件日志" class="headerlink" title="十六、检查系统事件日志"></a>十六、检查系统事件日志</h2><p>查看最近两小时系统警告和错误：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$startTime</span> = <span class="token punctuation">(</span><span class="token function">Get-Date</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AddHours<span class="token punctuation">(</span><span class="token operator">-</span>2<span class="token punctuation">)</span>
+
+<span class="token function">Get-WinEvent</span> <span class="token operator">-</span>FilterHashtable @<span class="token punctuation">{</span>
+    LogName   = <span class="token string">"System"</span>
+    StartTime = <span class="token variable">$startTime</span>
+    Level     = 2<span class="token punctuation">,</span> 3
+<span class="token punctuation">}</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    TimeCreated<span class="token punctuation">,</span>
+    ProviderName<span class="token punctuation">,</span>
+    Id<span class="token punctuation">,</span>
+    LevelDisplayName<span class="token punctuation">,</span>
+    Message <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>筛选常见磁盘、USB 和驱动问题：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-WinEvent</span> <span class="token operator">-</span>FilterHashtable @<span class="token punctuation">{</span>
+    LogName   = <span class="token string">"System"</span>
+    StartTime = <span class="token punctuation">(</span><span class="token function">Get-Date</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AddHours<span class="token punctuation">(</span><span class="token operator">-</span>6<span class="token punctuation">)</span>
+<span class="token punctuation">}</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>ProviderName <span class="token operator">-match</span> `
+        <span class="token string">"Disk|Ntfs|stor|USB|Kernel-PnP|DriverFrameworks|WHEA|volmgr"</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    TimeCreated<span class="token punctuation">,</span>
+    ProviderName<span class="token punctuation">,</span>
+    Id<span class="token punctuation">,</span>
+    LevelDisplayName<span class="token punctuation">,</span>
+    Message <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="十七、检查进程数字签名"><a href="#十七、检查进程数字签名" class="headerlink" title="十七、检查进程数字签名"></a>十七、检查进程数字签名</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token variable">$process</span> = <span class="token function">Get-CimInstance</span> Win32_Process `
+    <span class="token operator">-</span><span class="token keyword">Filter</span> <span class="token string">"ProcessId=<span class="token variable">$TargetProcessId</span>"</span>
+
+<span class="token variable">$process</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    ProcessId<span class="token punctuation">,</span>
+    Name<span class="token punctuation">,</span>
+    ExecutablePath<span class="token punctuation">,</span>
+    CommandLine <span class="token punctuation">|</span>
+<span class="token function">Format-List</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">.</span>ExecutablePath<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Get-AuthenticodeSignature</span> `
+        <span class="token operator">-</span>FilePath <span class="token variable">$process</span><span class="token punctuation">.</span>ExecutablePath <span class="token punctuation">|</span>
+    <span class="token function">Select-Object</span> `
+        Status<span class="token punctuation">,</span>
+        StatusMessage<span class="token punctuation">,</span>
+        SignerCertificate<span class="token punctuation">,</span>
+        Path <span class="token punctuation">|</span>
+    <span class="token function">Format-List</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>未签名不等于恶意，有签名也不等于没有问题。更应关注异常路径、临时目录运行和名称伪装。</p>
+<hr>
+<h2 id="十八、检查-GDI-和-USER-对象泄漏"><a href="#十八、检查-GDI-和-USER-对象泄漏" class="headerlink" title="十八、检查 GDI 和 USER 对象泄漏"></a>十八、检查 GDI 和 USER 对象泄漏</h2><p>某些 GUI 程序会泄漏窗口、菜单、画刷、字体、设备上下文等资源。</p>
+<p>先加载 API：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Add-Type</span> @<span class="token string">"
+using System;
+using System.Runtime.InteropServices;
+
+public static class GuiResources
+{
+    [DllImport("</span>user32<span class="token punctuation">.</span>dll<span class="token string">")]
+    public static extern int GetGuiResources(
+        IntPtr hProcess,
+        int uiFlags
+    );
+}
+"</span>@<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看排行榜：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            PID         = <span class="token variable">$_</span><span class="token punctuation">.</span>Id
+            <span class="token keyword">Process</span>     = <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessName
+            Handles     = <span class="token variable">$_</span><span class="token punctuation">.</span>HandleCount
+            GDIObjects  = <span class="token namespace">[GuiResources]</span>::GetGuiResources<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Handle<span class="token punctuation">,</span> 0<span class="token punctuation">)</span>
+            USERObjects = <span class="token namespace">[GuiResources]</span>::GetGuiResources<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Handle<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> GDIObjects <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>GDI 或 USER 对象持续上涨时，可能出现窗口无法打开、菜单变黑、界面无法刷新、按钮和图标消失等现象。</p>
+<hr>
+<h2 id="十九、长期记录系统句柄"><a href="#十九、长期记录系统句柄" class="headerlink" title="十九、长期记录系统句柄"></a>十九、长期记录系统句柄</h2><p>先创建目录：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$AuditRoot</span> = <span class="token function">Join-Path</span> <span class="token variable">$env</span>:USERPROFILE <span class="token string">"Desktop\HandleAudit"</span>
+<span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Path <span class="token variable">$AuditRoot</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>每 30 秒记录一次：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$LogPath</span> = <span class="token function">Join-Path</span> `
+    <span class="token variable">$env</span>:USERPROFILE `
+    <span class="token string">"Desktop\HandleAudit\system_handle_log.csv"</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">$true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$processes</span> = <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue
+
+    <span class="token variable">$row</span> = <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        Time      = <span class="token function">Get-Date</span>
+        Processes = <span class="token variable">$processes</span><span class="token punctuation">.</span>Count
+        Handles   = <span class="token punctuation">(</span><span class="token variable">$processes</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        Threads   = <span class="token punctuation">(</span>
+            <span class="token variable">$processes</span> <span class="token punctuation">|</span>
+            <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+            <span class="token function">Measure-Object</span> <span class="token operator">-</span>Sum
+        <span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        MemoryGB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+            <span class="token punctuation">(</span><span class="token variable">$processes</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> WorkingSet64 <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum <span class="token operator">/</span> 1GB<span class="token punctuation">,</span>
+            2
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token variable">$row</span> <span class="token punctuation">|</span>
+    <span class="token function">Export-Csv</span> `
+        <span class="token operator">-</span>Path <span class="token variable">$LogPath</span> `
+        <span class="token operator">-</span>NoTypeInformation `
+        <span class="token operator">-</span>Encoding UTF8 `
+        <span class="token operator">-</span>Append
+
+    <span class="token variable">$row</span> <span class="token punctuation">|</span> <span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize
+    <span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 30
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看最近记录：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Import-Csv</span> <span class="token variable">$LogPath</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>Last 20 <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="二十、长期记录句柄最高的进程"><a href="#二十、长期记录句柄最高的进程" class="headerlink" title="二十、长期记录句柄最高的进程"></a>二十、长期记录句柄最高的进程</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$LogPath</span> = <span class="token function">Join-Path</span> `
+    <span class="token variable">$env</span>:USERPROFILE `
+    <span class="token string">"Desktop\HandleAudit\top_process_handles.csv"</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">$true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$time</span> = <span class="token function">Get-Date</span>
+
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">Sort-Object</span> HandleCount <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+    <span class="token function">Select-Object</span> <span class="token operator">-</span>First 30 <span class="token punctuation">|</span>
+    <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            Time     = <span class="token variable">$time</span>
+            PID      = <span class="token variable">$_</span><span class="token punctuation">.</span>Id
+            <span class="token keyword">Process</span>  = <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessName
+            Handles  = <span class="token variable">$_</span><span class="token punctuation">.</span>HandleCount
+            Threads  = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            MemoryMB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>WorkingSet64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 1<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token punctuation">|</span>
+    <span class="token function">Export-Csv</span> `
+        <span class="token operator">-</span>Path <span class="token variable">$LogPath</span> `
+        <span class="token operator">-</span>NoTypeInformation `
+        <span class="token operator">-</span>Encoding UTF8 `
+        <span class="token operator">-</span>Append
+
+    <span class="token function">Write-Host</span> <span class="token string">"已记录：<span class="token variable">$time</span>"</span>
+    <span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds 30
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="二十一、检查开机启动项、服务和计划任务"><a href="#二十一、检查开机启动项、服务和计划任务" class="headerlink" title="二十一、检查开机启动项、服务和计划任务"></a>二十一、检查开机启动项、服务和计划任务</h2><p>开机启动项：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-CimInstance</span> Win32_StartupCommand <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> `
+    Name<span class="token punctuation">,</span>
+    Command<span class="token punctuation">,</span>
+    Location<span class="token punctuation">,</span>
+    User <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Name <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>Wrap<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行中的服务：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Service</span> <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>Status <span class="token operator">-eq</span> <span class="token string">"Running"</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> DisplayName <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> Status<span class="token punctuation">,</span> Name<span class="token punctuation">,</span> DisplayName <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行中的计划任务：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-ScheduledTask</span> <span class="token punctuation">|</span>
+<span class="token function">Where-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$_</span><span class="token punctuation">.</span>State <span class="token operator">-eq</span> <span class="token string">"Running"</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> TaskPath<span class="token punctuation">,</span> TaskName<span class="token punctuation">,</span> State <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="二十二、安全验证可疑程序"><a href="#二十二、安全验证可疑程序" class="headerlink" title="二十二、安全验证可疑程序"></a>二十二、安全验证可疑程序</h2><p>记录关闭前总句柄：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$before</span> = <span class="token punctuation">(</span>
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum
+<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>优先尝试正常关闭：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$TargetProcessId</span> = 12345
+
+<span class="token variable">$process</span> = <span class="token function">Get-Process</span> <span class="token operator">-</span>Id <span class="token variable">$TargetProcessId</span> `
+    <span class="token operator">-</span>ErrorAction SilentlyContinue
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$process</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$null</span> = <span class="token variable">$process</span><span class="token punctuation">.</span>CloseMainWindow<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>必要时按 PID 强制结束：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Stop-Process</span> <span class="token operator">-</span>Id <span class="token variable">$TargetProcessId</span> <span class="token operator">-</span>Force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重新统计：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$after</span> = <span class="token punctuation">(</span>
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">Measure-Object</span> HandleCount <span class="token operator">-</span>Sum
+<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+
+<span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+    Before  = <span class="token variable">$before</span>
+    After   = <span class="token variable">$after</span>
+    Reduced = <span class="token variable">$before</span> <span class="token operator">-</span> <span class="token variable">$after</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span> <span class="token function">Format-List</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关闭程序后句柄下降很多，说明它贡献较大，但不一定代表它存在泄漏，也可能只是正常占用较高。</p>
+<hr>
+<h2 id="二十三、不能随意结束的系统进程"><a href="#二十三、不能随意结束的系统进程" class="headerlink" title="二十三、不能随意结束的系统进程"></a>二十三、不能随意结束的系统进程</h2><p>一般不要直接结束：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">System
+Registry
+smss.exe
+csrss.exe
+wininit.exe
+winlogon.exe
+services.exe
+lsass.exe
+dwm.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对 <code>svchost.exe</code>，应先查 PID 对应服务，不要批量结束。</p>
+<p><code>explorer.exe</code> 可以重启：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Stop-Process</span> <span class="token operator">-</span>Name explorer <span class="token operator">-</span>Force
+<span class="token function">Start-Process</span> explorer<span class="token punctuation">.</span>exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>重启 Explorer 只能验证资源管理器或 Shell 扩展问题，不能修复内核驱动泄漏。</p>
+<hr>
+<h2 id="二十四、常见异常模式"><a href="#二十四、常见异常模式" class="headerlink" title="二十四、常见异常模式"></a>二十四、常见异常模式</h2><h3 id="模式一：单个-PID-句柄持续上涨"><a href="#模式一：单个-PID-句柄持续上涨" class="headerlink" title="模式一：单个 PID 句柄持续上涨"></a>模式一：单个 PID 句柄持续上涨</h3><p>可能原因：</p>
+<ul>
+<li>文件句柄未关闭；</li>
+<li>注册表句柄未关闭；</li>
+<li>同步对象泄漏；</li>
+<li>插件或扩展泄漏；</li>
+<li>程序自身缺陷。</li>
+</ul>
+<h3 id="模式二：同名进程越来越多"><a href="#模式二：同名进程越来越多" class="headerlink" title="模式二：同名进程越来越多"></a>模式二：同名进程越来越多</h3><p>可能原因：</p>
+<ul>
+<li>父程序不断拉起子进程；</li>
+<li>子进程超时后未退出；</li>
+<li>更新器反复启动；</li>
+<li>IDE、终端或脚本反复创建工具进程；</li>
+<li>浏览器或 WebView2 宿主异常。</li>
+</ul>
+<h3 id="模式三：System-句柄上涨"><a href="#模式三：System-句柄上涨" class="headerlink" title="模式三：System 句柄上涨"></a>模式三：System 句柄上涨</h3><p>重点怀疑：</p>
+<ul>
+<li>USB、磁盘或存储驱动；</li>
+<li>VPN、虚拟网卡；</li>
+<li>杀毒软件；</li>
+<li>虚拟机；</li>
+<li>文件系统过滤驱动。</li>
+</ul>
+<h3 id="模式四：svchost-某个-PID-上涨"><a href="#模式四：svchost-某个-PID-上涨" class="headerlink" title="模式四：svchost 某个 PID 上涨"></a>模式四：svchost 某个 PID 上涨</h3><p>先查询该 PID 承载的具体服务，再针对服务排查。</p>
+<h3 id="模式五：Explorer-句柄上涨"><a href="#模式五：Explorer-句柄上涨" class="headerlink" title="模式五：Explorer 句柄上涨"></a>模式五：Explorer 句柄上涨</h3><p>重点怀疑：</p>
+<ul>
+<li>右键菜单扩展；</li>
+<li>网盘 Shell 扩展；</li>
+<li>搜索工具；</li>
+<li>压缩软件；</li>
+<li>缩略图生成；</li>
+<li>无响应的外接磁盘或网络路径。</li>
+</ul>
+<h3 id="模式六：浏览器或-WebView2-总量高"><a href="#模式六：浏览器或-WebView2-总量高" class="headerlink" title="模式六：浏览器或 WebView2 总量高"></a>模式六：浏览器或 WebView2 总量高</h3><p>重点检查：</p>
+<ul>
+<li>标签页和扩展；</li>
+<li>后台运行设置；</li>
+<li>使用 WebView2 的桌面应用；</li>
+<li>是否有子进程残留；</li>
+<li>同名进程实例是否持续增长。</li>
+</ul>
+<hr>
+<h2 id="二十五、一键审查脚本"><a href="#二十五、一键审查脚本" class="headerlink" title="二十五、一键审查脚本"></a>二十五、一键审查脚本</h2><p>将以下脚本保存为 <code>Handle-Audit.ps1</code>。</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">param</span><span class="token punctuation">(</span>
+    <span class="token namespace">[int]</span><span class="token variable">$ObserveSeconds</span> = 60<span class="token punctuation">,</span>
+    <span class="token namespace">[int]</span><span class="token variable">$Top</span> = 30<span class="token punctuation">,</span>
+    <span class="token namespace">[string]</span><span class="token variable">$OutputDirectory</span> = <span class="token punctuation">(</span>
+        <span class="token function">Join-Path</span> <span class="token variable">$env</span>:USERPROFILE <span class="token string">"Desktop\HandleAudit"</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token function">Set-StrictMode</span> <span class="token operator">-</span>Version Latest
+<span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Path <span class="token variable">$OutputDirectory</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
+
+<span class="token keyword">function</span> <span class="token function">Get-FullProcessSnapshot</span> <span class="token punctuation">{</span>
+    <span class="token variable">$time</span> = <span class="token function">Get-Date</span>
+    <span class="token variable">$cimProcesses</span> = <span class="token function">Get-CimInstance</span> Win32_Process <span class="token operator">-</span>ErrorAction SilentlyContinue
+    <span class="token variable">$cimMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$item</span> in <span class="token variable">$cimProcesses</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$cimMap</span><span class="token punctuation">[</span><span class="token namespace">[int]</span><span class="token variable">$item</span><span class="token punctuation">.</span>ProcessId<span class="token punctuation">]</span> = <span class="token variable">$item</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">Get-Process</span> <span class="token operator">-</span>ErrorAction SilentlyContinue <span class="token punctuation">|</span>
+    <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+        <span class="token variable">$cim</span> = <span class="token variable">$null</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cimMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token namespace">[int]</span><span class="token variable">$_</span><span class="token punctuation">.</span>Id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$cim</span> = <span class="token variable">$cimMap</span><span class="token punctuation">[</span><span class="token namespace">[int]</span><span class="token variable">$_</span><span class="token punctuation">.</span>Id<span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token variable">$creationTime</span> = <span class="token string">""</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cim</span> <span class="token operator">-and</span> <span class="token variable">$cim</span><span class="token punctuation">.</span>CreationDate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token variable">$creationTime</span> = <span class="token punctuation">(</span><span class="token namespace">[datetime]</span><span class="token variable">$cim</span><span class="token punctuation">.</span>CreationDate<span class="token punctuation">)</span><span class="token punctuation">.</span>ToString<span class="token punctuation">(</span><span class="token string">"o"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span> <span class="token punctuation">{</span>
+                <span class="token variable">$creationTime</span> = <span class="token string">""</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            SnapshotTime   = <span class="token variable">$time</span>
+            Key            = <span class="token string">"<span class="token function">$<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Id<span class="token punctuation">)</span></span>|<span class="token variable">$creationTime</span>"</span>
+            PID            = <span class="token variable">$_</span><span class="token punctuation">.</span>Id
+            ParentPID      = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cim</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token variable">$cim</span><span class="token punctuation">.</span>ParentProcessId <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            <span class="token keyword">Process</span>        = <span class="token variable">$_</span><span class="token punctuation">.</span>ProcessName
+            CreationTime   = <span class="token variable">$creationTime</span>
+            Handles        = <span class="token namespace">[int64]</span><span class="token variable">$_</span><span class="token punctuation">.</span>HandleCount
+            Threads        = <span class="token keyword">try</span> <span class="token punctuation">{</span> <span class="token namespace">[int64]</span><span class="token variable">$_</span><span class="token punctuation">.</span>Threads<span class="token punctuation">.</span>Count <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+            WorkingSetMB   = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>WorkingSet64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 2<span class="token punctuation">)</span>
+            PrivateMB      = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>PrivateMemorySize64 <span class="token operator">/</span> 1MB<span class="token punctuation">,</span> 2<span class="token punctuation">)</span>
+            ExecutablePath = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cim</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token variable">$cim</span><span class="token punctuation">.</span>ExecutablePath <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token variable">$null</span> <span class="token punctuation">}</span>
+            CommandLine    = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cim</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token variable">$cim</span><span class="token punctuation">.</span>CommandLine <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token variable">$null</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Get-GroupedSnapshot</span> <span class="token punctuation">{</span>
+    <span class="token keyword">param</span><span class="token punctuation">(</span><span class="token namespace">[Parameter(Mandatory)]</span><span class="token namespace">[array]</span><span class="token variable">$Snapshot</span><span class="token punctuation">)</span>
+
+    <span class="token variable">$Snapshot</span> <span class="token punctuation">|</span>
+    <span class="token function">Group-Object</span> <span class="token keyword">Process</span> <span class="token punctuation">|</span>
+    <span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            <span class="token keyword">Process</span>      = <span class="token variable">$_</span><span class="token punctuation">.</span>Name
+            Instances    = <span class="token variable">$_</span><span class="token punctuation">.</span>Count
+            Handles      = <span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> Handles <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+            Threads      = <span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> Threads <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+            WorkingSetMB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+                <span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> WorkingSetMB <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum<span class="token punctuation">,</span>
+                2
+            <span class="token punctuation">)</span>
+            PrivateMB    = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+                <span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token function">Group</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> PrivateMB <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum<span class="token punctuation">,</span>
+                2
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Get-SystemSummary</span> <span class="token punctuation">{</span>
+    <span class="token keyword">param</span><span class="token punctuation">(</span><span class="token namespace">[Parameter(Mandatory)]</span><span class="token namespace">[array]</span><span class="token variable">$Snapshot</span><span class="token punctuation">)</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        Time         = <span class="token function">Get-Date</span>
+        Processes    = <span class="token variable">$Snapshot</span><span class="token punctuation">.</span>Count
+        Handles      = <span class="token punctuation">(</span><span class="token variable">$Snapshot</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> Handles <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        Threads      = <span class="token punctuation">(</span><span class="token variable">$Snapshot</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> Threads <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum
+        WorkingSetGB = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+            <span class="token punctuation">(</span><span class="token variable">$Snapshot</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> WorkingSetMB <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum <span class="token operator">/</span> 1024<span class="token punctuation">,</span>
+            2
+        <span class="token punctuation">)</span>
+        PrivateGB    = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+            <span class="token punctuation">(</span><span class="token variable">$Snapshot</span> <span class="token punctuation">|</span> <span class="token function">Measure-Object</span> PrivateMB <span class="token operator">-</span>Sum<span class="token punctuation">)</span><span class="token punctuation">.</span>Sum <span class="token operator">/</span> 1024<span class="token punctuation">,</span>
+            2
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"正在采集基线快照……"</span> <span class="token operator">-</span>ForegroundColor Cyan
+<span class="token variable">$before</span> = <span class="token function">Get-FullProcessSnapshot</span>
+<span class="token variable">$beforeGrouped</span> = <span class="token function">Get-GroupedSnapshot</span> <span class="token operator">-</span>Snapshot <span class="token variable">$before</span>
+<span class="token variable">$beforeSummary</span> = <span class="token function">Get-SystemSummary</span> <span class="token operator">-</span>Snapshot <span class="token variable">$before</span>
+
+<span class="token variable">$before</span> <span class="token punctuation">|</span> <span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"01_processes_before.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$before</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Handles <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First <span class="token variable">$Top</span> <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"02_top_processes_before.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$beforeGrouped</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Handles <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"03_grouped_processes_before.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$beforeSummary</span> <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"04_system_summary_before.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$beforeSummary</span> <span class="token punctuation">|</span> <span class="token function">Format-List</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"观察 <span class="token variable">$ObserveSeconds</span> 秒……"</span> <span class="token operator">-</span>ForegroundColor Yellow
+<span class="token function">Start-Sleep</span> <span class="token operator">-</span>Seconds <span class="token variable">$ObserveSeconds</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"正在采集第二次快照……"</span> <span class="token operator">-</span>ForegroundColor Cyan
+<span class="token variable">$after</span> = <span class="token function">Get-FullProcessSnapshot</span>
+<span class="token variable">$afterGrouped</span> = <span class="token function">Get-GroupedSnapshot</span> <span class="token operator">-</span>Snapshot <span class="token variable">$after</span>
+<span class="token variable">$afterSummary</span> = <span class="token function">Get-SystemSummary</span> <span class="token operator">-</span>Snapshot <span class="token variable">$after</span>
+
+<span class="token variable">$after</span> <span class="token punctuation">|</span> <span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"05_processes_after.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$afterGrouped</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> Handles <span class="token operator">-</span>Descending <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"06_grouped_processes_after.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$afterSummary</span> <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"07_system_summary_after.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$beforeMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$item</span> in <span class="token variable">$before</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$item</span><span class="token punctuation">.</span>Key<span class="token punctuation">]</span> = <span class="token variable">$item</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$processGrowth</span> = <span class="token variable">$after</span> <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$beforeMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span>Key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$old</span> = <span class="token variable">$beforeMap</span><span class="token punctuation">[</span><span class="token variable">$_</span><span class="token punctuation">.</span>Key<span class="token punctuation">]</span>
+
+        <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+            PID             = <span class="token variable">$_</span><span class="token punctuation">.</span>PID
+            <span class="token keyword">Process</span>         = <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span>
+            ParentPID       = <span class="token variable">$_</span><span class="token punctuation">.</span>ParentPID
+            HandlesBefore   = <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+            HandlesAfter    = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+            HandleDelta     = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+            ThreadsBefore   = <span class="token variable">$old</span><span class="token punctuation">.</span>Threads
+            ThreadsAfter    = <span class="token variable">$_</span><span class="token punctuation">.</span>Threads
+            ThreadDelta     = <span class="token variable">$_</span><span class="token punctuation">.</span>Threads <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Threads
+            PrivateBeforeMB = <span class="token variable">$old</span><span class="token punctuation">.</span>PrivateMB
+            PrivateAfterMB  = <span class="token variable">$_</span><span class="token punctuation">.</span>PrivateMB
+            PrivateDeltaMB  = <span class="token namespace">[math]</span>::Round<span class="token punctuation">(</span>
+                <span class="token variable">$_</span><span class="token punctuation">.</span>PrivateMB <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>PrivateMB<span class="token punctuation">,</span>
+                2
+            <span class="token punctuation">)</span>
+            ExecutablePath  = <span class="token variable">$_</span><span class="token punctuation">.</span>ExecutablePath
+            CommandLine     = <span class="token variable">$_</span><span class="token punctuation">.</span>CommandLine
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> HandleDelta <span class="token operator">-</span>Descending
+
+<span class="token variable">$processGrowth</span> <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"08_process_handle_growth.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token variable">$beforeGroupMap</span> = @<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$item</span> in <span class="token variable">$beforeGrouped</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token variable">$beforeGroupMap</span><span class="token punctuation">[</span><span class="token variable">$item</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">]</span> = <span class="token variable">$item</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$groupGrowth</span> = <span class="token variable">$afterGrouped</span> <span class="token punctuation">|</span>
+<span class="token function">ForEach-Object</span> <span class="token punctuation">{</span>
+    <span class="token variable">$old</span> = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$beforeGroupMap</span><span class="token punctuation">.</span>ContainsKey<span class="token punctuation">(</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$beforeGroupMap</span><span class="token punctuation">[</span><span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token variable">$null</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+        <span class="token keyword">Process</span>         = <span class="token variable">$_</span><span class="token punctuation">.</span><span class="token keyword">Process</span>
+        InstancesBefore = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Instances <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        InstancesAfter  = <span class="token variable">$_</span><span class="token punctuation">.</span>Instances
+        InstanceDelta   = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Instances <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Instances
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Instances
+        <span class="token punctuation">}</span>
+        HandlesBefore   = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Handles <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> 0 <span class="token punctuation">}</span>
+        HandlesAfter    = <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+        HandleDelta     = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Handles <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Handles
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Handles
+        <span class="token punctuation">}</span>
+        ThreadDelta     = <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$old</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Threads <span class="token operator">-</span> <span class="token variable">$old</span><span class="token punctuation">.</span>Threads
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token variable">$_</span><span class="token punctuation">.</span>Threads
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token punctuation">|</span>
+<span class="token function">Sort-Object</span> HandleDelta <span class="token operator">-</span>Descending
+
+<span class="token variable">$groupGrowth</span> <span class="token punctuation">|</span>
+<span class="token function">Export-Csv</span> `
+    <span class="token punctuation">(</span><span class="token function">Join-Path</span> <span class="token variable">$OutputDirectory</span> <span class="token string">"09_group_handle_growth.csv"</span><span class="token punctuation">)</span> `
+    <span class="token operator">-</span>NoTypeInformation <span class="token operator">-</span>Encoding UTF8
+
+<span class="token function">Write-Host</span> <span class="token string">"系统变化："</span> <span class="token operator">-</span>ForegroundColor Green
+<span class="token namespace">[PSCustomObject]</span>@<span class="token punctuation">{</span>
+    ProcessesBefore = <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Processes
+    ProcessesAfter  = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Processes
+    ProcessDelta    = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Processes <span class="token operator">-</span> <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Processes
+    HandlesBefore   = <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Handles
+    HandlesAfter    = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Handles
+    HandleDelta     = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Handles <span class="token operator">-</span> <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Handles
+    ThreadsBefore   = <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Threads
+    ThreadsAfter    = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Threads
+    ThreadDelta     = <span class="token variable">$afterSummary</span><span class="token punctuation">.</span>Threads <span class="token operator">-</span> <span class="token variable">$beforeSummary</span><span class="token punctuation">.</span>Threads
+<span class="token punctuation">}</span> <span class="token punctuation">|</span> <span class="token function">Format-List</span>
+
+<span class="token function">Write-Host</span> <span class="token string">"同一进程句柄增长排行榜："</span> <span class="token operator">-</span>ForegroundColor Green
+<span class="token variable">$processGrowth</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First <span class="token variable">$Top</span> `
+    PID<span class="token punctuation">,</span>
+    <span class="token keyword">Process</span><span class="token punctuation">,</span>
+    HandleDelta<span class="token punctuation">,</span>
+    ThreadDelta<span class="token punctuation">,</span>
+    PrivateDeltaMB <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize
+
+<span class="token function">Write-Host</span> <span class="token string">"程序族句柄增长排行榜："</span> <span class="token operator">-</span>ForegroundColor Green
+<span class="token variable">$groupGrowth</span> <span class="token punctuation">|</span>
+<span class="token function">Select-Object</span> <span class="token operator">-</span>First <span class="token variable">$Top</span> <span class="token punctuation">|</span>
+<span class="token function">Format-Table</span> <span class="token operator">-</span>AutoSize
+
+<span class="token function">Write-Host</span> <span class="token string">"审查完成。报告目录："</span> <span class="token operator">-</span>ForegroundColor Cyan
+<span class="token function">Write-Host</span> <span class="token variable">$OutputDirectory</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-ExecutionPolicy</span> <span class="token operator">-</span>Scope <span class="token keyword">Process</span> <span class="token operator">-</span>ExecutionPolicy Bypass
+
+<span class="token punctuation">.</span>\Handle-Audit<span class="token punctuation">.</span>ps1 <span class="token operator">-</span>ObserveSeconds 120 <span class="token operator">-</span>Top 40<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>默认报告目录：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">桌面\HandleAudit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>主要文件：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">01_processes_before.csv
+02_top_processes_before.csv
+03_grouped_processes_before.csv
+04_system_summary_before.csv
+05_processes_after.csv
+06_grouped_processes_after.csv
+07_system_summary_after.csv
+08_process_handle_growth.csv
+09_group_handle_growth.csv<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中最重要的是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">08_process_handle_growth.csv
+09_group_handle_growth.csv<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<hr>
+<h2 id="二十六、标准排查流程"><a href="#二十六、标准排查流程" class="headerlink" title="二十六、标准排查流程"></a>二十六、标准排查流程</h2><h3 id="第一阶段：确认问题"><a href="#第一阶段：确认问题" class="headerlink" title="第一阶段：确认问题"></a>第一阶段：确认问题</h3><ol>
+<li>记录总句柄；</li>
+<li>记录进程数；</li>
+<li>记录线程数；</li>
+<li>观察总句柄是否持续上涨；</li>
+<li>确认是否同时出现卡顿、窗口无法打开等症状。</li>
+</ol>
+<h3 id="第二阶段：定位范围"><a href="#第二阶段：定位范围" class="headerlink" title="第二阶段：定位范围"></a>第二阶段：定位范围</h3><ol>
+<li>查看单进程句柄排行；</li>
+<li>查看同名进程汇总；</li>
+<li>比较一分钟句柄增量；</li>
+<li>比较实例数量增量；</li>
+<li>区分句柄泄漏和进程增殖。</li>
+</ol>
+<h3 id="第三阶段：追踪来源"><a href="#第三阶段：追踪来源" class="headerlink" title="第三阶段：追踪来源"></a>第三阶段：追踪来源</h3><ol>
+<li>查看命令行；</li>
+<li>查看可执行文件路径；</li>
+<li>查看父进程；</li>
+<li>查看完整祖先链；</li>
+<li>查看子进程；</li>
+<li>对 svchost 查询具体服务；</li>
+<li>对 System 检查驱动和设备。</li>
+</ol>
+<h3 id="第四阶段：隔离验证"><a href="#第四阶段：隔离验证" class="headerlink" title="第四阶段：隔离验证"></a>第四阶段：隔离验证</h3><ol>
+<li>正常退出可疑程序；</li>
+<li>记录句柄下降数量；</li>
+<li>暂停插件或扩展；</li>
+<li>暂停后台服务；</li>
+<li>断开非必要设备；</li>
+<li>重复相同操作验证是否复现。</li>
+</ol>
+<h3 id="第五阶段：形成证据"><a href="#第五阶段：形成证据" class="headerlink" title="第五阶段：形成证据"></a>第五阶段：形成证据</h3><p>建议保留：</p>
+<ul>
+<li>系统总量日志；</li>
+<li>进程增长 CSV；</li>
+<li>命令行；</li>
+<li>父进程链；</li>
+<li>程序版本；</li>
+<li>触发步骤；</li>
+<li>开始和结束时间；</li>
+<li>关闭程序前后的句柄差值。</li>
+</ul>
+<hr>
+<h2 id="二十七、最终判断标准"><a href="#二十七、最终判断标准" class="headerlink" title="二十七、最终判断标准"></a>二十七、最终判断标准</h2><p>通常满足以下多个条件，才能较有把握地判断为句柄泄漏：</p>
+<ol>
+<li>同一个 PID 持续存在；</li>
+<li>句柄数量连续多轮增长；</li>
+<li>负载停止后仍然不回落；</li>
+<li>重复执行某个操作时稳定复现；</li>
+<li>关闭目标程序后总句柄明显下降；</li>
+<li>重启目标程序后句柄恢复低位；</li>
+<li>再次操作后重新开始增长；</li>
+<li>进程实例数量没有同步增加；</li>
+<li>不是正常浏览器标签页、虚拟机或批量任务造成；</li>
+<li>问题与特定插件、版本、设备或服务高度相关。</li>
+</ol>
+<p>不够可靠的判断：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">它现在有 10000 个句柄。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>更可靠的证据链：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">同一个 PID 在空闲状态下每分钟稳定增加 1500 个句柄，
+停止业务后不释放，
+关闭该程序后系统总句柄立即下降 80000，
+重新启动该程序后句柄恢复低位，
+再次执行相同操作后重新持续上涨。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这才是一条完整、可信的句柄泄漏证据链。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/">https://0xdadream.github.io/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/windows/">
+                                    <span class="chip bg-color">windows</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="Windows 11 句柄审查与泄漏定位教程">
+                        
+                        <span class="card-title">Windows 11 句柄审查与泄漏定位教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Windows 11 句柄审查与泄漏定位教程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
+                                    报错修复
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/windows/">
+                        <span class="chip bg-color">windows</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/05/29/wsl2-ci-pan-zhan-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程">
+                        
+                        <span class="card-title">WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-05-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/wsl/">
+                        <span class="chip bg-color">wsl</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 逐梦<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">358.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

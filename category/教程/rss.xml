@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sun, 01 Mar 2026 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sun, 01 Mar 2026 12:25:00 +0800</lastBuildDate>
+        <pubDate>Fri, 29 May 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 29 May 2026 12:25:00 +0800</lastBuildDate>
         <category>AI</category>
         <category>tip</category>
         <category>intel</category>
@@ -61,6 +61,682 @@
         <category>i春秋</category>
         <category>mcp</category>
         <category>证书</category>
+        <category>ai</category>
+        <category>wsl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/05/29/wsl2-ci-pan-zhan-yong/</guid>
+            <title>WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程</title>
+            <link>https://0xdadream.github.io/2026/05/29/wsl2-ci-pan-zhan-yong/</link>
+            <category>wsl</category>
+            <pubDate>Fri, 29 May 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;WSL2-虚拟磁盘-ext4-vhdx-占用过大缩减教程&#34;&gt;&lt;a href=&#34;#WSL2-虚拟磁盘-ext4-vhdx-占用过大缩减教程&#34; class=&#34;headerlink&#34; title=&#34;WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程&#34;&gt;&lt;/a&gt;WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程&lt;/h1&gt;&lt;p&gt;本文适用于这种情况：Windows 里看到某个 WSL2 的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 文件很大，比如 90GB、100GB，但进入 WSL 后用 &lt;code&gt;df -h&lt;/code&gt; 查看，Linux 内部实际只用了十几 GB。出现这种情况并不是 WSL 坏了，而是因为 WSL2 使用的是动态虚拟硬盘。它会随着使用自动变大，但你在 Linux 里删除文件后，外层的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 通常不会自动缩小，所以需要手动压缩。&lt;/p&gt;
+&lt;p&gt;以 Ubuntu-22.04 为例，假设它的虚拟磁盘路径类似下面这样：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个路径是正常的。不同 WSL 发行版可能在不同目录下，例如有的在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\Packages\...\LocalState\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也有的在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{GUID}\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;路径不同只是安装方式不同，不代表异常。真正要判断的是：Windows 看到的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 大小，和 WSL 内部实际使用量是否差距很大。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查询-WSL-名称和状态&#34;&gt;&lt;a href=&#34;#查询-WSL-名称和状态&#34; class=&#34;headerlink&#34; title=&#34;查询 WSL 名称和状态&#34;&gt;&lt;/a&gt;查询 WSL 名称和状态&lt;/h2&gt;&lt;p&gt;先打开 PowerShell，执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;  NAME            STATE           VERSION
+&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Running         2
+  Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Stopped         2
+  Ubuntu-24&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Stopped         2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里要确认你准备缩减的是哪个发行版。后面的教程以：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Ubuntu-22.04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为例。如果你的名字不同，比如 &lt;code&gt;Ubuntu&lt;/code&gt;、&lt;code&gt;Ubuntu-24.04&lt;/code&gt;，后面命令里的名字要对应修改。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查询-WSL-的真实磁盘路径&#34;&gt;&lt;a href=&#34;#查询-WSL-的真实磁盘路径&#34; class=&#34;headerlink&#34; title=&#34;查询 WSL 的真实磁盘路径&#34;&gt;&lt;/a&gt;查询 WSL 的真实磁盘路径&lt;/h2&gt;&lt;p&gt;不要自己去文件夹里乱找，也不要手动复制很长的 GUID 路径。最稳的方法是从注册表里读取 WSL 的真实路径。&lt;/p&gt;
+&lt;p&gt;在 PowerShell 中执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        Name = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName
+        BasePath = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath
+        Version = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Version
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;Name           BasePath
+&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;           &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;
+Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\wsl\&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\Packages\&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\LocalState
+Ubuntu-24&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\Packages\&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\LocalState&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中 &lt;code&gt;BasePath&lt;/code&gt; 就是对应 WSL 虚拟磁盘所在的目录。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;自动获取-Ubuntu-22-04-的-ext4-vhdx-路径&#34;&gt;&lt;a href=&#34;#自动获取-Ubuntu-22-04-的-ext4-vhdx-路径&#34; class=&#34;headerlink&#34; title=&#34;自动获取 Ubuntu-22.04 的 ext4.vhdx 路径&#34;&gt;&lt;/a&gt;自动获取 Ubuntu-22.04 的 ext4.vhdx 路径&lt;/h2&gt;&lt;p&gt;为了避免路径输错，建议直接用变量保存路径。执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下会输出类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ext4.vhdx
+True&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要最后是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;True&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就说明路径正确。&lt;/p&gt;
+&lt;p&gt;如果是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;False&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明没有找到 &lt;code&gt;ext4.vhdx&lt;/code&gt;，这时不要继续压缩，先检查发行版名字是不是写错了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查看压缩前-ext4-vhdx-的大小&#34;&gt;&lt;a href=&#34;#查看压缩前-ext4-vhdx-的大小&#34; class=&#34;headerlink&#34; title=&#34;查看压缩前 ext4.vhdx 的大小&#34;&gt;&lt;/a&gt;查看压缩前 ext4.vhdx 的大小&lt;/h2&gt;&lt;p&gt;继续在 PowerShell 中执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;FullName                                                               SizeGB
+--------                                                               ------
+C:\Users\xxx\AppData\Local\wsl\{...}\ext4.vhdx                         95.65&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;SizeGB&lt;/code&gt; 就是 Windows 当前实际被这个虚拟磁盘文件占用的空间。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查看-WSL-内部实际使用量&#34;&gt;&lt;a href=&#34;#查看-WSL-内部实际使用量&#34; class=&#34;headerlink&#34; title=&#34;查看 WSL 内部实际使用量&#34;&gt;&lt;/a&gt;查看 WSL 内部实际使用量&lt;/h2&gt;&lt;p&gt;接着查看 Ubuntu-22.04 内部到底用了多少空间：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; df &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;h &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果结果类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdc        1007G 17G  939G  2%   /&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明 Linux 内部实际只用了 17GB。此时如果 Windows 上的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 是 95GB，就说明中间有大量已经释放但没有被 Windows 回收的空间，可以进行压缩。&lt;/p&gt;
+&lt;p&gt;如果这里 &lt;code&gt;Used&lt;/code&gt; 也很大，比如 80GB、90GB，那就不是虚拟磁盘没缩的问题，而是 WSL 里面确实有大文件，需要先清理 Linux 内部文件，再压缩。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;执行-fstrim-标记可回收空间&#34;&gt;&lt;a href=&#34;#执行-fstrim-标记可回收空间&#34; class=&#34;headerlink&#34; title=&#34;执行 fstrim 标记可回收空间&#34;&gt;&lt;/a&gt;执行 fstrim 标记可回收空间&lt;/h2&gt;&lt;p&gt;在压缩之前，先让 WSL 标记哪些空间已经不用了：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; bash &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;lc &lt;span class=&#34;token string&#34;&gt;&#34;sudo fstrim -av&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令可能会要求输入 Ubuntu 里的 sudo 密码。执行后可能会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/: 70 GiB trimmed&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这表示 Linux 内部有一部分空闲块已经被标记为可以回收。即使输出比较少，也可以继续下一步。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;关闭-WSL&#34;&gt;&lt;a href=&#34;#关闭-WSL&#34; class=&#34;headerlink&#34; title=&#34;关闭 WSL&#34;&gt;&lt;/a&gt;关闭 WSL&lt;/h2&gt;&lt;p&gt;压缩虚拟磁盘前，必须关闭 WSL。执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后检查状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最好确认 Ubuntu-22.04 已经是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Stopped&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果还显示 &lt;code&gt;Running&lt;/code&gt;，等几秒后再执行一次：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;使用-DiskPart-压缩-ext4-vhdx&#34;&gt;&lt;a href=&#34;#使用-DiskPart-压缩-ext4-vhdx&#34; class=&#34;headerlink&#34; title=&#34;使用 DiskPart 压缩 ext4.vhdx&#34;&gt;&lt;/a&gt;使用 DiskPart 压缩 ext4.vhdx&lt;/h2&gt;&lt;p&gt;如果你的系统支持 &lt;code&gt;Optimize-VHD&lt;/code&gt;，可以使用它。但很多 Windows 家用版或未启用 Hyper-V 模块的系统没有这个命令，所以这里直接使用更通用的 DiskPart 方法。&lt;/p&gt;
+&lt;p&gt;建议用&lt;strong&gt;管理员 PowerShell&lt;/strong&gt;执行下面这一整段：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-not&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;找不到 VHDX 文件：&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown
+
+@&lt;span class=&#34;token string&#34;&gt;&#34;
+select vdisk file=&#34;&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+&#34;&lt;/span&gt;@ &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Set-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding ASCII
+
+diskpart &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;s &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段命令会自动找到 Ubuntu-22.04 的 &lt;code&gt;ext4.vhdx&lt;/code&gt;，生成 DiskPart 脚本，然后执行压缩。这样做的好处是不用你手动输入长路径，也不会因为 GUID 少输一个字符而失败。&lt;/p&gt;
+&lt;p&gt;成功时，DiskPart 一般会显示类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;DiskPart 成功地选择了虚拟磁盘文件。
+DiskPart 成功地附加了虚拟磁盘文件。
+DiskPart 成功地压缩了虚拟磁盘文件。
+DiskPart 成功地分离了虚拟磁盘文件。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中最关键的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;DiskPart 成功地压缩了虚拟磁盘文件。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;验证压缩结果&#34;&gt;&lt;a href=&#34;#验证压缩结果&#34; class=&#34;headerlink&#34; title=&#34;验证压缩结果&#34;&gt;&lt;/a&gt;验证压缩结果&lt;/h2&gt;&lt;p&gt;压缩完成后，再查看一次 &lt;code&gt;ext4.vhdx&lt;/code&gt; 的大小：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 PowerShell 变量 &lt;code&gt;$vhd&lt;/code&gt; 已经失效，就重新执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下，原来 95GB 左右的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 可能会降到 20GB 到 30GB 左右。不一定会刚好等于 &lt;code&gt;df -h&lt;/code&gt; 里的 17GB，因为虚拟磁盘还会保留文件系统元数据和一些结构空间。&lt;/p&gt;
+&lt;p&gt;只要它明显变小，就说明缩减成功。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;启动-WSL-检查是否正常&#34;&gt;&lt;a href=&#34;#启动-WSL-检查是否正常&#34; class=&#34;headerlink&#34; title=&#34;启动 WSL 检查是否正常&#34;&gt;&lt;/a&gt;启动 WSL 检查是否正常&lt;/h2&gt;&lt;p&gt;最后重新启动 Ubuntu-22.04：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入后执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;df &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;h &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认系统可以正常进入，空间显示正常即可。&lt;/p&gt;
+&lt;p&gt;退出 WSL：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;最终推荐命令合集&#34;&gt;&lt;a href=&#34;#最终推荐命令合集&#34; class=&#34;headerlink&#34; title=&#34;最终推荐命令合集&#34;&gt;&lt;/a&gt;最终推荐命令合集&lt;/h2&gt;&lt;p&gt;如果你已经确认要缩减的是 &lt;code&gt;Ubuntu-22.04&lt;/code&gt;，可以直接用下面这段。用&lt;strong&gt;管理员 PowerShell&lt;/strong&gt;运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;目标 VHDX：&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-not&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;错误：找不到 VHDX 文件，停止操作。&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n压缩前大小：&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n执行 fstrim...&#34;&lt;/span&gt;
+wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; bash &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;lc &lt;span class=&#34;token string&#34;&gt;&#34;sudo fstrim -av&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n关闭 WSL...&#34;&lt;/span&gt;
+wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown
+
+@&lt;span class=&#34;token string&#34;&gt;&#34;
+select vdisk file=&#34;&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+&#34;&lt;/span&gt;@ &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Set-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding ASCII
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n开始压缩 VHDX...&#34;&lt;/span&gt;
+diskpart &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;s &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n压缩后大小：&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这版流程就是：先自动找到 Ubuntu-22.04 的 &lt;code&gt;ext4.vhdx&lt;/code&gt;，显示压缩前大小，执行 &lt;code&gt;fstrim&lt;/code&gt;，关闭 WSL，使用 DiskPart 压缩，最后显示压缩后大小。路径里的用户名和 GUID 都不需要手动输入，避免出错。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/04/19/linux-proxy/</guid>
+            <title>Linux 包管理换源 + v2rayN 代理完整备忘录</title>
+            <link>https://0xdadream.github.io/2026/04/19/linux-proxy/</link>
+            <pubDate>Sun, 19 Apr 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Linux-包管理换源-v2rayN-代理完整备忘录&#34;&gt;&lt;a href=&#34;#Linux-包管理换源-v2rayN-代理完整备忘录&#34; class=&#34;headerlink&#34; title=&#34;Linux 包管理换源 + v2rayN 代理完整备忘录&#34;&gt;&lt;/a&gt;Linux 包管理换源 + v2rayN 代理完整备忘录&lt;/h1&gt;&lt;p&gt;（本文适合作为长期保存的 Markdown 备忘文档）&lt;/p&gt;
+&lt;h2 id=&#34;一、目标&#34;&gt;&lt;a href=&#34;#一、目标&#34; class=&#34;headerlink&#34; title=&#34;一、目标&#34;&gt;&lt;/a&gt;一、目标&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在网络受限环境下稳定使用 Linux&lt;/li&gt;
+&lt;li&gt;包管理器使用国内镜像源&lt;/li&gt;
+&lt;li&gt;通过 v2rayN（Windows）为 Linux 提供代理&lt;/li&gt;
+&lt;li&gt;可随时开启/关闭代理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、v2rayN-基础准备（Windows）&#34;&gt;&lt;a href=&#34;#二、v2rayN-基础准备（Windows）&#34; class=&#34;headerlink&#34; title=&#34;二、v2rayN 基础准备（Windows）&#34;&gt;&lt;/a&gt;二、v2rayN 基础准备（Windows）&lt;/h2&gt;&lt;h3 id=&#34;必须开启的本地端口&#34;&gt;&lt;a href=&#34;#必须开启的本地端口&#34; class=&#34;headerlink&#34; title=&#34;必须开启的本地端口&#34;&gt;&lt;/a&gt;必须开启的本地端口&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;地址&lt;/th&gt;
+&lt;th&gt;端口&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
+&lt;td&gt;10809&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SOCKS5&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
+&lt;td&gt;10808&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;模式建议：全局模式（最简单稳定）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三、Linux-包管理器换源&#34;&gt;&lt;a href=&#34;#三、Linux-包管理器换源&#34; class=&#34;headerlink&#34; title=&#34;三、Linux 包管理器换源&#34;&gt;&lt;/a&gt;三、Linux 包管理器换源&lt;/h2&gt;&lt;h3 id=&#34;3-1-Ubuntu-Debian（APT）&#34;&gt;&lt;a href=&#34;#3-1-Ubuntu-Debian（APT）&#34; class=&#34;headerlink&#34; title=&#34;3.1 Ubuntu / Debian（APT）&#34;&gt;&lt;/a&gt;3.1 Ubuntu / Debian（APT）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;cp&lt;/span&gt; /etc/apt/sources.list /etc/apt/sources.list.bak
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/apt/sources.list&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu 22.04 示例（清华源）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted universe multiverse&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更新：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;3-2-CentOS-Rocky-Alma&#34;&gt;&lt;a href=&#34;#3-2-CentOS-Rocky-Alma&#34; class=&#34;headerlink&#34; title=&#34;3.2 CentOS / Rocky / Alma&#34;&gt;&lt;/a&gt;3.2 CentOS / Rocky / Alma&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /etc/yum.repos.d/bak
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak/
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum makecache&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;3-3-Arch-Linux&#34;&gt;&lt;a href=&#34;#3-3-Arch-Linux&#34; class=&#34;headerlink&#34; title=&#34;3.3 Arch Linux&#34;&gt;&lt;/a&gt;3.3 Arch Linux&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/pacman.d/mirrorlist&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; pacman &lt;span class=&#34;token parameter variable&#34;&gt;-Syy&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;四、Linux-使用-v2rayN-代理&#34;&gt;&lt;a href=&#34;#四、Linux-使用-v2rayN-代理&#34; class=&#34;headerlink&#34; title=&#34;四、Linux 使用 v2rayN 代理&#34;&gt;&lt;/a&gt;四、Linux 使用 v2rayN 代理&lt;/h2&gt;&lt;h3 id=&#34;4-1-临时代理（推荐）&#34;&gt;&lt;a href=&#34;#4-1-临时代理（推荐）&#34; class=&#34;headerlink&#34; title=&#34;4.1 临时代理（推荐）&#34;&gt;&lt;/a&gt;4.1 临时代理（推荐）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;http_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;http://127.0.0.1:10809
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;https_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;http://127.0.0.1:10809
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ALL_PROXY&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; ipinfo.io&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;4-2-apt-专用代理&#34;&gt;&lt;a href=&#34;#4-2-apt-专用代理&#34; class=&#34;headerlink&#34; title=&#34;4.2 apt 专用代理&#34;&gt;&lt;/a&gt;4.2 apt 专用代理&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/apt/apt.conf.d/99proxy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Acquire::http::Proxy &#34;http://127.0.0.1:10809&#34;;
+Acquire::https::Proxy &#34;http://127.0.0.1:10809&#34;;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;五、常用工具代理配置&#34;&gt;&lt;a href=&#34;#五、常用工具代理配置&#34; class=&#34;headerlink&#34; title=&#34;五、常用工具代理配置&#34;&gt;&lt;/a&gt;五、常用工具代理配置&lt;/h2&gt;&lt;h3 id=&#34;Git&#34;&gt;&lt;a href=&#34;#Git&#34; class=&#34;headerlink&#34; title=&#34;Git&#34;&gt;&lt;/a&gt;Git&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; http.proxy http://127.0.0.1:10809
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; https.proxy http://127.0.0.1:10809&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;取消：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--unset&lt;/span&gt; http.proxy
+&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; config &lt;span class=&#34;token parameter variable&#34;&gt;--global&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--unset&lt;/span&gt; https.proxy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;pip&#34;&gt;&lt;a href=&#34;#pip&#34; class=&#34;headerlink&#34; title=&#34;pip&#34;&gt;&lt;/a&gt;pip&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pip config &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; requests &lt;span class=&#34;token parameter variable&#34;&gt;--proxy&lt;/span&gt; http://127.0.0.1:10809&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;npm&#34;&gt;&lt;a href=&#34;#npm&#34; class=&#34;headerlink&#34; title=&#34;npm&#34;&gt;&lt;/a&gt;npm&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; config &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; registry https://registry.npmmirror.com
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; config &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; proxy http://127.0.0.1:10809
+&lt;span class=&#34;token function&#34;&gt;npm&lt;/span&gt; config &lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; https-proxy http://127.0.0.1:10809&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;Docker-代理&#34;&gt;&lt;a href=&#34;#Docker-代理&#34; class=&#34;headerlink&#34; title=&#34;Docker 代理&#34;&gt;&lt;/a&gt;Docker 代理&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /etc/systemd/system/docker.service.d
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; /etc/systemd/system/docker.service.d/http-proxy.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token section&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token section-name selector&#34;&gt;Service&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;HTTP_PROXY=http://127.0.0.1:10809&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;&#34;&lt;span class=&#34;token inner-value&#34;&gt;HTTPS_PROXY=http://127.0.0.1:10809&lt;/span&gt;&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl daemon-reexec
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl restart &lt;span class=&#34;token function&#34;&gt;docker&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;六、代理开关脚本&#34;&gt;&lt;a href=&#34;#六、代理开关脚本&#34; class=&#34;headerlink&#34; title=&#34;六、代理开关脚本&#34;&gt;&lt;/a&gt;六、代理开关脚本&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# proxy_on&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;http_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;http://127.0.0.1:10809
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;https_proxy&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;http://127.0.0.1:10809
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ALL_PROXY&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# proxy_off&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;unset&lt;/span&gt; http_proxy https_proxy ALL_PROXY&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;七、常见问题&#34;&gt;&lt;a href=&#34;#七、常见问题&#34; class=&#34;headerlink&#34; title=&#34;七、常见问题&#34;&gt;&lt;/a&gt;七、常见问题&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;apt 卡住：v2rayN 是否启动&lt;/li&gt;
+&lt;li&gt;curl 有效 apt 无效：未配置 apt.conf.d&lt;/li&gt;
+&lt;li&gt;git clone 慢：git 未单独设置代理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八、总结&#34;&gt;&lt;a href=&#34;#八、总结&#34; class=&#34;headerlink&#34; title=&#34;八、总结&#34;&gt;&lt;/a&gt;八、总结&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;换源解决速度问题&lt;br&gt;代理解决访问问题&lt;br&gt;临时代理最安全&lt;/p&gt;
+&lt;/blockquote&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/04/16/nano-jiao-cheng/</guid>
+            <title>nano教程</title>
+            <link>https://0xdadream.github.io/2026/04/16/nano-jiao-cheng/</link>
+            <category>tools</category>
+            <pubDate>Thu, 16 Apr 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;nano教程&#34;&gt;&lt;a href=&#34;#nano教程&#34; class=&#34;headerlink&#34; title=&#34;nano教程&#34;&gt;&lt;/a&gt;nano教程&lt;/h1&gt;&lt;h3 id=&#34;1-安装（一次搞定）&#34;&gt;&lt;a href=&#34;#1-安装（一次搞定）&#34; class=&#34;headerlink&#34; title=&#34;1. 安装（一次搞定）&#34;&gt;&lt;/a&gt;1. 安装（一次搞定）&lt;/h3&gt;&lt;p&gt;大多数系统自带，没装就敲：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ubuntu/Debian：sudo apt install nano -y&lt;/li&gt;
+&lt;li&gt;Fedora/RHEL/CentOS：sudo dnf install nano -y&lt;/li&gt;
+&lt;li&gt;Arch：sudo pacman -S nano&lt;/li&gt;
+&lt;li&gt;macOS（Homebrew）：brew install nano&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;验证：nano –version&lt;/p&gt;
+&lt;h3 id=&#34;2-怎么打开&#34;&gt;&lt;a href=&#34;#2-怎么打开&#34; class=&#34;headerlink&#34; title=&#34;2. 怎么打开&#34;&gt;&lt;/a&gt;2. 怎么打开&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;nano 文件名          # 新建或打开
+nano /etc/nginx/nginx.conf   # 改系统文件建议加 sudo
+nano +行号 文件名     # 直接跳到某行（比如 nano +50 config.py）
+nano                  # 新建临时文件，退出时再命名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-界面和最常用操作（底部一直有提示）&#34;&gt;&lt;a href=&#34;#3-界面和最常用操作（底部一直有提示）&#34; class=&#34;headerlink&#34; title=&#34;3. 界面和最常用操作（底部一直有提示）&#34;&gt;&lt;/a&gt;3. 界面和最常用操作（底部一直有提示）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;保存&lt;/strong&gt;：Ctrl + S（最快）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;另存为&lt;/strong&gt;：Ctrl + O（改名用）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;退出&lt;/strong&gt;：Ctrl + X（改了会问你保存不）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;光标移动&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方向键 或 Ctrl + F/B/P/N（右左上下）&lt;/li&gt;
+&lt;li&gt;行首：Ctrl + A&lt;/li&gt;
+&lt;li&gt;行尾：Ctrl + E&lt;/li&gt;
+&lt;li&gt;文件头：Alt + \&lt;/li&gt;
+&lt;li&gt;文件尾：Alt + /&lt;/li&gt;
+&lt;li&gt;跳行：Ctrl + _（输入行号回车）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;编辑&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接打字&lt;/li&gt;
+&lt;li&gt;删一行：Ctrl + K&lt;/li&gt;
+&lt;li&gt;复制一行：Alt + 6&lt;/li&gt;
+&lt;li&gt;粘贴：Ctrl + U&lt;/li&gt;
+&lt;li&gt;撤销：Alt + U&lt;/li&gt;
+&lt;li&gt;重做：Alt + E&lt;/li&gt;
+&lt;li&gt;删前面字符：Backspace / Ctrl + H&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;删除全文&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Alt + \ → 文件头&lt;/li&gt;
+&lt;li&gt;Alt + A（设标记）&lt;/li&gt;
+&lt;li&gt;Alt + / → 文件尾（全选中反白）&lt;/li&gt;
+&lt;li&gt;Ctrl + K → 全删&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;删完直接 Ctrl + S 保存就空了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;选中文字&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;光标到起点 → Alt + A&lt;/li&gt;
+&lt;li&gt;移动光标选中&lt;/li&gt;
+&lt;li&gt;Ctrl + K 剪切 / Alt + 6 复制 / Ctrl + U 粘贴&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;鼠标能直接点选、拖拽（大部分终端都支持）。&lt;/p&gt;
+&lt;h3 id=&#34;4-搜索和替换&#34;&gt;&lt;a href=&#34;#4-搜索和替换&#34; class=&#34;headerlink&#34; title=&#34;4. 搜索和替换&#34;&gt;&lt;/a&gt;4. 搜索和替换&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;搜索：Ctrl + F（向前）或 Ctrl + B（向后）&lt;/li&gt;
+&lt;li&gt;下一个：Alt + F / Alt + B&lt;/li&gt;
+&lt;li&gt;替换：Alt + R（输入旧 → 回车 → 新 → 回车 → Y/N 确认）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;支持正则（^ 行首、$ 行尾）。&lt;/p&gt;
+&lt;h3 id=&#34;5-多文件同时编辑（日常神器）&#34;&gt;&lt;a href=&#34;#5-多文件同时编辑（日常神器）&#34; class=&#34;headerlink&#34; title=&#34;5. 多文件同时编辑（日常神器）&#34;&gt;&lt;/a&gt;5. 多文件同时编辑（日常神器）&lt;/h3&gt;&lt;p&gt;启动：nano 文件1 文件2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换：Alt + &amp;lt;（上一个） / Alt + &amp;gt;（下一个）&lt;/li&gt;
+&lt;li&gt;关当前文件：Ctrl + X（只关这一个）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-宏录制（重复操作一次搞定）&#34;&gt;&lt;a href=&#34;#6-宏录制（重复操作一次搞定）&#34; class=&#34;headerlink&#34; title=&#34;6. 宏录制（重复操作一次搞定）&#34;&gt;&lt;/a&gt;6. 宏录制（重复操作一次搞定）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;开始录制：Alt + :&lt;/li&gt;
+&lt;li&gt;做完操作&lt;/li&gt;
+&lt;li&gt;停止：Alt + ;&lt;/li&gt;
+&lt;li&gt;回放：Alt + :（再按一次）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;批量改变量名、加注释超快。&lt;/p&gt;
+&lt;h3 id=&#34;7-其他日常小技巧&#34;&gt;&lt;a href=&#34;#7-其他日常小技巧&#34; class=&#34;headerlink&#34; title=&#34;7. 其他日常小技巧&#34;&gt;&lt;/a&gt;7. 其他日常小技巧&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;执行命令并插入输出：Ctrl + T 然后输入 !date 或 !ls（前面加 !）&lt;/li&gt;
+&lt;li&gt;插入文件内容：Ctrl + R + 文件名&lt;/li&gt;
+&lt;li&gt;书签（大文件跳跃）：光标位置 Alt + B 设置，下一个 Alt + N&lt;/li&gt;
+&lt;li&gt;拼写检查：Ctrl + T（系统有 aspell 就行）&lt;/li&gt;
+&lt;li&gt;大小写转换：选中后 Alt + U（大写） / Alt + L（小写）&lt;/li&gt;
+&lt;li&gt;缩进：Tab / Shift + Tab&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-让-Nano-永久好用（配一次就行）&#34;&gt;&lt;a href=&#34;#8-让-Nano-永久好用（配一次就行）&#34; class=&#34;headerlink&#34; title=&#34;8. 让 Nano 永久好用（配一次就行）&#34;&gt;&lt;/a&gt;8. 让 Nano 永久好用（配一次就行）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;nano ~/.nanorc&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;粘贴下面内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-nanorc&#34; data-language=&#34;nanorc&#34;&gt;&lt;code class=&#34;language-nanorc&#34;&gt;set linenumbers          # 显示行号 set tabsize 4 set tabstospaces         # Tab 转空格 set autoindent set smooth               # 丝滑滚动 set softwrap             # 自动换行 set mouse                # 鼠标支持 include &#34;/usr/share/nano/*.nanorc&#34;  # 自动语法高亮（Python、JSON 等）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后重开 nano 生效。想全局改就编辑 /etc/nanorc。&lt;/p&gt;
+&lt;h3 id=&#34;9-启动参数（懒人专用）&#34;&gt;&lt;a href=&#34;#9-启动参数（懒人专用）&#34; class=&#34;headerlink&#34; title=&#34;9. 启动参数（懒人专用）&#34;&gt;&lt;/a&gt;9. 启动参数（懒人专用）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;nano -w 文件：不自动换行（看日志用）&lt;/li&gt;
+&lt;li&gt;nano -v 文件：只读模式&lt;/li&gt;
+&lt;li&gt;nano -B 文件：自动备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;10-常见问题秒解决&#34;&gt;&lt;a href=&#34;#10-常见问题秒解决&#34; class=&#34;headerlink&#34; title=&#34;10. 常见问题秒解决&#34;&gt;&lt;/a&gt;10. 常见问题秒解决&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;保存不了：权限问题，加 sudo 或检查路径&lt;/li&gt;
+&lt;li&gt;快捷键不灵：终端里试 Esc 代替 Alt&lt;/li&gt;
+&lt;li&gt;中文乱码：终端敲 export LANG=zh_CN.UTF-8&lt;/li&gt;
+&lt;li&gt;文件太大：先用 less 文件 看，必要时再 nano&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;日常就这些，够你改配置、写脚本、看日志、临时笔记了。第一次用直接 Ctrl + G 看内置帮助，过一遍就全记住了。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/04/14/tdl-chang-qi-wei-hu-zhong-ji-wan-zheng-jiao-cheng/</guid>
+            <title>tdl 长期维护完整最终教程</title>
+            <link>https://0xdadream.github.io/2026/04/14/tdl-chang-qi-wei-hu-zhong-ji-wan-zheng-jiao-cheng/</link>
+            <category>tools</category>
+            <pubDate>Tue, 14 Apr 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;tdl-长期维护完整最终教程（Windows）&#34;&gt;&lt;a href=&#34;#tdl-长期维护完整最终教程（Windows）&#34; class=&#34;headerlink&#34; title=&#34;tdl 长期维护完整最终教程（Windows）&#34;&gt;&lt;/a&gt;tdl 长期维护完整最终教程（Windows）&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;一、tdl-的正确定位&#34;&gt;&lt;a href=&#34;#一、tdl-的正确定位&#34; class=&#34;headerlink&#34; title=&#34;一、tdl 的正确定位&#34;&gt;&lt;/a&gt;一、tdl 的正确定位&lt;/h2&gt;&lt;p&gt;✅ tdl 是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Telegram &lt;strong&gt;官方 API&lt;/strong&gt; 客户端&lt;/li&gt;
+&lt;li&gt;使用 &lt;strong&gt;你自己的账号（session）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;命令行工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;❌ tdl 不是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爬虫 / bot&lt;/li&gt;
+&lt;li&gt;破解工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工作模型（必须记住）&#34;&gt;&lt;a href=&#34;#工作模型（必须记住）&#34; class=&#34;headerlink&#34; title=&#34;工作模型（必须记住）&#34;&gt;&lt;/a&gt;工作模型（必须记住）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;Telegram Desktop（登录一次）
+        ↓
+本地 session（凭证）
+        ↓
+tdl 以“正常用户身份”下载&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;👉 &lt;strong&gt;是否打开软件不重要&lt;br&gt; 是否退出账号非常重要&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、长期维护前必须固定的-3-件事&#34;&gt;&lt;a href=&#34;#二、长期维护前必须固定的-3-件事&#34; class=&#34;headerlink&#34; title=&#34;二、长期维护前必须固定的 3 件事&#34;&gt;&lt;/a&gt;二、长期维护前必须固定的 3 件事&lt;/h2&gt;&lt;h3 id=&#34;✅-1️⃣-固定账号（建议一个专用老号）&#34;&gt;&lt;a href=&#34;#✅-1️⃣-固定账号（建议一个专用老号）&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 固定账号（建议一个专用老号）&#34;&gt;&lt;/a&gt;✅ 1️⃣ 固定账号（建议一个专用老号）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;用来下载&lt;/li&gt;
+&lt;li&gt;不频繁换设备 / IP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-固定-namespace（这是下载历史的“身份证”）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-固定-namespace（这是下载历史的“身份证”）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 固定 namespace（这是下载历史的“身份证”）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 固定 namespace（这是下载历史的“身份证”）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl login -n archive&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以后所有命令 &lt;strong&gt;必须加&lt;/strong&gt;：&lt;code&gt;-n archive&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-固定目录结构（一定照做）&#34;&gt;&lt;a href=&#34;#✅-3️⃣-固定目录结构（一定照做）&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 固定目录结构（一定照做）&#34;&gt;&lt;/a&gt;✅ 3️⃣ 固定目录结构（一定照做）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\
+│
+├─ Channel_A\
+│  ├─ tdl-export.json
+│  └─ media\
+│
+├─ Channel_B\
+│  ├─ tdl-export.json
+│  └─ media\
+│
+└─ README.txt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 一个频道 = 一个目录&lt;br&gt; ❌ 永远不要混&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三、安装-登录（一次性）&#34;&gt;&lt;a href=&#34;#三、安装-登录（一次性）&#34; class=&#34;headerlink&#34; title=&#34;三、安装 &amp;amp; 登录（一次性）&#34;&gt;&lt;/a&gt;三、安装 &amp;amp; 登录（一次性）&lt;/h2&gt;&lt;h3 id=&#34;✅-1️⃣-安装-tdl&#34;&gt;&lt;a href=&#34;#✅-1️⃣-安装-tdl&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 安装 tdl&#34;&gt;&lt;/a&gt;✅ 1️⃣ 安装 tdl&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;iwr -useb https://docs.iyear.me/tdl/install.ps1 | iex&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证：&lt;code&gt;tdl version&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-安装-Telegram-Desktop（官网版）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-安装-Telegram-Desktop（官网版）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 安装 Telegram Desktop（官网版）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 安装 Telegram Desktop（官网版）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;登录一次账号&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要退出登录&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-登录-tdl（一次即可）&#34;&gt;&lt;a href=&#34;#✅-3️⃣-登录-tdl（一次即可）&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 登录 tdl（一次即可）&#34;&gt;&lt;/a&gt;✅ 3️⃣ 登录 tdl（一次即可）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl login -n archive --proxy socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive chat ls&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;四、第一次完整下载（初始化）&#34;&gt;&lt;a href=&#34;#四、第一次完整下载（初始化）&#34; class=&#34;headerlink&#34; title=&#34;四、第一次完整下载（初始化）&#34;&gt;&lt;/a&gt;四、第一次完整下载（初始化）&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 只做一次&lt;br&gt;✅ 之后都是“追加”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-1：进入频道目录&#34;&gt;&lt;a href=&#34;#Step-1：进入频道目录&#34; class=&#34;headerlink&#34; title=&#34;Step 1：进入频道目录&#34;&gt;&lt;/a&gt;Step 1：进入频道目录&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd D:\TG-Archive\Channel_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-2：导出聊天清单（不下载）&#34;&gt;&lt;a href=&#34;#Step-2：导出聊天清单（不下载）&#34; class=&#34;headerlink&#34; title=&#34;Step 2：导出聊天清单（不下载）&#34;&gt;&lt;/a&gt;Step 2：导出聊天清单（不下载）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive chat export -c &amp;lt;频道ID或@username&amp;gt; --proxy socks5://127.0.0.1:10808&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成：&lt;code&gt;tdl-export.json&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;👉 &lt;strong&gt;这是一个“下载清单/快照”&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;Step-3：按清单下载（长期维护核心命令）&#34;&gt;&lt;a href=&#34;#Step-3：按清单下载（长期维护核心命令）&#34; class=&#34;headerlink&#34; title=&#34;Step 3：按清单下载（长期维护核心命令）&#34;&gt;&lt;/a&gt;Step 3：按清单下载（长期维护核心命令）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl -n archive dl -f tdl-export.json --takeout --proxy socks5://127.0.0.1:10808 -t 12 -l 1 --continue -d media&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;🔍-五、补充：-d-media-是干什么的？&#34;&gt;&lt;a href=&#34;#🔍-五、补充：-d-media-是干什么的？&#34; class=&#34;headerlink&#34; title=&#34;🔍 五、补充：-d media 是干什么的？&#34;&gt;&lt;/a&gt;🔍 五、补充：&lt;code&gt;-d media&lt;/code&gt; 是干什么的？&lt;/h2&gt;&lt;h3 id=&#34;✅-结论&#34;&gt;&lt;a href=&#34;#✅-结论&#34; class=&#34;headerlink&#34; title=&#34;✅ 结论&#34;&gt;&lt;/a&gt;✅ 结论&lt;/h3&gt;&lt;p&gt;&lt;code&gt;-d media&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;表示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;把所有下载的图片/视频，统一放到当前目录下的 &lt;code&gt;media&lt;/code&gt; 文件夹中&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-不加-d-会怎样？&#34;&gt;&lt;a href=&#34;#✅-不加-d-会怎样？&#34; class=&#34;headerlink&#34; title=&#34;✅ 不加 -d 会怎样？&#34;&gt;&lt;/a&gt;✅ 不加 &lt;code&gt;-d&lt;/code&gt; 会怎样？&lt;/h3&gt;&lt;p&gt;默认行为是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;当前目录/
+└─ downloads/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-加了-d-media-后（推荐）&#34;&gt;&lt;a href=&#34;#✅-加了-d-media-后（推荐）&#34; class=&#34;headerlink&#34; title=&#34;✅ 加了 -d media 后（推荐）&#34;&gt;&lt;/a&gt;✅ 加了 &lt;code&gt;-d media&lt;/code&gt; 后（推荐）&lt;/h3&gt;&lt;p&gt;如果你在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\Channel_A&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果一定是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-Plain&#34; data-language=&#34;Plain&#34;&gt;&lt;div class=&#34;caption&#34;&gt;&lt;span&gt;Text&lt;/span&gt;&lt;/div&gt;&lt;code class=&#34;language-Plain&#34;&gt;D:\TG-Archive\Channel_A\
+├─ tdl-export.json
+└─ media\
+   ├─ -100xxx_12345_video.mp4
+   ├─ -100xxx_12346_photo.jpg&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;导出文件与媒体分离&lt;/li&gt;
+&lt;li&gt;目录长期不会乱&lt;/li&gt;
+&lt;li&gt;后期备份、迁移非常清晰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 &lt;strong&gt;长期维护必须用 &lt;code&gt;-d media&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;（目录不存在会自动创建）&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六、长期维护：追加新内容&#34;&gt;&lt;a href=&#34;#六、长期维护：追加新内容&#34; class=&#34;headerlink&#34; title=&#34;六、长期维护：追加新内容&#34;&gt;&lt;/a&gt;六、长期维护：追加新内容&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;❗ tdl 不会自动追踪更新&lt;br&gt; ✅ &lt;strong&gt;追加 = 重新 export + continue&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;✅-标准追加流程（以后永远这样）&#34;&gt;&lt;a href=&#34;#✅-标准追加流程（以后永远这样）&#34; class=&#34;headerlink&#34; title=&#34;✅ 标准追加流程（以后永远这样）&#34;&gt;&lt;/a&gt;✅ 标准追加流程（以后永远这样）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;cd D:\TG-Archive\Channel_A
+
+tdl -n archive chat export -c &amp;lt;频道ID&amp;gt; --proxy socks5://127.0.0.1:10808
+
+tdl -n archive dl -f tdl-export.json --takeout --proxy socks5://127.0.0.1:10808 -t 12 -l 1 --continue -d media&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;✅ 老内容自动跳过&lt;br&gt;✅ 新视频自动追加&lt;br&gt;✅ 永不重复&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;七、直接下载“一条视频-图片”&#34;&gt;&lt;a href=&#34;#七、直接下载“一条视频-图片”&#34; class=&#34;headerlink&#34; title=&#34;七、直接下载“一条视频 / 图片”&#34;&gt;&lt;/a&gt;七、直接下载“一条视频 / 图片”&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 这是&lt;strong&gt;手动补漏 / 临时下载&lt;/strong&gt;必会用的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-1️⃣-下载一条视频-图片&#34;&gt;&lt;a href=&#34;#✅-1️⃣-下载一条视频-图片&#34; class=&#34;headerlink&#34; title=&#34;✅ 1️⃣ 下载一条视频 / 图片&#34;&gt;&lt;/a&gt;✅ 1️⃣ 下载一条视频 / 图片&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;国内环境常用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123 --proxy socks5://127.0.0.1:10808 --continue&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-2️⃣-下载相册-组合消息（一定要加）&#34;&gt;&lt;a href=&#34;#✅-2️⃣-下载相册-组合消息（一定要加）&#34; class=&#34;headerlink&#34; title=&#34;✅ 2️⃣ 下载相册 / 组合消息（一定要加）&#34;&gt;&lt;/a&gt;✅ 2️⃣ 下载相册 / 组合消息（一定要加）&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl dl -u https://t.me/xxx/123 --group&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;否则只会下其中一个文件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;✅-3️⃣-补漏神器：批量链接下载&#34;&gt;&lt;a href=&#34;#✅-3️⃣-补漏神器：批量链接下载&#34; class=&#34;headerlink&#34; title=&#34;✅ 3️⃣ 补漏神器：批量链接下载&#34;&gt;&lt;/a&gt;✅ 3️⃣ 补漏神器：批量链接下载&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;Get-Content links.txt | ForEach-Object {tdl dl -u $_ --continue}&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;八、tdl-dl-所有你会用到的重要选项（完整表）&#34;&gt;&lt;a href=&#34;#八、tdl-dl-所有你会用到的重要选项（完整表）&#34; class=&#34;headerlink&#34; title=&#34;八、tdl dl 所有你会用到的重要选项（完整表）&#34;&gt;&lt;/a&gt;八、&lt;code&gt;tdl dl&lt;/code&gt; 所有你会用到的重要选项（完整表）&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;选项&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-f tdl-export.json&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从导出清单批量下载&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-u &amp;lt;链接&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;直接下载某条消息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-d media&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定下载目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--takeout&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;官方导出模式（降风控）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--continue&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;断点续传 + 不重复&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--restart&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;忽略历史，全部重下&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--group&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;下载相册/组合消息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--skip-same&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;文件名+大小相同跳过&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-t &amp;lt;n&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;单文件线程数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-l &amp;lt;n&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;同时下载多少个文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-i mp4,mkv&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只下载指定类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-e jpg,png&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;排除某些类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--template&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自定义文件名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--desc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从新到旧下载（不推荐长期用）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;九、tdl-如何判断“已经下载过”（核心机制）&#34;&gt;&lt;a href=&#34;#九、tdl-如何判断“已经下载过”（核心机制）&#34; class=&#34;headerlink&#34; title=&#34;九、tdl 如何判断“已经下载过”（核心机制）&#34;&gt;&lt;/a&gt;九、tdl 如何判断“已经下载过”（核心机制）&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ &lt;strong&gt;tdl 不主要看文件在不在&lt;br&gt;tdl 看 MessageID + 本地状态&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;判断顺序：&lt;/p&gt;
+&lt;p&gt;1️⃣ MessageID + &lt;code&gt;.tdl&lt;/code&gt; 状态（核心）&lt;br&gt;2️⃣ 文件名 + 文件大小（&lt;code&gt;--skip-same&lt;/code&gt;）&lt;br&gt;3️⃣ 文件是否存在（最弱）&lt;/p&gt;
+&lt;p&gt;👉 所以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 改文件名不影响&lt;/li&gt;
+&lt;li&gt;❌ 删 &lt;code&gt;.tdl&lt;/code&gt; = tdl 失忆&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十、Telegram-Desktop-要不要打开？&#34;&gt;&lt;a href=&#34;#十、Telegram-Desktop-要不要打开？&#34; class=&#34;headerlink&#34; title=&#34;十、Telegram Desktop 要不要打开？&#34;&gt;&lt;/a&gt;十、Telegram Desktop 要不要打开？&lt;/h2&gt;&lt;p&gt;✅ &lt;strong&gt;不需要打开、不需要运行&lt;/strong&gt;&lt;br&gt;❌ &lt;strong&gt;不能退出账号&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;判断方法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-PowerShell&#34; data-language=&#34;PowerShell&#34;&gt;&lt;code class=&#34;language-PowerShell&#34;&gt;tdl chat ls&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十一、长期维护三条铁律（一定记住）&#34;&gt;&lt;a href=&#34;#十一、长期维护三条铁律（一定记住）&#34; class=&#34;headerlink&#34; title=&#34;十一、长期维护三条铁律（一定记住）&#34;&gt;&lt;/a&gt;十一、长期维护三条铁律（一定记住）&lt;/h2&gt;&lt;p&gt;1️⃣ namespace 永远不换&lt;br&gt;2️⃣ 一个频道一个目录&lt;br&gt;3️⃣ 追加只用：&lt;code&gt;export + --continue&lt;/code&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2026/03/01/wang-luo-dai-li-jia-gou-yu-cdn-liu-liang-gong-cheng-quan-jie-xi/</guid>
             <title>网络代理架构与 CDN 流量工程全解析</title>
@@ -4647,772 +5323,6 @@ except (Exception, psycopg2.DatabaseError) as error:
 &lt;li&gt;**正确处理 &lt;code&gt;None&lt;/code&gt;**：参数化查询会自动将 &lt;code&gt;None&lt;/code&gt; 转为 &lt;code&gt;NULL&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;捕获 &lt;code&gt;psycopg2.DatabaseError&lt;/code&gt;&lt;/strong&gt; 来处理数据库相关的特定异常。&lt;/li&gt;
 &lt;/ol&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/</guid>
-            <title>OPC-UA 与 Python 详细使用教程</title>
-            <link>https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/</link>
-            <category>python</category>
-            <pubDate>Sun, 19 Oct 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h2 id=&#34;OPC-UA-与-Python-详细使用教程&#34;&gt;&lt;a href=&#34;#OPC-UA-与-Python-详细使用教程&#34; class=&#34;headerlink&#34; title=&#34;OPC-UA 与 Python 详细使用教程&#34;&gt;&lt;/a&gt;OPC-UA 与 Python 详细使用教程&lt;/h2&gt;&lt;h3 id=&#34;1-什么是-OPC-UA？&#34;&gt;&lt;a href=&#34;#1-什么是-OPC-UA？&#34; class=&#34;headerlink&#34; title=&#34;1. 什么是 OPC-UA？&#34;&gt;&lt;/a&gt;1. 什么是 OPC-UA？&lt;/h3&gt;&lt;p&gt;OPC-UA (Open Platform Communications Unified Architecture) 是一种独立于平台、面向服务的机器对机器（M2M）通信协议。它被广泛应用于工业自动化领域，用于在不同厂商的设备、控制器和软件应用之间实现安全、可靠的数据交换。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;核心概念：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;服务器 (Server):&lt;/strong&gt; 通常是设备（如 PLC、DCS）或网关，它持有数据并将其暴露给网络。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;客户端 (Client):&lt;/strong&gt; 通常是监控软件（如 SCADA、HMI）或数据采集程序，它连接到服务器以读取、写入或订阅数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;地址空间 (Address Space):&lt;/strong&gt; 服务器内部所有数据的分层结构。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;节点 (Node):&lt;/strong&gt; 地址空间中的一个元素，可以是对象 (Object)、变量 (Variable)、方法 (Method) 等。每个节点都有一个唯一的 &lt;code&gt;NodeId&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;变量 (Variable):&lt;/strong&gt; 存放实际数据的节点，例如温度、压力、开关状态等。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-安装-python-opcua&#34;&gt;&lt;a href=&#34;#2-安装-python-opcua&#34; class=&#34;headerlink&#34; title=&#34;2. 安装 python-opcua&#34;&gt;&lt;/a&gt;2. 安装 &lt;code&gt;python-opcua&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;安装非常简单，使用 pip 即可：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pip install opcua&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-第一部分：创建一个简单的-OPC-UA-服务器&#34;&gt;&lt;a href=&#34;#3-第一部分：创建一个简单的-OPC-UA-服务器&#34; class=&#34;headerlink&#34; title=&#34;3. 第一部分：创建一个简单的 OPC-UA 服务器&#34;&gt;&lt;/a&gt;3. 第一部分：创建一个简单的 OPC-UA 服务器&lt;/h3&gt;&lt;p&gt;我们将创建一个服务器，它会暴露一个模拟的温度传感器变量。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import ua, Server
-
-# 1. 创建服务器实例
-server = Server()
-
-# 2. 设置服务器端点 (Endpoint)
-#    客户端将通过这个 URL 连接
-url = &#34;opc.tcp://0.0.0.0:4840/freeopcua/server/&#34;
-server.set_endpoint(url)
-
-# 3. 设置服务器名称（可选）
-server.set_server_name(&#34;Python OPC-UA 示例服务器&#34;)
-
-# 4. 设置安全策略（这里使用最不安全的，方便测试）
-#    实际应用中应使用更安全的策略
-server.set_security_policy([
-    ua.SecurityPolicyType.NoSecurity,
-    ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt,
-    ua.SecurityPolicyType.Basic256Sha256_Sign
-])
-
-# 5. 注册一个唯一的命名空间 (Namespace)
-#    命名空间用于组织你自己的节点，防止与标准节点冲突
-ns_name = &#34;http://examples.freeopcua.github.io&#34;
-idx = server.register_namespace(ns_name)
-
-# 6. 在服务器的 Objects 节点下创建一个“MyObjects”文件夹
-objects = server.get_objects_node()
-my_folder = objects.add_object(idx, &#34;MyObjects&#34;)
-
-# 7. 在“MyObjects”文件夹下创建变量
-#    idx: 命名空间索引
-#    &#34;MyVariable&#34;: 节点的浏览名称 (BrowseName)
-#    0: 变量的初始值
-my_var = my_folder.add_variable(idx, &#34;MyVariable&#34;, 0)
-my_temp_sensor = my_folder.add_variable(idx, &#34;TemperatureSensor&#34;, 20.0)
-
-# 8. 使变量可被客户端写入
-#    默认情况下，变量是只读的
-my_var.set_writable()
-my_temp_sensor.set_writable()
-
-# 9. 启动服务器
-try:
-    print(f&#34;启动服务器于 {url}&#34;)
-    server.start()
-    
-    # 让服务器持续运行，并模拟温度变化
-    temperature = 20.0
-    delta = 0.5
-    
-    while True:
-        time.sleep(2)  # 每2秒更新一次
-        
-        temperature += delta
-        if temperature &amp;gt; 30 or temperature &amp;lt; 19:
-            delta = -delta # 调转方向
-            
-        print(f&#34;设置新温度值为: {temperature:.1f}&#34;)
-        my_temp_sensor.set_value(temperature)
-
-except KeyboardInterrupt:
-    print(&#34;\n服务器正在停止...&#34;)
-finally:
-    # 10. 关闭服务器
-    server.stop()
-    print(&#34;服务器已关闭&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 将以上代码保存为 &lt;code&gt;server.py&lt;/code&gt; 并运行 &lt;code&gt;python server.py&lt;/code&gt;。你现在就有了一个正在运行的 OPC-UA 服务器。&lt;/p&gt;
-&lt;h3 id=&#34;4-第二部分：创建一个-OPC-UA-客户端（读写）&#34;&gt;&lt;a href=&#34;#4-第二部分：创建一个-OPC-UA-客户端（读写）&#34; class=&#34;headerlink&#34; title=&#34;4. 第二部分：创建一个 OPC-UA 客户端（读写）&#34;&gt;&lt;/a&gt;4. 第二部分：创建一个 OPC-UA 客户端（读写）&lt;/h3&gt;&lt;p&gt;现在我们创建另一个脚本来连接服务器、读取和写入数据。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import Client, ua
-
-# 服务器的 URL，与 server.py 中设置的保持一致
-url = &#34;opc.tcp://localhost:4840/freeopcua/server/&#34;
-
-# 1. 创建客户端实例
-client = Client(url)
-
-try:
-    # 2. 连接到服务器
-    print(f&#34;正在连接到 {url} ...&#34;)
-    client.connect()
-    print(&#34;连接成功！&#34;)
-
-    # 3. 浏览节点 (可选, 但有助于理解结构)
-    #    获取根节点
-    root = client.get_root_node()
-    print(f&#34;根节点: {root}&#34;)
-    print(f&#34;根节点的子节点: {root.get_children()}&#34;)
-
-    # 4. 获取我们感兴趣的特定节点
-    #    方法a: 通过浏览路径 (Browse Path)
-    #    路径: Root -&amp;gt; Objects (0:Objects) -&amp;gt; 命名空间2 (2:MyObjects) -&amp;gt; 变量 (2:TemperatureSensor)
-    #    &#39;2&#39; 是我们自己注册的命名空间的索引 (idx)
-    #    注意: 命名空间索引 (ns) 可能会变化，通常 0 是标准，1 是服务器内部，我们注册的从 2 开始
-    temp_node = client.get_node(&#34;ns=2;s=TemperatureSensor&#34;)
-    my_var_node = client.get_node(&#34;ns=2;s=MyVariable&#34;)
-
-    #    方法b: 通过 NodeId (如果已知)
-    #    node_id_str = &#34;ns=2;i=2&#34; # 假设你知道它的 NodeId
-    #    temp_node = client.get_node(node_id_str)
-    
-    print(&#34;-&#34; * 30)
-    
-    # 5. 读取节点的值
-    current_temp = temp_node.get_value()
-    print(f&#34;读取到当前温度: {current_temp}&#34;)
-    
-    current_var = my_var_node.get_value()
-    print(f&#34;读取到 MyVariable: {current_var}&#34;)
-    
-    print(&#34;-&#34; * 30)
-
-    # 6. 写入节点的值
-    new_value = 99.9
-    print(f&#34;正在向 MyVariable 写入新值: {new_value}&#34;)
-    
-    # 构造 ua.DataValue 和 ua.Variant
-    data_value = ua.DataValue(ua.Variant(new_value, ua.VariantType.Double))
-    my_var_node.set_value(data_value)
-    
-    # 验证写入
-    time.sleep(1)
-    read_back = my_var_node.get_value()
-    print(f&#34;回读 MyVariable 的值: {read_back}&#34;)
-    
-    # 尝试写入只读节点（如果 TemperatureSensor 没设置 set_writable()，这里会报错）
-    try:
-        temp_node.set_value(ua.DataValue(ua.Variant(100.0, ua.VariantType.Float)))
-        print(&#34;成功写入温度值 (服务器端允许写入)&#34;)
-    except ua.UaError as e:
-        print(f&#34;写入温度值失败 (可能是只读): {e}&#34;)
-
-
-finally:
-    # 7. 断开连接
-    if client:
-        client.disconnect()
-        print(&#34;客户端已断开连接&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 保持 &lt;code&gt;server.py&lt;/code&gt; 运行，打开一个新的终端，运行 &lt;code&gt;python client.py&lt;/code&gt;。你将看到客户端连接、读取、写入并断开连接的过程。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;5-第三部分：订阅数据变化&#34;&gt;&lt;a href=&#34;#5-第三部分：订阅数据变化&#34; class=&#34;headerlink&#34; title=&#34;5. 第三部分：订阅数据变化&#34;&gt;&lt;/a&gt;5. 第三部分：订阅数据变化&lt;/h3&gt;&lt;p&gt;OPC-UA 最强大的功能之一是订阅。客户端不需要（也不应该）频繁轮询数据，而是可以告诉服务器：“当这个变量变化时，请通知我。”&lt;/p&gt;
-&lt;p&gt;我们将修改客户端代码来实现订阅。&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;import time
-from opcua import Client
-
-# 1. 定义一个订阅处理器类 (Handler)
-class SubHandler(object):
-    &#34;&#34;&#34;
-    订阅处理器，用于处理来自服务器的数据变更通知。
-    &#34;&#34;&#34;
-    def datachange_notification(self, node, val, data):
-        &#34;&#34;&#34;
-        当订阅的节点数据发生变化时，此方法被调用。
-        &#34;&#34;&#34;
-        print(f&#34;[订阅] 节点 {node} 的值变为: {val}&#34;)
-
-    def event_notification(self, event):
-        &#34;&#34;&#34;
-        处理事件通知 (本例中未使用)
-        &#34;&#34;&#34;
-        print(f&#34;[订阅] 收到新事件: {event}&#34;)
-
-# --- 主程序 ---
-url = &#34;opc.tcp://localhost:4840/freeopcua/server/&#34;
-client = Client(url)
-
-try:
-    client.connect()
-    print(&#34;客户端已连接&#34;)
-
-    # 2. 获取要订阅的节点
-    temp_node = client.get_node(&#34;ns=2;s=TemperatureSensor&#34;)
-    print(f&#34;将要订阅的节点: {temp_node}&#34;)
-
-    # 3. 创建订阅处理器实例
-    handler = SubHandler()
-
-    # 4. 在客户端上创建订阅 (Subscription)
-    #    参数 1000: 订阅的发布间隔 (ms)。服务器将每1000ms检查一次是否有变化。
-    subscription = client.create_subscription(1000, handler)
-    print(&#34;已创建订阅&#34;)
-
-    # 5. 告诉订阅要监控哪个节点 (MonitoredItem)
-    #    参数 10: 队列大小 (QueueSize)
-    handle = subscription.subscribe_data_change(temp_node, queuesize=10)
-    print(f&#34;已订阅节点 {temp_node} 的数据变化&#34;)
-
-    # 6. 让客户端保持运行以接收通知
-    print(&#34;正在等待数据变化 (按 Ctrl+C 停止)...&#34;)
-    while True:
-        time.sleep(1)
-
-except KeyboardInterrupt:
-    print(&#34;\n正在停止订阅...&#34;)
-finally:
-    # 7. 删除订阅 (可选, 但良好实践)
-    if &#39;subscription&#39; in locals():
-        subscription.delete()
-        print(&#34;订阅已删除&#34;)
-    
-    # 8. 断开连接
-    client.disconnect()
-    print(&#34;客户端已断开&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 确保 &lt;code&gt;server.py&lt;/code&gt; 正在运行（它会每2秒更新一次温度）。然后运行这个新的订阅客户端脚本 &lt;code&gt;subscriber.py&lt;/code&gt;。你将看到它每2秒（或根据服务器的更新频率）打印一次 &lt;code&gt;[订阅] ...&lt;/code&gt; 的消息。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;6-第四部分：在服务器上创建并调用方法&#34;&gt;&lt;a href=&#34;#6-第四部分：在服务器上创建并调用方法&#34; class=&#34;headerlink&#34; title=&#34;6. 第四部分：在服务器上创建并调用方法&#34;&gt;&lt;/a&gt;6. 第四部分：在服务器上创建并调用方法&lt;/h3&gt;&lt;p&gt;OPC-UA 不仅能传输数据，还能执行命令（方法）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. 修改 &lt;code&gt;server.py&lt;/code&gt;：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;server.start()&lt;/code&gt; 之前，添加以下代码来定义一个方法：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# --- (接第 8 步之后, server.start() 之前) ---
-
-# 定义一个 Python 函数作为方法的实现
-def multiply_by_two(parent, variant_x):
-    &#34;&#34;&#34;
-    一个简单的 OPC-UA 方法，接收一个输入参数并返回其两倍。
-    &#34;&#34;&#34;
-    x = variant_x.Value
-    print(f&#34;服务器方法 &#39;multiply_by_two&#39; 被调用，输入: {x}&#34;)
-    
-    result = x * 2
-    
-    # 返回值必须是 ua.Variant
-    return [ua.Variant(result, ua.VariantType.Double)]
-
-# 9. 在 &#34;MyObjects&#34; 文件夹下注册这个方法
-#    输入参数定义
-in_arg = ua.Argument()
-in_arg.Name = &#34;InputX&#34;
-in_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-in_arg.ValueRank = -1
-in_arg.ArrayDimensions = []
-in_arg.Description = ua.LocalizedText(&#34;一个浮点数输入&#34;)
-
-# 输出参数定义
-out_arg = ua.Argument()
-out_arg.Name = &#34;ResultY&#34;
-out_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-out_arg.ValueRank = -1
-out_arg.ArrayDimensions = []
-out_arg.Description = ua.LocalizedText(&#34;返回 InputX * 2&#34;)
-
-# 将方法添加到地址空间
-my_folder.add_method(
-    idx,                          # 命名空间
-    &#34;MultiplyByTwo&#34;,              # 方法名称
-    multiply_by_two,              # 绑定的 Python 函数
-    [in_arg],                     # 输入参数列表
-    [out_arg]                     # 输出参数列表
-)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;2. 修改 &lt;code&gt;client.py&lt;/code&gt;（普通的读写客户端）：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;client.disconnect()&lt;/code&gt; 之前，添加以下代码来调用该方法：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Python&#34; data-language=&#34;Python&#34;&gt;&lt;code class=&#34;language-Python&#34;&gt;# --- (接第 6 步之后, client.disconnect() 之前) ---
-
-print(&#34;-&#34; * 30)
-# 7. 调用服务器上的方法
-print(&#34;正在调用服务器方法 &#39;MultiplyByTwo&#39;...&#34;)
-
-# 获取方法节点
-method_node = my_folder_node.get_child(&#34;2:MultiplyByTwo&#34;)
-
-# 准备输入参数
-input_value = 10.5
-print(f&#34;输入参数为: {input_value}&#34;)
-
-# 调用方法 (父节点, 方法节点, 输入参数)
-# 父节点是 &#39;MyObjects&#39;
-my_folder_node = client.get_node(&#34;ns=2;s=MyObjects&#34;) 
-result = my_folder_node.call_method(method_node, input_value)
-# 或者: result = client.call_method(method_node, input_value) 
-
-print(f&#34;服务器返回结果: {result}&#34;)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;注意：&lt;/em&gt; 你需要先在客户端代码中获取 &lt;code&gt;my_folder_node&lt;/code&gt;，例如 &lt;code&gt;my_folder_node = client.get_node(&#34;ns=2;s=MyObjects&#34;)&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;运行：&lt;/strong&gt; 重启服务器 &lt;code&gt;server.py&lt;/code&gt;（现在它包含了方法）。运行 &lt;code&gt;client.py&lt;/code&gt;，你将看到客户端成功调用了服务器上的 &lt;code&gt;MultiplyByTwo&lt;/code&gt; 方法并获得了 &lt;code&gt;21.0&lt;/code&gt; 的返回结果。&lt;/p&gt;
-&lt;h3 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;本教程涵盖了 &lt;code&gt;python-opcua&lt;/code&gt; 最核心的三个功能：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;创建服务器&lt;/strong&gt; 并暴露变量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;创建客户端&lt;/strong&gt; 以读取和写入变量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用订阅&lt;/strong&gt; 来实时接收数据变更通知。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用方法&lt;/strong&gt; 来执行远程命令。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在实际应用中，你还需要深入了解：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;安全性：&lt;/strong&gt; 使用证书和用户认证来保护你的服务器。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;复杂数据类型：&lt;/strong&gt; 定义和使用自定义的结构体 (Structs)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;历史数据：&lt;/strong&gt; 查询历史数据 (Historical Access)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;事件 (Events)：&lt;/strong&gt; 订阅比数据变更更复杂的事件（如警报）。&lt;/li&gt;
-&lt;/ul&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/</guid>
-            <title>从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战</title>
-            <link>https://0xdadream.github.io/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/</link>
-            <category>plc</category>
-            <pubDate>Tue, 14 Oct 2025 02:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;从-PLC-读取-STRING-WSTRING：UCS-2、GBK-与-Python-实战&#34;&gt;&lt;a href=&#34;#从-PLC-读取-STRING-WSTRING：UCS-2、GBK-与-Python-实战&#34; class=&#34;headerlink&#34; title=&#34;从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战&#34;&gt;&lt;/a&gt;从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&#34;1-PLC中-STRING-WSTRING-的内存布局&#34;&gt;&lt;a href=&#34;#1-PLC中-STRING-WSTRING-的内存布局&#34; class=&#34;headerlink&#34; title=&#34;1. PLC中 STRING / WSTRING 的内存布局&#34;&gt;&lt;/a&gt;1. PLC中 STRING / WSTRING 的内存布局&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;以西门子 S7 系列为例，PLC 中 &lt;code&gt;STRING&lt;/code&gt; 类型通常在 DB（Data Block）内以固定结构存储：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;byte offset: 0        1         2 ...
-            +--------+--------+-----------------
-field       | MaxLen | ActLen | Data (payload)
-size        | 1 byte | 1 byte | MaxLen * (char_size)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;MaxLen（第 0 字节）&lt;/strong&gt;：定义时指定的最大字符数（例如 &lt;code&gt;STRING[20]&lt;/code&gt; 则为 20）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ActLen（第 1 字节）&lt;/strong&gt;：当前字符串占用的字符数（不是字节数！）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data（从第 2 字节开始）&lt;/strong&gt;：字符数据。对 &lt;code&gt;STRING&lt;/code&gt; 来说，旧型号可能用单字节编码（ASCII 或 GBK 的双字节区），新型号与 &lt;code&gt;WSTRING&lt;/code&gt; 会用 2 字节/字符（UCS-2 / UTF-16LE）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;：&lt;code&gt;ActLen&lt;/code&gt; 保存的是字符个数，而非字节数。因此读取字节区间时需根据每字符的字节数做乘法，例如 UCS-2/UTF-16LE 为 &lt;code&gt;ActLen * 2&lt;/code&gt; 字节。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-UCS-2（UTF-16LE）与-GBK-的本质区别&#34;&gt;&lt;a href=&#34;#2-UCS-2（UTF-16LE）与-GBK-的本质区别&#34; class=&#34;headerlink&#34; title=&#34;2. UCS-2（UTF-16LE）与 GBK 的本质区别&#34;&gt;&lt;/a&gt;2. UCS-2（UTF-16LE）与 GBK 的本质区别&lt;/h2&gt;&lt;h3 id=&#34;UCS-2-UTF-16LE&#34;&gt;&lt;a href=&#34;#UCS-2-UTF-16LE&#34; class=&#34;headerlink&#34; title=&#34;UCS-2 / UTF-16LE&#34;&gt;&lt;/a&gt;UCS-2 / UTF-16LE&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体系&lt;/strong&gt;：Unicode 的早期实现（UCS-2）与更通用的 UTF-16（两者在基本平面 BMP 区相同）。S7-1500 等设备通常按小端序存储，因此用 &lt;code&gt;utf-16le&lt;/code&gt; 解码。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;每字符字节数&lt;/strong&gt;：固定 &lt;strong&gt;2 字节/字符&lt;/strong&gt;（UCS-2 基本平面）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：支持广泛字符集（全球语言），编码稳定一致。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;GBK&#34;&gt;&lt;a href=&#34;#GBK&#34; class=&#34;headerlink&#34; title=&#34;GBK&#34;&gt;&lt;/a&gt;GBK&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体系&lt;/strong&gt;：中国国家标准的扩展（在 GB2312 基础上扩展），主要用于中文环境。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;每字符字节数&lt;/strong&gt;：&lt;strong&gt;1 或 2 字节&lt;/strong&gt;（英文 ASCII 占 1 字节，中文字符占 2 字节）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：在老旧或本地化 Windows/PLC 工程中常见，文本体积相对小。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;对比要点&#34;&gt;&lt;a href=&#34;#对比要点&#34; class=&#34;headerlink&#34; title=&#34;对比要点&#34;&gt;&lt;/a&gt;对比要点&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;UCS-2 固定 2 字节，ActLen * 2 即为字节长度；GBK 则是可变的，无法直接用 ActLen 乘以固定系数得到字节数（但 PLC 的 &lt;code&gt;ActLen&lt;/code&gt; 在 GBK 场景通常表示字符个数，而 payload 区按最大长度分配字节空间）。&lt;/li&gt;
-&lt;li&gt;解码时：UCS-2 用 &lt;code&gt;&#39;utf-16le&#39;&lt;/code&gt;；GBK 用 &lt;code&gt;&#39;gbk&#39;&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-如何判断-PLC-存储的是哪种编码（理论与实践）&#34;&gt;&lt;a href=&#34;#3-如何判断-PLC-存储的是哪种编码（理论与实践）&#34; class=&#34;headerlink&#34; title=&#34;3. 如何判断 PLC 存储的是哪种编码（理论与实践）&#34;&gt;&lt;/a&gt;3. 如何判断 PLC 存储的是哪种编码（理论与实践）&lt;/h2&gt;&lt;h3 id=&#34;理论判断&#34;&gt;&lt;a href=&#34;#理论判断&#34; class=&#34;headerlink&#34; title=&#34;理论判断&#34;&gt;&lt;/a&gt;理论判断&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;查看 PLC 程序或工程文件（TIA Portal）中字符串变量的类型和属性：&lt;code&gt;STRING&lt;/code&gt;、&lt;code&gt;WSTRING&lt;/code&gt; 或有没有明确选择 Unicode。新型号/多语言工程通常使用 Unicode。&lt;/li&gt;
-&lt;li&gt;查阅 PLC 文档：S7-300/400 旧系列更多使用 OEM 编码或 ASCII，S7-1200/1500 更多支持 Unicode（UCS-2/UTF-16LE）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;实践检测（字节探测法）&#34;&gt;&lt;a href=&#34;#实践检测（字节探测法）&#34; class=&#34;headerlink&#34; title=&#34;实践检测（字节探测法）&#34;&gt;&lt;/a&gt;实践检测（字节探测法）&lt;/h3&gt;&lt;p&gt;当无法直接查看工程时，可以通过读取字节并尝试解码判断：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;读取 &lt;code&gt;MaxLen&lt;/code&gt; 与 &lt;code&gt;ActLen&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;提取 &lt;code&gt;payload = data[offset+2 : offset+2 + MaxLen * char_bytes]&lt;/code&gt;（若不清楚 &lt;code&gt;char_bytes&lt;/code&gt;，先取 &lt;code&gt;MaxLen*2&lt;/code&gt; 作为上限）&lt;/li&gt;
-&lt;li&gt;尝试按 &lt;code&gt;utf-16le&lt;/code&gt; 解码 &lt;code&gt;payload[:ActLen*2]&lt;/code&gt;：若输出为合法文本（没有大量替代字符或异常码点），则很可能为 UCS-2/UTF-16LE。&lt;/li&gt;
-&lt;li&gt;若失败，尝试按 &lt;code&gt;gbk&lt;/code&gt; 解码 &lt;code&gt;payload[:ActLen*1?]&lt;/code&gt;（GBK 的字节长度不固定，需小心边界）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;常用 heuristic：若 &lt;code&gt;payload[0]&lt;/code&gt; 为 ASCII 可打印字符或序列中每隔一字节有 &lt;code&gt;0x00&lt;/code&gt;（常见于 UTF-16LE 小端），那通常是 UTF-16LE；若高位字节不规则，但符合 GBK 两字节中文区间（0x81-0xFE 等），则可能为 GBK。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;代码自动检测思路（后面会有实现）&#34;&gt;&lt;a href=&#34;#代码自动检测思路（后面会有实现）&#34; class=&#34;headerlink&#34; title=&#34;代码自动检测思路（后面会有实现）&#34;&gt;&lt;/a&gt;代码自动检测思路（后面会有实现）&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;优先尝试 &lt;code&gt;utf-16le&lt;/code&gt;（在新 PLC 上更常见且安全性高），失败后回退到 &lt;code&gt;gbk&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;使用错误替换策略或严格检测（例如检查解码后包含多少不可打印字符或替代字符 &lt;code&gt;�&lt;/code&gt;），并据此决定编码。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-Python-实战：可靠读取与解码函数（含自动检测）&#34;&gt;&lt;a href=&#34;#4-Python-实战：可靠读取与解码函数（含自动检测）&#34; class=&#34;headerlink&#34; title=&#34;4. Python 实战：可靠读取与解码函数（含自动检测）&#34;&gt;&lt;/a&gt;4. Python 实战：可靠读取与解码函数（含自动检测）&lt;/h2&gt;&lt;p&gt;下面给出两个函数：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;get_string_ucs2_raw&lt;/code&gt;：明确 UTF-16LE&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;get_string_auto_decode&lt;/code&gt;：自动检测 UTF-16LE 与 GBK 并返回最可信结果&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; Tuple
-
-&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;get_string_ucs2_raw&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; max_length&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;
-    假定 PLC 存储为 UCS-2 / UTF-16LE：
-    - data: 从 plc.db_read() 得到的 bytes
-    - byte_offset: 字符串的起始偏移
-    - max_length: STRING 定义的最大字符数（用于边界检查）
-    &#34;&#34;&#34;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-        &lt;span class=&#34;token comment&#34;&gt;# 读取 MaxLen 与 ActLen（按字节偏移）&lt;/span&gt;
-        max_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-        actual_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-
-        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
-
-        &lt;span class=&#34;token comment&#34;&gt;# 每个字符 2 字节（UCS-2 / UTF-16LE）&lt;/span&gt;
-        start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
-        end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
-
-        &lt;span class=&#34;token comment&#34;&gt;# 边界保护&lt;/span&gt;
-        end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;end&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-
-        str_bytes &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; str_bytes&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;strict&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-
-    &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; e&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-        &lt;span class=&#34;token comment&#34;&gt;# 若 strict 抛错，可改为 &#39;replace&#39; 或 &#39;ignore&#39;，但应该记录日志&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;UCS-2 解码失败: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
-
-
-&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;_is_likely_utf16le&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;b&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bool&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;简单启发式判断：检查在前 N 字节中，是否大量出现偶数位为 0x00（小端UTF-16的常见特点）&#34;&#34;&#34;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;b&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;False&lt;/span&gt;
-    &lt;span class=&#34;token comment&#34;&gt;# 检查前 8 字节中偶数位是否有较多 0x00&lt;/span&gt;
-    sample &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; b&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-    zeros &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sample&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; sample&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; zeros &lt;span class=&#34;token operator&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sample&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-
-
-&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;get_string_auto_decode&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; max_length&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; Tuple&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;token triple-quoted-string string&#34;&gt;&#34;&#34;&#34;
-    自动检测编码并返回 (decoded_str, encoding_used)
-    返回示例: (&#34;你好&#34;, &#39;utf-16le&#39;) 或 (&#34;中文&#34;, &#39;gbk&#39;)
-    &#34;&#34;&#34;&lt;/span&gt;
-    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-        max_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-        actual_len &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;unknown&#39;&lt;/span&gt;
-
-        &lt;span class=&#34;token comment&#34;&gt;# 尝试用 utf-16le 解码&lt;/span&gt;
-        start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; byte_offset &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
-        &lt;span class=&#34;token comment&#34;&gt;# 先取一个上限区域（实际长度*2 或者 max_len*2，取边界）&lt;/span&gt;
-        utf16_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; actual_len &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;
-        utf16_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;utf16_end&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-        candidate &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;utf16_end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-
-        &lt;span class=&#34;token comment&#34;&gt;# 启发式快速判断&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; _is_likely_utf16le&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;candidate&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-                s &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; candidate&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-                &lt;span class=&#34;token comment&#34;&gt;# 可做额外校验：是否包含大量不可打印字符&lt;/span&gt;
-                &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;�&#39;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-                    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-                &lt;span class=&#34;token keyword&#34;&gt;pass&lt;/span&gt;
-
-        &lt;span class=&#34;token comment&#34;&gt;# 回退到 GBK 解码：按实际长度取字节&lt;/span&gt;
-        &lt;span class=&#34;token comment&#34;&gt;# GBK 是可变字节，因此我们尽量取 max_len*2 作为安全上限&lt;/span&gt;
-        gbk_start &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; start
-        gbk_end &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;start &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; max_length &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;data&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-        gbk_bytes &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;gbk_start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; gbk_end&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-
-        &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-            s2 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; gbk_bytes&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;gbk&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;strict&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-            &lt;span class=&#34;token comment&#34;&gt;# 取前 actual_len 个字符（因为 gbk_bytes 可能包含后续空白）&lt;/span&gt;
-            s2 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; s2&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;actual_len&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; s2&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;rstrip&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;gbk&#39;&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-            &lt;span class=&#34;token comment&#34;&gt;# 最后保底：尝试 latin1 显示原始字节（避免崩溃）&lt;/span&gt;
-            &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; data&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;start&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;start&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;actual_len&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;latin1&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; errors&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;replace&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;latin1&#39;&lt;/span&gt;
-
-    &lt;span class=&#34;token keyword&#34;&gt;except&lt;/span&gt; Exception &lt;span class=&#34;token keyword&#34;&gt;as&lt;/span&gt; e&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string-interpolation&#34;&gt;&lt;span class=&#34;token string&#34;&gt;f&#34;读取字符串失败: &lt;/span&gt;&lt;span class=&#34;token interpolation&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;error&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;使用示例&#34;&gt;&lt;a href=&#34;#使用示例&#34; class=&#34;headerlink&#34; title=&#34;使用示例&#34;&gt;&lt;/a&gt;使用示例&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# 假设 plc.db_read() 返回如下模拟数据&lt;/span&gt;
-&lt;span class=&#34;token comment&#34;&gt;# MaxLen=254, ActLen=3, 内容为 UTF-16LE 编码的 &#39;你好!&#39;&lt;/span&gt;
-sim &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;254&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;你好!&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;encode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;utf-16le&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;b&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;20&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;get_string_auto_decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;sim&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;5-与常见库的交互（snap7-python-snap7-opcua）&#34;&gt;&lt;a href=&#34;#5-与常见库的交互（snap7-python-snap7-opcua）&#34; class=&#34;headerlink&#34; title=&#34;5. 与常见库的交互（snap7 / python-snap7 / opcua）&#34;&gt;&lt;/a&gt;5. 与常见库的交互（snap7 / python-snap7 / opcua）&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;python-snap7 / snap7&lt;/strong&gt;：常用于直接从 S7 PLC 的 DB 读取 raw bytes。&lt;code&gt;client.db_read(db_number, start, size)&lt;/code&gt; 返回 &lt;code&gt;bytes&lt;/code&gt;，可传入到上面函数中。注意 &lt;code&gt;start&lt;/code&gt; 与 &lt;code&gt;size&lt;/code&gt; 的计算需根据变量在 DB 中的偏移计算。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;opcua / open62541 等&lt;/strong&gt;：若通过 OPC UA 读取字符串字段，服务器端通常已经做了解码（返回 Python &lt;code&gt;str&lt;/code&gt;），但也可能返回 &lt;code&gt;byte[]&lt;/code&gt;，需按实际情况处理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;示例（snap7）：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; snap7
-&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; snap7&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;util &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
-
-client &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; snap7&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Client&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;connect&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;192.168.0.10&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-raw &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;db_read&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;260&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 读取 DB1 前 260 字节&lt;/span&gt;
-s&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; enc &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; get_string_auto_decode&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;raw&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; byte_offset&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;结果&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; s&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; enc&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
-client&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;disconnect&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-&lt;h2 id=&#34;6-常见陷阱与调试方法&#34;&gt;&lt;a href=&#34;#6-常见陷阱与调试方法&#34; class=&#34;headerlink&#34; title=&#34;6. 常见陷阱与调试方法&#34;&gt;&lt;/a&gt;6. 常见陷阱与调试方法&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;偏移错误&lt;/strong&gt;：变量的 DB 偏移并非总是 0。使用 TIA Portal 看变量在 DB 中的偏移地址，或在 PLC 程序里把字符串变量放在已知位置做测试。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;误把 ActLen 当字节长度&lt;/strong&gt;：记住 ActLen 是字符数；UCS-2 场景下字节数是 &lt;code&gt;ActLen * 2&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;编码混用&lt;/strong&gt;：工程中不同字符串变量可能用不同编码（历史遗留问题）。对关键字段做编码检测或在 PLC 端统一编码策略。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;截断问题&lt;/strong&gt;：读取的字节长度需保证覆盖 &lt;code&gt;MaxLen&lt;/code&gt;，否则可能截断或丢失数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Endian（字节序）问题&lt;/strong&gt;：S7 系列通常是小端（LE）；若看见 &lt;code&gt;0x00&lt;/code&gt; 在高位，优先考虑 UTF-16LE。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;空值与填充&lt;/strong&gt;：PLC 的字符串区可能被 &lt;code&gt;0x00&lt;/code&gt; 填充，解码后使用 &lt;code&gt;.rstrip(&#39;\x00&#39;)&lt;/code&gt; 清除尾部空字符。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;调试小技巧：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用 hexdump（或 &lt;code&gt;raw.hex()&lt;/code&gt;）观察前 32 字节，判断 0x00 分布；&lt;/li&gt;
-&lt;li&gt;在 PLC 端写已知 ASCII / 中文样本进行对比；&lt;/li&gt;
-&lt;li&gt;若使用 snap7，可先把 DB 整体导出并在本地做分析。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;7-性能与安全注意事项&#34;&gt;&lt;a href=&#34;#7-性能与安全注意事项&#34; class=&#34;headerlink&#34; title=&#34;7. 性能与安全注意事项&#34;&gt;&lt;/a&gt;7. 性能与安全注意事项&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;性能&lt;/strong&gt;：字符串解码本身开销小，但若你频繁读取大量 DB（例如每 100ms 读取数百个字符串），应当合理缓存、合并读取请求以减少网络负载。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;边界检查&lt;/strong&gt;：任何从 PLC 读取的偏移与长度都应做边界检查以防止 &lt;code&gt;IndexError&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;错误记录&lt;/strong&gt;：在自动检测解码失败时应记录日志（包含原始 bytes 的 hex），便于回溯。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;注入风险&lt;/strong&gt;：PLC 字符串通常不是攻击面，但若上层系统将这些字符串直接用于命令或脚本，应对特殊字符做清洗与验证。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/08/16/ming-xuan-zhong-jie-zhe-xi-lie-zhu-ban-kai-qi-yuan-cheng-huan-xing/</guid>
-            <title>铭瑄终结者系列主板开启远程唤醒</title>
-            <link>https://0xdadream.github.io/2025/08/16/ming-xuan-zhong-jie-zhe-xi-lie-zhu-ban-kai-qi-yuan-cheng-huan-xing/</link>
-            <category>net</category>
-            <pubDate>Sat, 16 Aug 2025 02:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;铭瑄终结者系列主板开启远程唤醒&#34;&gt;&lt;a href=&#34;#铭瑄终结者系列主板开启远程唤醒&#34; class=&#34;headerlink&#34; title=&#34;铭瑄终结者系列主板开启远程唤醒&#34;&gt;&lt;/a&gt;铭瑄终结者系列主板开启远程唤醒&lt;/h1&gt;&lt;h2 id=&#34;🖥-一、BIOS-中开启远程唤醒（网络唤醒）&#34;&gt;&lt;a href=&#34;#🖥-一、BIOS-中开启远程唤醒（网络唤醒）&#34; class=&#34;headerlink&#34; title=&#34;🖥 一、BIOS 中开启远程唤醒（网络唤醒）&#34;&gt;&lt;/a&gt;🖥 一、BIOS 中开启远程唤醒（网络唤醒）&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;终结者系列使用的是 AMI BIOS，界面和选项名称已做中文化。&lt;br&gt; 如果 BIOS 是英文版，选项位置相同，只是名字不同。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;进入 BIOS&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;重启电脑，看到铭瑄 Logo 时，连续按 &lt;strong&gt;&lt;code&gt;Del&lt;/code&gt;&lt;/strong&gt; 进入 BIOS。&lt;/li&gt;
-&lt;li&gt;如果是简易模式，按 &lt;strong&gt;&lt;code&gt;F7&lt;/code&gt;&lt;/strong&gt; 切换到高级模式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;找到电源管理选项&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;菜单路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;高级（Advanced） → 电源管理（Power Management Setup）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;部分版本路径：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;高级（Advanced） → ACPI设置（ACPI Settings）&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;开启网络唤醒&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;找到以下选项，并设置：&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;网络唤醒（Wake on LAN / 网络唤醒）&lt;/strong&gt; → &lt;strong&gt;启用（Enabled）&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PCI-E 唤醒（Power On By PCI-E/PCI）&lt;/strong&gt; → &lt;strong&gt;启用（Enabled）&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;从 S5 状态唤醒（S5 Wake on LAN）&lt;/strong&gt; → &lt;strong&gt;启用（Enabled）&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;如果有 &lt;strong&gt;ErP 支持（ErP Ready）&lt;/strong&gt;，设置为 &lt;strong&gt;禁用（Disabled）&lt;/strong&gt;，否则关机后网卡会断电。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;保存并退出&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;按 &lt;strong&gt;F10&lt;/strong&gt; 保存设置并重启进入 Windows。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;💻-二、Windows-系统中开启远程唤醒&#34;&gt;&lt;a href=&#34;#💻-二、Windows-系统中开启远程唤醒&#34; class=&#34;headerlink&#34; title=&#34;💻 二、Windows 系统中开启远程唤醒&#34;&gt;&lt;/a&gt;💻 二、Windows 系统中开启远程唤醒&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;以 Windows 10 / Windows 11 为例，其他版本类似。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;打开设备管理器&lt;/strong&gt;&lt;ul&gt;
-&lt;li&gt;按 &lt;code&gt;Win + X&lt;/code&gt; → 选择 &lt;strong&gt;设备管理器&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;设置网卡属性&lt;/strong&gt;&lt;ul&gt;
-&lt;li&gt;展开 &lt;strong&gt;网络适配器&lt;/strong&gt;，找到你的 &lt;strong&gt;有线网卡&lt;/strong&gt;（Intel / Realtek PCIe GbE 等）。&lt;/li&gt;
-&lt;li&gt;双击网卡 → 切换到 &lt;strong&gt;电源管理&lt;/strong&gt; 选项卡：&lt;ul&gt;
-&lt;li&gt;✅ 允许此设备唤醒计算机&lt;/li&gt;
-&lt;li&gt;✅ 仅允许使用魔术包唤醒计算机&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;切换到 &lt;strong&gt;高级&lt;/strong&gt; 选项卡：&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Wake on Magic Packet&lt;/strong&gt; → &lt;strong&gt;Enabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Shutdown Wake-On-Lan&lt;/strong&gt;（关机唤醒）→ &lt;strong&gt;Enabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Wake on pattern match&lt;/strong&gt; → &lt;strong&gt;Enabled&lt;/strong&gt;（如果有）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关闭快速启动&lt;/strong&gt;&lt;ul&gt;
-&lt;li&gt;控制面板 → 硬件和声音 → 电源选项 → 选择电源按钮功能&lt;/li&gt;
-&lt;li&gt;取消勾选 &lt;strong&gt;启用快速启动&lt;/strong&gt;（需要先点击“更改当前不可用的设置”）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;🌐-三、测试局域网远程唤醒&#34;&gt;&lt;a href=&#34;#🌐-三、测试局域网远程唤醒&#34; class=&#34;headerlink&#34; title=&#34;🌐 三、测试局域网远程唤醒&#34;&gt;&lt;/a&gt;🌐 三、测试局域网远程唤醒&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;获取目标电脑的 MAC 地址&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在命令行（CMD）输入：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ipconfig /all&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;找到你的有线网卡，记录 &lt;strong&gt;物理地址&lt;/strong&gt;（如 &lt;code&gt;B0-25-AA-11-33-77&lt;/code&gt;）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;使用另一台设备发送唤醒信号&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;：下载 WakeMeOnLan&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Android&lt;/strong&gt;：下载 “WolOn” 或 “Wake On Lan” APP&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Linux/macOS&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;wakeonlan 00:11:22:33:44:55&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;检查是否能从关机状态被唤醒&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;电脑必须连接有线网口，并且关机状态下网卡灯依然闪烁，才表示供电正常。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;🔧-常见问题&#34;&gt;&lt;a href=&#34;#🔧-常见问题&#34; class=&#34;headerlink&#34; title=&#34;🔧 常见问题&#34;&gt;&lt;/a&gt;🔧 常见问题&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;问题&lt;/th&gt;
-&lt;th&gt;原因&lt;/th&gt;
-&lt;th&gt;解决方法&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;无法唤醒&lt;/td&gt;
-&lt;td&gt;BIOS 未开启网络唤醒&lt;/td&gt;
-&lt;td&gt;重新进入 BIOS 检查“网络唤醒”是否启用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;关机后网卡灯不亮&lt;/td&gt;
-&lt;td&gt;ErP 启用导致断电&lt;/td&gt;
-&lt;td&gt;将 BIOS 中 ErP 关闭&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;能睡眠唤醒，关机不能&lt;/td&gt;
-&lt;td&gt;S5 唤醒未启用&lt;/td&gt;
-&lt;td&gt;在 BIOS 开启 S5 Wake on LAN&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;公网唤醒失败&lt;/td&gt;
-&lt;td&gt;路由器未转发广播包&lt;/td&gt;
-&lt;td&gt;在路由器开启 UDP 广播转发或端口映射&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2025/08/15/autodl-fu-wu-qi-ssh-mian-mi-deng-lu-ji-vs-code-pei-zhi-wan-zheng-jiao-cheng/</guid>
-            <title>AutoDL服务器SSH免密登录及VS Code配置完整教程</title>
-            <link>https://0xdadream.github.io/2025/08/15/autodl-fu-wu-qi-ssh-mian-mi-deng-lu-ji-vs-code-pei-zhi-wan-zheng-jiao-cheng/</link>
-            <category>ssh</category>
-            <pubDate>Fri, 15 Aug 2025 12:25:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;AutoDL服务器SSH免密登录及VS-Code配置完整教程&#34;&gt;&lt;a href=&#34;#AutoDL服务器SSH免密登录及VS-Code配置完整教程&#34; class=&#34;headerlink&#34; title=&#34;AutoDL服务器SSH免密登录及VS Code配置完整教程&#34;&gt;&lt;/a&gt;AutoDL服务器SSH免密登录及VS Code配置完整教程&lt;/h1&gt;&lt;h4 id=&#34;准备工作&#34;&gt;&lt;a href=&#34;#准备工作&#34; class=&#34;headerlink&#34; title=&#34;准备工作&#34;&gt;&lt;/a&gt;&lt;strong&gt;准备工作&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;在开始之前，请确保您已准备好：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;一台本地电脑（Windows, macOS 或 Linux 系统）。&lt;/li&gt;
-&lt;li&gt;已安装 &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;在 VS Code 中，从扩展商店安装微软官方插件 **&lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh&#34;&gt;Remote - SSH&lt;/a&gt;**。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;第一部分：生成-SSH-密钥并配置-AutoDL&#34;&gt;&lt;a href=&#34;#第一部分：生成-SSH-密钥并配置-AutoDL&#34; class=&#34;headerlink&#34; title=&#34;第一部分：生成 SSH 密钥并配置 AutoDL&#34;&gt;&lt;/a&gt;&lt;strong&gt;第一部分：生成 SSH 密钥并配置 AutoDL&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;这一部分的核心是在您的本地电脑上创建一把“钥匙”（私钥），并将对应的“锁”（公钥）放到 AutoDL 服务器上。&lt;/p&gt;
-&lt;h4 id=&#34;步骤-1-1：在本地电脑生成-SSH-密钥对&#34;&gt;&lt;a href=&#34;#步骤-1-1：在本地电脑生成-SSH-密钥对&#34; class=&#34;headerlink&#34; title=&#34;步骤 1.1：在本地电脑生成 SSH 密钥对&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 1.1：在本地电脑生成 SSH 密钥对&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;根据您的操作系统，选择相应的方法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;对于 Windows 10 / 11 用户：&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;打开 &lt;strong&gt;PowerShell&lt;/strong&gt; 或 **命令提示符 (CMD)**。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;输入以下命令并按回车：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;ssh-keygen -t rsa -b 4096&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;程序会询问几个问题，请按以下方式操作：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Enter file in which to save the key...&lt;/code&gt;: &lt;strong&gt;直接按回车&lt;/strong&gt;，使用默认路径（通常是 &lt;code&gt;C:\Users\您的用户名\.ssh\id_rsa&lt;/code&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Enter passphrase (empty for no passphrase):&lt;/code&gt;: &lt;strong&gt;直接按回车&lt;/strong&gt;，设置为空密码，这是实现“免密”登录的关键。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Enter same passphrase again:&lt;/code&gt;: &lt;strong&gt;再次按回车&lt;/strong&gt;确认。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;对于 macOS 和 Linux 用户：&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;打开**终端 (Terminal)**。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;输入以下命令并按回车：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;ssh-keygen -t rsa -b 4096&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;与 Windows 类似，连续三次按回车即可：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;提示保存位置时，按回车（默认路径 &lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;）。&lt;/li&gt;
-&lt;li&gt;提示输入密码时，按回车（留空）。&lt;/li&gt;
-&lt;li&gt;再次确认密码时，按回车。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;完成后，在您的 &lt;code&gt;.ssh&lt;/code&gt; 目录下会生成两个核心文件：&lt;code&gt;id_rsa&lt;/code&gt; (私钥，&lt;strong&gt;绝不能泄露&lt;/strong&gt;）和 &lt;code&gt;id_rsa.pub&lt;/code&gt; (公钥，用于上传到服务器)。&lt;/p&gt;
-&lt;h4 id=&#34;步骤-1-2：复制您的公钥&#34;&gt;&lt;a href=&#34;#步骤-1-2：复制您的公钥&#34; class=&#34;headerlink&#34; title=&#34;步骤 1.2：复制您的公钥&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 1.2：复制您的公钥&lt;/strong&gt;&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Windows:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;打开文件资源管理器，地址栏输入 &lt;code&gt;%USERPROFILE%\.ssh&lt;/code&gt; 并回车。&lt;/li&gt;
-&lt;li&gt;找到 &lt;code&gt;id_rsa.pub&lt;/code&gt; 文件，用记事本或其他文本编辑器打开。&lt;/li&gt;
-&lt;li&gt;复制文件内的&lt;strong&gt;全部内容&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;macOS / Linux:&lt;/strong&gt; 打开终端，输入以下命令即可将公钥内容复制到剪贴板：&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-Bash&#34; data-language=&#34;Bash&#34;&gt;&lt;code class=&#34;language-Bash&#34;&gt;pbcopy &amp;lt; ~/.ssh/id_rsa.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;(如果 &lt;code&gt;pbcopy&lt;/code&gt; 不可用，可使用 &lt;code&gt;cat ~/.ssh/id_rsa.pub&lt;/code&gt; 查看内容后手动复制)。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;步骤-1-3：在-AutoDL-控制台添加公钥&#34;&gt;&lt;a href=&#34;#步骤-1-3：在-AutoDL-控制台添加公钥&#34; class=&#34;headerlink&#34; title=&#34;步骤 1.3：在 AutoDL 控制台添加公钥&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 1.3：在 AutoDL 控制台添加公钥&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;登录 &lt;a href=&#34;https://www.autodl.com/console&#34;&gt;AutoDL 控制台&lt;/a&gt;。&lt;/li&gt;
-&lt;li&gt;在左侧导航栏中，点击 &lt;strong&gt;“账号”&lt;/strong&gt; -&amp;gt; &lt;strong&gt;“SSH 密钥”&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;点击 &lt;strong&gt;“添加 SSH 密钥”&lt;/strong&gt; 按钮。&lt;/li&gt;
-&lt;li&gt;在弹出的窗口中：&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;密钥名称&lt;/strong&gt;：起一个好记的名字，例如 &lt;code&gt;my_windows_pc&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;公钥内容&lt;/strong&gt;：将刚刚复制的公钥字符串&lt;strong&gt;完整地粘贴&lt;/strong&gt;进去。&lt;/li&gt;
-&lt;li&gt;点击 &lt;strong&gt;“确定”&lt;/strong&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;重要提示&lt;/strong&gt;：如果您在添加密钥时有正在运行的实例，您必须&lt;strong&gt;重启该实例&lt;/strong&gt;才能使新密钥生效。对于新创建的实例，会自动应用已保存的密钥。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;第二部分：配置-VS-Code-实现一键连接&#34;&gt;&lt;a href=&#34;#第二部分：配置-VS-Code-实现一键连接&#34; class=&#34;headerlink&#34; title=&#34;第二部分：配置 VS Code 实现一键连接&#34;&gt;&lt;/a&gt;&lt;strong&gt;第二部分：配置 VS Code 实现一键连接&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;现在，我们来告诉 VS Code 如何使用刚刚设置好的密钥去连接您的 AutoDL 服务器。&lt;/p&gt;
-&lt;h4 id=&#34;步骤-2-1：在-VS-Code-中打开-SSH-配置文件&#34;&gt;&lt;a href=&#34;#步骤-2-1：在-VS-Code-中打开-SSH-配置文件&#34; class=&#34;headerlink&#34; title=&#34;步骤 2.1：在 VS Code 中打开 SSH 配置文件&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 2.1：在 VS Code 中打开 SSH 配置文件&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;打开 VS Code。&lt;/li&gt;
-&lt;li&gt;按下快捷键 &lt;code&gt;F1&lt;/code&gt; (或者 &lt;code&gt;Ctrl+Shift+P&lt;/code&gt; / &lt;code&gt;Cmd+Shift+P&lt;/code&gt;) 打开命令面板。&lt;/li&gt;
-&lt;li&gt;输入并选择 &lt;code&gt;Remote-SSH: Open SSH Configuration File...&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;在弹出的选择框中，选择默认的配置文件路径（例如 &lt;code&gt;C:\Users\YourName\.ssh\config&lt;/code&gt; 或 &lt;code&gt;~/.ssh/config&lt;/code&gt;）并打开它。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;步骤-2-2：添加您的-AutoDL-服务器信息&#34;&gt;&lt;a href=&#34;#步骤-2-2：添加您的-AutoDL-服务器信息&#34; class=&#34;headerlink&#34; title=&#34;步骤 2.2：添加您的 AutoDL 服务器信息&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 2.2：添加您的 AutoDL 服务器信息&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;将下面的配置模板复制到打开的 &lt;code&gt;config&lt;/code&gt; 文件中，并根据您实例的实际情况修改。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;配置模板：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;Host my-autodl-server
-    HostName &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;服务器地址&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
-    User root
-    Port &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;端口号&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
-    IdentityFile &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;您的私钥路径&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;请务必修改以下占位符：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Host my-autodl-server&lt;/code&gt;: 给您的服务器起一个别名，例如 &lt;code&gt;autodl-4090&lt;/code&gt;，这个名字将显示在 VS Code 的连接列表里。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;服务器地址&amp;gt;&lt;/code&gt;: 从 AutoDL 控制台【我的实例】页面找到 SSH 访问指令，复制 &lt;code&gt;@&lt;/code&gt; 后面的服务器地址（例如 &lt;code&gt;connect.region-4.autodl.com&lt;/code&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;端口号&amp;gt;&lt;/code&gt;: 同样从 SSH 访问指令中找到端口号 &lt;code&gt;-p&lt;/code&gt; 后面的数字。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;您的私钥路径&amp;gt;&lt;/code&gt;:&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;macOS / Linux 用户&lt;/strong&gt;: 通常无需修改，就是 &lt;code&gt;~/.ssh/id_rsa&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Windows 用户&lt;/strong&gt;: 请修改为您的私钥绝对路径，**注意使用正斜杠 &lt;code&gt;/&lt;/code&gt;**，例如 &lt;code&gt;C:/Users/Lihua/.ssh/id_rsa&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;修改完成的配置示例：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;# AutoDL 4090 实例&lt;/span&gt;
-Host autodl-4090
-    HostName connect.region-4.autodl.com
-    User root
-    Port &lt;span class=&#34;token number&#34;&gt;54321&lt;/span&gt;
-    IdentityFile C:/Users/Lihua/.ssh/id_rsa&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改完成后，&lt;strong&gt;保存 (&lt;code&gt;Ctrl+S&lt;/code&gt;)&lt;/strong&gt; 该 &lt;code&gt;config&lt;/code&gt; 文件。&lt;/p&gt;
-&lt;h4 id=&#34;步骤-2-3：连接服务器&#34;&gt;&lt;a href=&#34;#步骤-2-3：连接服务器&#34; class=&#34;headerlink&#34; title=&#34;步骤 2.3：连接服务器&#34;&gt;&lt;/a&gt;&lt;strong&gt;步骤 2.3：连接服务器&lt;/strong&gt;&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;点击 VS Code 左侧边栏的 &lt;strong&gt;“远程资源管理器”&lt;/strong&gt; 图标。&lt;/li&gt;
-&lt;li&gt;在顶部的下拉菜单中选择 “SSH”。&lt;/li&gt;
-&lt;li&gt;您会看到刚才在 &lt;code&gt;config&lt;/code&gt; 文件中设置的主机别名（例如 &lt;code&gt;autodl-4090&lt;/code&gt;）已经出现在列表中。&lt;/li&gt;
-&lt;li&gt;将鼠标悬停在您的主机名上，点击右侧出现的 &lt;strong&gt;“连接到主机”&lt;/strong&gt; 图标（文件夹带 &lt;code&gt;+&lt;/code&gt; 号的图标）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;VS Code 会打开一个新窗口，并自动完成 SSH 连接。第一次连接时，可能会弹窗提示确认服务器的指纹，选择 “Continue” 即可。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;至此，您已成功配置完毕！&lt;/strong&gt; 现在，每次想连接 AutoDL 服务器时，只需在 VS Code 的远程资源管理器中轻轻一点，即可实现无需密码的安全连接。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

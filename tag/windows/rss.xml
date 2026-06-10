@@ -5,8 +5,8 @@
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Tue, 13 Jan 2026 23:25:00 +0800</pubDate>
-        <lastBuildDate>Tue, 13 Jan 2026 23:25:00 +0800</lastBuildDate>
+        <pubDate>Mon, 01 Jun 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Mon, 01 Jun 2026 12:25:00 +0800</lastBuildDate>
         <category>AI</category>
         <category>tip</category>
         <category>intel</category>
@@ -61,6 +61,1214 @@
         <category>i春秋</category>
         <category>mcp</category>
         <category>证书</category>
+        <category>ai</category>
+        <category>wsl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/</guid>
+            <title>Windows 11 句柄审查与泄漏定位教程</title>
+            <link>https://0xdadream.github.io/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/</link>
+            <category>windows</category>
+            <pubDate>Mon, 01 Jun 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Windows-11-句柄审查与泄漏定位教程&#34;&gt;&lt;a href=&#34;#Windows-11-句柄审查与泄漏定位教程&#34; class=&#34;headerlink&#34; title=&#34;Windows 11 句柄审查与泄漏定位教程&#34;&gt;&lt;/a&gt;Windows 11 句柄审查与泄漏定位教程&lt;/h1&gt;&lt;h2 id=&#34;纯-PowerShell-通用版&#34;&gt;&lt;a href=&#34;#纯-PowerShell-通用版&#34; class=&#34;headerlink&#34; title=&#34;纯 PowerShell 通用版&#34;&gt;&lt;/a&gt;纯 PowerShell 通用版&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;适用系统：Windows 10 / Windows 11&lt;br&gt;适用环境：Windows PowerShell 5.1、PowerShell 7&lt;br&gt;建议：使用“管理员身份”打开 PowerShell&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一、句柄是什么&#34;&gt;&lt;a href=&#34;#一、句柄是什么&#34; class=&#34;headerlink&#34; title=&#34;一、句柄是什么&#34;&gt;&lt;/a&gt;一、句柄是什么&lt;/h2&gt;&lt;p&gt;Windows 程序访问文件、注册表、进程、线程、设备等系统对象时，通常通过“句柄”完成访问。&lt;/p&gt;
+&lt;p&gt;常见句柄对象包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件和目录&lt;/li&gt;
+&lt;li&gt;注册表项&lt;/li&gt;
+&lt;li&gt;进程和线程&lt;/li&gt;
+&lt;li&gt;事件对象 Event&lt;/li&gt;
+&lt;li&gt;互斥体 Mutex&lt;/li&gt;
+&lt;li&gt;信号量 Semaphore&lt;/li&gt;
+&lt;li&gt;管道 Pipe&lt;/li&gt;
+&lt;li&gt;共享内存 Section&lt;/li&gt;
+&lt;li&gt;访问令牌 Token&lt;/li&gt;
+&lt;li&gt;网络和设备对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正常程序会打开对象、使用对象，再关闭句柄。程序持续创建句柄却没有正确关闭，就可能出现句柄泄漏。&lt;/p&gt;
+&lt;p&gt;典型表现：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10:00 Handles=3000
+10:05 Handles=5000
+10:10 Handles=8000
+10:15 Handles=12000&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;判断句柄泄漏最重要的不是某一时刻的绝对值，而是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在系统空闲或相同工作负载下，句柄是否持续单向增长，并且长时间不回落。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二、句柄多少才算异常&#34;&gt;&lt;a href=&#34;#二、句柄多少才算异常&#34; class=&#34;headerlink&#34; title=&#34;二、句柄多少才算异常&#34;&gt;&lt;/a&gt;二、句柄多少才算异常&lt;/h2&gt;&lt;p&gt;Windows 没有适用于所有电脑的固定异常阈值。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;情况&lt;/th&gt;
+&lt;th&gt;参考判断&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;总句柄几万&lt;/td&gt;
+&lt;td&gt;轻度使用时常见&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;总句柄十几万&lt;/td&gt;
+&lt;td&gt;浏览器、IDE、虚拟机、后台软件较多时可能正常&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;总句柄二三十万&lt;/td&gt;
+&lt;td&gt;建议审查，但不代表一定泄漏&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;总句柄持续上涨&lt;/td&gt;
+&lt;td&gt;比绝对值更值得怀疑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;单个普通程序几千句柄&lt;/td&gt;
+&lt;td&gt;需要结合程序类型判断&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;单进程数万句柄且持续上涨&lt;/td&gt;
+&lt;td&gt;高度可疑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;同名进程数量不断增加&lt;/td&gt;
+&lt;td&gt;可能是进程增殖，不一定是单进程泄漏&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;重启后恢复低位，随后持续上涨&lt;/td&gt;
+&lt;td&gt;符合泄漏或后台任务堆积特征&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;浏览器、数据库、虚拟机、杀毒软件、IDE、WebView2 应用本来就可能持有较多句柄，因此不要仅凭“句柄很多”直接结束进程。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三、快速检查系统总量&#34;&gt;&lt;a href=&#34;#三、快速检查系统总量&#34; class=&#34;headerlink&#34; title=&#34;三、快速检查系统总量&#34;&gt;&lt;/a&gt;三、快速检查系统总量&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+
+&lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    Time      = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+    Processes = &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+    Handles   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+    Threads   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+    &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+    MemoryGB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        2
+    &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最简总句柄命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;四、单进程句柄排行榜&#34;&gt;&lt;a href=&#34;#四、单进程句柄排行榜&#34; class=&#34;headerlink&#34; title=&#34;四、单进程句柄排行榜&#34;&gt;&lt;/a&gt;四、单进程句柄排行榜&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        PID      = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+        &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+        Handles  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+        Threads  = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        MemoryMB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        CPU      = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CPU&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重点观察：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是否有普通程序达到数万句柄；&lt;/li&gt;
+&lt;li&gt;是否有进程线程数异常高；&lt;/li&gt;
+&lt;li&gt;是否有进程内存、线程和句柄同步上涨；&lt;/li&gt;
+&lt;li&gt;是否存在大量同名进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;五、按程序名称汇总多实例&#34;&gt;&lt;a href=&#34;#五、按程序名称汇总多实例&#34; class=&#34;headerlink&#34; title=&#34;五、按程序名称汇总多实例&#34;&gt;&lt;/a&gt;五、按程序名称汇总多实例&lt;/h2&gt;&lt;p&gt;浏览器、WebView2、Electron、QQ、IDE、网盘等通常会拆分为大量子进程。单个进程不高，不代表程序族合计不高。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Group-Object&lt;/span&gt; ProcessName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$group&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;   = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+        Instances = &lt;span class=&#34;token variable&#34;&gt;$group&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+        Handles   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        Threads   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+            &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+            &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        MemoryMB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+            1
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;六、判断句柄泄漏还是进程增殖&#34;&gt;&lt;a href=&#34;#六、判断句柄泄漏还是进程增殖&#34; class=&#34;headerlink&#34; title=&#34;六、判断句柄泄漏还是进程增殖&#34;&gt;&lt;/a&gt;六、判断句柄泄漏还是进程增殖&lt;/h2&gt;&lt;h3 id=&#34;单进程句柄泄漏&#34;&gt;&lt;a href=&#34;#单进程句柄泄漏&#34; class=&#34;headerlink&#34; title=&#34;单进程句柄泄漏&#34;&gt;&lt;/a&gt;单进程句柄泄漏&lt;/h3&gt;&lt;p&gt;特征：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;同一个 PID
+同一个启动时间
+HandleCount 持续增长&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;进程增殖&#34;&gt;&lt;a href=&#34;#进程增殖&#34; class=&#34;headerlink&#34; title=&#34;进程增殖&#34;&gt;&lt;/a&gt;进程增殖&lt;/h3&gt;&lt;p&gt;特征：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;单个进程句柄不高
+同名进程数量持续增加
+总句柄随之上涨&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10:00 WebView2 实例=20
+10:30 WebView2 实例=45
+11:00 WebView2 实例=80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第二种情况应查明谁不断创建子进程，而不是只盯住某个 PID。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;七、持续监控系统总句柄&#34;&gt;&lt;a href=&#34;#七、持续监控系统总句柄&#34; class=&#34;headerlink&#34; title=&#34;七、持续监控系统总句柄&#34;&gt;&lt;/a&gt;七、持续监控系统总句柄&lt;/h2&gt;&lt;p&gt;按 &lt;code&gt;Ctrl + C&lt;/code&gt; 停止。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token boolean&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+
+    &lt;span class=&#34;token variable&#34;&gt;$handles&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+    &lt;span class=&#34;token variable&#34;&gt;$threads&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+    &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+
+    &lt;span class=&#34;token string&#34;&gt;&#34;{0:yyyy-MM-dd HH:mm:ss}  Processes={1}  Threads={2}  Handles={3}&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;f `
+        &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$threads&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$handles&lt;/span&gt;
+
+    &lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 10
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况通常会小幅上下波动。持续单向上涨且不回落才更可疑。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八、监控指定进程&#34;&gt;&lt;a href=&#34;#八、监控指定进程&#34; class=&#34;headerlink&#34; title=&#34;八、监控指定进程&#34;&gt;&lt;/a&gt;八、监控指定进程&lt;/h2&gt;&lt;p&gt;假设目标 PID 为 &lt;code&gt;12345&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token boolean&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Id &lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;目标进程已经退出。&#34;&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;break&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        Time      = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+        PID       = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+        &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;   = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+        Handles   = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+        Threads   = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        MemoryMB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        PrivateMB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMemorySize64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize
+
+    &lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 5
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认泄漏时要检查：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PID 是否没有变化；&lt;/li&gt;
+&lt;li&gt;进程启动时间是否没有变化；&lt;/li&gt;
+&lt;li&gt;句柄是否持续增长；&lt;/li&gt;
+&lt;li&gt;工作完成后句柄是否仍不释放。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;九、比较一分钟内谁增长最快&#34;&gt;&lt;a href=&#34;#九、比较一分钟内谁增长最快&#34; class=&#34;headerlink&#34; title=&#34;九、比较一分钟内谁增长最快&#34;&gt;&lt;/a&gt;九、比较一分钟内谁增长最快&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-HandleSnapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$startTime&lt;/span&gt; = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;StartTime&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ToString&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;o&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            Key       = &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token function&#34;&gt;$&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/span&gt;|&lt;span class=&#34;token variable&#34;&gt;$startTime&lt;/span&gt;&#34;&lt;/span&gt;
+            PID       = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;   = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+            StartTime = &lt;span class=&#34;token variable&#34;&gt;$startTime&lt;/span&gt;
+            Handles   = &lt;span class=&#34;token namespace&#34;&gt;[int64]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+            Threads   = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            MemoryMB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;正在采集第一次快照……&#34;&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-HandleSnapshot&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;等待 60 秒，请保持正常使用电脑……&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 60
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;正在采集第二次快照……&#34;&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-HandleSnapshot&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            PID           = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PID
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;       = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;
+            HandlesOld    = &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            HandlesNow    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            HandleDelta   = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            ThreadsDelta  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+            MemoryDeltaMB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+                &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;MemoryMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;MemoryMB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+                1
+            &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; HandleDelta &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;经验判断：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;right&#34;&gt;一分钟句柄增量&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;几个到几十个&lt;/td&gt;
+&lt;td&gt;常见正常波动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;数百个&lt;/td&gt;
+&lt;td&gt;建议连续观察&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;数千个&lt;/td&gt;
+&lt;td&gt;高度可疑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;连续多轮增长&lt;/td&gt;
+&lt;td&gt;很可能存在泄漏&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;right&#34;&gt;增长后明显回落&lt;/td&gt;
+&lt;td&gt;可能是正常批量任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;建议连续执行三至五轮。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十、按程序族比较增长&#34;&gt;&lt;a href=&#34;#十、按程序族比较增长&#34; class=&#34;headerlink&#34; title=&#34;十、按程序族比较增长&#34;&gt;&lt;/a&gt;十、按程序族比较增长&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-GroupedHandleSnapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Group-Object&lt;/span&gt; ProcessName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;   = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+            Instances = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+            Handles   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+            Threads   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+                &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+                &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+                    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+                &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+                &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+            &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-GroupedHandleSnapshot&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 60
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-GroupedHandleSnapshot&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt; = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;       = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;
+        InstancesNow  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        InstanceDelta = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        HandlesNow    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        HandleDelta   = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        ThreadDelta   = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; HandleDelta &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;判断：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HandleDelta&lt;/code&gt; 很高、&lt;code&gt;InstanceDelta=0&lt;/code&gt;：更像现有进程内部泄漏；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HandleDelta&lt;/code&gt; 和 &lt;code&gt;InstanceDelta&lt;/code&gt; 都很高：更像不断产生新进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十一、查看进程路径、命令行和父进程&#34;&gt;&lt;a href=&#34;#十一、查看进程路径、命令行和父进程&#34; class=&#34;headerlink&#34; title=&#34;十一、查看进程路径、命令行和父进程&#34;&gt;&lt;/a&gt;十一、查看进程路径、命令行和父进程&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Filter&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ProcessId=&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ParentProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ExecutablePath&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    CreationDate&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    CommandLine &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;父进程详情：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Filter&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ProcessId=&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$parent&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Filter&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ProcessId=&lt;span class=&#34;token function&#34;&gt;$&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&#34;&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        ChildPID      = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId
+        ChildName     = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+        ParentPID     = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId
+        ParentName    = &lt;span class=&#34;token variable&#34;&gt;$parent&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+        ParentPath    = &lt;span class=&#34;token variable&#34;&gt;$parent&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath
+        ParentCommand = &lt;span class=&#34;token variable&#34;&gt;$parent&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CommandLine
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十二、查看完整进程祖先链&#34;&gt;&lt;a href=&#34;#十二、查看完整进程祖先链&#34; class=&#34;headerlink&#34; title=&#34;十二、查看完整进程祖先链&#34;&gt;&lt;/a&gt;十二、查看完整进程祖先链&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ProcessParentChain&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[Parameter(Mandatory)]&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$ProcessId&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;token variable&#34;&gt;$allProcesses&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process
+    &lt;span class=&#34;token variable&#34;&gt;$processMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$allProcesses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$processMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token variable&#34;&gt;$currentId&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$ProcessId&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$level&lt;/span&gt; = 0
+
+    &lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$currentId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$processMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$currentId&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            Level          = &lt;span class=&#34;token variable&#34;&gt;$level&lt;/span&gt;
+            PID            = &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId
+            ParentPID      = &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId
+            Name           = &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+            ExecutablePath = &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath
+            CommandLine    = &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CommandLine
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; 0&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;break&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+        &lt;span class=&#34;token variable&#34;&gt;$currentId&lt;/span&gt; = &lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$current&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId
+        &lt;span class=&#34;token variable&#34;&gt;$level&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;++&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Get-ProcessParentChain&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ProcessId 12345 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十三、查看子进程&#34;&gt;&lt;a href=&#34;#十三、查看子进程&#34; class=&#34;headerlink&#34; title=&#34;十三、查看子进程&#34;&gt;&lt;/a&gt;十三、查看子进程&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ParentProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    CreationDate&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ExecutablePath&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    CommandLine &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十四、分析-svchost-exe&#34;&gt;&lt;a href=&#34;#十四、分析-svchost-exe&#34; class=&#34;headerlink&#34; title=&#34;十四、分析 svchost.exe&#34;&gt;&lt;/a&gt;十四、分析 svchost.exe&lt;/h2&gt;&lt;p&gt;&lt;code&gt;svchost.exe&lt;/code&gt; 是 Windows 服务宿主，不要看到句柄高就直接结束。&lt;/p&gt;
+&lt;p&gt;查询指定 PID 承载的服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Service &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    DisplayName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    State&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    StartMode&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    PathName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看所有运行中的服务和 PID：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Service &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;State &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Running&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; Name &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    DisplayName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    StartMode &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要重启具体服务时：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Restart-Service&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name &lt;span class=&#34;token string&#34;&gt;&#34;服务名&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要随意停止关键系统服务。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十五、分析-System-进程&#34;&gt;&lt;a href=&#34;#十五、分析-System-进程&#34; class=&#34;headerlink&#34; title=&#34;十五、分析 System 进程&#34;&gt;&lt;/a&gt;十五、分析 System 进程&lt;/h2&gt;&lt;p&gt;&lt;code&gt;System&lt;/code&gt; 通常为 PID 4，代表大量内核和驱动活动。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Id 4 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    Id&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ProcessName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    HandleCount&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Threads&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    NonpagedSystemMemorySize64&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    PagedSystemMemorySize64 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 &lt;code&gt;System&lt;/code&gt; 句柄持续增长，常见嫌疑包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;存储或 USB 驱动；&lt;/li&gt;
+&lt;li&gt;网卡、蓝牙、显卡驱动；&lt;/li&gt;
+&lt;li&gt;文件系统过滤驱动；&lt;/li&gt;
+&lt;li&gt;杀毒软件；&lt;/li&gt;
+&lt;li&gt;VPN、虚拟网卡；&lt;/li&gt;
+&lt;li&gt;虚拟机；&lt;/li&gt;
+&lt;li&gt;磁盘或文件系统异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;查看运行中的驱动：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_SystemDriver &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;State &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Running&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    DisplayName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    StartMode&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    State&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    PathName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; DisplayName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;纯 PowerShell 可以判断 PID 4 是否持续增长，但不能可靠显示每个内核句柄究竟属于哪个驱动对象。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十六、检查系统事件日志&#34;&gt;&lt;a href=&#34;#十六、检查系统事件日志&#34; class=&#34;headerlink&#34; title=&#34;十六、检查系统事件日志&#34;&gt;&lt;/a&gt;十六、检查系统事件日志&lt;/h2&gt;&lt;p&gt;查看最近两小时系统警告和错误：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$startTime&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;AddHours&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Get-WinEvent&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;FilterHashtable @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    LogName   = &lt;span class=&#34;token string&#34;&gt;&#34;System&#34;&lt;/span&gt;
+    StartTime = &lt;span class=&#34;token variable&#34;&gt;$startTime&lt;/span&gt;
+    Level     = 2&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 3
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    TimeCreated&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ProviderName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Id&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    LevelDisplayName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Message &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;筛选常见磁盘、USB 和驱动问题：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-WinEvent&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;FilterHashtable @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    LogName   = &lt;span class=&#34;token string&#34;&gt;&#34;System&#34;&lt;/span&gt;
+    StartTime = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;AddHours&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;6&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProviderName &lt;span class=&#34;token operator&#34;&gt;-match&lt;/span&gt; `
+        &lt;span class=&#34;token string&#34;&gt;&#34;Disk|Ntfs|stor|USB|Kernel-PnP|DriverFrameworks|WHEA|volmgr&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    TimeCreated&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ProviderName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Id&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    LevelDisplayName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Message &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;十七、检查进程数字签名&#34;&gt;&lt;a href=&#34;#十七、检查进程数字签名&#34; class=&#34;headerlink&#34; title=&#34;十七、检查进程数字签名&#34;&gt;&lt;/a&gt;十七、检查进程数字签名&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Filter&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ProcessId=&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    ProcessId&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ExecutablePath&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    CommandLine &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-AuthenticodeSignature&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;FilePath &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+        Status&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        StatusMessage&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        SignerCertificate&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+        Path &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;未签名不等于恶意，有签名也不等于没有问题。更应关注异常路径、临时目录运行和名称伪装。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十八、检查-GDI-和-USER-对象泄漏&#34;&gt;&lt;a href=&#34;#十八、检查-GDI-和-USER-对象泄漏&#34; class=&#34;headerlink&#34; title=&#34;十八、检查 GDI 和 USER 对象泄漏&#34;&gt;&lt;/a&gt;十八、检查 GDI 和 USER 对象泄漏&lt;/h2&gt;&lt;p&gt;某些 GUI 程序会泄漏窗口、菜单、画刷、字体、设备上下文等资源。&lt;/p&gt;
+&lt;p&gt;先加载 API：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Add-Type&lt;/span&gt; @&lt;span class=&#34;token string&#34;&gt;&#34;
+using System;
+using System.Runtime.InteropServices;
+
+public static class GuiResources
+{
+    [DllImport(&#34;&lt;/span&gt;user32&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dll&lt;span class=&#34;token string&#34;&gt;&#34;)]
+    public static extern int GetGuiResources(
+        IntPtr hProcess,
+        int uiFlags
+    );
+}
+&#34;&lt;/span&gt;@&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看排行榜：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            PID         = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;     = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+            Handles     = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+            GDIObjects  = &lt;span class=&#34;token namespace&#34;&gt;[GuiResources]&lt;/span&gt;::GetGuiResources&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handle&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 0&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            USERObjects = &lt;span class=&#34;token namespace&#34;&gt;[GuiResources]&lt;/span&gt;::GetGuiResources&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handle&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; GDIObjects &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;GDI 或 USER 对象持续上涨时，可能出现窗口无法打开、菜单变黑、界面无法刷新、按钮和图标消失等现象。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;十九、长期记录系统句柄&#34;&gt;&lt;a href=&#34;#十九、长期记录系统句柄&#34; class=&#34;headerlink&#34; title=&#34;十九、长期记录系统句柄&#34;&gt;&lt;/a&gt;十九、长期记录系统句柄&lt;/h2&gt;&lt;p&gt;先创建目录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$AuditRoot&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE &lt;span class=&#34;token string&#34;&gt;&#34;Desktop\HandleAudit&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType Directory &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token variable&#34;&gt;$AuditRoot&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Out-Null&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每 30 秒记录一次：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$LogPath&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; `
+    &lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE `
+    &lt;span class=&#34;token string&#34;&gt;&#34;Desktop\HandleAudit\system_handle_log.csv&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token boolean&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+
+    &lt;span class=&#34;token variable&#34;&gt;$row&lt;/span&gt; = &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        Time      = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+        Processes = &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+        Handles   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        Threads   = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+            &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+            &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        MemoryGB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$processes&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+            2
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token variable&#34;&gt;$row&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token variable&#34;&gt;$LogPath&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8 `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Append
+
+    &lt;span class=&#34;token variable&#34;&gt;$row&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize
+    &lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 30
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看最近记录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Import-Csv&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$LogPath&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Last 20 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;二十、长期记录句柄最高的进程&#34;&gt;&lt;a href=&#34;#二十、长期记录句柄最高的进程&#34; class=&#34;headerlink&#34; title=&#34;二十、长期记录句柄最高的进程&#34;&gt;&lt;/a&gt;二十、长期记录句柄最高的进程&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$LogPath&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; `
+    &lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE `
+    &lt;span class=&#34;token string&#34;&gt;&#34;Desktop\HandleAudit\top_process_handles.csv&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token boolean&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$time&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First 30 &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            Time     = &lt;span class=&#34;token variable&#34;&gt;$time&lt;/span&gt;
+            PID      = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+            Handles  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+            Threads  = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            MemoryMB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token variable&#34;&gt;$LogPath&lt;/span&gt; `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8 `
+        &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Append
+
+    &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;已记录：&lt;span class=&#34;token variable&#34;&gt;$time&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds 30
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;二十一、检查开机启动项、服务和计划任务&#34;&gt;&lt;a href=&#34;#二十一、检查开机启动项、服务和计划任务&#34; class=&#34;headerlink&#34; title=&#34;二十一、检查开机启动项、服务和计划任务&#34;&gt;&lt;/a&gt;二十一、检查开机启动项、服务和计划任务&lt;/h2&gt;&lt;p&gt;开机启动项：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_StartupCommand &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; `
+    Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Command&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    Location&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    User &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Name &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Wrap&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行中的服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Service&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Status &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Running&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; DisplayName &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; Status&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; Name&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; DisplayName &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行中的计划任务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ScheduledTask&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;State &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Running&#34;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; TaskPath&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; TaskName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; State &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;二十二、安全验证可疑程序&#34;&gt;&lt;a href=&#34;#二十二、安全验证可疑程序&#34; class=&#34;headerlink&#34; title=&#34;二十二、安全验证可疑程序&#34;&gt;&lt;/a&gt;二十二、安全验证可疑程序&lt;/h2&gt;&lt;p&gt;记录关闭前总句柄：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;优先尝试正常关闭：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; = 12345
+
+&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Id &lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CloseMainWindow&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;必要时按 PID 强制结束：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Stop-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Id &lt;span class=&#34;token variable&#34;&gt;$TargetProcessId&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新统计：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; HandleCount &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+
+&lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    Before  = &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;
+    After   = &lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt;
+    Reduced = &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关闭程序后句柄下降很多，说明它贡献较大，但不一定代表它存在泄漏，也可能只是正常占用较高。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二十三、不能随意结束的系统进程&#34;&gt;&lt;a href=&#34;#二十三、不能随意结束的系统进程&#34; class=&#34;headerlink&#34; title=&#34;二十三、不能随意结束的系统进程&#34;&gt;&lt;/a&gt;二十三、不能随意结束的系统进程&lt;/h2&gt;&lt;p&gt;一般不要直接结束：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;System
+Registry
+smss.exe
+csrss.exe
+wininit.exe
+winlogon.exe
+services.exe
+lsass.exe
+dwm.exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对 &lt;code&gt;svchost.exe&lt;/code&gt;，应先查 PID 对应服务，不要批量结束。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;explorer.exe&lt;/code&gt; 可以重启：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Stop-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name explorer &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force
+&lt;span class=&#34;token function&#34;&gt;Start-Process&lt;/span&gt; explorer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重启 Explorer 只能验证资源管理器或 Shell 扩展问题，不能修复内核驱动泄漏。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二十四、常见异常模式&#34;&gt;&lt;a href=&#34;#二十四、常见异常模式&#34; class=&#34;headerlink&#34; title=&#34;二十四、常见异常模式&#34;&gt;&lt;/a&gt;二十四、常见异常模式&lt;/h2&gt;&lt;h3 id=&#34;模式一：单个-PID-句柄持续上涨&#34;&gt;&lt;a href=&#34;#模式一：单个-PID-句柄持续上涨&#34; class=&#34;headerlink&#34; title=&#34;模式一：单个 PID 句柄持续上涨&#34;&gt;&lt;/a&gt;模式一：单个 PID 句柄持续上涨&lt;/h3&gt;&lt;p&gt;可能原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件句柄未关闭；&lt;/li&gt;
+&lt;li&gt;注册表句柄未关闭；&lt;/li&gt;
+&lt;li&gt;同步对象泄漏；&lt;/li&gt;
+&lt;li&gt;插件或扩展泄漏；&lt;/li&gt;
+&lt;li&gt;程序自身缺陷。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式二：同名进程越来越多&#34;&gt;&lt;a href=&#34;#模式二：同名进程越来越多&#34; class=&#34;headerlink&#34; title=&#34;模式二：同名进程越来越多&#34;&gt;&lt;/a&gt;模式二：同名进程越来越多&lt;/h3&gt;&lt;p&gt;可能原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;父程序不断拉起子进程；&lt;/li&gt;
+&lt;li&gt;子进程超时后未退出；&lt;/li&gt;
+&lt;li&gt;更新器反复启动；&lt;/li&gt;
+&lt;li&gt;IDE、终端或脚本反复创建工具进程；&lt;/li&gt;
+&lt;li&gt;浏览器或 WebView2 宿主异常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式三：System-句柄上涨&#34;&gt;&lt;a href=&#34;#模式三：System-句柄上涨&#34; class=&#34;headerlink&#34; title=&#34;模式三：System 句柄上涨&#34;&gt;&lt;/a&gt;模式三：System 句柄上涨&lt;/h3&gt;&lt;p&gt;重点怀疑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;USB、磁盘或存储驱动；&lt;/li&gt;
+&lt;li&gt;VPN、虚拟网卡；&lt;/li&gt;
+&lt;li&gt;杀毒软件；&lt;/li&gt;
+&lt;li&gt;虚拟机；&lt;/li&gt;
+&lt;li&gt;文件系统过滤驱动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式四：svchost-某个-PID-上涨&#34;&gt;&lt;a href=&#34;#模式四：svchost-某个-PID-上涨&#34; class=&#34;headerlink&#34; title=&#34;模式四：svchost 某个 PID 上涨&#34;&gt;&lt;/a&gt;模式四：svchost 某个 PID 上涨&lt;/h3&gt;&lt;p&gt;先查询该 PID 承载的具体服务，再针对服务排查。&lt;/p&gt;
+&lt;h3 id=&#34;模式五：Explorer-句柄上涨&#34;&gt;&lt;a href=&#34;#模式五：Explorer-句柄上涨&#34; class=&#34;headerlink&#34; title=&#34;模式五：Explorer 句柄上涨&#34;&gt;&lt;/a&gt;模式五：Explorer 句柄上涨&lt;/h3&gt;&lt;p&gt;重点怀疑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;右键菜单扩展；&lt;/li&gt;
+&lt;li&gt;网盘 Shell 扩展；&lt;/li&gt;
+&lt;li&gt;搜索工具；&lt;/li&gt;
+&lt;li&gt;压缩软件；&lt;/li&gt;
+&lt;li&gt;缩略图生成；&lt;/li&gt;
+&lt;li&gt;无响应的外接磁盘或网络路径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模式六：浏览器或-WebView2-总量高&#34;&gt;&lt;a href=&#34;#模式六：浏览器或-WebView2-总量高&#34; class=&#34;headerlink&#34; title=&#34;模式六：浏览器或 WebView2 总量高&#34;&gt;&lt;/a&gt;模式六：浏览器或 WebView2 总量高&lt;/h3&gt;&lt;p&gt;重点检查：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标签页和扩展；&lt;/li&gt;
+&lt;li&gt;后台运行设置；&lt;/li&gt;
+&lt;li&gt;使用 WebView2 的桌面应用；&lt;/li&gt;
+&lt;li&gt;是否有子进程残留；&lt;/li&gt;
+&lt;li&gt;同名进程实例是否持续增长。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二十五、一键审查脚本&#34;&gt;&lt;a href=&#34;#二十五、一键审查脚本&#34; class=&#34;headerlink&#34; title=&#34;二十五、一键审查脚本&#34;&gt;&lt;/a&gt;二十五、一键审查脚本&lt;/h2&gt;&lt;p&gt;将以下脚本保存为 &lt;code&gt;Handle-Audit.ps1&lt;/code&gt;。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+    &lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$ObserveSeconds&lt;/span&gt; = 60&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Top&lt;/span&gt; = 30&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token namespace&#34;&gt;[string]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE &lt;span class=&#34;token string&#34;&gt;&#34;Desktop\HandleAudit&#34;&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Set-StrictMode&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Version Latest
+&lt;span class=&#34;token function&#34;&gt;New-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ItemType Directory &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Path &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Force &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Out-Null&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-FullProcessSnapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$time&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$cimProcesses&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-CimInstance&lt;/span&gt; Win32_Process &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue
+    &lt;span class=&#34;token variable&#34;&gt;$cimMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$cimProcesses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$cimMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessId&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token function&#34;&gt;Get-Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ErrorAction SilentlyContinue &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cimMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$cimMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[int]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+        &lt;span class=&#34;token variable&#34;&gt;$creationTime&lt;/span&gt; = &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-and&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CreationDate&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;token variable&#34;&gt;$creationTime&lt;/span&gt; = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[datetime]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CreationDate&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ToString&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;o&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;token variable&#34;&gt;$creationTime&lt;/span&gt; = &lt;span class=&#34;token string&#34;&gt;&#34;&#34;&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            SnapshotTime   = &lt;span class=&#34;token variable&#34;&gt;$time&lt;/span&gt;
+            Key            = &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token function&#34;&gt;$&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/span&gt;|&lt;span class=&#34;token variable&#34;&gt;$creationTime&lt;/span&gt;&#34;&lt;/span&gt;
+            PID            = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Id
+            ParentPID      = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentProcessId &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;        = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ProcessName
+            CreationTime   = &lt;span class=&#34;token variable&#34;&gt;$creationTime&lt;/span&gt;
+            Handles        = &lt;span class=&#34;token namespace&#34;&gt;[int64]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;HandleCount
+            Threads        = &lt;span class=&#34;token keyword&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token namespace&#34;&gt;[int64]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            WorkingSetMB   = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;WorkingSet64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            PrivateMB      = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMemorySize64 &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1MB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; 2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            ExecutablePath = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+            CommandLine    = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$cim&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CommandLine &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-GroupedSnapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[Parameter(Mandatory)]&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[array]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Group-Object&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;      = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Name
+            Instances    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+            Handles      = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+            Threads      = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+            WorkingSetMB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+                &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; WorkingSetMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+                2
+            &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            PrivateMB    = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+                &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Group&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; PrivateMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+                2
+            &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-SystemSummary&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;param&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[Parameter(Mandatory)]&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[array]&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        Time         = &lt;span class=&#34;token function&#34;&gt;Get-Date&lt;/span&gt;
+        Processes    = &lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Count
+        Handles      = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        Threads      = &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum
+        WorkingSetGB = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; WorkingSetMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1024&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+            2
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+        PrivateGB    = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$Snapshot&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Measure-Object&lt;/span&gt; PrivateMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Sum&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Sum &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt; 1024&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+            2
+        &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;正在采集基线快照……&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Cyan
+&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-FullProcessSnapshot&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$beforeGrouped&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-GroupedSnapshot&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Snapshot &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-SystemSummary&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Snapshot &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;01_processes_before.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First &lt;span class=&#34;token variable&#34;&gt;$Top&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;02_top_processes_before.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeGrouped&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;03_grouped_processes_before.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;04_system_summary_before.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;观察 &lt;span class=&#34;token variable&#34;&gt;$ObserveSeconds&lt;/span&gt; 秒……&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Yellow
+&lt;span class=&#34;token function&#34;&gt;Start-Sleep&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Seconds &lt;span class=&#34;token variable&#34;&gt;$ObserveSeconds&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;正在采集第二次快照……&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Cyan
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-FullProcessSnapshot&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$afterGrouped&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-GroupedSnapshot&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Snapshot &lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt;
+&lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-SystemSummary&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Snapshot &lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;05_processes_after.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$afterGrouped&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;06_grouped_processes_after.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;07_system_summary_after.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$before&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$processGrowth&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$after&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$beforeMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Key&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            PID             = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PID
+            &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;         = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;
+            ParentPID       = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ParentPID
+            HandlesBefore   = &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            HandlesAfter    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            HandleDelta     = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+            ThreadsBefore   = &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+            ThreadsAfter    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+            ThreadDelta     = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+            PrivateBeforeMB = &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMB
+            PrivateAfterMB  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMB
+            PrivateDeltaMB  = &lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;
+                &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMB &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PrivateMB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+                2
+            &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+            ExecutablePath  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ExecutablePath
+            CommandLine     = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;CommandLine
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; HandleDelta &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending
+
+&lt;span class=&#34;token variable&#34;&gt;$processGrowth&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;08_process_handle_growth.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token variable&#34;&gt;$beforeGroupMap&lt;/span&gt; = @&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt; in &lt;span class=&#34;token variable&#34;&gt;$beforeGrouped&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$beforeGroupMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$item&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$groupGrowth&lt;/span&gt; = &lt;span class=&#34;token variable&#34;&gt;$afterGrouped&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt; = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$beforeGroupMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ContainsKey&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$beforeGroupMap&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token variable&#34;&gt;$null&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;         = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;
+        InstancesBefore = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        InstancesAfter  = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        InstanceDelta   = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Instances
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        HandlesBefore   = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; 0 &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        HandlesAfter    = &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        HandleDelta     = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        ThreadDelta     = &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$old&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+        &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Sort-Object&lt;/span&gt; HandleDelta &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Descending
+
+&lt;span class=&#34;token variable&#34;&gt;$groupGrowth&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Export-Csv&lt;/span&gt; `
+    &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;09_group_handle_growth.csv&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; `
+    &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;NoTypeInformation &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding UTF8
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;系统变化：&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Green
+&lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    ProcessesBefore = &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Processes
+    ProcessesAfter  = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Processes
+    ProcessDelta    = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Processes &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Processes
+    HandlesBefore   = &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+    HandlesAfter    = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+    HandleDelta     = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Handles
+    ThreadsBefore   = &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+    ThreadsAfter    = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+    ThreadDelta     = &lt;span class=&#34;token variable&#34;&gt;$afterSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$beforeSummary&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Threads
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Format-List&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;同一进程句柄增长排行榜：&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Green
+&lt;span class=&#34;token variable&#34;&gt;$processGrowth&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First &lt;span class=&#34;token variable&#34;&gt;$Top&lt;/span&gt; `
+    PID&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    HandleDelta&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    ThreadDelta&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;
+    PrivateDeltaMB &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;程序族句柄增长排行榜：&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Green
+&lt;span class=&#34;token variable&#34;&gt;$groupGrowth&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;First &lt;span class=&#34;token variable&#34;&gt;$Top&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Format-Table&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;AutoSize
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;审查完成。报告目录：&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ForegroundColor Cyan
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$OutputDirectory&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Scope &lt;span class=&#34;token keyword&#34;&gt;Process&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ExecutionPolicy Bypass
+
+&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\Handle-Audit&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ps1 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;ObserveSeconds 120 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Top 40&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;默认报告目录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;桌面\HandleAudit&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主要文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;01_processes_before.csv
+02_top_processes_before.csv
+03_grouped_processes_before.csv
+04_system_summary_before.csv
+05_processes_after.csv
+06_grouped_processes_after.csv
+07_system_summary_after.csv
+08_process_handle_growth.csv
+09_group_handle_growth.csv&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中最重要的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;08_process_handle_growth.csv
+09_group_handle_growth.csv&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;二十六、标准排查流程&#34;&gt;&lt;a href=&#34;#二十六、标准排查流程&#34; class=&#34;headerlink&#34; title=&#34;二十六、标准排查流程&#34;&gt;&lt;/a&gt;二十六、标准排查流程&lt;/h2&gt;&lt;h3 id=&#34;第一阶段：确认问题&#34;&gt;&lt;a href=&#34;#第一阶段：确认问题&#34; class=&#34;headerlink&#34; title=&#34;第一阶段：确认问题&#34;&gt;&lt;/a&gt;第一阶段：确认问题&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;记录总句柄；&lt;/li&gt;
+&lt;li&gt;记录进程数；&lt;/li&gt;
+&lt;li&gt;记录线程数；&lt;/li&gt;
+&lt;li&gt;观察总句柄是否持续上涨；&lt;/li&gt;
+&lt;li&gt;确认是否同时出现卡顿、窗口无法打开等症状。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第二阶段：定位范围&#34;&gt;&lt;a href=&#34;#第二阶段：定位范围&#34; class=&#34;headerlink&#34; title=&#34;第二阶段：定位范围&#34;&gt;&lt;/a&gt;第二阶段：定位范围&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;查看单进程句柄排行；&lt;/li&gt;
+&lt;li&gt;查看同名进程汇总；&lt;/li&gt;
+&lt;li&gt;比较一分钟句柄增量；&lt;/li&gt;
+&lt;li&gt;比较实例数量增量；&lt;/li&gt;
+&lt;li&gt;区分句柄泄漏和进程增殖。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第三阶段：追踪来源&#34;&gt;&lt;a href=&#34;#第三阶段：追踪来源&#34; class=&#34;headerlink&#34; title=&#34;第三阶段：追踪来源&#34;&gt;&lt;/a&gt;第三阶段：追踪来源&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;查看命令行；&lt;/li&gt;
+&lt;li&gt;查看可执行文件路径；&lt;/li&gt;
+&lt;li&gt;查看父进程；&lt;/li&gt;
+&lt;li&gt;查看完整祖先链；&lt;/li&gt;
+&lt;li&gt;查看子进程；&lt;/li&gt;
+&lt;li&gt;对 svchost 查询具体服务；&lt;/li&gt;
+&lt;li&gt;对 System 检查驱动和设备。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第四阶段：隔离验证&#34;&gt;&lt;a href=&#34;#第四阶段：隔离验证&#34; class=&#34;headerlink&#34; title=&#34;第四阶段：隔离验证&#34;&gt;&lt;/a&gt;第四阶段：隔离验证&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;正常退出可疑程序；&lt;/li&gt;
+&lt;li&gt;记录句柄下降数量；&lt;/li&gt;
+&lt;li&gt;暂停插件或扩展；&lt;/li&gt;
+&lt;li&gt;暂停后台服务；&lt;/li&gt;
+&lt;li&gt;断开非必要设备；&lt;/li&gt;
+&lt;li&gt;重复相同操作验证是否复现。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第五阶段：形成证据&#34;&gt;&lt;a href=&#34;#第五阶段：形成证据&#34; class=&#34;headerlink&#34; title=&#34;第五阶段：形成证据&#34;&gt;&lt;/a&gt;第五阶段：形成证据&lt;/h3&gt;&lt;p&gt;建议保留：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;系统总量日志；&lt;/li&gt;
+&lt;li&gt;进程增长 CSV；&lt;/li&gt;
+&lt;li&gt;命令行；&lt;/li&gt;
+&lt;li&gt;父进程链；&lt;/li&gt;
+&lt;li&gt;程序版本；&lt;/li&gt;
+&lt;li&gt;触发步骤；&lt;/li&gt;
+&lt;li&gt;开始和结束时间；&lt;/li&gt;
+&lt;li&gt;关闭程序前后的句柄差值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二十七、最终判断标准&#34;&gt;&lt;a href=&#34;#二十七、最终判断标准&#34; class=&#34;headerlink&#34; title=&#34;二十七、最终判断标准&#34;&gt;&lt;/a&gt;二十七、最终判断标准&lt;/h2&gt;&lt;p&gt;通常满足以下多个条件，才能较有把握地判断为句柄泄漏：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;同一个 PID 持续存在；&lt;/li&gt;
+&lt;li&gt;句柄数量连续多轮增长；&lt;/li&gt;
+&lt;li&gt;负载停止后仍然不回落；&lt;/li&gt;
+&lt;li&gt;重复执行某个操作时稳定复现；&lt;/li&gt;
+&lt;li&gt;关闭目标程序后总句柄明显下降；&lt;/li&gt;
+&lt;li&gt;重启目标程序后句柄恢复低位；&lt;/li&gt;
+&lt;li&gt;再次操作后重新开始增长；&lt;/li&gt;
+&lt;li&gt;进程实例数量没有同步增加；&lt;/li&gt;
+&lt;li&gt;不是正常浏览器标签页、虚拟机或批量任务造成；&lt;/li&gt;
+&lt;li&gt;问题与特定插件、版本、设备或服务高度相关。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不够可靠的判断：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;它现在有 10000 个句柄。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更可靠的证据链：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;同一个 PID 在空闲状态下每分钟稳定增加 1500 个句柄，
+停止业务后不释放，
+关闭该程序后系统总句柄立即下降 80000，
+重新启动该程序后句柄恢复低位，
+再次执行相同操作后重新持续上涨。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这才是一条完整、可信的句柄泄漏证据链。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2026/01/13/windows11-xi-tong-wen-jian/</guid>
             <title>windows11系统文件</title>

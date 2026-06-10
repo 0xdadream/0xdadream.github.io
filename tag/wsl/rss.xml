@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>逐梦 • Posts by &#34;wsl&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 29 May 2026 12:25:00 +0800</pubDate>
+        <lastBuildDate>Fri, 29 May 2026 12:25:00 +0800</lastBuildDate>
+        <category>AI</category>
+        <category>tip</category>
+        <category>intel</category>
+        <category>email</category>
+        <category>安装</category>
+        <category>cloudflare</category>
+        <category>linux</category>
+        <category>ssh</category>
+        <category>tips</category>
+        <category>Java</category>
+        <category>conda</category>
+        <category>教程</category>
+        <category>环境</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>python</category>
+        <category>bug</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>wsl2</category>
+        <category>windows</category>
+        <category>net</category>
+        <category>BUUCTF</category>
+        <category>XGBoost</category>
+        <category>server</category>
+        <category>wall</category>
+        <category>powershell</category>
+        <category>comfyui</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>tools</category>
+        <category>emby</category>
+        <category>git</category>
+        <category>google</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>文件上传</category>
+        <category>远程</category>
+        <category>php</category>
+        <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>i春秋</category>
+        <category>mcp</category>
+        <category>证书</category>
+        <category>ai</category>
+        <category>wsl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/05/29/wsl2-ci-pan-zhan-yong/</guid>
+            <title>WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程</title>
+            <link>https://0xdadream.github.io/2026/05/29/wsl2-ci-pan-zhan-yong/</link>
+            <category>wsl</category>
+            <pubDate>Fri, 29 May 2026 12:25:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;WSL2-虚拟磁盘-ext4-vhdx-占用过大缩减教程&#34;&gt;&lt;a href=&#34;#WSL2-虚拟磁盘-ext4-vhdx-占用过大缩减教程&#34; class=&#34;headerlink&#34; title=&#34;WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程&#34;&gt;&lt;/a&gt;WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程&lt;/h1&gt;&lt;p&gt;本文适用于这种情况：Windows 里看到某个 WSL2 的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 文件很大，比如 90GB、100GB，但进入 WSL 后用 &lt;code&gt;df -h&lt;/code&gt; 查看，Linux 内部实际只用了十几 GB。出现这种情况并不是 WSL 坏了，而是因为 WSL2 使用的是动态虚拟硬盘。它会随着使用自动变大，但你在 Linux 里删除文件后，外层的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 通常不会自动缩小，所以需要手动压缩。&lt;/p&gt;
+&lt;p&gt;以 Ubuntu-22.04 为例，假设它的虚拟磁盘路径类似下面这样：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个路径是正常的。不同 WSL 发行版可能在不同目录下，例如有的在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\Packages\...\LocalState\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也有的在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{GUID}\ext4.vhdx&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;路径不同只是安装方式不同，不代表异常。真正要判断的是：Windows 看到的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 大小，和 WSL 内部实际使用量是否差距很大。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查询-WSL-名称和状态&#34;&gt;&lt;a href=&#34;#查询-WSL-名称和状态&#34; class=&#34;headerlink&#34; title=&#34;查询 WSL 名称和状态&#34;&gt;&lt;/a&gt;查询 WSL 名称和状态&lt;/h2&gt;&lt;p&gt;先打开 PowerShell，执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;  NAME            STATE           VERSION
+&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Running         2
+  Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Stopped         2
+  Ubuntu-24&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04    Stopped         2&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里要确认你准备缩减的是哪个发行版。后面的教程以：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Ubuntu-22.04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为例。如果你的名字不同，比如 &lt;code&gt;Ubuntu&lt;/code&gt;、&lt;code&gt;Ubuntu-24.04&lt;/code&gt;，后面命令里的名字要对应修改。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查询-WSL-的真实磁盘路径&#34;&gt;&lt;a href=&#34;#查询-WSL-的真实磁盘路径&#34; class=&#34;headerlink&#34; title=&#34;查询 WSL 的真实磁盘路径&#34;&gt;&lt;/a&gt;查询 WSL 的真实磁盘路径&lt;/h2&gt;&lt;p&gt;不要自己去文件夹里乱找，也不要手动复制很长的 GUID 路径。最稳的方法是从注册表里读取 WSL 的真实路径。&lt;/p&gt;
+&lt;p&gt;在 PowerShell 中执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath
+    &lt;span class=&#34;token namespace&#34;&gt;[PSCustomObject]&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+        Name = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName
+        BasePath = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath
+        Version = &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Version
+    &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;Name           BasePath
+&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;           &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;
+Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\wsl\&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+Ubuntu-20&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\Packages\&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\LocalState
+Ubuntu-24&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04   C:\Users\xxx\AppData\Local\Packages\&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;\LocalState&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中 &lt;code&gt;BasePath&lt;/code&gt; 就是对应 WSL 虚拟磁盘所在的目录。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;自动获取-Ubuntu-22-04-的-ext4-vhdx-路径&#34;&gt;&lt;a href=&#34;#自动获取-Ubuntu-22-04-的-ext4-vhdx-路径&#34; class=&#34;headerlink&#34; title=&#34;自动获取 Ubuntu-22.04 的 ext4.vhdx 路径&#34;&gt;&lt;/a&gt;自动获取 Ubuntu-22.04 的 ext4.vhdx 路径&lt;/h2&gt;&lt;p&gt;为了避免路径输错，建议直接用变量保存路径。执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下会输出类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;C:\Users\xxx\AppData\Local\wsl\{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ext4.vhdx
+True&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要最后是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;True&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就说明路径正确。&lt;/p&gt;
+&lt;p&gt;如果是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;False&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明没有找到 &lt;code&gt;ext4.vhdx&lt;/code&gt;，这时不要继续压缩，先检查发行版名字是不是写错了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查看压缩前-ext4-vhdx-的大小&#34;&gt;&lt;a href=&#34;#查看压缩前-ext4-vhdx-的大小&#34; class=&#34;headerlink&#34; title=&#34;查看压缩前 ext4.vhdx 的大小&#34;&gt;&lt;/a&gt;查看压缩前 ext4.vhdx 的大小&lt;/h2&gt;&lt;p&gt;继续在 PowerShell 中执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;FullName                                                               SizeGB
+--------                                                               ------
+C:\Users\xxx\AppData\Local\wsl\{...}\ext4.vhdx                         95.65&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;SizeGB&lt;/code&gt; 就是 Windows 当前实际被这个虚拟磁盘文件占用的空间。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;查看-WSL-内部实际使用量&#34;&gt;&lt;a href=&#34;#查看-WSL-内部实际使用量&#34; class=&#34;headerlink&#34; title=&#34;查看 WSL 内部实际使用量&#34;&gt;&lt;/a&gt;查看 WSL 内部实际使用量&lt;/h2&gt;&lt;p&gt;接着查看 Ubuntu-22.04 内部到底用了多少空间：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; df &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;h &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果结果类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdc        1007G 17G  939G  2%   /&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明 Linux 内部实际只用了 17GB。此时如果 Windows 上的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 是 95GB，就说明中间有大量已经释放但没有被 Windows 回收的空间，可以进行压缩。&lt;/p&gt;
+&lt;p&gt;如果这里 &lt;code&gt;Used&lt;/code&gt; 也很大，比如 80GB、90GB，那就不是虚拟磁盘没缩的问题，而是 WSL 里面确实有大文件，需要先清理 Linux 内部文件，再压缩。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;执行-fstrim-标记可回收空间&#34;&gt;&lt;a href=&#34;#执行-fstrim-标记可回收空间&#34; class=&#34;headerlink&#34; title=&#34;执行 fstrim 标记可回收空间&#34;&gt;&lt;/a&gt;执行 fstrim 标记可回收空间&lt;/h2&gt;&lt;p&gt;在压缩之前，先让 WSL 标记哪些空间已经不用了：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; bash &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;lc &lt;span class=&#34;token string&#34;&gt;&#34;sudo fstrim -av&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令可能会要求输入 Ubuntu 里的 sudo 密码。执行后可能会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;/: 70 GiB trimmed&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这表示 Linux 内部有一部分空闲块已经被标记为可以回收。即使输出比较少，也可以继续下一步。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;关闭-WSL&#34;&gt;&lt;a href=&#34;#关闭-WSL&#34; class=&#34;headerlink&#34; title=&#34;关闭 WSL&#34;&gt;&lt;/a&gt;关闭 WSL&lt;/h2&gt;&lt;p&gt;压缩虚拟磁盘前，必须关闭 WSL。执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后检查状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最好确认 Ubuntu-22.04 已经是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;Stopped&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果还显示 &lt;code&gt;Running&lt;/code&gt;，等几秒后再执行一次：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;使用-DiskPart-压缩-ext4-vhdx&#34;&gt;&lt;a href=&#34;#使用-DiskPart-压缩-ext4-vhdx&#34; class=&#34;headerlink&#34; title=&#34;使用 DiskPart 压缩 ext4.vhdx&#34;&gt;&lt;/a&gt;使用 DiskPart 压缩 ext4.vhdx&lt;/h2&gt;&lt;p&gt;如果你的系统支持 &lt;code&gt;Optimize-VHD&lt;/code&gt;，可以使用它。但很多 Windows 家用版或未启用 Hyper-V 模块的系统没有这个命令，所以这里直接使用更通用的 DiskPart 方法。&lt;/p&gt;
+&lt;p&gt;建议用&lt;strong&gt;管理员 PowerShell&lt;/strong&gt;执行下面这一整段：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-not&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;找不到 VHDX 文件：&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown
+
+@&lt;span class=&#34;token string&#34;&gt;&#34;
+select vdisk file=&#34;&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+&#34;&lt;/span&gt;@ &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Set-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding ASCII
+
+diskpart &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;s &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这段命令会自动找到 Ubuntu-22.04 的 &lt;code&gt;ext4.vhdx&lt;/code&gt;，生成 DiskPart 脚本，然后执行压缩。这样做的好处是不用你手动输入长路径，也不会因为 GUID 少输一个字符而失败。&lt;/p&gt;
+&lt;p&gt;成功时，DiskPart 一般会显示类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;DiskPart 成功地选择了虚拟磁盘文件。
+DiskPart 成功地附加了虚拟磁盘文件。
+DiskPart 成功地压缩了虚拟磁盘文件。
+DiskPart 成功地分离了虚拟磁盘文件。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中最关键的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;DiskPart 成功地压缩了虚拟磁盘文件。&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;验证压缩结果&#34;&gt;&lt;a href=&#34;#验证压缩结果&#34; class=&#34;headerlink&#34; title=&#34;验证压缩结果&#34;&gt;&lt;/a&gt;验证压缩结果&lt;/h2&gt;&lt;p&gt;压缩完成后，再查看一次 &lt;code&gt;ext4.vhdx&lt;/code&gt; 的大小：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 PowerShell 变量 &lt;code&gt;$vhd&lt;/code&gt; 已经失效，就重新执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常情况下，原来 95GB 左右的 &lt;code&gt;ext4.vhdx&lt;/code&gt; 可能会降到 20GB 到 30GB 左右。不一定会刚好等于 &lt;code&gt;df -h&lt;/code&gt; 里的 17GB，因为虚拟磁盘还会保留文件系统元数据和一些结构空间。&lt;/p&gt;
+&lt;p&gt;只要它明显变小，就说明缩减成功。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;启动-WSL-检查是否正常&#34;&gt;&lt;a href=&#34;#启动-WSL-检查是否正常&#34; class=&#34;headerlink&#34; title=&#34;启动 WSL 检查是否正常&#34;&gt;&lt;/a&gt;启动 WSL 检查是否正常&lt;/h2&gt;&lt;p&gt;最后重新启动 Ubuntu-22.04：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入后执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;df &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;h &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认系统可以正常进入，空间显示正常即可。&lt;/p&gt;
+&lt;p&gt;退出 WSL：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;最终推荐命令合集&#34;&gt;&lt;a href=&#34;#最终推荐命令合集&#34; class=&#34;headerlink&#34; title=&#34;最终推荐命令合集&#34;&gt;&lt;/a&gt;最终推荐命令合集&lt;/h2&gt;&lt;p&gt;如果你已经确认要缩减的是 &lt;code&gt;Ubuntu-22.04&lt;/code&gt;，可以直接用下面这段。用&lt;strong&gt;管理员 PowerShell&lt;/strong&gt;运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ForEach-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Get-ItemProperty&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;PSPath &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;DistributionName &lt;span class=&#34;token operator&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Ubuntu-22.04&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; = &lt;span class=&#34;token function&#34;&gt;Join-Path&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$p&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;BasePath &lt;span class=&#34;token string&#34;&gt;&#34;ext4.vhdx&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;目标 VHDX：&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-not&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;Test-Path&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;错误：找不到 VHDX 文件，停止操作。&#34;&lt;/span&gt;
+    &lt;span class=&#34;token keyword&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n压缩前大小：&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n执行 fstrim...&#34;&lt;/span&gt;
+wsl &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d Ubuntu-22&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;04 &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt; bash &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;lc &lt;span class=&#34;token string&#34;&gt;&#34;sudo fstrim -av&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n关闭 WSL...&#34;&lt;/span&gt;
+wsl &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;shutdown
+
+@&lt;span class=&#34;token string&#34;&gt;&#34;
+select vdisk file=&#34;&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+&#34;&lt;/span&gt;@ &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Set-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Encoding ASCII
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n开始压缩 VHDX...&#34;&lt;/span&gt;
+diskpart &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;s &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:TEMP\compact-wsl.txt&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;Write-Host&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;`n压缩后大小：&#34;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Get-Item&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;LiteralPath &lt;span class=&#34;token variable&#34;&gt;$vhd&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;Select-Object&lt;/span&gt; FullName&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;@&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;Name=&lt;span class=&#34;token string&#34;&gt;&#34;SizeGB&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;Expression=&lt;span class=&#34;token punctuation&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;[math]&lt;/span&gt;::Round&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Length/1GB&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;}&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这版流程就是：先自动找到 Ubuntu-22.04 的 &lt;code&gt;ext4.vhdx&lt;/code&gt;，显示压缩前大小，执行 &lt;code&gt;fstrim&lt;/code&gt;，关闭 WSL，使用 DiskPart 压缩，最后显示压缩后大小。路径里的用户名和 GUID 都不需要手动输入，避免出错。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
