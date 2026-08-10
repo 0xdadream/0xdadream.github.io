@@ -1,0 +1,1163 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>閫愭ⅵ • Posts by &#34;pki&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 10 Aug 2026 03:35:00 +0800</pubDate>
+        <lastBuildDate>Mon, 10 Aug 2026 03:35:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
+        <category>ssh</category>
+        <category>cloudflare</category>
+        <category>tunnel</category>
+        <category>zero-trust</category>
+        <category>rdp</category>
+        <category>docker</category>
+        <category>chatgpt</category>
+        <category>openai</category>
+        <category>mcp</category>
+        <category>windows</category>
+        <category>agent</category>
+        <category>qwen</category>
+        <category>email</category>
+        <category>linux</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>tips</category>
+        <category>教程</category>
+        <category>ai</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>conda</category>
+        <category>bug</category>
+        <category>python</category>
+        <category>openssh</category>
+        <category>vscode</category>
+        <category>环境</category>
+        <category>net</category>
+        <category>wsl2</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>XGBoost</category>
+        <category>wsl</category>
+        <category>server</category>
+        <category>tools</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>emby</category>
+        <category>comfyui</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>google</category>
+        <category>git</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>php</category>
+        <category>文件上传</category>
+        <category>远程</category>
+        <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>证书</category>
+        <category>i春秋</category>
+        <category>certificate</category>
+        <category>pki</category>
+        <category>x509</category>
+        <category>tls</category>
+        <category>openssl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/</guid>
+            <title>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</title>
+            <link>https://0xdadream.github.io/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/</link>
+            <category>ssh</category>
+            <category>cloudflare</category>
+            <category>certificate</category>
+            <category>pki</category>
+            <category>x509</category>
+            <category>tls</category>
+            <category>openssl</category>
+            <pubDate>Mon, 10 Aug 2026 03:35:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书&#34;&gt;&lt;a href=&#34;#数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书&#34; class=&#34;headerlink&#34; title=&#34;数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书&#34;&gt;&lt;/a&gt;数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书&lt;/h1&gt;&lt;p&gt;很多人第一次接触“证书”是在 HTTPS：&lt;code&gt;cert.pem&lt;/code&gt;、&lt;code&gt;fullchain.pem&lt;/code&gt;、&lt;code&gt;privkey.pem&lt;/code&gt;；后来又会遇到 &lt;code&gt;.crt&lt;/code&gt;、&lt;code&gt;.cer&lt;/code&gt;、&lt;code&gt;.p12&lt;/code&gt;、&lt;code&gt;.pfx&lt;/code&gt;、&lt;code&gt;.jks&lt;/code&gt;、SSH Certificate、Android 签名证书、S/MIME、VPN 客户端证书，概念很快就混在一起。&lt;br&gt;这篇文章不按“后缀名背诵法”来讲，而是先建立一套统一模型，再把不同场景映射进去。只要理解下面这句话，后面的 TLS、SSH、代码签名、邮件和设备证书就都能串起来：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;私钥负责证明“我掌握这个身份能力”，公钥负责让别人验证；证书负责把公钥与身份、用途、期限和约束绑定起来；信任链负责回答“我为什么相信这个绑定”。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本文面向高校学习者，同时兼顾原理、命令和工程使用。示例中的域名、IP、组织名均为演示值，请勿直接照搬到生产环境。&lt;/p&gt;
+&lt;h2 id=&#34;一、先从最底层问题开始：为什么公钥还需要证书&#34;&gt;&lt;a href=&#34;#一、先从最底层问题开始：为什么公钥还需要证书&#34; class=&#34;headerlink&#34; title=&#34;一、先从最底层问题开始：为什么公钥还需要证书&#34;&gt;&lt;/a&gt;一、先从最底层问题开始：为什么公钥还需要证书&lt;/h2&gt;&lt;p&gt;假设服务器自己生成一对密钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Private Key  ──数学关系──&amp;gt;  Public Key
+   私钥                           公钥
+   保密                           可公开&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;私钥可以完成签名等只有持有者才能做的操作；公钥可以验证相应结果。但“这个公钥到底属于谁”并不会由数学关系自动给出。&lt;/p&gt;
+&lt;p&gt;如果一个服务器直接说：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;我是 example.com，这是我的公钥：ABC...&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;攻击者同样可以说：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;我是 example.com，这是我的公钥：EVIL...&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因此真正困难的是&lt;strong&gt;公钥与身份之间的可信绑定&lt;/strong&gt;。数字证书就是为解决这个问题出现的。&lt;/p&gt;
+&lt;p&gt;一张典型证书可以抽象为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Certificate
+├─ Subject：证书代表谁
+├─ Subject Public Key：主体公钥
+├─ Validity：有效期
+├─ Usage / Constraints：允许做什么、受到什么限制
+├─ Issuer：谁签发
+└─ Signature：签发者对证书正文的数字签名&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于 X.509，可以把待签部分理解成 &lt;code&gt;TBSCertificate&lt;/code&gt;（To Be Signed Certificate）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;signature = Sign(CA_Private_Key, Hash(TBSCertificate))&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证者使用 CA 公钥检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Verify(CA_Public_Key, Hash(TBSCertificate), signature)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;签名验证成功说明：证书内容在签发后没有被篡改，并且签名确实由对应 CA 私钥产生。但这&lt;strong&gt;仍然不等于证书已经可信&lt;/strong&gt;，因为还需要回答一个更重要的问题：&lt;strong&gt;我为什么相信这个 CA？&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二、PKI：把“我为什么相信它”变成一条可验证链&#34;&gt;&lt;a href=&#34;#二、PKI：把“我为什么相信它”变成一条可验证链&#34; class=&#34;headerlink&#34; title=&#34;二、PKI：把“我为什么相信它”变成一条可验证链&#34;&gt;&lt;/a&gt;二、PKI：把“我为什么相信它”变成一条可验证链&lt;/h2&gt;&lt;p&gt;PKI（Public Key Infrastructure，公钥基础设施）不是单独某个算法，而是一套围绕证书申请、签发、验证、分发、撤销和生命周期管理建立的信任体系。&lt;br&gt;典型 Web PKI 信任链如下：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;客户端 Trust Store
+        │ 预置信任
+        ▼
+     Root CA
+        │ 签发
+        ▼
+ Intermediate CA
+        │ 签发
+        ▼
+   Leaf Certificate
+   example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-1-Trust-Store-与-Trust-Anchor&#34;&gt;&lt;a href=&#34;#2-1-Trust-Store-与-Trust-Anchor&#34; class=&#34;headerlink&#34; title=&#34;2.1 Trust Store 与 Trust Anchor&#34;&gt;&lt;/a&gt;2.1 Trust Store 与 Trust Anchor&lt;/h3&gt;&lt;p&gt;Windows、macOS、Linux、Android、iOS、Java 或浏览器都有自己的信任存储。被直接信任的根通常称为 &lt;strong&gt;Trust Anchor（信任锚）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;因此“根证书可信”并不是因为它能自己给自己签名，而是因为操作系统、浏览器或管理员通过另一条可信渠道把它放进了 Trust Store。&lt;/p&gt;
+&lt;h3 id=&#34;2-2-为什么要有-Intermediate-CA&#34;&gt;&lt;a href=&#34;#2-2-为什么要有-Intermediate-CA&#34; class=&#34;headerlink&#34; title=&#34;2.2 为什么要有 Intermediate CA&#34;&gt;&lt;/a&gt;2.2 为什么要有 Intermediate CA&lt;/h3&gt;&lt;p&gt;理论上 Root CA 可以直接给所有网站签证书，但根私钥一旦泄露，整个信任体系都会受到影响。工程上通常让 Root CA 长期离线或保存在高安全级别 HSM 中，只负责签发少量 Intermediate CA；日常签发由中间 CA 完成。&lt;/p&gt;
+&lt;p&gt;这样即使某个 Intermediate CA 出问题，也可以单独停止或撤销它，而不必立即替换整个根。&lt;/p&gt;
+&lt;h3 id=&#34;2-3-Self-Signed-不等于“密码学上无效”&#34;&gt;&lt;a href=&#34;#2-3-Self-Signed-不等于“密码学上无效”&#34; class=&#34;headerlink&#34; title=&#34;2.3 Self-Signed 不等于“密码学上无效”&#34;&gt;&lt;/a&gt;2.3 Self-Signed 不等于“密码学上无效”&lt;/h3&gt;&lt;p&gt;Root Certificate 通常是 self-signed：&lt;code&gt;Issuer == Subject&lt;/code&gt;，并由自己的私钥签名。它的信任来自外部配置，而不是“自己证明自己”。&lt;/p&gt;
+&lt;p&gt;所以实验室里的私有 Root CA 完全可以是自签名的；真正的关键是：&lt;strong&gt;客户端是否通过可信渠道安装并信任这个根。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;三、X-509-证书里到底有什么&#34;&gt;&lt;a href=&#34;#三、X-509-证书里到底有什么&#34; class=&#34;headerlink&#34; title=&#34;三、X.509 证书里到底有什么&#34;&gt;&lt;/a&gt;三、X.509 证书里到底有什么&lt;/h2&gt;&lt;p&gt;X.509 是 TLS、S/MIME、很多 VPN、802.1X、Kubernetes 和企业设备证书中最常见的证书体系。查看证书：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.crt &lt;span class=&#34;token parameter variable&#34;&gt;-text&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重点字段可以先记成下面这张表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字段&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Subject&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;证书主体是谁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;谁签发了它&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Serial Number&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;签发者范围内的证书序列号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Not Before / Not After&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;生效与过期时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Subject Public Key Info&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;主体公钥和算法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Basic Constraints&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是否允许作为 CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Key Usage&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;公钥允许执行哪些基础密码学用途&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Extended Key Usage&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;允许用于 TLS Server、TLS Client、Code Signing 等什么场景&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Subject Alternative Name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;域名、IP、邮件地址等现代身份标识&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SKI / AKI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Subject/Authority Key Identifier，帮助识别密钥与签发关系&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Signature Algorithm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;CA 使用什么算法给证书签名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h3 id=&#34;3-1-SAN-比-CN-更重要&#34;&gt;&lt;a href=&#34;#3-1-SAN-比-CN-更重要&#34; class=&#34;headerlink&#34; title=&#34;3.1 SAN 比 CN 更重要&#34;&gt;&lt;/a&gt;3.1 SAN 比 CN 更重要&lt;/h3&gt;&lt;p&gt;现代 TLS 服务身份验证应看 &lt;code&gt;subjectAltName&lt;/code&gt;（SAN），而不是把 &lt;code&gt;Subject&lt;/code&gt; 中的 Common Name 当成域名验证的主要依据。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;X509v3 Subject Alternative Name:
+    DNS:example.com,
+    DNS:www.example.com,
+    IP Address:192.0.2.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果访问 &lt;code&gt;https://api.example.com&lt;/code&gt;，证书里就必须存在能够匹配它的相应 DNS 身份。直接访问 IP 时，也不能因为“这个 IP 正好指向那台服务器”就自动把 DNS SAN 当成 IP SAN 使用。&lt;/p&gt;
+&lt;p&gt;通配符也不是无限匹配：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;*.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通常可以匹配：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;api.example.com
+www.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但不能理解成同时自动覆盖：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;example.com
+a.b.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-2-Basic-Constraints：它到底是不是-CA&#34;&gt;&lt;a href=&#34;#3-2-Basic-Constraints：它到底是不是-CA&#34; class=&#34;headerlink&#34; title=&#34;3.2 Basic Constraints：它到底是不是 CA&#34;&gt;&lt;/a&gt;3.2 Basic Constraints：它到底是不是 CA&lt;/h3&gt;&lt;p&gt;CA 证书通常包含：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Basic Constraints: critical
+    CA:TRUE&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;普通服务器或客户端 Leaf Certificate 应是 &lt;code&gt;CA:FALSE&lt;/code&gt;。如果有 &lt;code&gt;pathlen:0&lt;/code&gt;，表示该 CA 下面不能再出现新的非 self-issued 中间 CA。&lt;/p&gt;
+&lt;h3 id=&#34;3-3-Key-Usage-与-Extended-Key-Usage&#34;&gt;&lt;a href=&#34;#3-3-Key-Usage-与-Extended-Key-Usage&#34; class=&#34;headerlink&#34; title=&#34;3.3 Key Usage 与 Extended Key Usage&#34;&gt;&lt;/a&gt;3.3 Key Usage 与 Extended Key Usage&lt;/h3&gt;&lt;p&gt;常见组合：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;CA：keyCertSign, cRLSign
+TLS Server：digitalSignature + serverAuth
+TLS Client：digitalSignature + clientAuth
+Code Signing：codeSigning
+S/MIME：emailProtection&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以“签名正确”只是第一步，证书用途不允许时，同样不应该拿来做对应认证。&lt;/p&gt;
+&lt;h3 id=&#34;3-4-验证证书不是只验证一个-Signature&#34;&gt;&lt;a href=&#34;#3-4-验证证书不是只验证一个-Signature&#34; class=&#34;headerlink&#34; title=&#34;3.4 验证证书不是只验证一个 Signature&#34;&gt;&lt;/a&gt;3.4 验证证书不是只验证一个 Signature&lt;/h3&gt;&lt;p&gt;完整证书路径验证至少会考虑：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;能否从 Leaf 构建到可信 Trust Anchor；&lt;/li&gt;
+&lt;li&gt;每一级签名是否正确；&lt;/li&gt;
+&lt;li&gt;当前时间是否处于有效期内；&lt;/li&gt;
+&lt;li&gt;目标域名/IP/身份是否匹配；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Basic Constraints&lt;/code&gt;、&lt;code&gt;Key Usage&lt;/code&gt;、&lt;code&gt;Extended Key Usage&lt;/code&gt; 是否允许当前用途；&lt;/li&gt;
+&lt;li&gt;路径长度、Name Constraints、Certificate Policies 等约束是否满足；&lt;/li&gt;
+&lt;li&gt;应用是否要求检查撤销状态、Certificate Transparency 或其他策略。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;因此：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;“这个证书的 CA 签名数学上正确”
+            ≠
+“这个证书现在可以被我用于 example.com 的 TLS 认证”&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OpenSSL 的 &lt;code&gt;X509_verify()&lt;/code&gt; 也只检查单张证书签名；真正做链验证应使用 &lt;code&gt;openssl verify&lt;/code&gt; 或相应的证书路径验证 API。&lt;/p&gt;
+&lt;h2 id=&#34;四、私钥、CSR-与证书签发到底是什么关系&#34;&gt;&lt;a href=&#34;#四、私钥、CSR-与证书签发到底是什么关系&#34; class=&#34;headerlink&#34; title=&#34;四、私钥、CSR 与证书签发到底是什么关系&#34;&gt;&lt;/a&gt;四、私钥、CSR 与证书签发到底是什么关系&lt;/h2&gt;&lt;p&gt;正常情况下，申请公开证书时&lt;strong&gt;不需要把私钥交给 CA&lt;/strong&gt;。流程是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;本地生成 Private Key
+        │
+        ├─&amp;gt; 推导 Public Key
+        │
+        └─&amp;gt; 生成 CSR
+                │
+                ▼
+              CA 验证申请
+                │
+                ▼
+           签发 Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CSR（Certificate Signing Request，常见为 PKCS #10）包含公钥、申请主体/扩展信息以及申请者对请求本身的签名，但不应该包含你的私钥。&lt;/p&gt;
+&lt;h2 id=&#34;五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS-一次分清&#34;&gt;&lt;a href=&#34;#五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS-一次分清&#34; class=&#34;headerlink&#34; title=&#34;五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS 一次分清&#34;&gt;&lt;/a&gt;五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS 一次分清&lt;/h2&gt;&lt;p&gt;理解证书文件时要先分开两个维度：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;“里面是什么数据结构？”
+        与
+“这个数据结构怎么编码/封装？”&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;扩展名往往只是约定，不能单独作为安全判断依据。&lt;/p&gt;
+&lt;h3 id=&#34;5-1-PEM：文本封装，不是“某一种证书”&#34;&gt;&lt;a href=&#34;#5-1-PEM：文本封装，不是“某一种证书”&#34; class=&#34;headerlink&#34; title=&#34;5.1 PEM：文本封装，不是“某一种证书”&#34;&gt;&lt;/a&gt;5.1 PEM：文本封装，不是“某一种证书”&lt;/h3&gt;&lt;p&gt;典型 PEM：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;-----BEGIN CERTIFICATE-----
+MIID...
+-----END CERTIFICATE-----&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PEM 中可以装很多不同对象，真正应该看 &lt;code&gt;BEGIN&lt;/code&gt; 后面的标签：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;BEGIN CERTIFICATE              → X.509 Certificate
+BEGIN PRIVATE KEY              → 常见 PKCS #8 Private Key
+BEGIN ENCRYPTED PRIVATE KEY    → 加密的 PKCS #8 Private Key
+BEGIN PUBLIC KEY               → Public Key
+BEGIN CERTIFICATE REQUEST      → CSR
+BEGIN X509 CRL                 → CRL&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以 &lt;code&gt;.pem&lt;/code&gt; &lt;strong&gt;既可能完全公开，也可能包含最高敏感级别的私钥&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;5-2-DER：二进制编码&#34;&gt;&lt;a href=&#34;#5-2-DER：二进制编码&#34; class=&#34;headerlink&#34; title=&#34;5.2 DER：二进制编码&#34;&gt;&lt;/a&gt;5.2 DER：二进制编码&lt;/h3&gt;&lt;p&gt;DER 是 ASN.1 的确定性二进制编码。用文本编辑器打开通常会看到乱码。&lt;/p&gt;
+&lt;p&gt;PEM 与 DER 常见转换：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; cert.pem &lt;span class=&#34;token parameter variable&#34;&gt;-outform&lt;/span&gt; DER &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; cert.der
+openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-inform&lt;/span&gt; DER &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; cert.der &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; cert.pem&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;5-3-crt-cer-key-是用途习惯，不是可靠编码声明&#34;&gt;&lt;a href=&#34;#5-3-crt-cer-key-是用途习惯，不是可靠编码声明&#34; class=&#34;headerlink&#34; title=&#34;5.3 .crt / .cer / .key 是用途习惯，不是可靠编码声明&#34;&gt;&lt;/a&gt;5.3 &lt;code&gt;.crt&lt;/code&gt; / &lt;code&gt;.cer&lt;/code&gt; / &lt;code&gt;.key&lt;/code&gt; 是用途习惯，不是可靠编码声明&lt;/h3&gt;&lt;p&gt;常见约定是：&lt;code&gt;.crt&lt;/code&gt;、&lt;code&gt;.cer&lt;/code&gt; 放证书，&lt;code&gt;.key&lt;/code&gt; 放私钥；但 &lt;code&gt;.crt/.cer&lt;/code&gt; 内部可能是 PEM，也可能是 DER，具体要看实际内容或让工具识别。&lt;/p&gt;
+&lt;h3 id=&#34;5-4-PKCS-12：-p12-pfx&#34;&gt;&lt;a href=&#34;#5-4-PKCS-12：-p12-pfx&#34; class=&#34;headerlink&#34; title=&#34;5.4 PKCS #12：.p12 / .pfx&#34;&gt;&lt;/a&gt;5.4 PKCS #12：&lt;code&gt;.p12&lt;/code&gt; / &lt;code&gt;.pfx&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;PKCS #12 可以把下面这些内容放进同一个受口令保护的容器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Private Key
++ Leaf Certificate
++ Intermediate Certificate(s)&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此 &lt;code&gt;.p12/.pfx&lt;/code&gt; 往往比单独 &lt;code&gt;.crt&lt;/code&gt; 敏感得多，应默认按“可能含私钥”处理。&lt;/p&gt;
+&lt;p&gt;导出：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl pkcs12 &lt;span class=&#34;token parameter variable&#34;&gt;-export&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-inkey&lt;/span&gt; server.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-certfile&lt;/span&gt; intermediate-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; server.p12&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看内容：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl pkcs12 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.p12 &lt;span class=&#34;token parameter variable&#34;&gt;-info&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-5-JKS、KeyStore-与-TrustStore&#34;&gt;&lt;a href=&#34;#5-5-JKS、KeyStore-与-TrustStore&#34; class=&#34;headerlink&#34; title=&#34;5.5 JKS、KeyStore 与 TrustStore&#34;&gt;&lt;/a&gt;5.5 JKS、KeyStore 与 TrustStore&lt;/h3&gt;&lt;p&gt;Java 生态常见 JKS 或 PKCS #12 KeyStore。理解时不要只记文件名：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;KeyStore   → “我是谁”：自己的 Private Key + Certificate Chain
+TrustStore → “我信谁”：信任的 Root/CA Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这两个概念也适用于 Windows Certificate Store、macOS Keychain、Linux CA Bundle 等其他平台。&lt;/p&gt;
+&lt;h3 id=&#34;5-6-cert-pem、chain-pem、fullchain-pem-怎么理解&#34;&gt;&lt;a href=&#34;#5-6-cert-pem、chain-pem、fullchain-pem-怎么理解&#34; class=&#34;headerlink&#34; title=&#34;5.6 cert.pem、chain.pem、fullchain.pem 怎么理解&#34;&gt;&lt;/a&gt;5.6 &lt;code&gt;cert.pem&lt;/code&gt;、&lt;code&gt;chain.pem&lt;/code&gt;、&lt;code&gt;fullchain.pem&lt;/code&gt; 怎么理解&lt;/h3&gt;&lt;p&gt;在 Web Server/ACME 场景中常见：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;cert.pem      → Leaf Certificate
+chain.pem     → Intermediate Certificate(s)
+fullchain.pem → cert.pem + chain.pem
+privkey.pem   → 与 Leaf 对应的 Private Key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;服务器通常应该发送 Leaf + Intermediate，而 Root 通常已经在客户端 Trust Store 中，没有必要跟着服务器重复发送。&lt;/p&gt;
+&lt;h3 id=&#34;5-7-文件速查表&#34;&gt;&lt;a href=&#34;#5-7-文件速查表&#34; class=&#34;headerlink&#34; title=&#34;5.7 文件速查表&#34;&gt;&lt;/a&gt;5.7 文件速查表&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文件/后缀&lt;/th&gt;
+&lt;th&gt;常见内容&lt;/th&gt;
+&lt;th&gt;默认敏感性&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.key&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Private Key&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.csr&lt;/code&gt; / &lt;code&gt;.req&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Certificate Signing Request&lt;/td&gt;
+&lt;td&gt;低&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.crt&lt;/code&gt; / &lt;code&gt;.cer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Certificate&lt;/td&gt;
+&lt;td&gt;通常公开&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.pem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;文本封装，内容不固定&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;必须看内容&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.der&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;DER 二进制编码对象&lt;/td&gt;
+&lt;td&gt;必须看内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.p12&lt;/code&gt; / &lt;code&gt;.pfx&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;PKCS #12，可含私钥和证书链&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.p7b&lt;/code&gt; / &lt;code&gt;.p7c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;PKCS #7/CMS 证书集合等&lt;/td&gt;
+&lt;td&gt;通常不含私钥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.jks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Java KeyStore&lt;/td&gt;
+&lt;td&gt;可能很高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;.pub&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;公钥（常见于 SSH）&lt;/td&gt;
+&lt;td&gt;公开&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;看到陌生文件时，最稳妥的做法不是猜后缀，而是先检查文件头、格式和对象类型。&lt;/p&gt;
+&lt;h2 id=&#34;六、完整实验：自己搭一条-Root-→-Intermediate-→-Server-证书链&#34;&gt;&lt;a href=&#34;#六、完整实验：自己搭一条-Root-→-Intermediate-→-Server-证书链&#34; class=&#34;headerlink&#34; title=&#34;六、完整实验：自己搭一条 Root → Intermediate → Server 证书链&#34;&gt;&lt;/a&gt;六、完整实验：自己搭一条 Root → Intermediate → Server 证书链&lt;/h2&gt;&lt;p&gt;下面用 OpenSSL 做一套最小但逻辑完整的实验 PKI。它适合学习，不是企业生产 CA 的完整运维模板；生产 CA 还需要数据库、序列号、撤销、审计、离线根、密钥保护和严格策略。&lt;/p&gt;
+&lt;h3 id=&#34;6-1-创建目录与-Root-CA&#34;&gt;&lt;a href=&#34;#6-1-创建目录与-Root-CA&#34; class=&#34;headerlink&#34; title=&#34;6.1 创建目录与 Root CA&#34;&gt;&lt;/a&gt;6.1 创建目录与 Root CA&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; cert-lab &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; cert-lab
+
+openssl genpkey &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-algorithm&lt;/span&gt; RSA &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-pkeyopt&lt;/span&gt; rsa_keygen_bits:3072 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; root-ca.key
+
+openssl req &lt;span class=&#34;token parameter variable&#34;&gt;-x509&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-new&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-days&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3650&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-key&lt;/span&gt; root-ca.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; root-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-subj&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/C=CN/O=Campus Lab/CN=Campus Lab Root CA&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-addext&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;basicConstraints=critical,CA:TRUE,pathlen:1&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-addext&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;keyUsage=critical,keyCertSign,cRLSign&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-addext&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;subjectKeyIdentifier=hash&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;root-ca.key  → Root Private Key，最高敏感
+root-ca.crt  → Root Certificate，可分发给需要信任它的客户端&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-2-创建-Intermediate-CA&#34;&gt;&lt;a href=&#34;#6-2-创建-Intermediate-CA&#34; class=&#34;headerlink&#34; title=&#34;6.2 创建 Intermediate CA&#34;&gt;&lt;/a&gt;6.2 创建 Intermediate CA&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl genpkey &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-algorithm&lt;/span&gt; RSA &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-pkeyopt&lt;/span&gt; rsa_keygen_bits:3072 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; intermediate-ca.key
+
+openssl req &lt;span class=&#34;token parameter variable&#34;&gt;-new&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-key&lt;/span&gt; intermediate-ca.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; intermediate-ca.csr &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-subj&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/C=CN/O=Campus Lab/CN=Campus Lab Intermediate CA&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建 &lt;code&gt;intermediate.ext&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token key attr-name&#34;&gt;basicConstraints&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;critical,CA:TRUE,pathlen:0&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;keyUsage&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;critical,keyCertSign,cRLSign&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;subjectKeyIdentifier&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;hash&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;authorityKeyIdentifier&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;keyid,issuer&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Root CA 签发 Intermediate：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-req&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; intermediate-ca.csr &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CA&lt;/span&gt; root-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAkey&lt;/span&gt; root-ca.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAcreateserial&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; intermediate-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-days&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1825&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-extfile&lt;/span&gt; intermediate.ext&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先验证中间 CA：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl verify &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAfile&lt;/span&gt; root-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  intermediate-ca.crt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;预期：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;intermediate-ca.crt: OK&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-3-创建-Server-Key-与-CSR&#34;&gt;&lt;a href=&#34;#6-3-创建-Server-Key-与-CSR&#34; class=&#34;headerlink&#34; title=&#34;6.3 创建 Server Key 与 CSR&#34;&gt;&lt;/a&gt;6.3 创建 Server Key 与 CSR&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl genpkey &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-algorithm&lt;/span&gt; RSA &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-pkeyopt&lt;/span&gt; rsa_keygen_bits:2048 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; server.key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;生成 CSR：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl req &lt;span class=&#34;token parameter variable&#34;&gt;-new&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-key&lt;/span&gt; server.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; server.csr &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-subj&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;/C=CN/O=Campus Lab/CN=demo.local&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建 &lt;code&gt;server.ext&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token key attr-name&#34;&gt;basicConstraints&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;critical,CA:FALSE&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;keyUsage&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;critical,digitalSignature,keyEncipherment&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;extendedKeyUsage&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;serverAuth&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;subjectAltName&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;DNS:demo.local,DNS:localhost,IP:127.0.0.1&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;subjectKeyIdentifier&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;hash&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;authorityKeyIdentifier&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;keyid,issuer&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由 Intermediate CA 签发：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-req&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.csr &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CA&lt;/span&gt; intermediate-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAkey&lt;/span&gt; intermediate-ca.key &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAcreateserial&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-out&lt;/span&gt; server.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-days&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;90&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-extfile&lt;/span&gt; server.ext&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证整条链：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl verify &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAfile&lt;/span&gt; root-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-untrusted&lt;/span&gt; intermediate-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  server.crt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;预期：&lt;code&gt;server.crt: OK&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;6-4-不只看-OK：继续检查-hostname、SAN-和用途&#34;&gt;&lt;a href=&#34;#6-4-不只看-OK：继续检查-hostname、SAN-和用途&#34; class=&#34;headerlink&#34; title=&#34;6.4 不只看 OK：继续检查 hostname、SAN 和用途&#34;&gt;&lt;/a&gt;6.4 不只看 &lt;code&gt;OK&lt;/code&gt;：继续检查 hostname、SAN 和用途&lt;/h3&gt;&lt;p&gt;验证 hostname：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl verify &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAfile&lt;/span&gt; root-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-untrusted&lt;/span&gt; intermediate-ca.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-verify_hostname&lt;/span&gt; demo.local &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  server.crt&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看 SAN：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.crt &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-ext&lt;/span&gt; subjectAltName&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看主体、签发者、序列号和时间：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.crt &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-subject&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-issuer&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-serial&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-dates&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-fingerprint&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-sha256&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-5-判断-Certificate-与-Private-Key-是否匹配&#34;&gt;&lt;a href=&#34;#6-5-判断-Certificate-与-Private-Key-是否匹配&#34; class=&#34;headerlink&#34; title=&#34;6.5 判断 Certificate 与 Private Key 是否匹配&#34;&gt;&lt;/a&gt;6.5 判断 Certificate 与 Private Key 是否匹配&lt;/h3&gt;&lt;p&gt;分别把证书和私钥中的公钥导出为 DER，再计算摘要：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.crt &lt;span class=&#34;token parameter variable&#34;&gt;-pubkey&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; openssl pkey &lt;span class=&#34;token parameter variable&#34;&gt;-pubin&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-outform&lt;/span&gt; DER &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; sha256sum
+
+openssl pkey &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; server.key &lt;span class=&#34;token parameter variable&#34;&gt;-pubout&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-outform&lt;/span&gt; DER &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; sha256sum&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;两个 SHA-256 值相同，说明它们对应同一把公钥。这种方法比只针对 RSA modulus 的老教程更通用。&lt;/p&gt;
+&lt;h2 id=&#34;七、HTTPS-TLS-中证书到底做了什么&#34;&gt;&lt;a href=&#34;#七、HTTPS-TLS-中证书到底做了什么&#34; class=&#34;headerlink&#34; title=&#34;七、HTTPS/TLS 中证书到底做了什么&#34;&gt;&lt;/a&gt;七、HTTPS/TLS 中证书到底做了什么&lt;/h2&gt;&lt;p&gt;最常见的误解是：“HTTPS 用证书公钥把整个网页加密”。现代 TLS 不是这样工作的。&lt;br&gt;以 TLS 1.3 为例，可以把过程简化为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Client                         Server
+  │                              │
+  ├──── ClientHello ────────────&amp;gt;│
+  │&amp;lt;─── ServerHello ─────────────┤
+  │      密钥协商                 │
+  │&amp;lt;─── Certificate ─────────────┤
+  │&amp;lt;─── CertificateVerify ───────┤
+  │&amp;lt;─── Finished ────────────────┤
+  ├──── Finished ───────────────&amp;gt;│
+  │                              │
+  └════ 对称加密应用数据 ════════┘&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里至少有两个不同问题：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Certificate：
+“这个公钥被可信 PKI 绑定给了 example.com。”
+
+CertificateVerify：
+“当前参与握手的服务器确实掌握这个证书对应的私钥。”&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;真正大量的 HTTP 数据使用握手导出的对称流量密钥和 AEAD 算法保护，而不是拿证书公钥逐包加密。&lt;/p&gt;
+&lt;h3 id=&#34;7-1-SNI-与-Certificate-是两回事&#34;&gt;&lt;a href=&#34;#7-1-SNI-与-Certificate-是两回事&#34; class=&#34;headerlink&#34; title=&#34;7.1 SNI 与 Certificate 是两回事&#34;&gt;&lt;/a&gt;7.1 SNI 与 Certificate 是两回事&lt;/h3&gt;&lt;p&gt;一台 IP 可以托管多个 HTTPS 站点。客户端通常通过 TLS 的 Server Name Indication（SNI）告诉服务器自己想访问哪个 hostname，服务器据此选择合适的证书。&lt;/p&gt;
+&lt;p&gt;所以排查远程 TLS 时建议：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl s_client &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-connect&lt;/span&gt; example.com:443 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-servername&lt;/span&gt; example.com &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-showcerts&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果漏掉 &lt;code&gt;-servername&lt;/code&gt;，多站点服务器可能给你另一张默认 Certificate，导致排错方向错误。&lt;/p&gt;
+&lt;h3 id=&#34;7-2-公网证书、DV-OV-EV-与-2026-年有效期变化&#34;&gt;&lt;a href=&#34;#7-2-公网证书、DV-OV-EV-与-2026-年有效期变化&#34; class=&#34;headerlink&#34; title=&#34;7.2 公网证书、DV/OV/EV 与 2026 年有效期变化&#34;&gt;&lt;/a&gt;7.2 公网证书、DV/OV/EV 与 2026 年有效期变化&lt;/h3&gt;&lt;p&gt;公有 Web PKI 中，DV/OV/EV 的主要区别是 CA 对 Subscriber 身份信息验证到什么程度，并不是“EV 使用更强加密算法”。&lt;/p&gt;
+&lt;p&gt;截至 &lt;strong&gt;2026-08-10&lt;/strong&gt;，CA/Browser Forum Baseline Requirements 已把 Public TLS Subscriber Certificate 的最大有效期缩短为：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;签发时间&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;最大有效期&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;2026-03-15 之前&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;398 天&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2026-03-15 ～ 2027-03-14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;200 天&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2027-03-15 ～ 2029-03-14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;100 天&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2029-03-15 起&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;47 天&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;这说明公有 TLS 的方向是&lt;strong&gt;更短证书生命周期 + 自动化续期&lt;/strong&gt;，而不是继续依赖人工一年一换。&lt;/p&gt;
+&lt;h3 id=&#34;7-3-ACME-为什么重要&#34;&gt;&lt;a href=&#34;#7-3-ACME-为什么重要&#34; class=&#34;headerlink&#34; title=&#34;7.3 ACME 为什么重要&#34;&gt;&lt;/a&gt;7.3 ACME 为什么重要&lt;/h3&gt;&lt;p&gt;ACME（RFC 8555）把域名控制验证、证书申请、签发和续期做成标准化协议。Let’s Encrypt、acme.sh、Certbot 等工具的核心价值就在于自动完成这套生命周期。&lt;/p&gt;
+&lt;p&gt;生产环境不要把“续期成功”理解成任务结束，还应该验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;新证书是否真正部署到目标路径
+服务是否 reload/restart 成功
+当前线上监听的证书是否已经切换
+完整 Intermediate Chain 是否正确
+监控是否能在过期前报警&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;八、mTLS：证书不只可以证明服务器&#34;&gt;&lt;a href=&#34;#八、mTLS：证书不只可以证明服务器&#34; class=&#34;headerlink&#34; title=&#34;八、mTLS：证书不只可以证明服务器&#34;&gt;&lt;/a&gt;八、mTLS：证书不只可以证明服务器&lt;/h2&gt;&lt;p&gt;普通 HTTPS 多数是客户端验证服务器；mTLS（Mutual TLS）则让双方都持有证书：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Client                           Server
+  │── 验证 Server Certificate ──&amp;gt;│
+  │&amp;lt;─ 验证 Client Certificate ───│&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;客户端证书常用于企业 API、微服务、数据库、VPN、设备认证和 Zero Trust 内部服务。&lt;br&gt;可以把 mTLS 配置里的三个文件直接翻译成人话：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;ca.pem          → 我信任谁签发的证书
+client-cert.pem → 我向对方声明的公开身份
+client-key.pem  → 我证明自己确实拥有这个身份的秘密&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;服务端也有类似的 &lt;code&gt;server-cert&lt;/code&gt; / &lt;code&gt;server-key&lt;/code&gt;。客户端证书通常还应具有合适的 &lt;code&gt;clientAuth&lt;/code&gt; EKU，而不是随便拿一张 server certificate 互换使用。&lt;/p&gt;
+&lt;p&gt;mTLS 与用户名密码最大的思维差异是：密码主要证明“你知道什么”，私钥认证则证明“你掌握什么密码学凭据”。实际系统还可以把证书中的 SAN、Subject、Serial Number 或自定义扩展映射为用户、设备和权限。&lt;/p&gt;
+&lt;h2 id=&#34;九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency&#34;&gt;&lt;a href=&#34;#九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency&#34; class=&#34;headerlink&#34; title=&#34;九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency&#34;&gt;&lt;/a&gt;九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency&lt;/h2&gt;&lt;h3 id=&#34;9-1-证书公开，私钥才是核心秘密&#34;&gt;&lt;a href=&#34;#9-1-证书公开，私钥才是核心秘密&#34; class=&#34;headerlink&#34; title=&#34;9.1 证书公开，私钥才是核心秘密&#34;&gt;&lt;/a&gt;9.1 证书公开，私钥才是核心秘密&lt;/h3&gt;&lt;p&gt;HTTPS Server Certificate 本来就会发送给客户端，因此别人拿到你的 &lt;code&gt;.crt&lt;/code&gt; 通常不是事故；真正危险的是 &lt;code&gt;server.key&lt;/code&gt;、包含私钥的 &lt;code&gt;.p12/.pfx&lt;/code&gt;，或者能够调用私钥签名能力的 Token/HSM 凭据。&lt;/p&gt;
+&lt;p&gt;如果私钥泄露，而证书还有几个月才过期，就需要撤销机制。&lt;/p&gt;
+&lt;h3 id=&#34;9-2-CRL-与-OCSP&#34;&gt;&lt;a href=&#34;#9-2-CRL-与-OCSP&#34; class=&#34;headerlink&#34; title=&#34;9.2 CRL 与 OCSP&#34;&gt;&lt;/a&gt;9.2 CRL 与 OCSP&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;CRL  → CA 发布“哪些 Serial Number 已撤销”的列表
+OCSP → 客户端/服务端向 Responder 查询某张证书当前状态&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OCSP Stapling 则允许 Web Server 预先取得 OCSP 响应，并在 TLS 握手时一起提供，减少客户端额外在线查询。&lt;/p&gt;
+&lt;p&gt;实际浏览器和操作系统如何处理 revocation、soft-fail、缓存等问题依赖具体平台策略，不要把“RFC 中存在 OCSP”简单理解成“所有浏览器每次访问都一定实时查询”。&lt;/p&gt;
+&lt;h3 id=&#34;9-3-Certificate-Transparency（CT）&#34;&gt;&lt;a href=&#34;#9-3-Certificate-Transparency（CT）&#34; class=&#34;headerlink&#34; title=&#34;9.3 Certificate Transparency（CT）&#34;&gt;&lt;/a&gt;9.3 Certificate Transparency（CT）&lt;/h3&gt;&lt;p&gt;CT 把公有 TLS 证书提交到可审计日志中，帮助域名所有者和安全研究者发现异常或误签证书。&lt;/p&gt;
+&lt;p&gt;它的重点不是“让 CA 永远无法误签”，而是让证书签发行为更公开、更容易被监控和审计。&lt;/p&gt;
+&lt;h2 id=&#34;十、SSH-Public-Key-与-SSH-Certificate-不要混为一谈&#34;&gt;&lt;a href=&#34;#十、SSH-Public-Key-与-SSH-Certificate-不要混为一谈&#34; class=&#34;headerlink&#34; title=&#34;十、SSH Public Key 与 SSH Certificate 不要混为一谈&#34;&gt;&lt;/a&gt;十、SSH Public Key 与 SSH Certificate 不要混为一谈&lt;/h2&gt;&lt;p&gt;平时执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;得到的 &lt;code&gt;id_ed25519.pub&lt;/code&gt; 只是 &lt;strong&gt;SSH Public Key&lt;/strong&gt;。把它写入远端 &lt;code&gt;authorized_keys&lt;/code&gt; 属于普通公钥认证，并不是 SSH Certificate。&lt;/p&gt;
+&lt;p&gt;OpenSSH 还支持自己的 Certificate 格式，它与 X.509 不同，但思想类似：服务器或客户端不再逐个信任所有终端公钥，而是信任一个 SSH CA。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;SSH CA Private Key
+       │ 签名
+       ▼
+Alice Public Key + 身份/有效期/Principal
+       │
+       ▼
+Alice SSH Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成 User CA：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; ssh_user_ca&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成 Alice Key：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; alice&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;签发 8 小时 User Certificate：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt; ssh_user_ca &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-I&lt;/span&gt; alice@campus &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; alice &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-V&lt;/span&gt; +8h &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  alice.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;会生成 &lt;code&gt;alice-cert.pub&lt;/code&gt;。其中 &lt;code&gt;-I&lt;/code&gt; 是 Certificate Identity，&lt;code&gt;-n&lt;/code&gt; 指定 principal，&lt;code&gt;-V&lt;/code&gt; 控制有效期。&lt;br&gt;服务器配置：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;TrustedUserCAKeys /etc/ssh/user_ca.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后服务器可以信任“由这个 SSH CA 签发、principal 合适且仍在有效期内”的用户证书，而不是在每台服务器上维护大量 &lt;code&gt;authorized_keys&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;OpenSSH 还支持 &lt;strong&gt;Host Certificate&lt;/strong&gt;，方向正好反过来：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;User Certificate → Server 验证用户
+Host Certificate → Client 验证服务器&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Host Certificate 可以让大量服务器由同一个 SSH Host CA 统一背书，避免每台客户端手工维护成百上千条 Host Key 信任关系。&lt;/p&gt;
+&lt;h3 id=&#34;10-1-SSH-Certificate-为什么适合短期凭据&#34;&gt;&lt;a href=&#34;#10-1-SSH-Certificate-为什么适合短期凭据&#34; class=&#34;headerlink&#34; title=&#34;10.1 SSH Certificate 为什么适合短期凭据&#34;&gt;&lt;/a&gt;10.1 SSH Certificate 为什么适合短期凭据&lt;/h3&gt;&lt;p&gt;OpenSSH Certificate 可以携带 principal、serial、Key ID、validity interval、critical options 和 extensions。因此企业可以做：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;用户登录 SSO
+   ↓
+通过策略审批
+   ↓
+签发 8 小时 SSH Certificate
+   ↓
+访问服务器
+   ↓
+自动过期&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这比复制多年有效的静态公钥更容易撤权、审计和自动化。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但要再次强调：&lt;strong&gt;OpenSSH Certificate 不是 X.509 Certificate。&lt;/strong&gt; 两者只是共享“CA 对公钥身份进行签名背书”这一思想。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;十一、代码签名证书：证明“这个程序是谁发布的”&#34;&gt;&lt;a href=&#34;#十一、代码签名证书：证明“这个程序是谁发布的”&#34; class=&#34;headerlink&#34; title=&#34;十一、代码签名证书：证明“这个程序是谁发布的”&#34;&gt;&lt;/a&gt;十一、代码签名证书：证明“这个程序是谁发布的”&lt;/h2&gt;&lt;p&gt;TLS 证书证明通信端点身份，代码签名则主要回答：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;这个程序是谁签的？
+签名后文件有没有被改过？
+签名者证书在签名策略下是否可信？&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;代码签名的核心可以抽象为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Program/File
+    │
+    ▼
+   Hash
+    │
+    ▼
+Sign with Publisher Private Key
+    │
+    ├── Digital Signature
+    └── Signing Certificate / Chain&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证者重新计算文件摘要并验证签名。如果文件在签名后被改动，摘要变化，验证就会失败。&lt;/p&gt;
+&lt;h3 id=&#34;11-1-Windows-Authenticode&#34;&gt;&lt;a href=&#34;#11-1-Windows-Authenticode&#34; class=&#34;headerlink&#34; title=&#34;11.1 Windows Authenticode&#34;&gt;&lt;/a&gt;11.1 Windows Authenticode&lt;/h3&gt;&lt;p&gt;Windows 常见的 &lt;code&gt;.exe&lt;/code&gt;、&lt;code&gt;.dll&lt;/code&gt;、&lt;code&gt;.msi&lt;/code&gt; 可以使用 Authenticode。Windows SDK 的 &lt;code&gt;signtool&lt;/code&gt; 支持签名、验证和时间戳，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;signtool sign `
+  &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;f signer&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;pfx `
+  &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;fd SHA256 `
+  app&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;signtool verify &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;pa &lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;v app&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生产签名还应使用可信时间戳服务。时间戳的价值在于：即使签名证书以后自然过期，验证者仍可以根据平台策略判断文件是否在证书有效时完成签名。&lt;/p&gt;
+&lt;h3 id=&#34;11-2-Android-App-Signing&#34;&gt;&lt;a href=&#34;#11-2-Android-App-Signing&#34; class=&#34;headerlink&#34; title=&#34;11.2 Android App Signing&#34;&gt;&lt;/a&gt;11.2 Android App Signing&lt;/h3&gt;&lt;p&gt;Android APK 安装和更新依赖应用签名身份。可以把它理解成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;旧版本由 Key A 合法签名
+        ↓
+新版本必须满足 Android 允许的同一签名身份/密钥轮换关系
+        ↓
+才能作为合法更新安装&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此 Android 的“签名证书”主要证明应用发布身份，而不是证明某个 HTTPS 域名。&lt;/p&gt;
+&lt;h3 id=&#34;11-3-Apple-Code-Signing&#34;&gt;&lt;a href=&#34;#11-3-Apple-Code-Signing&#34; class=&#34;headerlink&#34; title=&#34;11.3 Apple Code Signing&#34;&gt;&lt;/a&gt;11.3 Apple Code Signing&lt;/h3&gt;&lt;p&gt;Apple 平台同样依赖代码签名证书与私钥，但还会结合 Provisioning Profile、Entitlements、Developer Team 等平台策略。证书解决“谁签的”，平台策略再决定“这个签名身份允许以什么权限、在哪些环境运行”。&lt;/p&gt;
+&lt;p&gt;这也是一个重要规律：&lt;strong&gt;Certificate 负责身份绑定，但完整授权系统往往还会叠加额外 Policy。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”&#34;&gt;&lt;a href=&#34;#十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”&#34; class=&#34;headerlink&#34; title=&#34;十二、S/MIME 与 OpenPGP：邮件和个人身份中的“证书”&#34;&gt;&lt;/a&gt;十二、S/MIME 与 OpenPGP：邮件和个人身份中的“证书”&lt;/h2&gt;&lt;h3 id=&#34;12-1-S-MIME&#34;&gt;&lt;a href=&#34;#12-1-S-MIME&#34; class=&#34;headerlink&#34; title=&#34;12.1 S/MIME&#34;&gt;&lt;/a&gt;12.1 S/MIME&lt;/h3&gt;&lt;p&gt;S/MIME 使用 X.509/PKI 为邮件提供数字签名和加密。&lt;/p&gt;
+&lt;p&gt;签名邮件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Alice Mail
+   │ Hash
+   ▼
+Alice Private Key Sign
+   │
+   ▼
+Signature + Alice Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bob 通过 Alice Certificate 取得公钥并验证签名，可以检测邮件签名后是否被修改。&lt;/p&gt;
+&lt;p&gt;加密给 Bob 时，逻辑反过来：Alice 需要 Bob 的公开证书/公钥来保护发给 Bob 的内容或会话密钥，而 Bob 用自己的私钥解密。&lt;/p&gt;
+&lt;h3 id=&#34;12-2-OpenPGP-Certificate-不是-X-509-Certificate&#34;&gt;&lt;a href=&#34;#12-2-OpenPGP-Certificate-不是-X-509-Certificate&#34; class=&#34;headerlink&#34; title=&#34;12.2 OpenPGP Certificate 不是 X.509 Certificate&#34;&gt;&lt;/a&gt;12.2 OpenPGP Certificate 不是 X.509 Certificate&lt;/h3&gt;&lt;p&gt;OpenPGP 也使用 “Certificate” 这个术语，但数据结构和信任模型与 X.509 不同。它包含 Primary Key、User ID、Subkey、Certification Signature 等对象，并可使用直接验证指纹、组织策略、目录服务、TOFU 或传统 Web of Trust 等方式建立信任。&lt;/p&gt;
+&lt;p&gt;所以看到 &lt;code&gt;certificate&lt;/code&gt; 这个词时，第一件事应该问：&lt;strong&gt;它属于哪套协议和格式？&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;十三、VPN、802-1X、IoT、数据库和-Kubernetes-为什么也都在用证书&#34;&gt;&lt;a href=&#34;#十三、VPN、802-1X、IoT、数据库和-Kubernetes-为什么也都在用证书&#34; class=&#34;headerlink&#34; title=&#34;十三、VPN、802.1X、IoT、数据库和 Kubernetes 为什么也都在用证书&#34;&gt;&lt;/a&gt;十三、VPN、802.1X、IoT、数据库和 Kubernetes 为什么也都在用证书&lt;/h2&gt;&lt;p&gt;这些场景看起来完全不同，但本质仍然是“给机器、用户或服务一个可验证的公钥身份”。&lt;/p&gt;
+&lt;h3 id=&#34;13-1-VPN-与-802-1X-EAP-TLS&#34;&gt;&lt;a href=&#34;#13-1-VPN-与-802-1X-EAP-TLS&#34; class=&#34;headerlink&#34; title=&#34;13.1 VPN 与 802.1X / EAP-TLS&#34;&gt;&lt;/a&gt;13.1 VPN 与 802.1X / EAP-TLS&lt;/h3&gt;&lt;p&gt;企业 VPN 可以给每个用户或设备签一张 Client Certificate；802.1X 的 EAP-TLS 也可以让终端使用证书向网络接入系统证明身份。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Corporate Root / Device CA
+        │
+        ├── Alice-Laptop
+        ├── Bob-Phone
+        └── Lab-PC-017&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设备丢失时只撤销对应证书，不需要修改全公司的共享密码。&lt;/p&gt;
+&lt;h3 id=&#34;13-2-IoT-工业设备&#34;&gt;&lt;a href=&#34;#13-2-IoT-工业设备&#34; class=&#34;headerlink&#34; title=&#34;13.2 IoT / 工业设备&#34;&gt;&lt;/a&gt;13.2 IoT / 工业设备&lt;/h3&gt;&lt;p&gt;IoT 设备可以在制造或注册阶段写入独立 Private Key 与 Device Certificate，再通过 mTLS 与平台建立身份认证。&lt;/p&gt;
+&lt;p&gt;私钥最好位于 TPM、Secure Element 或其他难以导出的硬件中，而不是把同一把私钥复制到所有设备镜像。&lt;/p&gt;
+&lt;h3 id=&#34;13-3-数据库&#34;&gt;&lt;a href=&#34;#13-3-数据库&#34; class=&#34;headerlink&#34; title=&#34;13.3 数据库&#34;&gt;&lt;/a&gt;13.3 数据库&lt;/h3&gt;&lt;p&gt;数据库配置中的：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;ca.pem
+client-cert.pem
+client-key.pem&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;仍然分别回答：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;CA   → 我信任谁？
+Cert → 我向服务器声明什么身份？
+Key  → 我如何证明这个身份确实属于我？&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;13-4-Kubernetes&#34;&gt;&lt;a href=&#34;#13-4-Kubernetes&#34; class=&#34;headerlink&#34; title=&#34;13.4 Kubernetes&#34;&gt;&lt;/a&gt;13.4 Kubernetes&lt;/h3&gt;&lt;p&gt;&lt;code&gt;kubeconfig&lt;/code&gt; 中的 &lt;code&gt;certificate-authority-data&lt;/code&gt;、&lt;code&gt;client-certificate-data&lt;/code&gt;、&lt;code&gt;client-key-data&lt;/code&gt; 也是同一模型。Kubernetes 组件之间大量依赖 TLS 和 Client Certificate 建立服务/节点/用户身份，随后再叠加 RBAC 等授权策略。&lt;/p&gt;
+&lt;h2 id=&#34;十四、HSM、TPM、智能卡到底和证书是什么关系&#34;&gt;&lt;a href=&#34;#十四、HSM、TPM、智能卡到底和证书是什么关系&#34; class=&#34;headerlink&#34; title=&#34;十四、HSM、TPM、智能卡到底和证书是什么关系&#34;&gt;&lt;/a&gt;十四、HSM、TPM、智能卡到底和证书是什么关系&lt;/h2&gt;&lt;p&gt;HSM、TPM、Smart Card、Secure Element 本身不是“证书”，它们主要解决的是&lt;strong&gt;私钥如何安全生成、保存和使用&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;理想模型：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Application
+   │ 发送待签数据
+   ▼
+HSM / TPM / Smart Card
+   │ 私钥永不导出
+   │ 内部执行 Sign
+   ▼
+Signature&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Certificate 可以公开放在文件系统或目录服务里，而 Private Key 被限制在硬件内部。高价值 CA、代码签名、设备身份和企业用户证书都常采用这种思路。&lt;/p&gt;
+&lt;p&gt;因此证书体系最终的安全上限，很大程度取决于私钥保护：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不要把 Private Key 上传到 GitHub、公共网盘或聊天群；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.pfx/.p12&lt;/code&gt; 默认按“可能包含私钥”处理；&lt;/li&gt;
+&lt;li&gt;为可导出私钥设置合理的文件权限和加密口令；&lt;/li&gt;
+&lt;li&gt;高价值签名密钥优先使用不可导出的硬件密钥；&lt;/li&gt;
+&lt;li&gt;Root CA 应显著提高保护等级并减少在线使用频率；&lt;/li&gt;
+&lt;li&gt;建立轮换、备份、撤销、应急响应和审计方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;十五、OpenSSL-证书排错命令速查&#34;&gt;&lt;a href=&#34;#十五、OpenSSL-证书排错命令速查&#34; class=&#34;headerlink&#34; title=&#34;十五、OpenSSL 证书排错命令速查&#34;&gt;&lt;/a&gt;十五、OpenSSL 证书排错命令速查&lt;/h2&gt;&lt;p&gt;查看 Certificate：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl x509 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; cert.pem &lt;span class=&#34;token parameter variable&#34;&gt;-text&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 CSR：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl req &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; request.csr &lt;span class=&#34;token parameter variable&#34;&gt;-text&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 Private Key：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl pkey &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; private.key &lt;span class=&#34;token parameter variable&#34;&gt;-text&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查看远程 TLS 链：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl s_client &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-connect&lt;/span&gt; example.com:443 &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-servername&lt;/span&gt; example.com &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-showcerts&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;验证链与 hostname：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl verify &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-CAfile&lt;/span&gt; root.pem &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-untrusted&lt;/span&gt; intermediate.pem &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-verify_hostname&lt;/span&gt; example.com &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  server.pem&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看 PKCS #12：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;openssl pkcs12 &lt;span class=&#34;token parameter variable&#34;&gt;-in&lt;/span&gt; certificate.p12 &lt;span class=&#34;token parameter variable&#34;&gt;-info&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-noout&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;检查 PEM 第一行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; file.pem&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;常见输出：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;-----BEGIN CERTIFICATE-----
+-----BEGIN PRIVATE KEY-----
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+-----BEGIN CERTIFICATE REQUEST-----&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;15-1-unable-to-get-local-issuer-certificate&#34;&gt;&lt;a href=&#34;#15-1-unable-to-get-local-issuer-certificate&#34; class=&#34;headerlink&#34; title=&#34;15.1 unable to get local issuer certificate&#34;&gt;&lt;/a&gt;15.1 &lt;code&gt;unable to get local issuer certificate&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;常见原因是服务器没有提供 Intermediate Certificate，客户端无法从 Leaf 构建到自己的 Trust Anchor。&lt;/p&gt;
+&lt;p&gt;优先检查服务器实际发送的链，而不是把 Root Certificate 随便拼进 &lt;code&gt;fullchain.pem&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;15-2-hostname-mismatch&#34;&gt;&lt;a href=&#34;#15-2-hostname-mismatch&#34; class=&#34;headerlink&#34; title=&#34;15.2 hostname mismatch&#34;&gt;&lt;/a&gt;15.2 hostname mismatch&lt;/h3&gt;&lt;p&gt;先确认你访问的究竟是 DNS Name 还是 IP，再检查 SAN 中是否存在正确类型的标识。&lt;code&gt;CN=example.com&lt;/code&gt; 不能作为现代 TLS 配置里忽略 SAN 的理由。&lt;/p&gt;
+&lt;h3 id=&#34;15-3-Certificate-与-Private-Key-不匹配&#34;&gt;&lt;a href=&#34;#15-3-Certificate-与-Private-Key-不匹配&#34; class=&#34;headerlink&#34; title=&#34;15.3 Certificate 与 Private Key 不匹配&#34;&gt;&lt;/a&gt;15.3 Certificate 与 Private Key 不匹配&lt;/h3&gt;&lt;p&gt;典型表现是 Nginx/Apache/Java 启动时报 key mismatch、private key does not match certificate 等错误。不要凭文件名猜，直接按前文方式导出两边 Public Key 后比较 SHA-256。&lt;/p&gt;
+&lt;h3 id=&#34;15-4-curl-k-verify-False-为什么只能用于诊断&#34;&gt;&lt;a href=&#34;#15-4-curl-k-verify-False-为什么只能用于诊断&#34; class=&#34;headerlink&#34; title=&#34;15.4 curl -k / verify=False 为什么只能用于诊断&#34;&gt;&lt;/a&gt;15.4 &lt;code&gt;curl -k&lt;/code&gt; / &lt;code&gt;verify=False&lt;/code&gt; 为什么只能用于诊断&lt;/h3&gt;&lt;p&gt;关闭证书验证后，连接可能仍然“有加密”，但你失去了对通信对端身份的可靠确认：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Client ═TLS═ Attacker ═TLS═ Real Server&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;两段链路都可以是加密的，但客户端连接的可能已经不是预期服务器。&lt;/p&gt;
+&lt;p&gt;所以正确排错顺序应该是：先用 &lt;code&gt;-k&lt;/code&gt; 等手段短时确认“问题是否确实来自证书验证”，随后修复 CA、SAN、时间、完整链或 hostname，而不是把关闭验证作为永久方案。&lt;/p&gt;
+&lt;h3 id=&#34;15-5-时间错误也会制造“证书故障”&#34;&gt;&lt;a href=&#34;#15-5-时间错误也会制造“证书故障”&#34; class=&#34;headerlink&#34; title=&#34;15.5 时间错误也会制造“证书故障”&#34;&gt;&lt;/a&gt;15.5 时间错误也会制造“证书故障”&lt;/h3&gt;&lt;p&gt;证书有 &lt;code&gt;Not Before&lt;/code&gt; 与 &lt;code&gt;Not After&lt;/code&gt;。虚拟机、双系统、RTC、NTP 或容器宿主机时间明显错误时，完全正常的证书也可能显示“尚未生效”或“已经过期”。&lt;/p&gt;
+&lt;h2 id=&#34;十六、Certificate-Pinning：比普通-CA-信任更进一步&#34;&gt;&lt;a href=&#34;#十六、Certificate-Pinning：比普通-CA-信任更进一步&#34; class=&#34;headerlink&#34; title=&#34;十六、Certificate Pinning：比普通 CA 信任更进一步&#34;&gt;&lt;/a&gt;十六、Certificate Pinning：比普通 CA 信任更进一步&lt;/h2&gt;&lt;p&gt;普通 Web PKI 的模型大致是：只要证书能够通过受信任路径、hostname 和策略验证，就可以接受。&lt;/p&gt;
+&lt;p&gt;Pinning 则额外要求客户端只接受指定 Certificate 或指定 Public Key/SPKI。这可以缩小受信任范围，但也会带来证书/密钥轮换和灾难恢复风险。&lt;/p&gt;
+&lt;p&gt;因此做 Pinning 时至少要设计：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何轮换 Key；&lt;/li&gt;
+&lt;li&gt;新旧 Pin 如何平滑共存；&lt;/li&gt;
+&lt;li&gt;客户端长期不升级时怎么办；&lt;/li&gt;
+&lt;li&gt;Pin 配错以后如何恢复；&lt;/li&gt;
+&lt;li&gt;是否真的需要应用层 Pinning，而不是已经有足够的 Web PKI 与平台安全能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不要把“把当前证书 SHA-256 写死到代码里”当成完整的 Pinning 设计。&lt;/p&gt;
+&lt;h2 id=&#34;十七、最常见的错误理解&#34;&gt;&lt;a href=&#34;#十七、最常见的错误理解&#34; class=&#34;headerlink&#34; title=&#34;十七、最常见的错误理解&#34;&gt;&lt;/a&gt;十七、最常见的错误理解&lt;/h2&gt;&lt;h3 id=&#34;误区-1：Certificate-就是-Public-Key&#34;&gt;&lt;a href=&#34;#误区-1：Certificate-就是-Public-Key&#34; class=&#34;headerlink&#34; title=&#34;误区 1：Certificate 就是 Public Key&#34;&gt;&lt;/a&gt;误区 1：Certificate 就是 Public Key&lt;/h3&gt;&lt;p&gt;不对。Certificate &lt;strong&gt;包含&lt;/strong&gt; Public Key，同时还有身份、有效期、用途、限制、Issuer 和 CA Signature。&lt;/p&gt;
+&lt;h3 id=&#34;误区-2：证书必须保密&#34;&gt;&lt;a href=&#34;#误区-2：证书必须保密&#34; class=&#34;headerlink&#34; title=&#34;误区 2：证书必须保密&#34;&gt;&lt;/a&gt;误区 2：证书必须保密&lt;/h3&gt;&lt;p&gt;通常不对。证书本身设计为可公开分发；需要保密的是对应 Private Key。例外是证书文件周边可能包含隐私信息，但那是隐私管理问题，不是“证书必须像私钥一样保密”。&lt;/p&gt;
+&lt;h3 id=&#34;误区-3：-pem-一定是证书&#34;&gt;&lt;a href=&#34;#误区-3：-pem-一定是证书&#34; class=&#34;headerlink&#34; title=&#34;误区 3：.pem 一定是证书&#34;&gt;&lt;/a&gt;误区 3：&lt;code&gt;.pem&lt;/code&gt; 一定是证书&lt;/h3&gt;&lt;p&gt;不对。PEM 可以装 Certificate、Private Key、CSR、CRL 等不同对象。&lt;/p&gt;
+&lt;h3 id=&#34;误区-4：-crt-一定-PEM、-cer-一定-DER&#34;&gt;&lt;a href=&#34;#误区-4：-crt-一定-PEM、-cer-一定-DER&#34; class=&#34;headerlink&#34; title=&#34;误区 4：.crt 一定 PEM、.cer 一定 DER&#34;&gt;&lt;/a&gt;误区 4：&lt;code&gt;.crt&lt;/code&gt; 一定 PEM、&lt;code&gt;.cer&lt;/code&gt; 一定 DER&lt;/h3&gt;&lt;p&gt;不可靠。扩展名只是常见习惯，最终应检查实际编码和内容。&lt;/p&gt;
+&lt;h3 id=&#34;误区-5：HTTPS-用证书公钥直接加密整个网页&#34;&gt;&lt;a href=&#34;#误区-5：HTTPS-用证书公钥直接加密整个网页&#34; class=&#34;headerlink&#34; title=&#34;误区 5：HTTPS 用证书公钥直接加密整个网页&#34;&gt;&lt;/a&gt;误区 5：HTTPS 用证书公钥直接加密整个网页&lt;/h3&gt;&lt;p&gt;对现代 TLS 不准确。证书主要承担认证；TLS 握手建立会话密钥后，应用数据主要使用对称 AEAD 保护。&lt;/p&gt;
+&lt;h3 id=&#34;误区-6：Self-Signed-一定“不安全”&#34;&gt;&lt;a href=&#34;#误区-6：Self-Signed-一定“不安全”&#34; class=&#34;headerlink&#34; title=&#34;误区 6：Self-Signed 一定“不安全”&#34;&gt;&lt;/a&gt;误区 6：Self-Signed 一定“不安全”&lt;/h3&gt;&lt;p&gt;Self-Signed 的主要问题通常是缺少默认信任，而不是密码学签名天然失效。私有 PKI 中 Root CA 本身就经常是 self-signed。&lt;/p&gt;
+&lt;h3 id=&#34;误区-7：签名正确就代表整张证书可信&#34;&gt;&lt;a href=&#34;#误区-7：签名正确就代表整张证书可信&#34; class=&#34;headerlink&#34; title=&#34;误区 7：签名正确就代表整张证书可信&#34;&gt;&lt;/a&gt;误区 7：签名正确就代表整张证书可信&lt;/h3&gt;&lt;p&gt;不对。还必须考虑 Trust Chain、Validity、Identity、Constraints、Usage、Revocation 和应用策略。&lt;/p&gt;
+&lt;h3 id=&#34;误区-8：id-ed25519-pub-是-SSH-Certificate&#34;&gt;&lt;a href=&#34;#误区-8：id-ed25519-pub-是-SSH-Certificate&#34; class=&#34;headerlink&#34; title=&#34;误区 8：id_ed25519.pub 是 SSH Certificate&#34;&gt;&lt;/a&gt;误区 8：&lt;code&gt;id_ed25519.pub&lt;/code&gt; 是 SSH Certificate&lt;/h3&gt;&lt;p&gt;不对。它只是 OpenSSH Public Key；由 SSH CA 签发后的 &lt;code&gt;*-cert.pub&lt;/code&gt; 才是 OpenSSH Certificate。&lt;/p&gt;
+&lt;h3 id=&#34;误区-9：-pfx-只是另一种-crt&#34;&gt;&lt;a href=&#34;#误区-9：-pfx-只是另一种-crt&#34; class=&#34;headerlink&#34; title=&#34;误区 9：.pfx 只是另一种 .crt&#34;&gt;&lt;/a&gt;误区 9：&lt;code&gt;.pfx&lt;/code&gt; 只是另一种 &lt;code&gt;.crt&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;危险。PFX/PKCS #12 很可能同时包含 Certificate 和 Private Key。&lt;/p&gt;
+&lt;h2 id=&#34;十八、不同场景到底在证明什么&#34;&gt;&lt;a href=&#34;#十八、不同场景到底在证明什么&#34; class=&#34;headerlink&#34; title=&#34;十八、不同场景到底在证明什么&#34;&gt;&lt;/a&gt;十八、不同场景到底在证明什么&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;场景&lt;/th&gt;
+&lt;th&gt;证书/凭据主要证明什么&lt;/th&gt;
+&lt;th&gt;常见信任根&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;HTTPS&lt;/td&gt;
+&lt;td&gt;这个 TLS Server 是否代表目标域名/IP&lt;/td&gt;
+&lt;td&gt;Public/Private Root CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mTLS&lt;/td&gt;
+&lt;td&gt;Client 与 Server 双方身份&lt;/td&gt;
+&lt;td&gt;企业/服务 CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSH User Certificate&lt;/td&gt;
+&lt;td&gt;这个 SSH 用户公钥代表哪些 principal&lt;/td&gt;
+&lt;td&gt;SSH User CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSH Host Certificate&lt;/td&gt;
+&lt;td&gt;这个 Host Key 代表哪些主机名&lt;/td&gt;
+&lt;td&gt;SSH Host CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Windows Code Signing&lt;/td&gt;
+&lt;td&gt;程序发布者与文件完整性&lt;/td&gt;
+&lt;td&gt;Code Signing PKI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Android App Signing&lt;/td&gt;
+&lt;td&gt;App 的持续签名身份&lt;/td&gt;
+&lt;td&gt;App Signing Key/平台策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;S/MIME&lt;/td&gt;
+&lt;td&gt;邮件签名者/收件人公钥身份&lt;/td&gt;
+&lt;td&gt;S/MIME PKI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VPN / EAP-TLS&lt;/td&gt;
+&lt;td&gt;用户或设备身份&lt;/td&gt;
+&lt;td&gt;Enterprise CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IoT Device Certificate&lt;/td&gt;
+&lt;td&gt;独立设备身份&lt;/td&gt;
+&lt;td&gt;Device CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Kubernetes&lt;/td&gt;
+&lt;td&gt;Client/Server/Node 身份&lt;/td&gt;
+&lt;td&gt;Cluster CA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;以后遇到任何“证书问题”，优先问下面这些问题，而不是先搜索文件后缀：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;这是谁的 Certificate？&lt;/li&gt;
+&lt;li&gt;它属于 X.509、OpenSSH、OpenPGP 还是其他格式？&lt;/li&gt;
+&lt;li&gt;对应 Private Key 在哪里，由谁控制？&lt;/li&gt;
+&lt;li&gt;谁签发了它？&lt;/li&gt;
+&lt;li&gt;验证端为什么信任这个 Issuer？&lt;/li&gt;
+&lt;li&gt;完整 Certificate Chain 是什么？&lt;/li&gt;
+&lt;li&gt;SAN/Subject/Principal 表示的身份是什么？&lt;/li&gt;
+&lt;li&gt;Key Usage / EKU / Policy 允许它做什么？&lt;/li&gt;
+&lt;li&gt;什么时候生效、什么时候过期？&lt;/li&gt;
+&lt;li&gt;如何续期、轮换、撤销和审计？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;十九、把整套证书体系压缩成一张逻辑图&#34;&gt;&lt;a href=&#34;#十九、把整套证书体系压缩成一张逻辑图&#34; class=&#34;headerlink&#34; title=&#34;十九、把整套证书体系压缩成一张逻辑图&#34;&gt;&lt;/a&gt;十九、把整套证书体系压缩成一张逻辑图&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;          Trust Store
+              │
+              │ trust
+              ▼
+           Root CA
+              │ sign
+              ▼
+       Intermediate CA
+              │ sign
+              ▼
+       Leaf Certificate
+         │         │
+identity/usage     └── contains Public Key
+                        ▲
+                        │ key pair
+                        ▼
+                    Private Key
+                        │
+                        └── Sign / Proof of Possession&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后可以把全文记成六句话：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Private Key 是秘密能力，不应公开。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Public Key 可以公开，但单独的公钥不能自动证明身份。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Certificate 把 Public Key 与身份、用途、期限和约束绑定起来。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Issuer Signature 让这种绑定可以被密码学验证。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Trust Chain / Trust Store 决定你为什么相信 Issuer。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;真正的协议还要证明通信对端确实掌握 Certificate 对应的 Private Key。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以数字证书最本质的定义不是“用来加密的文件”，而是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;一个签发者用数字签名声明：这个 Public Key 在给定条件和用途下代表这个身份。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而 PKI 的任务，就是让这种声明能够大规模、自动化、可轮换、可撤销、可审计地被使用。&lt;/p&gt;
+&lt;h2 id=&#34;二十、Cloudflare-证书体系：Edge、Origin-CA、AOP-与-Tunnel&#34;&gt;&lt;a href=&#34;#二十、Cloudflare-证书体系：Edge、Origin-CA、AOP-与-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;二十、Cloudflare 证书体系：Edge、Origin CA、AOP 与 Tunnel&#34;&gt;&lt;/a&gt;二十、Cloudflare 证书体系：Edge、Origin CA、AOP 与 Tunnel&lt;/h2&gt;&lt;p&gt;Cloudflare 是理解“证书到底是谁出示给谁看”的一个非常好的现实案例。很多人会把浏览器看到的证书、Cloudflare Origin Certificate、Authenticated Origin Pull Certificate 混在一起，其实它们服务于不同方向的身份验证。&lt;/p&gt;
+&lt;p&gt;最典型的橙云反向代理链路可以先画成两段 TLS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   │
+   │ TLS ①：浏览器验证 Cloudflare
+   ▼
+Cloudflare Edge
+   │
+   │ TLS ②：Cloudflare 验证 Origin
+   ▼
+Origin Server&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;理解 Cloudflare 证书时，始终先问一句：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;这张 Certificate 是谁出示给谁看的？&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;20-1-Edge-Certificate：Cloudflare-出示给浏览器&#34;&gt;&lt;a href=&#34;#20-1-Edge-Certificate：Cloudflare-出示给浏览器&#34; class=&#34;headerlink&#34; title=&#34;20.1 Edge Certificate：Cloudflare 出示给浏览器&#34;&gt;&lt;/a&gt;20.1 Edge Certificate：Cloudflare 出示给浏览器&lt;/h3&gt;&lt;p&gt;假设访问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;https://blog.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当 DNS 记录开启 Cloudflare Proxy（橙云）后，浏览器首先连接的是 Cloudflare Edge。此时由 Cloudflare 向浏览器出示适用于 &lt;code&gt;blog.example.com&lt;/code&gt; 的 Edge Certificate。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   │
+   │ “你是否有资格代表 blog.example.com？”
+   ▼
+Cloudflare Edge
+   └── Edge Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cloudflare Universal SSL 就属于这一层。它解决的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser 如何验证 Cloudflare Edge
+确实能够代表目标公网域名提供 HTTPS&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以开启橙云后，即使源站上的证书完全不同，浏览器地址栏里看到的通常也是 Cloudflare Edge 使用的证书，而不是你 Nginx 上那张 Origin Certificate。&lt;/p&gt;
+&lt;h3 id=&#34;20-2-Origin-Certificate：Origin-出示给-Cloudflare&#34;&gt;&lt;a href=&#34;#20-2-Origin-Certificate：Origin-出示给-Cloudflare&#34; class=&#34;headerlink&#34; title=&#34;20.2 Origin Certificate：Origin 出示给 Cloudflare&#34;&gt;&lt;/a&gt;20.2 Origin Certificate：Origin 出示给 Cloudflare&lt;/h3&gt;&lt;p&gt;Cloudflare 接收到浏览器请求后，还要继续访问真正的源站：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare
+   │
+   │ “你真的是这个域名对应的 Origin 吗？”
+   ▼
+Origin Server
+   └── Origin Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果源站使用 Cloudflare Origin CA Certificate，那么逻辑是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare Origin CA
+        │ sign
+        ▼
+example.com / *.example.com
+Origin Certificate
+        │
+        └── 安装到 Nginx / Apache / Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nginx 常见配置形态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-nginx&#34; data-language=&#34;nginx&#34;&gt;&lt;code class=&#34;language-nginx&#34;&gt;&lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;ssl_certificate&lt;/span&gt;     /etc/nginx/ssl/origin.pem&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;token directive&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;ssl_certificate_key&lt;/span&gt; /etc/nginx/ssl/origin.key&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;origin.pem
+→ 可以公开的 Origin Certificate
+
+origin.key
+→ 对应 Private Key，必须保密&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这张证书的主要验证方是 Cloudflare，而不是普通浏览器。&lt;/p&gt;
+&lt;h3 id=&#34;20-3-为什么-Cloudflare-Origin-Certificate-直接访问时可能报不受信任&#34;&gt;&lt;a href=&#34;#20-3-为什么-Cloudflare-Origin-Certificate-直接访问时可能报不受信任&#34; class=&#34;headerlink&#34; title=&#34;20.3 为什么 Cloudflare Origin Certificate 直接访问时可能报不受信任&#34;&gt;&lt;/a&gt;20.3 为什么 Cloudflare Origin Certificate 直接访问时可能报不受信任&lt;/h3&gt;&lt;p&gt;假设源站 IP 为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;203.0.113.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;服务器只安装 Cloudflare Origin CA Certificate。正常橙云链路：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser → Cloudflare → Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以正常工作。&lt;/p&gt;
+&lt;p&gt;但如果绕过 Cloudflare：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser ─────────→ Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览器可能提示：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;certificate authority invalid&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原因不是证书“坏了”，而是验证者变了。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare Trust Policy
+→ 信任 Cloudflare Origin CA
+
+普通浏览器 Public Trust Store
+→ 不把 Cloudflare Origin CA 当作普通公网 WebPKI CA 使用&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这恰好说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;证书是否可信不是证书自己单方面决定的，而取决于验证端信任哪些 CA。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因此 Cloudflare Origin CA Certificate 更适合：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;源站只允许通过 Cloudflare Proxy 访问&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果源站还必须由普通浏览器直接访问，更适合使用 Let’s Encrypt 或其他公开受信任 CA 签发的证书。&lt;/p&gt;
+&lt;h3 id=&#34;20-4-Full-与-Full-strict-到底区别在哪&#34;&gt;&lt;a href=&#34;#20-4-Full-与-Full-strict-到底区别在哪&#34; class=&#34;headerlink&#34; title=&#34;20.4 Full 与 Full (strict) 到底区别在哪&#34;&gt;&lt;/a&gt;20.4 Full 与 Full (strict) 到底区别在哪&lt;/h3&gt;&lt;p&gt;把 Cloudflare 的 Encryption Mode 放回证书验证逻辑里就很好理解。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Full&lt;/code&gt; 可以抽象为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser ──HTTPS──&amp;gt; Cloudflare ──HTTPS──&amp;gt; Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重点是 Cloudflare 到 Origin 也使用 TLS，但对 Origin Certificate 的身份验证要求比较宽松。&lt;/p&gt;
+&lt;p&gt;而 &lt;code&gt;Full (strict)&lt;/code&gt; 可以理解为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;不仅要求 Cloudflare → Origin 使用 TLS
+还严格验证 Origin Certificate：
+
+- 是否在有效期内
+- 主机名是否匹配
+- 是否由受认可的 CA 签发
+- 证书链是否符合验证要求&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此条件允许时，更推荐：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare Proxy
++
+Full (strict)
++
+正确的 Origin Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果使用 Cloudflare Origin CA：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   │ Edge Certificate
+   ▼
+Cloudflare
+   │ Full (strict)
+   │ verify Origin Certificate
+   ▼
+Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果源站使用 Let’s Encrypt 等 Public CA Certificate，&lt;code&gt;Full (strict)&lt;/code&gt; 同样可以验证。&lt;/p&gt;
+&lt;h3 id=&#34;20-5-橙云和灰云为什么会影响证书要求&#34;&gt;&lt;a href=&#34;#20-5-橙云和灰云为什么会影响证书要求&#34; class=&#34;headerlink&#34; title=&#34;20.5 橙云和灰云为什么会影响证书要求&#34;&gt;&lt;/a&gt;20.5 橙云和灰云为什么会影响证书要求&lt;/h3&gt;&lt;p&gt;橙云（Proxied）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   ↓
+Cloudflare
+   ↓
+Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时可以非常自然地使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Edge：Cloudflare Universal SSL
+Origin：Cloudflare Origin CA Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;灰云（DNS Only）：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   ↓
+Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cloudflare 不再处于 TLS 数据路径中，浏览器直接验证源站 Certificate。&lt;/p&gt;
+&lt;p&gt;因此一个非常典型的故障现象是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;开橙云：HTTPS 正常
+关橙云：浏览器报证书不受信任&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果源站装的是 Cloudflare Origin CA Certificate，这个现象完全符合预期。&lt;/p&gt;
+&lt;h3 id=&#34;20-6-Authenticated-Origin-Pull：方向反过来了&#34;&gt;&lt;a href=&#34;#20-6-Authenticated-Origin-Pull：方向反过来了&#34; class=&#34;headerlink&#34; title=&#34;20.6 Authenticated Origin Pull：方向反过来了&#34;&gt;&lt;/a&gt;20.6 Authenticated Origin Pull：方向反过来了&lt;/h3&gt;&lt;p&gt;前面的 Origin Certificate 是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare 验证 Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但 Origin 也可以反过来要求：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;“访问我的这一方真的是 Cloudflare 吗？”&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这就是 Authenticated Origin Pull（AOP）体现的思路。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare                           Origin
+    │                                  │
+    │ &amp;lt;──── Origin Certificate ─────── │
+    │       CF 验证 Origin             │
+    │                                  │
+    │ ───── Client Certificate ──────&amp;gt; │
+    │       Origin 验证 Cloudflare     │&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以必须区分：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Origin CA Certificate
+→ Origin 出示给 Cloudflare
+
+AOP Client Certificate
+→ Cloudflare 出示给 Origin&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这已经非常接近 mTLS 的双向身份认证思想。&lt;/p&gt;
+&lt;h3 id=&#34;20-7-Cloudflare-Tunnel-又是哪一层&#34;&gt;&lt;a href=&#34;#20-7-Cloudflare-Tunnel-又是哪一层&#34; class=&#34;headerlink&#34; title=&#34;20.7 Cloudflare Tunnel 又是哪一层&#34;&gt;&lt;/a&gt;20.7 Cloudflare Tunnel 又是哪一层&lt;/h3&gt;&lt;p&gt;Cloudflare Tunnel 的结构通常变成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser
+   │ Edge TLS
+   ▼
+Cloudflare Edge
+   │
+   │ Cloudflare Tunnel
+   ▼
+cloudflared
+   │
+   ├── HTTP  → http://127.0.0.1:8080
+   │
+   └── HTTPS → https://internal.example:8443&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览器这一侧仍然使用 Cloudflare Edge Certificate。&lt;/p&gt;
+&lt;p&gt;但最后 &lt;code&gt;cloudflared → Origin Application&lt;/code&gt; 是否需要额外证书，取决于你配置的 Service URL。&lt;/p&gt;
+&lt;p&gt;如果是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一跳是 HTTP，本地应用本身不需要 TLS Certificate。&lt;/p&gt;
+&lt;p&gt;如果是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;https://internal.example:8443&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么最后一跳又产生一段新的 TLS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;cloudflared
+   │ verify certificate
+   ▼
+HTTPS Origin Application&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时应优先正确配置源站证书、CA 信任和 Origin Server Name，而不是为了“能连上”永久关闭证书验证。&lt;/p&gt;
+&lt;h3 id=&#34;20-8-Cloudflare-几种证书快速对照&#34;&gt;&lt;a href=&#34;#20-8-Cloudflare-几种证书快速对照&#34; class=&#34;headerlink&#34; title=&#34;20.8 Cloudflare 几种证书快速对照&#34;&gt;&lt;/a&gt;20.8 Cloudflare 几种证书快速对照&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;谁出示&lt;/th&gt;
+&lt;th&gt;谁验证&lt;/th&gt;
+&lt;th&gt;主要作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Edge / Universal SSL Certificate&lt;/td&gt;
+&lt;td&gt;Cloudflare Edge&lt;/td&gt;
+&lt;td&gt;Browser&lt;/td&gt;
+&lt;td&gt;证明公网域名身份&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Origin CA Certificate&lt;/td&gt;
+&lt;td&gt;Origin Server&lt;/td&gt;
+&lt;td&gt;Cloudflare&lt;/td&gt;
+&lt;td&gt;证明源站身份&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Public CA Origin Certificate&lt;/td&gt;
+&lt;td&gt;Origin Server&lt;/td&gt;
+&lt;td&gt;Cloudflare/Browser&lt;/td&gt;
+&lt;td&gt;源站 TLS，可直接被公网客户端信任&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AOP Client Certificate&lt;/td&gt;
+&lt;td&gt;Cloudflare&lt;/td&gt;
+&lt;td&gt;Origin Server&lt;/td&gt;
+&lt;td&gt;证明请求来自受信任的 Cloudflare 端&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mTLS Client Certificate&lt;/td&gt;
+&lt;td&gt;Client/Device&lt;/td&gt;
+&lt;td&gt;Cloudflare Edge&lt;/td&gt;
+&lt;td&gt;对客户端或设备做证书身份认证&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;因此 Cloudflare 证书体系可以压缩成下面三问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Browser：
+“Cloudflare，你是谁？”
+→ Edge Certificate
+
+Cloudflare：
+“Origin，你是谁？”
+→ Origin Certificate
+
+Origin：
+“Cloudflare，你是谁？”
+→ AOP Client Certificate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果以后在 Cloudflare Dashboard 看到新的 Certificate 功能，不需要先背名字，只需要判断：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;① 谁持有对应 Private Key？
+② 谁在握手中出示 Certificate？
+③ 谁负责验证它，以及验证方信任哪个 CA？&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要这三个问题回答清楚，Cloudflare 的 Edge、Origin、mTLS 和 Tunnel 证书逻辑基本就不会再混淆。&lt;/p&gt;
+&lt;h2 id=&#34;二十一、官方标准与延伸阅读&#34;&gt;&lt;a href=&#34;#二十一、官方标准与延伸阅读&#34; class=&#34;headerlink&#34; title=&#34;二十一、官方标准与延伸阅读&#34;&gt;&lt;/a&gt;二十一、官方标准与延伸阅读&lt;/h2&gt;&lt;p&gt;本文涉及的关键标准和官方资料如下，容易随时间变化的公有 TLS 规则以 &lt;strong&gt;2026-08-10&lt;/strong&gt; 查询结果为准：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc5280&#34;&gt;RFC 5280 — Internet X.509 PKI Certificate and CRL Profile&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc8446&#34;&gt;RFC 8446 — TLS 1.3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc9525&#34;&gt;RFC 9525 — Service Identity in TLS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc8555&#34;&gt;RFC 8555 — Automatic Certificate Management Environment (ACME)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc7468&#34;&gt;RFC 7468 — Textual Encodings of PKIX/PKCS/CMS Structures&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc7292&#34;&gt;RFC 7292 — PKCS #12&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rfc-editor.org/rfc/rfc9162&#34;&gt;RFC 9162 — Certificate Transparency Version 2.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.openssl.org/&#34;&gt;OpenSSL Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://man.openbsd.org/ssh-keygen&#34;&gt;OpenSSH ssh-keygen Manual — Certificates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cabforum.org/working-groups/server/baseline-requirements/requirements/&#34;&gt;CA/Browser Forum — TLS Baseline Requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/windows/win32/seccrypto/signtool&#34;&gt;Microsoft SignTool Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.android.com/studio/publish/app-signing&#34;&gt;Android App Signing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/ssl/edge-certificates/universal-ssl/&#34;&gt;Cloudflare Universal SSL / Edge Certificates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/&#34;&gt;Cloudflare Origin CA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full-strict/&#34;&gt;Cloudflare Full (strict)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/ssl/origin-configuration/authenticated-origin-pull/&#34;&gt;Cloudflare Authenticated Origin Pulls&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/origin-parameters/&#34;&gt;Cloudflare Tunnel Origin Parameters&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果只是临时查后缀，可以直接看本文第五章；如果真正遇到 HTTPS/SSH/代码签名故障，则建议从“&lt;strong&gt;身份 → 公钥 → 私钥 → Issuer → Trust Chain → Usage → Validity → Revocation/Policy&lt;/strong&gt;”这条链开始定位。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

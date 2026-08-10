@@ -1,0 +1,2265 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错, 閫愭ⅵ">
+    <meta name="description" content="从 SSH 客户端与服务端安装开始，完整讲清 Host Key、用户密钥、ssh-agent、~/.ssh/config、文件传输、VS Code Remote SSH、端口转发、跳板机、安全加固与系统化排错。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错 | 閫愭ⅵ</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="閫愭ⅵ" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">閫愭ⅵ</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">閫愭ⅵ</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ssh/">
+                                <span class="chip bg-color">ssh</span>
+                            </a>
+                        
+                            <a href="/tags/windows/">
+                                <span class="chip bg-color">windows</span>
+                            </a>
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                            <a href="/tags/openssh/">
+                                <span class="chip bg-color">openssh</span>
+                            </a>
+                        
+                            <a href="/tags/vscode/">
+                                <span class="chip bg-color">vscode</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                教程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-08-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-08-09
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    23 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="SSH-完整工作流程：从安装、密钥认证到-Config、隧道与排错"><a href="#SSH-完整工作流程：从安装、密钥认证到-Config、隧道与排错" class="headerlink" title="SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错"></a>SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</h1><p>SSH 用久了很容易只记住一句 <code>ssh user@ip</code>，真正遇到密钥、跳板机、端口转发、VS Code 或 <code>Permission denied</code> 时又开始逐个搜索。<br>这篇文章不只给命令，而是把 SSH 当成一条完整链路来理解：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">客户端 OpenSSH
+    │
+    ├── 读取 ~/.ssh/config
+    ├── 校验服务器 Host Key
+    ├── 使用密码 / 用户私钥认证
+    │
+    ▼
+网络：IP / 域名 / 端口 / NAT / 防火墙 / 跳板机
+    │
+    ▼
+服务端 sshd
+    ├── Host Key：证明“服务器是谁”
+    ├── authorized_keys：决定“谁能登录”
+    └── Shell / SFTP / 端口转发<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果这几个层次分清楚，大部分 SSH 问题都能按层定位，而不是靠反复改配置碰运气。</p>
+<blockquote>
+<p>本文以 Windows 11 作为常见客户端、Ubuntu/Debian 作为常见服务器，同时给出 Linux/macOS 客户端命令。命令中的 IP、域名、用户名和端口均为示例，请替换为自己的实际值。</p>
+</blockquote>
+<h2 id="一、先弄清-SSH-里到底有哪些东西"><a href="#一、先弄清-SSH-里到底有哪些东西" class="headerlink" title="一、先弄清 SSH 里到底有哪些东西"></a>一、先弄清 SSH 里到底有哪些东西</h2><p>OpenSSH 常见命令可以先记成下面这张表：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ssh</code></td>
+<td>登录远程主机、执行远程命令、建立隧道</td>
+</tr>
+<tr>
+<td><code>sshd</code></td>
+<td>SSH 服务端守护进程</td>
+</tr>
+<tr>
+<td><code>ssh-keygen</code></td>
+<td>生成和管理用户密钥、Host Key、指纹</td>
+</tr>
+<tr>
+<td><code>ssh-agent</code></td>
+<td>在本机内存中管理已解锁的私钥</td>
+</tr>
+<tr>
+<td><code>ssh-add</code></td>
+<td>把私钥加入 <code>ssh-agent</code></td>
+</tr>
+<tr>
+<td><code>ssh-keyscan</code></td>
+<td>获取远程主机公开的 Host Key</td>
+</tr>
+<tr>
+<td><code>scp</code></td>
+<td>通过 SSH/SFTP 复制文件</td>
+</tr>
+<tr>
+<td><code>sftp</code></td>
+<td>通过 SSH 进行交互式文件传输</td>
+</tr>
+</tbody></table>
+<p>还要区分三类经常被混淆的文件：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">客户端用户私钥：~/.ssh/id_ed25519_xxx
+客户端用户公钥：~/.ssh/id_ed25519_xxx.pub
+服务端授权列表：~/.ssh/authorized_keys
+客户端主机记录：~/.ssh/known_hosts
+服务端 Host Key：/etc/ssh/ssh_host_*_key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最重要的一条：<strong>用户私钥永远留在可信客户端，不需要上传到服务器。</strong></p>
+<h2 id="二、确认客户端是否已经有-OpenSSH"><a href="#二、确认客户端是否已经有-OpenSSH" class="headerlink" title="二、确认客户端是否已经有 OpenSSH"></a>二、确认客户端是否已经有 OpenSSH</h2><h3 id="Windows-11"><a href="#Windows-11" class="headerlink" title="Windows 11"></a>Windows 11</h3><p>PowerShell：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh <span class="token operator">-</span>V
+where<span class="token punctuation">.</span>exe ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Windows 10 1809 及之后的 Windows 可以把 OpenSSH Client/Server 作为系统可选功能安装。大多数 Windows 11 机器已经具备客户端；如果 <code>ssh</code> 不存在，可在“设置 → 系统 → 可选功能”中安装 <strong>OpenSSH Client</strong>。</p>
+<p>也可以用管理员 PowerShell 查看状态：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token punctuation">|</span> <span class="token function">Where-Object</span> Name <span class="token operator">-like</span> <span class="token string">'OpenSSH*'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Linux-macOS"><a href="#Linux-macOS" class="headerlink" title="Linux / macOS"></a>Linux / macOS</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-V</span>
+<span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> <span class="token function">ssh</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Ubuntu/Debian 如未安装客户端：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> openssh-client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>macOS 通常已自带 OpenSSH 客户端。</p>
+<h2 id="三、在-Linux-服务器安装并启动-sshd"><a href="#三、在-Linux-服务器安装并启动-sshd" class="headerlink" title="三、在 Linux 服务器安装并启动 sshd"></a>三、在 Linux 服务器安装并启动 sshd</h2><p>Ubuntu/Debian：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> openssh-server
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> <span class="token function">ssh</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>检查服务：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status <span class="token function">ssh</span> --no-pager
+ss <span class="token parameter variable">-lntp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':22'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>RHEL / Rocky / AlmaLinux / Fedora 常见写法：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> dnf <span class="token function">install</span> <span class="token parameter variable">-y</span> openssh-server
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> sshd
+systemctl status sshd --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>此时最基础的连接形式是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> user@192.0.2.10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果 SSH 不在 22 端口：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-p</span> <span class="token number">2222</span> user@192.0.2.10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>云服务器还要同时检查云厂商的安全组/防火墙规则。<code>sshd</code> 正在监听，并不代表公网一定能访问到它。</p>
+<h2 id="四、第一次连接最容易忽略的-Host-Key"><a href="#四、第一次连接最容易忽略的-Host-Key" class="headerlink" title="四、第一次连接最容易忽略的 Host Key"></a>四、第一次连接最容易忽略的 Host Key</h2><p>第一次连接新服务器时通常会看到：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">The authenticity of host 'server.example.com' can't be established.
+ED25519 key fingerprint is SHA256:...
+Are you sure you want to continue connecting (yes/no/[fingerprint])?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里验证的是<strong>服务器身份</strong>，不是你的用户登录密钥。</p>
+<p>最好先通过云厂商控制台、服务器本地终端或其他可信通道查看服务端 Ed25519 Host Key 指纹：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> ssh-keygen <span class="token parameter variable">-lf</span> /etc/ssh/ssh_host_ed25519_key.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>确认客户端看到的 <code>SHA256:...</code> 与服务器一致，再输入：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">yes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>记录随后会写入客户端：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">~/.ssh/known_hosts<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>以后同一主机的 Host Key 突然发生变化，SSH 会主动警告。这可能只是系统重装或容器重建，也可能意味着 DNS/IP 指向异常或中间人攻击，所以不要一看到报错就无脑删除 <code>known_hosts</code>。</p>
+<p>确认服务器确实重建并核对新指纹后，才清理旧记录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-R</span> server.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>非 22 端口的记录有时需要写成：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-R</span> <span class="token string">'[server.example.com]:2222'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="五、生成一把专用用户密钥"><a href="#五、生成一把专用用户密钥" class="headerlink" title="五、生成一把专用用户密钥"></a>五、生成一把专用用户密钥</h2><p>现在开始解决“客户端如何证明自己有权登录服务器”。</p>
+<p>对现代 OpenSSH 环境，个人服务器一般优先使用 Ed25519：</p>
+<h3 id="Windows-PowerShell"><a href="#Windows-PowerShell" class="headerlink" title="Windows PowerShell"></a>Windows PowerShell</h3><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh-keygen <span class="token operator">-</span>t ed25519 <span class="token operator">-</span>f <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab"</span> <span class="token operator">-</span>C <span class="token string">"windows-lab"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Linux-macOS-1"><a href="#Linux-macOS-1" class="headerlink" title="Linux / macOS"></a>Linux / macOS</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> ed25519 <span class="token parameter variable">-f</span> ~/.ssh/id_ed25519_lab <span class="token parameter variable">-C</span> <span class="token string">"laptop-lab"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>会生成：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">id_ed25519_lab       # 私钥：只能留在可信客户端
+id_ed25519_lab.pub   # 公钥：可以放到服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>建议给私钥设置一个<strong>口令（passphrase）</strong>，而不是为了所谓“免密登录”直接留空。真正方便的做法是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">私钥有口令
+    +
+ssh-agent 记住已解锁私钥
+    =
+日常连接不反复输入，同时私钥文件泄露后的风险更低<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>RSA 仍然有兼容性用途。如果必须连接老设备，可按设备支持情况另建 RSA 密钥，而不是把一个老 RSA 私钥复用到所有服务器。</p>
+<h2 id="六、把公钥安装到服务器"><a href="#六、把公钥安装到服务器" class="headerlink" title="六、把公钥安装到服务器"></a>六、把公钥安装到服务器</h2><p>Linux/macOS 客户端最方便的是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-copy-id <span class="token parameter variable">-i</span> ~/.ssh/id_ed25519_lab.pub user@server.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果端口不是 22：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-copy-id <span class="token parameter variable">-i</span> ~/.ssh/id_ed25519_lab.pub <span class="token parameter variable">-p</span> <span class="token number">2222</span> user@server.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Windows 默认没有 <code>ssh-copy-id</code>，可以先查看公钥：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Content</span> <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab.pub"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后通过云控制台或现有密码登录，把<strong>这一整行公钥</strong>追加到服务器：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/.ssh
+<span class="token function">chmod</span> <span class="token number">700</span> ~/.ssh
+<span class="token function">nano</span> ~/.ssh/authorized_keys
+<span class="token function">chmod</span> <span class="token number">600</span> ~/.ssh/authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>也可以在已经能够密码登录的 Unix 服务器上，从 Windows PowerShell 直接管道追加：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Content</span> <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab.pub"</span> <span class="token punctuation">|</span> ssh user@server<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com <span class="token string">"umask 077; mkdir -p ~/.ssh; cat &gt;&gt; ~/.ssh/authorized_keys"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>完成后先<strong>新开一个终端</strong>测试密钥登录，原来的服务器会话暂时不要关闭：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh <span class="token operator">-</span>i <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab"</span> user@server<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>只有这个新会话确认能正常登录后，再考虑关闭服务端密码认证。这样即使配置写错，也不至于立刻把自己锁在服务器外面。</p>
+<h2 id="七、用-ssh-agent-管理有口令的私钥"><a href="#七、用-ssh-agent-管理有口令的私钥" class="headerlink" title="七、用 ssh-agent 管理有口令的私钥"></a>七、用 ssh-agent 管理有口令的私钥</h2><h3 id="Windows-11-1"><a href="#Windows-11-1" class="headerlink" title="Windows 11"></a>Windows 11</h3><p>Windows 的 <code>ssh-agent</code> 服务默认可能没有启动。先用<strong>管理员 PowerShell</strong>执行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-Service</span> ssh-agent <span class="token punctuation">|</span> <span class="token function">Set-Service</span> <span class="token operator">-</span>StartupType Automatic
+<span class="token function">Start-Service</span> ssh-agent
+<span class="token function">Get-Service</span> ssh-agent<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后回到普通 PowerShell 加载私钥：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh-add <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab"</span>
+ssh-add <span class="token operator">-</span>l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>第一次执行 <code>ssh-add</code> 时输入私钥口令。后续 <code>ssh</code> 可以让 agent 代为完成签名，不必每次重新输入。</p>
+<p>删除某一把密钥：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh-add <span class="token operator">-</span>d <span class="token string">"<span class="token variable">$env</span>:USERPROFILE\.ssh\id_ed25519_lab"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>清空 agent：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh-add <span class="token operator">-</span>D<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Linux-macOS-2"><a href="#Linux-macOS-2" class="headerlink" title="Linux / macOS"></a>Linux / macOS</h3><p>很多桌面环境已经自动管理 agent。手动启动时可以：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">eval</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span>ssh-agent <span class="token parameter variable">-s</span><span class="token variable">)</span></span>"</span>
+ssh-add ~/.ssh/id_ed25519_lab
+ssh-add <span class="token parameter variable">-l</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>不要把“私钥没有口令”当成 ssh-agent 的替代品。两者解决的是不同问题：前者取消私钥本地保护，后者是在可信会话中暂存已解锁密钥。</p>
+<h2 id="八、真正应该长期使用的是-ssh-config"><a href="#八、真正应该长期使用的是-ssh-config" class="headerlink" title="八、真正应该长期使用的是 ~/.ssh/config"></a>八、真正应该长期使用的是 <code>~/.ssh/config</code></h2><p>命令越来越长时，不要每天这样连：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh <span class="token operator">-</span>p 2222 <span class="token operator">-</span>i C:\Users\me\<span class="token punctuation">.</span>ssh\id_ed25519_lab ubuntu@203<span class="token punctuation">.</span>0<span class="token punctuation">.</span>113<span class="token punctuation">.</span>10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>编辑客户端配置：</p>
+<p>Windows：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">C:\Users\你的用户名\.ssh\config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Linux/macOS：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">~/.ssh/config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>写入：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host lab
+    HostName 203.0.113.10
+    User ubuntu
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以后只需要：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>几个关键字段：</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Host</code></td>
+<td>本地别名，不必是真实域名</td>
+</tr>
+<tr>
+<td><code>HostName</code></td>
+<td>真正连接的 IP 或域名</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>远端用户名</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>SSH 服务端口</td>
+</tr>
+<tr>
+<td><code>IdentityFile</code></td>
+<td>指定用户私钥</td>
+</tr>
+<tr>
+<td><code>IdentitiesOnly yes</code></td>
+<td>只尝试显式配置的身份，避免 agent 中密钥太多</td>
+</tr>
+<tr>
+<td><code>ServerAliveInterval</code></td>
+<td>定期发送 SSH 层保活消息</td>
+</tr>
+<tr>
+<td><code>ServerAliveCountMax</code></td>
+<td>连续多少次无响应后断开</td>
+</tr>
+</tbody></table>
+<p>OpenSSH 客户端读取配置时，命令行参数优先于用户 <code>~/.ssh/config</code>，用户配置又优先于系统配置；同一参数通常使用<strong>最先得到的值</strong>。因此更具体的 <code>Host</code> 一般写在前面，<code>Host *</code> 默认项放后面。<br>想知道最终到底应用了什么配置，不要靠猜：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-G</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Windows PowerShell 过滤关键项：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh <span class="token operator">-</span>G lab <span class="token punctuation">|</span> <span class="token function">Select-String</span> <span class="token string">'hostname|user|port|identityfile|proxyjump|proxycommand'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令对排查“明明改了 config 为什么不生效”特别有用。</p>
+<h2 id="九、SSH-的常用连接方式"><a href="#九、SSH-的常用连接方式" class="headerlink" title="九、SSH 的常用连接方式"></a>九、SSH 的常用连接方式</h2><h3 id="1-交互式-Shell"><a href="#1-交互式-Shell" class="headerlink" title="1. 交互式 Shell"></a>1. 交互式 Shell</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-远程执行一条命令"><a href="#2-远程执行一条命令" class="headerlink" title="2. 远程执行一条命令"></a>2. 远程执行一条命令</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab <span class="token string">'hostname; whoami; uptime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-不分配伪终端"><a href="#3-不分配伪终端" class="headerlink" title="3. 不分配伪终端"></a>3. 不分配伪终端</h3><p>脚本或纯命令执行通常不需要 TTY：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab <span class="token string">'systemctl is-active nginx'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>某些命令确实需要终端环境时，再显式使用：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-t</span> lab <span class="token string">'top'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="十、文件传输：scp、sftp、rsync-怎么选"><a href="#十、文件传输：scp、sftp、rsync-怎么选" class="headerlink" title="十、文件传输：scp、sftp、rsync 怎么选"></a>十、文件传输：scp、sftp、rsync 怎么选</h2><h3 id="scp：一次性复制最方便"><a href="#scp：一次性复制最方便" class="headerlink" title="scp：一次性复制最方便"></a>scp：一次性复制最方便</h3><p>上传文件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">scp</span> ./demo.zip lab:~/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>下载文件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">scp</span> lab:~/result.log ./<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>递归复制目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">scp</span> <span class="token parameter variable">-r</span> ./project lab:~/project<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>现代 OpenSSH 的 <code>scp</code> 默认使用 SFTP 协议传输，但命令行习惯仍然保留 <code>scp</code> 形式。</p>
+<h3 id="sftp：交互式管理远程文件"><a href="#sftp：交互式管理远程文件" class="headerlink" title="sftp：交互式管理远程文件"></a>sftp：交互式管理远程文件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sftp</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>常用命令：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">pwd             查看远程目录
+lpwd            查看本地目录
+ls              列远程文件
+lls             列本地文件
+get file        下载
+put file        上传
+mkdir dir       创建远程目录
+exit            退出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="rsync：大量文件和增量同步更适合"><a href="#rsync：大量文件和增量同步更适合" class="headerlink" title="rsync：大量文件和增量同步更适合"></a>rsync：大量文件和增量同步更适合</h3><p>Linux/macOS 或 WSL 中，如果两端都有 <code>rsync</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rsync</span> <span class="token parameter variable">-azP</span> ./project/ lab:~/project/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>rsync</code> 更适合经常同步代码、数据集或备份，不需要每次把整个目录重传。</p>
+<h2 id="十一、VS-Code-Remote-SSH"><a href="#十一、VS-Code-Remote-SSH" class="headerlink" title="十一、VS Code Remote - SSH"></a>十一、VS Code Remote - SSH</h2><p>如果命令行已经可以：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>那么 VS Code Remote - SSH 通常不需要再维护另一套服务器参数，它直接读取 OpenSSH 的 <code>~/.ssh/config</code>。</p>
+<p>安装微软的 <strong>Remote - SSH</strong> 扩展后：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">F1 / Ctrl+Shift+P
+→ Remote-SSH: Connect to Host...
+→ lab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果 VS Code 失败，第一步仍然应该回到终端执行：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh <span class="token operator">-</span>vvv lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>先证明底层 OpenSSH 能连接，再处理 VS Code 自己的 Server 安装、代理或远端环境问题。</p>
+<h2 id="十二、服务端安全加固：先验证密钥，再关闭密码"><a href="#十二、服务端安全加固：先验证密钥，再关闭密码" class="headerlink" title="十二、服务端安全加固：先验证密钥，再关闭密码"></a>十二、服务端安全加固：先验证密钥，再关闭密码</h2><p>Ubuntu 支持直接编辑：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">/etc/ssh/sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也支持使用：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">/etc/ssh/sshd_config.d/*.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果系统已经通过 cloud-init、镜像厂商或其他配置片段设置过同一选项，要先检查实际加载顺序。OpenSSH 对大量配置项采用“先得到的值生效”的规则，因此不要想当然地认为文件名 <code>99-xxx.conf</code> 一定能覆盖前面的设置。</p>
+<p>先看配置语法：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> sshd <span class="token parameter variable">-t</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>再查看最终有效配置：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> sshd <span class="token parameter variable">-T</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-Ei</span> <span class="token string">'passwordauthentication|pubkeyauthentication|permitrootlogin|port|listenaddress'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>确认公钥登录已经成功后，常见的安全基线可以是：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin prohibit-password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果业务根本不需要 root 直接 SSH，进一步使用：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">PermitRootLogin no<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改后不要直接关闭当前 SSH 会话。先检查：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> sshd <span class="token parameter variable">-t</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>无输出通常表示语法通过，然后重载/重启：</p>
+<p>Ubuntu/Debian：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart <span class="token function">ssh</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>RHEL 系：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> systemctl restart sshd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>保持旧会话不动，再从另一个终端执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>只有新连接也成功，才算本轮配置真正安全落地。</p>
+<h2 id="十三、本地端口转发：访问“只在远端本机开放”的服务"><a href="#十三、本地端口转发：访问“只在远端本机开放”的服务" class="headerlink" title="十三、本地端口转发：访问“只在远端本机开放”的服务"></a>十三、本地端口转发：访问“只在远端本机开放”的服务</h2><p>假设远端 PostgreSQL 只监听：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:5432<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>本地执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-N</span> <span class="token parameter variable">-L</span> <span class="token number">127.0</span>.0.1:15432:127.0.0.1:5432 lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>链路是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">本机 127.0.0.1:15432
+        │
+        │ SSH 加密连接
+        ▼
+远端 SSH Server
+        │
+        ▼
+远端 127.0.0.1:5432<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>之后本地数据库客户端直接连接：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:15432<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里显式绑定 <code>127.0.0.1</code>，避免把转发端口意外暴露给局域网其他设备。</p>
+<p>更适合长期使用的 config：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host lab-db
+    HostName 203.0.113.10
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_lab
+    LocalForward 127.0.0.1:15432 127.0.0.1:5432
+    ExitOnForwardFailure yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>只建立隧道、不打开 Shell：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-N</span> lab-db<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="十四、远程端口转发：把“本地服务”送到远端"><a href="#十四、远程端口转发：把“本地服务”送到远端" class="headerlink" title="十四、远程端口转发：把“本地服务”送到远端"></a>十四、远程端口转发：把“本地服务”送到远端</h2><p>假设你的本机运行开发服务：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:3000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>希望远端服务器自己的 <code>127.0.0.1:8080</code> 能访问它：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-N</span> <span class="token parameter variable">-R</span> <span class="token number">127.0</span>.0.1:8080:127.0.0.1:3000 lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>链路是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">远端 127.0.0.1:8080 → SSH → 本机 127.0.0.1:3000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果想让远端其他机器也访问这个反向端口，会涉及 <code>GatewayPorts</code>、监听地址以及服务端防火墙，暴露范围明显扩大。除非明确知道自己在做什么，否则优先保持 <code>127.0.0.1</code>。</p>
+<h2 id="十五、动态转发：把-SSH-当-SOCKS-代理"><a href="#十五、动态转发：把-SSH-当-SOCKS-代理" class="headerlink" title="十五、动态转发：把 SSH 当 SOCKS 代理"></a>十五、动态转发：把 SSH 当 SOCKS 代理</h2><p>本地建立 SOCKS5 代理：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-N</span> <span class="token parameter variable">-D</span> <span class="token number">127.0</span>.0.1:1080 lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后把支持 SOCKS5 的应用指向：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:1080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>应用的 TCP 流量会经过 SSH 到远端，再由远端访问目标地址。</p>
+<p>这适合临时调试、访问远端网络中的 Web 服务等场景，但它不是 VPN，也不会自动接管系统全部流量。</p>
+<h2 id="十六、跳板机-ProxyJump：访问内网服务器"><a href="#十六、跳板机-ProxyJump：访问内网服务器" class="headerlink" title="十六、跳板机 ProxyJump：访问内网服务器"></a>十六、跳板机 ProxyJump：访问内网服务器</h2><p>典型结构：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">本机
+ │
+ ▼
+bastion.example.com      公网跳板机
+ │
+ ▼
+10.0.0.20                内网服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>命令行可以直接：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-J</span> bastion.example.com user@10.0.0.20<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>更推荐写进 config：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host bastion
+    HostName bastion.example.com
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_bastion
+    IdentitiesOnly yes
+
+Host internal
+    HostName 10.0.0.20
+    User dev
+    IdentityFile ~/.ssh/id_ed25519_internal
+    IdentitiesOnly yes
+    ProxyJump bastion<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以后：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> internal
+<span class="token function">scp</span> ./file internal:~/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>VS Code Remote - SSH 也可以直接使用 <code>internal</code>。</p>
+<h3 id="不要为了跳板机默认开启-Agent-Forwarding"><a href="#不要为了跳板机默认开启-Agent-Forwarding" class="headerlink" title="不要为了跳板机默认开启 Agent Forwarding"></a>不要为了跳板机默认开启 Agent Forwarding</h3><p><code>ProxyJump</code> 并不等于 <code>ForwardAgent yes</code>。通常客户端可以通过跳板机建立传输通道，然后直接向目标服务器完成认证，不需要把本地 agent 暴露给跳板机。</p>
+<p>所以不要在全局配置里随手写：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host *
+    ForwardAgent yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>只有确实需要并且信任中间主机时，再对具体主机启用 agent forwarding。</p>
+<h2 id="十七、ProxyCommand：SSH-不一定要直接连目标端口"><a href="#十七、ProxyCommand：SSH-不一定要直接连目标端口" class="headerlink" title="十七、ProxyCommand：SSH 不一定要直接连目标端口"></a>十七、ProxyCommand：SSH 不一定要直接连目标端口</h2><p>很多特殊网络方案会让 <code>ssh.exe</code> 把底层字节流交给另一个程序，例如 Cloudflare Access、HTTP CONNECT 代理或其他隧道客户端。</p>
+<p>典型结构：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host tunnel-host
+    HostName ssh.example.com
+    User root
+    IdentityFile ~/.ssh/id_ed25519_tunnel
+    IdentitiesOnly yes
+    ProxyCommand cloudflared access ssh --hostname %h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这时 SSH 的认证、Host Key、<code>scp</code>、<code>sftp</code> 等上层逻辑仍然由 OpenSSH 处理，只是“怎么到达远端 sshd”改成了 <code>ProxyCommand</code>。</p>
+<p>因此排错时必须把问题区分成：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">ProxyCommand 是否能建链
+        ↓
+能否看到 SSH Banner / 完成握手
+        ↓
+Host Key 是否通过
+        ↓
+用户公钥认证是否通过<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>不要把“网络隧道已经连通”和“SSH 用户已经认证成功”当成同一件事。</p>
+<h2 id="十八、系统化排错：先确定失败在哪一层"><a href="#十八、系统化排错：先确定失败在哪一层" class="headerlink" title="十八、系统化排错：先确定失败在哪一层"></a>十八、系统化排错：先确定失败在哪一层</h2><p>SSH 最有价值的排错命令是：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-vvv</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>调试时建议按下面顺序判断。</p>
+<h3 id="1-客户端配置有没有读对"><a href="#1-客户端配置有没有读对" class="headerlink" title="1. 客户端配置有没有读对"></a>1. 客户端配置有没有读对</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-G</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重点看：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">hostname
+user
+port
+identityfile
+proxyjump
+proxycommand<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-DNS-IP-端口能不能到达"><a href="#2-DNS-IP-端口能不能到达" class="headerlink" title="2. DNS/IP/端口能不能到达"></a>2. DNS/IP/端口能不能到达</h3><p>Windows PowerShell：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Resolve-DnsName</span> server<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com
+<span class="token function">Test-NetConnection</span> server<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com <span class="token operator">-</span>Port 22<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Linux/macOS：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">getent hosts server.example.com <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">||</span> <span class="token function">nslookup</span> server.example.com
+<span class="token function">nc</span> <span class="token parameter variable">-vz</span> server.example.com <span class="token number">22</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果这里就是超时，先查路由、安全组、防火墙、NAT、端口映射或代理，不要先折腾用户密钥。</p>
+<h3 id="3-服务端-sshd-是否真的在监听"><a href="#3-服务端-sshd-是否真的在监听" class="headerlink" title="3. 服务端 sshd 是否真的在监听"></a>3. 服务端 sshd 是否真的在监听</h3><p>服务器控制台：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status <span class="token function">ssh</span> --no-pager <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">||</span> systemctl status sshd --no-pager
+ss <span class="token parameter variable">-lntp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-E</span> <span class="token string">':22|:2222'</span>
+<span class="token function">sudo</span> sshd <span class="token parameter variable">-t</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>Ubuntu 日志：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> journalctl <span class="token parameter variable">-u</span> <span class="token function">ssh</span> <span class="token parameter variable">-n</span> <span class="token number">100</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>RHEL 系常用：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> journalctl <span class="token parameter variable">-u</span> sshd <span class="token parameter variable">-n</span> <span class="token number">100</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-已握手，但出现-Permission-denied-publickey"><a href="#4-已握手，但出现-Permission-denied-publickey" class="headerlink" title="4. 已握手，但出现 Permission denied (publickey)"></a>4. 已握手，但出现 <code>Permission denied (publickey)</code></h3><p>这说明网络和 SSH 协议层通常已经通了，重点查<strong>用户认证</strong>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">whoami</span>
+<span class="token function">ls</span> <span class="token parameter variable">-ld</span> ~ ~/.ssh
+<span class="token function">ls</span> <span class="token parameter variable">-l</span> ~/.ssh/authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>常见 Unix 权限：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">700</span> ~/.ssh
+<span class="token function">chmod</span> <span class="token number">600</span> ~/.ssh/authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>客户端确认自己到底在试哪把密钥：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-vvv</span> lab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或者直接强制：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> <span class="token parameter variable">-o</span> <span class="token assign-left variable">IdentitiesOnly</span><span class="token operator">=</span>yes <span class="token parameter variable">-i</span> ~/.ssh/id_ed25519_lab user@server.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="5-Too-many-authentication-failures"><a href="#5-Too-many-authentication-failures" class="headerlink" title="5. Too many authentication failures"></a>5. <code>Too many authentication failures</code></h3><p>这通常不是“密码输错太多”，而是本地 agent 里装了很多密钥，服务器在正确密钥出现前已经达到认证尝试上限。</p>
+<p>解决：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host lab
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="6-Connection-refused"><a href="#6-Connection-refused" class="headerlink" title="6. Connection refused"></a>6. <code>Connection refused</code></h3><p>通常表示已经到达目标主机，但目标端口没有服务监听，常见原因：</p>
+<ul>
+<li><code>sshd</code> 没启动；</li>
+<li>端口写错；</li>
+<li>sshd 只监听了其他地址；</li>
+<li>防火墙明确拒绝连接。</li>
+</ul>
+<h3 id="7-Connection-timed-out"><a href="#7-Connection-timed-out" class="headerlink" title="7. Connection timed out"></a>7. <code>Connection timed out</code></h3><p>更偏向网络路径问题：</p>
+<ul>
+<li>公网 IP/域名错误；</li>
+<li>云安全组没有放行；</li>
+<li>路由器没有端口映射；</li>
+<li>NAT 后主机不可直接入站；</li>
+<li>出入口防火墙丢弃数据包；</li>
+<li>网络封锁了目标端口。</li>
+</ul>
+<h3 id="8-REMOTE-HOST-IDENTIFICATION-HAS-CHANGED"><a href="#8-REMOTE-HOST-IDENTIFICATION-HAS-CHANGED" class="headerlink" title="8. REMOTE HOST IDENTIFICATION HAS CHANGED"></a>8. <code>REMOTE HOST IDENTIFICATION HAS CHANGED</code></h3><p>先问自己：服务器是否刚重装、容器是否重建、IP 是否重新分配、域名是否改了后端？</p>
+<p>在服务端可信控制台重新查看指纹：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> ssh-keygen <span class="token parameter variable">-lf</span> /etc/ssh/ssh_host_ed25519_key.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>确认变化合理后再删除客户端旧记录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-R</span> server.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后重新连接并核对新指纹。</p>
+<h3 id="9-SSH-连几分钟就断"><a href="#9-SSH-连几分钟就断" class="headerlink" title="9. SSH 连几分钟就断"></a>9. SSH 连几分钟就断</h3><p>先区分是 NAT/防火墙空闲超时，还是远端服务主动断开。</p>
+<p>客户端可以配置：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host lab
+    ServerAliveInterval 30
+    ServerAliveCountMax 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里是 SSH 协议层保活，不等于 TCPKeepAlive，也不是让失联服务器“永不掉线”。</p>
+<h2 id="十九、Windows-也可以作为-SSH-Server"><a href="#十九、Windows-也可以作为-SSH-Server" class="headerlink" title="十九、Windows 也可以作为 SSH Server"></a>十九、Windows 也可以作为 SSH Server</h2><p>Windows 11/Windows Server 可以安装 OpenSSH Server。管理员 PowerShell 先查看：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Get-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token punctuation">|</span> <span class="token function">Where-Object</span> Name <span class="token operator">-like</span> <span class="token string">'OpenSSH*'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如未安装：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Add-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Server~~~~0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1<span class="token punctuation">.</span>0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>启动并设为自动：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Start-Service</span> sshd
+<span class="token function">Set-Service</span> <span class="token operator">-</span>Name sshd <span class="token operator">-</span>StartupType Automatic
+<span class="token function">Get-Service</span> sshd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>Windows OpenSSH Server 的主配置通常位于：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">C:\ProgramData\ssh\sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Host Key 也保存在 <code>C:\ProgramData\ssh</code>。Windows 的 <code>authorized_keys</code> 与 ACL 规则和 Unix 不完全相同，尤其管理员账户默认配置可能使用：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">C:\ProgramData\ssh\administrators_authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>因此把 Windows 当服务端时，建议按 Microsoft 当前 OpenSSH 文档处理 ACL，不要直接照抄 Linux 的 <code>chmod 600</code> 思路。</p>
+<p>另外确认 Windows 防火墙存在 OpenSSH Server 的 TCP/22 入站规则。如果服务器需要经过公网访问，还要继续检查上游 NAT、云安全组或路由器端口映射。</p>
+<h2 id="二十、一套推荐的日常-SSH-配置"><a href="#二十、一套推荐的日常-SSH-配置" class="headerlink" title="二十、一套推荐的日常 SSH 配置"></a>二十、一套推荐的日常 SSH 配置</h2><p>下面是个人电脑管理多台 Linux 服务器时比较稳妥的起点：</p>
+<pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host lab
+    HostName 203.0.113.10
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+
+Host bastion
+    HostName bastion.example.com
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_bastion
+    IdentitiesOnly yes
+
+Host internal
+    HostName 10.0.0.20
+    User dev
+    IdentityFile ~/.ssh/id_ed25519_internal
+    IdentitiesOnly yes
+    ProxyJump bastion
+
+Host *
+    HashKnownHosts yes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里没有默认开启 <code>ForwardAgent</code>，也没有关闭 Host Key 检查，更没有把所有主机强行绑定到同一把私钥。</p>
+<h2 id="二十一、从零到稳定使用的完整操作顺序"><a href="#二十一、从零到稳定使用的完整操作顺序" class="headerlink" title="二十一、从零到稳定使用的完整操作顺序"></a>二十一、从零到稳定使用的完整操作顺序</h2><p>第一次配置一台新服务器，可以直接照下面顺序走：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">1. 客户端确认 ssh -V
+2. 服务端安装并启动 openssh-server
+3. 确认 sshd 监听地址和端口
+4. 确认网络/安全组/防火墙可达
+5. 第一次连接时核对服务器 Host Key 指纹
+6. 为这台服务器生成独立 Ed25519 用户密钥
+7. 给私钥设置 passphrase
+8. 把 .pub 公钥加入远端 authorized_keys
+9. 新开终端验证公钥登录
+10. 配置 ssh-agent
+11. 把长命令整理进 ~/.ssh/config
+12. 用 ssh -G 检查最终客户端配置
+13. 确认密钥登录稳定后，再关闭服务端密码认证
+14. 服务端每次改配置先 sshd -t
+15. 保留旧连接，新开第二个连接验证
+16. VS Code/scp/sftp 全部复用同一个 Host 别名
+17. 需要访问内网时使用 ProxyJump
+18. 需要访问远端本地服务时使用 -L
+19. 需要反向暴露本地服务时谨慎使用 -R
+20. 需要 SOCKS 代理时使用 -D
+21. 出错先 ssh -vvv，再按网络→握手→Host Key→用户认证分层定位<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这比“能连上就算配置完成”更接近一套长期可维护的 SSH 工作流。</p>
+<h2 id="二十二、不要做的几件事"><a href="#二十二、不要做的几件事" class="headerlink" title="二十二、不要做的几件事"></a>二十二、不要做的几件事</h2><ol>
+<li><strong>不要上传用户私钥到服务器。</strong> 服务器只需要你的公钥。</li>
+<li><strong>不要为了免输密码就默认创建无口令私钥。</strong> 优先使用 passphrase + ssh-agent。</li>
+<li><strong>不要第一次连接任何服务器都无脑输入 <code>yes</code>。</strong> 至少对重要机器核对 Host Key 指纹。</li>
+<li><strong>不要在公钥登录还没验证时先关闭密码认证。</strong> 这是最常见的自锁服务器方式之一。</li>
+<li><strong>不要全局 <code>ForwardAgent yes</code>。</strong> 只在确有需要的可信主机上使用。</li>
+<li><strong>不要全局关闭 <code>StrictHostKeyChecking</code>。</strong> 这样等于主动放弃服务器身份校验的重要防线。</li>
+<li><strong>不要把端口转发默认绑定 <code>0.0.0.0</code>。</strong> 本机使用时优先显式绑定 <code>127.0.0.1</code>。</li>
+<li><strong>不要把 <code>Connection timed out</code> 当成密钥问题。</strong> 连 TCP 都没建立时，用户密钥根本还没有登场。</li>
+<li><strong>不要看到 Host Key changed 就直接 <code>ssh-keygen -R</code>。</strong> 先确认服务器为什么变了。</li>
+<li><strong>不要一把长期私钥打天下。</strong> 重要设备、服务器或用途分开建密钥，撤销时更干净。</li>
+</ol>
+<h2 id="二十三、常用命令速查"><a href="#二十三、常用命令速查" class="headerlink" title="二十三、常用命令速查"></a>二十三、常用命令速查</h2><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通登录</td>
+<td><code>ssh lab</code></td>
+</tr>
+<tr>
+<td>指定端口</td>
+<td><code>ssh -p 2222 user@host</code></td>
+</tr>
+<tr>
+<td>指定私钥</td>
+<td><code>ssh -i ~/.ssh/id_ed25519_lab user@host</code></td>
+</tr>
+<tr>
+<td>查看最终配置</td>
+<td><code>ssh -G lab</code></td>
+</tr>
+<tr>
+<td>详细调试</td>
+<td><code>ssh -vvv lab</code></td>
+</tr>
+<tr>
+<td>执行远程命令</td>
+<td><code>ssh lab 'hostname; uptime'</code></td>
+</tr>
+<tr>
+<td>生成 Ed25519 密钥</td>
+<td><code>ssh-keygen -t ed25519</code></td>
+</tr>
+<tr>
+<td>查看公钥指纹</td>
+<td><code>ssh-keygen -lf key.pub</code></td>
+</tr>
+<tr>
+<td>从 known_hosts 删除旧记录</td>
+<td><code>ssh-keygen -R host</code></td>
+</tr>
+<tr>
+<td>查看 agent 密钥</td>
+<td><code>ssh-add -l</code></td>
+</tr>
+<tr>
+<td>上传文件</td>
+<td><code>scp file lab:~/</code></td>
+</tr>
+<tr>
+<td>下载文件</td>
+<td><code>scp lab:~/file ./</code></td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td><code>sftp lab</code></td>
+</tr>
+<tr>
+<td>本地转发</td>
+<td><code>ssh -N -L 127.0.0.1:15432:127.0.0.1:5432 lab</code></td>
+</tr>
+<tr>
+<td>远程转发</td>
+<td><code>ssh -N -R 127.0.0.1:8080:127.0.0.1:3000 lab</code></td>
+</tr>
+<tr>
+<td>SOCKS5 动态转发</td>
+<td><code>ssh -N -D 127.0.0.1:1080 lab</code></td>
+</tr>
+<tr>
+<td>跳板机</td>
+<td><code>ssh -J bastion target</code></td>
+</tr>
+<tr>
+<td>检查服务端配置语法</td>
+<td><code>sudo sshd -t</code></td>
+</tr>
+<tr>
+<td>查看服务端有效配置</td>
+<td><code>sudo sshd -T</code></td>
+</tr>
+</tbody></table>
+<h2 id="二十四、官方资料与版本边界"><a href="#二十四、官方资料与版本边界" class="headerlink" title="二十四、官方资料与版本边界"></a>二十四、官方资料与版本边界</h2><p>本文于 <strong>2026-08-09</strong> 按当前 OpenSSH、Ubuntu 与 Microsoft 官方资料重新核对。OpenSSH 的具体默认算法、Windows 可选功能状态以及发行版默认配置都可能随着版本变化，因此涉及安全策略或默认值时，优先查看当前系统自己的 <code>ssh -V</code>、<code>ssh -G</code>、<code>sshd -T</code> 和官方文档。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh">OpenSSH ssh(1) 手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh_config">OpenSSH ssh_config(5) 手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://man.openbsd.org/sshd_config">OpenSSH sshd_config(5) 手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh-keygen">OpenSSH ssh-keygen(1) 手册</a></li>
+<li><a target="_blank" rel="noopener" href="https://ubuntu.com/server/docs/how-to/security/openssh-server/">Ubuntu OpenSSH Server 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/windows-server/administration/openssh/openssh-overview">Microsoft：OpenSSH for Windows 概述</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement">Microsoft：OpenSSH 密钥管理</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse">Microsoft：开始使用 OpenSSH Server</a></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一套可靠的 SSH 工作流，核心不是记住更多命令，而是始终知道当前在处理哪一层：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">网络可达性
+    ↓
+SSH 协议握手
+    ↓
+服务器 Host Key 身份校验
+    ↓
+用户认证（私钥 / 公钥）
+    ↓
+Shell、文件传输、VS Code、端口转发与跳板机<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>日常使用时，把主机参数统一收进 <code>~/.ssh/config</code>，用独立密钥配合 <code>ssh-agent</code>，重要主机认真核对 Host Key；服务端先验证公钥登录，再关闭密码认证。出现故障时从 <code>ssh -G</code> 和 <code>ssh -vvv</code> 开始，按网络、握手、主机身份、用户认证逐层排查。</p>
+<p>掌握这条主线以后，<code>scp</code>、SFTP、VS Code Remote - SSH、<code>ProxyJump</code>、<code>ProxyCommand</code>、Cloudflare Tunnel 以及 <code>-L/-R/-D</code> 端口转发，本质上都只是同一套 OpenSSH 工作流在不同网络场景下的扩展。 </p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/">https://0xdadream.github.io/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ssh/">
+                                    <span class="chip bg-color">ssh</span>
+                                </a>
+                            
+                                <a href="/tags/windows/">
+                                    <span class="chip bg-color">windows</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/openssh/">
+                                    <span class="chip bg-color">openssh</span>
+                                </a>
+                            
+                                <a href="/tags/vscode/">
+                                    <span class="chip bg-color">vscode</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程">
+                        
+                        <span class="card-title">ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            使用 OpenAI Secure MCP Tunnel 将 ChatGPT 网页端与 Windows 11 本机 Desktop Commander MCP 安全连接，实现文件读写、PowerShell、Python、Node.js、Git、WSL 等本地操作，无需公网 IP、端口转发或额外 VPS。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/tunnel/">
+                        <span class="chip bg-color">tunnel</span>
+                    </a>
+                    
+                    <a href="/tags/chatgpt/">
+                        <span class="chip bg-color">chatgpt</span>
+                    </a>
+                    
+                    <a href="/tags/openai/">
+                        <span class="chip bg-color">openai</span>
+                    </a>
+                    
+                    <a href="/tags/mcp/">
+                        <span class="chip bg-color">mcp</span>
+                    </a>
+                    
+                    <a href="/tags/windows/">
+                        <span class="chip bg-color">windows</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/51.jpg" class="responsive-img" alt="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错">
+                        
+                        <span class="card-title">Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ssh/">
+                        <span class="chip bg-color">ssh</span>
+                    </a>
+                    
+                    <a href="/tags/cloudflare/">
+                        <span class="chip bg-color">cloudflare</span>
+                    </a>
+                    
+                    <a href="/tags/tunnel/">
+                        <span class="chip bg-color">tunnel</span>
+                    </a>
+                    
+                    <a href="/tags/zero-trust/">
+                        <span class="chip bg-color">zero-trust</span>
+                    </a>
+                    
+                    <a href="/tags/rdp/">
+                        <span class="chip bg-color">rdp</span>
+                    </a>
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 閫愭ⅵ<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">392.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

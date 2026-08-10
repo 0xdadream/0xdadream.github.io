@@ -1,0 +1,1915 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程, 閫愭ⅵ">
+    <meta name="description" content="使用 OpenAI Secure MCP Tunnel 将 ChatGPT 网页端与 Windows 11 本机 Desktop Commander MCP 安全连接，实现文件读写、PowerShell、Python、Node.js、Git、WSL 等本地操作，无需公网 IP、端口转发或额外 VPS。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程 | 閫愭ⅵ</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(/medias/banner/5.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="閫愭ⅵ" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">閫愭ⅵ</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">閫愭ⅵ</div>
+        <div class="logo-desc">
+            
+            Welcome to my blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/0xdadream/0xdadream.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/0xdadream/0xdadream.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/tunnel/">
+                                <span class="chip bg-color">tunnel</span>
+                            </a>
+                        
+                            <a href="/tags/chatgpt/">
+                                <span class="chip bg-color">chatgpt</span>
+                            </a>
+                        
+                            <a href="/tags/openai/">
+                                <span class="chip bg-color">openai</span>
+                            </a>
+                        
+                            <a href="/tags/mcp/">
+                                <span class="chip bg-color">mcp</span>
+                            </a>
+                        
+                            <a href="/tags/windows/">
+                                <span class="chip bg-color">windows</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                教程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-08-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-08-09
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="ChatGPT-网页端通过-OpenAI-Secure-MCP-Tunnel-操控-Windows-11-本地电脑完整教程"><a href="#ChatGPT-网页端通过-OpenAI-Secure-MCP-Tunnel-操控-Windows-11-本地电脑完整教程" class="headerlink" title="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程"></a>ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</h1><p>本文记录一套让 <strong>ChatGPT 网页端直接调用 Windows 11 本地 MCP 工具</strong> 的完整方案：使用 OpenAI 官方 Secure MCP Tunnel 作为传输层，在本机运行 <code>tunnel-client</code>，再通过 stdio 启动 Desktop Commander MCP。<br>最终链路如下：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">ChatGPT 网页端
+        │
+        ▼
+OpenAI Secure MCP Tunnel
+        │
+        ▼
+Windows 本机 tunnel-client.exe
+        │
+        │ stdio
+        ▼
+Desktop Commander MCP
+        │
+        ├── 文件读写 / 搜索 / 编辑
+        ├── PowerShell / CMD
+        ├── Python / Node.js / Git
+        ├── WSL
+        └── 长进程与日志读取<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这套方案最大的价值不是“完全不经过云”，而是<strong>本机只主动向 OpenAI 建立出站连接，不需要把本地 MCP Server 暴露到公网</strong>。因此不要求公网 IP、路由器端口映射、DDNS、VPS、ngrok 或 Cloudflare Tunnel。</p>
+<blockquote>
+<p>注意：本文说的“操控本地电脑”主要指文件系统与命令行能力。Desktop Commander 不是传统远程桌面，也不会天然看到桌面画面、移动鼠标或点击任意 GUI 控件。</p>
+</blockquote>
+<h2 id="一、这套方案到底能做什么"><a href="#一、这套方案到底能做什么" class="headerlink" title="一、这套方案到底能做什么"></a>一、这套方案到底能做什么</h2><p>连接成功后，ChatGPT 可以通过 Desktop Commander 调用本机工具，例如：</p>
+<ul>
+<li>列出和读取项目目录；</li>
+<li>新建、修改、移动、删除文件；</li>
+<li>搜索整个代码仓库；</li>
+<li>运行 PowerShell、CMD；</li>
+<li>调用 Python、Node.js、Git；</li>
+<li>调用 WSL 中的 Linux 命令；</li>
+<li>编译项目、运行测试、读取报错；</li>
+<li>启动长时间运行的程序并持续读取输出；</li>
+<li>继续通过本机 SSH 客户端管理远端服务器。</li>
+</ul>
+<p>它非常适合把 ChatGPT 变成真正参与本地开发工作的 Agent：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">看代码 → 修改 → 运行 → 看错误 → 再修改 → 测试<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>但如果目标是“打开微信并点击某个按钮”这类纯 GUI 自动化，还需要额外叠加浏览器自动化或 Windows UI Automation 工具。</p>
+<h2 id="二、为什么选择-OpenAI-Tunnel-Desktop-Commander-stdio"><a href="#二、为什么选择-OpenAI-Tunnel-Desktop-Commander-stdio" class="headerlink" title="二、为什么选择 OpenAI Tunnel + Desktop Commander stdio"></a>二、为什么选择 OpenAI Tunnel + Desktop Commander stdio</h2><p>Desktop Commander 自己也提供 Remote 模式，例如：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">npx <span class="token operator">-</span>y @wonderwhy-er/desktop-commander@latest remote<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这种模式本身也能远程连接，但本文选择让 Desktop Commander 只负责本地 MCP 能力，把远程传输交给 OpenAI 官方 Tunnel：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">OpenAI Secure MCP Tunnel
+        +
+Desktop Commander stdio MCP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>本机 MCP Server 因而不需要直接监听公网端口。OpenAI Tunnel Client 由 Windows 主动向 OpenAI 建立 HTTPS 出站连接，再把 ChatGPT 发来的 MCP 请求转给本地 stdio Server。</p>
+<p>这种结构的边界非常清晰：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">OpenAI Tunnel：负责远程传输与连接
+Desktop Commander：负责本地文件、Shell、进程等能力<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="三、开始前必须确认-ChatGPT-是否支持-Full-MCP"><a href="#三、开始前必须确认-ChatGPT-是否支持-Full-MCP" class="headerlink" title="三、开始前必须确认 ChatGPT 是否支持 Full MCP"></a>三、开始前必须确认 ChatGPT 是否支持 Full MCP</h2><p>截至 <strong>2026-08-09</strong>，OpenAI 官方文档列出的 ChatGPT Developer mode / 完整 MCP 支持范围是 <strong>Business、Enterprise、Edu 的 ChatGPT 网页版</strong>。</p>
+<p>因此如果你的设置中完全找不到 Developer mode、Apps 的 Create 入口或 Plugins 的开发入口，不要先怀疑 Windows 配置。</p>
+<p>官方参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">Developer mode and MCP apps in ChatGPT</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.openai.com/apps-sdk/deploy/connect-chatgpt">Connect your MCP server to ChatGPT</a></li>
+</ul>
+<p>界面和套餐范围后续可能调整，所以真正部署前应再以 OpenAI 当前文档为准。</p>
+<h2 id="四、准备-Windows-11-环境"><a href="#四、准备-Windows-11-环境" class="headerlink" title="四、准备 Windows 11 环境"></a>四、准备 Windows 11 环境</h2><h3 id="1-检查-Node-js-与-npx"><a href="#1-检查-Node-js-与-npx" class="headerlink" title="1. 检查 Node.js 与 npx"></a>1. 检查 Node.js 与 npx</h3><p>打开普通 PowerShell：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">node <span class="token operator">--</span>version
+npx <span class="token operator">--</span>version
+where<span class="token punctuation">.</span>exe node
+where<span class="token punctuation">.</span>exe npx<span class="token punctuation">.</span>cmd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>本文实际使用过 Node.js 22.x。只要 Desktop Commander 当前支持你的 Node.js 版本即可。</p>
+<p>如果你使用 nvm-windows，<code>where.exe npx.cmd</code> 很重要，因为 Tunnel 启动子进程时拿到的 PATH 可能与交互式 PowerShell 不完全一致。</p>
+<p>例如可能看到：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">C:\nvm4w\npx.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>后面可以直接把这个绝对路径写进启动脚本。</p>
+<h3 id="2-创建-Tunnel-和工作目录"><a href="#2-创建-Tunnel-和工作目录" class="headerlink" title="2. 创建 Tunnel 和工作目录"></a>2. 创建 Tunnel 和工作目录</h3><p>建议把运行文件和 ChatGPT 工作区分开：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Force <span class="token string">"E:\OpenAI-Tunnel"</span>
+<span class="token function">New-Item</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Force <span class="token string">"E:\ChatGPT-Workspace"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:\OpenAI-Tunnel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>用于保存 <code>tunnel-client.exe</code>、启动脚本和辅助配置；</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:\ChatGPT-Workspace<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>作为 ChatGPT 的默认本地工作目录。</p>
+<p>不建议第一次就把 <code>C:\</code>、<code>D:\</code>、<code>E:\</code> 整个盘符开放给 Agent。</p>
+<h2 id="五、在-OpenAI-Platform-创建-Secure-MCP-Tunnel"><a href="#五、在-OpenAI-Platform-创建-Secure-MCP-Tunnel" class="headerlink" title="五、在 OpenAI Platform 创建 Secure MCP Tunnel"></a>五、在 OpenAI Platform 创建 Secure MCP Tunnel</h2><p>进入 OpenAI Platform 的 Organization / Tunnels 页面，新建一个 Tunnel，例如：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">win11-desktop-commander<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>创建后会得到类似：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">tunnel_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也就是后面要使用的 <code>tunnel_id</code>。</p>
+<p>OpenAI Secure MCP Tunnel 当前支持把后端连接到 stdio MCP 或 HTTP MCP；本文选择 stdio，因为 Desktop Commander 本来就可以作为本机 stdio MCP Server 运行。</p>
+<h3 id="Tunnel-权限不要配错"><a href="#Tunnel-权限不要配错" class="headerlink" title="Tunnel 权限不要配错"></a>Tunnel 权限不要配错</h3><p>OpenAI 当前把 Tunnel 权限分成：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Tunnels Read
+Tunnels Use
+Tunnels Manage<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>创建和修改 Tunnel 需要 <code>Read + Manage</code>；真正运行 <code>tunnel-client</code>、让 ChatGPT 使用 Tunnel，则需要 <code>Read + Use</code>。</p>
+<p>建议专门创建一个 Runtime API Key 给长期运行的 Tunnel Client，而不要让常驻进程长期持有 Admin API Key。</p>
+<p>另外，Tunnel 还必须关联到目标 <strong>ChatGPT Workspace</strong>。只在 Platform Organization 中创建成功，并不代表 ChatGPT Workspace 一定能看到它。</p>
+<p>官方参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.openai.com/api/docs/guides/secure-mcp-tunnels">Secure MCP Tunnels</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openai/tunnel-client">openai/tunnel-client</a></li>
+</ul>
+<h2 id="六、下载-tunnel-client"><a href="#六、下载-tunnel-client" class="headerlink" title="六、下载 tunnel-client"></a>六、下载 tunnel-client</h2><p>优先从 OpenAI Platform 的 Tunnel 页面获取当前支持的 Windows Tunnel Client，或使用 OpenAI 官方 <code>openai/tunnel-client</code> Release。</p>
+<p>不要在长期教程中硬编码某一个旧 Release 的下载地址，因为客户端版本会更新。</p>
+<p>把下载后的程序放到：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:\OpenAI-Tunnel\tunnel-client.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后检查：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">cd <span class="token string">"E:\OpenAI-Tunnel"</span>
+<span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe <span class="token operator">--</span>version
+<span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe help quickstart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="七、创建-Desktop-Commander-启动脚本"><a href="#七、创建-Desktop-Commander-启动脚本" class="headerlink" title="七、创建 Desktop Commander 启动脚本"></a>七、创建 Desktop Commander 启动脚本</h2><p>创建：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:\OpenAI-Tunnel\start-desktop-commander.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>内容：</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo off
+cd /d E:\ChatGPT-Workspace
+call npx.cmd -y @wonderwhy-er/desktop-commander@0.2.46 --no-onboarding<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里固定 <code>0.2.46</code> 是因为这个版本在本文方案中做过完整端到端验证。后续确认新版正常后，可以再切换到：</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">call npx.cmd -y @wonderwhy-er/desktop-commander@latest --no-onboarding<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果使用 nvm-windows，并且 <code>where.exe npx.cmd</code> 返回 <code>C:\nvm4w\npx.cmd</code>，建议直接写绝对路径：</p>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">@echo off
+cd /d E:\ChatGPT-Workspace
+call "C:\nvm4w\npx.cmd" -y @wonderwhy-er/desktop-commander@0.2.46 --no-onboarding<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>先单独测试脚本：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">cmd<span class="token punctuation">.</span>exe <span class="token operator">/</span>d <span class="token operator">/</span>c E:<span class="token operator">/</span>OpenAI-Tunnel/<span class="token function">start-desktop</span><span class="token operator">-</span>commander<span class="token punctuation">.</span>cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果没有报错，并且程序保持运行，看起来像“卡住”，通常反而是正常的：stdio MCP Server 正在等待 MCP Client 发请求。按 <code>Ctrl+C</code> 退出测试即可。</p>
+<h2 id="八、设置-Runtime-API-Key"><a href="#八、设置-Runtime-API-Key" class="headerlink" title="八、设置 Runtime API Key"></a>八、设置 Runtime API Key</h2><p>当前 PowerShell 会话中：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token variable">$env</span>:CONTROL_PLANE_API_KEY = <span class="token string">"sk-REPLACE_WITH_YOUR_RUNTIME_KEY"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>真实 Key 不要截图、提交 Git、写入博客或发到聊天记录。</p>
+<h2 id="九、初始化-Tunnel-Profile"><a href="#九、初始化-Tunnel-Profile" class="headerlink" title="九、初始化 Tunnel Profile"></a>九、初始化 Tunnel Profile</h2><p>进入：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">cd <span class="token string">"E:\OpenAI-Tunnel"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>初始化 stdio Profile：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe init `
+  <span class="token operator">--</span>sample sample_mcp_stdio_local `
+  <span class="token operator">--</span>profile desktop-commander `
+  <span class="token operator">--</span>tunnel-id tunnel_REPLACE_WITH_YOUR_TUNNEL_ID `
+  <span class="token operator">--</span>mcp-command <span class="token string">"cmd.exe /d /c E:/OpenAI-Tunnel/start-desktop-commander.cmd"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里使用 <code>E:/OpenAI-Tunnel/...</code> 的正斜杠写法非常重要。</p>
+<p>本文实际调试时，Windows 反斜杠路径曾被二次解析，导致：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">'E:OpenAI-Tunnelstart-desktop-commander.cmd'
+不是内部或外部命令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>因此如果命令要经过 YAML、JSON、CMD 或其他多层解析，Windows 路径优先使用正斜杠通常更稳。</p>
+<h2 id="十、运行-doctor，但不要把-PASS-当成最终成功"><a href="#十、运行-doctor，但不要把-PASS-当成最终成功" class="headerlink" title="十、运行 doctor，但不要把 PASS 当成最终成功"></a>十、运行 doctor，但不要把 PASS 当成最终成功</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe doctor `
+  <span class="token operator">--</span>profile desktop-commander `
+  <span class="token operator">--</span>explain<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果看到 <code>RESULT ok</code>，说明本地预检没有发现明显问题。<br>但必须注意：<code>doctor</code> 只是本地 preflight，并不能证明 Runtime API Key 一定能成功轮询目标 Tunnel，也不能代替真正的端到端调用。</p>
+<p>OpenAI 官方 Troubleshooting 也明确区分了本地预检和真正运行阶段。</p>
+<p>因此正确理解是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">doctor PASS = 本地配置看起来可用
+不等于 = ChatGPT 已经能操作本机<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="十一、正式启动-Tunnel"><a href="#十一、正式启动-Tunnel" class="headerlink" title="十一、正式启动 Tunnel"></a>十一、正式启动 Tunnel</h2><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe run `
+  <span class="token operator">--</span>profile desktop-commander<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这个 PowerShell 窗口需要保持运行。</p>
+<p>运行链路是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Windows tunnel-client
+        │
+        ├── 主动连接 OpenAI
+        ├── 接收目标 Tunnel 的 MCP 请求
+        ├── 转给 Desktop Commander stdio
+        └── 把结果返回 ChatGPT<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果这里出现 401/403，优先检查 Runtime API Key、Tunnel ID、Organization、<code>Tunnels Read</code> 与 <code>Tunnels Use</code> 权限，以及目标 ChatGPT Workspace 是否已经正确关联。</p>
+<h2 id="十二、检查-Tunnel-Client-健康状态"><a href="#十二、检查-Tunnel-Client-健康状态" class="headerlink" title="十二、检查 Tunnel Client 健康状态"></a>十二、检查 Tunnel Client 健康状态</h2><p>另开一个 PowerShell：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">(</span><span class="token function">Invoke-WebRequest</span> `
+  <span class="token string">"http://127.0.0.1:8080/healthz"</span> `
+  <span class="token operator">-</span>UseBasicParsing<span class="token punctuation">)</span><span class="token punctuation">.</span>StatusCode
+
+<span class="token punctuation">(</span><span class="token function">Invoke-WebRequest</span> `
+  <span class="token string">"http://127.0.0.1:8080/readyz"</span> `
+  <span class="token operator">-</span>UseBasicParsing<span class="token punctuation">)</span><span class="token punctuation">.</span>StatusCode<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>正常目标是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">200
+200<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>还可以打开本地状态页面：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Start-Process</span> <span class="token string">"http://127.0.0.1:8080/ui"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里要区分：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">/healthz = 进程活着
+/readyz  = 已准备好真正处理 Tunnel 工作<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>排错时 <code>/readyz</code> 通常比单看 <code>/healthz</code> 更有价值。</p>
+<h2 id="十三、在-ChatGPT-中启用-Developer-Mode"><a href="#十三、在-ChatGPT-中启用-Developer-Mode" class="headerlink" title="十三、在 ChatGPT 中启用 Developer Mode"></a>十三、在 ChatGPT 中启用 Developer Mode</h2><p>根据 Workspace 当前界面，入口可能显示在 Settings / Security and login / Developer mode，或者 Workspace Settings / Apps 中。</p>
+<p>启用后，在 Apps / Plugins 的开发入口创建一个新的 MCP App，连接方式选择：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Tunnel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后选择刚才创建的 Tunnel，或输入对应 <code>tunnel_id</code>。</p>
+<p>如果 ChatGPT 中完全看不到 Tunnel，检查：</p>
+<ol>
+<li>Tunnel 是否关联了当前 ChatGPT Workspace；</li>
+<li>当前用户是否具备相应 Workspace 权限；</li>
+<li>Runtime Key 是否有 <code>Tunnels Read + Use</code>；</li>
+<li><code>tunnel-client run</code> 是否正在运行；</li>
+<li><code>/readyz</code> 是否返回 200。</li>
+</ol>
+<h3 id="身份验证怎么选"><a href="#身份验证怎么选" class="headerlink" title="身份验证怎么选"></a>身份验证怎么选</h3><p>本文的后端是本地 Desktop Commander stdio MCP，它本身没有额外 OAuth 登录流程，因此这一层通常使用：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Authentication: None<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不要把 Runtime API Key 填到 MCP App 的用户认证栏。Runtime Key 是 Tunnel Client 访问 OpenAI 控制面的凭据，不是 Desktop Commander 的用户登录密码。</p>
+<h2 id="十四、扫描-Desktop-Commander-Tools"><a href="#十四、扫描-Desktop-Commander-Tools" class="headerlink" title="十四、扫描 Desktop Commander Tools"></a>十四、扫描 Desktop Commander Tools</h2><p>创建 App 时扫描 Tools，正常会看到类似：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">get_config
+set_config_value
+list_directory
+read_file
+read_multiple_files
+write_file
+edit_block
+start_search
+get_more_search_results
+start_process
+interact_with_process
+read_process_output
+force_terminate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>具体工具数量和名称会随着 Desktop Commander 版本变化，不要把某个固定数量当成成功标准。</p>
+<h2 id="十五、第一次端到端测试"><a href="#十五、第一次端到端测试" class="headerlink" title="十五、第一次端到端测试"></a>十五、第一次端到端测试</h2><p>不要一开始就让 ChatGPT 操作真实项目，先用：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:\ChatGPT-Workspace<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>做最小闭环。</p>
+<h3 id="测试-1：列目录"><a href="#测试-1：列目录" class="headerlink" title="测试 1：列目录"></a>测试 1：列目录</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">使用 Desktop Commander 列出 E:\ChatGPT-Workspace 中的文件，只读取，不修改。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="测试-2：创建并读取文件"><a href="#测试-2：创建并读取文件" class="headerlink" title="测试 2：创建并读取文件"></a>测试 2：创建并读取文件</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">在 E:\ChatGPT-Workspace 创建 tunnel-test.txt，内容为：
+OpenAI Secure MCP Tunnel connected successfully.
+不要操作其他目录。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后再让 ChatGPT 读取这个文件，确认写入与读取都正常。</p>
+<h3 id="测试-3：PowerShell"><a href="#测试-3：PowerShell" class="headerlink" title="测试 3：PowerShell"></a>测试 3：PowerShell</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">执行：
+powershell.exe -NoProfile -Command "Get-Date"
+不要运行其他命令。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="测试-4：长进程"><a href="#测试-4：长进程" class="headerlink" title="测试 4：长进程"></a>测试 4：长进程</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">执行：
+powershell.exe -NoProfile -Command "Start-Sleep 3; Write-Output 'finished'"
+等待结束，并告诉我输出和退出码。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果目录读取、文件写入、文件重新读取、PowerShell 和长进程输出都通过，才算真正完成了 ChatGPT → OpenAI Tunnel → Windows 的端到端闭环。</p>
+<h2 id="十六、连通后第一件事：限制-allowedDirectories"><a href="#十六、连通后第一件事：限制-allowedDirectories" class="headerlink" title="十六、连通后第一件事：限制 allowedDirectories"></a>十六、连通后第一件事：限制 allowedDirectories</h2><p>调用 Desktop Commander 的 <code>get_config</code>，重点检查：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">allowedDirectories
+blockedCommands
+defaultShell
+telemetryEnabled<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一个非常容易误解的配置是：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"allowedDirectories"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>它并不是“禁止访问任何目录”，而是<strong>允许 Desktop Commander 文件工具访问整个文件系统</strong>。</p>
+<p>因此建议显式设置为：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">[</span>
+  <span class="token string">"E:\\ChatGPT-Workspace"</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后再次调用 <code>get_config</code> 确认。</p>
+<p>但是必须继续注意：<code>allowedDirectories</code> 不是完整安全沙箱。它主要限制 Desktop Commander 自己的文件类工具，而 PowerShell、CMD、Python、Node.js 或其他命令仍可能访问白名单以外的位置。</p>
+<p>因此真正的安全边界应该是：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Windows 普通用户权限 + 工作目录隔离 + Git/备份 + MCP 配置护栏<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="十七、安全建议"><a href="#十七、安全建议" class="headerlink" title="十七、安全建议"></a>十七、安全建议</h2><p>不要让 Tunnel Runtime 默认使用管理员账户。建议使用普通 Windows 用户，并只把必要项目放进工作区。</p>
+<p>以下内容不要放进 Agent 默认可访问目录：</p>
+<ul>
+<li>SSH 私钥；</li>
+<li>浏览器 Profile；</li>
+<li>密码库；</li>
+<li>钱包私钥；</li>
+<li>生产环境密钥；</li>
+<li>API Key 明文文件；</li>
+<li>重要个人隐私资料。</li>
+</ul>
+<p>对于下面这些操作，最好要求 Agent 在执行前先向你确认：</p>
+<ul>
+<li>批量删除或覆盖文件；</li>
+<li>修改注册表；</li>
+<li>安装系统组件；</li>
+<li>改防火墙；</li>
+<li><code>git push</code>；</li>
+<li>上传本地文件；</li>
+<li>部署生产环境；</li>
+<li>关闭安全软件。</li>
+</ul>
+<p>如果不需要 Desktop Commander 遥测，可以把 <code>telemetryEnabled</code> 设置为 <code>false</code>。</p>
+<p>另外不要把 Tunnel Client 的本地 Admin UI 从 <code>127.0.0.1</code> 随意改成 <code>0.0.0.0</code> 暴露到局域网。</p>
+<h2 id="十八、常见报错与排错顺序"><a href="#十八、常见报错与排错顺序" class="headerlink" title="十八、常见报错与排错顺序"></a>十八、常见报错与排错顺序</h2><h3 id="1-Windows-路径被吃掉"><a href="#1-Windows-路径被吃掉" class="headerlink" title="1. Windows 路径被吃掉"></a>1. Windows 路径被吃掉</h3><p>如果出现：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">'E:OpenAI-Tunnelstart-desktop-commander.cmd'
+不是内部或外部命令<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>把 Tunnel Profile 中的路径改成：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">E:/OpenAI-Tunnel/start-desktop-commander.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-找不到-npx-cmd"><a href="#2-找不到-npx-cmd" class="headerlink" title="2. 找不到 npx.cmd"></a>2. 找不到 npx.cmd</h3><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">where<span class="token punctuation">.</span>exe npx<span class="token punctuation">.</span>cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后在 <code>start-desktop-commander.cmd</code> 中写入实际绝对路径。</p>
+<h3 id="3-doctor-PASS，但-ChatGPT-仍不能用"><a href="#3-doctor-PASS，但-ChatGPT-仍不能用" class="headerlink" title="3. doctor PASS，但 ChatGPT 仍不能用"></a>3. doctor PASS，但 ChatGPT 仍不能用</h3><p>继续检查：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">/readyz
+/ui 日志
+Runtime API Key
+Tunnels Read + Use
+Workspace association
+真正的 ChatGPT Tool 调用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>不要把 doctor 当作端到端验收。</p>
+<h3 id="4-401-403"><a href="#4-401-403" class="headerlink" title="4. 401 / 403"></a>4. 401 / 403</h3><p>重点确认：</p>
+<ul>
+<li>Runtime API Key 是否正确；</li>
+<li>Tunnel ID 是否正确；</li>
+<li>Runtime Key 是否有 <code>Tunnels Read + Use</code>；</li>
+<li>Tunnel 是否属于正确的 Platform Organization；</li>
+<li>Tunnel 是否关联目标 ChatGPT Workspace。</li>
+</ul>
+<h3 id="5-readyz-503"><a href="#5-readyz-503" class="headerlink" title="5. /readyz = 503"></a>5. <code>/readyz = 503</code></h3><p>通常继续检查 Desktop Commander 子进程是否退出、<code>npx.cmd</code> 是否存在、Node.js 是否正常、MCP 初始化是否失败，以及 Tunnel 配置是否写错。</p>
+<h3 id="6-UNDICI-EHPA-punycode-Warning"><a href="#6-UNDICI-EHPA-punycode-Warning" class="headerlink" title="6. UNDICI-EHPA / punycode Warning"></a>6. UNDICI-EHPA / punycode Warning</h3><p>运行 Desktop Commander Remote 模式时可能看到 Node.js 的实验性或弃用警告，例如 UNDICI-EHPA、<code>punycode</code> DeprecationWarning。它们本身不一定代表 MCP 启动失败。</p>
+<p>本文方案并不依赖 <code>desktop-commander remote</code>，而是使用 Desktop Commander stdio + OpenAI Tunnel，因此优先看 stdio 子进程和 Tunnel Client 日志。</p>
+<h2 id="十九、日常启动流程"><a href="#十九、日常启动流程" class="headerlink" title="十九、日常启动流程"></a>十九、日常启动流程</h2><p>首次部署完成后，不需要每天重新创建 Tunnel。通常只需：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">cd <span class="token string">"E:\OpenAI-Tunnel"</span>
+<span class="token variable">$env</span>:CONTROL_PLANE_API_KEY = <span class="token string">"sk-YOUR_RUNTIME_KEY"</span>
+<span class="token punctuation">.</span>\tunnel-client<span class="token punctuation">.</span>exe run <span class="token operator">--</span>profile desktop-commander<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>保持这个窗口运行，然后打开 ChatGPT 使用已经创建好的 MCP App 即可。</p>
+<h2 id="二十、最终验收清单"><a href="#二十、最终验收清单" class="headerlink" title="二十、最终验收清单"></a>二十、最终验收清单</h2><p>不要只以“命令没报错”为标准，完整成功至少应该满足：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">[✓] Desktop Commander 单独可以启动
+[✓] tunnel-client doctor 正常
+[✓] /healthz = 200
+[✓] /readyz = 200
+[✓] ChatGPT 能扫描到 Desktop Commander Tools
+[✓] ChatGPT 能读取测试目录
+[✓] ChatGPT 能创建并重新读取测试文件
+[✓] ChatGPT 能运行 PowerShell
+[✓] ChatGPT 能读取长进程输出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>做到这里，下面这条链路才算真正闭环：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">ChatGPT
+   ↓
+OpenAI Secure MCP Tunnel
+   ↓
+tunnel-client
+   ↓
+Desktop Commander stdio MCP
+   ↓
+Windows 11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="二十一、官方资料"><a href="#二十一、官方资料" class="headerlink" title="二十一、官方资料"></a>二十一、官方资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developers.openai.com/api/docs/guides/secure-mcp-tunnels">OpenAI Secure MCP Tunnels</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openai/tunnel-client">OpenAI tunnel-client</a></li>
+<li><a target="_blank" rel="noopener" href="https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt">ChatGPT Developer mode and MCP apps</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.openai.com/apps-sdk/deploy/connect-chatgpt">Connect your MCP server to ChatGPT</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/wonderwhy-er/DesktopCommanderMCP">Desktop Commander</a></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OpenAI Secure MCP Tunnel + Desktop Commander 的重点不是把电脑变成公网服务器，而是让 Windows 主动连接 OpenAI，再由 ChatGPT 通过这条私有 Tunnel 调用本地 MCP。这样既保留了文件、Shell、Python、Git、WSL 等强大的开发能力，又避免了直接暴露 MCP 入站端口。</p>
+<p>真正需要谨慎的是权限：一旦 Agent 拿到 Shell，<code>allowedDirectories</code> 就不能被当成真正的安全沙箱。更可靠的做法是使用普通 Windows 账户、独立工作目录、Git/备份和明确的高风险操作确认规则，然后再逐步开放能力。</p>
+<p>如果目标是让 ChatGPT 真正参与本地开发，这套架构已经足够完成“读代码 → 修改 → 执行 → 看报错 → 继续修复 → 测试”的完整 Agent 工作流。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">0xdadream</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://0xdadream.github.io/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/">https://0xdadream.github.io/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">0xdadream</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/tunnel/">
+                                    <span class="chip bg-color">tunnel</span>
+                                </a>
+                            
+                                <a href="/tags/chatgpt/">
+                                    <span class="chip bg-color">chatgpt</span>
+                                </a>
+                            
+                                <a href="/tags/openai/">
+                                    <span class="chip bg-color">openai</span>
+                                </a>
+                            
+                                <a href="/tags/mcp/">
+                                    <span class="chip bg-color">mcp</span>
+                                </a>
+                            
+                                <a href="/tags/windows/">
+                                    <span class="chip bg-color">windows</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
+        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
+        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/49.jpg" class="responsive-img" alt="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书">
+                        
+                        <span class="card-title">数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ssh/">
+                        <span class="chip bg-color">ssh</span>
+                    </a>
+                    
+                    <a href="/tags/cloudflare/">
+                        <span class="chip bg-color">cloudflare</span>
+                    </a>
+                    
+                    <a href="/tags/certificate/">
+                        <span class="chip bg-color">certificate</span>
+                    </a>
+                    
+                    <a href="/tags/pki/">
+                        <span class="chip bg-color">pki</span>
+                    </a>
+                    
+                    <a href="/tags/x509/">
+                        <span class="chip bg-color">x509</span>
+                    </a>
+                    
+                    <a href="/tags/tls/">
+                        <span class="chip bg-color">tls</span>
+                    </a>
+                    
+                    <a href="/tags/openssl/">
+                        <span class="chip bg-color">openssl</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错">
+                        
+                        <span class="card-title">SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从 SSH 客户端与服务端安装开始，完整讲清 Host Key、用户密钥、ssh-agent、~/.ssh/config、文件传输、VS Code Remote SSH、端口转发、跳板机、安全加固与系统化排错。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ssh/">
+                        <span class="chip bg-color">ssh</span>
+                    </a>
+                    
+                    <a href="/tags/windows/">
+                        <span class="chip bg-color">windows</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                    <a href="/tags/openssh/">
+                        <span class="chip bg-color">openssh</span>
+                    </a>
+                    
+                    <a href="/tags/vscode/">
+                        <span class="chip bg-color">vscode</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 閫愭ⅵ<br />'
+            + '文章作者: 0xdadream<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">0xdadream</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">392.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,900 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>閫愭ⅵ • Posts by &#34;rdp&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 09 Aug 2026 04:18:00 +0800</pubDate>
+        <lastBuildDate>Sun, 09 Aug 2026 04:18:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
+        <category>ssh</category>
+        <category>cloudflare</category>
+        <category>tunnel</category>
+        <category>zero-trust</category>
+        <category>rdp</category>
+        <category>docker</category>
+        <category>chatgpt</category>
+        <category>openai</category>
+        <category>mcp</category>
+        <category>windows</category>
+        <category>agent</category>
+        <category>qwen</category>
+        <category>email</category>
+        <category>linux</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>tips</category>
+        <category>教程</category>
+        <category>ai</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>conda</category>
+        <category>bug</category>
+        <category>python</category>
+        <category>openssh</category>
+        <category>vscode</category>
+        <category>环境</category>
+        <category>net</category>
+        <category>wsl2</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>XGBoost</category>
+        <category>wsl</category>
+        <category>server</category>
+        <category>tools</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>emby</category>
+        <category>comfyui</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>google</category>
+        <category>git</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>php</category>
+        <category>文件上传</category>
+        <category>远程</category>
+        <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>证书</category>
+        <category>i春秋</category>
+        <category>certificate</category>
+        <category>pki</category>
+        <category>x509</category>
+        <category>tls</category>
+        <category>openssl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/</guid>
+            <title>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</title>
+            <link>https://0xdadream.github.io/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/</link>
+            <category>ssh</category>
+            <category>cloudflare</category>
+            <category>tunnel</category>
+            <category>zero-trust</category>
+            <category>rdp</category>
+            <category>docker</category>
+            <pubDate>Sun, 09 Aug 2026 04:18:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错&#34;&gt;&lt;a href=&#34;#Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错&#34; class=&#34;headerlink&#34; title=&#34;Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错&#34;&gt;&lt;/a&gt;Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错&lt;/h1&gt;&lt;p&gt;Cloudflare Tunnel 的价值并不只是“内网穿透”。它更像一条由内网主动向 Cloudflare 建立的安全连接：服务器不必拥有公网 IP，也不必在路由器、防火墙或云安全组上开放入站端口，就能把 Web、SSH、RDP、TCP 服务甚至整段私有网段接入 Cloudflare。&lt;/p&gt;
+&lt;p&gt;我之前已经单独写过一篇 &lt;strong&gt;Qwen Agent + Cloudflare Tunnel SSH&lt;/strong&gt; 的实战教程，那篇文章专门解决“临时容器没有公网端口，如何从 Windows SSH 进去”的问题。本文不会重复那篇文章，而是把 Cloudflare Tunnel 当成一个完整产品来讲，重点回答：它有哪些模式、各种功能分别怎么用、什么时候该用哪一种，以及出现故障时应该从哪一层排查。&lt;br&gt;本文的功能与命令以 &lt;strong&gt;2026-08-09 的 Cloudflare 官方文档&lt;/strong&gt;为准。示例统一使用 &lt;code&gt;example.com&lt;/code&gt;、&lt;code&gt;10.10.0.0/16&lt;/code&gt; 等保留示例值；Tunnel Token、私钥、真实内网地址都不应直接写进公开博客。&lt;/p&gt;
+&lt;h2 id=&#34;一、先把-Cloudflare-Tunnel-的工作方式想清楚&#34;&gt;&lt;a href=&#34;#一、先把-Cloudflare-Tunnel-的工作方式想清楚&#34; class=&#34;headerlink&#34; title=&#34;一、先把 Cloudflare Tunnel 的工作方式想清楚&#34;&gt;&lt;/a&gt;一、先把 Cloudflare Tunnel 的工作方式想清楚&lt;/h2&gt;&lt;p&gt;传统公网访问通常是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Internet
+   │
+   ▼
+公网 IP:开放端口
+   │
+   ▼
+NAT / 防火墙 / 端口映射
+   │
+   ▼
+内网服务&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cloudflare Tunnel 则反过来：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;浏览器 / SSH / RDP / WARP 客户端
+              │
+              ▼
+       Cloudflare Edge
+              ▲
+              │ 加密的出站 Tunnel
+              │
+        cloudflared
+              │
+      ┌───────┼────────┐
+      ▼       ▼        ▼
+   Web:8080 SSH:22  LAN 10.10.0.0/16&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关键变化只有一个：&lt;strong&gt;不是外面主动打进你的服务器，而是 &lt;code&gt;cloudflared&lt;/code&gt; 主动从内网连接 Cloudflare。&lt;/strong&gt;&lt;br&gt;这样做有几个直接结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源站可以没有公网 IPv4，也可以位于家庭宽带、CGNAT、公司内网、容器或云私网中。&lt;/li&gt;
+&lt;li&gt;通常不需要把 &lt;code&gt;80/443/22/3389&lt;/code&gt; 等端口直接暴露给 Internet。&lt;/li&gt;
+&lt;li&gt;Web 流量可以继续使用 Cloudflare 的 DNS、TLS、WAF、Rules、Access 等能力。&lt;/li&gt;
+&lt;li&gt;SSH、RDP、任意 TCP 也能通过 Tunnel 转发，但客户端接入方式和普通网页不同。&lt;/li&gt;
+&lt;li&gt;还可以不发布公网域名，而是把整个私有 IP/CIDR 或私有主机名交给 Cloudflare One Client 访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需要注意：Tunnel 解决的是&lt;strong&gt;连接和入口&lt;/strong&gt;问题，不会自动修复你的应用鉴权、数据库权限、SSH 配置或 Windows RDP 安全策略。&lt;/p&gt;
+&lt;h2 id=&#34;二、Cloudflare-Tunnel-到底有哪几种玩法&#34;&gt;&lt;a href=&#34;#二、Cloudflare-Tunnel-到底有哪几种玩法&#34; class=&#34;headerlink&#34; title=&#34;二、Cloudflare Tunnel 到底有哪几种玩法&#34;&gt;&lt;/a&gt;二、Cloudflare Tunnel 到底有哪几种玩法&lt;/h2&gt;&lt;p&gt;实际使用时，最容易混淆的是“Tunnel”这个词下面存在几种管理和接入模式。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;模式&lt;/th&gt;
+&lt;th&gt;适合什么场景&lt;/th&gt;
+&lt;th&gt;是否需要域名&lt;/th&gt;
+&lt;th&gt;是否适合长期运行&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Quick Tunnel&lt;/td&gt;
+&lt;td&gt;临时演示、本机开发、把 localhost 临时发给别人&lt;/td&gt;
+&lt;td&gt;不需要&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Remotely-managed Tunnel&lt;/td&gt;
+&lt;td&gt;大多数正式部署，Dashboard 管理路由和参数&lt;/td&gt;
+&lt;td&gt;发布公网应用时需要&lt;/td&gt;
+&lt;td&gt;是，首选&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Locally-managed Tunnel&lt;/td&gt;
+&lt;td&gt;希望配置完全放在 &lt;code&gt;config.yml&lt;/code&gt;、CLI/Git 中管理&lt;/td&gt;
+&lt;td&gt;发布公网应用时需要&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Private network routing&lt;/td&gt;
+&lt;td&gt;远程访问整个私网、IP/CIDR、私有主机名&lt;/td&gt;
+&lt;td&gt;不一定&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Cloudflare 当前对大多数用户推荐 &lt;strong&gt;remotely-managed tunnel&lt;/strong&gt;。它的 Tunnel 配置由 Cloudflare 控制面管理，服务器只需要持有 Tunnel Token 并运行 &lt;code&gt;cloudflared&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果你只是想快速分享 &lt;code&gt;localhost:8080&lt;/code&gt;，Quick Tunnel 最省事；如果你想做可维护的正式入口，就应该创建命名 Tunnel。&lt;/p&gt;
+&lt;h2 id=&#34;三、开始前需要准备什么&#34;&gt;&lt;a href=&#34;#三、开始前需要准备什么&#34; class=&#34;headerlink&#34; title=&#34;三、开始前需要准备什么&#34;&gt;&lt;/a&gt;三、开始前需要准备什么&lt;/h2&gt;&lt;h3 id=&#34;3-1-最基本的条件&#34;&gt;&lt;a href=&#34;#3-1-最基本的条件&#34; class=&#34;headerlink&#34; title=&#34;3.1 最基本的条件&#34;&gt;&lt;/a&gt;3.1 最基本的条件&lt;/h3&gt;&lt;p&gt;正式发布自己的域名时，通常需要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一个 Cloudflare 账号；&lt;/li&gt;
+&lt;li&gt;一个已接入 Cloudflare DNS 的域名；&lt;/li&gt;
+&lt;li&gt;一台能够主动访问 Internet 的主机；&lt;/li&gt;
+&lt;li&gt;在这台主机上运行 &lt;code&gt;cloudflared&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;本地真正提供服务的 Web/SSH/RDP/TCP 程序。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果只是 Quick Tunnel，则连自己的域名都不需要。&lt;/p&gt;
+&lt;h3 id=&#34;3-2-防火墙真正需要放行什么&#34;&gt;&lt;a href=&#34;#3-2-防火墙真正需要放行什么&#34; class=&#34;headerlink&#34; title=&#34;3.2 防火墙真正需要放行什么&#34;&gt;&lt;/a&gt;3.2 防火墙真正需要放行什么&lt;/h3&gt;&lt;p&gt;Cloudflare Tunnel 是出站连接。当前 &lt;code&gt;cloudflared&lt;/code&gt; 主要通过 &lt;strong&gt;UDP/7844（QUIC）&lt;/strong&gt; 或 &lt;strong&gt;TCP/7844（HTTP/2）&lt;/strong&gt; 连接 Cloudflare Edge；&lt;code&gt;auto&lt;/code&gt; 模式会优先尝试 QUIC，并在 UDP 不可用时回退到 HTTP/2。&lt;/p&gt;
+&lt;p&gt;因此企业或校园网严格限制出站时，至少要确认 DNS、TCP/UDP 7844 和 Cloudflare 管理接口所需的 HTTPS 能正常访问。&lt;/p&gt;
+&lt;p&gt;新版本 &lt;code&gt;cloudflared&lt;/code&gt; 会在 Tunnel 启动前做连接预检。遇到建链失败时，可以直接执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel diag&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要只用 &lt;code&gt;curl https://www.cloudflare.com&lt;/code&gt; 判断 Tunnel 是否可用：能访问 443 并不代表 7844 一定放行。&lt;/p&gt;
+&lt;h2 id=&#34;四、安装-cloudflared&#34;&gt;&lt;a href=&#34;#四、安装-cloudflared&#34; class=&#34;headerlink&#34; title=&#34;四、安装 cloudflared&#34;&gt;&lt;/a&gt;四、安装 cloudflared&lt;/h2&gt;&lt;h3 id=&#34;4-1-Windows-11&#34;&gt;&lt;a href=&#34;#4-1-Windows-11&#34; class=&#34;headerlink&#34; title=&#34;4.1 Windows 11&#34;&gt;&lt;/a&gt;4.1 Windows 11&lt;/h3&gt;&lt;p&gt;如果 Windows Package Manager 中可以正常找到软件包，最方便的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;winget install &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;id Cloudflare&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装后验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cloudflared &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;version
+where&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以直接从 Cloudflare 官方下载页获取 64 位 EXE 或 MSI。Windows 上的独立 &lt;code&gt;cloudflared&lt;/code&gt; 不会自动更新，因此需要自行维护版本。&lt;/p&gt;
+&lt;h3 id=&#34;4-2-macOS&#34;&gt;&lt;a href=&#34;#4-2-macOS&#34; class=&#34;headerlink&#34; title=&#34;4.2 macOS&#34;&gt;&lt;/a&gt;4.2 macOS&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;brew &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; cloudflared
+cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-3-Linux&#34;&gt;&lt;a href=&#34;#4-3-Linux&#34; class=&#34;headerlink&#34; title=&#34;4.3 Linux&#34;&gt;&lt;/a&gt;4.3 Linux&lt;/h3&gt;&lt;p&gt;Cloudflare 官方提供 Package Repository，也提供 amd64、ARM、ARM64 的二进制、&lt;code&gt;.deb&lt;/code&gt; 和 &lt;code&gt;.rpm&lt;/code&gt; 包。生产环境建议优先使用包管理方式，便于升级和服务管理。&lt;/p&gt;
+&lt;p&gt;安装完成统一验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;五、实例-1：不用域名，30-秒启动-Quick-Tunnel&#34;&gt;&lt;a href=&#34;#五、实例-1：不用域名，30-秒启动-Quick-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;五、实例 1：不用域名，30 秒启动 Quick Tunnel&#34;&gt;&lt;/a&gt;五、实例 1：不用域名，30 秒启动 Quick Tunnel&lt;/h2&gt;&lt;p&gt;Quick Tunnel 非常适合临时演示。&lt;/p&gt;
+&lt;p&gt;假设本机有一个 HTTP 服务监听 &lt;code&gt;127.0.0.1:8080&lt;/code&gt;。没有现成服务时，可以临时启动：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;python3 &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; http.server &lt;span class=&#34;token number&#34;&gt;8080&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--bind&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另开一个终端：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动后会得到一个随机的：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;https://xxxxxxxx.trycloudflare.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;访问这个地址，请求会经过 Cloudflare 再到你的 &lt;code&gt;127.0.0.1:8080&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;Quick Tunnel 的优点是零配置、零域名；缺点同样明显：地址随机、生命周期依赖当前进程，也不是为正式生产环境设计的。&lt;/p&gt;
+&lt;p&gt;因此它适合：临时 Demo、Webhook 调试、手机访问电脑上的开发页面、给同事短时间看一个本地站点。&lt;/p&gt;
+&lt;p&gt;不适合：长期网站、管理后台、数据库、SSH/RDP 的正式入口。&lt;/p&gt;
+&lt;h2 id=&#34;六、实例-2：正式发布一个本地-Web-服务&#34;&gt;&lt;a href=&#34;#六、实例-2：正式发布一个本地-Web-服务&#34; class=&#34;headerlink&#34; title=&#34;六、实例 2：正式发布一个本地 Web 服务&#34;&gt;&lt;/a&gt;六、实例 2：正式发布一个本地 Web 服务&lt;/h2&gt;&lt;p&gt;这是最常用的 Cloudflare Tunnel 场景。&lt;/p&gt;
+&lt;p&gt;假设：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;域名：app.example.com
+源站：127.0.0.1:8080
+协议：HTTP&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-1-在-Dashboard-创建-Tunnel&#34;&gt;&lt;a href=&#34;#6-1-在-Dashboard-创建-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;6.1 在 Dashboard 创建 Tunnel&#34;&gt;&lt;/a&gt;6.1 在 Dashboard 创建 Tunnel&lt;/h3&gt;&lt;p&gt;进入 Cloudflare Dashboard 的 Tunnel 页面，创建一个新的 Cloudflare Tunnel，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;home-server&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;选择与你服务器系统对应的安装方式。Dashboard 会给出带 Tunnel Token 的启动命令。&lt;/p&gt;
+&lt;p&gt;Token 相当于这条 Tunnel 的连接凭据。&lt;strong&gt;不要把完整 Token 放进博客、GitHub、截图、聊天记录或 Docker Compose 仓库。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;6-2-添加-Published-application&#34;&gt;&lt;a href=&#34;#6-2-添加-Published-application&#34; class=&#34;headerlink&#34; title=&#34;6.2 添加 Published application&#34;&gt;&lt;/a&gt;6.2 添加 Published application&lt;/h3&gt;&lt;p&gt;在这条 Tunnel 的 Routes 中添加 Published application：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Hostname: app.example.com
+Service Type: HTTP
+URL: http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后，Cloudflare 会让该 hostname 指向 Tunnel。其本质是把域名关联到 &lt;code&gt;&amp;lt;Tunnel-UUID&amp;gt;.cfargotunnel.com&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;6-3-在服务器运行-Tunnel&#34;&gt;&lt;a href=&#34;#6-3-在服务器运行-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;6.3 在服务器运行 Tunnel&#34;&gt;&lt;/a&gt;6.3 在服务器运行 Tunnel&lt;/h3&gt;&lt;p&gt;临时验证时，可以直接使用 Dashboard 给出的命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel run &lt;span class=&#34;token parameter variable&#34;&gt;--token&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;lt;TUNNEL_TOKEN&amp;gt;&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;长期运行不要一直开着终端，后文会改成系统服务或 Docker。&lt;/p&gt;
+&lt;h3 id=&#34;6-4-分层验证，不要一上来只看公网域名&#34;&gt;&lt;a href=&#34;#6-4-分层验证，不要一上来只看公网域名&#34; class=&#34;headerlink&#34; title=&#34;6.4 分层验证，不要一上来只看公网域名&#34;&gt;&lt;/a&gt;6.4 分层验证，不要一上来只看公网域名&lt;/h3&gt;&lt;p&gt;先在运行 &lt;code&gt;cloudflared&lt;/code&gt; 的主机测试源站：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本地返回正常后，再看 Tunnel 日志是否出现已注册连接，最后访问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-I&lt;/span&gt; https://app.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一个非常重要的排错原则是：&lt;strong&gt;Tunnel 显示 Healthy，只能证明 &lt;code&gt;cloudflared&lt;/code&gt; 到 Cloudflare 的连接健康，不代表 &lt;code&gt;cloudflared&lt;/code&gt; 一定能访问你的 &lt;code&gt;127.0.0.1:8080&lt;/code&gt;。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;因此“Tunnel Healthy，但网站 502”并不矛盾，通常是最后一跳的源站地址、端口、协议或证书有问题。&lt;/p&gt;
+&lt;h2 id=&#34;七、一条-Tunnel-可以同时发布多少种服务&#34;&gt;&lt;a href=&#34;#七、一条-Tunnel-可以同时发布多少种服务&#34; class=&#34;headerlink&#34; title=&#34;七、一条 Tunnel 可以同时发布多少种服务&#34;&gt;&lt;/a&gt;七、一条 Tunnel 可以同时发布多少种服务&lt;/h2&gt;&lt;p&gt;一条 Tunnel 不等于一个端口。你可以给同一个 Tunnel 配置多个 hostname，每个 hostname 指向不同服务。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;公网入口&lt;/th&gt;
+&lt;th&gt;Tunnel 内部服务&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;app.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;http://127.0.0.1:8080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Web 应用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;api.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;http://127.0.0.1:3000&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;API&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;grafana.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;http://127.0.0.1:3001&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Grafana&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh://127.0.0.1:22&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;SSH&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;rdp.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rdp://127.0.0.1:3389&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;RDP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;db.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;tcp://127.0.0.1:5432&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;PostgreSQL/TCP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Cloudflare 当前 Published application 支持的典型 Service Type 包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HTTP&lt;/code&gt;：例如 &lt;code&gt;http://localhost:8000&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTPS&lt;/code&gt;：例如 &lt;code&gt;https://localhost:8443&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UNIX&lt;/code&gt; / &lt;code&gt;UNIX+TLS&lt;/code&gt;：直接代理 Unix Socket&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TCP&lt;/code&gt;：任意 TCP 服务&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SSH&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RDP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMB&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTP_STATUS&lt;/code&gt;：直接返回指定 HTTP 状态码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BASTION&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需要记住一个边界：&lt;strong&gt;HTTP/HTTPS 可以直接让浏览器访问；SSH、RDP、SMB、任意 TCP 这类非 HTTP Published Application，传统客户端通常还需要客户端侧的 &lt;code&gt;cloudflared&lt;/code&gt;，或者改用 Cloudflare One Client 的私网路由方案。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;八、实例-3：源站本身就是-HTTPS，证书怎么处理&#34;&gt;&lt;a href=&#34;#八、实例-3：源站本身就是-HTTPS，证书怎么处理&#34; class=&#34;headerlink&#34; title=&#34;八、实例 3：源站本身就是 HTTPS，证书怎么处理&#34;&gt;&lt;/a&gt;八、实例 3：源站本身就是 HTTPS，证书怎么处理&lt;/h2&gt;&lt;p&gt;假设本地服务不是 HTTP，而是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;https://127.0.0.1:8443&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Published application 的 Service Type 选择 HTTPS，并填：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;https://127.0.0.1:8443&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果源站证书是给 &lt;code&gt;internal.example.com&lt;/code&gt; 签发的，而你通过 &lt;code&gt;127.0.0.1&lt;/code&gt; 连接，就可能出现证书名称不匹配。更合理的处理是配置 &lt;strong&gt;Origin Server Name&lt;/strong&gt;，告诉 &lt;code&gt;cloudflared&lt;/code&gt; 期望证书中的服务器名：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Origin Server Name: internal.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果是私有 CA，也可以让系统信任对应 CA，保持 TLS 验证开启。&lt;/p&gt;
+&lt;h3 id=&#34;8-1-No-TLS-Verify-为什么不该默认打开&#34;&gt;&lt;a href=&#34;#8-1-No-TLS-Verify-为什么不该默认打开&#34; class=&#34;headerlink&#34; title=&#34;8.1 No TLS Verify 为什么不该默认打开&#34;&gt;&lt;/a&gt;8.1 &lt;code&gt;No TLS Verify&lt;/code&gt; 为什么不该默认打开&lt;/h3&gt;&lt;p&gt;Cloudflare 也提供 &lt;code&gt;noTLSVerify=true&lt;/code&gt;，它会直接关闭 &lt;code&gt;cloudflared&lt;/code&gt; 到源站这一跳的证书验证。这样自签名证书确实能立刻连通，但也失去了对源站身份的验证。&lt;/p&gt;
+&lt;p&gt;所以推荐顺序是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用正确的源站证书；&lt;/li&gt;
+&lt;li&gt;必要时配置 &lt;code&gt;originServerName&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;私有 CA 则正确导入信任链；&lt;/li&gt;
+&lt;li&gt;只有明确接受风险时才使用 &lt;code&gt;No TLS Verify&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其他常用 Origin 参数还有 &lt;code&gt;connectTimeout&lt;/code&gt;、&lt;code&gt;tlsTimeout&lt;/code&gt;、&lt;code&gt;httpHostHeader&lt;/code&gt;、&lt;code&gt;disableChunkedEncoding&lt;/code&gt; 和 &lt;code&gt;http2Origin&lt;/code&gt;。遇到旧应用、反向代理 Host 头、WSGI 或源站 HTTP/2 问题时，这些参数很有用。&lt;/p&gt;
+&lt;h2 id=&#34;九、实例-4：给管理后台加-Cloudflare-Access-登录&#34;&gt;&lt;a href=&#34;#九、实例-4：给管理后台加-Cloudflare-Access-登录&#34; class=&#34;headerlink&#34; title=&#34;九、实例 4：给管理后台加 Cloudflare Access 登录&#34;&gt;&lt;/a&gt;九、实例 4：给管理后台加 Cloudflare Access 登录&lt;/h2&gt;&lt;p&gt;如果 &lt;code&gt;app.example.com&lt;/code&gt; 是公开博客，直接发布即可；如果它是 Grafana、Portainer、NAS 管理页、内部面板，就不应该只依赖应用自身登录框。&lt;/p&gt;
+&lt;p&gt;这时可以给 Published Application 前面再加一层 Cloudflare Access：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;用户
+ │
+ ▼
+Cloudflare Access 身份验证/策略
+ │ 通过
+ ▼
+Cloudflare Edge
+ │
+ ▼
+Tunnel → 内部 Web 服务&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 Zero Trust 的 Access 中创建 Self-hosted Application，并把域名设为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;admin.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后建立 Allow 策略，只允许指定身份、用户组或其他条件通过。&lt;/p&gt;
+&lt;p&gt;这样真正的源站端口仍未公开，而访问者在请求到达内部应用前就先经过 Cloudflare 的身份策略。&lt;/p&gt;
+&lt;h3 id=&#34;9-1-机器调用不要照搬人工网页登录&#34;&gt;&lt;a href=&#34;#9-1-机器调用不要照搬人工网页登录&#34; class=&#34;headerlink&#34; title=&#34;9.1 机器调用不要照搬人工网页登录&#34;&gt;&lt;/a&gt;9.1 机器调用不要照搬人工网页登录&lt;/h3&gt;&lt;p&gt;浏览器用户适合交互式身份认证；CI、脚本、API 客户端等机器流量则应使用适合机器身份的 &lt;strong&gt;Service Token / Service Auth&lt;/strong&gt; 方案，而不是让无人值守程序依赖弹浏览器登录。&lt;/p&gt;
+&lt;p&gt;Tunnel 与 Access 是两层不同能力：&lt;strong&gt;Tunnel 负责把流量送进去，Access 决定谁能进去。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;十、实例-5：通过-Tunnel-使用-SSH&#34;&gt;&lt;a href=&#34;#十、实例-5：通过-Tunnel-使用-SSH&#34; class=&#34;headerlink&#34; title=&#34;十、实例 5：通过 Tunnel 使用 SSH&#34;&gt;&lt;/a&gt;十、实例 5：通过 Tunnel 使用 SSH&lt;/h2&gt;&lt;p&gt;SSH 是最典型的非 HTTP 场景。服务端先确保 SSH 真正在本机可用，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ss &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:22&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; localhost&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后给 Tunnel 添加 Published application：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Hostname: ssh.example.com
+Service Type: SSH
+URL: localhost:22&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于管理员入口，建议再创建对应的 Cloudflare Access 应用，而不是仅仅发布 hostname。&lt;/p&gt;
+&lt;h3 id=&#34;10-1-客户端使用-cloudflared-OpenSSH&#34;&gt;&lt;a href=&#34;#10-1-客户端使用-cloudflared-OpenSSH&#34; class=&#34;headerlink&#34; title=&#34;10.1 客户端使用 cloudflared + OpenSSH&#34;&gt;&lt;/a&gt;10.1 客户端使用 cloudflared + OpenSSH&lt;/h3&gt;&lt;p&gt;客户端也安装 &lt;code&gt;cloudflared&lt;/code&gt;，然后在 &lt;code&gt;~/.ssh/config&lt;/code&gt; 中加入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host ssh.example.com
+    User youruser
+    ProxyCommand cloudflared access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows OpenSSH 同样可以使用这一思路。如果 &lt;code&gt;cloudflared.exe&lt;/code&gt; 不在 PATH，可以在 &lt;code&gt;ProxyCommand&lt;/code&gt; 中写绝对路径。&lt;/p&gt;
+&lt;p&gt;之后正常执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; ssh.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;首次访问受 Access 保护的 hostname 时，&lt;code&gt;cloudflared&lt;/code&gt; 会启动浏览器完成身份认证，随后 SSH 数据通过 Cloudflare 转入你的内网 SSH Server。&lt;/p&gt;
+&lt;h3 id=&#34;10-2-浏览器里直接打开-SSH&#34;&gt;&lt;a href=&#34;#10-2-浏览器里直接打开-SSH&#34; class=&#34;headerlink&#34; title=&#34;10.2 浏览器里直接打开 SSH&#34;&gt;&lt;/a&gt;10.2 浏览器里直接打开 SSH&lt;/h3&gt;&lt;p&gt;Cloudflare 还支持 browser-rendered SSH。配置好 SSH Published Application 与 Access 后，用户可以从浏览器/App Launcher 打开终端，而不需要本地 SSH 客户端。&lt;/p&gt;
+&lt;p&gt;这适合临时运维或受控设备，但日常开发通常还是原生 OpenSSH 更顺手。&lt;/p&gt;
+&lt;h3 id=&#34;10-3-私网-SSH：不发布-ssh-example-com&#34;&gt;&lt;a href=&#34;#10-3-私网-SSH：不发布-ssh-example-com&#34; class=&#34;headerlink&#34; title=&#34;10.3 私网 SSH：不发布 ssh.example.com&#34;&gt;&lt;/a&gt;10.3 私网 SSH：不发布 &lt;code&gt;ssh.example.com&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;另一种思路是后面要讲的 Private network routing：把 &lt;code&gt;10.10.0.0/16&lt;/code&gt; 或 &lt;code&gt;server.internal&lt;/code&gt; 路由进 Tunnel，让电脑通过 Cloudflare One Client 接入后直接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; youruser@10.10.0.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种方式更像传统 VPN，SSH 自己仍然使用原生密钥认证，不必为每台机器建立一个公网 hostname。&lt;/p&gt;
+&lt;h3 id=&#34;10-4-Access-for-Infrastructure&#34;&gt;&lt;a href=&#34;#10-4-Access-for-Infrastructure&#34; class=&#34;headerlink&#34; title=&#34;10.4 Access for Infrastructure&#34;&gt;&lt;/a&gt;10.4 Access for Infrastructure&lt;/h3&gt;&lt;p&gt;如果是团队化运维，还可以使用 Cloudflare Access for Infrastructure：它把目标主机、用户名和 Access 策略结合起来，并支持短期 SSH 证书、会话控制和 SSH 命令日志等能力。&lt;/p&gt;
+&lt;p&gt;需要注意当前功能边界：某些 SSH 转发能力，例如本地/远程端口转发、Agent Forwarding、X11 Forwarding，并不适用于所有 Access for Infrastructure 场景。决定替换现有堡垒机前，应先核对你的工作流。&lt;/p&gt;
+&lt;p&gt;如果只是个人服务器，通常“Tunnel + Access + OpenSSH ProxyCommand”或“Private network + 原生 SSH”已经足够。&lt;/p&gt;
+&lt;h2 id=&#34;十一、实例-6：转发任意-TCP——以-PostgreSQL-为例&#34;&gt;&lt;a href=&#34;#十一、实例-6：转发任意-TCP——以-PostgreSQL-为例&#34; class=&#34;headerlink&#34; title=&#34;十一、实例 6：转发任意 TCP——以 PostgreSQL 为例&#34;&gt;&lt;/a&gt;十一、实例 6：转发任意 TCP——以 PostgreSQL 为例&lt;/h2&gt;&lt;p&gt;假设 PostgreSQL 只监听服务器本地：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:5432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;给 Tunnel 添加：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Hostname: db.example.com
+Service Type: TCP
+URL: localhost:5432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并建议给 &lt;code&gt;db.example.com&lt;/code&gt; 配置 Access 策略。&lt;/p&gt;
+&lt;p&gt;客户端安装 &lt;code&gt;cloudflared&lt;/code&gt; 后，先在本机开一个临时监听端口：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared access tcp &lt;span class=&#34;token parameter variable&#34;&gt;--hostname&lt;/span&gt; db.example.com &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; localhost:15432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后数据库客户端不再连接公网 &lt;code&gt;db.example.com:5432&lt;/code&gt;，而是连接本机：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;psql &lt;span class=&#34;token parameter variable&#34;&gt;-h&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1 &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;15432&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-U&lt;/span&gt; postgres&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;链路实际上是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;psql → localhost:15432 → 客户端 cloudflared
+     → Cloudflare Access/Tunnel → 服务端 cloudflared
+     → localhost:5432 → PostgreSQL&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同一方法也可以用于 Redis、MySQL、开发调试端口以及其他基于 TCP 的内部服务。&lt;/p&gt;
+&lt;h2 id=&#34;十二、实例-7：远程连接-Windows-RDP&#34;&gt;&lt;a href=&#34;#十二、实例-7：远程连接-Windows-RDP&#34; class=&#34;headerlink&#34; title=&#34;十二、实例 7：远程连接 Windows RDP&#34;&gt;&lt;/a&gt;十二、实例 7：远程连接 Windows RDP&lt;/h2&gt;&lt;p&gt;假设内网 Windows 主机已经开启远程桌面，RDP 监听：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;localhost:3389&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Tunnel 中添加：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Hostname: rdp.example.com
+Service Type: RDP
+URL: localhost:3389&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并给这个 hostname 创建 Access 应用限制访问者。&lt;/p&gt;
+&lt;h3 id=&#34;12-1-使用本地-RDP-客户端&#34;&gt;&lt;a href=&#34;#12-1-使用本地-RDP-客户端&#34; class=&#34;headerlink&#34; title=&#34;12.1 使用本地 RDP 客户端&#34;&gt;&lt;/a&gt;12.1 使用本地 RDP 客户端&lt;/h3&gt;&lt;p&gt;客户端执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cloudflared access rdp &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;hostname rdp&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;url rdp:&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;localhost:13389&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里故意使用本地 &lt;code&gt;13389&lt;/code&gt;，避免 Windows 本机 &lt;code&gt;3389&lt;/code&gt; 已经被 Remote Desktop Service 占用。&lt;/p&gt;
+&lt;p&gt;随后在 Microsoft Remote Desktop / &lt;code&gt;mstsc&lt;/code&gt; 中连接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;localhost:13389&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cloudflare 负责外层身份认证和传输，最终 Windows 仍会使用目标主机自己的 Windows 账号凭据登录。&lt;/p&gt;
+&lt;h3 id=&#34;12-2-直接在浏览器使用-RDP&#34;&gt;&lt;a href=&#34;#12-2-直接在浏览器使用-RDP&#34; class=&#34;headerlink&#34; title=&#34;12.2 直接在浏览器使用 RDP&#34;&gt;&lt;/a&gt;12.2 直接在浏览器使用 RDP&lt;/h3&gt;&lt;p&gt;Cloudflare 当前也支持 browser-based RDP。用户可以从 Access App Launcher 发起连接，不要求客户端安装传统 RDP 软件或 Cloudflare One Client。&lt;/p&gt;
+&lt;p&gt;这种方式适合临时运维、受限终端或不方便安装客户端的设备；长期桌面办公则要结合体验、键盘映射和组织策略选择。&lt;/p&gt;
+&lt;h2 id=&#34;十三、实例-8：把整个家庭-实验室私网接进来&#34;&gt;&lt;a href=&#34;#十三、实例-8：把整个家庭-实验室私网接进来&#34; class=&#34;headerlink&#34; title=&#34;十三、实例 8：把整个家庭/实验室私网接进来&#34;&gt;&lt;/a&gt;十三、实例 8：把整个家庭/实验室私网接进来&lt;/h2&gt;&lt;p&gt;如果你有很多内网设备，一个个创建 &lt;code&gt;ssh.example.com&lt;/code&gt;、&lt;code&gt;nas.example.com&lt;/code&gt;、&lt;code&gt;rdp.example.com&lt;/code&gt; 会越来越麻烦。这时更适合 &lt;strong&gt;Private network routing&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;假设服务器所在 LAN 是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10.10.0.0/16&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10.10.0.10  Linux Server
+10.10.0.20  NAS
+10.10.0.30  Windows PC
+10.10.0.40  PostgreSQL&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 Cloudflare Zero Trust 的 Tunnel/Routes 中创建 Private network route，把：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10.10.0.0/16&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;路由到这条 Tunnel。&lt;/p&gt;
+&lt;p&gt;远端电脑安装并登录组织的 Cloudflare One Client，然后确保 Split Tunnel、Gateway 网络策略等允许该网段通过 Cloudflare。&lt;/p&gt;
+&lt;p&gt;之后应用可以像在局域网里一样直接访问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; user@10.10.0.10
+&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; http://10.10.0.20:5000
+psql &lt;span class=&#34;token parameter variable&#34;&gt;-h&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10.10&lt;/span&gt;.0.40 &lt;span class=&#34;token parameter variable&#34;&gt;-U&lt;/span&gt; postgres&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 远程桌面可以直接连接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;10.10.0.30&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时你不需要为每一种协议配置单独的公网 hostname，Cloudflare Tunnel 更像一个带 Zero Trust 策略的远程私网入口。&lt;/p&gt;
+&lt;h3 id=&#34;13-1-私网模式的两个关键边界&#34;&gt;&lt;a href=&#34;#13-1-私网模式的两个关键边界&#34; class=&#34;headerlink&#34; title=&#34;13.1 私网模式的两个关键边界&#34;&gt;&lt;/a&gt;13.1 私网模式的两个关键边界&lt;/h3&gt;&lt;p&gt;第一，&lt;code&gt;cloudflared&lt;/code&gt; 的这条私网 Tunnel 是&lt;strong&gt;出站建立、用于接收远端用户请求&lt;/strong&gt;的。内网服务器自己主动访问 Internet 时，仍然使用它原本的默认路由，不会自动从 Cloudflare Tunnel 出去。&lt;/p&gt;
+&lt;p&gt;第二，目标内网服务看到的源地址通常是运行 &lt;code&gt;cloudflared&lt;/code&gt; 那台机器的本地源 IP，而不是远端笔记本原始地址。因此如果内部数据库或防火墙依赖 Source IP ACL，需要重新设计策略，不能假设客户端真实 LAN IP 会透明保留。&lt;/p&gt;
+&lt;h3 id=&#34;13-2-网段重叠怎么办&#34;&gt;&lt;a href=&#34;#13-2-网段重叠怎么办&#34; class=&#34;headerlink&#34; title=&#34;13.2 网段重叠怎么办&#34;&gt;&lt;/a&gt;13.2 网段重叠怎么办&lt;/h3&gt;&lt;p&gt;如果两个办公室都使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;192.168.1.0/24&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;直接建立两条同 CIDR 路由会产生歧义。Cloudflare 提供 Virtual Network 来隔离重叠地址空间。对于多家庭、多实验室、多云 VPC 场景，应该在设计阶段就处理重叠，而不是等路由随机命中后再排错。&lt;/p&gt;
+&lt;h2 id=&#34;十四、实例-9：通过私有主机名访问内部服务&#34;&gt;&lt;a href=&#34;#十四、实例-9：通过私有主机名访问内部服务&#34; class=&#34;headerlink&#34; title=&#34;十四、实例 9：通过私有主机名访问内部服务&#34;&gt;&lt;/a&gt;十四、实例 9：通过私有主机名访问内部服务&lt;/h2&gt;&lt;p&gt;有些内部服务 IP 会变化，或者用户更希望访问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;git.internal.example
+nas.internal.example&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而不是记 &lt;code&gt;10.10.0.20&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;Cloudflare Tunnel 支持 private hostname routing。客户端仍使用 Cloudflare One Client，通过 Zero Trust 的 Gateway/DNS 与 Tunnel 把这些私有主机名解析并路由到内部网络。&lt;/p&gt;
+&lt;p&gt;这种模式适合内部 Git、NAS、开发环境和动态地址服务。与 Published application 不同，它不是把 &lt;code&gt;git.internal.example&lt;/code&gt; 发布成一个所有 Internet 用户都能解析并直接访问的普通公网入口。&lt;/p&gt;
+&lt;h2 id=&#34;十五、实例-10：用-Docker-运行-cloudflared&#34;&gt;&lt;a href=&#34;#十五、实例-10：用-Docker-运行-cloudflared&#34; class=&#34;headerlink&#34; title=&#34;十五、实例 10：用 Docker 运行 cloudflared&#34;&gt;&lt;/a&gt;十五、实例 10：用 Docker 运行 cloudflared&lt;/h2&gt;&lt;p&gt;如果服务本来就在 Docker 中，把 &lt;code&gt;cloudflared&lt;/code&gt; 也容器化通常更容易维护。&lt;/p&gt;
+&lt;p&gt;官方镜像基本用法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;docker&lt;/span&gt; run &lt;span class=&#34;token parameter variable&#34;&gt;--rm&lt;/span&gt; cloudflare/cloudflared:latest &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  tunnel --no-autoupdate run &lt;span class=&#34;token parameter variable&#34;&gt;--token&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;lt;TUNNEL_TOKEN&amp;gt;&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正式部署不建议把 Token 明文写进 Compose。可以保存为仅管理员可读文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; ./cloudflared
+&lt;span class=&#34;token builtin class-name&#34;&gt;printf&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;%s&#39;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;lt;TUNNEL_TOKEN&amp;gt;&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; ./cloudflared/tunnel-token
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; ./cloudflared/tunnel-token&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;compose.yml&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;cloudflared&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token key atrule&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; cloudflare/cloudflared&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;2026.7.3
+    &lt;span class=&#34;token key atrule&#34;&gt;restart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; unless&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;stopped
+    &lt;span class=&#34;token key atrule&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; tunnel &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;no&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;autoupdate run &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;file /run/secrets/tunnel&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token
+    &lt;span class=&#34;token key atrule&#34;&gt;volumes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+      &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; ./cloudflared/tunnel&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;/run/secrets/tunnel&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;ro&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;docker&lt;/span&gt; compose up &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;docker&lt;/span&gt; compose logs &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;固定版本标签有利于可重复部署；升级时再显式修改镜像版本并验证。&lt;/p&gt;
+&lt;h3 id=&#34;15-1-Docker-最容易踩的-localhost-坑&#34;&gt;&lt;a href=&#34;#15-1-Docker-最容易踩的-localhost-坑&#34; class=&#34;headerlink&#34; title=&#34;15.1 Docker 最容易踩的 localhost 坑&#34;&gt;&lt;/a&gt;15.1 Docker 最容易踩的 &lt;code&gt;localhost&lt;/code&gt; 坑&lt;/h3&gt;&lt;p&gt;如果 &lt;code&gt;cloudflared&lt;/code&gt; 自己在容器里，那么：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;http://localhost:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;指的是 &lt;strong&gt;cloudflared 容器自己的 8080&lt;/strong&gt;，不是宿主机，也不是另一个业务容器。&lt;/p&gt;
+&lt;p&gt;如果业务服务也在同一个 Compose 网络中，应该直接使用服务名，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;web&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token key atrule&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; nginx&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;alpine
+
+  &lt;span class=&#34;token key atrule&#34;&gt;cloudflared&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;token key atrule&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; cloudflare/cloudflared&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;2026.7.3
+    &lt;span class=&#34;token key atrule&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; tunnel &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;no&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;autoupdate run &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;file /run/secrets/tunnel&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;token&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Tunnel 的 Published application 此时可以指向：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;http://web:80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果目标在宿主机，则要使用容器能够访问宿主机的地址，而不是机械地写 &lt;code&gt;127.0.0.1&lt;/code&gt;。不同 Linux/Windows Docker 网络模式的宿主机地址不同，应先从 cloudflared 容器内部测试连通性。&lt;/p&gt;
+&lt;p&gt;调试命令可以用临时容器进入同一网络验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://web:80&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先证明 Docker 网络没问题，再排查 Cloudflare。&lt;/p&gt;
+&lt;h2 id=&#34;十六、让-Tunnel-开机自启：系统服务&#34;&gt;&lt;a href=&#34;#十六、让-Tunnel-开机自启：系统服务&#34; class=&#34;headerlink&#34; title=&#34;十六、让 Tunnel 开机自启：系统服务&#34;&gt;&lt;/a&gt;十六、让 Tunnel 开机自启：系统服务&lt;/h2&gt;&lt;p&gt;Cloudflare 官方建议长期运行时把 &lt;code&gt;cloudflared&lt;/code&gt; 作为系统服务，而不是依赖一个打开的终端。&lt;/p&gt;
+&lt;h3 id=&#34;16-1-Remotely-managed-Tunnel&#34;&gt;&lt;a href=&#34;#16-1-Remotely-managed-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;16.1 Remotely-managed Tunnel&#34;&gt;&lt;/a&gt;16.1 Remotely-managed Tunnel&lt;/h3&gt;&lt;p&gt;Dashboard 为不同系统生成的命令通常会包含 Token。按照 Dashboard 当前给出的命令安装最稳妥，例如 Linux 常见形式为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; cloudflared &lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;&amp;lt;TUNNEL_TOKEN&amp;gt;&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装后检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;systemctl status cloudflared
+journalctl &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;100&lt;/span&gt; --no-pager&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 则应在管理员终端按照 Dashboard/官方 Windows Service 指引安装并检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sc&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe query cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;16-2-Locally-managed-Tunnel&#34;&gt;&lt;a href=&#34;#16-2-Locally-managed-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;16.2 Locally-managed Tunnel&#34;&gt;&lt;/a&gt;16.2 Locally-managed Tunnel&lt;/h3&gt;&lt;p&gt;如果使用本地 &lt;code&gt;config.yml&lt;/code&gt;，Linux 可以：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--config&lt;/span&gt; /home/&lt;span class=&#34;token environment constant&#34;&gt;USER&lt;/span&gt;/.cloudflared/config.yml &lt;span class=&#34;token function&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl start cloudflared
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl status cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里显式写 &lt;code&gt;--config&lt;/code&gt; 很重要：使用 &lt;code&gt;sudo&lt;/code&gt; 后 &lt;code&gt;$HOME&lt;/code&gt; 可能变成 &lt;code&gt;/root&lt;/code&gt;，否则服务可能找不到普通用户目录中的配置文件。&lt;/p&gt;
+&lt;h2 id=&#34;十七、实例-11：完全用-config-yml-管理-Tunnel&#34;&gt;&lt;a href=&#34;#十七、实例-11：完全用-config-yml-管理-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;十七、实例 11：完全用 config.yml 管理 Tunnel&#34;&gt;&lt;/a&gt;十七、实例 11：完全用 config.yml 管理 Tunnel&lt;/h2&gt;&lt;p&gt;如果你希望配置可版本化、可审计，或者想理解 Tunnel 的底层 CLI 工作流，可以使用 locally-managed tunnel。&lt;/p&gt;
+&lt;p&gt;先登录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel login&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览器授权后会生成账户级 &lt;code&gt;cert.pem&lt;/code&gt;。然后创建 Tunnel：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel create home-lab
+cloudflared tunnel list&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;记下生成的 Tunnel UUID，并创建 &lt;code&gt;~/.cloudflared/config.yml&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;tunnel&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; 11111111&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;2222&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;3333&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;4444&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;555555555555&lt;/span&gt;
+&lt;span class=&#34;token key atrule&#34;&gt;credentials-file&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; /home/user/.cloudflared/11111111&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;2222&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;3333&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;4444&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;555555555555.json
+
+&lt;span class=&#34;token key atrule&#34;&gt;ingress&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;hostname&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; app.example.com
+    &lt;span class=&#34;token key atrule&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; http&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//127.0.0.1&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8080&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;hostname&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; api.example.com
+    &lt;span class=&#34;token key atrule&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; http&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//127.0.0.1&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3000&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;hostname&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ssh.example.com
+    &lt;span class=&#34;token key atrule&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ssh&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;//127.0.0.1&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;22&lt;/span&gt;
+  &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; http_status&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;404&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一条 catch-all 规则非常重要：没有匹配前面 hostname 的请求统一返回 404。&lt;/p&gt;
+&lt;h3 id=&#34;17-1-配置写完先验证，不要直接重启生产服务&#34;&gt;&lt;a href=&#34;#17-1-配置写完先验证，不要直接重启生产服务&#34; class=&#34;headerlink&#34; title=&#34;17.1 配置写完先验证，不要直接重启生产服务&#34;&gt;&lt;/a&gt;17.1 配置写完先验证，不要直接重启生产服务&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel ingress validate&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;还可以测试某个 URL 最终会命中哪条规则：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel ingress rule https://app.example.com
+cloudflared tunnel ingress rule https://unknown.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为 hostname 创建 DNS 路由：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel route dns home-lab app.example.com
+cloudflared tunnel route dns home-lab api.example.com
+cloudflared tunnel route dns home-lab ssh.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后运行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel run home-lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看详情：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel info home-lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;DNS 记录与 Tunnel 进程是独立的：即使 Tunnel 停掉，CNAME 仍会存在。因此“DNS 有记录”不等于 Tunnel 在线。&lt;/p&gt;
+&lt;h3 id=&#34;17-2-Locally-managed-Tunnel-同样可以路由私网&#34;&gt;&lt;a href=&#34;#17-2-Locally-managed-Tunnel-同样可以路由私网&#34; class=&#34;headerlink&#34; title=&#34;17.2 Locally-managed Tunnel 同样可以路由私网&#34;&gt;&lt;/a&gt;17.2 Locally-managed Tunnel 同样可以路由私网&lt;/h3&gt;&lt;p&gt;配置文件启用 WARP routing：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-yaml&#34; data-language=&#34;yaml&#34;&gt;&lt;code class=&#34;language-yaml&#34;&gt;&lt;span class=&#34;token key atrule&#34;&gt;tunnel&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; 11111111&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;2222&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;3333&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;4444&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;555555555555&lt;/span&gt;
+&lt;span class=&#34;token key atrule&#34;&gt;credentials-file&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; /home/user/.cloudflared/11111111&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;2222&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;3333&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;4444&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;555555555555.json
+&lt;span class=&#34;token key atrule&#34;&gt;warp-routing&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;token key atrule&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token boolean important&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加 CIDR：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel route &lt;span class=&#34;token function&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10.10&lt;/span&gt;.0.0/16 home-lab
+cloudflared tunnel route &lt;span class=&#34;token function&#34;&gt;ip&lt;/span&gt; show&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这说明“公网 Published Application”和“私网 IP routing”可以使用同一个 Cloudflare Tunnel 体系，但终端用户的接入方式不同：前者走公网 hostname，后者通常由 Cloudflare One Client 把私网流量送到 Cloudflare。&lt;/p&gt;
+&lt;h2 id=&#34;十八、Tunnel-传输协议与常用运行参数&#34;&gt;&lt;a href=&#34;#十八、Tunnel-传输协议与常用运行参数&#34; class=&#34;headerlink&#34; title=&#34;十八、Tunnel 传输协议与常用运行参数&#34;&gt;&lt;/a&gt;十八、Tunnel 传输协议与常用运行参数&lt;/h2&gt;&lt;p&gt;一般情况下不要为了“优化”而盲目强制协议，默认：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--protocol&lt;/span&gt; auto run &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;auto&lt;/code&gt; 会优先尝试 QUIC；如果 UDP/7844 不可用，可以回退 HTTP/2。排错时才适合显式测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--protocol&lt;/span&gt; quic run &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.
+cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--protocol&lt;/span&gt; http2 run &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 QUIC 必定失败而 HTTP/2 正常，重点检查 UDP/7844；如果两者都失败，则继续检查 TCP/7844、DNS、代理和防火墙。&lt;br&gt;几个值得知道的运行参数：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;使用建议&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;`–protocol auto&lt;/td&gt;
+&lt;td&gt;quic&lt;/td&gt;
+&lt;td&gt;http2`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`–loglevel info&lt;/td&gt;
+&lt;td&gt;warn&lt;/td&gt;
+&lt;td&gt;error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--logfile PATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;写入日志文件&lt;/td&gt;
+&lt;td&gt;服务化部署方便留存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--metrics IP:PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定 Prometheus metrics 地址&lt;/td&gt;
+&lt;td&gt;只绑定可信接口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--grace-period&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;优雅退出等待时间&lt;/td&gt;
+&lt;td&gt;长连接服务可关注&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--retries&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;连接失败重试次数&lt;/td&gt;
+&lt;td&gt;通常保持默认&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;`–edge-ip-version auto&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;6`&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--token-file PATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从文件读取 Remote Tunnel Token&lt;/td&gt;
+&lt;td&gt;比命令行明文 Token 更适合长期运行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--no-autoupdate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;禁止自身自动更新&lt;/td&gt;
+&lt;td&gt;Docker/包管理安装常用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--post-quantum&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;强制 QUIC 使用后量子模式&lt;/td&gt;
+&lt;td&gt;仅在明确需要时启用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Cloudflare 当前的 QUIC 已具备后量子能力并允许兼容回退；&lt;code&gt;--post-quantum&lt;/code&gt; 的意义是&lt;strong&gt;强制&lt;/strong&gt;后量子而不是“开启后量子”。它也不能与 HTTP/2 Tunnel 协议一起使用，因此普通部署不需要为了追新特性盲目加入此参数。&lt;/p&gt;
+&lt;h3 id=&#34;18-1-Debug-日志也可能泄密&#34;&gt;&lt;a href=&#34;#18-1-Debug-日志也可能泄密&#34; class=&#34;headerlink&#34; title=&#34;18.1 Debug 日志也可能泄密&#34;&gt;&lt;/a&gt;18.1 Debug 日志也可能泄密&lt;/h3&gt;&lt;p&gt;&lt;code&gt;--loglevel debug&lt;/code&gt; 会记录更多请求/响应信息。公开贴日志前应检查 Authorization、Cookie、Access Header、URL Query、内部 hostname 等敏感内容。&lt;/p&gt;
+&lt;p&gt;生产环境不要长期把 debug 当默认日志等级。&lt;/p&gt;
+&lt;h2 id=&#34;十九、实例-12：给-Tunnel-做高可用&#34;&gt;&lt;a href=&#34;#十九、实例-12：给-Tunnel-做高可用&#34; class=&#34;headerlink&#34; title=&#34;十九、实例 12：给 Tunnel 做高可用&#34;&gt;&lt;/a&gt;十九、实例 12：给 Tunnel 做高可用&lt;/h2&gt;&lt;p&gt;单机 &lt;code&gt;cloudflared&lt;/code&gt; 有一个明显问题：主机重启、进程崩溃、网络断开时，这条 Tunnel 就失去 Connector。&lt;/p&gt;
+&lt;p&gt;Cloudflare 支持给同一条 Tunnel 运行多个 &lt;strong&gt;replica&lt;/strong&gt;。对于 remotely-managed Tunnel，可以在第二台能够访问相同后端网络的主机上使用同一 Tunnel Token 启动另一个 &lt;code&gt;cloudflared&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;         Cloudflare
+        /          \
+cloudflared-A    cloudflared-B
+     │               │
+     └────── LAN ────┘
+            │
+       app:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每个 &lt;code&gt;cloudflared&lt;/code&gt; 副本自身会建立多条到不同 Cloudflare Edge 的连接。官方当前文档说明，一个副本通常建立 4 条连接，并跨至少两个数据中心；一条 Tunnel 最多可扩展到 25 个 replicas / 100 条连接。&lt;/p&gt;
+&lt;p&gt;家庭或小型实验室通常两台 Connector 已经足够，重点不是堆副本数量，而是确保：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;两台 Connector 都能访问同一个目标服务；&lt;/li&gt;
+&lt;li&gt;Token 与路由配置一致；&lt;/li&gt;
+&lt;li&gt;业务服务本身也不是单点；&lt;/li&gt;
+&lt;li&gt;切换时允许已有长连接中断并重新建立。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Replica 解决的是 Connector 可用性，不会自动把一个只存在于 A 本机 &lt;code&gt;127.0.0.1&lt;/code&gt; 的服务复制到 B。&lt;/p&gt;
+&lt;h2 id=&#34;二十、监控：日志、状态和-Prometheus-Metrics&#34;&gt;&lt;a href=&#34;#二十、监控：日志、状态和-Prometheus-Metrics&#34; class=&#34;headerlink&#34; title=&#34;二十、监控：日志、状态和 Prometheus Metrics&#34;&gt;&lt;/a&gt;二十、监控：日志、状态和 Prometheus Metrics&lt;/h2&gt;&lt;h3 id=&#34;20-1-先看-Tunnel-状态&#34;&gt;&lt;a href=&#34;#20-1-先看-Tunnel-状态&#34; class=&#34;headerlink&#34; title=&#34;20.1 先看 Tunnel 状态&#34;&gt;&lt;/a&gt;20.1 先看 Tunnel 状态&lt;/h3&gt;&lt;p&gt;Dashboard 常见状态包括 Healthy、Inactive、Down、Degraded。状态的含义应结合 Connector 日志与真实业务探测判断，不能只看一个绿色图标。&lt;/p&gt;
+&lt;p&gt;本地常用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel info &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;TUNNEL_NAME_OR_UUID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+cloudflared tunnel diag&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;systemd：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;journalctl &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;docker&lt;/span&gt; compose logs &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;20-2-Prometheus-Metrics&#34;&gt;&lt;a href=&#34;#20-2-Prometheus-Metrics&#34; class=&#34;headerlink&#34; title=&#34;20.2 Prometheus Metrics&#34;&gt;&lt;/a&gt;20.2 Prometheus Metrics&lt;/h3&gt;&lt;p&gt;&lt;code&gt;cloudflared&lt;/code&gt; 启动时会暴露 Prometheus 格式的 metrics endpoint。非容器环境默认尝试 &lt;code&gt;127.0.0.1:20241&lt;/code&gt; 到 &lt;code&gt;127.0.0.1:20245&lt;/code&gt; 中的可用端口；容器环境默认绑定 &lt;code&gt;0.0.0.0:&amp;lt;PORT&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;具体端口应看启动日志，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Starting metrics server on 127.0.0.1:20241/metrics&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; http://127.0.0.1:20241/metrics&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生产环境可以让 Prometheus 抓取该端点，但不要无保护地把 metrics 端口暴露到公网。&lt;/p&gt;
+&lt;h2 id=&#34;二十一、故障排查：按链路分层，不要乱改配置&#34;&gt;&lt;a href=&#34;#二十一、故障排查：按链路分层，不要乱改配置&#34; class=&#34;headerlink&#34; title=&#34;二十一、故障排查：按链路分层，不要乱改配置&#34;&gt;&lt;/a&gt;二十一、故障排查：按链路分层，不要乱改配置&lt;/h2&gt;&lt;p&gt;Tunnel 的完整链路至少有：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;客户端
+ → DNS / Access
+ → Cloudflare Edge
+ → Tunnel Connector
+ → 本地网络
+ → Origin 应用&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;排错时应从最靠近源站的地方开始。&lt;/p&gt;
+&lt;h3 id=&#34;21-1-Error-1033：Cloudflare-找不到健康-Tunnel-Connector&#34;&gt;&lt;a href=&#34;#21-1-Error-1033：Cloudflare-找不到健康-Tunnel-Connector&#34; class=&#34;headerlink&#34; title=&#34;21.1 Error 1033：Cloudflare 找不到健康 Tunnel Connector&#34;&gt;&lt;/a&gt;21.1 Error 1033：Cloudflare 找不到健康 Tunnel Connector&lt;/h3&gt;&lt;p&gt;1033 的核心方向是 Cloudflare Edge 无法找到这条 Tunnel 的健康 &lt;code&gt;cloudflared&lt;/code&gt; 连接。&lt;/p&gt;
+&lt;p&gt;检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; cloudflared
+systemctl status cloudflared
+cloudflared tunnel diag&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再检查 7844：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UDP/7844 是否允许 QUIC；&lt;/li&gt;
+&lt;li&gt;TCP/7844 是否允许 HTTP/2 fallback；&lt;/li&gt;
+&lt;li&gt;DNS 是否正常；&lt;/li&gt;
+&lt;li&gt;代理、防火墙、校园网出口是否拦截；&lt;/li&gt;
+&lt;li&gt;Tunnel Token/credentials 是否属于正确 Tunnel。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果进程根本没运行，先修进程；如果进程在持续重连，再修网络。&lt;/p&gt;
+&lt;h3 id=&#34;21-2-Error-502：Tunnel-通了，但-Origin-不通&#34;&gt;&lt;a href=&#34;#21-2-Error-502：Tunnel-通了，但-Origin-不通&#34; class=&#34;headerlink&#34; title=&#34;21.2 Error 502：Tunnel 通了，但 Origin 不通&#34;&gt;&lt;/a&gt;21.2 Error 502：Tunnel 通了，但 Origin 不通&lt;/h3&gt;&lt;p&gt;这是最常见情况。先在 &lt;strong&gt;运行 cloudflared 的同一网络上下文&lt;/strong&gt;里测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 &lt;code&gt;cloudflared&lt;/code&gt; 在 Docker，应该从容器网络测试业务服务，而不是在宿主机测试完就认为容器也一定可达。&lt;/p&gt;
+&lt;p&gt;重点检查：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务是否真的启动；&lt;/li&gt;
+&lt;li&gt;端口是否写错；&lt;/li&gt;
+&lt;li&gt;HTTP/HTTPS 是否选反；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;localhost&lt;/code&gt; 是否指错网络命名空间；&lt;/li&gt;
+&lt;li&gt;服务只绑定 &lt;code&gt;127.0.0.1&lt;/code&gt;，但 Connector 在另一台机器；&lt;/li&gt;
+&lt;li&gt;HTTPS 源站证书校验是否失败。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;21-3-x509-certificate-signed-by-unknown-authority&#34;&gt;&lt;a href=&#34;#21-3-x509-certificate-signed-by-unknown-authority&#34; class=&#34;headerlink&#34; title=&#34;21.3 x509: certificate signed by unknown authority&#34;&gt;&lt;/a&gt;21.3 &lt;code&gt;x509: certificate signed by unknown authority&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;这说明 &lt;code&gt;cloudflared&lt;/code&gt; 连接 HTTPS Origin 时不信任证书链。&lt;/p&gt;
+&lt;p&gt;正确解决方式优先是：修复证书链、导入私有 CA、配置正确的 Origin Server Name。&lt;code&gt;noTLSVerify&lt;/code&gt; 可以快速确认“是不是证书验证导致”，但不应该成为默认永久修复。&lt;/p&gt;
+&lt;h3 id=&#34;21-4-cloudflared-service-is-already-installed&#34;&gt;&lt;a href=&#34;#21-4-cloudflared-service-is-already-installed&#34; class=&#34;headerlink&#34; title=&#34;21.4 cloudflared service is already installed&#34;&gt;&lt;/a&gt;21.4 &lt;code&gt;cloudflared service is already installed&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;一台机器通常只需要一个 cloudflared 系统服务。已经安装服务后，不要为了每个 hostname 再重复 &lt;code&gt;service install&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;更合理的是在现有 Tunnel/Connector 上增加路由，或者明确卸载/替换旧服务后再重新安装。&lt;/p&gt;
+&lt;h3 id=&#34;21-5-域名解析正常，但访问还是失败&#34;&gt;&lt;a href=&#34;#21-5-域名解析正常，但访问还是失败&#34; class=&#34;headerlink&#34; title=&#34;21.5 域名解析正常，但访问还是失败&#34;&gt;&lt;/a&gt;21.5 域名解析正常，但访问还是失败&lt;/h3&gt;&lt;p&gt;检查 DNS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nslookup&lt;/span&gt; app.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命名 Tunnel 的 Published Application 最终会关联到 &lt;code&gt;&amp;lt;UUID&amp;gt;.cfargotunnel.com&lt;/code&gt;。DNS 记录存在并不证明 Connector 在线，也不证明 Origin 正常。&lt;/p&gt;
+&lt;p&gt;如果手工创建 CNAME，还要确认：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hostname 没有与已有 A/AAAA/CNAME 冲突；&lt;/li&gt;
+&lt;li&gt;Tunnel UUID 属于正确的 Cloudflare 账号；&lt;/li&gt;
+&lt;li&gt;Published application 的 hostname 与实际访问域名一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;21-6-IPv4-IPv6-的-localhost-不一致&#34;&gt;&lt;a href=&#34;#21-6-IPv4-IPv6-的-localhost-不一致&#34; class=&#34;headerlink&#34; title=&#34;21.6 IPv4/IPv6 的 localhost 不一致&#34;&gt;&lt;/a&gt;21.6 IPv4/IPv6 的 localhost 不一致&lt;/h3&gt;&lt;p&gt;某些程序只监听：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另一些只监听：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;[::1]:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要把 &lt;code&gt;localhost&lt;/code&gt; 当成永远等价于 IPv4。排错时显式测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://127.0.0.1:8080
+&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-g&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;::1&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 Tunnel Service URL 中写 IPv6 literal 时必须使用方括号，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;http://[2001:db8::1]:8000&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;21-7-Private-network-路由建了，但客户端访问不了&#34;&gt;&lt;a href=&#34;#21-7-Private-network-路由建了，但客户端访问不了&#34; class=&#34;headerlink&#34; title=&#34;21.7 Private network 路由建了，但客户端访问不了&#34;&gt;&lt;/a&gt;21.7 Private network 路由建了，但客户端访问不了&lt;/h3&gt;&lt;p&gt;按顺序检查：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tunnel Connector 是否 Healthy；&lt;/li&gt;
+&lt;li&gt;CIDR 是否真的路由到正确 Tunnel；&lt;/li&gt;
+&lt;li&gt;Cloudflare One Client 是否登录正确组织并处于连接状态；&lt;/li&gt;
+&lt;li&gt;Split Tunnel 是否把目标网段排除掉了；&lt;/li&gt;
+&lt;li&gt;Gateway Network Policy 是否允许目标协议/端口；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cloudflared&lt;/code&gt; 主机本身是否能访问目标 LAN IP；&lt;/li&gt;
+&lt;li&gt;内网主机防火墙是否允许来自 Connector 所在网段的连接。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最关键的本地验证，例如目标是 &lt;code&gt;10.10.0.20:5000&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; http://10.10.0.20:5000&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这条命令应该在运行 &lt;code&gt;cloudflared&lt;/code&gt; 的主机执行。连这里都失败，就还没有到 Cloudflare One Client 那一层。&lt;/p&gt;
+&lt;h3 id=&#34;21-8-Access-登录循环或非-HTTP-长连接不稳定&#34;&gt;&lt;a href=&#34;#21-8-Access-登录循环或非-HTTP-长连接不稳定&#34; class=&#34;headerlink&#34; title=&#34;21.8 Access 登录循环或非 HTTP 长连接不稳定&#34;&gt;&lt;/a&gt;21.8 Access 登录循环或非 HTTP 长连接不稳定&lt;/h3&gt;&lt;p&gt;先确认 Access Application 的 hostname、Policy、身份提供方和会话状态正确。&lt;/p&gt;
+&lt;p&gt;对于自动化或长期非 HTTP 连接，Cloudflare 官方特别提醒：客户端侧 &lt;code&gt;cloudflared access&lt;/code&gt; 依赖 WebSocket，持久连接存在意外关闭的可能。长期机器到机器流量应优先考虑 Service Auth 或 WARP/Private network 路由，而不是把交互式浏览器认证硬套在守护进程上。&lt;/p&gt;
+&lt;h2 id=&#34;二十二、安全硬化：Tunnel-不开公网端口，不代表可以不做安全&#34;&gt;&lt;a href=&#34;#二十二、安全硬化：Tunnel-不开公网端口，不代表可以不做安全&#34; class=&#34;headerlink&#34; title=&#34;二十二、安全硬化：Tunnel 不开公网端口，不代表可以不做安全&#34;&gt;&lt;/a&gt;二十二、安全硬化：Tunnel 不开公网端口，不代表可以不做安全&lt;/h2&gt;&lt;p&gt;推荐至少做到下面这些：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Origin 能只监听 localhost 就不要监听 &lt;code&gt;0.0.0.0&lt;/code&gt;。&lt;/strong&gt; 如果 &lt;code&gt;cloudflared&lt;/code&gt; 与应用同机，Web/SSH 管理服务通常没必要再对整个 LAN 开放。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管理后台叠加 Access。&lt;/strong&gt; Tunnel 负责网络可达，Access 负责身份准入，两者不要混为一谈。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tunnel Token 按密钥处理。&lt;/strong&gt; 泄露后应立即在 Cloudflare 侧轮换/重新生成，不要只删 Git 里的那一行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要公开 locally-managed credentials JSON 或 &lt;code&gt;cert.pem&lt;/code&gt;。&lt;/strong&gt; &lt;code&gt;cert.pem&lt;/code&gt; 具有账户级管理能力，风险甚至高于单条 Tunnel Token。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSH 继续使用密钥认证。&lt;/strong&gt; Tunnel 不能替代 &lt;code&gt;sshd&lt;/code&gt; 自身的最小权限、禁用弱口令等配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据库仍要保留数据库鉴权。&lt;/strong&gt; 不要因为入口在 Access 后面就创建无密码数据库用户。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTPS Origin 优先保持证书验证。&lt;/strong&gt; &lt;code&gt;noTLSVerify&lt;/code&gt; 仅作为明确权衡后的选项。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Debug 日志不要长期保留。&lt;/strong&gt; 分享日志前先脱敏 Header、Cookie、Token、域名和内网地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Private network 使用 Gateway Policy 做最小网络授权。&lt;/strong&gt; 不要把整个 &lt;code&gt;/8&lt;/code&gt; 网段无条件开放给所有设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Quick Tunnel 不用于正式敏感服务。&lt;/strong&gt; 它的定位就是临时开发和测试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;22-1-Git-仓库应该忽略什么&#34;&gt;&lt;a href=&#34;#22-1-Git-仓库应该忽略什么&#34; class=&#34;headerlink&#34; title=&#34;22.1 Git 仓库应该忽略什么&#34;&gt;&lt;/a&gt;22.1 Git 仓库应该忽略什么&lt;/h3&gt;&lt;p&gt;至少不要提交：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ignore&#34; data-language=&#34;ignore&#34;&gt;&lt;code class=&#34;language-ignore&#34;&gt;&lt;span class=&#34;token entry string&#34;&gt;.cloudflared&lt;span class=&#34;token punctuation&#34;&gt;/&lt;/span&gt;cert.pem&lt;/span&gt;
+&lt;span class=&#34;token entry string&#34;&gt;.cloudflared&lt;span class=&#34;token punctuation&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;.json&lt;/span&gt;
+&lt;span class=&#34;token entry string&#34;&gt;cloudflared&lt;span class=&#34;token punctuation&#34;&gt;/&lt;/span&gt;tunnel-token&lt;/span&gt;
+&lt;span class=&#34;token entry string&#34;&gt;.env&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;config.yml&lt;/code&gt; 是否可以提交，要看里面有没有秘密。纯 Tunnel UUID、hostname 和非敏感路由通常可以版本化；Token、证书、Service Token Secret 不能。&lt;/p&gt;
+&lt;h2 id=&#34;二十三、常见场景到底该选哪一种方案&#34;&gt;&lt;a href=&#34;#二十三、常见场景到底该选哪一种方案&#34; class=&#34;headerlink&#34; title=&#34;二十三、常见场景到底该选哪一种方案&#34;&gt;&lt;/a&gt;二十三、常见场景到底该选哪一种方案&lt;/h2&gt;&lt;h3 id=&#34;场景-A：临时把本地网页发给别人&#34;&gt;&lt;a href=&#34;#场景-A：临时把本地网页发给别人&#34; class=&#34;headerlink&#34; title=&#34;场景 A：临时把本地网页发给别人&#34;&gt;&lt;/a&gt;场景 A：临时把本地网页发给别人&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Quick Tunnel&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;场景-B：长期发布个人网站-API&#34;&gt;&lt;a href=&#34;#场景-B：长期发布个人网站-API&#34; class=&#34;headerlink&#34; title=&#34;场景 B：长期发布个人网站/API&#34;&gt;&lt;/a&gt;场景 B：长期发布个人网站/API&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Remotely-managed Tunnel + HTTP/HTTPS Published Application&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要身份保护的后台再加 Access。&lt;/p&gt;
+&lt;h3 id=&#34;场景-C：没有公网-IP-的服务器需要-SSH&#34;&gt;&lt;a href=&#34;#场景-C：没有公网-IP-的服务器需要-SSH&#34; class=&#34;headerlink&#34; title=&#34;场景 C：没有公网 IP 的服务器需要 SSH&#34;&gt;&lt;/a&gt;场景 C：没有公网 IP 的服务器需要 SSH&lt;/h3&gt;&lt;p&gt;个人少量主机：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;SSH Published Application + Access + client-side cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主机很多：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Private network routing + Cloudflare One Client + 原生 SSH&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;场景-D：远程控制家庭-Windows&#34;&gt;&lt;a href=&#34;#场景-D：远程控制家庭-Windows&#34; class=&#34;headerlink&#34; title=&#34;场景 D：远程控制家庭 Windows&#34;&gt;&lt;/a&gt;场景 D：远程控制家庭 Windows&lt;/h3&gt;&lt;p&gt;可以选择 &lt;code&gt;RDP Published Application + Access&lt;/code&gt;，或者把家庭 LAN 作为 Private network 后直接连接内网 IP。&lt;/p&gt;
+&lt;h3 id=&#34;场景-E：远程访问-NAS、数据库和很多内网设备&#34;&gt;&lt;a href=&#34;#场景-E：远程访问-NAS、数据库和很多内网设备&#34; class=&#34;headerlink&#34; title=&#34;场景 E：远程访问 NAS、数据库和很多内网设备&#34;&gt;&lt;/a&gt;场景 E：远程访问 NAS、数据库和很多内网设备&lt;/h3&gt;&lt;p&gt;优先考虑：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Private network routing + Cloudflare One Client + Gateway Policy&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而不是为每一个 TCP 端口创建一个公网 hostname。&lt;/p&gt;
+&lt;h3 id=&#34;场景-F：只开放一个数据库给少数管理员&#34;&gt;&lt;a href=&#34;#场景-F：只开放一个数据库给少数管理员&#34; class=&#34;headerlink&#34; title=&#34;场景 F：只开放一个数据库给少数管理员&#34;&gt;&lt;/a&gt;场景 F：只开放一个数据库给少数管理员&lt;/h3&gt;&lt;p&gt;可以使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;TCP Published Application + Access + cloudflared access tcp&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果数据库连接需要长期保持，或者应用程序是无人值守服务，更适合 Private network/WARP 或 Service Auth 架构。&lt;/p&gt;
+&lt;h3 id=&#34;场景-G：Docker-里同时有多个应用&#34;&gt;&lt;a href=&#34;#场景-G：Docker-里同时有多个应用&#34; class=&#34;headerlink&#34; title=&#34;场景 G：Docker 里同时有多个应用&#34;&gt;&lt;/a&gt;场景 G：Docker 里同时有多个应用&lt;/h3&gt;&lt;p&gt;一条 Tunnel 就可以承载多个服务。让 &lt;code&gt;cloudflared&lt;/code&gt; 与业务容器处于可互通的 Docker Network，Published application 使用容器服务名，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;http://web:80
+http://grafana:3000
+http://api:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要为每个容器都机械地运行一份 Tunnel。&lt;/p&gt;
+&lt;h2 id=&#34;二十四、cloudflared-常用命令速查&#34;&gt;&lt;a href=&#34;#二十四、cloudflared-常用命令速查&#34; class=&#34;headerlink&#34; title=&#34;二十四、cloudflared 常用命令速查&#34;&gt;&lt;/a&gt;二十四、cloudflared 常用命令速查&lt;/h2&gt;&lt;h3 id=&#34;基础信息&#34;&gt;&lt;a href=&#34;#基础信息&#34; class=&#34;headerlink&#34; title=&#34;基础信息&#34;&gt;&lt;/a&gt;基础信息&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;
+cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--help&lt;/span&gt;
+cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--help&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;Quick-Tunnel&#34;&gt;&lt;a href=&#34;#Quick-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;Quick Tunnel&#34;&gt;&lt;/a&gt;Quick Tunnel&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; http://127.0.0.1:8080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;连接诊断&#34;&gt;&lt;a href=&#34;#连接诊断&#34; class=&#34;headerlink&#34; title=&#34;连接诊断&#34;&gt;&lt;/a&gt;连接诊断&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel diag&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;Locally-managed-Tunnel&#34;&gt;&lt;a href=&#34;#Locally-managed-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;Locally-managed Tunnel&#34;&gt;&lt;/a&gt;Locally-managed Tunnel&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel login
+cloudflared tunnel create &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;NAME&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+cloudflared tunnel list
+cloudflared tunnel info &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;NAME_OR_UUID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+cloudflared tunnel ingress validate
+cloudflared tunnel ingress rule https://app.example.com
+cloudflared tunnel route dns &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;NAME_OR_UUID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt; app.example.com
+cloudflared tunnel route &lt;span class=&#34;token function&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10.10&lt;/span&gt;.0.0/16 &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;NAME_OR_UUID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;
+cloudflared tunnel route &lt;span class=&#34;token function&#34;&gt;ip&lt;/span&gt; show
+cloudflared tunnel run &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;NAME_OR_UUID&lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;客户端-Access&#34;&gt;&lt;a href=&#34;#客户端-Access&#34; class=&#34;headerlink&#34; title=&#34;客户端 Access&#34;&gt;&lt;/a&gt;客户端 Access&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared access &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--hostname&lt;/span&gt; ssh.example.com
+cloudflared access tcp &lt;span class=&#34;token parameter variable&#34;&gt;--hostname&lt;/span&gt; db.example.com &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; localhost:15432
+cloudflared access rdp &lt;span class=&#34;token parameter variable&#34;&gt;--hostname&lt;/span&gt; rdp.example.com &lt;span class=&#34;token parameter variable&#34;&gt;--url&lt;/span&gt; rdp://localhost:13389&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;systemd&#34;&gt;&lt;a href=&#34;#systemd&#34; class=&#34;headerlink&#34; title=&#34;systemd&#34;&gt;&lt;/a&gt;systemd&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;systemctl status cloudflared
+systemctl restart cloudflared
+journalctl &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;二十五、版本升级与维护&#34;&gt;&lt;a href=&#34;#二十五、版本升级与维护&#34; class=&#34;headerlink&#34; title=&#34;二十五、版本升级与维护&#34;&gt;&lt;/a&gt;二十五、版本升级与维护&lt;/h2&gt;&lt;p&gt;Cloudflare 官方当前支持的是相对新的 &lt;code&gt;cloudflared&lt;/code&gt; 版本，过旧版本可能错过功能、协议和安全修复。升级时不要只看“能不能启动”，还要考虑长连接会被重启中断。&lt;/p&gt;
+&lt;p&gt;查看版本：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;包管理安装应优先使用对应包管理器升级；Docker 则拉取新镜像并滚动替换。&lt;/p&gt;
+&lt;p&gt;如果直接使用 &lt;code&gt;cloudflared update&lt;/code&gt;，更新完成后通常还需要重启对应服务。高可用环境可以先升级一个 replica，确认正常后再处理另一个，从而降低整体中断窗口。&lt;/p&gt;
+&lt;p&gt;不要把自动更新与业务高可用混为一谈：任何单实例进程重启都可能影响它正在承载的 WebSocket、SSH、RDP 或其他长连接。&lt;/p&gt;
+&lt;h2 id=&#34;二十六、最终选择速查表&#34;&gt;&lt;a href=&#34;#二十六、最终选择速查表&#34; class=&#34;headerlink&#34; title=&#34;二十六、最终选择速查表&#34;&gt;&lt;/a&gt;二十六、最终选择速查表&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;你的需求&lt;/th&gt;
+&lt;th&gt;推荐方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;临时分享 localhost&lt;/td&gt;
+&lt;td&gt;Quick Tunnel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;长期公开网站/API&lt;/td&gt;
+&lt;td&gt;Remotely-managed + HTTP/HTTPS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;保护 Web 管理后台&lt;/td&gt;
+&lt;td&gt;Tunnel + Access&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;单台/少量 SSH&lt;/td&gt;
+&lt;td&gt;SSH Published App + Access + client-side cloudflared&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大量 SSH/内网主机&lt;/td&gt;
+&lt;td&gt;Private network + Cloudflare One Client&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;单个临时 TCP 服务&lt;/td&gt;
+&lt;td&gt;TCP Published App + Access&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;长期数据库/机器连接&lt;/td&gt;
+&lt;td&gt;Private network 或合适的 Service Auth 架构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Windows RDP&lt;/td&gt;
+&lt;td&gt;RDP Published App + Access，或 Private network&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;整个家庭/实验室 LAN&lt;/td&gt;
+&lt;td&gt;Private IP/CIDR routing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;多 Docker Web 服务&lt;/td&gt;
+&lt;td&gt;一个 Tunnel + Docker 网络内多个 Service Route&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;配置必须 GitOps/本地控制&lt;/td&gt;
+&lt;td&gt;Locally-managed + config.yml&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Connector 不能成为单点&lt;/td&gt;
+&lt;td&gt;同 Tunnel 部署多个 replica&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;二十七、官方文档与继续阅读&#34;&gt;&lt;a href=&#34;#二十七、官方文档与继续阅读&#34; class=&#34;headerlink&#34; title=&#34;二十七、官方文档与继续阅读&#34;&gt;&lt;/a&gt;二十七、官方文档与继续阅读&lt;/h2&gt;&lt;p&gt;Cloudflare Tunnel 更新较快，涉及版本、参数和产品入口时应以官方文档为最终依据。本文主要核对了以下资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/downloads/&#34;&gt;Cloudflare Tunnel Downloads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/&#34;&gt;Published applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/protocols/&#34;&gt;Protocols for published applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/&#34;&gt;Quick Tunnels&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/&#34;&gt;Connect private networks with cloudflared&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/cloudflared-authentication/&#34;&gt;Client-side cloudflared&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/access-controls/applications/non-http/cloudflared-authentication/arbitrary-tcp/&#34;&gt;Arbitrary TCP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-cloudflared-authentication/&#34;&gt;RDP with client-side cloudflared&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/rdp/rdp-browser/&#34;&gt;Browser-based RDP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/local-management/create-local-tunnel/&#34;&gt;Locally-managed tunnel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/local-management/configuration-file/&#34;&gt;Configuration file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/origin-parameters/&#34;&gt;Origin parameters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/run-parameters/&#34;&gt;Run parameters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/metrics/&#34;&gt;Tunnel metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/tunnel/advanced/local-management/as-a-service/&#34;&gt;Run as a service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;Cloudflare Tunnel 最值得掌握的不是某一条启动命令，而是它的分层模型：&lt;strong&gt;Connector 负责从内网主动接入 Cloudflare，Route 决定流量送到哪里，Access/Gateway 决定谁有资格访问，Origin 自己仍负责真实的应用安全。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果只是临时分享页面，用 Quick Tunnel；如果是正式 Web 服务，用 remotely-managed Published Application；如果是 SSH/RDP/TCP 少量入口，可以配合 Access；如果要访问整段家庭、实验室或公司内网，则 Private network routing 往往比给每个端口创建公网域名更自然。&lt;/p&gt;
+&lt;p&gt;只要排错时始终沿着“客户端 → Cloudflare → Tunnel → Connector → Origin”逐层验证，Cloudflare Tunnel 的大多数问题都能快速定位，而不需要靠反复删除重建 Tunnel 碰运气。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

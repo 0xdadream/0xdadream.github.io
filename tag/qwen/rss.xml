@@ -1,0 +1,860 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>閫愭ⅵ • Posts by &#34;qwen&#34; tag</title>
+        <link>https://0xdadream.github.io</link>
+        <description>Welcome to my blog</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 08 Aug 2026 23:26:00 +0800</pubDate>
+        <lastBuildDate>Sat, 08 Aug 2026 23:26:00 +0800</lastBuildDate>
+        <category>tip</category>
+        <category>AI</category>
+        <category>intel</category>
+        <category>ssh</category>
+        <category>cloudflare</category>
+        <category>tunnel</category>
+        <category>zero-trust</category>
+        <category>rdp</category>
+        <category>docker</category>
+        <category>chatgpt</category>
+        <category>openai</category>
+        <category>mcp</category>
+        <category>windows</category>
+        <category>agent</category>
+        <category>qwen</category>
+        <category>email</category>
+        <category>linux</category>
+        <category>安装</category>
+        <category>Java</category>
+        <category>tips</category>
+        <category>教程</category>
+        <category>ai</category>
+        <category>re</category>
+        <category>工具</category>
+        <category>conda</category>
+        <category>bug</category>
+        <category>python</category>
+        <category>openssh</category>
+        <category>vscode</category>
+        <category>环境</category>
+        <category>net</category>
+        <category>wsl2</category>
+        <category>web</category>
+        <category>wp</category>
+        <category>攻防世界</category>
+        <category>BUUCTF</category>
+        <category>XGBoost</category>
+        <category>wsl</category>
+        <category>server</category>
+        <category>tools</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>emby</category>
+        <category>comfyui</category>
+        <category>sql</category>
+        <category>代码审计</category>
+        <category>漏洞复现</category>
+        <category>google</category>
+        <category>git</category>
+        <category>学习</category>
+        <category>java</category>
+        <category>命令</category>
+        <category>php</category>
+        <category>文件上传</category>
+        <category>远程</category>
+        <category>命令行</category>
+        <category>数据库</category>
+        <category>plc</category>
+        <category>proxy</category>
+        <category>下载</category>
+        <category>区块链</category>
+        <category>汇编</category>
+        <category>word</category>
+        <category>密码学</category>
+        <category>证书</category>
+        <category>i春秋</category>
+        <category>certificate</category>
+        <category>pki</category>
+        <category>x509</category>
+        <category>tls</category>
+        <category>openssl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/</guid>
+            <title>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</title>
+            <link>https://0xdadream.github.io/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/</link>
+            <category>ssh</category>
+            <category>cloudflare</category>
+            <category>tunnel</category>
+            <category>agent</category>
+            <category>qwen</category>
+            <pubDate>Sat, 08 Aug 2026 23:26:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程&#34;&gt;&lt;a href=&#34;#Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程&#34; class=&#34;headerlink&#34; title=&#34;Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程&#34;&gt;&lt;/a&gt;Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程&lt;/h1&gt;&lt;p&gt;本文记录一次真实可用的 Qwen Agent 实践：Qwen 提供的 Linux Agent/容器环境可以执行命令并主动访问公网，但&lt;strong&gt;没有公网 IP，也没有给用户开放 SSH 端口&lt;/strong&gt;。目标是从自己的 Windows 11 电脑直接 SSH 进入这个 Agent 容器。&lt;/p&gt;
+&lt;p&gt;为了避免把真实入口长期暴露在公开文章中，下面统一使用 &lt;code&gt;qwen.example.com&lt;/code&gt; 作为示例域名；实际使用时替换为你在 Cloudflare 中配置的真实子域名即可。这套方法并不只适用于 Qwen，只要其他 Agent、沙箱或临时容器允许主动出网并运行 &lt;code&gt;sshd&lt;/code&gt; 与 &lt;code&gt;cloudflared&lt;/code&gt;，同样可以复用。&lt;/p&gt;
+&lt;h2 id=&#34;一、最终实现效果&#34;&gt;&lt;a href=&#34;#一、最终实现效果&#34; class=&#34;headerlink&#34; title=&#34;一、最终实现效果&#34;&gt;&lt;/a&gt;一、最终实现效果&lt;/h2&gt;&lt;p&gt;最终链路如下：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Windows 11
+   │
+   │ OpenSSH + cloudflared ProxyCommand
+   ▼
+Cloudflare Edge
+   │
+   │ Cloudflare Tunnel
+   ▼
+厂商 Agent / Linux 容器
+   │
+   ├── cloudflared（主动出站连接 Cloudflare）
+   │
+   └── sshd → 127.0.0.1:2222&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;整个过程中，Agent 一侧&lt;strong&gt;不需要开放任何公网入站端口&lt;/strong&gt;。只要容器能够主动访问公网，并允许运行 &lt;code&gt;cloudflared&lt;/code&gt; 和 &lt;code&gt;sshd&lt;/code&gt;，就可以把本地 SSH 服务通过 Cloudflare Tunnel 暴露出来。&lt;/p&gt;
+&lt;p&gt;本次实际测试环境：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Agent：Linux x86_64 容器，Debian 12 系环境&lt;/li&gt;
+&lt;li&gt;权限：&lt;code&gt;root&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;SSH Server：OpenSSH 9.2p1&lt;/li&gt;
+&lt;li&gt;SSH 内部监听：&lt;code&gt;127.0.0.1:2222&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;cloudflared：2026.7.3&lt;/li&gt;
+&lt;li&gt;客户端：Windows 11 + OpenSSH for Windows&lt;/li&gt;
+&lt;li&gt;Cloudflare Tunnel：Dashboard 创建的 remotely-managed tunnel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;二、为什么-Cloudflare-Tunnel-能解决这个问题&#34;&gt;&lt;a href=&#34;#二、为什么-Cloudflare-Tunnel-能解决这个问题&#34; class=&#34;headerlink&#34; title=&#34;二、为什么 Cloudflare Tunnel 能解决这个问题&#34;&gt;&lt;/a&gt;二、为什么 Cloudflare Tunnel 能解决这个问题&lt;/h2&gt;&lt;p&gt;传统 SSH 需要客户端直接访问服务器的公网地址和 SSH 端口，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;ssh → 公网IP:22 → sshd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但厂商 Agent/沙箱通常处于 NAT、容器网络或内部集群中，没有公网 IP，也没有开放入站端口，因此外部无法直接连接。&lt;/p&gt;
+&lt;p&gt;Cloudflare Tunnel 的思路正好相反：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Agent 内的 cloudflared
+        │
+        └────主动出站────► Cloudflare&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;外部客户端连接 Cloudflare 后，Cloudflare 再通过这条已经建立好的 Tunnel，把流量送到 Agent 内部的本地服务。&lt;/p&gt;
+&lt;p&gt;因此它不要求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Agent 拥有公网 IP&lt;/li&gt;
+&lt;li&gt;厂商开放 TCP/22&lt;/li&gt;
+&lt;li&gt;配置路由器端口映射&lt;/li&gt;
+&lt;li&gt;自己购买 VPS 做 FRP 中转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但仍然要求 Agent 至少能够主动访问公网，并且厂商没有禁止此类 Tunnel/后台进程。&lt;/p&gt;
+&lt;h2 id=&#34;三、开始前先检查-Agent-环境&#34;&gt;&lt;a href=&#34;#三、开始前先检查-Agent-环境&#34; class=&#34;headerlink&#34; title=&#34;三、开始前先检查 Agent 环境&#34;&gt;&lt;/a&gt;三、开始前先检查 Agent 环境&lt;/h2&gt;&lt;p&gt;先让 Agent 执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;whoami&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;uname&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; sshd &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; cloudflared &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /etc/os-release&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;理想条件是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;root                           # 最方便，但普通用户也有办法
+Linux ... x86_64 GNU/Linux     # 常见容器架构
+/usr/bin/curl                  # 能下载文件&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 &lt;code&gt;sshd&lt;/code&gt; 和 &lt;code&gt;cloudflared&lt;/code&gt; 不存在没有关系，后面安装即可。&lt;/p&gt;
+&lt;p&gt;还应测试基本公网访问：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-I&lt;/span&gt; --max-time &lt;span class=&#34;token number&#34;&gt;10&lt;/span&gt; https://www.cloudflare.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：HTTPS 能访问只说明 TCP/443 可用，并不能证明 Cloudflare Tunnel 一定能建链。当前 Cloudflare Tunnel 主要要求容器能够访问 Cloudflare Tunnel 边缘的 &lt;strong&gt;TCP/UDP 7844&lt;/strong&gt;：UDP 用于 QUIC，TCP 用于 HTTP/2；&lt;code&gt;cloudflared&lt;/code&gt; 默认会自动选择并在必要时回退。管理 API 与更新还会使用 TCP/443。&lt;/p&gt;
+&lt;p&gt;从 &lt;code&gt;cloudflared 2026.5.2&lt;/code&gt; 开始，&lt;code&gt;cloudflared tunnel run&lt;/code&gt; 与 &lt;code&gt;cloudflared tunnel diag&lt;/code&gt; 会自动做连通性预检，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS：&lt;code&gt;region1.v2.argotunnel.com&lt;/code&gt;、&lt;code&gt;region2.v2.argotunnel.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;UDP/7844：QUIC&lt;/li&gt;
+&lt;li&gt;TCP/7844：HTTP/2&lt;/li&gt;
+&lt;li&gt;TCP/443：Cloudflare 管理 API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本次实际环境使用 &lt;code&gt;cloudflared 2026.7.3&lt;/code&gt;，已经包含这套预检逻辑。因此如果后面 Tunnel 启动失败，优先直接运行 &lt;code&gt;cloudflared tunnel diag&lt;/code&gt;，比只用 &lt;code&gt;curl https://www.cloudflare.com&lt;/code&gt; 更有判断价值。&lt;/p&gt;
+&lt;h2 id=&#34;四、在-Windows-生成一把-Agent-专用-SSH-密钥&#34;&gt;&lt;a href=&#34;#四、在-Windows-生成一把-Agent-专用-SSH-密钥&#34; class=&#34;headerlink&#34; title=&#34;四、在 Windows 生成一把 Agent 专用 SSH 密钥&#34;&gt;&lt;/a&gt;四、在 Windows 生成一把 Agent 专用 SSH 密钥&lt;/h2&gt;&lt;p&gt;不要把长期用于其他服务器的老私钥到处复用。建议给这个 Agent 单独生成一把 Ed25519 密钥。&lt;/p&gt;
+&lt;p&gt;Windows PowerShell：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-keygen &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;t ed25519 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;f &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_qwen&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;C &lt;span class=&#34;token string&#34;&gt;&#34;qwen-agent&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;生成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\Users\你的用户名\.ssh\id_ed25519_qwen       # 私钥，绝不能上传
+C:\Users\你的用户名\.ssh\id_ed25519_qwen.pub   # 公钥，可以给远端&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看公钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_qwen.pub&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;后面只需要把这一整行&lt;strong&gt;公钥&lt;/strong&gt;放入 Agent，私钥始终保留在 Windows。&lt;/p&gt;
+&lt;h2 id=&#34;五、在-Agent-安装-OpenSSH-Server&#34;&gt;&lt;a href=&#34;#五、在-Agent-安装-OpenSSH-Server&#34; class=&#34;headerlink&#34; title=&#34;五、在 Agent 安装 OpenSSH Server&#34;&gt;&lt;/a&gt;五、在 Agent 安装 OpenSSH Server&lt;/h2&gt;&lt;p&gt;Debian/Ubuntu：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; update
+&lt;span class=&#34;token assign-left variable&#34;&gt;DEBIAN_FRONTEND&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;noninteractive &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; openssh-server&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; sshd
+/usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-V&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;head&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果看到 &lt;code&gt;/usr/sbin/sshd&lt;/code&gt;，说明安装完成。&lt;/p&gt;
+&lt;p&gt;生成服务器 Host Key：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-A&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 Host Key 是&lt;strong&gt;服务器身份密钥&lt;/strong&gt;，与 Windows 上用于登录的用户密钥不是同一套东西。客户端第一次连接时，SSH 会把服务器 Host Key 指纹写入 &lt;code&gt;known_hosts&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;六、把-Windows-公钥加入-Agent&#34;&gt;&lt;a href=&#34;#六、把-Windows-公钥加入-Agent&#34; class=&#34;headerlink&#34; title=&#34;六、把 Windows 公钥加入 Agent&#34;&gt;&lt;/a&gt;六、把 Windows 公钥加入 Agent&lt;/h2&gt;&lt;p&gt;在 Agent 中执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /root/.ssh
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;700&lt;/span&gt; /root/.ssh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后把 Windows 的 &lt;code&gt;id_ed25519_qwen.pub&lt;/code&gt; 整行加入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /root/.ssh/authorized_keys &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;EOF&#39;
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent
+EOF&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：这里必须是 &lt;code&gt;.pub&lt;/code&gt; 公钥，&lt;strong&gt;绝不能把 Windows 私钥上传到 Agent&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;如果担心重复添加，可以使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;PUB&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-qxF&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$PUB&lt;/span&gt;&#34;&lt;/span&gt; /root/.ssh/authorized_keys &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$PUB&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /root/.ssh/authorized_keys
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;七、在容器里启动一个只监听-localhost-的-SSH-Server&#34;&gt;&lt;a href=&#34;#七、在容器里启动一个只监听-localhost-的-SSH-Server&#34; class=&#34;headerlink&#34; title=&#34;七、在容器里启动一个只监听 localhost 的 SSH Server&#34;&gt;&lt;/a&gt;七、在容器里启动一个只监听 localhost 的 SSH Server&lt;/h2&gt;&lt;p&gt;临时 Agent 容器通常没有 systemd，所以不要依赖 &lt;code&gt;systemctl start ssh&lt;/code&gt;。这里直接启动独立的 &lt;code&gt;sshd&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;创建配置：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/agent_sshd_config &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;EOF&#39;
+Port 2222
+ListenAddress 127.0.0.1
+HostKey /etc/ssh/ssh_host_ed25519_key
+PermitRootLogin prohibit-password
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+UsePAM no
+PidFile /tmp/agent-sshd.pid
+Subsystem sftp internal-sftp
+EOF&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;检查语法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;/usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /tmp/agent_sshd_config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;没有输出通常就是通过。然后后台启动：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; /usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-D&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /tmp/agent_sshd_config &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/sshd.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只监听 &lt;code&gt;127.0.0.1:2222&lt;/code&gt; 的好处是：即使容器网络中存在其他主机，也无法直接通过容器网卡访问 SSH；真正能访问它的是同一容器里的 &lt;code&gt;cloudflared&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;八、验证-sshd-是否真的正常&#34;&gt;&lt;a href=&#34;#八、验证-sshd-是否真的正常&#34; class=&#34;headerlink&#34; title=&#34;八、验证 sshd 是否真的正常&#34;&gt;&lt;/a&gt;八、验证 sshd 是否真的正常&lt;/h2&gt;&lt;p&gt;先看进程和日志：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;[s]shd&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /tmp/sshd.log&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再看监听端口：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ss &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:2222&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;netstat&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:2222&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最推荐的 SSH Banner 测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;timeout&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; ssh-keyscan &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1 &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常会看到类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:2222 SSH-2.0-OpenSSH_9.2p1 Debian-...&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 Agent 内部有一把测试私钥，也可以直接本机测试：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; /path/to/test_private_key &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; root@127.0.0.1 &lt;span class=&#34;token string&#34;&gt;&#39;whoami; hostname; pwd&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要本地 SSH 能成功，再进入 Cloudflare 阶段；不要在 origin 本身还没通时去调 Tunnel。&lt;/p&gt;
+&lt;h2 id=&#34;九、安装-cloudflared&#34;&gt;&lt;a href=&#34;#九、安装-cloudflared&#34; class=&#34;headerlink&#34; title=&#34;九、安装 cloudflared&#34;&gt;&lt;/a&gt;九、安装 cloudflared&lt;/h2&gt;&lt;p&gt;如果系统是 Linux x86_64，可以直接下载官方 AMD64 二进制：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-L&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--fail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--retry&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; /usr/local/bin/cloudflared &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x /usr/local/bin/cloudflared
+cloudflared &lt;span class=&#34;token parameter variable&#34;&gt;--version&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以按照 Cloudflare Dashboard 创建 Tunnel 时给出的 Debian 安装命令安装。&lt;/p&gt;
+&lt;p&gt;建议再执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel diag&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;它可以帮助检查 DNS、Cloudflare API 以及 Tunnel 传输所需网络是否可达。&lt;/p&gt;
+&lt;p&gt;如果 HTTPS 能上网但 Tunnel 一直无法注册连接，尤其要关注厂商是否封锁了 Cloudflare Tunnel 所使用的出站连接。&lt;/p&gt;
+&lt;h2 id=&#34;十、在-Cloudflare-Dashboard-创建-remotely-managed-Tunnel&#34;&gt;&lt;a href=&#34;#十、在-Cloudflare-Dashboard-创建-remotely-managed-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;十、在 Cloudflare Dashboard 创建 remotely-managed Tunnel&#34;&gt;&lt;/a&gt;十、在 Cloudflare Dashboard 创建 remotely-managed Tunnel&lt;/h2&gt;&lt;p&gt;登录 Cloudflare Dashboard。按 2026 年当前界面进入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Networking → Tunnels → Create a tunnel&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建 remotely-managed Tunnel，选择 &lt;code&gt;cloudflared&lt;/code&gt; Connector，并给 Tunnel 起一个名字，例如：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;qwen-agent&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;系统会根据操作系统给出安装和运行命令。对于这种临时容器，通常**不要使用 &lt;code&gt;service install&lt;/code&gt;**，因为容器里可能根本没有 systemd。&lt;/p&gt;
+&lt;p&gt;Dashboard 会给出类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel run &lt;span class=&#34;token parameter variable&#34;&gt;--token&lt;/span&gt; eyJ&lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;eyJ...&lt;/code&gt; 是 &lt;strong&gt;Tunnel Token&lt;/strong&gt;，它具有启动该 Tunnel Connector 的权限，必须当作敏感凭据保护。&lt;/p&gt;
+&lt;h3 id=&#34;关键区别：不要误走-tunnel-login&#34;&gt;&lt;a href=&#34;#关键区别：不要误走-tunnel-login&#34; class=&#34;headerlink&#34; title=&#34;关键区别：不要误走 tunnel login&#34;&gt;&lt;/a&gt;关键区别：不要误走 &lt;code&gt;tunnel login&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;Dashboard 创建的是 remotely-managed tunnel，运行 Connector 时只需要 Tunnel Token。&lt;/p&gt;
+&lt;p&gt;因此不要因为看不到 &lt;code&gt;cert.pem&lt;/code&gt; 就执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;cloudflared tunnel login
+cloudflared tunnel create xxx
+cloudflared tunnel route dns xxx &lt;span class=&#34;token punctuation&#34;&gt;..&lt;/span&gt;.&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些是 locally-managed tunnel 的另一套工作流。两套方式不要混用。&lt;/p&gt;
+&lt;h2 id=&#34;十一、用-Token-文件后台运行-Tunnel&#34;&gt;&lt;a href=&#34;#十一、用-Token-文件后台运行-Tunnel&#34; class=&#34;headerlink&#34; title=&#34;十一、用 Token 文件后台运行 Tunnel&#34;&gt;&lt;/a&gt;十一、用 Token 文件后台运行 Tunnel&lt;/h2&gt;&lt;p&gt;为了避免 Token 直接长期出现在进程命令行中，可以把它保存为只允许 root 读取的文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /root/.cloudflared
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;700&lt;/span&gt; /root/.cloudflared
+
+&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/root/.cloudflared/qwen-tunnel.token &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;EOF&#39;
+eyJ...这里粘贴 Dashboard 给出的完整 Tunnel Token...
+EOF&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.cloudflared/qwen-tunnel.token&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后后台启动：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; cloudflared tunnel run &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  --token-file /root/.cloudflared/qwen-tunnel.token &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/cloudflared.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本文实测的 &lt;code&gt;cloudflared 2026.7.3&lt;/code&gt; 已明确支持 &lt;code&gt;--token-file&lt;/code&gt;；可以通过 &lt;code&gt;cloudflared tunnel run --help&lt;/code&gt; 再确认当前版本是否包含该参数。&lt;code&gt;--token&lt;/code&gt; 与 &lt;code&gt;--token-file&lt;/code&gt; 同时存在时，&lt;code&gt;--token&lt;/code&gt; 优先，因此不要同时配置两份来源。&lt;/p&gt;
+&lt;p&gt;检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sleep&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;
+pgrep &lt;span class=&#34;token parameter variable&#34;&gt;-af&lt;/span&gt; cloudflared &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;50&lt;/span&gt; /tmp/cloudflared.log&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果日志出现 &lt;code&gt;Registered tunnel connection&lt;/code&gt;，并且 Cloudflare Dashboard 显示 Connected/Healthy，说明 Tunnel Connector 已经成功建立。&lt;/p&gt;
+&lt;h2 id=&#34;十二、在-Tunnel-中添加-SSH-Published-Application&#34;&gt;&lt;a href=&#34;#十二、在-Tunnel-中添加-SSH-Published-Application&#34; class=&#34;headerlink&#34; title=&#34;十二、在 Tunnel 中添加 SSH Published Application&#34;&gt;&lt;/a&gt;十二、在 Tunnel 中添加 SSH Published Application&lt;/h2&gt;&lt;p&gt;Tunnel Connected 后，在 Cloudflare Dashboard 进入当前 Tunnel。按当前界面依次选择：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Networking → Tunnels → qwen-agent → Routes → Add route → Published application&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;假设使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;qwen.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当前界面推荐填写：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Hostname: qwen.example.com
+Service: SSH
+URL: 127.0.0.1:2222&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果界面仍显示 Path 字段则留空。SSH 不是通过 &lt;code&gt;/ssh&lt;/code&gt; 这种 HTTP Path 路由的。&lt;/p&gt;
+&lt;p&gt;Cloudflare 当前官方文档还明确建议：为这个公开 hostname 再创建一个 &lt;strong&gt;Access self-hosted application&lt;/strong&gt;，通过身份策略限制谁可以访问。Published application 负责“把 SSH 服务接到 Cloudflare”，Access 负责“谁有资格到达这个入口”，远端 OpenSSH 公钥认证则继续作为 Linux 登录层。个人临时测试可以先把 SSH 链路跑通，但长期保留入口时建议把 Access 一并配置。&lt;/p&gt;
+&lt;p&gt;最终 origin 关系是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;qwen.example.com
+       ↓
+Cloudflare Tunnel
+       ↓
+ssh://127.0.0.1:2222&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;2222&lt;/code&gt; 是 Agent &lt;strong&gt;内部端口&lt;/strong&gt;，不是 Windows 后面要直接访问的公网端口。&lt;/p&gt;
+&lt;h2 id=&#34;十三、Windows-安装-cloudflared&#34;&gt;&lt;a href=&#34;#十三、Windows-安装-cloudflared&#34; class=&#34;headerlink&#34; title=&#34;十三、Windows 安装 cloudflared&#34;&gt;&lt;/a&gt;十三、Windows 安装 cloudflared&lt;/h2&gt;&lt;p&gt;Windows 11 可以直接使用 winget：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;winget install &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;id Cloudflare&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装后重新打开 PowerShell，然后检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cloudflared &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;version
+where&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本次实际安装路径为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\Program Files (x86)\cloudflared\cloudflared.exe&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果安装后当前终端暂时还找不到 &lt;code&gt;cloudflared&lt;/code&gt;，可以直接在 SSH 配置中写这个绝对路径，不必等待 PATH 刷新。&lt;/p&gt;
+&lt;h2 id=&#34;十四、配置-Windows-OpenSSH&#34;&gt;&lt;a href=&#34;#十四、配置-Windows-OpenSSH&#34; class=&#34;headerlink&#34; title=&#34;十四、配置 Windows OpenSSH&#34;&gt;&lt;/a&gt;十四、配置 Windows OpenSSH&lt;/h2&gt;&lt;p&gt;编辑：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\Users\你的用户名\.ssh\config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;加入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host qwen
+    HostName qwen.example.com
+    User root
+    IdentityFile C:/Users/你的用户名/.ssh/id_ed25519_qwen
+    IdentitiesOnly yes
+    ProxyCommand &#34;C:/Program Files (x86)/cloudflared/cloudflared.exe&#34; access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 &lt;code&gt;cloudflared&lt;/code&gt; 已正确加入 PATH，也可以把最后一行简化成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;ProxyCommand cloudflared access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里**不要写 &lt;code&gt;Port 2222&lt;/code&gt;**。&lt;/p&gt;
+&lt;p&gt;原因是 &lt;code&gt;2222&lt;/code&gt; 只存在于 Tunnel 后端：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Cloudflare Tunnel → Agent 的 127.0.0.1:2222&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 客户端访问的是 Cloudflare 上的 hostname，由 &lt;code&gt;cloudflared access ssh&lt;/code&gt; 建立代理连接，而不是直接访问公网 &lt;code&gt;:2222&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;因此也不要使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;p 2222 root@qwen&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正确方式是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh qwen&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;GUI-SSH-客户端：不支持-ProxyCommand-时怎么连接&#34;&gt;&lt;a href=&#34;#GUI-SSH-客户端：不支持-ProxyCommand-时怎么连接&#34; class=&#34;headerlink&#34; title=&#34;GUI SSH 客户端：不支持 ProxyCommand 时怎么连接&#34;&gt;&lt;/a&gt;GUI SSH 客户端：不支持 ProxyCommand 时怎么连接&lt;/h3&gt;&lt;p&gt;有些 GUI SSH 工具只允许填写“地址、端口、用户名、私钥”，没有 OpenSSH 的 &lt;code&gt;ProxyCommand&lt;/code&gt; 配置项。这时不要把 &lt;code&gt;qwen.example.com:2222&lt;/code&gt; 或 Agent 的内部端口直接填进去，而是让 Windows 上的 &lt;code&gt;cloudflared&lt;/code&gt; 先建立一个&lt;strong&gt;本地 TCP 入口&lt;/strong&gt;，再让 GUI SSH 客户端连接这个本地端口。&lt;/p&gt;
+&lt;p&gt;Cloudflare 官方的 client-side &lt;code&gt;cloudflared&lt;/code&gt; 支持这种用法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;cloudflared access tcp &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;hostname qwen&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com &lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;url localhost:22222&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里的 &lt;code&gt;22222&lt;/code&gt; 是 Windows 本机临时监听端口，可以换成其他未被占用的端口。这个命令需要保持运行；如果该 hostname 配置了 Cloudflare Access 策略，&lt;code&gt;cloudflared&lt;/code&gt; 会按策略触发浏览器身份认证。&lt;/p&gt;
+&lt;p&gt;此时 GUI SSH 工具填写：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;配置项&lt;/th&gt;
+&lt;th&gt;填写内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;名称&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;qwen&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;地址 / Host&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;127.0.0.1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;端口&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22222&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;登录用户&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;root&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;验证方式&lt;/td&gt;
+&lt;td&gt;私钥 / Public Key / Key&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;私钥&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;C:\Users\你的用户名\.ssh\id_ed25519_qwen&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;登录密码&lt;/td&gt;
+&lt;td&gt;留空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;跳板机&lt;/td&gt;
+&lt;td&gt;不需要&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GUI 内代理&lt;/td&gt;
+&lt;td&gt;通常不需要&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;本教程前面已经将远端 &lt;code&gt;sshd&lt;/code&gt; 配置为 &lt;code&gt;PasswordAuthentication no&lt;/code&gt;，因此 GUI 客户端这里应选择&lt;strong&gt;私钥认证&lt;/strong&gt;，不要再选“密码”。&lt;/p&gt;
+&lt;p&gt;这时完整链路变成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;GUI SSH 客户端
+      ↓
+127.0.0.1:22222
+      ↓
+Windows cloudflared access tcp
+      ↓
+qwen.example.com
+      ↓
+Cloudflare Tunnel
+      ↓
+Agent 127.0.0.1:2222
+      ↓
+sshd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意两个端口不是一回事：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Windows 本地端口：22222    ← GUI SSH 工具连接这里
+Agent 内部 SSH 端口：2222  ← Cloudflare Tunnel 后端连接这里&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 GUI SSH 工具本身支持自定义 OpenSSH &lt;code&gt;ProxyCommand&lt;/code&gt;，仍建议直接使用前面的：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;ProxyCommand cloudflared access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只有在 GUI 工具无法使用 &lt;code&gt;ProxyCommand&lt;/code&gt; 时，才需要额外运行 &lt;code&gt;cloudflared access tcp&lt;/code&gt; 作为本地桥接。Cloudflare 官方文档也明确说明，&lt;code&gt;access tcp&lt;/code&gt; 可以监听任意本地端口，然后让客户端应用连接该端口。&lt;/p&gt;
+&lt;p&gt;如果 GUI 工具提示 &lt;code&gt;Connection refused 127.0.0.1:22222&lt;/code&gt;，首先检查运行 &lt;code&gt;cloudflared access tcp ...&lt;/code&gt; 的 PowerShell 窗口是否仍然存在，以及本地端口是否正在监听，而不是先去修改 Agent 的 SSH 配置。&lt;/p&gt;
+&lt;h2 id=&#34;十五、第一次连接与-Host-Key&#34;&gt;&lt;a href=&#34;#十五、第一次连接与-Host-Key&#34; class=&#34;headerlink&#34; title=&#34;十五、第一次连接与 Host Key&#34;&gt;&lt;/a&gt;十五、第一次连接与 Host Key&lt;/h2&gt;&lt;p&gt;第一次连接建议使用详细日志：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;v qwen&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果链路已经打通，会看到远端类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Remote protocol version 2.0, remote software version OpenSSH_9.2p1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一次连接还可能出现：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;The authenticity of host &#39;qwen.example.com&#39; can&#39;t be established.
+ED25519 key fingerprint is SHA256:...
+Are you sure you want to continue connecting?&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认指纹无误后输入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;SSH 会把服务器 Host Key 写入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\Users\你的用户名\.ssh\known_hosts&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;随后进行用户公钥认证。如果 Windows 公钥已正确放入远端 &lt;code&gt;/root/.ssh/authorized_keys&lt;/code&gt;，就会进入 Shell。&lt;br&gt;连接成功后可以快速验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh qwen &lt;span class=&#34;token string&#34;&gt;&#34;echo whoami=&lt;span class=&#34;token function&#34;&gt;$&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;whoami&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/span&gt;; hostname; pwd&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正常应返回远端用户、容器主机名和工作目录。&lt;/p&gt;
+&lt;h2 id=&#34;十六、常见问题与踩坑记录&#34;&gt;&lt;a href=&#34;#十六、常见问题与踩坑记录&#34; class=&#34;headerlink&#34; title=&#34;十六、常见问题与踩坑记录&#34;&gt;&lt;/a&gt;十六、常见问题与踩坑记录&lt;/h2&gt;&lt;h3 id=&#34;1-curl-telnet-127-0-0-1-2222-一直卡住&#34;&gt;&lt;a href=&#34;#1-curl-telnet-127-0-0-1-2222-一直卡住&#34; class=&#34;headerlink&#34; title=&#34;1. curl telnet://127.0.0.1:2222 一直卡住&#34;&gt;&lt;/a&gt;1. &lt;code&gt;curl telnet://127.0.0.1:2222&lt;/code&gt; 一直卡住&lt;/h3&gt;&lt;p&gt;这是本次实际遇到的问题。SSH 是持续交互协议，&lt;code&gt;curl&lt;/code&gt; 连上后收到 SSH Banner，但不会完成 SSH 握手，于是双方会继续等待，看起来像“卡死”。&lt;/p&gt;
+&lt;p&gt;不要用无限等待的 &lt;code&gt;curl telnet://&lt;/code&gt; 检测 SSH。改用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;timeout&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; ssh-keyscan &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者只检查监听：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ss &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:2222&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-Permission-denied-publickey-keyboard-interactive&#34;&gt;&lt;a href=&#34;#2-Permission-denied-publickey-keyboard-interactive&#34; class=&#34;headerlink&#34; title=&#34;2. Permission denied (publickey,keyboard-interactive)&#34;&gt;&lt;/a&gt;2. &lt;code&gt;Permission denied (publickey,keyboard-interactive)&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;这通常说明网络、Tunnel、sshd 都已经通了，只是用户认证失败。&lt;br&gt;重点检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /root/.ssh/authorized_keys
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-ld&lt;/span&gt; /root/.ssh
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; /root/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并确认 Windows 使用的是对应私钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;G qwen &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Select-String&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;identityfile|hostname|user|proxycommand&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-Host-key-verification-failed&#34;&gt;&lt;a href=&#34;#3-Host-key-verification-failed&#34; class=&#34;headerlink&#34; title=&#34;3. Host key verification failed&#34;&gt;&lt;/a&gt;3. &lt;code&gt;Host key verification failed&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;这表示已经到达远端 SSH，但客户端不接受服务器 Host Key。第一次连接可以交互确认；如果容器被重建，Host Key 可能变化。&lt;/p&gt;
+&lt;p&gt;先确认确实是新的合法容器，再删除旧记录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-keygen &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;R qwen&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后重新连接并确认新指纹。不要在无法确认原因时无脑忽略 Host Key 检查。&lt;/p&gt;
+&lt;h3 id=&#34;4-cloudflared-提示缺少-cert-pem&#34;&gt;&lt;a href=&#34;#4-cloudflared-提示缺少-cert-pem&#34; class=&#34;headerlink&#34; title=&#34;4. cloudflared 提示缺少 cert.pem&#34;&gt;&lt;/a&gt;4. cloudflared 提示缺少 &lt;code&gt;cert.pem&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;如果 Tunnel 是在 Dashboard 创建的 remotely-managed tunnel，不需要 &lt;code&gt;cert.pem&lt;/code&gt;。直接用 Dashboard 给出的 Tunnel Token 启动 Connector。&lt;/p&gt;
+&lt;p&gt;只有 locally-managed tunnel 才会涉及 &lt;code&gt;cloudflared tunnel login&lt;/code&gt;、&lt;code&gt;cert.pem&lt;/code&gt; 和本地 credentials JSON。&lt;/p&gt;
+&lt;h3 id=&#34;5-Tunnel-已-Healthy，但-SSH-仍失败&#34;&gt;&lt;a href=&#34;#5-Tunnel-已-Healthy，但-SSH-仍失败&#34; class=&#34;headerlink&#34; title=&#34;5. Tunnel 已 Healthy，但 SSH 仍失败&#34;&gt;&lt;/a&gt;5. Tunnel 已 Healthy，但 SSH 仍失败&lt;/h3&gt;&lt;p&gt;按下面顺序定位，不要同时乱改多处：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;① Agent 本地能否 ssh 127.0.0.1:2222
+② sshd 是否仍监听 127.0.0.1:2222
+③ cloudflared 是否仍在运行
+④ Tunnel Dashboard 是否 Healthy
+⑤ Published Application 是否指向 ssh://127.0.0.1:2222
+⑥ Windows ProxyCommand 是否正确
+⑦ Windows 私钥是否与 authorized_keys 中公钥匹配&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个顺序可以快速判断问题在哪一层。&lt;/p&gt;
+&lt;h3 id=&#34;6-Agent-界面显示命令一直“处理中”&#34;&gt;&lt;a href=&#34;#6-Agent-界面显示命令一直“处理中”&#34; class=&#34;headerlink&#34; title=&#34;6. Agent 界面显示命令一直“处理中”&#34;&gt;&lt;/a&gt;6. Agent 界面显示命令一直“处理中”&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sshd -D&lt;/code&gt; 和 &lt;code&gt;cloudflared tunnel run&lt;/code&gt; 本身都是长期运行进程，直接前台执行当然不会退出。&lt;/p&gt;
+&lt;p&gt;在&lt;strong&gt;临时测试阶段&lt;/strong&gt;，可以使用 &lt;code&gt;nohup ... &amp;amp;&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; /usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-D&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /tmp/agent_sshd_config &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/sshd.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; cloudflared tunnel run --token-file /root/.cloudflared/qwen-tunnel.token &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/cloudflared.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后通过 &lt;code&gt;pgrep&lt;/code&gt; 和日志判断状态，而不是等待命令返回。&lt;/p&gt;
+&lt;p&gt;但要注意：&lt;code&gt;nohup&lt;/code&gt; 只能保证关闭终端后进程继续运行，&lt;strong&gt;不能解决容器/服务器重启后的自动恢复&lt;/strong&gt;。如果 Agent 的 PID 1 是 &lt;code&gt;supervisord&lt;/code&gt;，应使用下面的 Supervisor 持久化方案。&lt;/p&gt;
+&lt;h2 id=&#34;十七、临时-Agent-容器的生命周期问题&#34;&gt;&lt;a href=&#34;#十七、临时-Agent-容器的生命周期问题&#34; class=&#34;headerlink&#34; title=&#34;十七、临时 Agent 容器的生命周期问题&#34;&gt;&lt;/a&gt;十七、临时 Agent 容器的生命周期问题&lt;/h2&gt;&lt;p&gt;很多厂商 Agent 实际上是临时容器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;任务开始 → 创建容器 → Agent 工作 → 会话结束 → 容器销毁&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果容器被重建，下面这些内容可能全部消失：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/root/.ssh/authorized_keys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/tmp/agent_sshd_config&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/ssh/ssh_host_*&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sshd&lt;/code&gt; 进程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cloudflared&lt;/code&gt; 进程&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/root/.cloudflared/qwen-tunnel.token&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但 Cloudflare Dashboard 中的 Tunnel、Published Application、DNS 记录以及 Windows 的 &lt;code&gt;~/.ssh/config&lt;/code&gt; 可以继续保留。&lt;/p&gt;
+&lt;p&gt;因此每次新容器出现后，只需要重新完成“安装 sshd/cloudflared → 写公钥 → 启动 sshd → 启动 Tunnel Connector”即可。&lt;/p&gt;
+&lt;p&gt;如果容器频繁重建，建议把服务端初始化封装成脚本，并把 Tunnel Token 通过安全的 Secret/环境变量注入，而不是写死在公开脚本里。&lt;/p&gt;
+&lt;h3 id=&#34;Qwen-Agent-实测：使用-Supervisor-实现重启自动恢复&#34;&gt;&lt;a href=&#34;#Qwen-Agent-实测：使用-Supervisor-实现重启自动恢复&#34; class=&#34;headerlink&#34; title=&#34;Qwen Agent 实测：使用 Supervisor 实现重启自动恢复&#34;&gt;&lt;/a&gt;Qwen Agent 实测：使用 Supervisor 实现重启自动恢复&lt;/h3&gt;&lt;p&gt;本次 Qwen Agent 实际检查结果是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;comm&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; systemctl
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出类似：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;supervisord
+/usr/bin/systemctl
+/usr/local/bin/cloudflared&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里最容易误判：&lt;strong&gt;系统里存在 &lt;code&gt;systemctl&lt;/code&gt; 命令，不等于系统正在使用 systemd。&lt;/strong&gt; 判断 init/进程管理器要看 PID 1；只要 &lt;code&gt;ps -p 1 -o comm=&lt;/code&gt; 返回 &lt;code&gt;supervisord&lt;/code&gt;，就应该使用 Supervisor，而不是 &lt;code&gt;systemctl enable ...&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;对于这种环境，推荐把 &lt;code&gt;sshd&lt;/code&gt; 和 &lt;code&gt;cloudflared&lt;/code&gt; 都交给 Supervisor 管理。&lt;/p&gt;
+&lt;h4 id=&#34;1-把-SSH-配置从-tmp-移到持久位置&#34;&gt;&lt;a href=&#34;#1-把-SSH-配置从-tmp-移到持久位置&#34; class=&#34;headerlink&#34; title=&#34;1. 把 SSH 配置从 /tmp 移到持久位置&#34;&gt;&lt;/a&gt;1. 把 SSH 配置从 &lt;code&gt;/tmp&lt;/code&gt; 移到持久位置&lt;/h4&gt;&lt;p&gt;前面的 &lt;code&gt;/tmp/agent_sshd_config&lt;/code&gt; 适合临时测试，长期运行改为：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /tmp/agent_sshd_config /etc/ssh/qwen_sshd_config
+&lt;span class=&#34;token function&#34;&gt;sed&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;s#PidFile /tmp/agent-sshd.pid#PidFile /run/qwen-sshd.pid#&#39;&lt;/span&gt; /etc/ssh/qwen_sshd_config
+/usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /etc/ssh/qwen_sshd_config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最终核心配置仍保持：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Port 2222
+ListenAddress 127.0.0.1
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+PidFile /run/qwen-sshd.pid&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-Tunnel-Token-使用独立文件保存&#34;&gt;&lt;a href=&#34;#2-Tunnel-Token-使用独立文件保存&#34; class=&#34;headerlink&#34; title=&#34;2. Tunnel Token 使用独立文件保存&#34;&gt;&lt;/a&gt;2. Tunnel Token 使用独立文件保存&lt;/h4&gt;&lt;p&gt;不要把真实 Token 直接写进 Supervisor 配置。继续使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;/root/.cloudflared/qwen-tunnel.token&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并限制权限：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.cloudflared/qwen-tunnel.token&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supervisor 只通过 &lt;code&gt;--token-file&lt;/code&gt; 引用它。&lt;/p&gt;
+&lt;h4 id=&#34;3-为-sshd-创建启动包装器&#34;&gt;&lt;a href=&#34;#3-为-sshd-创建启动包装器&#34; class=&#34;headerlink&#34; title=&#34;3. 为 sshd 创建启动包装器&#34;&gt;&lt;/a&gt;3. 为 sshd 创建启动包装器&lt;/h4&gt;&lt;p&gt;如果之前已经通过 &lt;code&gt;nohup&lt;/code&gt; 启动过旧 sshd，第一次迁移时可能与新实例争抢 &lt;code&gt;127.0.0.1:2222&lt;/code&gt;。可以创建一个包装器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/usr/local/sbin/qwen-sshd-supervised &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;EOF&#39;
+#!/bin/sh
+
+if pgrep -f -- &#39;/usr/sbin/sshd -D -e -f /tmp/agent_sshd_config&#39; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1; then
+    pkill -f -- &#39;/usr/sbin/sshd -D -e -f /tmp/agent_sshd_config&#39; || true
+    sleep 1
+fi
+
+exec /usr/sbin/sshd \
+    -D \
+    -e \
+    -f /etc/ssh/qwen_sshd_config
+EOF&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;755&lt;/span&gt; /usr/local/sbin/qwen-sshd-supervised&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;4-增加-Supervisor-Program&#34;&gt;&lt;a href=&#34;#4-增加-Supervisor-Program&#34; class=&#34;headerlink&#34; title=&#34;4. 增加 Supervisor Program&#34;&gt;&lt;/a&gt;4. 增加 Supervisor Program&lt;/h4&gt;&lt;p&gt;本次 Qwen Agent 的实际 Supervisor 配置位于：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;/etc/supervisor/conf.d/supervisord.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;增加：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token section&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token section-name selector&#34;&gt;program:qwen-sshd&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;/usr/local/sbin/qwen-sshd-supervised&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;autostart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;autorestart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;startsecs&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;startretries&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;priority&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;15&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stopsignal&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;TERM&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stopasgroup&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;killasgroup&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;/var/log/qwen-sshd.log&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile_maxbytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;5MB&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile_backups&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;redirect_stderr&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+
+&lt;span class=&#34;token section&#34;&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token section-name selector&#34;&gt;program:qwen-cloudflared&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;/usr/local/bin/cloudflared tunnel run --token-file /root/.cloudflared/qwen-tunnel.token&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;autostart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;autorestart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;startsecs&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;5&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;startretries&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;20&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;priority&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;25&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stopsignal&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;TERM&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stopasgroup&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;killasgroup&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;/var/log/qwen-cloudflared.log&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile_maxbytes&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;5MB&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;stdout_logfile_backups&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;redirect_stderr&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中最关键的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-ini&#34; data-language=&#34;ini&#34;&gt;&lt;code class=&#34;language-ini&#34;&gt;&lt;span class=&#34;token key attr-name&#34;&gt;autostart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token key attr-name&#34;&gt;autorestart&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token value attr-value&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;前者让 Supervisor 启动时自动启动进程，后者负责在进程异常退出后自动拉起。&lt;/p&gt;
+&lt;p&gt;本次环境还存在：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;/etc/supervisor/conf.d/supervisord.conf.template&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当前 &lt;code&gt;supervisord.conf&lt;/code&gt; 是由这个模板展开生成的，因此为了避免容器重启后配置被平台重新生成覆盖，**同样的 &lt;code&gt;[program:qwen-sshd]&lt;/code&gt; 和 &lt;code&gt;[program:qwen-cloudflared]&lt;/code&gt; 块也要同步写入 &lt;code&gt;.template&lt;/code&gt;**。&lt;/p&gt;
+&lt;h4 id=&#34;5-不建议在线直接-HUP-PID-1，优先重启验收&#34;&gt;&lt;a href=&#34;#5-不建议在线直接-HUP-PID-1，优先重启验收&#34; class=&#34;headerlink&#34; title=&#34;5. 不建议在线直接 HUP PID 1，优先重启验收&#34;&gt;&lt;/a&gt;5. 不建议在线直接 HUP PID 1，优先重启验收&lt;/h4&gt;&lt;p&gt;在这种一整个 Agent 都由同一个 Supervisor 管理的容器里，不建议为了加载两条新配置直接对 PID 1 执行 &lt;code&gt;SIGHUP&lt;/code&gt;，因为可能连 Qwen App、Xvfb、XFCE 等其他程序一起重启。&lt;/p&gt;
+&lt;p&gt;更稳妥的方式是：先把配置全部写好并校验，再正常重启 Agent/容器。&lt;/p&gt;
+&lt;p&gt;重启以后验证：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;pgrep &lt;span class=&#34;token parameter variable&#34;&gt;-af&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;sshd|cloudflared&#39;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;^\[program:qwen-&#39;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  /etc/supervisor/conf.d/supervisord.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本次实际重启验收后得到：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;sshd: /usr/sbin/sshd -D -e -f /etc/ssh/qwen_sshd_config [listener]
+/usr/local/bin/cloudflared tunnel run --token-file /root/.cloudflared/qwen-tunnel.token
+
+[program:qwen-sshd]
+[program:qwen-cloudflared]&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;随后 Windows 再通过 Cloudflare Tunnel 成功 SSH 进入 Agent，说明服务器端已经完成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Qwen Agent 重启
+      ↓
+supervisord (PID 1)
+      ├── qwen-sshd
+      │      └── 127.0.0.1:2222
+      │
+      └── qwen-cloudflared
+             └── Cloudflare Tunnel&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至此，服务器端不再需要每次手动执行 &lt;code&gt;nohup sshd ...&lt;/code&gt; 或 &lt;code&gt;nohup cloudflared tunnel run ...&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;注意：这只能解决“&lt;strong&gt;同一个持久容器重启&lt;/strong&gt;”后的自动恢复。如果平台是“销毁旧容器并重新创建一个全新容器”，那么 &lt;code&gt;/etc&lt;/code&gt;、&lt;code&gt;/root/.ssh&lt;/code&gt;、Tunnel Token 等仍可能一起消失，此时仍应使用后面的初始化脚本或平台提供的持久卷/Secret/启动钩子。&lt;/p&gt;
+&lt;h2 id=&#34;十八、安全建议&#34;&gt;&lt;a href=&#34;#十八、安全建议&#34; class=&#34;headerlink&#34; title=&#34;十八、安全建议&#34;&gt;&lt;/a&gt;十八、安全建议&lt;/h2&gt;&lt;p&gt;这套方案虽然不需要开放公网 22 端口，但仍应把 SSH 和 Tunnel Token 当作高价值入口管理。&lt;/p&gt;
+&lt;p&gt;建议至少做到：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;SSH 禁止密码登录&lt;/strong&gt;：保持 &lt;code&gt;PasswordAuthentication no&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;只使用公钥认证&lt;/strong&gt;：每个设备/Agent 单独一把密钥，方便撤销。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sshd 只监听 localhost&lt;/strong&gt;：例如 &lt;code&gt;127.0.0.1:2222&lt;/code&gt;，避免容器网络中的其他主机直接访问。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;保护 Tunnel Token&lt;/strong&gt;：不要发到聊天记录、Git 仓库或博客；泄露后应立即在 Cloudflare 侧轮换/重置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要公开私钥&lt;/strong&gt;：&lt;code&gt;id_ed25519_qwen&lt;/code&gt; 永远只留在本地可信设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可选叠加 Cloudflare Access&lt;/strong&gt;：需要更严格访问控制时，可再增加身份认证或 Service Token。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;尊重厂商规则&lt;/strong&gt;：有些 Agent/沙箱明确禁止反向 Tunnel、后台守护进程或远程 Shell，使用前应确认服务条款。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;尤其要注意：Tunnel Token 和 SSH 私钥是两种完全不同的凭据。&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Tunnel Token
+= 允许某台机器作为 Connector 接入你的 Cloudflare Tunnel
+
+SSH Private Key
+= 证明客户端有权登录远端 Linux 用户&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;两者都不能泄露。&lt;/p&gt;
+&lt;h2 id=&#34;十九、临时容器快速初始化脚本&#34;&gt;&lt;a href=&#34;#十九、临时容器快速初始化脚本&#34; class=&#34;headerlink&#34; title=&#34;十九、临时容器快速初始化脚本&#34;&gt;&lt;/a&gt;十九、临时容器快速初始化脚本&lt;/h2&gt;&lt;p&gt;如果厂商经常重建容器，可以把下面脚本保存为 &lt;code&gt;bootstrap_ssh_tunnel.sh&lt;/code&gt;。使用前只需要准备：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SSH_PUBLIC_KEY&lt;/code&gt;：Windows 的 &lt;code&gt;.pub&lt;/code&gt; 公钥&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TUNNEL_TOKEN&lt;/code&gt;：Cloudflare Dashboard 的 Tunnel Token&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;不要把包含真实 Token 的脚本提交到 Git。&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-euo&lt;/span&gt; pipefail
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;${SSH_PUBLIC_KEY&lt;span class=&#34;token operator&#34;&gt;:?&lt;/span&gt;请设置 SSH_PUBLIC_KEY}&lt;/span&gt;&#34;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;${TUNNEL_TOKEN&lt;span class=&#34;token operator&#34;&gt;:?&lt;/span&gt;请设置 TUNNEL_TOKEN}&lt;/span&gt;&#34;&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; update
+  &lt;span class=&#34;token assign-left variable&#34;&gt;DEBIAN_FRONTEND&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;noninteractive &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; openssh-server &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; procps
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; cloudflared &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;
+  &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-L&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--fail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--retry&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+    &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; /usr/local/bin/cloudflared &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+    https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+  &lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x /usr/local/bin/cloudflared
+&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;
+
+ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-A&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; /root/.ssh /root/.cloudflared
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;700&lt;/span&gt; /root/.ssh /root/.cloudflared
+
+
+&lt;span class=&#34;token function&#34;&gt;touch&lt;/span&gt; /root/.ssh/authorized_keys
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.ssh/authorized_keys
+&lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-qxF&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$SSH_PUBLIC_KEY&lt;/span&gt;&#34;&lt;/span&gt; /root/.ssh/authorized_keys &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$SSH_PUBLIC_KEY&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /root/.ssh/authorized_keys
+
+&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/agent_sshd_config &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;EOF&#39;
+Port 2222
+ListenAddress 127.0.0.1
+HostKey /etc/ssh/ssh_host_ed25519_key
+PermitRootLogin prohibit-password
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+UsePAM no
+PidFile /tmp/agent-sshd.pid
+Subsystem sftp internal-sftp
+EOF&lt;/span&gt;
+
+/usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /tmp/agent_sshd_config
+&lt;span class=&#34;token function&#34;&gt;pkill&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;sshd -D -e -f /tmp/agent_sshd_config&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; /usr/sbin/sshd &lt;span class=&#34;token parameter variable&#34;&gt;-D&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /tmp/agent_sshd_config &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/sshd.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;printf&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;%s\n&#39;&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$TUNNEL_TOKEN&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/root/.cloudflared/qwen-tunnel.token
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; /root/.cloudflared/qwen-tunnel.token
+&lt;span class=&#34;token function&#34;&gt;pkill&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;cloudflared tunnel run&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;nohup&lt;/span&gt; cloudflared tunnel run &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  --token-file /root/.cloudflared/qwen-tunnel.token &lt;span class=&#34;token punctuation&#34;&gt;\&lt;/span&gt;
+  &lt;span class=&#34;token operator&#34;&gt;&amp;gt;&lt;/span&gt;/tmp/cloudflared.log &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;
+
+&lt;span class=&#34;token function&#34;&gt;sleep&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;=== SSH ===&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ps&lt;/span&gt; aux &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;[s]shd&#39;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;timeout&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; ssh-keyscan &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1 &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;&amp;amp;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+
+&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;=== CLOUDFLARED ===&#39;&lt;/span&gt;
+pgrep &lt;span class=&#34;token parameter variable&#34;&gt;-af&lt;/span&gt; cloudflared &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;tail&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;20&lt;/span&gt; /tmp/cloudflared.log &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token boolean&#34;&gt;true&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行方式示例：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SSH_PUBLIC_KEY&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;ssh-ed25519 AAAA... qwen-agent&#39;&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;TUNNEL_TOKEN&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;eyJ...&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;bash&lt;/span&gt; bootstrap_ssh_tunnel.sh
+&lt;span class=&#34;token builtin class-name&#34;&gt;unset&lt;/span&gt; TUNNEL_TOKEN&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果脚本输出 SSH Banner，且 Cloudflare 日志出现 Tunnel 注册成功信息，就可以回到 Windows 执行 &lt;code&gt;ssh qwen&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果旧版 &lt;code&gt;cloudflared&lt;/code&gt; 不支持 &lt;code&gt;--token-file&lt;/code&gt;，请先升级；临时测试也可以使用 Dashboard 给出的 &lt;code&gt;cloudflared tunnel run --token ...&lt;/code&gt;，但不要把 Token 写入公开日志或仓库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;二十、完整链路的判断标准&#34;&gt;&lt;a href=&#34;#二十、完整链路的判断标准&#34; class=&#34;headerlink&#34; title=&#34;二十、完整链路的判断标准&#34;&gt;&lt;/a&gt;二十、完整链路的判断标准&lt;/h2&gt;&lt;p&gt;不要只看 Cloudflare 面板显示绿色。真正成功至少要同时满足：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Agent sshd                  ✅ 127.0.0.1:2222 正常监听
+Agent 本地 SSH               ✅ 公钥认证可用
+Agent cloudflared            ✅ Connector 正在运行
+Cloudflare Tunnel            ✅ Healthy / Connected
+Published Application        ✅ ssh://127.0.0.1:2222
+Windows cloudflared          ✅ 可执行
+Windows SSH config           ✅ ProxyCommand 正确
+Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最终在 Windows 只需要：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh qwen&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就可以进入原本完全没有公网 SSH 入口的厂商 Agent 容器。&lt;/p&gt;
+&lt;h2 id=&#34;二十一、cloudflared-常用命令速查与解释&#34;&gt;&lt;a href=&#34;#二十一、cloudflared-常用命令速查与解释&#34; class=&#34;headerlink&#34; title=&#34;二十一、cloudflared 常用命令速查与解释&#34;&gt;&lt;/a&gt;二十一、cloudflared 常用命令速查与解释&lt;/h2&gt;&lt;p&gt;&lt;code&gt;cloudflared&lt;/code&gt; 不只是“SSH 工具”，它本质上是 Cloudflare 的 Tunnel/Access 客户端。最常用的命令可以分成四类：查看信息、运行 Tunnel、管理 Tunnel、作为客户端访问受 Cloudflare 保护的服务。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文采用的是 Dashboard 创建的 &lt;strong&gt;remotely-managed Tunnel + Tunnel Token&lt;/strong&gt;。下面表格中的 &lt;code&gt;tunnel list/info/route dns/cleanup/delete&lt;/code&gt; 属于账户级 Tunnel 管理命令，通常需要 &lt;code&gt;cloudflared tunnel login&lt;/code&gt; 产生的账户证书或其他管理凭据；它们不是本教程 Agent 端启动 Connector 的必需命令。不要因为这些管理命令提示缺少 &lt;code&gt;cert.pem&lt;/code&gt;，就误以为 &lt;code&gt;tunnel run --token/--token-file&lt;/code&gt; 也需要 &lt;code&gt;cert.pem&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;典型使用场景&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared version&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看当前版本&lt;/td&gt;
+&lt;td&gt;确认安装是否成功、排查参数兼容性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared help&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看顶层帮助&lt;/td&gt;
+&lt;td&gt;不记得命令时先查这里&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel help&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看 Tunnel 子命令&lt;/td&gt;
+&lt;td&gt;查询 Tunnel 相关参数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel run --token &amp;lt;TOKEN&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;使用 Dashboard Tunnel Token 启动 Connector&lt;/td&gt;
+&lt;td&gt;Agent/服务器主动接入 Cloudflare&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel run --token-file /path/token&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;从文件读取 Token 启动 Connector&lt;/td&gt;
+&lt;td&gt;比把 Token 长期暴露在命令行中更适合长期运行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared access ssh --hostname ssh.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通过 Cloudflare Access/Tunnel 访问 SSH&lt;/td&gt;
+&lt;td&gt;Windows &lt;code&gt;ProxyCommand&lt;/code&gt; 的核心命令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared access login https://example.com&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;登录 Cloudflare Access&lt;/td&gt;
+&lt;td&gt;先完成浏览器身份认证，再访问受保护应用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel diag&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;检查 Tunnel 网络环境&lt;/td&gt;
+&lt;td&gt;排查 DNS、Cloudflare API、出站连接异常&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel list&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;列出 Tunnel&lt;/td&gt;
+&lt;td&gt;CLI 管理 Tunnel 时查看名称和 UUID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel info &amp;lt;NAME或UUID&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看指定 Tunnel/Connector 状态&lt;/td&gt;
+&lt;td&gt;排查当前连接情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel route dns &amp;lt;TUNNEL&amp;gt; &amp;lt;HOSTNAME&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;为 Tunnel 创建 DNS 路由&lt;/td&gt;
+&lt;td&gt;locally-managed Tunnel 常用；Dashboard 路由通常不需要手动执行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel cleanup &amp;lt;TUNNEL&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;清理异常退出后残留的 Connector 连接&lt;/td&gt;
+&lt;td&gt;主机断电、进程被强杀后清理旧连接记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel delete &amp;lt;TUNNEL&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;删除 Tunnel&lt;/td&gt;
+&lt;td&gt;确认不再使用后清理 Tunnel&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared tunnel --url http://127.0.0.1:3000&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;创建 Quick Tunnel&lt;/td&gt;
+&lt;td&gt;临时把本地 Web 服务暴露到 &lt;code&gt;trycloudflare.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared service install ...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;安装为系统服务&lt;/td&gt;
+&lt;td&gt;正常 Linux/Windows 长期服务器；临时容器通常没必要&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;cloudflared update&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自更新二进制&lt;/td&gt;
+&lt;td&gt;直接下载二进制安装时使用；包管理器安装更建议用对应包管理器升级&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;本教程最核心的两个命令方向一定要区分清楚：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;Agent / 服务器端：
+cloudflared tunnel run ...
+        ↓
+把本机服务“送进” Cloudflare Tunnel
+
+Windows / 客户端：
+cloudflared access ssh --hostname ...
+        ↓
+从 Cloudflare 把 SSH 连接“接出来”&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此本教程 Windows SSH 配置里的：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;ProxyCommand cloudflared access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;实际意思是让 &lt;code&gt;ssh.exe&lt;/code&gt; 不直接连接远端端口，而是把 SSH 数据交给 &lt;code&gt;cloudflared&lt;/code&gt;，再由 Cloudflare 转入 Tunnel。也正因为如此，Windows 端不需要直接访问 Agent 的 &lt;code&gt;2222&lt;/code&gt; 端口。&lt;/p&gt;
+&lt;p&gt;另外要特别区分两套 Tunnel 管理方式：Dashboard 创建的 remotely-managed tunnel 主要使用 &lt;code&gt;Tunnel Token + tunnel run&lt;/code&gt;；&lt;code&gt;cloudflared tunnel login&lt;/code&gt;、&lt;code&gt;tunnel create&lt;/code&gt;、本地 &lt;code&gt;cert.pem&lt;/code&gt; 和 credentials JSON 则属于 locally-managed tunnel 的另一套流程。没有必要把两套方式混在一起。&lt;/p&gt;
+&lt;p&gt;调试时，推荐按以下优先级使用命令：先用 &lt;code&gt;cloudflared version&lt;/code&gt; 确认版本，再用 &lt;code&gt;cloudflared tunnel diag&lt;/code&gt; 检查网络，随后看 &lt;code&gt;cloudflared&lt;/code&gt; 运行日志；如果是 Windows SSH 失败，再用 &lt;code&gt;ssh -v qwen&lt;/code&gt; 判断问题究竟发生在 ProxyCommand、Tunnel、sshd 还是公钥认证阶段。&lt;/p&gt;
+&lt;h2 id=&#34;二十二、官方文档与版本校验&#34;&gt;&lt;a href=&#34;#二十二、官方文档与版本校验&#34; class=&#34;headerlink&#34; title=&#34;二十二、官方文档与版本校验&#34;&gt;&lt;/a&gt;二十二、官方文档与版本校验&lt;/h2&gt;&lt;p&gt;本文于 &lt;strong&gt;2026-08-09&lt;/strong&gt; 按 Cloudflare 当前官方文档重新核对，并在 Windows 本机确认 &lt;code&gt;cloudflared 2026.7.3&lt;/code&gt; 的 &lt;code&gt;tunnel run --help&lt;/code&gt; 中存在 &lt;code&gt;--token-file&lt;/code&gt; 参数。后续如果 Cloudflare Dashboard 改版，优先以官方文档中的最新菜单名称和参数为准：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/get-started/create-remote-tunnel/&#34;&gt;Create a tunnel (dashboard)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/use-cases/ssh/ssh-cloudflared-authentication/&#34;&gt;Connect to SSH with client-side cloudflared&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/troubleshoot-tunnels/connectivity-prechecks/&#34;&gt;Connectivity pre-checks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/remote-tunnel-permissions/&#34;&gt;Tunnel permissions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;Cloudflare Tunnel 在这个场景中解决的是&lt;strong&gt;网络可达性&lt;/strong&gt;：让只能主动出网的 Agent 容器反向接入 Cloudflare；OpenSSH 解决的是&lt;strong&gt;远程 Shell 与身份认证&lt;/strong&gt;。二者组合后，可以在不开放公网端口、不要求公网 IP 的情况下获得标准 SSH 使用体验。&lt;/p&gt;
+&lt;p&gt;这套方法尤其适合可执行任意 Linux 命令、允许后台进程、但厂商没有提供 SSH 入口的开发 Agent、临时沙箱和容器环境。真正需要重点管理的是三件事：&lt;strong&gt;容器生命周期、Tunnel Token 和 SSH 私钥&lt;/strong&gt;。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

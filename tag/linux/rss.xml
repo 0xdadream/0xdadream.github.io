@@ -1,68 +1,807 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>逐梦 • Posts by &#34;linux&#34; tag</title>
+        <title>閫愭ⅵ • Posts by &#34;linux&#34; tag</title>
         <link>https://0xdadream.github.io</link>
         <description>Welcome to my blog</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 25 Apr 2026 12:25:00 +0800</pubDate>
-        <lastBuildDate>Sat, 25 Apr 2026 12:25:00 +0800</lastBuildDate>
-        <category>AI</category>
+        <pubDate>Sun, 09 Aug 2026 05:13:00 +0800</pubDate>
+        <lastBuildDate>Sun, 09 Aug 2026 05:13:00 +0800</lastBuildDate>
         <category>tip</category>
+        <category>AI</category>
         <category>intel</category>
         <category>ssh</category>
-        <category>ai</category>
         <category>cloudflare</category>
-        <category>安装</category>
+        <category>tunnel</category>
+        <category>zero-trust</category>
+        <category>rdp</category>
+        <category>docker</category>
+        <category>chatgpt</category>
+        <category>openai</category>
+        <category>mcp</category>
+        <category>windows</category>
+        <category>agent</category>
+        <category>qwen</category>
         <category>email</category>
+        <category>linux</category>
+        <category>安装</category>
+        <category>Java</category>
         <category>tips</category>
+        <category>教程</category>
+        <category>ai</category>
         <category>re</category>
         <category>工具</category>
-        <category>Java</category>
         <category>conda</category>
-        <category>linux</category>
-        <category>教程</category>
-        <category>环境</category>
-        <category>python</category>
         <category>bug</category>
+        <category>python</category>
+        <category>openssh</category>
+        <category>vscode</category>
+        <category>环境</category>
+        <category>net</category>
+        <category>wsl2</category>
         <category>web</category>
         <category>wp</category>
         <category>攻防世界</category>
-        <category>windows</category>
-        <category>net</category>
-        <category>wsl2</category>
-        <category>wsl</category>
         <category>BUUCTF</category>
         <category>XGBoost</category>
+        <category>wsl</category>
         <category>server</category>
-        <category>wall</category>
         <category>tools</category>
+        <category>powershell</category>
+        <category>wall</category>
+        <category>emby</category>
+        <category>comfyui</category>
         <category>sql</category>
         <category>代码审计</category>
         <category>漏洞复现</category>
-        <category>emby</category>
-        <category>comfyui</category>
-        <category>git</category>
-        <category>powershell</category>
         <category>google</category>
+        <category>git</category>
         <category>学习</category>
         <category>java</category>
         <category>命令</category>
+        <category>php</category>
         <category>文件上传</category>
         <category>远程</category>
-        <category>php</category>
         <category>命令行</category>
         <category>数据库</category>
         <category>plc</category>
         <category>proxy</category>
         <category>下载</category>
         <category>区块链</category>
-        <category>word</category>
         <category>汇编</category>
+        <category>word</category>
         <category>密码学</category>
-        <category>mcp</category>
-        <category>i春秋</category>
         <category>证书</category>
+        <category>i春秋</category>
+        <category>certificate</category>
+        <category>pki</category>
+        <category>x509</category>
+        <category>tls</category>
+        <category>openssl</category>
+        <item>
+            <guid isPermalink="true">https://0xdadream.github.io/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/</guid>
+            <title>SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</title>
+            <link>https://0xdadream.github.io/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/</link>
+            <category>ssh</category>
+            <category>windows</category>
+            <category>linux</category>
+            <category>openssh</category>
+            <category>vscode</category>
+            <pubDate>Sun, 09 Aug 2026 05:13:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;SSH-完整工作流程：从安装、密钥认证到-Config、隧道与排错&#34;&gt;&lt;a href=&#34;#SSH-完整工作流程：从安装、密钥认证到-Config、隧道与排错&#34; class=&#34;headerlink&#34; title=&#34;SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错&#34;&gt;&lt;/a&gt;SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错&lt;/h1&gt;&lt;p&gt;SSH 用久了很容易只记住一句 &lt;code&gt;ssh user@ip&lt;/code&gt;，真正遇到密钥、跳板机、端口转发、VS Code 或 &lt;code&gt;Permission denied&lt;/code&gt; 时又开始逐个搜索。&lt;br&gt;这篇文章不只给命令，而是把 SSH 当成一条完整链路来理解：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;客户端 OpenSSH
+    │
+    ├── 读取 ~/.ssh/config
+    ├── 校验服务器 Host Key
+    ├── 使用密码 / 用户私钥认证
+    │
+    ▼
+网络：IP / 域名 / 端口 / NAT / 防火墙 / 跳板机
+    │
+    ▼
+服务端 sshd
+    ├── Host Key：证明“服务器是谁”
+    ├── authorized_keys：决定“谁能登录”
+    └── Shell / SFTP / 端口转发&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果这几个层次分清楚，大部分 SSH 问题都能按层定位，而不是靠反复改配置碰运气。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文以 Windows 11 作为常见客户端、Ubuntu/Debian 作为常见服务器，同时给出 Linux/macOS 客户端命令。命令中的 IP、域名、用户名和端口均为示例，请替换为自己的实际值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一、先弄清-SSH-里到底有哪些东西&#34;&gt;&lt;a href=&#34;#一、先弄清-SSH-里到底有哪些东西&#34; class=&#34;headerlink&#34; title=&#34;一、先弄清 SSH 里到底有哪些东西&#34;&gt;&lt;/a&gt;一、先弄清 SSH 里到底有哪些东西&lt;/h2&gt;&lt;p&gt;OpenSSH 常见命令可以先记成下面这张表：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;登录远程主机、执行远程命令、建立隧道&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sshd&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;SSH 服务端守护进程&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh-keygen&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;生成和管理用户密钥、Host Key、指纹&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh-agent&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在本机内存中管理已解锁的私钥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh-add&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;把私钥加入 &lt;code&gt;ssh-agent&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ssh-keyscan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;获取远程主机公开的 Host Key&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;scp&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通过 SSH/SFTP 复制文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;sftp&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;通过 SSH 进行交互式文件传输&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;还要区分三类经常被混淆的文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;客户端用户私钥：~/.ssh/id_ed25519_xxx
+客户端用户公钥：~/.ssh/id_ed25519_xxx.pub
+服务端授权列表：~/.ssh/authorized_keys
+客户端主机记录：~/.ssh/known_hosts
+服务端 Host Key：/etc/ssh/ssh_host_*_key&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最重要的一条：&lt;strong&gt;用户私钥永远留在可信客户端，不需要上传到服务器。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二、确认客户端是否已经有-OpenSSH&#34;&gt;&lt;a href=&#34;#二、确认客户端是否已经有-OpenSSH&#34; class=&#34;headerlink&#34; title=&#34;二、确认客户端是否已经有 OpenSSH&#34;&gt;&lt;/a&gt;二、确认客户端是否已经有 OpenSSH&lt;/h2&gt;&lt;h3 id=&#34;Windows-11&#34;&gt;&lt;a href=&#34;#Windows-11&#34; class=&#34;headerlink&#34; title=&#34;Windows 11&#34;&gt;&lt;/a&gt;Windows 11&lt;/h3&gt;&lt;p&gt;PowerShell：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;V
+where&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;exe ssh&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 10 1809 及之后的 Windows 可以把 OpenSSH Client/Server 作为系统可选功能安装。大多数 Windows 11 机器已经具备客户端；如果 &lt;code&gt;ssh&lt;/code&gt; 不存在，可在“设置 → 系统 → 可选功能”中安装 &lt;strong&gt;OpenSSH Client&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;也可以用管理员 PowerShell 查看状态：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-WindowsCapability&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Online &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; Name &lt;span class=&#34;token operator&#34;&gt;-like&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;OpenSSH*&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;Linux-macOS&#34;&gt;&lt;a href=&#34;#Linux-macOS&#34; class=&#34;headerlink&#34; title=&#34;Linux / macOS&#34;&gt;&lt;/a&gt;Linux / macOS&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-V&lt;/span&gt;
+&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu/Debian 如未安装客户端：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; openssh-client&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;macOS 通常已自带 OpenSSH 客户端。&lt;/p&gt;
+&lt;h2 id=&#34;三、在-Linux-服务器安装并启动-sshd&#34;&gt;&lt;a href=&#34;#三、在-Linux-服务器安装并启动-sshd&#34; class=&#34;headerlink&#34; title=&#34;三、在 Linux 服务器安装并启动 sshd&#34;&gt;&lt;/a&gt;三、在 Linux 服务器安装并启动 sshd&lt;/h2&gt;&lt;p&gt;Ubuntu/Debian：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; update
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; openssh-server
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl &lt;span class=&#34;token builtin class-name&#34;&gt;enable&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--now&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;检查服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;systemctl status &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; --no-pager
+ss &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:22&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;RHEL / Rocky / AlmaLinux / Fedora 常见写法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; dnf &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-y&lt;/span&gt; openssh-server
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl &lt;span class=&#34;token builtin class-name&#34;&gt;enable&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;--now&lt;/span&gt; sshd
+systemctl status sshd --no-pager&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此时最基础的连接形式是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; user@192.0.2.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 SSH 不在 22 端口：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; user@192.0.2.10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;云服务器还要同时检查云厂商的安全组/防火墙规则。&lt;code&gt;sshd&lt;/code&gt; 正在监听，并不代表公网一定能访问到它。&lt;/p&gt;
+&lt;h2 id=&#34;四、第一次连接最容易忽略的-Host-Key&#34;&gt;&lt;a href=&#34;#四、第一次连接最容易忽略的-Host-Key&#34; class=&#34;headerlink&#34; title=&#34;四、第一次连接最容易忽略的 Host Key&#34;&gt;&lt;/a&gt;四、第一次连接最容易忽略的 Host Key&lt;/h2&gt;&lt;p&gt;第一次连接新服务器时通常会看到：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;The authenticity of host &#39;server.example.com&#39; can&#39;t be established.
+ED25519 key fingerprint is SHA256:...
+Are you sure you want to continue connecting (yes/no/[fingerprint])?&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里验证的是&lt;strong&gt;服务器身份&lt;/strong&gt;，不是你的用户登录密钥。&lt;/p&gt;
+&lt;p&gt;最好先通过云厂商控制台、服务器本地终端或其他可信通道查看服务端 Ed25519 Host Key 指纹：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-lf&lt;/span&gt; /etc/ssh/ssh_host_ed25519_key.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认客户端看到的 &lt;code&gt;SHA256:...&lt;/code&gt; 与服务器一致，再输入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;记录随后会写入客户端：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;~/.ssh/known_hosts&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以后同一主机的 Host Key 突然发生变化，SSH 会主动警告。这可能只是系统重装或容器重建，也可能意味着 DNS/IP 指向异常或中间人攻击，所以不要一看到报错就无脑删除 &lt;code&gt;known_hosts&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;确认服务器确实重建并核对新指纹后，才清理旧记录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; server.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;非 22 端口的记录有时需要写成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;[server.example.com]:2222&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;五、生成一把专用用户密钥&#34;&gt;&lt;a href=&#34;#五、生成一把专用用户密钥&#34; class=&#34;headerlink&#34; title=&#34;五、生成一把专用用户密钥&#34;&gt;&lt;/a&gt;五、生成一把专用用户密钥&lt;/h2&gt;&lt;p&gt;现在开始解决“客户端如何证明自己有权登录服务器”。&lt;/p&gt;
+&lt;p&gt;对现代 OpenSSH 环境，个人服务器一般优先使用 Ed25519：&lt;/p&gt;
+&lt;h3 id=&#34;Windows-PowerShell&#34;&gt;&lt;a href=&#34;#Windows-PowerShell&#34; class=&#34;headerlink&#34; title=&#34;Windows PowerShell&#34;&gt;&lt;/a&gt;Windows PowerShell&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-keygen &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;t ed25519 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;f &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;C &lt;span class=&#34;token string&#34;&gt;&#34;windows-lab&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;Linux-macOS-1&#34;&gt;&lt;a href=&#34;#Linux-macOS-1&#34; class=&#34;headerlink&#34; title=&#34;Linux / macOS&#34;&gt;&lt;/a&gt;Linux / macOS&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; ed25519 &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; ~/.ssh/id_ed25519_lab &lt;span class=&#34;token parameter variable&#34;&gt;-C&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;laptop-lab&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;会生成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;id_ed25519_lab       # 私钥：只能留在可信客户端
+id_ed25519_lab.pub   # 公钥：可以放到服务器&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;建议给私钥设置一个&lt;strong&gt;口令（passphrase）&lt;/strong&gt;，而不是为了所谓“免密登录”直接留空。真正方便的做法是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;私钥有口令
+    +
+ssh-agent 记住已解锁私钥
+    =
+日常连接不反复输入，同时私钥文件泄露后的风险更低&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;RSA 仍然有兼容性用途。如果必须连接老设备，可按设备支持情况另建 RSA 密钥，而不是把一个老 RSA 私钥复用到所有服务器。&lt;/p&gt;
+&lt;h2 id=&#34;六、把公钥安装到服务器&#34;&gt;&lt;a href=&#34;#六、把公钥安装到服务器&#34; class=&#34;headerlink&#34; title=&#34;六、把公钥安装到服务器&#34;&gt;&lt;/a&gt;六、把公钥安装到服务器&lt;/h2&gt;&lt;p&gt;Linux/macOS 客户端最方便的是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-copy-id &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; ~/.ssh/id_ed25519_lab.pub user@server.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果端口不是 22：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-copy-id &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; ~/.ssh/id_ed25519_lab.pub &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2222&lt;/span&gt; user@server.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows 默认没有 &lt;code&gt;ssh-copy-id&lt;/code&gt;，可以先查看公钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab.pub&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后通过云控制台或现有密码登录，把&lt;strong&gt;这一整行公钥&lt;/strong&gt;追加到服务器：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; ~/.ssh
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;700&lt;/span&gt; ~/.ssh
+&lt;span class=&#34;token function&#34;&gt;nano&lt;/span&gt; ~/.ssh/authorized_keys
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; ~/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以在已经能够密码登录的 Unix 服务器上，从 Windows PowerShell 直接管道追加：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Content&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab.pub&#34;&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; ssh user@server&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com &lt;span class=&#34;token string&#34;&gt;&#34;umask 077; mkdir -p ~/.ssh; cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;完成后先&lt;strong&gt;新开一个终端&lt;/strong&gt;测试密钥登录，原来的服务器会话暂时不要关闭：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;i &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab&#34;&lt;/span&gt; user@server&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;只有这个新会话确认能正常登录后，再考虑关闭服务端密码认证。这样即使配置写错，也不至于立刻把自己锁在服务器外面。&lt;/p&gt;
+&lt;h2 id=&#34;七、用-ssh-agent-管理有口令的私钥&#34;&gt;&lt;a href=&#34;#七、用-ssh-agent-管理有口令的私钥&#34; class=&#34;headerlink&#34; title=&#34;七、用 ssh-agent 管理有口令的私钥&#34;&gt;&lt;/a&gt;七、用 ssh-agent 管理有口令的私钥&lt;/h2&gt;&lt;h3 id=&#34;Windows-11-1&#34;&gt;&lt;a href=&#34;#Windows-11-1&#34; class=&#34;headerlink&#34; title=&#34;Windows 11&#34;&gt;&lt;/a&gt;Windows 11&lt;/h3&gt;&lt;p&gt;Windows 的 &lt;code&gt;ssh-agent&lt;/code&gt; 服务默认可能没有启动。先用&lt;strong&gt;管理员 PowerShell&lt;/strong&gt;执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-Service&lt;/span&gt; ssh-agent &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Set-Service&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;StartupType Automatic
+&lt;span class=&#34;token function&#34;&gt;Start-Service&lt;/span&gt; ssh-agent
+&lt;span class=&#34;token function&#34;&gt;Get-Service&lt;/span&gt; ssh-agent&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后回到普通 PowerShell 加载私钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-add &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab&#34;&lt;/span&gt;
+ssh-add &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;l&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一次执行 &lt;code&gt;ssh-add&lt;/code&gt; 时输入私钥口令。后续 &lt;code&gt;ssh&lt;/code&gt; 可以让 agent 代为完成签名，不必每次重新输入。&lt;/p&gt;
+&lt;p&gt;删除某一把密钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-add &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;d &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$env&lt;/span&gt;:USERPROFILE\.ssh\id_ed25519_lab&#34;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;清空 agent：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh-add &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;D&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;Linux-macOS-2&#34;&gt;&lt;a href=&#34;#Linux-macOS-2&#34; class=&#34;headerlink&#34; title=&#34;Linux / macOS&#34;&gt;&lt;/a&gt;Linux / macOS&lt;/h3&gt;&lt;p&gt;很多桌面环境已经自动管理 agent。手动启动时可以：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;eval&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;ssh-agent &lt;span class=&#34;token parameter variable&#34;&gt;-s&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&#34;&lt;/span&gt;
+ssh-add ~/.ssh/id_ed25519_lab
+ssh-add &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要把“私钥没有口令”当成 ssh-agent 的替代品。两者解决的是不同问题：前者取消私钥本地保护，后者是在可信会话中暂存已解锁密钥。&lt;/p&gt;
+&lt;h2 id=&#34;八、真正应该长期使用的是-ssh-config&#34;&gt;&lt;a href=&#34;#八、真正应该长期使用的是-ssh-config&#34; class=&#34;headerlink&#34; title=&#34;八、真正应该长期使用的是 ~/.ssh/config&#34;&gt;&lt;/a&gt;八、真正应该长期使用的是 &lt;code&gt;~/.ssh/config&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;命令越来越长时，不要每天这样连：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;p 2222 &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;i C:\Users\me\&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ssh\id_ed25519_lab ubuntu@203&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;0&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;113&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;10&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编辑客户端配置：&lt;/p&gt;
+&lt;p&gt;Windows：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\Users\你的用户名\.ssh\config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Linux/macOS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;~/.ssh/config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;写入：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host lab
+    HostName 203.0.113.10
+    User ubuntu
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以后只需要：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;几个关键字段：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;配置&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Host&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;本地别名，不必是真实域名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;HostName&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;真正连接的 IP 或域名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;User&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;远端用户名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;SSH 服务端口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IdentityFile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;指定用户私钥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IdentitiesOnly yes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;只尝试显式配置的身份，避免 agent 中密钥太多&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerAliveInterval&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;定期发送 SSH 层保活消息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ServerAliveCountMax&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;连续多少次无响应后断开&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;OpenSSH 客户端读取配置时，命令行参数优先于用户 &lt;code&gt;~/.ssh/config&lt;/code&gt;，用户配置又优先于系统配置；同一参数通常使用&lt;strong&gt;最先得到的值&lt;/strong&gt;。因此更具体的 &lt;code&gt;Host&lt;/code&gt; 一般写在前面，&lt;code&gt;Host *&lt;/code&gt; 默认项放后面。&lt;br&gt;想知道最终到底应用了什么配置，不要靠猜：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-G&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows PowerShell 过滤关键项：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;G lab &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Select-String&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;hostname|user|port|identityfile|proxyjump|proxycommand&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令对排查“明明改了 config 为什么不生效”特别有用。&lt;/p&gt;
+&lt;h2 id=&#34;九、SSH-的常用连接方式&#34;&gt;&lt;a href=&#34;#九、SSH-的常用连接方式&#34; class=&#34;headerlink&#34; title=&#34;九、SSH 的常用连接方式&#34;&gt;&lt;/a&gt;九、SSH 的常用连接方式&lt;/h2&gt;&lt;h3 id=&#34;1-交互式-Shell&#34;&gt;&lt;a href=&#34;#1-交互式-Shell&#34; class=&#34;headerlink&#34; title=&#34;1. 交互式 Shell&#34;&gt;&lt;/a&gt;1. 交互式 Shell&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-远程执行一条命令&#34;&gt;&lt;a href=&#34;#2-远程执行一条命令&#34; class=&#34;headerlink&#34; title=&#34;2. 远程执行一条命令&#34;&gt;&lt;/a&gt;2. 远程执行一条命令&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab &lt;span class=&#34;token string&#34;&gt;&#39;hostname; whoami; uptime&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-不分配伪终端&#34;&gt;&lt;a href=&#34;#3-不分配伪终端&#34; class=&#34;headerlink&#34; title=&#34;3. 不分配伪终端&#34;&gt;&lt;/a&gt;3. 不分配伪终端&lt;/h3&gt;&lt;p&gt;脚本或纯命令执行通常不需要 TTY：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab &lt;span class=&#34;token string&#34;&gt;&#39;systemctl is-active nginx&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;某些命令确实需要终端环境时，再显式使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt; lab &lt;span class=&#34;token string&#34;&gt;&#39;top&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;十、文件传输：scp、sftp、rsync-怎么选&#34;&gt;&lt;a href=&#34;#十、文件传输：scp、sftp、rsync-怎么选&#34; class=&#34;headerlink&#34; title=&#34;十、文件传输：scp、sftp、rsync 怎么选&#34;&gt;&lt;/a&gt;十、文件传输：scp、sftp、rsync 怎么选&lt;/h2&gt;&lt;h3 id=&#34;scp：一次性复制最方便&#34;&gt;&lt;a href=&#34;#scp：一次性复制最方便&#34; class=&#34;headerlink&#34; title=&#34;scp：一次性复制最方便&#34;&gt;&lt;/a&gt;scp：一次性复制最方便&lt;/h3&gt;&lt;p&gt;上传文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;scp&lt;/span&gt; ./demo.zip lab:~/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下载文件：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;scp&lt;/span&gt; lab:~/result.log ./&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;递归复制目录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;scp&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-r&lt;/span&gt; ./project lab:~/project&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现代 OpenSSH 的 &lt;code&gt;scp&lt;/code&gt; 默认使用 SFTP 协议传输，但命令行习惯仍然保留 &lt;code&gt;scp&lt;/code&gt; 形式。&lt;/p&gt;
+&lt;h3 id=&#34;sftp：交互式管理远程文件&#34;&gt;&lt;a href=&#34;#sftp：交互式管理远程文件&#34; class=&#34;headerlink&#34; title=&#34;sftp：交互式管理远程文件&#34;&gt;&lt;/a&gt;sftp：交互式管理远程文件&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sftp&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;常用命令：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;pwd             查看远程目录
+lpwd            查看本地目录
+ls              列远程文件
+lls             列本地文件
+get file        下载
+put file        上传
+mkdir dir       创建远程目录
+exit            退出&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;rsync：大量文件和增量同步更适合&#34;&gt;&lt;a href=&#34;#rsync：大量文件和增量同步更适合&#34; class=&#34;headerlink&#34; title=&#34;rsync：大量文件和增量同步更适合&#34;&gt;&lt;/a&gt;rsync：大量文件和增量同步更适合&lt;/h3&gt;&lt;p&gt;Linux/macOS 或 WSL 中，如果两端都有 &lt;code&gt;rsync&lt;/code&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;rsync&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-azP&lt;/span&gt; ./project/ lab:~/project/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;rsync&lt;/code&gt; 更适合经常同步代码、数据集或备份，不需要每次把整个目录重传。&lt;/p&gt;
+&lt;h2 id=&#34;十一、VS-Code-Remote-SSH&#34;&gt;&lt;a href=&#34;#十一、VS-Code-Remote-SSH&#34; class=&#34;headerlink&#34; title=&#34;十一、VS Code Remote - SSH&#34;&gt;&lt;/a&gt;十一、VS Code Remote - SSH&lt;/h2&gt;&lt;p&gt;如果命令行已经可以：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么 VS Code Remote - SSH 通常不需要再维护另一套服务器参数，它直接读取 OpenSSH 的 &lt;code&gt;~/.ssh/config&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;安装微软的 &lt;strong&gt;Remote - SSH&lt;/strong&gt; 扩展后：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;F1 / Ctrl+Shift+P
+→ Remote-SSH: Connect to Host...
+→ lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果 VS Code 失败，第一步仍然应该回到终端执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;ssh &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;vvv lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先证明底层 OpenSSH 能连接，再处理 VS Code 自己的 Server 安装、代理或远端环境问题。&lt;/p&gt;
+&lt;h2 id=&#34;十二、服务端安全加固：先验证密钥，再关闭密码&#34;&gt;&lt;a href=&#34;#十二、服务端安全加固：先验证密钥，再关闭密码&#34; class=&#34;headerlink&#34; title=&#34;十二、服务端安全加固：先验证密钥，再关闭密码&#34;&gt;&lt;/a&gt;十二、服务端安全加固：先验证密钥，再关闭密码&lt;/h2&gt;&lt;p&gt;Ubuntu 支持直接编辑：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;/etc/ssh/sshd_config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也支持使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;/etc/ssh/sshd_config.d/*.conf&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果系统已经通过 cloud-init、镜像厂商或其他配置片段设置过同一选项，要先检查实际加载顺序。OpenSSH 对大量配置项采用“先得到的值生效”的规则，因此不要想当然地认为文件名 &lt;code&gt;99-xxx.conf&lt;/code&gt; 一定能覆盖前面的设置。&lt;/p&gt;
+&lt;p&gt;先看配置语法：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;再查看最终有效配置：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; sshd &lt;span class=&#34;token parameter variable&#34;&gt;-T&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-Ei&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;passwordauthentication|pubkeyauthentication|permitrootlogin|port|listenaddress&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认公钥登录已经成功后，常见的安全基线可以是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin prohibit-password&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果业务根本不需要 root 直接 SSH，进一步使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;PermitRootLogin no&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改后不要直接关闭当前 SSH 会话。先检查：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;无输出通常表示语法通过，然后重载/重启：&lt;/p&gt;
+&lt;p&gt;Ubuntu/Debian：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl restart &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;RHEL 系：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl restart sshd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;保持旧会话不动，再从另一个终端执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只有新连接也成功，才算本轮配置真正安全落地。&lt;/p&gt;
+&lt;h2 id=&#34;十三、本地端口转发：访问“只在远端本机开放”的服务&#34;&gt;&lt;a href=&#34;#十三、本地端口转发：访问“只在远端本机开放”的服务&#34; class=&#34;headerlink&#34; title=&#34;十三、本地端口转发：访问“只在远端本机开放”的服务&#34;&gt;&lt;/a&gt;十三、本地端口转发：访问“只在远端本机开放”的服务&lt;/h2&gt;&lt;p&gt;假设远端 PostgreSQL 只监听：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:5432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本地执行：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-N&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-L&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1:15432:127.0.0.1:5432 lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;链路是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;本机 127.0.0.1:15432
+        │
+        │ SSH 加密连接
+        ▼
+远端 SSH Server
+        │
+        ▼
+远端 127.0.0.1:5432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后本地数据库客户端直接连接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:15432&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里显式绑定 &lt;code&gt;127.0.0.1&lt;/code&gt;，避免把转发端口意外暴露给局域网其他设备。&lt;/p&gt;
+&lt;p&gt;更适合长期使用的 config：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host lab-db
+    HostName 203.0.113.10
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_lab
+    LocalForward 127.0.0.1:15432 127.0.0.1:5432
+    ExitOnForwardFailure yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只建立隧道、不打开 Shell：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-N&lt;/span&gt; lab-db&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;十四、远程端口转发：把“本地服务”送到远端&#34;&gt;&lt;a href=&#34;#十四、远程端口转发：把“本地服务”送到远端&#34; class=&#34;headerlink&#34; title=&#34;十四、远程端口转发：把“本地服务”送到远端&#34;&gt;&lt;/a&gt;十四、远程端口转发：把“本地服务”送到远端&lt;/h2&gt;&lt;p&gt;假设你的本机运行开发服务：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:3000&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;希望远端服务器自己的 &lt;code&gt;127.0.0.1:8080&lt;/code&gt; 能访问它：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-N&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1:8080:127.0.0.1:3000 lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;链路是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;远端 127.0.0.1:8080 → SSH → 本机 127.0.0.1:3000&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果想让远端其他机器也访问这个反向端口，会涉及 &lt;code&gt;GatewayPorts&lt;/code&gt;、监听地址以及服务端防火墙，暴露范围明显扩大。除非明确知道自己在做什么，否则优先保持 &lt;code&gt;127.0.0.1&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;十五、动态转发：把-SSH-当-SOCKS-代理&#34;&gt;&lt;a href=&#34;#十五、动态转发：把-SSH-当-SOCKS-代理&#34; class=&#34;headerlink&#34; title=&#34;十五、动态转发：把 SSH 当 SOCKS 代理&#34;&gt;&lt;/a&gt;十五、动态转发：把 SSH 当 SOCKS 代理&lt;/h2&gt;&lt;p&gt;本地建立 SOCKS5 代理：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-N&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-D&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;127.0&lt;/span&gt;.0.1:1080 lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后把支持 SOCKS5 的应用指向：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;127.0.0.1:1080&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;应用的 TCP 流量会经过 SSH 到远端，再由远端访问目标地址。&lt;/p&gt;
+&lt;p&gt;这适合临时调试、访问远端网络中的 Web 服务等场景，但它不是 VPN，也不会自动接管系统全部流量。&lt;/p&gt;
+&lt;h2 id=&#34;十六、跳板机-ProxyJump：访问内网服务器&#34;&gt;&lt;a href=&#34;#十六、跳板机-ProxyJump：访问内网服务器&#34; class=&#34;headerlink&#34; title=&#34;十六、跳板机 ProxyJump：访问内网服务器&#34;&gt;&lt;/a&gt;十六、跳板机 ProxyJump：访问内网服务器&lt;/h2&gt;&lt;p&gt;典型结构：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;本机
+ │
+ ▼
+bastion.example.com      公网跳板机
+ │
+ ▼
+10.0.0.20                内网服务器&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命令行可以直接：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-J&lt;/span&gt; bastion.example.com user@10.0.0.20&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更推荐写进 config：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host bastion
+    HostName bastion.example.com
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_bastion
+    IdentitiesOnly yes
+
+Host internal
+    HostName 10.0.0.20
+    User dev
+    IdentityFile ~/.ssh/id_ed25519_internal
+    IdentitiesOnly yes
+    ProxyJump bastion&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以后：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; internal
+&lt;span class=&#34;token function&#34;&gt;scp&lt;/span&gt; ./file internal:~/&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;VS Code Remote - SSH 也可以直接使用 &lt;code&gt;internal&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;不要为了跳板机默认开启-Agent-Forwarding&#34;&gt;&lt;a href=&#34;#不要为了跳板机默认开启-Agent-Forwarding&#34; class=&#34;headerlink&#34; title=&#34;不要为了跳板机默认开启 Agent Forwarding&#34;&gt;&lt;/a&gt;不要为了跳板机默认开启 Agent Forwarding&lt;/h3&gt;&lt;p&gt;&lt;code&gt;ProxyJump&lt;/code&gt; 并不等于 &lt;code&gt;ForwardAgent yes&lt;/code&gt;。通常客户端可以通过跳板机建立传输通道，然后直接向目标服务器完成认证，不需要把本地 agent 暴露给跳板机。&lt;/p&gt;
+&lt;p&gt;所以不要在全局配置里随手写：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host *
+    ForwardAgent yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只有确实需要并且信任中间主机时，再对具体主机启用 agent forwarding。&lt;/p&gt;
+&lt;h2 id=&#34;十七、ProxyCommand：SSH-不一定要直接连目标端口&#34;&gt;&lt;a href=&#34;#十七、ProxyCommand：SSH-不一定要直接连目标端口&#34; class=&#34;headerlink&#34; title=&#34;十七、ProxyCommand：SSH 不一定要直接连目标端口&#34;&gt;&lt;/a&gt;十七、ProxyCommand：SSH 不一定要直接连目标端口&lt;/h2&gt;&lt;p&gt;很多特殊网络方案会让 &lt;code&gt;ssh.exe&lt;/code&gt; 把底层字节流交给另一个程序，例如 Cloudflare Access、HTTP CONNECT 代理或其他隧道客户端。&lt;/p&gt;
+&lt;p&gt;典型结构：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host tunnel-host
+    HostName ssh.example.com
+    User root
+    IdentityFile ~/.ssh/id_ed25519_tunnel
+    IdentitiesOnly yes
+    ProxyCommand cloudflared access ssh --hostname %h&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时 SSH 的认证、Host Key、&lt;code&gt;scp&lt;/code&gt;、&lt;code&gt;sftp&lt;/code&gt; 等上层逻辑仍然由 OpenSSH 处理，只是“怎么到达远端 sshd”改成了 &lt;code&gt;ProxyCommand&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;因此排错时必须把问题区分成：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;ProxyCommand 是否能建链
+        ↓
+能否看到 SSH Banner / 完成握手
+        ↓
+Host Key 是否通过
+        ↓
+用户公钥认证是否通过&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不要把“网络隧道已经连通”和“SSH 用户已经认证成功”当成同一件事。&lt;/p&gt;
+&lt;h2 id=&#34;十八、系统化排错：先确定失败在哪一层&#34;&gt;&lt;a href=&#34;#十八、系统化排错：先确定失败在哪一层&#34; class=&#34;headerlink&#34; title=&#34;十八、系统化排错：先确定失败在哪一层&#34;&gt;&lt;/a&gt;十八、系统化排错：先确定失败在哪一层&lt;/h2&gt;&lt;p&gt;SSH 最有价值的排错命令是：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-vvv&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;调试时建议按下面顺序判断。&lt;/p&gt;
+&lt;h3 id=&#34;1-客户端配置有没有读对&#34;&gt;&lt;a href=&#34;#1-客户端配置有没有读对&#34; class=&#34;headerlink&#34; title=&#34;1. 客户端配置有没有读对&#34;&gt;&lt;/a&gt;1. 客户端配置有没有读对&lt;/h3&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-G&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重点看：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;hostname
+user
+port
+identityfile
+proxyjump
+proxycommand&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-DNS-IP-端口能不能到达&#34;&gt;&lt;a href=&#34;#2-DNS-IP-端口能不能到达&#34; class=&#34;headerlink&#34; title=&#34;2. DNS/IP/端口能不能到达&#34;&gt;&lt;/a&gt;2. DNS/IP/端口能不能到达&lt;/h3&gt;&lt;p&gt;Windows PowerShell：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Resolve-DnsName&lt;/span&gt; server&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com
+&lt;span class=&#34;token function&#34;&gt;Test-NetConnection&lt;/span&gt; server&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;example&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;com &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Port 22&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Linux/macOS：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;getent hosts server.example.com &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;nslookup&lt;/span&gt; server.example.com
+&lt;span class=&#34;token function&#34;&gt;nc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-vz&lt;/span&gt; server.example.com &lt;span class=&#34;token number&#34;&gt;22&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果这里就是超时，先查路由、安全组、防火墙、NAT、端口映射或代理，不要先折腾用户密钥。&lt;/p&gt;
+&lt;h3 id=&#34;3-服务端-sshd-是否真的在监听&#34;&gt;&lt;a href=&#34;#3-服务端-sshd-是否真的在监听&#34; class=&#34;headerlink&#34; title=&#34;3. 服务端 sshd 是否真的在监听&#34;&gt;&lt;/a&gt;3. 服务端 sshd 是否真的在监听&lt;/h3&gt;&lt;p&gt;服务器控制台：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;systemctl status &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; --no-pager &lt;span class=&#34;token operator&#34;&gt;&lt;span class=&#34;token file-descriptor important&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;/span&gt;/dev/null &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; systemctl status sshd --no-pager
+ss &lt;span class=&#34;token parameter variable&#34;&gt;-lntp&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-E&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:22|:2222&#39;&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; sshd &lt;span class=&#34;token parameter variable&#34;&gt;-t&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ubuntu 日志：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; journalctl &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;100&lt;/span&gt; --no-pager&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;RHEL 系常用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; journalctl &lt;span class=&#34;token parameter variable&#34;&gt;-u&lt;/span&gt; sshd &lt;span class=&#34;token parameter variable&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;100&lt;/span&gt; --no-pager&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-已握手，但出现-Permission-denied-publickey&#34;&gt;&lt;a href=&#34;#4-已握手，但出现-Permission-denied-publickey&#34; class=&#34;headerlink&#34; title=&#34;4. 已握手，但出现 Permission denied (publickey)&#34;&gt;&lt;/a&gt;4. 已握手，但出现 &lt;code&gt;Permission denied (publickey)&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;这说明网络和 SSH 协议层通常已经通了，重点查&lt;strong&gt;用户认证&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;whoami&lt;/span&gt;
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-ld&lt;/span&gt; ~ ~/.ssh
+&lt;span class=&#34;token function&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt; ~/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;常见 Unix 权限：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;700&lt;/span&gt; ~/.ssh
+&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;600&lt;/span&gt; ~/.ssh/authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;客户端确认自己到底在试哪把密钥：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-vvv&lt;/span&gt; lab&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者直接强制：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;IdentitiesOnly&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;yes &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; ~/.ssh/id_ed25519_lab user@server.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-Too-many-authentication-failures&#34;&gt;&lt;a href=&#34;#5-Too-many-authentication-failures&#34; class=&#34;headerlink&#34; title=&#34;5. Too many authentication failures&#34;&gt;&lt;/a&gt;5. &lt;code&gt;Too many authentication failures&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;这通常不是“密码输错太多”，而是本地 agent 里装了很多密钥，服务器在正确密钥出现前已经达到认证尝试上限。&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host lab
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-Connection-refused&#34;&gt;&lt;a href=&#34;#6-Connection-refused&#34; class=&#34;headerlink&#34; title=&#34;6. Connection refused&#34;&gt;&lt;/a&gt;6. &lt;code&gt;Connection refused&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;通常表示已经到达目标主机，但目标端口没有服务监听，常见原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sshd&lt;/code&gt; 没启动；&lt;/li&gt;
+&lt;li&gt;端口写错；&lt;/li&gt;
+&lt;li&gt;sshd 只监听了其他地址；&lt;/li&gt;
+&lt;li&gt;防火墙明确拒绝连接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;7-Connection-timed-out&#34;&gt;&lt;a href=&#34;#7-Connection-timed-out&#34; class=&#34;headerlink&#34; title=&#34;7. Connection timed out&#34;&gt;&lt;/a&gt;7. &lt;code&gt;Connection timed out&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;更偏向网络路径问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公网 IP/域名错误；&lt;/li&gt;
+&lt;li&gt;云安全组没有放行；&lt;/li&gt;
+&lt;li&gt;路由器没有端口映射；&lt;/li&gt;
+&lt;li&gt;NAT 后主机不可直接入站；&lt;/li&gt;
+&lt;li&gt;出入口防火墙丢弃数据包；&lt;/li&gt;
+&lt;li&gt;网络封锁了目标端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-REMOTE-HOST-IDENTIFICATION-HAS-CHANGED&#34;&gt;&lt;a href=&#34;#8-REMOTE-HOST-IDENTIFICATION-HAS-CHANGED&#34; class=&#34;headerlink&#34; title=&#34;8. REMOTE HOST IDENTIFICATION HAS CHANGED&#34;&gt;&lt;/a&gt;8. &lt;code&gt;REMOTE HOST IDENTIFICATION HAS CHANGED&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;先问自己：服务器是否刚重装、容器是否重建、IP 是否重新分配、域名是否改了后端？&lt;/p&gt;
+&lt;p&gt;在服务端可信控制台重新查看指纹：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-lf&lt;/span&gt; /etc/ssh/ssh_host_ed25519_key.pub&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;确认变化合理后再删除客户端旧记录：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh-keygen &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; server.example.com&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后重新连接并核对新指纹。&lt;/p&gt;
+&lt;h3 id=&#34;9-SSH-连几分钟就断&#34;&gt;&lt;a href=&#34;#9-SSH-连几分钟就断&#34; class=&#34;headerlink&#34; title=&#34;9. SSH 连几分钟就断&#34;&gt;&lt;/a&gt;9. SSH 连几分钟就断&lt;/h3&gt;&lt;p&gt;先区分是 NAT/防火墙空闲超时，还是远端服务主动断开。&lt;/p&gt;
+&lt;p&gt;客户端可以配置：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host lab
+    ServerAliveInterval 30
+    ServerAliveCountMax 3&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里是 SSH 协议层保活，不等于 TCPKeepAlive，也不是让失联服务器“永不掉线”。&lt;/p&gt;
+&lt;h2 id=&#34;十九、Windows-也可以作为-SSH-Server&#34;&gt;&lt;a href=&#34;#十九、Windows-也可以作为-SSH-Server&#34; class=&#34;headerlink&#34; title=&#34;十九、Windows 也可以作为 SSH Server&#34;&gt;&lt;/a&gt;十九、Windows 也可以作为 SSH Server&lt;/h2&gt;&lt;p&gt;Windows 11/Windows Server 可以安装 OpenSSH Server。管理员 PowerShell 先查看：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Get-WindowsCapability&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Online &lt;span class=&#34;token punctuation&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;Where-Object&lt;/span&gt; Name &lt;span class=&#34;token operator&#34;&gt;-like&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;OpenSSH*&#39;&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如未安装：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Add-WindowsCapability&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Online &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name OpenSSH&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;Server~~~~0&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;0&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;1&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;0&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动并设为自动：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-powershell&#34; data-language=&#34;powershell&#34;&gt;&lt;code class=&#34;language-powershell&#34;&gt;&lt;span class=&#34;token function&#34;&gt;Start-Service&lt;/span&gt; sshd
+&lt;span class=&#34;token function&#34;&gt;Set-Service&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;Name sshd &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;StartupType Automatic
+&lt;span class=&#34;token function&#34;&gt;Get-Service&lt;/span&gt; sshd&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Windows OpenSSH Server 的主配置通常位于：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\ProgramData\ssh\sshd_config&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Host Key 也保存在 &lt;code&gt;C:\ProgramData\ssh&lt;/code&gt;。Windows 的 &lt;code&gt;authorized_keys&lt;/code&gt; 与 ACL 规则和 Unix 不完全相同，尤其管理员账户默认配置可能使用：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;C:\ProgramData\ssh\administrators_authorized_keys&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此把 Windows 当服务端时，建议按 Microsoft 当前 OpenSSH 文档处理 ACL，不要直接照抄 Linux 的 &lt;code&gt;chmod 600&lt;/code&gt; 思路。&lt;/p&gt;
+&lt;p&gt;另外确认 Windows 防火墙存在 OpenSSH Server 的 TCP/22 入站规则。如果服务器需要经过公网访问，还要继续检查上游 NAT、云安全组或路由器端口映射。&lt;/p&gt;
+&lt;h2 id=&#34;二十、一套推荐的日常-SSH-配置&#34;&gt;&lt;a href=&#34;#二十、一套推荐的日常-SSH-配置&#34; class=&#34;headerlink&#34; title=&#34;二十、一套推荐的日常 SSH 配置&#34;&gt;&lt;/a&gt;二十、一套推荐的日常 SSH 配置&lt;/h2&gt;&lt;p&gt;下面是个人电脑管理多台 Linux 服务器时比较稳妥的起点：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-sshconfig&#34; data-language=&#34;sshconfig&#34;&gt;&lt;code class=&#34;language-sshconfig&#34;&gt;Host lab
+    HostName 203.0.113.10
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519_lab
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+
+Host bastion
+    HostName bastion.example.com
+    User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_bastion
+    IdentitiesOnly yes
+
+Host internal
+    HostName 10.0.0.20
+    User dev
+    IdentityFile ~/.ssh/id_ed25519_internal
+    IdentitiesOnly yes
+    ProxyJump bastion
+
+Host *
+    HashKnownHosts yes&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里没有默认开启 &lt;code&gt;ForwardAgent&lt;/code&gt;，也没有关闭 Host Key 检查，更没有把所有主机强行绑定到同一把私钥。&lt;/p&gt;
+&lt;h2 id=&#34;二十一、从零到稳定使用的完整操作顺序&#34;&gt;&lt;a href=&#34;#二十一、从零到稳定使用的完整操作顺序&#34; class=&#34;headerlink&#34; title=&#34;二十一、从零到稳定使用的完整操作顺序&#34;&gt;&lt;/a&gt;二十一、从零到稳定使用的完整操作顺序&lt;/h2&gt;&lt;p&gt;第一次配置一台新服务器，可以直接照下面顺序走：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;1. 客户端确认 ssh -V
+2. 服务端安装并启动 openssh-server
+3. 确认 sshd 监听地址和端口
+4. 确认网络/安全组/防火墙可达
+5. 第一次连接时核对服务器 Host Key 指纹
+6. 为这台服务器生成独立 Ed25519 用户密钥
+7. 给私钥设置 passphrase
+8. 把 .pub 公钥加入远端 authorized_keys
+9. 新开终端验证公钥登录
+10. 配置 ssh-agent
+11. 把长命令整理进 ~/.ssh/config
+12. 用 ssh -G 检查最终客户端配置
+13. 确认密钥登录稳定后，再关闭服务端密码认证
+14. 服务端每次改配置先 sshd -t
+15. 保留旧连接，新开第二个连接验证
+16. VS Code/scp/sftp 全部复用同一个 Host 别名
+17. 需要访问内网时使用 ProxyJump
+18. 需要访问远端本地服务时使用 -L
+19. 需要反向暴露本地服务时谨慎使用 -R
+20. 需要 SOCKS 代理时使用 -D
+21. 出错先 ssh -vvv，再按网络→握手→Host Key→用户认证分层定位&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这比“能连上就算配置完成”更接近一套长期可维护的 SSH 工作流。&lt;/p&gt;
+&lt;h2 id=&#34;二十二、不要做的几件事&#34;&gt;&lt;a href=&#34;#二十二、不要做的几件事&#34; class=&#34;headerlink&#34; title=&#34;二十二、不要做的几件事&#34;&gt;&lt;/a&gt;二十二、不要做的几件事&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;不要上传用户私钥到服务器。&lt;/strong&gt; 服务器只需要你的公钥。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要为了免输密码就默认创建无口令私钥。&lt;/strong&gt; 优先使用 passphrase + ssh-agent。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要第一次连接任何服务器都无脑输入 &lt;code&gt;yes&lt;/code&gt;。&lt;/strong&gt; 至少对重要机器核对 Host Key 指纹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要在公钥登录还没验证时先关闭密码认证。&lt;/strong&gt; 这是最常见的自锁服务器方式之一。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要全局 &lt;code&gt;ForwardAgent yes&lt;/code&gt;。&lt;/strong&gt; 只在确有需要的可信主机上使用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要全局关闭 &lt;code&gt;StrictHostKeyChecking&lt;/code&gt;。&lt;/strong&gt; 这样等于主动放弃服务器身份校验的重要防线。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要把端口转发默认绑定 &lt;code&gt;0.0.0.0&lt;/code&gt;。&lt;/strong&gt; 本机使用时优先显式绑定 &lt;code&gt;127.0.0.1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要把 &lt;code&gt;Connection timed out&lt;/code&gt; 当成密钥问题。&lt;/strong&gt; 连 TCP 都没建立时，用户密钥根本还没有登场。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要看到 Host Key changed 就直接 &lt;code&gt;ssh-keygen -R&lt;/code&gt;。&lt;/strong&gt; 先确认服务器为什么变了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不要一把长期私钥打天下。&lt;/strong&gt; 重要设备、服务器或用途分开建密钥，撤销时更干净。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;二十三、常用命令速查&#34;&gt;&lt;a href=&#34;#二十三、常用命令速查&#34; class=&#34;headerlink&#34; title=&#34;二十三、常用命令速查&#34;&gt;&lt;/a&gt;二十三、常用命令速查&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;需求&lt;/th&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;普通登录&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定端口&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -p 2222 user@host&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指定私钥&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -i ~/.ssh/id_ed25519_lab user@host&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看最终配置&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -G lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;详细调试&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -vvv lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;执行远程命令&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh lab &#39;hostname; uptime&#39;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;生成 Ed25519 密钥&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh-keygen -t ed25519&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看公钥指纹&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh-keygen -lf key.pub&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;从 known_hosts 删除旧记录&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh-keygen -R host&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看 agent 密钥&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh-add -l&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;上传文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;scp file lab:~/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;下载文件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;scp lab:~/file ./&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SFTP&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sftp lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;本地转发&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -N -L 127.0.0.1:15432:127.0.0.1:5432 lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;远程转发&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -N -R 127.0.0.1:8080:127.0.0.1:3000 lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SOCKS5 动态转发&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -N -D 127.0.0.1:1080 lab&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;跳板机&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ssh -J bastion target&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;检查服务端配置语法&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sudo sshd -t&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;查看服务端有效配置&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sudo sshd -T&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h2 id=&#34;二十四、官方资料与版本边界&#34;&gt;&lt;a href=&#34;#二十四、官方资料与版本边界&#34; class=&#34;headerlink&#34; title=&#34;二十四、官方资料与版本边界&#34;&gt;&lt;/a&gt;二十四、官方资料与版本边界&lt;/h2&gt;&lt;p&gt;本文于 &lt;strong&gt;2026-08-09&lt;/strong&gt; 按当前 OpenSSH、Ubuntu 与 Microsoft 官方资料重新核对。OpenSSH 的具体默认算法、Windows 可选功能状态以及发行版默认配置都可能随着版本变化，因此涉及安全策略或默认值时，优先查看当前系统自己的 &lt;code&gt;ssh -V&lt;/code&gt;、&lt;code&gt;ssh -G&lt;/code&gt;、&lt;code&gt;sshd -T&lt;/code&gt; 和官方文档。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://man.openbsd.org/ssh&#34;&gt;OpenSSH ssh(1) 手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://man.openbsd.org/ssh_config&#34;&gt;OpenSSH ssh_config(5) 手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://man.openbsd.org/sshd_config&#34;&gt;OpenSSH sshd_config(5) 手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://man.openbsd.org/ssh-keygen&#34;&gt;OpenSSH ssh-keygen(1) 手册&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ubuntu.com/server/docs/how-to/security/openssh-server/&#34;&gt;Ubuntu OpenSSH Server 官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/windows-server/administration/openssh/openssh-overview&#34;&gt;Microsoft：OpenSSH for Windows 概述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/windows-server/administration/openssh/openssh_keymanagement&#34;&gt;Microsoft：OpenSSH 密钥管理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse&#34;&gt;Microsoft：开始使用 OpenSSH Server&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a href=&#34;#总结&#34; class=&#34;headerlink&#34; title=&#34;总结&#34;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;一套可靠的 SSH 工作流，核心不是记住更多命令，而是始终知道当前在处理哪一层：&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-text&#34; data-language=&#34;text&#34;&gt;&lt;code class=&#34;language-text&#34;&gt;网络可达性
+    ↓
+SSH 协议握手
+    ↓
+服务器 Host Key 身份校验
+    ↓
+用户认证（私钥 / 公钥）
+    ↓
+Shell、文件传输、VS Code、端口转发与跳板机&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;日常使用时，把主机参数统一收进 &lt;code&gt;~/.ssh/config&lt;/code&gt;，用独立密钥配合 &lt;code&gt;ssh-agent&lt;/code&gt;，重要主机认真核对 Host Key；服务端先验证公钥登录，再关闭密码认证。出现故障时从 &lt;code&gt;ssh -G&lt;/code&gt; 和 &lt;code&gt;ssh -vvv&lt;/code&gt; 开始，按网络、握手、主机身份、用户认证逐层排查。&lt;/p&gt;
+&lt;p&gt;掌握这条主线以后，&lt;code&gt;scp&lt;/code&gt;、SFTP、VS Code Remote - SSH、&lt;code&gt;ProxyJump&lt;/code&gt;、&lt;code&gt;ProxyCommand&lt;/code&gt;、Cloudflare Tunnel 以及 &lt;code&gt;-L/-R/-D&lt;/code&gt; 端口转发，本质上都只是同一套 OpenSSH 工作流在不同网络场景下的扩展。 &lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://0xdadream.github.io/2026/04/25/centos-xiu-fu/</guid>
             <title>CentOS 8 源失效修复教程</title>
@@ -1637,26 +2376,6 @@ dpkg --force-all &lt;span class=&#34;token parameter variable&#34;&gt;--purge&lt
 &lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-b&lt;/span&gt; url &lt;span class=&#34;token comment&#34;&gt;#后台下载&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;对于下载的文件包执行源码安装&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://0xdadream.github.io/2021/08/02/guo-nei-jing-xiang-yuan/</guid>
-            <title>国内镜像源</title>
-            <link>https://0xdadream.github.io/2021/08/02/guo-nei-jing-xiang-yuan/</link>
-            <category>tip</category>
-            <category>linux</category>
-            <pubDate>Mon, 02 Aug 2021 09:11:00 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;国内镜像源&#34;&gt;&lt;a href=&#34;#国内镜像源&#34; class=&#34;headerlink&#34; title=&#34;国内镜像源&#34;&gt;&lt;/a&gt;国内镜像源&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://mirrors.163.com/&#34;&gt;欢迎访问网易开源镜像站 (163.com)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://developer.aliyun.com/mirror/&#34;&gt;阿里巴巴开源镜像站-OPSX镜像站-阿里云开发者社区 (aliyun.com)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://mirrors.huaweicloud.com/home&#34;&gt;华为开源镜像站_软件开发服务_华为云 (huaweicloud.com)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://mirrors.cloud.tencent.com/&#34;&gt;腾讯软件源 (tencent.com)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/&#34;&gt;清华大学开源软件镜像站 | Tsinghua Open Source Mirror&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://mirrors.ustc.edu.cn/&#34;&gt;USTC Open Source Software Mirror&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://mirror.bit.edu.cn/web/&#34;&gt;北京理工大学 开源软件镜像服务 (bit.edu.cn)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://mirror.bjtu.edu.cn/&#34;&gt;首页 - 北京交通大学自由与开源软件镜像站 (bjtu.edu.cn)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://mirror.azure.cn/&#34;&gt;Mirror site (azure.cn)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
  ]]></description>
         </item>
     </channel>
