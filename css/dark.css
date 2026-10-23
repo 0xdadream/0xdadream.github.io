@@ -69,7 +69,11 @@ body.DarkMode .read .bg-cover .description {
 body.DarkMode .fArticleTitle, body.DarkMode .fArticleAuthor, body.DarkMode .fArticleUpdate {
     color: rgba(255, 255, 255, 0.6) !important;
 }
-body.DarkMode .v[data-class="v"] .vinput, .v[data-class="v"] .veditor, .v[data-class="v"] p, .v[data-class="v"] pre code, .v[data-class="v"] .status-bar {
+body.DarkMode .v[data-class="v"] .vinput,
+body.DarkMode .v[data-class="v"] .veditor,
+body.DarkMode .v[data-class="v"] p,
+body.DarkMode .v[data-class="v"] pre code,
+body.DarkMode .v[data-class="v"] .status-bar {
     color: rgba(255, 255, 255, 0.6);
 }
 body.DarkMode blockquote {
@@ -156,8 +160,34 @@ body.DarkMode .card-image-V .box-content .title {
 body.DarkMode header .menus_item_child:before {
     border-color: transparent transparent rgba(45, 42, 52, 0.8);
 }
-body.DarkMode #searchModal, .DarkMode .h-color, .DarkMode header .menus_item_child {
+.DarkMode .h-color, .DarkMode header .menus_item_child {
     background: rgba(45, 42, 52, 0.8);
+}
+
+/* Give search a readable dark palette instead of inverting the entire dialog. */
+body.DarkMode #searchModal {
+    filter: none;
+    background: #282c34;
+    color: #e2e8f0;
+}
+
+body.DarkMode #searchModal .search-header .title,
+body.DarkMode #searchModal .search-input,
+body.DarkMode #searchModal .search-result {
+    color: #e2e8f0;
+}
+
+body.DarkMode #searchModal .search-result-title {
+    color: #70d6ad;
+}
+
+body.DarkMode #searchModal .search-keyword {
+    background: #354b5f;
+    color: #9dd9ff;
+}
+
+body.DarkMode #searchModal .search-result-list li {
+    border-color: #455063;
 }
 body.DarkMode .card-content p > code,
 body.DarkMode .card-content h2 > code,
@@ -327,10 +357,7 @@ body.DarkMode {
 
 body.DarkMode #vcomments textarea,
 body.DarkMode #waline textarea {
-    background: url(/medias_webp/simiao.webp) 100% 100% no-repeat;
     box-sizing: border-box;
-    background-size: contain;
-    background-position: right;
     background-color: rgba(255, 255, 255, 0);
     resize: vertical;
     caret-color: red;

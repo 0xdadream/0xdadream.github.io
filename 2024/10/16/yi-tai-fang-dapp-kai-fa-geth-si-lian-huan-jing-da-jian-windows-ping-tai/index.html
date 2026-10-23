@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台, 逐梦">
+    <meta name="keywords" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/">
+    <link rel="preload" as="image" href="/medias/featureimages/15.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台 | 逐梦">
+    <meta property="og:description" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台">
+    <meta property="og:url" content="https://0xdadream.github.io/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台 | 逐梦">
+    <meta name="twitter:description" content="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台 | 逐梦","headline":"以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台 | 逐梦","description":"以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台","url":"https://0xdadream.github.io/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2024-10-16T01:25:00.000Z","dateModified":"2026-10-21T16:07:25.666Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -424,14 +620,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-07-29
+                    2026-10-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    8.4k
+                    8.5k
                 </div>
                 
 
@@ -443,9 +639,9 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -453,29 +649,50 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-DApp-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="dream-toc-list-text">一、安装 DApp 开发环境</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-1-%E5%AE%89%E8%A3%85-Node-js"><span class="dream-toc-list-text">1.1 安装 Node.js</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-2-%E5%AE%89%E8%A3%85-Geth"><span class="dream-toc-list-text">1.2 安装 Geth</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-3-%E5%AE%89%E8%A3%85-solidity-%E7%BC%96%E8%AF%91%E5%99%A8"><span class="dream-toc-list-text">1.3 安装 solidity 编译器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-4-%E5%AE%89%E8%A3%85-web3"><span class="dream-toc-list-text">1.4 安装 web3</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-5-%E5%AE%89%E8%A3%85-truffle-%E6%A1%86%E6%9E%B6"><span class="dream-toc-list-text">1.5 安装 truffle 框架</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-6-%E5%AE%89%E8%A3%85-webpack"><span class="dream-toc-list-text">1.6 安装 webpack</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E3%80%81%E8%BF%90%E8%A1%8C%E7%A7%81%E9%93%BE%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">二、运行私链节点</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-1-%E5%88%9B%E4%B8%96%E5%9D%97%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">2.1 创世块配置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-2-%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A7%81%E9%93%BE%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">2.2 初始化私链节点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-3-%E5%90%AF%E5%8A%A8%E7%A7%81%E9%93%BE%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">2.3 启动私链节点</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#Geth-%E5%90%AF%E5%8A%A8%E7%BB%93%E6%9E%9C%E8%A7%A3%E9%87%8A"><span class="dream-toc-list-text">Geth 启动结果解释</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%90%8E%E7%BB%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%99%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">后续如何使用这些配置</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-4-%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="dream-toc-list-text">2.4 账户管理</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-4-1-%E6%9F%A5%E7%9C%8B%E8%B4%A6%E6%88%B7%E5%88%97%E8%A1%A8"><span class="dream-toc-list-text">2.4.1 查看账户列表</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-4-2-%E5%88%9B%E5%BB%BA%E6%96%B0%E8%B4%A6%E6%88%B7"><span class="dream-toc-list-text">2.4.2 创建新账户</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-4-3-%E6%9F%A5%E8%AF%A2%E8%B4%A6%E6%88%B7%E4%BD%99%E9%A2%9D"><span class="dream-toc-list-text">2.4.3 查询账户余额</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-4-4-%E6%8C%96%E7%9F%BF"><span class="dream-toc-list-text">2.4.4 挖矿</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-4-5-%E8%A7%A3%E9%94%81%E8%B4%A6%E6%88%B7"><span class="dream-toc-list-text">2.4.5 解锁账户</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-5-%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">2.5 交易</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E5%8F%91%E9%80%81%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">1. 发送交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-%E6%9F%A5%E8%AF%A2%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">2. 查询交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">3. 创建自定义交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#4-%E7%A6%BB%E7%BA%BF%E7%AD%BE%E5%90%8D%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">4. 离线签名交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#5-%E6%89%B9%E9%87%8F%E5%8F%91%E9%80%81%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">5. 批量发送交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#6-%E6%A3%80%E6%9F%A5%E8%B4%A6%E6%88%B7%E4%BD%99%E9%A2%9D"><span class="dream-toc-list-text">6. 检查账户余额</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#7-%E6%A3%80%E6%9F%A5%E4%BA%A4%E6%98%93%E6%B1%A0%E4%B8%AD%E7%9A%84%E4%BA%A4%E6%98%93"><span class="dream-toc-list-text">7. 检查交易池中的交易</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#8-%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E7%9A%84-gas-%E4%BB%B7%E6%A0%BC"><span class="dream-toc-list-text">8. 检查当前的 gas 价格</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#9-%E7%9B%91%E5%90%AC%E5%8C%BA%E5%9D%97%E5%92%8C%E4%BA%A4%E6%98%93%E4%BA%8B%E4%BB%B6"><span class="dream-toc-list-text">9. 监听区块和交易事件</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#10-%E4%BA%A4%E6%98%93%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB"><span class="dream-toc-list-text">10. 交易命令汇总</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-6-%E7%A7%81%E9%93%BE%E5%A4%9A%E4%B8%AA%E8%8A%82%E7%82%B9%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%AF%A6%E7%BB%86%E5%91%BD%E4%BB%A4"><span class="dream-toc-list-text">2.6 私链多个节点连接的详细命令</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="dream-toc-list-text">1. 准备工作</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96-Geth-%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">2. 初始化 Geth 节点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E5%90%AF%E5%8A%A8%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">3. 启动节点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#4-%E6%89%8B%E5%8A%A8%E8%BF%9E%E6%8E%A5%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">4. 手动连接节点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#5-%E5%90%8C%E6%AD%A5%E5%92%8C%E6%8C%96%E7%9F%BF"><span class="dream-toc-list-text">5. 同步和挖矿</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#6-%E8%B4%A6%E6%88%B7%E5%92%8C%E4%BA%A4%E6%98%93%E7%AE%A1%E7%90%86"><span class="dream-toc-list-text">6. 账户和交易管理</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#7-%E8%AE%BE%E7%BD%AE%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="dream-toc-list-text">7. 设置启动脚本</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#8-%E5%A4%9A%E8%8A%82%E7%82%B9%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%80%BB%E7%BB%93%E6%AD%A5%E9%AA%A4"><span class="dream-toc-list-text">8. 多节点连接的总结步骤</span></a></li></ol></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%89%E3%80%81%E6%9E%84%E5%BB%BA%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE"><span class="dream-toc-list-text">三、构建示例项目</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%88%9B%E5%BB%BA-Truffle-%E9%A1%B9%E7%9B%AE"><span class="dream-toc-list-text">创建 Truffle 项目</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="dream-toc-list-text">创建项目目录：</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-Truffle-%E9%A1%B9%E7%9B%AE%EF%BC%9A"><span class="dream-toc-list-text">初始化 Truffle 项目：</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E4%BF%AE%E6%94%B9-Truffle-%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">修改 Truffle 配置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%BC%96%E5%86%99%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6"><span class="dream-toc-list-text">编写智能合约</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%81%E7%A7%BB%E6%96%87%E4%BB%B6"><span class="dream-toc-list-text">创建迁移文件</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E9%BB%98%E8%AE%A4%E8%BF%81%E7%A7%BB%E8%A1%8C%E4%B8%BA"><span class="dream-toc-list-text">1. 默认迁移行为</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-%E9%83%A8%E7%BD%B2%E7%89%B9%E5%AE%9A%E5%90%88%E7%BA%A6"><span class="dream-toc-list-text">2. 部署特定合约</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E5%9B%9E%E6%BB%9A%E5%B9%B6%E9%87%8D%E6%96%B0%E9%83%A8%E7%BD%B2"><span class="dream-toc-list-text">3. 回滚并重新部署</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#4-%E9%83%A8%E7%BD%B2%E7%9A%84%E9%80%89%E6%8B%A9%E6%80%A7%E6%8E%A7%E5%88%B6"><span class="dream-toc-list-text">4. 部署的选择性控制</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%BC%96%E8%AF%91%E5%90%88%E7%BA%A6"><span class="dream-toc-list-text">编译合约</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91%E4%B8%8E%E9%83%A8%E7%BD%B2"><span class="dream-toc-list-text">自动编译与部署</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E8%AE%A4%E7%BC%96%E8%AF%91%E7%8A%B6%E6%80%81"><span class="dream-toc-list-text">如何确认编译状态</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%90%AF%E5%8A%A8-Geth-%E8%8A%82%E7%82%B9"><span class="dream-toc-list-text">启动 Geth 节点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%A7%A3%E9%94%81%E8%B4%A6%E6%88%B7-2"><span class="dream-toc-list-text">解锁账户</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%90%AF%E5%8A%A8%E6%8C%96%E7%9F%BF-1"><span class="dream-toc-list-text">启动挖矿</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E9%83%A8%E7%BD%B2%E5%90%88%E7%BA%A6"><span class="dream-toc-list-text">部署合约</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E6%A3%80%E6%9F%A5%E9%83%A8%E7%BD%B2%E7%BB%93%E6%9E%9C"><span class="dream-toc-list-text">检查部署结果</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E4%B8%8E%E5%90%88%E7%BA%A6%E4%BA%A4%E4%BA%92"><span class="dream-toc-list-text">与合约交互</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%90%AF%E5%8A%A8-DApp"><span class="dream-toc-list-text">启动 DApp</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="dream-toc-list-text">四、命令详解</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-Geth-%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="dream-toc-list-text">1. Geth 命令行选项</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-Geth-%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%91%BD%E4%BB%A4"><span class="dream-toc-list-text">2. Geth 控制台命令</span></a></li></ol></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
                 <h1 id="以太坊-DApp-开发-Geth-私链环境搭建-Windows-平台"><a href="#以太坊-DApp-开发-Geth-私链环境搭建-Windows-平台" class="headerlink" title="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台"></a>以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台</h1><h2 id="一、安装-DApp-开发环境"><a href="#一、安装-DApp-开发环境" class="headerlink" title="一、安装 DApp 开发环境"></a>一、安装 DApp 开发环境</h2><h3 id="1-1-安装-Node-js"><a href="#1-1-安装-Node-js" class="headerlink" title="1.1 安装 Node.js"></a>1.1 安装 Node.js</h3><p>看我这篇<a href="https://0xdadream.github.io/2024/01/20/node.js-ban-ben-wen-ti/">node.js版本问题 | 逐梦 (0xdadream.github.io)</a></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> <span class="token parameter variable">--version</span>
 v22.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="1-2-安装-Geth"><a href="#1-2-安装-Geth" class="headerlink" title="1.2 安装 Geth"></a>1.2 安装 Geth</h3><p><a target="_blank" rel="noopener" href="https://geth.ethereum.org/downloads">Downloads | go-ethereum</a></p>
 <p>下载 64 位<a target="_blank" rel="noopener" href="https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.3-329ac18e.exe">https://gethstore.blob.core.windows.net/builds/geth-windows-amd64-1.8.3-329ac18e.exe</a></p>
-<p>或者 32 位<a target="_blank" rel="noopener" href="https://gethstore.blob.core.windows.net/builds/geth-windows-386-1.8.3-329ac18e.exe">https://gethstore.blob.core.windows.net/builds/geth-windows-386-1.8.3-329ac18e.exe</a> </p>
-<p>Geth 安装程序,然后进行安装。 安装完毕后打开一个控制台,执行命令验证安装成功:  </p>
+<p>或者 32 位<a target="_blank" rel="noopener" href="https://gethstore.blob.core.windows.net/builds/geth-windows-386-1.8.3-329ac18e.exe">https://gethstore.blob.core.windows.net/builds/geth-windows-386-1.8.3-329ac18e.exe</a></p>
+<p>Geth 安装程序,然后进行安装。 安装完毕后打开一个控制台,执行命令验证安装成功:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth version
 Geth
 Version: <span class="token number">1.8</span>.3-stable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="1-3-安装-solidity-编译器"><a href="#1-3-安装-solidity-编译器" class="headerlink" title="1.3 安装 solidity 编译器"></a>1.3 安装 solidity 编译器</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> solc <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>  安装完毕后,执行命令验证安装成功 </p>
+<p>安装完毕后,执行命令验证安装成功</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">solcjs <span class="token parameter variable">-V</span>
 <span class="token number">0.8</span>.28+commit.7893614a.Emscripten.clang<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -483,7 +700,7 @@ Version: <span class="token number">1.8</span>.3-stable <span aria-hidden="true"
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> web3 <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>验证，创建一个文件<code>index.js</code>,写入以下内容</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const <span class="token punctuation">{</span> Web3 <span class="token punctuation">}</span> <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'web3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">const <span class="token punctuation">&#123;</span> Web3 <span class="token punctuation">&#125;</span> <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'web3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 console.log<span class="token punctuation">(</span><span class="token string">"Version:"</span>,Web3.version<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -491,17 +708,17 @@ console.log<span class="token punctuation">(</span><span class="token string">"V
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> index.js
 Version: <span class="token number">4.13</span>.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="1-5-安装-truffle-框架"><a href="#1-5-安装-truffle-框架" class="headerlink" title="1.5 安装 truffle 框架"></a>1.5 安装 truffle 框架</h3><p> 执行以下命令安装 truffle 开发框架: </p>
+<h3 id="1-5-安装-truffle-框架"><a href="#1-5-安装-truffle-框架" class="headerlink" title="1.5 安装 truffle 框架"></a>1.5 安装 truffle 框架</h3><p>执行以下命令安装 truffle 开发框架:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> truffle<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>验证安装:  </p>
+<p>验证安装:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle.cmd version
 Truffle v5.11.5 <span class="token punctuation">(</span>core: <span class="token number">5.11</span>.5<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h3 id="1-6-安装-webpack"><a href="#1-6-安装-webpack" class="headerlink" title="1.6 安装 webpack"></a>1.6 安装 webpack</h3><p>执行以下命令安装 webpack:  </p>
+<h3 id="1-6-安装-webpack"><a href="#1-6-安装-webpack" class="headerlink" title="1.6 安装 webpack"></a>1.6 安装 webpack</h3><p>执行以下命令安装 webpack:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> webpack –g <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>验证安装  </p>
+<p>验证安装</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">webpack <span class="token parameter variable">-h</span>
 Usage: webpack <span class="token punctuation">[</span>entries<span class="token punctuation">..</span>.<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span>
 Alternative usage to run commands: webpack <span class="token punctuation">[</span>command<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -512,34 +729,34 @@ Alternative usage to run commands: webpack <span class="token punctuation">[</sp
 notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>然后编辑内容如下:</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
-    <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
         <span class="token property">"chainId"</span><span class="token operator">:</span> <span class="token number">987</span><span class="token punctuation">,</span>
         <span class="token property">"homesteadBlock"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
         <span class="token property">"eip155Block"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
         <span class="token property">"eip158Block"</span><span class="token operator">:</span> <span class="token number">0</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
     <span class="token property">"difficulty"</span><span class="token operator">:</span> <span class="token string">"200"</span><span class="token punctuation">,</span>
     <span class="token property">"gasLimit"</span><span class="token operator">:</span> <span class="token string">"2100000"</span><span class="token punctuation">,</span>
-    <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token property">"7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token property">"7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
             <span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"300000"</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token property">"f41c74c9ae680c1aa78f42e5647a62f353b7bdde"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token property">"f41c74c9ae680c1aa78f42e5647a62f353b7bdde"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
             <span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"400000"</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>config.chainId</code>用来声明以太坊网络编号,选择一个大于 10 的数字即可。  <code>difficulty</code> 用来声明挖矿难度,越小的值难度越低,也就能更快速地出块。</p>
 <p>完整版的 <code>gensis.json</code> 如下所示</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
       <span class="token property">"chainId"</span><span class="token operator">:</span> <span class="token number">987</span><span class="token punctuation">,</span>
       <span class="token property">"homesteadBlock"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
       <span class="token property">"eip155Block"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
       <span class="token property">"eip158Block"</span><span class="token operator">:</span> <span class="token number">0</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
   <span class="token property">"difficulty"</span><span class="token operator">:</span> <span class="token string">"0x400"</span><span class="token punctuation">,</span>
   <span class="token property">"gasLimit"</span><span class="token operator">:</span> <span class="token string">"0xffffffff"</span><span class="token punctuation">,</span>
   <span class="token comment">// 可选填的参数</span>
@@ -549,10 +766,10 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
   <span class="token property">"mixhash"</span><span class="token operator">:</span> <span class="token string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="token punctuation">,</span>
   <span class="token property">"parentHash"</span><span class="token operator">:</span> <span class="token string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="token punctuation">,</span>
   <span class="token property">"timestamp"</span><span class="token operator">:</span> <span class="token string">"0x00"</span><span class="token punctuation">,</span>
-  <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"430e986e0cca10a174baad96871ec9cb308c6d05"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"111111"</span><span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"430e986e0cca10a174baad96871ec9cb308c6d05"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"111111"</span><span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>各个字段解释如下：</p>
 <table>
@@ -625,10 +842,10 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <span class="token comment"># Successfully wrote genesis state</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>这会在当前目录下创建 data 目录,用来保存区块数据及账户信息</p>
-<p>可以上述命令写到一个脚本 <code>init.cmd</code> 里，文件内容如下:  </p>
+<p>可以上述命令写到一个脚本 <code>init.cmd</code> 里，文件内容如下:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--datadir</span> .<span class="token punctuation">\</span>data init gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>在部署下一个节点时,就可以直接执行这个脚本进行初始化了。例如,在另一台机器上:  </p>
+<p>在部署下一个节点时,就可以直接执行这个脚本进行初始化了。例如,在另一台机器上:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">init.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="2-3-启动私链节点"><a href="#2-3-启动私链节点" class="headerlink" title="2.3 启动私链节点"></a>2.3 启动私链节点</h3><p>在我们现在的环境下，需要启动一个 Geth 节点来接入私链网络（实际上也是这个私链网络的唯一一个节点），负责在创世块后挖出第一个块。该节点也是我们与以太坊私链通信的节点服务器。下面我们来启动这样一个节点。同样,你可以用一个脚本 <code>console.cmd</code> 来简化启动节点时的输入,文件内容如下:</p>
@@ -649,7 +866,7 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </thead>
 <tbody><tr>
 <td>–rpc</td>
-<td>开启JSON-RPC 服务，可供调用/调试访问。</td>
+<td>开启JSON-RPC 服务，可供调用&#x2F;调试访问。</td>
 </tr>
 <tr>
 <td>–rpcaddr</td>
@@ -681,7 +898,7 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </tr>
 <tr>
 <td>–port</td>
-<td>监听以太坊节点之间P2P消息的TCP/UDP端口，默认30303。</td>
+<td>监听以太坊节点之间P2P消息的TCP&#x2F;UDP端口，默认30303。</td>
 </tr>
 <tr>
 <td>–mine</td>
@@ -701,7 +918,7 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </tr>
 </tbody></table>
 <p>输入回车，启动成功！此时控制台会输出一组日志信息并有欢迎信息</p>
-<p>以后启动节点,只要直接执行这个脚本即可:  </p>
+<p>以后启动节点,只要直接执行这个脚本即可:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">console.cmd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>进入控制台</p>
@@ -715,44 +932,23 @@ notepad gensis.json<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </ul>
 <h4 id="后续如何使用这些配置"><a href="#后续如何使用这些配置" class="headerlink" title="后续如何使用这些配置"></a>后续如何使用这些配置</h4><h5 id="进入控制台后："><a href="#进入控制台后：" class="headerlink" title="进入控制台后："></a>进入控制台后：</h5><p>你可以直接在 Geth 控制台中输入命令与节点交互。以下是一些常见的操作：</p>
 <ul>
-<li><p><strong>查看挖矿状态</strong>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span>hashrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这会返回当前的挖矿算力。</p>
-</li>
-<li><p><strong>查看当前区块高度</strong>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这会显示当前节点已同步的最新区块号。</p>
-</li>
-<li><p><strong>查看账户余额</strong>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这会显示指定账户的余额。</p>
-</li>
-<li><p><strong>停止挖矿</strong>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这会停止挖矿进程。</p>
-</li>
-<li><p><strong>发送交易</strong>： 你可以使用 <code>eth.sendTransaction</code> 发送交易。例如：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">,</span> <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>解锁账户</strong>： 如果要发送交易，首先需要解锁账户：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">,</span> <span class="token string">"password"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>查看挖矿状态</strong>：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span>hashrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这会返回当前的挖矿算力。</li>
+<li><strong>查看当前区块高度</strong>：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这会显示当前节点已同步的最新区块号。</li>
+<li><strong>查看账户余额</strong>：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这会显示指定账户的余额。</li>
+<li><strong>停止挖矿</strong>：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这会停止挖矿进程。</li>
+<li><strong>发送交易</strong>： 你可以使用 <code>eth.sendTransaction</code> 发送交易。例如：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">,</span> <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>解锁账户</strong>： 如果要发送交易，首先需要解锁账户：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82"</span><span class="token punctuation">,</span> <span class="token string">"password"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h5 id="使用-RPC-接口："><a href="#使用-RPC-接口：" class="headerlink" title="使用 RPC 接口："></a>使用 RPC 接口：</h5><p>你启动了 RPC 服务，这意味着你可以通过 HTTP 与节点交互，而不必进入控制台。可以使用 <code>curl</code>、Web3.js、Python 等工具来与节点通信。下面是几个例子：</p>
 <ul>
-<li><p><strong>使用 <code>curl</code> 查看区块高度</strong>：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token parameter variable">--data</span> <span class="token string">'{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'</span> http://127.0.0.1:8545<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这会返回当前的区块高度。</p>
-</li>
-<li><p><strong>使用 Web3.js 与节点交互</strong>： 你可以使用 Web3.js 编写一个简单的脚本来获取节点信息。例如，安装 Web3.js：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> web3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>然后使用以下 JavaScript 代码获取节点的区块高度：</p>
-<pre class="line-numbers language-web-idl" data-language="web-idl"><code class="language-web-idl"><span class="token keyword">const</span> <span class="token class-name">Web3</span> <span class="token operator">=</span> require<span class="token punctuation">(</span>'web3'<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<li><strong>使用 <code>curl</code> 查看区块高度</strong>：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-X</span> POST <span class="token parameter variable">--data</span> <span class="token string">'&#123;"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1&#125;'</span> http://127.0.0.1:8545<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这会返回当前的区块高度。</li>
+<li><strong>使用 Web3.js 与节点交互</strong>： 你可以使用 Web3.js 编写一个简单的脚本来获取节点信息。例如，安装 Web3.js：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> web3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+然后使用以下 JavaScript 代码获取节点的区块高度：<pre class="line-numbers language-web-idl" data-language="web-idl"><code class="language-web-idl"><span class="token keyword">const</span> <span class="token class-name">Web3</span> <span class="token operator">=</span> require<span class="token punctuation">(</span>'web3'<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token class-name">web3</span> <span class="token operator">=</span> <span class="token class-name">new</span> Web3<span class="token punctuation">(</span>'http<span class="token operator">:</span><span class="token comment">//127.0.0.1:8545');</span>
 
 web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span>getBlockNumber<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
@@ -761,21 +957,21 @@ web3<span class="token punctuation">.</span>eth<span class="token punctuation">.
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span><span class="token function">addPeer</span><span class="token punctuation">(</span><span class="token string">"enode://publickey@ip:port"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这将允许你将其他节点加入到网络中。</p>
-<h3 id="2-4-账户管理"><a href="#2-4-账户管理" class="headerlink" title="2.4 账户管理"></a>2.4 账户管理</h3><h4 id="2-4-1-查看账户列表"><a href="#2-4-1-查看账户列表" class="headerlink" title="2.4.1 查看账户列表"></a>2.4.1 查看账户列表</h4><p>在 geth 控制台,使用 eth 对象的 accounts 属性查看目前的账户列表:  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&gt;</span> eth.accounts  or personal.listAccounts
+<h3 id="2-4-账户管理"><a href="#2-4-账户管理" class="headerlink" title="2.4 账户管理"></a>2.4 账户管理</h3><h4 id="2-4-1-查看账户列表"><a href="#2-4-1-查看账户列表" class="headerlink" title="2.4.1 查看账户列表"></a>2.4.1 查看账户列表</h4><p>在 geth 控制台,使用 eth 对象的 accounts 属性查看目前的账户列表:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> eth.accounts  or personal.listAccounts
 <span class="token punctuation">[</span><span class="token punctuation">]</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h4 id="2-4-2-创建新账户"><a href="#2-4-2-创建新账户" class="headerlink" title="2.4.2 创建新账户"></a>2.4.2 创建新账户</h4><p>在 geth 控制台,使用 personal 对象的 newAccount()方法创建一个新账户,参数为你自己选择的密码:  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&gt;</span> personal.newAccount<span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span>  
+<h4 id="2-4-2-创建新账户"><a href="#2-4-2-创建新账户" class="headerlink" title="2.4.2 创建新账户"></a>2.4.2 创建新账户</h4><p>在 geth 控制台,使用 personal 对象的 newAccount()方法创建一个新账户,参数为你自己选择的密码:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> personal.newAccount<span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span>  
 <span class="token string">"0x6e1d438b00d5bb865c4d842e9c02549709130147"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>输出就是新创建的账户地址(公钥),你的输出不会和上面的示例相同。geth 会保存到数据目录下的 keystore 文件中。</p>
-<h4 id="2-4-3-查询账户余额"><a href="#2-4-3-查询账户余额" class="headerlink" title="2.4.3 查询账户余额"></a>2.4.3 查询账户余额</h4><p>在 geth 控制台,使用 personal 对象的 getBalance()方法获取挃定账户的余额,参数为账户地址:  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&gt;</span> eth.getBalance<span class="token punctuation">(</span>eth.accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  
+<h4 id="2-4-3-查询账户余额"><a href="#2-4-3-查询账户余额" class="headerlink" title="2.4.3 查询账户余额"></a>2.4.3 查询账户余额</h4><p>在 geth 控制台,使用 personal 对象的 getBalance()方法获取挃定账户的余额,参数为账户地址:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> eth.getBalance<span class="token punctuation">(</span>eth.accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  
 <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>  或者直接输入账户地址:  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&gt;</span> eth.getBalance<span class="token punctuation">(</span><span class="token string">'0xd8bcf1324d566cbec5d3b67e6e14485b06a41d49'</span><span class="token punctuation">)</span>  
+<p>或者直接输入账户地址:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> eth.getBalance<span class="token punctuation">(</span><span class="token string">'0xd8bcf1324d566cbec5d3b67e6e14485b06a41d49'</span><span class="token punctuation">)</span>  
 <span class="token number">0</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">web3.fromWei<span class="token punctuation">(</span>eth.getBalance<span class="token punctuation">(</span>eth.accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">))</span> <span class="token comment"># 将wei换算成eth</span>
@@ -801,7 +997,7 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span>hashrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>返回的数值表示每秒计算的哈希数，以 H/s（哈希每秒）为单位。</li>
+<li>返回的数值表示每秒计算的哈希数，以 H&#x2F;s（哈希每秒）为单位。</li>
 </ul>
 <h6 id="查看矿工账户"><a href="#查看矿工账户" class="headerlink" title="查看矿工账户"></a>查看矿工账户</h6><p>使用以下命令查看当前挖矿收益的账户（即矿工地址）：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>coinbase<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -861,11 +1057,8 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 
 <p>这样，挖矿时的日志会显示更多详细的挖矿信息。</p>
 <h5 id="7-挖矿常见问题"><a href="#7-挖矿常见问题" class="headerlink" title="7. 挖矿常见问题"></a>7. <strong>挖矿常见问题</strong></h5><ul>
-<li><p><strong>无法开始挖矿？</strong> 如果你无法开始挖矿，可能是由于账户未解锁。确保你已解锁矿工账户：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span>coinbase<span class="token punctuation">,</span> <span class="token string">"yourpassword"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>矿工奖励没有到账？</strong> 矿工奖励发放需要时间，尤其是在主网上挖矿时，奖励只有在挖到的区块被确认后才能到账。</p>
-</li>
+<li><strong>无法开始挖矿？</strong> 如果你无法开始挖矿，可能是由于账户未解锁。确保你已解锁矿工账户：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span>coinbase<span class="token punctuation">,</span> <span class="token string">"yourpassword"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>矿工奖励没有到账？</strong> 矿工奖励发放需要时间，尤其是在主网上挖矿时，奖励只有在挖到的区块被确认后才能到账。</li>
 </ul>
 <h5 id="8-挖矿命令汇总"><a href="#8-挖矿命令汇总" class="headerlink" title="8. 挖矿命令汇总"></a>8. <strong>挖矿命令汇总</strong></h5><table>
 <thead>
@@ -891,7 +1084,7 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <td>查看是否正在挖矿</td>
 </tr>
 <tr>
-<td><code>miner.setEtherbase("address")</code></td>
+<td><code>miner.setEtherbase(&quot;address&quot;)</code></td>
 <td>设置矿工账户</td>
 </tr>
 <tr>
@@ -903,7 +1096,7 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <td>查看当前区块高度</td>
 </tr>
 <tr>
-<td><code>eth.getBlock('latest')</code></td>
+<td><code>eth.getBlock(&#39;latest&#39;)</code></td>
 <td>查看最新的区块信息</td>
 </tr>
 <tr>
@@ -911,21 +1104,21 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <td>查看交易池中的待处理交易</td>
 </tr>
 <tr>
-<td><code>personal.unlockAccount(eth.coinbase, "password", 600)</code></td>
+<td><code>personal.unlockAccount(eth.coinbase, &quot;password&quot;, 600)</code></td>
 <td>解锁矿工账户</td>
 </tr>
 </tbody></table>
 <h4 id="2-4-5-解锁账户"><a href="#2-4-5-解锁账户" class="headerlink" title="2.4.5 解锁账户"></a>2.4.5 解锁账户</h4><p>在部署合约时需要一个解锁的账户。</p>
-<p>在 geth 控制台使用 <code>personal</code> 对象的 <code>unlockAccount()</code>  方法来解锁挃定的账户,参数为账户地址和账户密码(在创建账户时挃定的那个密码):  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&gt;</span> eth.unlockAccount<span class="token punctuation">(</span>eth.accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>,<span class="token string">'123456'</span><span class="token punctuation">)</span>  
+<p>在 geth 控制台使用 <code>personal</code> 对象的 <code>unlockAccount()</code>  方法来解锁挃定的账户,参数为账户地址和账户密码(在创建账户时挃定的那个密码):</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> eth.unlockAccount<span class="token punctuation">(</span>eth.accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>,<span class="token string">'123456'</span><span class="token punctuation">)</span>  
 <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="2-5-交易"><a href="#2-5-交易" class="headerlink" title="2.5 交易"></a>2.5 交易</h3><h4 id="1-发送交易"><a href="#1-发送交易" class="headerlink" title="1. 发送交易"></a>1. <strong>发送交易</strong></h4><h5 id="使用-eth-sendTransaction-发送交易"><a href="#使用-eth-sendTransaction-发送交易" class="headerlink" title="使用 eth.sendTransaction 发送交易"></a>使用 <code>eth.sendTransaction</code> 发送交易</h5><p>发送交易时，你可以使用 <code>eth.sendTransaction</code> 命令。示例如下：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xSenderAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>from</code>: 发送者账户的地址，必须先解锁账户。</li>
@@ -985,36 +1178,36 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <li><code>logs</code>: 该交易的事件日志列表</li>
 </ul>
 <h4 id="3-创建自定义交易"><a href="#3-创建自定义交易" class="headerlink" title="3. 创建自定义交易"></a>3. <strong>创建自定义交易</strong></h4><p>你可以使用 <code>eth.sendTransaction</code> 创建自定义交易，除了 <code>from</code> 和 <code>to</code> 之外，还可以指定 <code>gas</code>、<code>gasPrice</code> 和 <code>data</code> 等字段：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xSenderAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gas</span><span class="token operator">:</span> <span class="token number">21000</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gasPrice</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token string">"gwei"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token string">"0xSomeData"</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>gas</code>: 设置交易的 gas 限制，确保足够高。</li>
 <li><code>gasPrice</code>: 设置每单位 gas 的价格，单位是 wei。</li>
 </ul>
-<h5 id="自定义-gas-价格"><a href="#自定义-gas-价格" class="headerlink" title="自定义 gas 价格"></a>自定义 gas 价格</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<h5 id="自定义-gas-价格"><a href="#自定义-gas-价格" class="headerlink" title="自定义 gas 价格"></a>自定义 gas 价格</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xSenderAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gas</span><span class="token operator">:</span> <span class="token number">21000</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gasPrice</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token string">"gwei"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这将设置一个较高的 gas 价格，以加快交易打包。</p>
 <h4 id="4-离线签名交易"><a href="#4-离线签名交易" class="headerlink" title="4. 离线签名交易"></a>4. <strong>离线签名交易</strong></h4><p>在某些场景下，你可能希望在离线状态下生成交易并签名，然后再发送。以下是离线签名交易的步骤：</p>
-<h5 id="构建未签名交易"><a href="#构建未签名交易" class="headerlink" title="构建未签名交易"></a>构建未签名交易</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> rawTx <span class="token operator">=</span> <span class="token punctuation">{</span>
+<h5 id="构建未签名交易"><a href="#构建未签名交易" class="headerlink" title="构建未签名交易"></a>构建未签名交易</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> rawTx <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   <span class="token literal-property property">nonce</span><span class="token operator">:</span> web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span><span class="token function">getTransactionCount</span><span class="token punctuation">(</span><span class="token string">"0xSenderAddress"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gasPrice</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toHex</span><span class="token punctuation">(</span>web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token string">'20'</span><span class="token punctuation">,</span> <span class="token string">'gwei'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">gasLimit</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toHex</span><span class="token punctuation">(</span><span class="token number">21000</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toHex</span><span class="token punctuation">(</span>web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'ether'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="签名交易"><a href="#签名交易" class="headerlink" title="签名交易"></a>签名交易</h5><p>使用 <code>eth.accounts.signTransaction</code> 函数来签名交易：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> signedTx <span class="token operator">=</span> eth<span class="token punctuation">.</span>accounts<span class="token punctuation">.</span><span class="token function">signTransaction</span><span class="token punctuation">(</span>rawTx<span class="token punctuation">,</span> <span class="token string">"0xPrivateKey"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1024,20 +1217,19 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
   <span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'receipt'</span><span class="token punctuation">,</span> console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="5-批量发送交易"><a href="#5-批量发送交易" class="headerlink" title="5. 批量发送交易"></a>5. <strong>批量发送交易</strong></h4><p>如果你需要一次发送多笔交易，你可以在脚本中批量调用 <code>eth.sendTransaction</code>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
     <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xSenderAddress"</span><span class="token punctuation">,</span>
     <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
     <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="6-检查账户余额"><a href="#6-检查账户余额" class="headerlink" title="6. 检查账户余额"></a>6. <strong>检查账户余额</strong></h4><p>你可以随时使用以下命令检查账户的余额：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0xAddress"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li><p>返回值为账户的余额，单位是 wei。如果你想以以太币（ether）显示，可以使用以下命令：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span><span class="token function">fromWei</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0xAddress"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>返回值为账户的余额，单位是 wei。如果你想以以太币（ether）显示，可以使用以下命令：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span><span class="token function">fromWei</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0xAddress"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h4 id="7-检查交易池中的交易"><a href="#7-检查交易池中的交易" class="headerlink" title="7. 检查交易池中的交易"></a>7. <strong>检查交易池中的交易</strong></h4><p>交易被发送后，可能会在交易池中等待确认。你可以使用以下命令查看交易池中的状态：</p>
 <h5 id="检查挂起的交易"><a href="#检查挂起的交易" class="headerlink" title="检查挂起的交易"></a>检查挂起的交易</h5><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">txpool<span class="token punctuation">.</span>status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1053,16 +1245,16 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <li>返回的值是以 wei 为单位的当前 gas 价格。</li>
 </ul>
 <h4 id="9-监听区块和交易事件"><a href="#9-监听区块和交易事件" class="headerlink" title="9. 监听区块和交易事件"></a>9. <strong>监听区块和交易事件</strong></h4><p>你可以通过监听事件来实时监控交易状态。例如，当新区块生成时，可以收到通知：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'newBlockHeaders'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'newBlockHeaders'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>error<span class="token punctuation">)</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"connected"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">subscriptionId</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"connected"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">subscriptionId</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>subscriptionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">blockHeader</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">blockHeader</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>blockHeader<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="10-交易命令汇总"><a href="#10-交易命令汇总" class="headerlink" title="10. 交易命令汇总"></a>10. <strong>交易命令汇总</strong></h4><table>
 <thead>
@@ -1080,15 +1272,15 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <td>解锁账户以便发送交易</td>
 </tr>
 <tr>
-<td><code>eth.getTransaction("txHash")</code></td>
+<td><code>eth.getTransaction(&quot;txHash&quot;)</code></td>
 <td>根据哈希查询交易详情</td>
 </tr>
 <tr>
-<td><code>eth.getTransactionReceipt("txHash")</code></td>
+<td><code>eth.getTransactionReceipt(&quot;txHash&quot;)</code></td>
 <td>根据哈希查询交易收据</td>
 </tr>
 <tr>
-<td><code>eth.getBalance("0xAddress")</code></td>
+<td><code>eth.getBalance(&quot;0xAddress&quot;)</code></td>
 <td>查询账户余额</td>
 </tr>
 <tr>
@@ -1100,19 +1292,19 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <td>获取当前的 gas 价格</td>
 </tr>
 <tr>
-<td><code>eth.accounts.signTransaction({...}, "privateKey")</code></td>
+<td><code>eth.accounts.signTransaction({...}, &quot;privateKey&quot;)</code></td>
 <td>离线签名交易</td>
 </tr>
 <tr>
-<td><code>eth.sendSignedTransaction("signedTx")</code></td>
+<td><code>eth.sendSignedTransaction(&quot;signedTx&quot;)</code></td>
 <td>发送已签名交易</td>
 </tr>
 </tbody></table>
 <h3 id="2-6-私链多个节点连接的详细命令"><a href="#2-6-私链多个节点连接的详细命令" class="headerlink" title="2.6 私链多个节点连接的详细命令"></a>2.6 私链多个节点连接的详细命令</h3><p>在以太坊私链中，多个节点可以通过网络连接形成一个共识网络。在这种情况下，节点之间需要能够发现彼此，并保持同步。以下是详细的步骤和命令，用于设置并连接多个 Geth 节点到同一个私链网络。</p>
 <h4 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. <strong>准备工作</strong></h4><h5 id="创建-genesis-json-文件"><a href="#创建-genesis-json-文件" class="headerlink" title="创建 genesis.json 文件"></a>创建 <code>genesis.json</code> 文件</h5><p>在私链中，所有节点需要共享同一个创世区块 (<code>genesis block</code>)。首先，创建一个 <code>genesis.json</code> 文件，它定义了私链的创世区块和区块链的初始配置。</p>
 <p>以下是一个示例 <code>genesis.json</code> 文件：</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
-  <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"config"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
     <span class="token property">"chainId"</span><span class="token operator">:</span> <span class="token number">987</span><span class="token punctuation">,</span> 
     <span class="token property">"homesteadBlock"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> 
     <span class="token property">"eip150Block"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
@@ -1121,13 +1313,13 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
     <span class="token property">"byzantiumBlock"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
     <span class="token property">"constantinopleBlock"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
     <span class="token property">"petersburgBlock"</span><span class="token operator">:</span> <span class="token number">0</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
   <span class="token property">"difficulty"</span><span class="token operator">:</span> <span class="token string">"200000"</span><span class="token punctuation">,</span>
   <span class="token property">"gasLimit"</span><span class="token operator">:</span> <span class="token string">"8000000"</span><span class="token punctuation">,</span>
-  <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">"0xYourAccountAddress"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"1000000000000000000000"</span> <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token property">"alloc"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"0xYourAccountAddress"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token property">"balance"</span><span class="token operator">:</span> <span class="token string">"1000000000000000000000"</span> <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>chainId</code>: 为私链设置一个独特的网络 ID（不同于主网和测试网）。</li>
@@ -1174,7 +1366,7 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span><span class="token function">addPeer</span><span class="token punctuation">(</span><span class="token string">"enode://1234567890abcdef@127.0.0.1:30303"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li>将 <code>"enode://1234567890abcdef@127.0.0.1:30303"</code> 替换为节点A的 <code>enode</code> 地址。</li>
+<li>将 <code>&quot;enode://1234567890abcdef@127.0.0.1:30303&quot;</code> 替换为节点A的 <code>enode</code> 地址。</li>
 </ul>
 <h5 id="验证节点是否连接"><a href="#验证节点是否连接" class="headerlink" title="验证节点是否连接"></a>验证节点是否连接</h5><p>在任何一个节点的控制台中，使用以下命令检查当前连接的对等节点数量：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">net<span class="token punctuation">.</span>peerCount<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1189,8 +1381,7 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">// 使用 1 个线程进行挖矿</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
-<li><p>挖到的区块会自动同步到其他节点。你可以通过以下命令查看区块高度：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>挖到的区块会自动同步到其他节点。你可以通过以下命令查看区块高度：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h4 id="6-账户和交易管理"><a href="#6-账户和交易管理" class="headerlink" title="6. 账户和交易管理"></a>6. <strong>账户和交易管理</strong></h4><h5 id="创建新账户"><a href="#创建新账户" class="headerlink" title="创建新账户"></a>创建新账户</h5><p>在 Geth 控制台中，你可以为每个节点创建新账户：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">personal<span class="token punctuation">.</span><span class="token function">newAccount</span><span class="token punctuation">(</span><span class="token string">"password"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1199,11 +1390,11 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"0xYourAccountAddress"</span><span class="token punctuation">,</span> <span class="token string">"password"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h5 id="发送交易"><a href="#发送交易" class="headerlink" title="发送交易"></a>发送交易</h5><p>在节点之间发送交易，可以使用 <code>eth.sendTransaction</code>：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
   <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xSenderAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xRecipientAddress"</span><span class="token punctuation">,</span>
   <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>from</code>: 发送者账户地址。</li>
@@ -1228,51 +1419,52 @@ web3.toWei<span class="token punctuation">(</span><span class="token number">10<
 <li><h4 id="创建项目目录："><a href="#创建项目目录：" class="headerlink" title="创建项目目录："></a><strong>创建项目目录</strong>：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> my-dapp
 <span class="token builtin class-name">cd</span> my-dapp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><h4 id="初始化-Truffle-项目："><a href="#初始化-Truffle-项目：" class="headerlink" title="初始化 Truffle 项目："></a><strong>初始化 Truffle 项目</strong>：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle init or truffle.cmd unbox webpack <span class="token comment">#后者用 webpack 模版初始化项目骨架结构</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><h4 id="初始化-Truffle-项目："><a href="#初始化-Truffle-项目：" class="headerlink" title="初始化 Truffle 项目："></a><strong>初始化 Truffle 项目</strong>：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">   truffle init
+<span class="token comment"># 或使用 webpack 模板初始化项目骨架：truffle.cmd unbox webpack</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>安装项目依赖的 NPM 包 ，执行以下命令安装 npm 包:  </p>
+<p>安装项目依赖的 NPM 包 ，执行以下命令安装 npm 包:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> app
-<span class="token function">npm</span> <span class="token function">install</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ol>
 <h3 id="修改-Truffle-配置"><a href="#修改-Truffle-配置" class="headerlink" title="修改 Truffle 配置"></a>修改 Truffle 配置</h3><p>在项目根目录下找到 <code>truffle-config.js</code> 文件，并修改如下：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">networks</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">development</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">networks</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">development</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
       <span class="token literal-property property">host</span><span class="token operator">:</span> <span class="token string">"localhost"</span><span class="token punctuation">,</span>  <span class="token comment">// 根据实际情况设置</span>
       <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token number">8545</span><span class="token punctuation">,</span>         <span class="token comment">// 根据实际情况设置</span>
       <span class="token literal-property property">network_id</span><span class="token operator">:</span> <span class="token string">"*"</span><span class="token punctuation">,</span>    <span class="token comment">// 匹配任何网络 ID</span>
       <span class="token literal-property property">gas</span><span class="token operator">:</span> <span class="token number">3000000</span>        <span class="token comment">// 设置最大 gas 限制</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">compilers</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">solc</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">compilers</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">solc</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
       <span class="token literal-property property">version</span><span class="token operator">:</span> <span class="token string">"0.8.0"</span>   <span class="token comment">// 指定 Solidity 编译器版本</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="编写智能合约"><a href="#编写智能合约" class="headerlink" title="编写智能合约"></a>编写智能合约</h3><p>在 <code>contracts</code> 目录下创建一个新的合约文件，例如 <code>MyContract.sol</code>：</p>
 <pre class="line-numbers language-solidity" data-language="solidity"><code class="language-solidity"><span class="token comment">// SPDX-License-Identifier: MIT</span>
 <span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span>
 
-<span class="token keyword">contract</span> <span class="token class-name">MyContract</span> <span class="token punctuation">{</span>
+<span class="token keyword">contract</span> <span class="token class-name">MyContract</span> <span class="token punctuation">&#123;</span>
     <span class="token builtin">string</span> <span class="token keyword">public</span> message<span class="token punctuation">;</span>
 
-    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token keyword">memory</span> initialMessage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token keyword">memory</span> initialMessage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         message <span class="token operator">=</span> initialMessage<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token punctuation">&#125;</span>
 
-    <span class="token keyword">function</span> <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token keyword">memory</span> newMessage<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token keyword">memory</span> newMessage<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">&#123;</span>
         message <span class="token operator">=</span> newMessage<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="创建迁移文件"><a href="#创建迁移文件" class="headerlink" title="创建迁移文件"></a>创建迁移文件</h3><p>在 <code>migrations</code> 目录下创建一个新的迁移文件，例如 <code>2_deploy_my_contract.js</code>：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> MyContract <span class="token operator">=</span> artifacts<span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"MyContract"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   deployer<span class="token punctuation">.</span><span class="token function">deploy</span><span class="token punctuation">(</span>MyContract<span class="token punctuation">,</span> <span class="token string">"Hello, World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="1-默认迁移行为"><a href="#1-默认迁移行为" class="headerlink" title="1. 默认迁移行为"></a>1. 默认迁移行为</h4><p>当你运行以下命令时：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle migrate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1286,9 +1478,9 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <h5 id="2-1-创建特定迁移文件"><a href="#2-1-创建特定迁移文件" class="headerlink" title="2.1 创建特定迁移文件"></a>2.1 创建特定迁移文件</h5><p>你可以在 <code>migrations</code> 目录中创建新的迁移文件，只包含要部署的合约。例如，假设你只想部署 <code>MyContract</code> 合约，你可以创建一个新的迁移文件，例如 <code>3_deploy_my_contract.js</code>，内容如下：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> MyContract <span class="token operator">=</span> artifacts<span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"MyContract"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   deployer<span class="token punctuation">.</span><span class="token function">deploy</span><span class="token punctuation">(</span>MyContract<span class="token punctuation">,</span> <span class="token string">"Hello, World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="2-2-使用-f-参数"><a href="#2-2-使用-f-参数" class="headerlink" title="2.2 使用 --f 参数"></a>2.2 使用 <code>--f</code> 参数</h5><p>如果你想只运行特定的迁移文件，可以使用 <code>--f</code> 参数（<code>--f</code> 后接文件的序号）：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle migrate <span class="token parameter variable">--f</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1305,13 +1497,13 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> MyContractA <span class="token operator">=</span> artifacts<span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"MyContractA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> MyContractB <span class="token operator">=</span> artifacts<span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"MyContractB"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">deployer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">await</span> deployer<span class="token punctuation">.</span><span class="token function">deploy</span><span class="token punctuation">(</span>MyContractA<span class="token punctuation">,</span> <span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">const</span> instanceA <span class="token operator">=</span> <span class="token keyword">await</span> MyContractA<span class="token punctuation">.</span><span class="token function">deployed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   
   <span class="token comment">// 部署时传递 MyContractA 的地址</span>
   <span class="token keyword">await</span> deployer<span class="token punctuation">.</span><span class="token function">deploy</span><span class="token punctuation">(</span>MyContractB<span class="token punctuation">,</span> instanceA<span class="token punctuation">.</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="编译合约"><a href="#编译合约" class="headerlink" title="编译合约"></a>编译合约</h3><p>在部署合约之前，您需要确保智能合约已被编译。您可以通过以下命令来编译合约：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle compile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1333,20 +1525,20 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"user1"</span><span class="token punctuation">,</span> <span class="token string">"your_password"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>如果已经正确地解锁了账户,你会看到部署过程停止在某个状态</p>
-<p>这是因为 truffle 在等待部署交易提交,但是我们在私链中还没有启动挖矿。  现在切换回 geth 终端窗口,查看交易池的状态:  </p>
+<p>这是因为 truffle 在等待部署交易提交,但是我们在私链中还没有启动挖矿。  现在切换回 geth 终端窗口,查看交易池的状态:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">txpool.status  
-<span class="token punctuation">{</span>  
+<span class="token punctuation">&#123;</span>  
 pending:1,  
 queued:0  
-<span class="token punctuation">}</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>有一个挂起的交易</p>
 <h3 id="启动挖矿-1"><a href="#启动挖矿-1" class="headerlink" title="启动挖矿"></a>启动挖矿</h3><p>在 Geth 控制台中，启动挖矿：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>稍等小会儿,再查看交易池的状态:  </p>
+<p>稍等小会儿,再查看交易池的状态:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">txpool.status  
-<span class="token punctuation">{</span>  pending:0,  queued:0  <span class="token punctuation">}</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#123;</span>  pending:0,  queued:0  <span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>交易已经成功提交了</p>
 <h3 id="部署合约"><a href="#部署合约" class="headerlink" title="部署合约"></a>部署合约</h3><p>在项目目录中，使用以下命令部署合约：</p>
@@ -1355,11 +1547,8 @@ queued:0
 <h3 id="检查部署结果"><a href="#检查部署结果" class="headerlink" title="检查部署结果"></a>检查部署结果</h3><p>部署完成后，您可以查看终端输出中的合约地址和交易哈希，确认合约是否成功部署。</p>
 <h3 id="与合约交互"><a href="#与合约交互" class="headerlink" title="与合约交互"></a>与合约交互</h3><p>在合约部署后，您可以使用 Truffle 控制台与合约进行交互：</p>
 <ol>
-<li><p>启动 Truffle 控制台：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle console <span class="token parameter variable">--network</span> development<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>在控制台中，获取合约实例并与其交互：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">await</span> MyContract<span class="token punctuation">.</span><span class="token function">deployed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<li>启动 Truffle 控制台：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">truffle console <span class="token parameter variable">--network</span> development<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>在控制台中，获取合约实例并与其交互：<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> instance <span class="token operator">=</span> <span class="token keyword">await</span> MyContract<span class="token punctuation">.</span><span class="token function">deployed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> currentMessage <span class="token operator">=</span> <span class="token keyword">await</span> instance<span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>currentMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出当前消息</span>
 
@@ -1367,119 +1556,62 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">const</span> updatedMessage <span class="token operator">=</span> <span class="token keyword">await</span> instance<span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>updatedMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出更新后的消息</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
-<h3 id="启动-DApp"><a href="#启动-DApp" class="headerlink" title="启动 DApp"></a>启动 DApp</h3><p>执行以下命令来启动 DApp:  </p>
+<h3 id="启动-DApp"><a href="#启动-DApp" class="headerlink" title="启动 DApp"></a>启动 DApp</h3><p>执行以下命令来启动 DApp:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在浏览器里访问 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> 即可</p>
-<p>如果你希望从别的机器也可以访问你的 DApp 应用,修改一下 <code>package.json</code>:  </p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">{</span>  
-	scripts:<span class="token punctuation">{</span>
+<p>如果你希望从别的机器也可以访问你的 DApp 应用,修改一下 <code>package.json</code>:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">&#123;</span>  
+	scripts:<span class="token punctuation">&#123;</span>
     	<span class="token string">"dev"</span><span class="token builtin class-name">:</span> <span class="token string">"webpack-dev-server –-host 0.0.0.0"</span> 
-    	<span class="token punctuation">}</span>  
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    	<span class="token punctuation">&#125;</span>  
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="四、命令详解"><a href="#四、命令详解" class="headerlink" title="四、命令详解"></a>四、命令详解</h2><h3 id="1-Geth-命令行选项"><a href="#1-Geth-命令行选项" class="headerlink" title="1. Geth 命令行选项"></a>1. <strong>Geth 命令行选项</strong></h3><p>这些命令是在启动 Geth 时使用的，用来配置节点行为。</p>
 <ul>
-<li><p><strong>–datadir</strong>：指定数据目录，所有区块链和配置数据将保存在此目录中。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--datadir</span> ./data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–networkid</strong>：选择要加入的网络 ID，避免连接到错误的链。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--networkid</span> <span class="token number">987</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–port</strong>：指定节点的P2P通信端口（默认是 30303）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--port</span> <span class="token number">30303</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–nodiscover</strong>：禁用节点自动发现，防止自动连接其他节点（常用于私有网络）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--nodiscover</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–maxpeers</strong>：设置最多连接的节点数（默认 25）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--maxpeers</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–mine</strong>：启动节点时立即开始挖矿。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--mine</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–minerthreads</strong>：设置挖矿使用的线程数量（默认为 1）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--minerthreads</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–etherbase</strong>：指定挖矿奖励接收的以太坊地址。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--etherbase</span> 0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–rpc</strong>：启用 HTTP-RPC 接口，允许通过 HTTP 与节点交互。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpc</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–rpcaddr</strong>：指定 HTTP-RPC 接口监听的地址。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcaddr</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–rpcport</strong>：指定 HTTP-RPC 端口。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcport</span> <span class="token number">8545</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–rpccorsdomain</strong>：指定允许通过 CORS（跨域资源共享）访问的域，通常设置为 <code>*</code> 允许所有域。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpccorsdomain</span> <span class="token string">"*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–rpcapi</strong>：指定允许通过 RPC 接口调用的 API 模块（例如 <code>eth</code>, <code>net</code>, <code>web3</code>）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcapi</span> <span class="token string">"eth,net,web3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–syncmode</strong>：设置节点的同步模式，常用的有：</p>
-<ul>
+<li><strong>–datadir</strong>：指定数据目录，所有区块链和配置数据将保存在此目录中。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--datadir</span> ./data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–networkid</strong>：选择要加入的网络 ID，避免连接到错误的链。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--networkid</span> <span class="token number">987</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–port</strong>：指定节点的P2P通信端口（默认是 30303）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--port</span> <span class="token number">30303</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–nodiscover</strong>：禁用节点自动发现，防止自动连接其他节点（常用于私有网络）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--nodiscover</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–maxpeers</strong>：设置最多连接的节点数（默认 25）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--maxpeers</span> <span class="token number">30</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–mine</strong>：启动节点时立即开始挖矿。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--mine</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–minerthreads</strong>：设置挖矿使用的线程数量（默认为 1）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--minerthreads</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–etherbase</strong>：指定挖矿奖励接收的以太坊地址。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--etherbase</span> 0x7df9a875a174b3bc565e6424a0050ebc1b2d1d82<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–rpc</strong>：启用 HTTP-RPC 接口，允许通过 HTTP 与节点交互。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpc</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–rpcaddr</strong>：指定 HTTP-RPC 接口监听的地址。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcaddr</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–rpcport</strong>：指定 HTTP-RPC 端口。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcport</span> <span class="token number">8545</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–rpccorsdomain</strong>：指定允许通过 CORS（跨域资源共享）访问的域，通常设置为 <code>*</code> 允许所有域。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpccorsdomain</span> <span class="token string">"*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–rpcapi</strong>：指定允许通过 RPC 接口调用的 API 模块（例如 <code>eth</code>, <code>net</code>, <code>web3</code>）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--rpcapi</span> <span class="token string">"eth,net,web3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–syncmode</strong>：设置节点的同步模式，常用的有：<ul>
 <li><code>fast</code>（默认，快速同步）</li>
 <li><code>full</code>（完全同步）</li>
 <li><code>light</code>（轻节点，只下载区块头）</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--syncmode</span> fast<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>–ipcdisable</strong>：禁用 Geth 的 IPC-RPC 通信接口（默认启用 IPC）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--ipcdisable</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--syncmode</span> fast<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>–ipcdisable</strong>：禁用 Geth 的 IPC-RPC 通信接口（默认启用 IPC）。<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">geth <span class="token parameter variable">--ipcdisable</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <h3 id="2-Geth-控制台命令"><a href="#2-Geth-控制台命令" class="headerlink" title="2. Geth 控制台命令"></a>2. <strong>Geth 控制台命令</strong></h3><p>这些命令是在 Geth 启动并进入控制台时使用的，或者通过 <code>geth attach</code> 来附加到已运行的节点。</p>
 <ul>
-<li><p><strong>eth.syncing</strong>：查看节点是否在同步，并返回同步状态。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>syncing<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>eth.blockNumber</strong>：获取当前节点的区块高度。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**eth.getBlock(blockNumber)**：查看某个区块的信息（例如查看最新区块）。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBlock</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span>blockNumber<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**eth.getBalance(address)**：查看某个地址的余额。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0xYourAddressHere"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**miner.start(threads)**：启动挖矿，并指定使用的线程数（例如 1 个线程）。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**miner.stop()**：停止挖矿。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**personal.newAccount(password)**：创建新账户，并设置密码。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">newAccount</span><span class="token punctuation">(</span><span class="token string">"YourPassword"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**personal.unlockAccount(address, password)**：解锁指定账户，允许在一段时间内使用账户进行交易。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"0xYourAddressHere"</span><span class="token punctuation">,</span> <span class="token string">"YourPassword"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>admin.peers</strong>：查看当前连接的节点。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span>peers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**admin.addPeer(enodeURL)**：手动添加一个节点。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span><span class="token function">addPeer</span><span class="token punctuation">(</span><span class="token string">"enode://..."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>net.peerCount</strong>：查看连接的节点数量。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">net<span class="token punctuation">.</span>peerCount<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><strong>txpool.status</strong>：查看交易池的状态，包含等待和挂起的交易数量。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">txpool<span class="token punctuation">.</span>status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**debug.verbosity(level)**：设置日志的详细程度（0 为最少，5 为最多）。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">debug<span class="token punctuation">.</span><span class="token function">verbosity</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**web3.sha3(string)**：计算字符串的 Keccak-256 哈希。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span><span class="token function">sha3</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>**eth.sendTransaction({from: sender, to: receiver, value: amount})**：发送交易（注意单位为 Wei）。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xYourAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xReceiverAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>eth.syncing</strong>：查看节点是否在同步，并返回同步状态。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>syncing<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>eth.blockNumber</strong>：获取当前节点的区块高度。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span>blockNumber<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**eth.getBlock(blockNumber)**：查看某个区块的信息（例如查看最新区块）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBlock</span><span class="token punctuation">(</span>eth<span class="token punctuation">.</span>blockNumber<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**eth.getBalance(address)**：查看某个地址的余额。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token string">"0xYourAddressHere"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**miner.start(threads)**：启动挖矿，并指定使用的线程数（例如 1 个线程）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**miner.stop()**：停止挖矿。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">miner<span class="token punctuation">.</span><span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**personal.newAccount(password)**：创建新账户，并设置密码。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">newAccount</span><span class="token punctuation">(</span><span class="token string">"YourPassword"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**personal.unlockAccount(address, password)**：解锁指定账户，允许在一段时间内使用账户进行交易。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">personal<span class="token punctuation">.</span><span class="token function">unlockAccount</span><span class="token punctuation">(</span><span class="token string">"0xYourAddressHere"</span><span class="token punctuation">,</span> <span class="token string">"YourPassword"</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>admin.peers</strong>：查看当前连接的节点。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span>peers<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**admin.addPeer(enodeURL)**：手动添加一个节点。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">admin<span class="token punctuation">.</span><span class="token function">addPeer</span><span class="token punctuation">(</span><span class="token string">"enode://..."</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>net.peerCount</strong>：查看连接的节点数量。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">net<span class="token punctuation">.</span>peerCount<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>txpool.status</strong>：查看交易池的状态，包含等待和挂起的交易数量。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">txpool<span class="token punctuation">.</span>status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**debug.verbosity(level)**：设置日志的详细程度（0 为最少，5 为最多）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">debug<span class="token punctuation">.</span><span class="token function">verbosity</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**web3.sha3(string)**：计算字符串的 Keccak-256 哈希。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">web3<span class="token punctuation">.</span><span class="token function">sha3</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>**eth.sendTransaction({from: sender, to: receiver, value: amount})**：发送交易（注意单位为 Wei）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">eth<span class="token punctuation">.</span><span class="token function">sendTransaction</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token string">"0xYourAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token string">"0xReceiverAddress"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> web3<span class="token punctuation">.</span><span class="token function">toWei</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"ether"</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
 <p>这些命令涵盖了Geth在日常使用中的常见需求，包括节点管理、账户管理、挖矿、网络连接、交易等。你可以根据自己的需求组合使用。</p>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -1558,8 +1690,44 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -1584,10 +1752,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1855,27 +2023,17 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1889,156 +2047,87 @@ console<span class="token punctuation">.</span><span class="token function">log<
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2024/11/03/pip-huan-yuan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/36.jpg" class="responsive-img" alt="pip换源">
-                        
-                        <span class="card-title">pip换源</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            pip换源
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-11-03
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/tips/" class="post-category">
-                                    tips
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/tips/">
-                        <span class="chip bg-color">tips</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2024/11/06/flask-jiao-cheng/">
+            <span class="dream-related-reason">共同标签：教程</span><h3>flask教程</h3>
+            <time datetime="2024-11-06">2024-11-06</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2024/10/10/wen-jian-ming-han-yi/">
+            <span class="dream-related-reason">共同标签：教程</span><h3>文件名含义</h3>
+            <time datetime="2024-10-10">2024-10-10</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2024/10/10/devc-an-zhuang-wai-bu-ku/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="dev c++安装外部库">
-                        
-                        <span class="card-title">dev c++安装外部库</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            dev c++安装外部库
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/tips/" class="post-category">
-                                    tips
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/tips/">
-                        <span class="chip bg-color">tips</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2024/07/27/shi-yong-cloudflare-de-r2-chuang-jian-tu-chuang/">
+            <span class="dream-related-reason">共同标签：教程</span><h3>使用cloudflare的R2创建图床</h3>
+            <time datetime="2024-07-27">2024-07-27</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2024/11/03/pip-huan-yuan/" rel="prev"><span>较新的一篇</span><strong>pip换源</strong></a>
+        <a href="/2024/10/10/devc-an-zhuang-wai-bu-ku/" rel="next"><span>较早的一篇</span><strong>dev c++安装外部库</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -2057,6 +2146,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -2069,9 +2159,10 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -2081,23 +2172,27 @@ console<span class="token punctuation">.</span><span class="token function">log<
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -2122,7 +2217,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -2132,6 +2226,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -2147,60 +2243,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -2211,27 +2253,30 @@ console<span class="token punctuation">.</span><span class="token function">log<
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -2243,38 +2288,44 @@ console<span class="token punctuation">.</span><span class="token function">log<
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -2285,107 +2336,209 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -2396,35 +2549,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -2448,45 +2640,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

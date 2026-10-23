@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书, 逐梦">
+    <meta name="keywords" content="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
+    <link rel="preload" as="image" href="/medias/featureimages/49.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书 | 逐梦">
+    <meta property="og:description" content="从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。">
+    <meta property="og:url" content="https://0xdadream.github.io/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书 | 逐梦">
+    <meta name="twitter:description" content="从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书 | 逐梦","headline":"数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书 | 逐梦","description":"从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。","url":"https://0xdadream.github.io/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2026-08-09T19:35:00.000Z","dateModified":"2026-10-21T16:07:25.696Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -396,6 +592,10 @@
                                 <span class="chip bg-color">cloudflare</span>
                             </a>
                         
+                            <a href="/tags/tls/">
+                                <span class="chip bg-color">tls</span>
+                            </a>
+                        
                             <a href="/tags/certificate/">
                                 <span class="chip bg-color">certificate</span>
                             </a>
@@ -406,10 +606,6 @@
                         
                             <a href="/tags/x509/">
                                 <span class="chip bg-color">x509</span>
-                            </a>
-                        
-                            <a href="/tags/tls/">
-                                <span class="chip bg-color">tls</span>
                             </a>
                         
                             <a href="/tags/openssl/">
@@ -444,7 +640,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-08-10
+                    2026-10-22
                 </div>
                 
 
@@ -463,9 +659,9 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -473,21 +669,42 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书"><a href="#数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书" class="headerlink" title="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书"></a>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</h1><p>很多人第一次接触“证书”是在 HTTPS：<code>cert.pem</code>、<code>fullchain.pem</code>、<code>privkey.pem</code>；后来又会遇到 <code>.crt</code>、<code>.cer</code>、<code>.p12</code>、<code>.pfx</code>、<code>.jks</code>、SSH Certificate、Android 签名证书、S/MIME、VPN 客户端证书，概念很快就混在一起。<br>这篇文章不按“后缀名背诵法”来讲，而是先建立一套统一模型，再把不同场景映射进去。只要理解下面这句话，后面的 TLS、SSH、代码签名、邮件和设备证书就都能串起来：</p>
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E4%BB%8E%E6%9C%80%E5%BA%95%E5%B1%82%E9%97%AE%E9%A2%98%E5%BC%80%E5%A7%8B%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%85%AC%E9%92%A5%E8%BF%98%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6"><span class="dream-toc-list-text">一、先从最底层问题开始：为什么公钥还需要证书</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E3%80%81PKI%EF%BC%9A%E6%8A%8A%E2%80%9C%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E7%9B%B8%E4%BF%A1%E5%AE%83%E2%80%9D%E5%8F%98%E6%88%90%E4%B8%80%E6%9D%A1%E5%8F%AF%E9%AA%8C%E8%AF%81%E9%93%BE"><span class="dream-toc-list-text">二、PKI：把“我为什么相信它”变成一条可验证链</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-1-Trust-Store-%E4%B8%8E-Trust-Anchor"><span class="dream-toc-list-text">2.1 Trust Store 与 Trust Anchor</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-Intermediate-CA"><span class="dream-toc-list-text">2.2 为什么要有 Intermediate CA</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-3-Self-Signed-%E4%B8%8D%E7%AD%89%E4%BA%8E%E2%80%9C%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%8A%E6%97%A0%E6%95%88%E2%80%9D"><span class="dream-toc-list-text">2.3 Self-Signed 不等于“密码学上无效”</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%89%E3%80%81X-509-%E8%AF%81%E4%B9%A6%E9%87%8C%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">三、X.509 证书里到底有什么</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-1-SAN-%E6%AF%94-CN-%E6%9B%B4%E9%87%8D%E8%A6%81"><span class="dream-toc-list-text">3.1 SAN 比 CN 更重要</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-2-Basic-Constraints%EF%BC%9A%E5%AE%83%E5%88%B0%E5%BA%95%E6%98%AF%E4%B8%8D%E6%98%AF-CA"><span class="dream-toc-list-text">3.2 Basic Constraints：它到底是不是 CA</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-3-Key-Usage-%E4%B8%8E-Extended-Key-Usage"><span class="dream-toc-list-text">3.3 Key Usage 与 Extended Key Usage</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-4-%E9%AA%8C%E8%AF%81%E8%AF%81%E4%B9%A6%E4%B8%8D%E6%98%AF%E5%8F%AA%E9%AA%8C%E8%AF%81%E4%B8%80%E4%B8%AA-Signature"><span class="dream-toc-list-text">3.4 验证证书不是只验证一个 Signature</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%9B%9B%E3%80%81%E7%A7%81%E9%92%A5%E3%80%81CSR-%E4%B8%8E%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%8F%91%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB"><span class="dream-toc-list-text">四、私钥、CSR 与证书签发到底是什么关系</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%94%E3%80%81PEM%E3%80%81DER%E3%80%81CRT%E3%80%81CER%E3%80%81KEY%E3%80%81PFX%E3%80%81P12%E3%80%81JKS-%E4%B8%80%E6%AC%A1%E5%88%86%E6%B8%85"><span class="dream-toc-list-text">五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS 一次分清</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-1-PEM%EF%BC%9A%E6%96%87%E6%9C%AC%E5%B0%81%E8%A3%85%EF%BC%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E6%9F%90%E4%B8%80%E7%A7%8D%E8%AF%81%E4%B9%A6%E2%80%9D"><span class="dream-toc-list-text">5.1 PEM：文本封装，不是“某一种证书”</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-2-DER%EF%BC%9A%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BC%96%E7%A0%81"><span class="dream-toc-list-text">5.2 DER：二进制编码</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-3-crt-cer-key-%E6%98%AF%E7%94%A8%E9%80%94%E4%B9%A0%E6%83%AF%EF%BC%8C%E4%B8%8D%E6%98%AF%E5%8F%AF%E9%9D%A0%E7%BC%96%E7%A0%81%E5%A3%B0%E6%98%8E"><span class="dream-toc-list-text">5.3 .crt &#x2F; .cer &#x2F; .key 是用途习惯，不是可靠编码声明</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-4-PKCS-12%EF%BC%9A-p12-pfx"><span class="dream-toc-list-text">5.4 PKCS #12：.p12 &#x2F; .pfx</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-5-JKS%E3%80%81KeyStore-%E4%B8%8E-TrustStore"><span class="dream-toc-list-text">5.5 JKS、KeyStore 与 TrustStore</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-6-cert-pem%E3%80%81chain-pem%E3%80%81fullchain-pem-%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3"><span class="dream-toc-list-text">5.6 cert.pem、chain.pem、fullchain.pem 怎么理解</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-7-%E6%96%87%E4%BB%B6%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="dream-toc-list-text">5.7 文件速查表</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AD%E3%80%81%E5%AE%8C%E6%95%B4%E5%AE%9E%E9%AA%8C%EF%BC%9A%E8%87%AA%E5%B7%B1%E6%90%AD%E4%B8%80%E6%9D%A1-Root-%E2%86%92-Intermediate-%E2%86%92-Server-%E8%AF%81%E4%B9%A6%E9%93%BE"><span class="dream-toc-list-text">六、完整实验：自己搭一条 Root → Intermediate → Server 证书链</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-1-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E4%B8%8E-Root-CA"><span class="dream-toc-list-text">6.1 创建目录与 Root CA</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-2-%E5%88%9B%E5%BB%BA-Intermediate-CA"><span class="dream-toc-list-text">6.2 创建 Intermediate CA</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-3-%E5%88%9B%E5%BB%BA-Server-Key-%E4%B8%8E-CSR"><span class="dream-toc-list-text">6.3 创建 Server Key 与 CSR</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-4-%E4%B8%8D%E5%8F%AA%E7%9C%8B-OK%EF%BC%9A%E7%BB%A7%E7%BB%AD%E6%A3%80%E6%9F%A5-hostname%E3%80%81SAN-%E5%92%8C%E7%94%A8%E9%80%94"><span class="dream-toc-list-text">6.4 不只看 OK：继续检查 hostname、SAN 和用途</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-5-%E5%88%A4%E6%96%AD-Certificate-%E4%B8%8E-Private-Key-%E6%98%AF%E5%90%A6%E5%8C%B9%E9%85%8D"><span class="dream-toc-list-text">6.5 判断 Certificate 与 Private Key 是否匹配</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%83%E3%80%81HTTPS-TLS-%E4%B8%AD%E8%AF%81%E4%B9%A6%E5%88%B0%E5%BA%95%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">七、HTTPS&#x2F;TLS 中证书到底做了什么</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#7-1-SNI-%E4%B8%8E-Certificate-%E6%98%AF%E4%B8%A4%E5%9B%9E%E4%BA%8B"><span class="dream-toc-list-text">7.1 SNI 与 Certificate 是两回事</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#7-2-%E5%85%AC%E7%BD%91%E8%AF%81%E4%B9%A6%E3%80%81DV-OV-EV-%E4%B8%8E-2026-%E5%B9%B4%E6%9C%89%E6%95%88%E6%9C%9F%E5%8F%98%E5%8C%96"><span class="dream-toc-list-text">7.2 公网证书、DV&#x2F;OV&#x2F;EV 与 2026 年有效期变化</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#7-3-ACME-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%8D%E8%A6%81"><span class="dream-toc-list-text">7.3 ACME 为什么重要</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AB%E3%80%81mTLS%EF%BC%9A%E8%AF%81%E4%B9%A6%E4%B8%8D%E5%8F%AA%E5%8F%AF%E4%BB%A5%E8%AF%81%E6%98%8E%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="dream-toc-list-text">八、mTLS：证书不只可以证明服务器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B9%9D%E3%80%81%E8%AF%81%E4%B9%A6%E6%B3%84%E9%9C%B2%E3%80%81%E6%92%A4%E9%94%80%E3%80%81CRL%E3%80%81OCSP-%E4%B8%8E-Certificate-Transparency"><span class="dream-toc-list-text">九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#9-1-%E8%AF%81%E4%B9%A6%E5%85%AC%E5%BC%80%EF%BC%8C%E7%A7%81%E9%92%A5%E6%89%8D%E6%98%AF%E6%A0%B8%E5%BF%83%E7%A7%98%E5%AF%86"><span class="dream-toc-list-text">9.1 证书公开，私钥才是核心秘密</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#9-2-CRL-%E4%B8%8E-OCSP"><span class="dream-toc-list-text">9.2 CRL 与 OCSP</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#9-3-Certificate-Transparency%EF%BC%88CT%EF%BC%89"><span class="dream-toc-list-text">9.3 Certificate Transparency（CT）</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E3%80%81SSH-Public-Key-%E4%B8%8E-SSH-Certificate-%E4%B8%8D%E8%A6%81%E6%B7%B7%E4%B8%BA%E4%B8%80%E8%B0%88"><span class="dream-toc-list-text">十、SSH Public Key 与 SSH Certificate 不要混为一谈</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#10-1-SSH-Certificate-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%82%E5%90%88%E7%9F%AD%E6%9C%9F%E5%87%AD%E6%8D%AE"><span class="dream-toc-list-text">10.1 SSH Certificate 为什么适合短期凭据</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E4%BB%A3%E7%A0%81%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%EF%BC%9A%E8%AF%81%E6%98%8E%E2%80%9C%E8%BF%99%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%98%AF%E8%B0%81%E5%8F%91%E5%B8%83%E7%9A%84%E2%80%9D"><span class="dream-toc-list-text">十一、代码签名证书：证明“这个程序是谁发布的”</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#11-1-Windows-Authenticode"><span class="dream-toc-list-text">11.1 Windows Authenticode</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#11-2-Android-App-Signing"><span class="dream-toc-list-text">11.2 Android App Signing</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#11-3-Apple-Code-Signing"><span class="dream-toc-list-text">11.3 Apple Code Signing</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81S-MIME-%E4%B8%8E-OpenPGP%EF%BC%9A%E9%82%AE%E4%BB%B6%E5%92%8C%E4%B8%AA%E4%BA%BA%E8%BA%AB%E4%BB%BD%E4%B8%AD%E7%9A%84%E2%80%9C%E8%AF%81%E4%B9%A6%E2%80%9D"><span class="dream-toc-list-text">十二、S&#x2F;MIME 与 OpenPGP：邮件和个人身份中的“证书”</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#12-1-S-MIME"><span class="dream-toc-list-text">12.1 S&#x2F;MIME</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#12-2-OpenPGP-Certificate-%E4%B8%8D%E6%98%AF-X-509-Certificate"><span class="dream-toc-list-text">12.2 OpenPGP Certificate 不是 X.509 Certificate</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%89%E3%80%81VPN%E3%80%81802-1X%E3%80%81IoT%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C-Kubernetes-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E9%83%BD%E5%9C%A8%E7%94%A8%E8%AF%81%E4%B9%A6"><span class="dream-toc-list-text">十三、VPN、802.1X、IoT、数据库和 Kubernetes 为什么也都在用证书</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-1-VPN-%E4%B8%8E-802-1X-EAP-TLS"><span class="dream-toc-list-text">13.1 VPN 与 802.1X &#x2F; EAP-TLS</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-2-IoT-%E5%B7%A5%E4%B8%9A%E8%AE%BE%E5%A4%87"><span class="dream-toc-list-text">13.2 IoT &#x2F; 工业设备</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-3-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="dream-toc-list-text">13.3 数据库</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-4-Kubernetes"><span class="dream-toc-list-text">13.4 Kubernetes</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81HSM%E3%80%81TPM%E3%80%81%E6%99%BA%E8%83%BD%E5%8D%A1%E5%88%B0%E5%BA%95%E5%92%8C%E8%AF%81%E4%B9%A6%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB"><span class="dream-toc-list-text">十四、HSM、TPM、智能卡到底和证书是什么关系</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%94%E3%80%81OpenSSL-%E8%AF%81%E4%B9%A6%E6%8E%92%E9%94%99%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="dream-toc-list-text">十五、OpenSSL 证书排错命令速查</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-1-unable-to-get-local-issuer-certificate"><span class="dream-toc-list-text">15.1 unable to get local issuer certificate</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-2-hostname-mismatch"><span class="dream-toc-list-text">15.2 hostname mismatch</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-3-Certificate-%E4%B8%8E-Private-Key-%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="dream-toc-list-text">15.3 Certificate 与 Private Key 不匹配</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-4-curl-k-verify-False-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E8%83%BD%E7%94%A8%E4%BA%8E%E8%AF%8A%E6%96%AD"><span class="dream-toc-list-text">15.4 curl -k &#x2F; verify&#x3D;False 为什么只能用于诊断</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-5-%E6%97%B6%E9%97%B4%E9%94%99%E8%AF%AF%E4%B9%9F%E4%BC%9A%E5%88%B6%E9%80%A0%E2%80%9C%E8%AF%81%E4%B9%A6%E6%95%85%E9%9A%9C%E2%80%9D"><span class="dream-toc-list-text">15.5 时间错误也会制造“证书故障”</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AD%E3%80%81Certificate-Pinning%EF%BC%9A%E6%AF%94%E6%99%AE%E9%80%9A-CA-%E4%BF%A1%E4%BB%BB%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="dream-toc-list-text">十六、Certificate Pinning：比普通 CA 信任更进一步</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%99%E8%AF%AF%E7%90%86%E8%A7%A3"><span class="dream-toc-list-text">十七、最常见的错误理解</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-1%EF%BC%9ACertificate-%E5%B0%B1%E6%98%AF-Public-Key"><span class="dream-toc-list-text">误区 1：Certificate 就是 Public Key</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-2%EF%BC%9A%E8%AF%81%E4%B9%A6%E5%BF%85%E9%A1%BB%E4%BF%9D%E5%AF%86"><span class="dream-toc-list-text">误区 2：证书必须保密</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-3%EF%BC%9A-pem-%E4%B8%80%E5%AE%9A%E6%98%AF%E8%AF%81%E4%B9%A6"><span class="dream-toc-list-text">误区 3：.pem 一定是证书</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-4%EF%BC%9A-crt-%E4%B8%80%E5%AE%9A-PEM%E3%80%81-cer-%E4%B8%80%E5%AE%9A-DER"><span class="dream-toc-list-text">误区 4：.crt 一定 PEM、.cer 一定 DER</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-5%EF%BC%9AHTTPS-%E7%94%A8%E8%AF%81%E4%B9%A6%E5%85%AC%E9%92%A5%E7%9B%B4%E6%8E%A5%E5%8A%A0%E5%AF%86%E6%95%B4%E4%B8%AA%E7%BD%91%E9%A1%B5"><span class="dream-toc-list-text">误区 5：HTTPS 用证书公钥直接加密整个网页</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-6%EF%BC%9ASelf-Signed-%E4%B8%80%E5%AE%9A%E2%80%9C%E4%B8%8D%E5%AE%89%E5%85%A8%E2%80%9D"><span class="dream-toc-list-text">误区 6：Self-Signed 一定“不安全”</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-7%EF%BC%9A%E7%AD%BE%E5%90%8D%E6%AD%A3%E7%A1%AE%E5%B0%B1%E4%BB%A3%E8%A1%A8%E6%95%B4%E5%BC%A0%E8%AF%81%E4%B9%A6%E5%8F%AF%E4%BF%A1"><span class="dream-toc-list-text">误区 7：签名正确就代表整张证书可信</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-8%EF%BC%9Aid-ed25519-pub-%E6%98%AF-SSH-Certificate"><span class="dream-toc-list-text">误区 8：id_ed25519.pub 是 SSH Certificate</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AF%AF%E5%8C%BA-9%EF%BC%9A-pfx-%E5%8F%AA%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A7%8D-crt"><span class="dream-toc-list-text">误区 9：.pfx 只是另一种 .crt</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E4%B8%8D%E5%90%8C%E5%9C%BA%E6%99%AF%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AF%81%E6%98%8E%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">十八、不同场景到底在证明什么</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E6%8A%8A%E6%95%B4%E5%A5%97%E8%AF%81%E4%B9%A6%E4%BD%93%E7%B3%BB%E5%8E%8B%E7%BC%A9%E6%88%90%E4%B8%80%E5%BC%A0%E9%80%BB%E8%BE%91%E5%9B%BE"><span class="dream-toc-list-text">十九、把整套证书体系压缩成一张逻辑图</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81Cloudflare-%E8%AF%81%E4%B9%A6%E4%BD%93%E7%B3%BB%EF%BC%9AEdge%E3%80%81Origin-CA%E3%80%81AOP-%E4%B8%8E-Tunnel"><span class="dream-toc-list-text">二十、Cloudflare 证书体系：Edge、Origin CA、AOP 与 Tunnel</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-1-Edge-Certificate%EF%BC%9ACloudflare-%E5%87%BA%E7%A4%BA%E7%BB%99%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="dream-toc-list-text">20.1 Edge Certificate：Cloudflare 出示给浏览器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-2-Origin-Certificate%EF%BC%9AOrigin-%E5%87%BA%E7%A4%BA%E7%BB%99-Cloudflare"><span class="dream-toc-list-text">20.2 Origin Certificate：Origin 出示给 Cloudflare</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-3-%E4%B8%BA%E4%BB%80%E4%B9%88-Cloudflare-Origin-Certificate-%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%E6%97%B6%E5%8F%AF%E8%83%BD%E6%8A%A5%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB"><span class="dream-toc-list-text">20.3 为什么 Cloudflare Origin Certificate 直接访问时可能报不受信任</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-4-Full-%E4%B8%8E-Full-strict-%E5%88%B0%E5%BA%95%E5%8C%BA%E5%88%AB%E5%9C%A8%E5%93%AA"><span class="dream-toc-list-text">20.4 Full 与 Full (strict) 到底区别在哪</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-5-%E6%A9%99%E4%BA%91%E5%92%8C%E7%81%B0%E4%BA%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BD%B1%E5%93%8D%E8%AF%81%E4%B9%A6%E8%A6%81%E6%B1%82"><span class="dream-toc-list-text">20.5 橙云和灰云为什么会影响证书要求</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-6-Authenticated-Origin-Pull%EF%BC%9A%E6%96%B9%E5%90%91%E5%8F%8D%E8%BF%87%E6%9D%A5%E4%BA%86"><span class="dream-toc-list-text">20.6 Authenticated Origin Pull：方向反过来了</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-7-Cloudflare-Tunnel-%E5%8F%88%E6%98%AF%E5%93%AA%E4%B8%80%E5%B1%82"><span class="dream-toc-list-text">20.7 Cloudflare Tunnel 又是哪一层</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-8-Cloudflare-%E5%87%A0%E7%A7%8D%E8%AF%81%E4%B9%A6%E5%BF%AB%E9%80%9F%E5%AF%B9%E7%85%A7"><span class="dream-toc-list-text">20.8 Cloudflare 几种证书快速对照</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%80%E3%80%81%E5%AE%98%E6%96%B9%E6%A0%87%E5%87%86%E4%B8%8E%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="dream-toc-list-text">二十一、官方标准与延伸阅读</span></a></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
+                <h1 id="数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书"><a href="#数字证书体系大全：从公私钥、PKI-到-TLS、SSH、代码签名与设备证书" class="headerlink" title="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书"></a>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</h1><p>很多人第一次接触“证书”是在 HTTPS：<code>cert.pem</code>、<code>fullchain.pem</code>、<code>privkey.pem</code>；后来又会遇到 <code>.crt</code>、<code>.cer</code>、<code>.p12</code>、<code>.pfx</code>、<code>.jks</code>、SSH Certificate、Android 签名证书、S&#x2F;MIME、VPN 客户端证书，概念很快就混在一起。<br>这篇文章不按“后缀名背诵法”来讲，而是先建立一套统一模型，再把不同场景映射进去。只要理解下面这句话，后面的 TLS、SSH、代码签名、邮件和设备证书就都能串起来：</p>
 <blockquote>
 <p><strong>私钥负责证明“我掌握这个身份能力”，公钥负责让别人验证；证书负责把公钥与身份、用途、期限和约束绑定起来；信任链负责回答“我为什么相信这个绑定”。</strong></p>
 </blockquote>
 <p>本文面向高校学习者，同时兼顾原理、命令和工程使用。示例中的域名、IP、组织名均为演示值，请勿直接照搬到生产环境。</p>
 <h2 id="一、先从最底层问题开始：为什么公钥还需要证书"><a href="#一、先从最底层问题开始：为什么公钥还需要证书" class="headerlink" title="一、先从最底层问题开始：为什么公钥还需要证书"></a>一、先从最底层问题开始：为什么公钥还需要证书</h2><p>假设服务器自己生成一对密钥：</p>
-<pre class="line-numbers language-text" data-language="text"><code class="language-text">Private Key  ──数学关系──&gt;  Public Key
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Private Key  ──数学关系──>  Public Key
    私钥                           公钥
    保密                           可公开<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -497,6 +714,7 @@
 
 <p>攻击者同样可以说：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">我是 example.com，这是我的公钥：EVIL...<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>因此真正困难的是<strong>公钥与身份之间的可信绑定</strong>。数字证书就是为解决这个问题出现的。</p>
 <p>一张典型证书可以抽象为：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Certificate
@@ -533,7 +751,7 @@
 <p>这样即使某个 Intermediate CA 出问题，也可以单独停止或撤销它，而不必立即替换整个根。</p>
 <h3 id="2-3-Self-Signed-不等于“密码学上无效”"><a href="#2-3-Self-Signed-不等于“密码学上无效”" class="headerlink" title="2.3 Self-Signed 不等于“密码学上无效”"></a>2.3 Self-Signed 不等于“密码学上无效”</h3><p>Root Certificate 通常是 self-signed：<code>Issuer == Subject</code>，并由自己的私钥签名。它的信任来自外部配置，而不是“自己证明自己”。</p>
 <p>所以实验室里的私有 Root CA 完全可以是自签名的；真正的关键是：<strong>客户端是否通过可信渠道安装并信任这个根。</strong></p>
-<h2 id="三、X-509-证书里到底有什么"><a href="#三、X-509-证书里到底有什么" class="headerlink" title="三、X.509 证书里到底有什么"></a>三、X.509 证书里到底有什么</h2><p>X.509 是 TLS、S/MIME、很多 VPN、802.1X、Kubernetes 和企业设备证书中最常见的证书体系。查看证书：</p>
+<h2 id="三、X-509-证书里到底有什么"><a href="#三、X-509-证书里到底有什么" class="headerlink" title="三、X.509 证书里到底有什么"></a>三、X.509 证书里到底有什么</h2><p>X.509 是 TLS、S&#x2F;MIME、很多 VPN、802.1X、Kubernetes 和企业设备证书中最常见的证书体系。查看证书：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl x509 <span class="token parameter variable">-in</span> server.crt <span class="token parameter variable">-text</span> <span class="token parameter variable">-noout</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>重点字段可以先记成下面这张表：</p>
@@ -582,7 +800,7 @@
 </tr>
 <tr>
 <td><code>SKI / AKI</code></td>
-<td>Subject/Authority Key Identifier，帮助识别密钥与签发关系</td>
+<td>Subject&#x2F;Authority Key Identifier，帮助识别密钥与签发关系</td>
 </tr>
 <tr>
 <td><code>Signature Algorithm</code></td>
@@ -595,6 +813,7 @@
     DNS:example.com,
     DNS:www.example.com,
     IP Address:192.0.2.10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>如果访问 <code>https://api.example.com</code>，证书里就必须存在能够匹配它的相应 DNS 身份。直接访问 IP 时，也不能因为“这个 IP 正好指向那台服务器”就自动把 DNS SAN 当成 IP SAN 使用。</p>
 <p>通配符也不是无限匹配：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">*.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -625,7 +844,7 @@ S/MIME：emailProtection<span aria-hidden="true" class="line-numbers-rows"><span
 <li>能否从 Leaf 构建到可信 Trust Anchor；</li>
 <li>每一级签名是否正确；</li>
 <li>当前时间是否处于有效期内；</li>
-<li>目标域名/IP/身份是否匹配；</li>
+<li>目标域名&#x2F;IP&#x2F;身份是否匹配；</li>
 <li><code>Basic Constraints</code>、<code>Key Usage</code>、<code>Extended Key Usage</code> 是否允许当前用途；</li>
 <li>路径长度、Name Constraints、Certificate Policies 等约束是否满足；</li>
 <li>应用是否要求检查撤销状态、Certificate Transparency 或其他策略。</li>
@@ -639,9 +858,9 @@ S/MIME：emailProtection<span aria-hidden="true" class="line-numbers-rows"><span
 <h2 id="四、私钥、CSR-与证书签发到底是什么关系"><a href="#四、私钥、CSR-与证书签发到底是什么关系" class="headerlink" title="四、私钥、CSR 与证书签发到底是什么关系"></a>四、私钥、CSR 与证书签发到底是什么关系</h2><p>正常情况下，申请公开证书时<strong>不需要把私钥交给 CA</strong>。流程是：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">本地生成 Private Key
         │
-        ├─&gt; 推导 Public Key
+        ├─> 推导 Public Key
         │
-        └─&gt; 生成 CSR
+        └─> 生成 CSR
                 │
                 ▼
               CA 验证申请
@@ -649,7 +868,7 @@ S/MIME：emailProtection<span aria-hidden="true" class="line-numbers-rows"><span
                 ▼
            签发 Certificate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>CSR（Certificate Signing Request，常见为 PKCS #10）包含公钥、申请主体/扩展信息以及申请者对请求本身的签名，但不应该包含你的私钥。</p>
+<p>CSR（Certificate Signing Request，常见为 PKCS #10）包含公钥、申请主体&#x2F;扩展信息以及申请者对请求本身的签名，但不应该包含你的私钥。</p>
 <h2 id="五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS-一次分清"><a href="#五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS-一次分清" class="headerlink" title="五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS 一次分清"></a>五、PEM、DER、CRT、CER、KEY、PFX、P12、JKS 一次分清</h2><p>理解证书文件时要先分开两个维度：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">“里面是什么数据结构？”
         与
@@ -674,8 +893,9 @@ BEGIN X509 CRL                 → CRL<span aria-hidden="true" class="line-numbe
 <p>PEM 与 DER 常见转换：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl x509 <span class="token parameter variable">-in</span> cert.pem <span class="token parameter variable">-outform</span> DER <span class="token parameter variable">-out</span> cert.der
 openssl x509 <span class="token parameter variable">-inform</span> DER <span class="token parameter variable">-in</span> cert.der <span class="token parameter variable">-out</span> cert.pem<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="5-3-crt-cer-key-是用途习惯，不是可靠编码声明"><a href="#5-3-crt-cer-key-是用途习惯，不是可靠编码声明" class="headerlink" title="5.3 .crt / .cer / .key 是用途习惯，不是可靠编码声明"></a>5.3 <code>.crt</code> / <code>.cer</code> / <code>.key</code> 是用途习惯，不是可靠编码声明</h3><p>常见约定是：<code>.crt</code>、<code>.cer</code> 放证书，<code>.key</code> 放私钥；但 <code>.crt/.cer</code> 内部可能是 PEM，也可能是 DER，具体要看实际内容或让工具识别。</p>
-<h3 id="5-4-PKCS-12：-p12-pfx"><a href="#5-4-PKCS-12：-p12-pfx" class="headerlink" title="5.4 PKCS #12：.p12 / .pfx"></a>5.4 PKCS #12：<code>.p12</code> / <code>.pfx</code></h3><p>PKCS #12 可以把下面这些内容放进同一个受口令保护的容器：</p>
+
+<h3 id="5-3-crt-cer-key-是用途习惯，不是可靠编码声明"><a href="#5-3-crt-cer-key-是用途习惯，不是可靠编码声明" class="headerlink" title="5.3 .crt &#x2F; .cer &#x2F; .key 是用途习惯，不是可靠编码声明"></a>5.3 <code>.crt</code> &#x2F; <code>.cer</code> &#x2F; <code>.key</code> 是用途习惯，不是可靠编码声明</h3><p>常见约定是：<code>.crt</code>、<code>.cer</code> 放证书，<code>.key</code> 放私钥；但 <code>.crt/.cer</code> 内部可能是 PEM，也可能是 DER，具体要看实际内容或让工具识别。</p>
+<h3 id="5-4-PKCS-12：-p12-pfx"><a href="#5-4-PKCS-12：-p12-pfx" class="headerlink" title="5.4 PKCS #12：.p12 &#x2F; .pfx"></a>5.4 PKCS #12：<code>.p12</code> &#x2F; <code>.pfx</code></h3><p>PKCS #12 可以把下面这些内容放进同一个受口令保护的容器：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Private Key
 + Leaf Certificate
 + Intermediate Certificate(s)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -696,7 +916,7 @@ openssl x509 <span class="token parameter variable">-inform</span> DER <span cla
 TrustStore → “我信谁”：信任的 Root/CA Certificate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>这两个概念也适用于 Windows Certificate Store、macOS Keychain、Linux CA Bundle 等其他平台。</p>
-<h3 id="5-6-cert-pem、chain-pem、fullchain-pem-怎么理解"><a href="#5-6-cert-pem、chain-pem、fullchain-pem-怎么理解" class="headerlink" title="5.6 cert.pem、chain.pem、fullchain.pem 怎么理解"></a>5.6 <code>cert.pem</code>、<code>chain.pem</code>、<code>fullchain.pem</code> 怎么理解</h3><p>在 Web Server/ACME 场景中常见：</p>
+<h3 id="5-6-cert-pem、chain-pem、fullchain-pem-怎么理解"><a href="#5-6-cert-pem、chain-pem、fullchain-pem-怎么理解" class="headerlink" title="5.6 cert.pem、chain.pem、fullchain.pem 怎么理解"></a>5.6 <code>cert.pem</code>、<code>chain.pem</code>、<code>fullchain.pem</code> 怎么理解</h3><p>在 Web Server&#x2F;ACME 场景中常见：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">cert.pem      → Leaf Certificate
 chain.pem     → Intermediate Certificate(s)
 fullchain.pem → cert.pem + chain.pem
@@ -706,7 +926,7 @@ privkey.pem   → 与 Leaf 对应的 Private Key<span aria-hidden="true" class="
 <h3 id="5-7-文件速查表"><a href="#5-7-文件速查表" class="headerlink" title="5.7 文件速查表"></a>5.7 文件速查表</h3><table>
 <thead>
 <tr>
-<th>文件/后缀</th>
+<th>文件&#x2F;后缀</th>
 <th>常见内容</th>
 <th>默认敏感性</th>
 </tr>
@@ -717,12 +937,12 @@ privkey.pem   → 与 Leaf 对应的 Private Key<span aria-hidden="true" class="
 <td><strong>高</strong></td>
 </tr>
 <tr>
-<td><code>.csr</code> / <code>.req</code></td>
+<td><code>.csr</code> &#x2F; <code>.req</code></td>
 <td>Certificate Signing Request</td>
 <td>低</td>
 </tr>
 <tr>
-<td><code>.crt</code> / <code>.cer</code></td>
+<td><code>.crt</code> &#x2F; <code>.cer</code></td>
 <td>Certificate</td>
 <td>通常公开</td>
 </tr>
@@ -737,13 +957,13 @@ privkey.pem   → 与 Leaf 对应的 Private Key<span aria-hidden="true" class="
 <td>必须看内容</td>
 </tr>
 <tr>
-<td><code>.p12</code> / <code>.pfx</code></td>
+<td><code>.p12</code> &#x2F; <code>.pfx</code></td>
 <td>PKCS #12，可含私钥和证书链</td>
 <td><strong>高</strong></td>
 </tr>
 <tr>
-<td><code>.p7b</code> / <code>.p7c</code></td>
-<td>PKCS #7/CMS 证书集合等</td>
+<td><code>.p7b</code> &#x2F; <code>.p7c</code></td>
+<td>PKCS #7&#x2F;CMS 证书集合等</td>
 <td>通常不含私钥</td>
 </tr>
 <tr>
@@ -787,6 +1007,7 @@ openssl req <span class="token parameter variable">-new</span> <span class="toke
   <span class="token parameter variable">-key</span> intermediate-ca.key <span class="token punctuation">\</span>
   <span class="token parameter variable">-out</span> intermediate-ca.csr <span class="token punctuation">\</span>
   <span class="token parameter variable">-subj</span> <span class="token string">"/C=CN/O=Campus Lab/CN=Campus Lab Intermediate CA"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>创建 <code>intermediate.ext</code>：</p>
 <pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token key attr-name">basicConstraints</span><span class="token punctuation">=</span><span class="token value attr-value">critical,CA:TRUE,pathlen:0</span>
 <span class="token key attr-name">keyUsage</span><span class="token punctuation">=</span><span class="token value attr-value">critical,keyCertSign,cRLSign</span>
@@ -816,6 +1037,7 @@ openssl req <span class="token parameter variable">-new</span> <span class="toke
   <span class="token parameter variable">-algorithm</span> RSA <span class="token punctuation">\</span>
   <span class="token parameter variable">-pkeyopt</span> rsa_keygen_bits:2048 <span class="token punctuation">\</span>
   <span class="token parameter variable">-out</span> server.key<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>生成 CSR：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl req <span class="token parameter variable">-new</span> <span class="token parameter variable">-sha256</span> <span class="token punctuation">\</span>
   <span class="token parameter variable">-key</span> server.key <span class="token punctuation">\</span>
@@ -874,16 +1096,16 @@ openssl pkey <span class="token parameter variable">-in</span> server.key <span 
   <span class="token operator">|</span> sha256sum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>两个 SHA-256 值相同，说明它们对应同一把公钥。这种方法比只针对 RSA modulus 的老教程更通用。</p>
-<h2 id="七、HTTPS-TLS-中证书到底做了什么"><a href="#七、HTTPS-TLS-中证书到底做了什么" class="headerlink" title="七、HTTPS/TLS 中证书到底做了什么"></a>七、HTTPS/TLS 中证书到底做了什么</h2><p>最常见的误解是：“HTTPS 用证书公钥把整个网页加密”。现代 TLS 不是这样工作的。<br>以 TLS 1.3 为例，可以把过程简化为：</p>
+<h2 id="七、HTTPS-TLS-中证书到底做了什么"><a href="#七、HTTPS-TLS-中证书到底做了什么" class="headerlink" title="七、HTTPS&#x2F;TLS 中证书到底做了什么"></a>七、HTTPS&#x2F;TLS 中证书到底做了什么</h2><p>最常见的误解是：“HTTPS 用证书公钥把整个网页加密”。现代 TLS 不是这样工作的。<br>以 TLS 1.3 为例，可以把过程简化为：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Client                         Server
   │                              │
-  ├──── ClientHello ────────────&gt;│
+  ├──── ClientHello ────────────>│
   │&lt;─── ServerHello ─────────────┤
   │      密钥协商                 │
   │&lt;─── Certificate ─────────────┤
   │&lt;─── CertificateVerify ───────┤
   │&lt;─── Finished ────────────────┤
-  ├──── Finished ───────────────&gt;│
+  ├──── Finished ───────────────>│
   │                              │
   └════ 对称加密应用数据 ════════┘<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
@@ -903,30 +1125,30 @@ CertificateVerify：
   <span class="token parameter variable">-showcerts</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果漏掉 <code>-servername</code>，多站点服务器可能给你另一张默认 Certificate，导致排错方向错误。</p>
-<h3 id="7-2-公网证书、DV-OV-EV-与-2026-年有效期变化"><a href="#7-2-公网证书、DV-OV-EV-与-2026-年有效期变化" class="headerlink" title="7.2 公网证书、DV/OV/EV 与 2026 年有效期变化"></a>7.2 公网证书、DV/OV/EV 与 2026 年有效期变化</h3><p>公有 Web PKI 中，DV/OV/EV 的主要区别是 CA 对 Subscriber 身份信息验证到什么程度，并不是“EV 使用更强加密算法”。</p>
-<p>截至 <strong>2026-08-10</strong>，CA/Browser Forum Baseline Requirements 已把 Public TLS Subscriber Certificate 的最大有效期缩短为：</p>
+<h3 id="7-2-公网证书、DV-OV-EV-与-2026-年有效期变化"><a href="#7-2-公网证书、DV-OV-EV-与-2026-年有效期变化" class="headerlink" title="7.2 公网证书、DV&#x2F;OV&#x2F;EV 与 2026 年有效期变化"></a>7.2 公网证书、DV&#x2F;OV&#x2F;EV 与 2026 年有效期变化</h3><p>公有 Web PKI 中，DV&#x2F;OV&#x2F;EV 的主要区别是 CA 对 Subscriber 身份信息验证到什么程度，并不是“EV 使用更强加密算法”。</p>
+<p>截至 <strong>2026-08-10</strong>，CA&#x2F;Browser Forum Baseline Requirements 已把 Public TLS Subscriber Certificate 的最大有效期缩短为：</p>
 <table>
 <thead>
 <tr>
 <th>签发时间</th>
-<th align="right">最大有效期</th>
+<th>最大有效期</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>2026-03-15 之前</td>
-<td align="right">398 天</td>
+<td>398 天</td>
 </tr>
 <tr>
 <td>2026-03-15 ～ 2027-03-14</td>
-<td align="right">200 天</td>
+<td>200 天</td>
 </tr>
 <tr>
 <td>2027-03-15 ～ 2029-03-14</td>
-<td align="right">100 天</td>
+<td>100 天</td>
 </tr>
 <tr>
 <td>2029-03-15 起</td>
-<td align="right">47 天</td>
+<td>47 天</td>
 </tr>
 </tbody></table>
 <p>这说明公有 TLS 的方向是<strong>更短证书生命周期 + 自动化续期</strong>，而不是继续依赖人工一年一换。</p>
@@ -940,7 +1162,7 @@ CertificateVerify：
 
 <h2 id="八、mTLS：证书不只可以证明服务器"><a href="#八、mTLS：证书不只可以证明服务器" class="headerlink" title="八、mTLS：证书不只可以证明服务器"></a>八、mTLS：证书不只可以证明服务器</h2><p>普通 HTTPS 多数是客户端验证服务器；mTLS（Mutual TLS）则让双方都持有证书：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Client                           Server
-  │── 验证 Server Certificate ──&gt;│
+  │── 验证 Server Certificate ──>│
   │&lt;─ 验证 Client Certificate ───│<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>客户端证书常用于企业 API、微服务、数据库、VPN、设备认证和 Zero Trust 内部服务。<br>可以把 mTLS 配置里的三个文件直接翻译成人话：</p>
@@ -948,9 +1170,9 @@ CertificateVerify：
 client-cert.pem → 我向对方声明的公开身份
 client-key.pem  → 我证明自己确实拥有这个身份的秘密<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>服务端也有类似的 <code>server-cert</code> / <code>server-key</code>。客户端证书通常还应具有合适的 <code>clientAuth</code> EKU，而不是随便拿一张 server certificate 互换使用。</p>
+<p>服务端也有类似的 <code>server-cert</code> &#x2F; <code>server-key</code>。客户端证书通常还应具有合适的 <code>clientAuth</code> EKU，而不是随便拿一张 server certificate 互换使用。</p>
 <p>mTLS 与用户名密码最大的思维差异是：密码主要证明“你知道什么”，私钥认证则证明“你掌握什么密码学凭据”。实际系统还可以把证书中的 SAN、Subject、Serial Number 或自定义扩展映射为用户、设备和权限。</p>
-<h2 id="九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency"><a href="#九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency" class="headerlink" title="九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency"></a>九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency</h2><h3 id="9-1-证书公开，私钥才是核心秘密"><a href="#9-1-证书公开，私钥才是核心秘密" class="headerlink" title="9.1 证书公开，私钥才是核心秘密"></a>9.1 证书公开，私钥才是核心秘密</h3><p>HTTPS Server Certificate 本来就会发送给客户端，因此别人拿到你的 <code>.crt</code> 通常不是事故；真正危险的是 <code>server.key</code>、包含私钥的 <code>.p12/.pfx</code>，或者能够调用私钥签名能力的 Token/HSM 凭据。</p>
+<h2 id="九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency"><a href="#九、证书泄露、撤销、CRL、OCSP-与-Certificate-Transparency" class="headerlink" title="九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency"></a>九、证书泄露、撤销、CRL、OCSP 与 Certificate Transparency</h2><h3 id="9-1-证书公开，私钥才是核心秘密"><a href="#9-1-证书公开，私钥才是核心秘密" class="headerlink" title="9.1 证书公开，私钥才是核心秘密"></a>9.1 证书公开，私钥才是核心秘密</h3><p>HTTPS Server Certificate 本来就会发送给客户端，因此别人拿到你的 <code>.crt</code> 通常不是事故；真正危险的是 <code>server.key</code>、包含私钥的 <code>.p12/.pfx</code>，或者能够调用私钥签名能力的 Token&#x2F;HSM 凭据。</p>
 <p>如果私钥泄露，而证书还有几个月才过期，就需要撤销机制。</p>
 <h3 id="9-2-CRL-与-OCSP"><a href="#9-2-CRL-与-OCSP" class="headerlink" title="9.2 CRL 与 OCSP"></a>9.2 CRL 与 OCSP</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">CRL  → CA 发布“哪些 Serial Number 已撤销”的列表
 OCSP → 客户端/服务端向 Responder 查询某张证书当前状态<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -1014,6 +1236,7 @@ Host Certificate → Client 验证服务器<span aria-hidden="true" class="line-
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">这个程序是谁签的？
 签名后文件有没有被改过？
 签名者证书在签名策略下是否可信？<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>代码签名的核心可以抽象为：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Program/File
     │
@@ -1047,7 +1270,7 @@ Sign with Publisher Private Key
 <p>因此 Android 的“签名证书”主要证明应用发布身份，而不是证明某个 HTTPS 域名。</p>
 <h3 id="11-3-Apple-Code-Signing"><a href="#11-3-Apple-Code-Signing" class="headerlink" title="11.3 Apple Code Signing"></a>11.3 Apple Code Signing</h3><p>Apple 平台同样依赖代码签名证书与私钥，但还会结合 Provisioning Profile、Entitlements、Developer Team 等平台策略。证书解决“谁签的”，平台策略再决定“这个签名身份允许以什么权限、在哪些环境运行”。</p>
 <p>这也是一个重要规律：<strong>Certificate 负责身份绑定，但完整授权系统往往还会叠加额外 Policy。</strong></p>
-<h2 id="十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”"><a href="#十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”" class="headerlink" title="十二、S/MIME 与 OpenPGP：邮件和个人身份中的“证书”"></a>十二、S/MIME 与 OpenPGP：邮件和个人身份中的“证书”</h2><h3 id="12-1-S-MIME"><a href="#12-1-S-MIME" class="headerlink" title="12.1 S/MIME"></a>12.1 S/MIME</h3><p>S/MIME 使用 X.509/PKI 为邮件提供数字签名和加密。</p>
+<h2 id="十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”"><a href="#十二、S-MIME-与-OpenPGP：邮件和个人身份中的“证书”" class="headerlink" title="十二、S&#x2F;MIME 与 OpenPGP：邮件和个人身份中的“证书”"></a>十二、S&#x2F;MIME 与 OpenPGP：邮件和个人身份中的“证书”</h2><h3 id="12-1-S-MIME"><a href="#12-1-S-MIME" class="headerlink" title="12.1 S&#x2F;MIME"></a>12.1 S&#x2F;MIME</h3><p>S&#x2F;MIME 使用 X.509&#x2F;PKI 为邮件提供数字签名和加密。</p>
 <p>签名邮件：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Alice Mail
    │ Hash
@@ -1058,11 +1281,11 @@ Alice Private Key Sign
 Signature + Alice Certificate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Bob 通过 Alice Certificate 取得公钥并验证签名，可以检测邮件签名后是否被修改。</p>
-<p>加密给 Bob 时，逻辑反过来：Alice 需要 Bob 的公开证书/公钥来保护发给 Bob 的内容或会话密钥，而 Bob 用自己的私钥解密。</p>
+<p>加密给 Bob 时，逻辑反过来：Alice 需要 Bob 的公开证书&#x2F;公钥来保护发给 Bob 的内容或会话密钥，而 Bob 用自己的私钥解密。</p>
 <h3 id="12-2-OpenPGP-Certificate-不是-X-509-Certificate"><a href="#12-2-OpenPGP-Certificate-不是-X-509-Certificate" class="headerlink" title="12.2 OpenPGP Certificate 不是 X.509 Certificate"></a>12.2 OpenPGP Certificate 不是 X.509 Certificate</h3><p>OpenPGP 也使用 “Certificate” 这个术语，但数据结构和信任模型与 X.509 不同。它包含 Primary Key、User ID、Subkey、Certification Signature 等对象，并可使用直接验证指纹、组织策略、目录服务、TOFU 或传统 Web of Trust 等方式建立信任。</p>
 <p>所以看到 <code>certificate</code> 这个词时，第一件事应该问：<strong>它属于哪套协议和格式？</strong></p>
 <h2 id="十三、VPN、802-1X、IoT、数据库和-Kubernetes-为什么也都在用证书"><a href="#十三、VPN、802-1X、IoT、数据库和-Kubernetes-为什么也都在用证书" class="headerlink" title="十三、VPN、802.1X、IoT、数据库和 Kubernetes 为什么也都在用证书"></a>十三、VPN、802.1X、IoT、数据库和 Kubernetes 为什么也都在用证书</h2><p>这些场景看起来完全不同，但本质仍然是“给机器、用户或服务一个可验证的公钥身份”。</p>
-<h3 id="13-1-VPN-与-802-1X-EAP-TLS"><a href="#13-1-VPN-与-802-1X-EAP-TLS" class="headerlink" title="13.1 VPN 与 802.1X / EAP-TLS"></a>13.1 VPN 与 802.1X / EAP-TLS</h3><p>企业 VPN 可以给每个用户或设备签一张 Client Certificate；802.1X 的 EAP-TLS 也可以让终端使用证书向网络接入系统证明身份。</p>
+<h3 id="13-1-VPN-与-802-1X-EAP-TLS"><a href="#13-1-VPN-与-802-1X-EAP-TLS" class="headerlink" title="13.1 VPN 与 802.1X &#x2F; EAP-TLS"></a>13.1 VPN 与 802.1X &#x2F; EAP-TLS</h3><p>企业 VPN 可以给每个用户或设备签一张 Client Certificate；802.1X 的 EAP-TLS 也可以让终端使用证书向网络接入系统证明身份。</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Corporate Root / Device CA
         │
         ├── Alice-Laptop
@@ -1070,7 +1293,7 @@ Signature + Alice Certificate<span aria-hidden="true" class="line-numbers-rows">
         └── Lab-PC-017<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>设备丢失时只撤销对应证书，不需要修改全公司的共享密码。</p>
-<h3 id="13-2-IoT-工业设备"><a href="#13-2-IoT-工业设备" class="headerlink" title="13.2 IoT / 工业设备"></a>13.2 IoT / 工业设备</h3><p>IoT 设备可以在制造或注册阶段写入独立 Private Key 与 Device Certificate，再通过 mTLS 与平台建立身份认证。</p>
+<h3 id="13-2-IoT-工业设备"><a href="#13-2-IoT-工业设备" class="headerlink" title="13.2 IoT &#x2F; 工业设备"></a>13.2 IoT &#x2F; 工业设备</h3><p>IoT 设备可以在制造或注册阶段写入独立 Private Key 与 Device Certificate，再通过 mTLS 与平台建立身份认证。</p>
 <p>私钥最好位于 TPM、Secure Element 或其他难以导出的硬件中，而不是把同一把私钥复制到所有设备镜像。</p>
 <h3 id="13-3-数据库"><a href="#13-3-数据库" class="headerlink" title="13.3 数据库"></a>13.3 数据库</h3><p>数据库配置中的：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">ca.pem
@@ -1082,7 +1305,7 @@ client-key.pem<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 Cert → 我向服务器声明什么身份？
 Key  → 我如何证明这个身份确实属于我？<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="13-4-Kubernetes"><a href="#13-4-Kubernetes" class="headerlink" title="13.4 Kubernetes"></a>13.4 Kubernetes</h3><p><code>kubeconfig</code> 中的 <code>certificate-authority-data</code>、<code>client-certificate-data</code>、<code>client-key-data</code> 也是同一模型。Kubernetes 组件之间大量依赖 TLS 和 Client Certificate 建立服务/节点/用户身份，随后再叠加 RBAC 等授权策略。</p>
+<h3 id="13-4-Kubernetes"><a href="#13-4-Kubernetes" class="headerlink" title="13.4 Kubernetes"></a>13.4 Kubernetes</h3><p><code>kubeconfig</code> 中的 <code>certificate-authority-data</code>、<code>client-certificate-data</code>、<code>client-key-data</code> 也是同一模型。Kubernetes 组件之间大量依赖 TLS 和 Client Certificate 建立服务&#x2F;节点&#x2F;用户身份，随后再叠加 RBAC 等授权策略。</p>
 <h2 id="十四、HSM、TPM、智能卡到底和证书是什么关系"><a href="#十四、HSM、TPM、智能卡到底和证书是什么关系" class="headerlink" title="十四、HSM、TPM、智能卡到底和证书是什么关系"></a>十四、HSM、TPM、智能卡到底和证书是什么关系</h2><p>HSM、TPM、Smart Card、Secure Element 本身不是“证书”，它们主要解决的是<strong>私钥如何安全生成、保存和使用</strong>。</p>
 <p>理想模型：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Application
@@ -1112,6 +1335,7 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 
 <p>查看 Private Key：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl pkey <span class="token parameter variable">-in</span> private.key <span class="token parameter variable">-text</span> <span class="token parameter variable">-noout</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>查看远程 TLS 链：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl s_client <span class="token punctuation">\</span>
   <span class="token parameter variable">-connect</span> example.com:443 <span class="token punctuation">\</span>
@@ -1140,15 +1364,15 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <h3 id="15-1-unable-to-get-local-issuer-certificate"><a href="#15-1-unable-to-get-local-issuer-certificate" class="headerlink" title="15.1 unable to get local issuer certificate"></a>15.1 <code>unable to get local issuer certificate</code></h3><p>常见原因是服务器没有提供 Intermediate Certificate，客户端无法从 Leaf 构建到自己的 Trust Anchor。</p>
 <p>优先检查服务器实际发送的链，而不是把 Root Certificate 随便拼进 <code>fullchain.pem</code>。</p>
 <h3 id="15-2-hostname-mismatch"><a href="#15-2-hostname-mismatch" class="headerlink" title="15.2 hostname mismatch"></a>15.2 hostname mismatch</h3><p>先确认你访问的究竟是 DNS Name 还是 IP，再检查 SAN 中是否存在正确类型的标识。<code>CN=example.com</code> 不能作为现代 TLS 配置里忽略 SAN 的理由。</p>
-<h3 id="15-3-Certificate-与-Private-Key-不匹配"><a href="#15-3-Certificate-与-Private-Key-不匹配" class="headerlink" title="15.3 Certificate 与 Private Key 不匹配"></a>15.3 Certificate 与 Private Key 不匹配</h3><p>典型表现是 Nginx/Apache/Java 启动时报 key mismatch、private key does not match certificate 等错误。不要凭文件名猜，直接按前文方式导出两边 Public Key 后比较 SHA-256。</p>
-<h3 id="15-4-curl-k-verify-False-为什么只能用于诊断"><a href="#15-4-curl-k-verify-False-为什么只能用于诊断" class="headerlink" title="15.4 curl -k / verify=False 为什么只能用于诊断"></a>15.4 <code>curl -k</code> / <code>verify=False</code> 为什么只能用于诊断</h3><p>关闭证书验证后，连接可能仍然“有加密”，但你失去了对通信对端身份的可靠确认：</p>
+<h3 id="15-3-Certificate-与-Private-Key-不匹配"><a href="#15-3-Certificate-与-Private-Key-不匹配" class="headerlink" title="15.3 Certificate 与 Private Key 不匹配"></a>15.3 Certificate 与 Private Key 不匹配</h3><p>典型表现是 Nginx&#x2F;Apache&#x2F;Java 启动时报 key mismatch、private key does not match certificate 等错误。不要凭文件名猜，直接按前文方式导出两边 Public Key 后比较 SHA-256。</p>
+<h3 id="15-4-curl-k-verify-False-为什么只能用于诊断"><a href="#15-4-curl-k-verify-False-为什么只能用于诊断" class="headerlink" title="15.4 curl -k &#x2F; verify=False 为什么只能用于诊断"></a>15.4 <code>curl -k</code> &#x2F; <code>verify=False</code> 为什么只能用于诊断</h3><p>关闭证书验证后，连接可能仍然“有加密”，但你失去了对通信对端身份的可靠确认：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Client ═TLS═ Attacker ═TLS═ Real Server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>两段链路都可以是加密的，但客户端连接的可能已经不是预期服务器。</p>
 <p>所以正确排错顺序应该是：先用 <code>-k</code> 等手段短时确认“问题是否确实来自证书验证”，随后修复 CA、SAN、时间、完整链或 hostname，而不是把关闭验证作为永久方案。</p>
 <h3 id="15-5-时间错误也会制造“证书故障”"><a href="#15-5-时间错误也会制造“证书故障”" class="headerlink" title="15.5 时间错误也会制造“证书故障”"></a>15.5 时间错误也会制造“证书故障”</h3><p>证书有 <code>Not Before</code> 与 <code>Not After</code>。虚拟机、双系统、RTC、NTP 或容器宿主机时间明显错误时，完全正常的证书也可能显示“尚未生效”或“已经过期”。</p>
 <h2 id="十六、Certificate-Pinning：比普通-CA-信任更进一步"><a href="#十六、Certificate-Pinning：比普通-CA-信任更进一步" class="headerlink" title="十六、Certificate Pinning：比普通 CA 信任更进一步"></a>十六、Certificate Pinning：比普通 CA 信任更进一步</h2><p>普通 Web PKI 的模型大致是：只要证书能够通过受信任路径、hostname 和策略验证，就可以接受。</p>
-<p>Pinning 则额外要求客户端只接受指定 Certificate 或指定 Public Key/SPKI。这可以缩小受信任范围，但也会带来证书/密钥轮换和灾难恢复风险。</p>
+<p>Pinning 则额外要求客户端只接受指定 Certificate 或指定 Public Key&#x2F;SPKI。这可以缩小受信任范围，但也会带来证书&#x2F;密钥轮换和灾难恢复风险。</p>
 <p>因此做 Pinning 时至少要设计：</p>
 <ul>
 <li>如何轮换 Key；</li>
@@ -1166,24 +1390,24 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <h3 id="误区-6：Self-Signed-一定“不安全”"><a href="#误区-6：Self-Signed-一定“不安全”" class="headerlink" title="误区 6：Self-Signed 一定“不安全”"></a>误区 6：Self-Signed 一定“不安全”</h3><p>Self-Signed 的主要问题通常是缺少默认信任，而不是密码学签名天然失效。私有 PKI 中 Root CA 本身就经常是 self-signed。</p>
 <h3 id="误区-7：签名正确就代表整张证书可信"><a href="#误区-7：签名正确就代表整张证书可信" class="headerlink" title="误区 7：签名正确就代表整张证书可信"></a>误区 7：签名正确就代表整张证书可信</h3><p>不对。还必须考虑 Trust Chain、Validity、Identity、Constraints、Usage、Revocation 和应用策略。</p>
 <h3 id="误区-8：id-ed25519-pub-是-SSH-Certificate"><a href="#误区-8：id-ed25519-pub-是-SSH-Certificate" class="headerlink" title="误区 8：id_ed25519.pub 是 SSH Certificate"></a>误区 8：<code>id_ed25519.pub</code> 是 SSH Certificate</h3><p>不对。它只是 OpenSSH Public Key；由 SSH CA 签发后的 <code>*-cert.pub</code> 才是 OpenSSH Certificate。</p>
-<h3 id="误区-9：-pfx-只是另一种-crt"><a href="#误区-9：-pfx-只是另一种-crt" class="headerlink" title="误区 9：.pfx 只是另一种 .crt"></a>误区 9：<code>.pfx</code> 只是另一种 <code>.crt</code></h3><p>危险。PFX/PKCS #12 很可能同时包含 Certificate 和 Private Key。</p>
+<h3 id="误区-9：-pfx-只是另一种-crt"><a href="#误区-9：-pfx-只是另一种-crt" class="headerlink" title="误区 9：.pfx 只是另一种 .crt"></a>误区 9：<code>.pfx</code> 只是另一种 <code>.crt</code></h3><p>危险。PFX&#x2F;PKCS #12 很可能同时包含 Certificate 和 Private Key。</p>
 <h2 id="十八、不同场景到底在证明什么"><a href="#十八、不同场景到底在证明什么" class="headerlink" title="十八、不同场景到底在证明什么"></a>十八、不同场景到底在证明什么</h2><table>
 <thead>
 <tr>
 <th>场景</th>
-<th>证书/凭据主要证明什么</th>
+<th>证书&#x2F;凭据主要证明什么</th>
 <th>常见信任根</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>HTTPS</td>
-<td>这个 TLS Server 是否代表目标域名/IP</td>
-<td>Public/Private Root CA</td>
+<td>这个 TLS Server 是否代表目标域名&#x2F;IP</td>
+<td>Public&#x2F;Private Root CA</td>
 </tr>
 <tr>
 <td>mTLS</td>
 <td>Client 与 Server 双方身份</td>
-<td>企业/服务 CA</td>
+<td>企业&#x2F;服务 CA</td>
 </tr>
 <tr>
 <td>SSH User Certificate</td>
@@ -1203,15 +1427,15 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <tr>
 <td>Android App Signing</td>
 <td>App 的持续签名身份</td>
-<td>App Signing Key/平台策略</td>
+<td>App Signing Key&#x2F;平台策略</td>
 </tr>
 <tr>
-<td>S/MIME</td>
-<td>邮件签名者/收件人公钥身份</td>
-<td>S/MIME PKI</td>
+<td>S&#x2F;MIME</td>
+<td>邮件签名者&#x2F;收件人公钥身份</td>
+<td>S&#x2F;MIME PKI</td>
 </tr>
 <tr>
-<td>VPN / EAP-TLS</td>
+<td>VPN &#x2F; EAP-TLS</td>
 <td>用户或设备身份</td>
 <td>Enterprise CA</td>
 </tr>
@@ -1222,7 +1446,7 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 </tr>
 <tr>
 <td>Kubernetes</td>
-<td>Client/Server/Node 身份</td>
+<td>Client&#x2F;Server&#x2F;Node 身份</td>
 <td>Cluster CA</td>
 </tr>
 </tbody></table>
@@ -1234,8 +1458,8 @@ Signature<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 <li>谁签发了它？</li>
 <li>验证端为什么信任这个 Issuer？</li>
 <li>完整 Certificate Chain 是什么？</li>
-<li>SAN/Subject/Principal 表示的身份是什么？</li>
-<li>Key Usage / EKU / Policy 允许它做什么？</li>
+<li>SAN&#x2F;Subject&#x2F;Principal 表示的身份是什么？</li>
+<li>Key Usage &#x2F; EKU &#x2F; Policy 允许它做什么？</li>
 <li>什么时候生效、什么时候过期？</li>
 <li>如何续期、轮换、撤销和审计？</li>
 </ol>
@@ -1258,13 +1482,14 @@ identity/usage     └── contains Public Key
                     Private Key
                         │
                         └── Sign / Proof of Possession<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>最后可以把全文记成六句话：</p>
 <ol>
 <li><strong>Private Key 是秘密能力，不应公开。</strong></li>
 <li><strong>Public Key 可以公开，但单独的公钥不能自动证明身份。</strong></li>
 <li><strong>Certificate 把 Public Key 与身份、用途、期限和约束绑定起来。</strong></li>
 <li><strong>Issuer Signature 让这种绑定可以被密码学验证。</strong></li>
-<li><strong>Trust Chain / Trust Store 决定你为什么相信 Issuer。</strong></li>
+<li><strong>Trust Chain &#x2F; Trust Store 决定你为什么相信 Issuer。</strong></li>
 <li><strong>真正的协议还要证明通信对端确实掌握 Certificate 对应的 Private Key。</strong></li>
 </ol>
 <p>所以数字证书最本质的定义不是“用来加密的文件”，而是：</p>
@@ -1363,7 +1588,7 @@ origin.key
 <p>如果源站还必须由普通浏览器直接访问，更适合使用 Let’s Encrypt 或其他公开受信任 CA 签发的证书。</p>
 <h3 id="20-4-Full-与-Full-strict-到底区别在哪"><a href="#20-4-Full-与-Full-strict-到底区别在哪" class="headerlink" title="20.4 Full 与 Full (strict) 到底区别在哪"></a>20.4 Full 与 Full (strict) 到底区别在哪</h3><p>把 Cloudflare 的 Encryption Mode 放回证书验证逻辑里就很好理解。</p>
 <p><code>Full</code> 可以抽象为：</p>
-<pre class="line-numbers language-text" data-language="text"><code class="language-text">Browser ──HTTPS──&gt; Cloudflare ──HTTPS──&gt; Origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">Browser ──HTTPS──> Cloudflare ──HTTPS──> Origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>重点是 Cloudflare 到 Origin 也使用 TLS，但对 Origin Certificate 的身份验证要求比较宽松。</p>
 <p>而 <code>Full (strict)</code> 可以理解为：</p>
@@ -1427,7 +1652,7 @@ Origin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
     │ &lt;──── Origin Certificate ─────── │
     │       CF 验证 Origin             │
     │                                  │
-    │ ───── Client Certificate ──────&gt; │
+    │ ───── Client Certificate ──────> │
     │       Origin 验证 Cloudflare     │<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>所以必须区分：</p>
@@ -1478,7 +1703,7 @@ HTTPS Origin Application<span aria-hidden="true" class="line-numbers-rows"><span
 </tr>
 </thead>
 <tbody><tr>
-<td>Edge / Universal SSL Certificate</td>
+<td>Edge &#x2F; Universal SSL Certificate</td>
 <td>Cloudflare Edge</td>
 <td>Browser</td>
 <td>证明公网域名身份</td>
@@ -1492,7 +1717,7 @@ HTTPS Origin Application<span aria-hidden="true" class="line-numbers-rows"><span
 <tr>
 <td>Public CA Origin Certificate</td>
 <td>Origin Server</td>
-<td>Cloudflare/Browser</td>
+<td>Cloudflare&#x2F;Browser</td>
 <td>源站 TLS，可直接被公网客户端信任</td>
 </tr>
 <tr>
@@ -1503,7 +1728,7 @@ HTTPS Origin Application<span aria-hidden="true" class="line-numbers-rows"><span
 </tr>
 <tr>
 <td>mTLS Client Certificate</td>
-<td>Client/Device</td>
+<td>Client&#x2F;Device</td>
 <td>Cloudflare Edge</td>
 <td>对客户端或设备做证书身份认证</td>
 </tr>
@@ -1533,23 +1758,24 @@ Origin：
 <li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc8446">RFC 8446 — TLS 1.3</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc9525">RFC 9525 — Service Identity in TLS</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc8555">RFC 8555 — Automatic Certificate Management Environment (ACME)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc7468">RFC 7468 — Textual Encodings of PKIX/PKCS/CMS Structures</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc7468">RFC 7468 — Textual Encodings of PKIX&#x2F;PKCS&#x2F;CMS Structures</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc7292">RFC 7292 — PKCS #12</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc9162">RFC 9162 — Certificate Transparency Version 2.0</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.openssl.org/">OpenSSL Documentation</a></li>
 <li><a target="_blank" rel="noopener" href="https://man.openbsd.org/ssh-keygen">OpenSSH ssh-keygen Manual — Certificates</a></li>
-<li><a target="_blank" rel="noopener" href="https://cabforum.org/working-groups/server/baseline-requirements/requirements/">CA/Browser Forum — TLS Baseline Requirements</a></li>
+<li><a target="_blank" rel="noopener" href="https://cabforum.org/working-groups/server/baseline-requirements/requirements/">CA&#x2F;Browser Forum — TLS Baseline Requirements</a></li>
 <li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/windows/win32/seccrypto/signtool">Microsoft SignTool Documentation</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/publish/app-signing">Android App Signing</a></li>
-<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/edge-certificates/universal-ssl/">Cloudflare Universal SSL / Edge Certificates</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/edge-certificates/universal-ssl/">Cloudflare Universal SSL &#x2F; Edge Certificates</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/">Cloudflare Origin CA</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full-strict/">Cloudflare Full (strict)</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/authenticated-origin-pull/">Cloudflare Authenticated Origin Pulls</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/tunnel/advanced/origin-parameters/">Cloudflare Tunnel Origin Parameters</a></li>
 </ul>
-<p>如果只是临时查后缀，可以直接看本文第五章；如果真正遇到 HTTPS/SSH/代码签名故障，则建议从“<strong>身份 → 公钥 → 私钥 → Issuer → Trust Chain → Usage → Validity → Revocation/Policy</strong>”这条链开始定位。</p>
+<p>如果只是临时查后缀，可以直接看本文第五章；如果真正遇到 HTTPS&#x2F;SSH&#x2F;代码签名故障，则建议从“<strong>身份 → 公钥 → 私钥 → Issuer → Trust Chain → Usage → Validity → Revocation&#x2F;Policy</strong>”这条链开始定位。</p>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -1620,6 +1846,10 @@ Origin：
                                     <span class="chip bg-color">cloudflare</span>
                                 </a>
                             
+                                <a href="/tags/tls/">
+                                    <span class="chip bg-color">tls</span>
+                                </a>
+                            
                                 <a href="/tags/certificate/">
                                     <span class="chip bg-color">certificate</span>
                                 </a>
@@ -1630,10 +1860,6 @@ Origin：
                             
                                 <a href="/tags/x509/">
                                     <span class="chip bg-color">x509</span>
-                                </a>
-                            
-                                <a href="/tags/tls/">
-                                    <span class="chip bg-color">tls</span>
                                 </a>
                             
                                 <a href="/tags/openssl/">
@@ -1648,8 +1874,44 @@ Origin：
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -1674,10 +1936,10 @@ Origin：
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1945,27 +2207,17 @@ Origin：
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1979,198 +2231,87 @@ Origin：
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
-            <div class="card">
-                <a href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/49.jpg" class="responsive-img" alt="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书">
-                        
-                        <span class="card-title">数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflare Edge/Origin/AOP 证书体系以及 OpenSSL 实战与排错。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
-                    </a>
-                    
-                    <a href="/tags/cloudflare/">
-                        <span class="chip bg-color">cloudflare</span>
-                    </a>
-                    
-                    <a href="/tags/certificate/">
-                        <span class="chip bg-color">certificate</span>
-                    </a>
-                    
-                    <a href="/tags/pki/">
-                        <span class="chip bg-color">pki</span>
-                    </a>
-                    
-                    <a href="/tags/x509/">
-                        <span class="chip bg-color">x509</span>
-                    </a>
-                    
-                    <a href="/tags/tls/">
-                        <span class="chip bg-color">tls</span>
-                    </a>
-                    
-                    <a href="/tags/openssl/">
-                        <span class="chip bg-color">openssl</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/09/25/vps-https-zheng-shu-shen-qing-wan-quan-zhi-nan-cloudflare-letsencrypt-acme/">
+            <span class="dream-related-reason">共同标签：cloudflare · tls</span><h3>VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</h3>
+            <time datetime="2026-09-25">2026-09-25</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
+            <span class="dream-related-reason">共同标签：ssh · cloudflare</span><h3>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</h3>
+            <time datetime="2026-08-09">2026-08-09</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程">
-                        
-                        <span class="card-title">ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            使用 OpenAI Secure MCP Tunnel 将 ChatGPT 网页端与 Windows 11 本机 Desktop Commander MCP 安全连接，实现文件读写、PowerShell、Python、Node.js、Git、WSL 等本地操作，无需公网 IP、端口转发或额外 VPS。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/chatgpt/">
-                        <span class="chip bg-color">chatgpt</span>
-                    </a>
-                    
-                    <a href="/tags/openai/">
-                        <span class="chip bg-color">openai</span>
-                    </a>
-                    
-                    <a href="/tags/mcp/">
-                        <span class="chip bg-color">mcp</span>
-                    </a>
-                    
-                    <a href="/tags/tunnel/">
-                        <span class="chip bg-color">tunnel</span>
-                    </a>
-                    
-                    <a href="/tags/windows/">
-                        <span class="chip bg-color">windows</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/">
+            <span class="dream-related-reason">共同标签：ssh · cloudflare</span><h3>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</h3>
+            <time datetime="2026-08-08">2026-08-08</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2026/08/18/cloudflare-pages-edgetunnel-cfnew-deploy-guide/" rel="prev"><span>较新的一篇</span><strong>Cloudflare Pages 部署 EdgeTunnel 与 CFNew：KV、环境变量、自定义域名完整教程</strong></a>
+        <a href="/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/" rel="next"><span>较早的一篇</span><strong>ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -2189,6 +2330,7 @@ Origin：
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -2201,9 +2343,10 @@ Origin：
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -2213,23 +2356,27 @@ Origin：
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -2254,7 +2401,6 @@ Origin：
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -2264,6 +2410,8 @@ Origin：
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -2279,60 +2427,6 @@ Origin：
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -2343,27 +2437,30 @@ Origin：
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -2375,38 +2472,44 @@ Origin：
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -2417,107 +2520,209 @@ Origin：
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -2528,35 +2733,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -2580,45 +2824,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

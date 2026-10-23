@@ -1,1 +1,97 @@
 /* Here is your custom css styles. */
+
+/* Materialize writes a pixel height at initialization; keep it responsive. */
+.carousel.carousel-slider.index-cover {
+    height: 100vh !important;
+}
+
+.carousel.carousel-slider.index-cover .carousel-item {
+    height: 100%;
+    min-height: 100%;
+}
+
+/* Keep the existing navbar appearance with a keyboard-operable theme button. */
+nav .theme-toggle {
+    display: block;
+    height: 64px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 64px;
+    cursor: pointer;
+}
+
+nav .theme-toggle:hover {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+nav .theme-toggle:focus {
+    background-color: transparent;
+}
+
+nav .theme-toggle:focus-visible,
+#articleContent a:focus-visible,
+#floating-toc-btn button:focus-visible {
+    outline: 2px solid #42b983;
+    outline-offset: 3px;
+}
+
+/* The fixed card receives its column width from the TOC layout handler. */
+.post-container .toc-widget {
+    width: 100%;
+}
+
+.post-container #toc-content {
+    max-height: calc(100vh - 184px);
+    overflow-wrap: anywhere;
+    overscroll-behavior: contain;
+}
+
+.Cuteen_DarkSky {
+    pointer-events: none;
+}
+
+/* Mobile hero: prevent title and action buttons from overflowing narrow screens. */
+@media only screen and (max-width: 600px) {
+    nav .theme-toggle {
+        height: 56px;
+        line-height: 56px;
+    }
+
+    .bg-cover .title {
+        font-size: clamp(2.15rem, 11vw, 2.8rem);
+        line-height: 1.14;
+        margin-bottom: 16px;
+        overflow-wrap: anywhere;
+    }
+
+    .bg-cover .description {
+        padding: 0 8px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .cover-btns {
+        top: 7vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 12px;
+    }
+
+    .cover-btns a {
+        margin: 0;
+        padding: 0 20px;
+        min-width: 0;
+        font-size: .94rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animated { animation: none !important; }
+    [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}

@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="本地部署与配置 MCP 服务器, 逐梦">
+    <meta name="keywords" content="本地部署与配置 MCP 服务器, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="本地部署与配置 MCP 服务器">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2025/06/29/ben-di-bu-shu-yu-pei-zhi-mcp-fu-wu-qi/">
+    <link rel="preload" as="image" href="/medias/featureimages/7.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="本地部署与配置 MCP 服务器 | 逐梦">
+    <meta property="og:description" content="本地部署与配置 MCP 服务器">
+    <meta property="og:url" content="https://0xdadream.github.io/2025/06/29/ben-di-bu-shu-yu-pei-zhi-mcp-fu-wu-qi/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="本地部署与配置 MCP 服务器 | 逐梦">
+    <meta name="twitter:description" content="本地部署与配置 MCP 服务器">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"本地部署与配置 MCP 服务器 | 逐梦","headline":"本地部署与配置 MCP 服务器 | 逐梦","description":"本地部署与配置 MCP 服务器","url":"https://0xdadream.github.io/2025/06/29/ben-di-bu-shu-yu-pei-zhi-mcp-fu-wu-qi/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2025-06-28T19:25:00.000Z","dateModified":"2026-10-21T16:07:25.708Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>本地部署与配置 MCP 服务器 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -420,7 +616,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-06-29
+                    2026-10-22
                 </div>
                 
 
@@ -439,9 +635,9 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -449,15 +645,36 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="本地部署与配置-MCP-服务器"><a href="#本地部署与配置-MCP-服务器" class="headerlink" title="本地部署与配置 MCP 服务器"></a>本地部署与配置 MCP 服务器</h1><p>本指南将根据您提供的专业指令，演示如何为两个不同技术栈的 MCP 服务器（一个基于 Python/uv，一个基于 Bun/TypeScript）设置项目、运行服务，并在 Cursor 中进行配置。主要针对wsl。</p>
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%80%EF%BC%9Amcp-sequential-thinking-Python-%E7%8E%AF%E5%A2%83"><span class="dream-toc-list-text">项目一：mcp_sequential_thinking (Python 环境)</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE"><span class="dream-toc-list-text">1. 设置项目</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="dream-toc-list-text">2. 安装依赖</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="dream-toc-list-text">3. 运行服务器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#4-%E5%8F%AF%E9%80%89-%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="dream-toc-list-text">4. (可选) 运行测试</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E9%A1%B9%E7%9B%AE%E4%BA%8C%EF%BC%9Acontext7-mcp-Bun-%E7%8E%AF%E5%A2%83"><span class="dream-toc-list-text">项目二：context7-mcp (Bun 环境)</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE-1"><span class="dream-toc-list-text">1. 设置项目</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="dream-toc-list-text">2. 构建项目</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8-1"><span class="dream-toc-list-text">3. 运行服务器</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%A8-Cursor-%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="dream-toc-list-text">在 Cursor 中配置本地服务器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9AHTTP-%E8%BF%9E%E6%8E%A5-%E6%8E%A8%E8%8D%90"><span class="dream-toc-list-text">方式一：HTTP 连接 (推荐)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9ACommand-%E5%91%BD%E4%BB%A4-%E7%94%B1-Cursor-%E5%90%AF%E5%8A%A8"><span class="dream-toc-list-text">方式二：Command 命令 (由 Cursor 启动)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%B9%A6%E5%86%99%E5%BD%A2%E5%BC%8F"><span class="dream-toc-list-text">书写形式</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D"><span class="dream-toc-list-text">提示词</span></a></li></ol></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
+                <h1 id="本地部署与配置-MCP-服务器"><a href="#本地部署与配置-MCP-服务器" class="headerlink" title="本地部署与配置 MCP 服务器"></a>本地部署与配置 MCP 服务器</h1><p>本指南将根据您提供的专业指令，演示如何为两个不同技术栈的 MCP 服务器（一个基于 Python&#x2F;uv，一个基于 Bun&#x2F;TypeScript）设置项目、运行服务，并在 Cursor 中进行配置。主要针对wsl。</p>
 <h3 id="项目一：mcp-sequential-thinking-Python-环境"><a href="#项目一：mcp-sequential-thinking-Python-环境" class="headerlink" title="项目一：mcp_sequential_thinking (Python 环境)"></a><strong>项目一：<code>mcp_sequential_thinking</code> (Python 环境)</strong></h3><p>这是一个使用 <code>uv</code> 作为包管理器的 Python 项目。</p>
 <h4 id="1-设置项目"><a href="#1-设置项目" class="headerlink" title="1. 设置项目"></a><strong>1. 设置项目</strong></h4><p>首先，克隆项目仓库（此处使用占位符，请替换为实际仓库地址），并创建虚拟环境。</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 克隆你的项目
@@ -470,18 +687,18 @@ uv venv
 # 激活环境
 # Windows
 .venv\Scripts\activate
-# Unix/Linux/macOS
-source .venv/bin/activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# Unix&#x2F;Linux&#x2F;macOS
+source .venv&#x2F;bin&#x2F;activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2-安装依赖"><a href="#2-安装依赖" class="headerlink" title="2. 安装依赖"></a><strong>2. 安装依赖</strong></h4><p><code>uv</code> 提供了灵活的依赖安装选项。</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 仅安装核心依赖
 uv pip install -e .
 
 # (推荐开发) 安装核心及测试工具
-uv pip install -e ".[dev]"
+uv pip install -e &quot;.[dev]&quot;
 
 # 安装所有可选依赖
-uv pip install -e ".[all]"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+uv pip install -e &quot;.[all]&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-运行服务器"><a href="#3-运行服务器" class="headerlink" title="3. 运行服务器"></a><strong>3. 运行服务器</strong></h4><p>您可以通过两种方式启动本地服务器。</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 方式一：直接通过模块运行
@@ -496,10 +713,10 @@ mcp-sequential-thinking<span aria-hidden="true" class="line-numbers-rows"><span>
 pytest
 
 # 运行测试并生成覆盖率报告
-pytest --cov=mcp_sequential_thinking<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+pytest --cov&#x3D;mcp_sequential_thinking<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
-<h3 id="项目二：context7-mcp-Bun-环境"><a href="#项目二：context7-mcp-Bun-环境" class="headerlink" title="项目二：context7-mcp (Bun 环境)"></a><strong>项目二：<code>context7-mcp</code> (Bun 环境)</strong></h3><p>这是一个使用 <code>Bun</code> 作为运行时和工具链的 TypeScript/JavaScript 项目。</p>
+<h3 id="项目二：context7-mcp-Bun-环境"><a href="#项目二：context7-mcp-Bun-环境" class="headerlink" title="项目二：context7-mcp (Bun 环境)"></a><strong>项目二：<code>context7-mcp</code> (Bun 环境)</strong></h3><p>这是一个使用 <code>Bun</code> 作为运行时和工具链的 TypeScript&#x2F;JavaScript 项目。</p>
 <h4 id="1-设置项目-1"><a href="#1-设置项目-1" class="headerlink" title="1. 设置项目"></a><strong>1. 设置项目</strong></h4><p>克隆 <code>context7</code> 的仓库并使用 <code>bun</code> 安装依赖。</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 克隆 context7 项目
 git clone &lt;your-bun-mcp-repo-url&gt;
@@ -514,11 +731,11 @@ bun i<span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
 <p>此命令通常会在 <code>dist</code> 目录下生成输出文件。</p>
 <h4 id="3-运行服务器-1"><a href="#3-运行服务器-1" class="headerlink" title="3. 运行服务器"></a><strong>3. 运行服务器</strong></h4><p>构建完成后，运行服务器并可指定参数。</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash"># 基本运行方式
-bun run dist/index.js
+bun run dist&#x2F;index.js
 
 # 高级运行方式：指定传输协议和端口
 # 下例将使用 http 协议并在 8080 端口上运行
-bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+bun run dist&#x2F;index.js --transport http --port 8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h3 id="在-Cursor-中配置本地服务器"><a href="#在-Cursor-中配置本地服务器" class="headerlink" title="在 Cursor 中配置本地服务器"></a><strong>在 Cursor 中配置本地服务器</strong></h3><p>将本地运行的服务器接入 Cursor 有两种主要方式：</p>
@@ -554,18 +771,18 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 <p><strong>重要提示</strong>: 您必须将 <code>/path/to/folder/context7-mcp/src/index.ts</code> 替换为您本地存放 <code>context7</code> 项目的<strong>绝对路径</strong>。这种方式更适合直接运行源文件，无需手动 <code>build</code> 和 <code>run</code>。</p>
 </li>
 </ol>
-<h4 id="书写形式"><a href="#书写形式" class="headerlink" title="书写形式"></a>书写形式</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "/home/hero/mcp-sequential-thinking/.venv/bin/mcp-sequential-thinking",
-      "cwd": "/home/hero/mcp-sequential-thinking"
-    },
-    "context7": {
-      "command": "bun",
-      "args": ["run", "/home/hero/context7/src/index.ts"]
-    }
-  }
-} <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="书写形式"><a href="#书写形式" class="headerlink" title="书写形式"></a>书写形式</h4><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">&#123;
+  &quot;mcpServers&quot;: &#123;
+    &quot;sequential-thinking&quot;: &#123;
+      &quot;command&quot;: &quot;&#x2F;home&#x2F;hero&#x2F;mcp-sequential-thinking&#x2F;.venv&#x2F;bin&#x2F;mcp-sequential-thinking&quot;,
+      &quot;cwd&quot;: &quot;&#x2F;home&#x2F;hero&#x2F;mcp-sequential-thinking&quot;
+    &#125;,
+    &quot;context7&quot;: &#123;
+      &quot;command&quot;: &quot;bun&quot;,
+      &quot;args&quot;: [&quot;run&quot;, &quot;&#x2F;home&#x2F;hero&#x2F;context7&#x2F;src&#x2F;index.ts&quot;]
+    &#125;
+  &#125;
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>自行理解</p>
 <h4 id="提示词"><a href="#提示词" class="headerlink" title="提示词"></a>提示词</h4><pre class="line-numbers language-none"><code class="language-none">你是一位具备顺序逻辑推理能力与跨文件代码理解能力的 AI 助手。我希望你结合 Sequential Thinking 插件的多步骤推理能力，以及 Context7 插件的跨上下文代码理解能力，帮助我更清晰、精准地完成以下任务。
@@ -576,8 +793,8 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 3. 在必要时提供逐步思路、函数关系图、模块依赖路径，并解释推理过程。
 4. 保持逻辑清晰，输出建议时标明每一步对应的推理依据。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
                 
+            </div>
             </div>
             <hr/>
 
@@ -652,8 +869,44 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -678,10 +931,10 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -949,27 +1202,17 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -983,148 +1226,87 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2025/08/13/mathtype-jie-he-gong-shi-shi-bie-dao-word/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="mathtype结合公式识别到word">
-                        
-                        <span class="card-title">mathtype结合公式识别到word</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            mathtype结合公式识别到word
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-13
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/tools/" class="post-category">
-                                    tools
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/08/22/2026-nian-ai-coding-cli-wan-zheng-zhi-nan/">
+            <span class="dream-related-reason">共同标签：mcp</span><h3>2026 AI Coding CLI 完整指南：主流终端 Agent 安装、使用、选择与避坑</h3>
+            <time datetime="2026-08-22">2026-08-22</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/">
+            <span class="dream-related-reason">共同标签：mcp</span><h3>ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</h3>
+            <time datetime="2026-08-09">2026-08-09</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/39.jpg" class="responsive-img" alt="WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)">
-                        
-                        <span class="card-title">WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/net/">
-                        <span class="chip bg-color">net</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/09/25/vps-https-zheng-shu-shen-qing-wan-quan-zhi-nan-cloudflare-letsencrypt-acme/">
+            <span class="dream-related-reason">同分类：教程</span><h3>VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</h3>
+            <time datetime="2026-09-25">2026-09-25</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2025/08/13/mathtype-jie-he-gong-shi-shi-bie-dao-word/" rel="prev"><span>较新的一篇</span><strong>mathtype结合公式识别到word</strong></a>
+        <a href="/2025/06/29/wsl-2-tong-guo-windows-v2rayn-dai-li-shang-wang-quan-wei-zhi-nan-2025-ban/" rel="next"><span>较早的一篇</span><strong>WSL 2 通过 Windows V2RayN 代理上网权威指南 (2025版)</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1143,6 +1325,7 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -1155,9 +1338,10 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -1167,23 +1351,27 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -1208,7 +1396,6 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -1218,6 +1405,8 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1233,60 +1422,6 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1297,27 +1432,30 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -1329,38 +1467,44 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -1371,107 +1515,209 @@ bun run dist/index.js --transport http --port 8080<span aria-hidden="true" class
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -1482,35 +1728,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -1534,45 +1819,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

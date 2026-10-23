@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错, 逐梦">
+    <meta name="keywords" content="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
+    <link rel="preload" as="image" href="/medias/featureimages/51.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错 | 逐梦">
+    <meta property="og:description" content="从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。">
+    <meta property="og:url" content="https://0xdadream.github.io/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错 | 逐梦">
+    <meta name="twitter:description" content="从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错 | 逐梦","headline":"Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错 | 逐梦","description":"从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。","url":"https://0xdadream.github.io/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2026-08-08T20:18:00.000Z","dateModified":"2026-10-21T16:07:25.462Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -440,7 +636,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-08-09
+                    2026-10-22
                 </div>
                 
 
@@ -459,9 +655,9 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -469,15 +665,36 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错"><a href="#Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错" class="headerlink" title="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错"></a>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</h1><p>Cloudflare Tunnel 的价值并不只是“内网穿透”。它更像一条由内网主动向 Cloudflare 建立的安全连接：服务器不必拥有公网 IP，也不必在路由器、防火墙或云安全组上开放入站端口，就能把 Web、SSH、RDP、TCP 服务甚至整段私有网段接入 Cloudflare。</p>
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%80%E3%80%81%E5%85%88%E6%8A%8A-Cloudflare-Tunnel-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%E6%83%B3%E6%B8%85%E6%A5%9A"><span class="dream-toc-list-text">一、先把 Cloudflare Tunnel 的工作方式想清楚</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E3%80%81Cloudflare-Tunnel-%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8E%A9%E6%B3%95"><span class="dream-toc-list-text">二、Cloudflare Tunnel 到底有哪几种玩法</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%A7%8B%E5%89%8D%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">三、开始前需要准备什么</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-1-%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="dream-toc-list-text">3.1 最基本的条件</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-2-%E9%98%B2%E7%81%AB%E5%A2%99%E7%9C%9F%E6%AD%A3%E9%9C%80%E8%A6%81%E6%94%BE%E8%A1%8C%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">3.2 防火墙真正需要放行什么</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85-cloudflared"><span class="dream-toc-list-text">四、安装 cloudflared</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-1-Windows-11"><span class="dream-toc-list-text">4.1 Windows 11</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-2-macOS"><span class="dream-toc-list-text">4.2 macOS</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-3-Linux"><span class="dream-toc-list-text">4.3 Linux</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%94%E3%80%81%E5%AE%9E%E4%BE%8B-1%EF%BC%9A%E4%B8%8D%E7%94%A8%E5%9F%9F%E5%90%8D%EF%BC%8C30-%E7%A7%92%E5%90%AF%E5%8A%A8-Quick-Tunnel"><span class="dream-toc-list-text">五、实例 1：不用域名，30 秒启动 Quick Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E4%BE%8B-2%EF%BC%9A%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0-Web-%E6%9C%8D%E5%8A%A1"><span class="dream-toc-list-text">六、实例 2：正式发布一个本地 Web 服务</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-1-%E5%9C%A8-Dashboard-%E5%88%9B%E5%BB%BA-Tunnel"><span class="dream-toc-list-text">6.1 在 Dashboard 创建 Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-2-%E6%B7%BB%E5%8A%A0-Published-application"><span class="dream-toc-list-text">6.2 添加 Published application</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-3-%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E8%A1%8C-Tunnel"><span class="dream-toc-list-text">6.3 在服务器运行 Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-4-%E5%88%86%E5%B1%82%E9%AA%8C%E8%AF%81%EF%BC%8C%E4%B8%8D%E8%A6%81%E4%B8%80%E4%B8%8A%E6%9D%A5%E5%8F%AA%E7%9C%8B%E5%85%AC%E7%BD%91%E5%9F%9F%E5%90%8D"><span class="dream-toc-list-text">6.4 分层验证，不要一上来只看公网域名</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%83%E3%80%81%E4%B8%80%E6%9D%A1-Tunnel-%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%97%B6%E5%8F%91%E5%B8%83%E5%A4%9A%E5%B0%91%E7%A7%8D%E6%9C%8D%E5%8A%A1"><span class="dream-toc-list-text">七、一条 Tunnel 可以同时发布多少种服务</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AB%E3%80%81%E5%AE%9E%E4%BE%8B-3%EF%BC%9A%E6%BA%90%E7%AB%99%E6%9C%AC%E8%BA%AB%E5%B0%B1%E6%98%AF-HTTPS%EF%BC%8C%E8%AF%81%E4%B9%A6%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86"><span class="dream-toc-list-text">八、实例 3：源站本身就是 HTTPS，证书怎么处理</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#8-1-No-TLS-Verify-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AF%A5%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80"><span class="dream-toc-list-text">8.1 No TLS Verify 为什么不该默认打开</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B9%9D%E3%80%81%E5%AE%9E%E4%BE%8B-4%EF%BC%9A%E7%BB%99%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%E5%8A%A0-Cloudflare-Access-%E7%99%BB%E5%BD%95"><span class="dream-toc-list-text">九、实例 4：给管理后台加 Cloudflare Access 登录</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#9-1-%E6%9C%BA%E5%99%A8%E8%B0%83%E7%94%A8%E4%B8%8D%E8%A6%81%E7%85%A7%E6%90%AC%E4%BA%BA%E5%B7%A5%E7%BD%91%E9%A1%B5%E7%99%BB%E5%BD%95"><span class="dream-toc-list-text">9.1 机器调用不要照搬人工网页登录</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E3%80%81%E5%AE%9E%E4%BE%8B-5%EF%BC%9A%E9%80%9A%E8%BF%87-Tunnel-%E4%BD%BF%E7%94%A8-SSH"><span class="dream-toc-list-text">十、实例 5：通过 Tunnel 使用 SSH</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#10-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8-cloudflared-OpenSSH"><span class="dream-toc-list-text">10.1 客户端使用 cloudflared + OpenSSH</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#10-2-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80-SSH"><span class="dream-toc-list-text">10.2 浏览器里直接打开 SSH</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#10-3-%E7%A7%81%E7%BD%91-SSH%EF%BC%9A%E4%B8%8D%E5%8F%91%E5%B8%83-ssh-example-com"><span class="dream-toc-list-text">10.3 私网 SSH：不发布 ssh.example.com</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#10-4-Access-for-Infrastructure"><span class="dream-toc-list-text">10.4 Access for Infrastructure</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%AE%9E%E4%BE%8B-6%EF%BC%9A%E8%BD%AC%E5%8F%91%E4%BB%BB%E6%84%8F-TCP%E2%80%94%E2%80%94%E4%BB%A5-PostgreSQL-%E4%B8%BA%E4%BE%8B"><span class="dream-toc-list-text">十一、实例 6：转发任意 TCP——以 PostgreSQL 为例</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%AE%9E%E4%BE%8B-7%EF%BC%9A%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5-Windows-RDP"><span class="dream-toc-list-text">十二、实例 7：远程连接 Windows RDP</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#12-1-%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0-RDP-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="dream-toc-list-text">12.1 使用本地 RDP 客户端</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#12-2-%E7%9B%B4%E6%8E%A5%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8-RDP"><span class="dream-toc-list-text">12.2 直接在浏览器使用 RDP</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E5%AE%9E%E4%BE%8B-8%EF%BC%9A%E6%8A%8A%E6%95%B4%E4%B8%AA%E5%AE%B6%E5%BA%AD-%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%A7%81%E7%BD%91%E6%8E%A5%E8%BF%9B%E6%9D%A5"><span class="dream-toc-list-text">十三、实例 8：把整个家庭&#x2F;实验室私网接进来</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-1-%E7%A7%81%E7%BD%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E8%BE%B9%E7%95%8C"><span class="dream-toc-list-text">13.1 私网模式的两个关键边界</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#13-2-%E7%BD%91%E6%AE%B5%E9%87%8D%E5%8F%A0%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="dream-toc-list-text">13.2 网段重叠怎么办</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E5%AE%9E%E4%BE%8B-9%EF%BC%9A%E9%80%9A%E8%BF%87%E7%A7%81%E6%9C%89%E4%B8%BB%E6%9C%BA%E5%90%8D%E8%AE%BF%E9%97%AE%E5%86%85%E9%83%A8%E6%9C%8D%E5%8A%A1"><span class="dream-toc-list-text">十四、实例 9：通过私有主机名访问内部服务</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E5%AE%9E%E4%BE%8B-10%EF%BC%9A%E7%94%A8-Docker-%E8%BF%90%E8%A1%8C-cloudflared"><span class="dream-toc-list-text">十五、实例 10：用 Docker 运行 cloudflared</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#15-1-Docker-%E6%9C%80%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84-localhost-%E5%9D%91"><span class="dream-toc-list-text">15.1 Docker 最容易踩的 localhost 坑</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E8%AE%A9-Tunnel-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%EF%BC%9A%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1"><span class="dream-toc-list-text">十六、让 Tunnel 开机自启：系统服务</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#16-1-Remotely-managed-Tunnel"><span class="dream-toc-list-text">16.1 Remotely-managed Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#16-2-Locally-managed-Tunnel"><span class="dream-toc-list-text">16.2 Locally-managed Tunnel</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E5%AE%9E%E4%BE%8B-11%EF%BC%9A%E5%AE%8C%E5%85%A8%E7%94%A8-config-yml-%E7%AE%A1%E7%90%86-Tunnel"><span class="dream-toc-list-text">十七、实例 11：完全用 config.yml 管理 Tunnel</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#17-1-%E9%85%8D%E7%BD%AE%E5%86%99%E5%AE%8C%E5%85%88%E9%AA%8C%E8%AF%81%EF%BC%8C%E4%B8%8D%E8%A6%81%E7%9B%B4%E6%8E%A5%E9%87%8D%E5%90%AF%E7%94%9F%E4%BA%A7%E6%9C%8D%E5%8A%A1"><span class="dream-toc-list-text">17.1 配置写完先验证，不要直接重启生产服务</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#17-2-Locally-managed-Tunnel-%E5%90%8C%E6%A0%B7%E5%8F%AF%E4%BB%A5%E8%B7%AF%E7%94%B1%E7%A7%81%E7%BD%91"><span class="dream-toc-list-text">17.2 Locally-managed Tunnel 同样可以路由私网</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AB%E3%80%81Tunnel-%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%B8%B8%E7%94%A8%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="dream-toc-list-text">十八、Tunnel 传输协议与常用运行参数</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#18-1-Debug-%E6%97%A5%E5%BF%97%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%B3%84%E5%AF%86"><span class="dream-toc-list-text">18.1 Debug 日志也可能泄密</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E5%AE%9E%E4%BE%8B-12%EF%BC%9A%E7%BB%99-Tunnel-%E5%81%9A%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="dream-toc-list-text">十九、实例 12：给 Tunnel 做高可用</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E7%9B%91%E6%8E%A7%EF%BC%9A%E6%97%A5%E5%BF%97%E3%80%81%E7%8A%B6%E6%80%81%E5%92%8C-Prometheus-Metrics"><span class="dream-toc-list-text">二十、监控：日志、状态和 Prometheus Metrics</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-1-%E5%85%88%E7%9C%8B-Tunnel-%E7%8A%B6%E6%80%81"><span class="dream-toc-list-text">20.1 先看 Tunnel 状态</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#20-2-Prometheus-Metrics"><span class="dream-toc-list-text">20.2 Prometheus Metrics</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%80%E3%80%81%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%EF%BC%9A%E6%8C%89%E9%93%BE%E8%B7%AF%E5%88%86%E5%B1%82%EF%BC%8C%E4%B8%8D%E8%A6%81%E4%B9%B1%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">二十一、故障排查：按链路分层，不要乱改配置</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-1-Error-1033%EF%BC%9ACloudflare-%E6%89%BE%E4%B8%8D%E5%88%B0%E5%81%A5%E5%BA%B7-Tunnel-Connector"><span class="dream-toc-list-text">21.1 Error 1033：Cloudflare 找不到健康 Tunnel Connector</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-2-Error-502%EF%BC%9ATunnel-%E9%80%9A%E4%BA%86%EF%BC%8C%E4%BD%86-Origin-%E4%B8%8D%E9%80%9A"><span class="dream-toc-list-text">21.2 Error 502：Tunnel 通了，但 Origin 不通</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-3-x509-certificate-signed-by-unknown-authority"><span class="dream-toc-list-text">21.3 x509: certificate signed by unknown authority</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-4-cloudflared-service-is-already-installed"><span class="dream-toc-list-text">21.4 cloudflared service is already installed</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-5-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%AD%A3%E5%B8%B8%EF%BC%8C%E4%BD%86%E8%AE%BF%E9%97%AE%E8%BF%98%E6%98%AF%E5%A4%B1%E8%B4%A5"><span class="dream-toc-list-text">21.5 域名解析正常，但访问还是失败</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-6-IPv4-IPv6-%E7%9A%84-localhost-%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="dream-toc-list-text">21.6 IPv4&#x2F;IPv6 的 localhost 不一致</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-7-Private-network-%E8%B7%AF%E7%94%B1%E5%BB%BA%E4%BA%86%EF%BC%8C%E4%BD%86%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86"><span class="dream-toc-list-text">21.7 Private network 路由建了，但客户端访问不了</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#21-8-Access-%E7%99%BB%E5%BD%95%E5%BE%AA%E7%8E%AF%E6%88%96%E9%9D%9E-HTTP-%E9%95%BF%E8%BF%9E%E6%8E%A5%E4%B8%8D%E7%A8%B3%E5%AE%9A"><span class="dream-toc-list-text">21.8 Access 登录循环或非 HTTP 长连接不稳定</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%8C%E3%80%81%E5%AE%89%E5%85%A8%E7%A1%AC%E5%8C%96%EF%BC%9ATunnel-%E4%B8%8D%E5%BC%80%E5%85%AC%E7%BD%91%E7%AB%AF%E5%8F%A3%EF%BC%8C%E4%B8%8D%E4%BB%A3%E8%A1%A8%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%81%9A%E5%AE%89%E5%85%A8"><span class="dream-toc-list-text">二十二、安全硬化：Tunnel 不开公网端口，不代表可以不做安全</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#22-1-Git-%E4%BB%93%E5%BA%93%E5%BA%94%E8%AF%A5%E5%BF%BD%E7%95%A5%E4%BB%80%E4%B9%88"><span class="dream-toc-list-text">22.1 Git 仓库应该忽略什么</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF%E5%88%B0%E5%BA%95%E8%AF%A5%E9%80%89%E5%93%AA%E4%B8%80%E7%A7%8D%E6%96%B9%E6%A1%88"><span class="dream-toc-list-text">二十三、常见场景到底该选哪一种方案</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-A%EF%BC%9A%E4%B8%B4%E6%97%B6%E6%8A%8A%E6%9C%AC%E5%9C%B0%E7%BD%91%E9%A1%B5%E5%8F%91%E7%BB%99%E5%88%AB%E4%BA%BA"><span class="dream-toc-list-text">场景 A：临时把本地网页发给别人</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-B%EF%BC%9A%E9%95%BF%E6%9C%9F%E5%8F%91%E5%B8%83%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99-API"><span class="dream-toc-list-text">场景 B：长期发布个人网站&#x2F;API</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-C%EF%BC%9A%E6%B2%A1%E6%9C%89%E5%85%AC%E7%BD%91-IP-%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9C%80%E8%A6%81-SSH"><span class="dream-toc-list-text">场景 C：没有公网 IP 的服务器需要 SSH</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-D%EF%BC%9A%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%AE%B6%E5%BA%AD-Windows"><span class="dream-toc-list-text">场景 D：远程控制家庭 Windows</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-E%EF%BC%9A%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE-NAS%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E5%BE%88%E5%A4%9A%E5%86%85%E7%BD%91%E8%AE%BE%E5%A4%87"><span class="dream-toc-list-text">场景 E：远程访问 NAS、数据库和很多内网设备</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-F%EF%BC%9A%E5%8F%AA%E5%BC%80%E6%94%BE%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%99%E5%B0%91%E6%95%B0%E7%AE%A1%E7%90%86%E5%91%98"><span class="dream-toc-list-text">场景 F：只开放一个数据库给少数管理员</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9C%BA%E6%99%AF-G%EF%BC%9ADocker-%E9%87%8C%E5%90%8C%E6%97%B6%E6%9C%89%E5%A4%9A%E4%B8%AA%E5%BA%94%E7%94%A8"><span class="dream-toc-list-text">场景 G：Docker 里同时有多个应用</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E5%9B%9B%E3%80%81cloudflared-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="dream-toc-list-text">二十四、cloudflared 常用命令速查</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9F%BA%E7%A1%80%E4%BF%A1%E6%81%AF"><span class="dream-toc-list-text">基础信息</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#Quick-Tunnel"><span class="dream-toc-list-text">Quick Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%BF%9E%E6%8E%A5%E8%AF%8A%E6%96%AD"><span class="dream-toc-list-text">连接诊断</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#Locally-managed-Tunnel"><span class="dream-toc-list-text">Locally-managed Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-Access"><span class="dream-toc-list-text">客户端 Access</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#systemd"><span class="dream-toc-list-text">systemd</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%94%E3%80%81%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%BB%B4%E6%8A%A4"><span class="dream-toc-list-text">二十五、版本升级与维护</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E5%85%AD%E3%80%81%E6%9C%80%E7%BB%88%E9%80%89%E6%8B%A9%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="dream-toc-list-text">二十六、最终选择速查表</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%83%E3%80%81%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%B8%8E%E7%BB%A7%E7%BB%AD%E9%98%85%E8%AF%BB"><span class="dream-toc-list-text">二十七、官方文档与继续阅读</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="dream-toc-list-text">总结</span></a></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
+                <h1 id="Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错"><a href="#Cloudflare-Tunnel-全功能实战指南：公网发布、SSH-RDP、私有网络、Access、高可用与排错" class="headerlink" title="Cloudflare Tunnel 全功能实战指南：公网发布、SSH&#x2F;RDP、私有网络、Access、高可用与排错"></a>Cloudflare Tunnel 全功能实战指南：公网发布、SSH&#x2F;RDP、私有网络、Access、高可用与排错</h1><p>Cloudflare Tunnel 的价值并不只是“内网穿透”。它更像一条由内网主动向 Cloudflare 建立的安全连接：服务器不必拥有公网 IP，也不必在路由器、防火墙或云安全组上开放入站端口，就能把 Web、SSH、RDP、TCP 服务甚至整段私有网段接入 Cloudflare。</p>
 <p>我之前已经单独写过一篇 <strong>Qwen Agent + Cloudflare Tunnel SSH</strong> 的实战教程，那篇文章专门解决“临时容器没有公网端口，如何从 Windows SSH 进去”的问题。本文不会重复那篇文章，而是把 Cloudflare Tunnel 当成一个完整产品来讲，重点回答：它有哪些模式、各种功能分别怎么用、什么时候该用哪一种，以及出现故障时应该从哪一层排查。<br>本文的功能与命令以 <strong>2026-08-09 的 Cloudflare 官方文档</strong>为准。示例统一使用 <code>example.com</code>、<code>10.10.0.0/16</code> 等保留示例值；Tunnel Token、私钥、真实内网地址都不应直接写进公开博客。</p>
 <h2 id="一、先把-Cloudflare-Tunnel-的工作方式想清楚"><a href="#一、先把-Cloudflare-Tunnel-的工作方式想清楚" class="headerlink" title="一、先把 Cloudflare Tunnel 的工作方式想清楚"></a>一、先把 Cloudflare Tunnel 的工作方式想清楚</h2><p>传统公网访问通常是：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Internet
@@ -511,7 +728,7 @@ NAT / 防火墙 / 端口映射
 <li>通常不需要把 <code>80/443/22/3389</code> 等端口直接暴露给 Internet。</li>
 <li>Web 流量可以继续使用 Cloudflare 的 DNS、TLS、WAF、Rules、Access 等能力。</li>
 <li>SSH、RDP、任意 TCP 也能通过 Tunnel 转发，但客户端接入方式和普通网页不同。</li>
-<li>还可以不发布公网域名，而是把整个私有 IP/CIDR 或私有主机名交给 Cloudflare One Client 访问。</li>
+<li>还可以不发布公网域名，而是把整个私有 IP&#x2F;CIDR 或私有主机名交给 Cloudflare One Client 访问。</li>
 </ul>
 <p>需要注意：Tunnel 解决的是<strong>连接和入口</strong>问题，不会自动修复你的应用鉴权、数据库权限、SSH 配置或 Windows RDP 安全策略。</p>
 <h2 id="二、Cloudflare-Tunnel-到底有哪几种玩法"><a href="#二、Cloudflare-Tunnel-到底有哪几种玩法" class="headerlink" title="二、Cloudflare Tunnel 到底有哪几种玩法"></a>二、Cloudflare Tunnel 到底有哪几种玩法</h2><p>实际使用时，最容易混淆的是“Tunnel”这个词下面存在几种管理和接入模式。</p>
@@ -538,13 +755,13 @@ NAT / 防火墙 / 端口映射
 </tr>
 <tr>
 <td>Locally-managed Tunnel</td>
-<td>希望配置完全放在 <code>config.yml</code>、CLI/Git 中管理</td>
+<td>希望配置完全放在 <code>config.yml</code>、CLI&#x2F;Git 中管理</td>
 <td>发布公网应用时需要</td>
 <td>是</td>
 </tr>
 <tr>
 <td>Private network routing</td>
-<td>远程访问整个私网、IP/CIDR、私有主机名</td>
+<td>远程访问整个私网、IP&#x2F;CIDR、私有主机名</td>
 <td>不一定</td>
 <td>是</td>
 </tr>
@@ -557,11 +774,11 @@ NAT / 防火墙 / 端口映射
 <li>一个已接入 Cloudflare DNS 的域名；</li>
 <li>一台能够主动访问 Internet 的主机；</li>
 <li>在这台主机上运行 <code>cloudflared</code>；</li>
-<li>本地真正提供服务的 Web/SSH/RDP/TCP 程序。</li>
+<li>本地真正提供服务的 Web&#x2F;SSH&#x2F;RDP&#x2F;TCP 程序。</li>
 </ol>
 <p>如果只是 Quick Tunnel，则连自己的域名都不需要。</p>
-<h3 id="3-2-防火墙真正需要放行什么"><a href="#3-2-防火墙真正需要放行什么" class="headerlink" title="3.2 防火墙真正需要放行什么"></a>3.2 防火墙真正需要放行什么</h3><p>Cloudflare Tunnel 是出站连接。当前 <code>cloudflared</code> 主要通过 <strong>UDP/7844（QUIC）</strong> 或 <strong>TCP/7844（HTTP/2）</strong> 连接 Cloudflare Edge；<code>auto</code> 模式会优先尝试 QUIC，并在 UDP 不可用时回退到 HTTP/2。</p>
-<p>因此企业或校园网严格限制出站时，至少要确认 DNS、TCP/UDP 7844 和 Cloudflare 管理接口所需的 HTTPS 能正常访问。</p>
+<h3 id="3-2-防火墙真正需要放行什么"><a href="#3-2-防火墙真正需要放行什么" class="headerlink" title="3.2 防火墙真正需要放行什么"></a>3.2 防火墙真正需要放行什么</h3><p>Cloudflare Tunnel 是出站连接。当前 <code>cloudflared</code> 主要通过 <strong>UDP&#x2F;7844（QUIC）</strong> 或 <strong>TCP&#x2F;7844（HTTP&#x2F;2）</strong> 连接 Cloudflare Edge；<code>auto</code> 模式会优先尝试 QUIC，并在 UDP 不可用时回退到 HTTP&#x2F;2。</p>
+<p>因此企业或校园网严格限制出站时，至少要确认 DNS、TCP&#x2F;UDP 7844 和 Cloudflare 管理接口所需的 HTTPS 能正常访问。</p>
 <p>新版本 <code>cloudflared</code> 会在 Tunnel 启动前做连接预检。遇到建链失败时，可以直接执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -581,6 +798,7 @@ cloudflared <span class="token parameter variable">--version</span><span aria-hi
 <p>安装完成统一验证：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared <span class="token parameter variable">--version</span>
 <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> cloudflared<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h2 id="五、实例-1：不用域名，30-秒启动-Quick-Tunnel"><a href="#五、实例-1：不用域名，30-秒启动-Quick-Tunnel" class="headerlink" title="五、实例 1：不用域名，30 秒启动 Quick Tunnel"></a>五、实例 1：不用域名，30 秒启动 Quick Tunnel</h2><p>Quick Tunnel 非常适合临时演示。</p>
 <p>假设本机有一个 HTTP 服务监听 <code>127.0.0.1:8080</code>。没有现成服务时，可以临时启动：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">python3 <span class="token parameter variable">-m</span> http.server <span class="token number">8080</span> <span class="token parameter variable">--bind</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -594,7 +812,7 @@ cloudflared <span class="token parameter variable">--version</span><span aria-hi
 <p>访问这个地址，请求会经过 Cloudflare 再到你的 <code>127.0.0.1:8080</code>。</p>
 <p>Quick Tunnel 的优点是零配置、零域名；缺点同样明显：地址随机、生命周期依赖当前进程，也不是为正式生产环境设计的。</p>
 <p>因此它适合：临时 Demo、Webhook 调试、手机访问电脑上的开发页面、给同事短时间看一个本地站点。</p>
-<p>不适合：长期网站、管理后台、数据库、SSH/RDP 的正式入口。</p>
+<p>不适合：长期网站、管理后台、数据库、SSH&#x2F;RDP 的正式入口。</p>
 <h2 id="六、实例-2：正式发布一个本地-Web-服务"><a href="#六、实例-2：正式发布一个本地-Web-服务" class="headerlink" title="六、实例 2：正式发布一个本地 Web 服务"></a>六、实例 2：正式发布一个本地 Web 服务</h2><p>这是最常用的 Cloudflare Tunnel 场景。</p>
 <p>假设：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">域名：app.example.com
@@ -613,7 +831,7 @@ URL: http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><sp
 
 <p>保存后，Cloudflare 会让该 hostname 指向 Tunnel。其本质是把域名关联到 <code>&lt;Tunnel-UUID&gt;.cfargotunnel.com</code>。</p>
 <h3 id="6-3-在服务器运行-Tunnel"><a href="#6-3-在服务器运行-Tunnel" class="headerlink" title="6.3 在服务器运行 Tunnel"></a>6.3 在服务器运行 Tunnel</h3><p>临时验证时，可以直接使用 Dashboard 给出的命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel run <span class="token parameter variable">--token</span> <span class="token string">'&lt;TUNNEL_TOKEN&gt;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel run <span class="token parameter variable">--token</span> <span class="token string">'&lt;TUNNEL_TOKEN>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>长期运行不要一直开着终端，后文会改成系统服务或 Docker。</p>
 <h3 id="6-4-分层验证，不要一上来只看公网域名"><a href="#6-4-分层验证，不要一上来只看公网域名" class="headerlink" title="6.4 分层验证，不要一上来只看公网域名"></a>6.4 分层验证，不要一上来只看公网域名</h3><p>先在运行 <code>cloudflared</code> 的主机测试源站：</p>
@@ -662,14 +880,14 @@ URL: http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><sp
 <tr>
 <td><code>db.example.com</code></td>
 <td><code>tcp://127.0.0.1:5432</code></td>
-<td>PostgreSQL/TCP</td>
+<td>PostgreSQL&#x2F;TCP</td>
 </tr>
 </tbody></table>
 <p>Cloudflare 当前 Published application 支持的典型 Service Type 包括：</p>
 <ul>
 <li><code>HTTP</code>：例如 <code>http://localhost:8000</code></li>
 <li><code>HTTPS</code>：例如 <code>https://localhost:8443</code></li>
-<li><code>UNIX</code> / <code>UNIX+TLS</code>：直接代理 Unix Socket</li>
+<li><code>UNIX</code> &#x2F; <code>UNIX+TLS</code>：直接代理 Unix Socket</li>
 <li><code>TCP</code>：任意 TCP 服务</li>
 <li><code>SSH</code></li>
 <li><code>RDP</code></li>
@@ -677,7 +895,7 @@ URL: http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><sp
 <li><code>HTTP_STATUS</code>：直接返回指定 HTTP 状态码</li>
 <li><code>BASTION</code></li>
 </ul>
-<p>需要记住一个边界：<strong>HTTP/HTTPS 可以直接让浏览器访问；SSH、RDP、SMB、任意 TCP 这类非 HTTP Published Application，传统客户端通常还需要客户端侧的 <code>cloudflared</code>，或者改用 Cloudflare One Client 的私网路由方案。</strong></p>
+<p>需要记住一个边界：<strong>HTTP&#x2F;HTTPS 可以直接让浏览器访问；SSH、RDP、SMB、任意 TCP 这类非 HTTP Published Application，传统客户端通常还需要客户端侧的 <code>cloudflared</code>，或者改用 Cloudflare One Client 的私网路由方案。</strong></p>
 <h2 id="八、实例-3：源站本身就是-HTTPS，证书怎么处理"><a href="#八、实例-3：源站本身就是-HTTPS，证书怎么处理" class="headerlink" title="八、实例 3：源站本身就是 HTTPS，证书怎么处理"></a>八、实例 3：源站本身就是 HTTPS，证书怎么处理</h2><p>假设本地服务不是 HTTP，而是：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">https://127.0.0.1:8443<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -696,7 +914,7 @@ URL: http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><sp
 <li>私有 CA 则正确导入信任链；</li>
 <li>只有明确接受风险时才使用 <code>No TLS Verify</code>。</li>
 </ol>
-<p>其他常用 Origin 参数还有 <code>connectTimeout</code>、<code>tlsTimeout</code>、<code>httpHostHeader</code>、<code>disableChunkedEncoding</code> 和 <code>http2Origin</code>。遇到旧应用、反向代理 Host 头、WSGI 或源站 HTTP/2 问题时，这些参数很有用。</p>
+<p>其他常用 Origin 参数还有 <code>connectTimeout</code>、<code>tlsTimeout</code>、<code>httpHostHeader</code>、<code>disableChunkedEncoding</code> 和 <code>http2Origin</code>。遇到旧应用、反向代理 Host 头、WSGI 或源站 HTTP&#x2F;2 问题时，这些参数很有用。</p>
 <h2 id="九、实例-4：给管理后台加-Cloudflare-Access-登录"><a href="#九、实例-4：给管理后台加-Cloudflare-Access-登录" class="headerlink" title="九、实例 4：给管理后台加 Cloudflare Access 登录"></a>九、实例 4：给管理后台加 Cloudflare Access 登录</h2><p>如果 <code>app.example.com</code> 是公开博客，直接发布即可；如果它是 Grafana、Portainer、NAS 管理页、内部面板，就不应该只依赖应用自身登录框。</p>
 <p>这时可以给 Published Application 前面再加一层 Cloudflare Access：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">用户
@@ -715,7 +933,7 @@ Tunnel → 内部 Web 服务<span aria-hidden="true" class="line-numbers-rows"><
 
 <p>然后建立 Allow 策略，只允许指定身份、用户组或其他条件通过。</p>
 <p>这样真正的源站端口仍未公开，而访问者在请求到达内部应用前就先经过 Cloudflare 的身份策略。</p>
-<h3 id="9-1-机器调用不要照搬人工网页登录"><a href="#9-1-机器调用不要照搬人工网页登录" class="headerlink" title="9.1 机器调用不要照搬人工网页登录"></a>9.1 机器调用不要照搬人工网页登录</h3><p>浏览器用户适合交互式身份认证；CI、脚本、API 客户端等机器流量则应使用适合机器身份的 <strong>Service Token / Service Auth</strong> 方案，而不是让无人值守程序依赖弹浏览器登录。</p>
+<h3 id="9-1-机器调用不要照搬人工网页登录"><a href="#9-1-机器调用不要照搬人工网页登录" class="headerlink" title="9.1 机器调用不要照搬人工网页登录"></a>9.1 机器调用不要照搬人工网页登录</h3><p>浏览器用户适合交互式身份认证；CI、脚本、API 客户端等机器流量则应使用适合机器身份的 <strong>Service Token &#x2F; Service Auth</strong> 方案，而不是让无人值守程序依赖弹浏览器登录。</p>
 <p>Tunnel 与 Access 是两层不同能力：<strong>Tunnel 负责把流量送进去，Access 决定谁能进去。</strong></p>
 <h2 id="十、实例-5：通过-Tunnel-使用-SSH"><a href="#十、实例-5：通过-Tunnel-使用-SSH" class="headerlink" title="十、实例 5：通过 Tunnel 使用 SSH"></a>十、实例 5：通过 Tunnel 使用 SSH</h2><p>SSH 是最典型的非 HTTP 场景。服务端先确保 SSH 真正在本机可用，例如：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-lntp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':22'</span>
@@ -737,14 +955,14 @@ URL: localhost:22<span aria-hidden="true" class="line-numbers-rows"><span></span
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> ssh.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>首次访问受 Access 保护的 hostname 时，<code>cloudflared</code> 会启动浏览器完成身份认证，随后 SSH 数据通过 Cloudflare 转入你的内网 SSH Server。</p>
-<h3 id="10-2-浏览器里直接打开-SSH"><a href="#10-2-浏览器里直接打开-SSH" class="headerlink" title="10.2 浏览器里直接打开 SSH"></a>10.2 浏览器里直接打开 SSH</h3><p>Cloudflare 还支持 browser-rendered SSH。配置好 SSH Published Application 与 Access 后，用户可以从浏览器/App Launcher 打开终端，而不需要本地 SSH 客户端。</p>
+<h3 id="10-2-浏览器里直接打开-SSH"><a href="#10-2-浏览器里直接打开-SSH" class="headerlink" title="10.2 浏览器里直接打开 SSH"></a>10.2 浏览器里直接打开 SSH</h3><p>Cloudflare 还支持 browser-rendered SSH。配置好 SSH Published Application 与 Access 后，用户可以从浏览器&#x2F;App Launcher 打开终端，而不需要本地 SSH 客户端。</p>
 <p>这适合临时运维或受控设备，但日常开发通常还是原生 OpenSSH 更顺手。</p>
 <h3 id="10-3-私网-SSH：不发布-ssh-example-com"><a href="#10-3-私网-SSH：不发布-ssh-example-com" class="headerlink" title="10.3 私网 SSH：不发布 ssh.example.com"></a>10.3 私网 SSH：不发布 <code>ssh.example.com</code></h3><p>另一种思路是后面要讲的 Private network routing：把 <code>10.10.0.0/16</code> 或 <code>server.internal</code> 路由进 Tunnel，让电脑通过 Cloudflare One Client 接入后直接：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> youruser@10.10.0.10<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这种方式更像传统 VPN，SSH 自己仍然使用原生密钥认证，不必为每台机器建立一个公网 hostname。</p>
 <h3 id="10-4-Access-for-Infrastructure"><a href="#10-4-Access-for-Infrastructure" class="headerlink" title="10.4 Access for Infrastructure"></a>10.4 Access for Infrastructure</h3><p>如果是团队化运维，还可以使用 Cloudflare Access for Infrastructure：它把目标主机、用户名和 Access 策略结合起来，并支持短期 SSH 证书、会话控制和 SSH 命令日志等能力。</p>
-<p>需要注意当前功能边界：某些 SSH 转发能力，例如本地/远程端口转发、Agent Forwarding、X11 Forwarding，并不适用于所有 Access for Infrastructure 场景。决定替换现有堡垒机前，应先核对你的工作流。</p>
+<p>需要注意当前功能边界：某些 SSH 转发能力，例如本地&#x2F;远程端口转发、Agent Forwarding、X11 Forwarding，并不适用于所有 Access for Infrastructure 场景。决定替换现有堡垒机前，应先核对你的工作流。</p>
 <p>如果只是个人服务器，通常“Tunnel + Access + OpenSSH ProxyCommand”或“Private network + 原生 SSH”已经足够。</p>
 <h2 id="十一、实例-6：转发任意-TCP——以-PostgreSQL-为例"><a href="#十一、实例-6：转发任意-TCP——以-PostgreSQL-为例" class="headerlink" title="十一、实例 6：转发任意 TCP——以 PostgreSQL 为例"></a>十一、实例 6：转发任意 TCP——以 PostgreSQL 为例</h2><p>假设 PostgreSQL 只监听服务器本地：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:5432<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -780,13 +998,13 @@ URL: localhost:3389<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">cloudflared access rdp <span class="token operator">--</span>hostname rdp<span class="token punctuation">.</span>example<span class="token punctuation">.</span>com <span class="token operator">--</span>url rdp:<span class="token operator">/</span><span class="token operator">/</span>localhost:13389<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这里故意使用本地 <code>13389</code>，避免 Windows 本机 <code>3389</code> 已经被 Remote Desktop Service 占用。</p>
-<p>随后在 Microsoft Remote Desktop / <code>mstsc</code> 中连接：</p>
+<p>随后在 Microsoft Remote Desktop &#x2F; <code>mstsc</code> 中连接：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">localhost:13389<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>Cloudflare 负责外层身份认证和传输，最终 Windows 仍会使用目标主机自己的 Windows 账号凭据登录。</p>
 <h3 id="12-2-直接在浏览器使用-RDP"><a href="#12-2-直接在浏览器使用-RDP" class="headerlink" title="12.2 直接在浏览器使用 RDP"></a>12.2 直接在浏览器使用 RDP</h3><p>Cloudflare 当前也支持 browser-based RDP。用户可以从 Access App Launcher 发起连接，不要求客户端安装传统 RDP 软件或 Cloudflare One Client。</p>
 <p>这种方式适合临时运维、受限终端或不方便安装客户端的设备；长期桌面办公则要结合体验、键盘映射和组织策略选择。</p>
-<h2 id="十三、实例-8：把整个家庭-实验室私网接进来"><a href="#十三、实例-8：把整个家庭-实验室私网接进来" class="headerlink" title="十三、实例 8：把整个家庭/实验室私网接进来"></a>十三、实例 8：把整个家庭/实验室私网接进来</h2><p>如果你有很多内网设备，一个个创建 <code>ssh.example.com</code>、<code>nas.example.com</code>、<code>rdp.example.com</code> 会越来越麻烦。这时更适合 <strong>Private network routing</strong>。</p>
+<h2 id="十三、实例-8：把整个家庭-实验室私网接进来"><a href="#十三、实例-8：把整个家庭-实验室私网接进来" class="headerlink" title="十三、实例 8：把整个家庭&#x2F;实验室私网接进来"></a>十三、实例 8：把整个家庭&#x2F;实验室私网接进来</h2><p>如果你有很多内网设备，一个个创建 <code>ssh.example.com</code>、<code>nas.example.com</code>、<code>rdp.example.com</code> 会越来越麻烦。这时更适合 <strong>Private network routing</strong>。</p>
 <p>假设服务器所在 LAN 是：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">10.10.0.0/16<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -796,7 +1014,7 @@ URL: localhost:3389<span aria-hidden="true" class="line-numbers-rows"><span></sp
 10.10.0.30  Windows PC
 10.10.0.40  PostgreSQL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>在 Cloudflare Zero Trust 的 Tunnel/Routes 中创建 Private network route，把：</p>
+<p>在 Cloudflare Zero Trust 的 Tunnel&#x2F;Routes 中创建 Private network route，把：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">10.10.0.0/16<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>路由到这条 Tunnel。</p>
@@ -821,16 +1039,16 @@ psql <span class="token parameter variable">-h</span> <span class="token number"
 nas.internal.example<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>而不是记 <code>10.10.0.20</code>。</p>
-<p>Cloudflare Tunnel 支持 private hostname routing。客户端仍使用 Cloudflare One Client，通过 Zero Trust 的 Gateway/DNS 与 Tunnel 把这些私有主机名解析并路由到内部网络。</p>
+<p>Cloudflare Tunnel 支持 private hostname routing。客户端仍使用 Cloudflare One Client，通过 Zero Trust 的 Gateway&#x2F;DNS 与 Tunnel 把这些私有主机名解析并路由到内部网络。</p>
 <p>这种模式适合内部 Git、NAS、开发环境和动态地址服务。与 Published application 不同，它不是把 <code>git.internal.example</code> 发布成一个所有 Internet 用户都能解析并直接访问的普通公网入口。</p>
 <h2 id="十五、实例-10：用-Docker-运行-cloudflared"><a href="#十五、实例-10：用-Docker-运行-cloudflared" class="headerlink" title="十五、实例 10：用 Docker 运行 cloudflared"></a>十五、实例 10：用 Docker 运行 cloudflared</h2><p>如果服务本来就在 Docker 中，把 <code>cloudflared</code> 也容器化通常更容易维护。</p>
 <p>官方镜像基本用法：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">--rm</span> cloudflare/cloudflared:latest <span class="token punctuation">\</span>
-  tunnel --no-autoupdate run <span class="token parameter variable">--token</span> <span class="token string">'&lt;TUNNEL_TOKEN&gt;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+  tunnel --no-autoupdate run <span class="token parameter variable">--token</span> <span class="token string">'&lt;TUNNEL_TOKEN>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>正式部署不建议把 Token 明文写进 Compose。可以保存为仅管理员可读文件：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ./cloudflared
-<span class="token builtin class-name">printf</span> <span class="token string">'%s'</span> <span class="token string">'&lt;TUNNEL_TOKEN&gt;'</span> <span class="token operator">&gt;</span> ./cloudflared/tunnel-token
+<span class="token builtin class-name">printf</span> <span class="token string">'%s'</span> <span class="token string">'&lt;TUNNEL_TOKEN>'</span> <span class="token operator">></span> ./cloudflared/tunnel-token
 <span class="token function">chmod</span> <span class="token number">600</span> ./cloudflared/tunnel-token<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><code>compose.yml</code>：</p>
@@ -863,20 +1081,20 @@ nas.internal.example<span aria-hidden="true" class="line-numbers-rows"><span></s
 <p>Tunnel 的 Published application 此时可以指向：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">http://web:80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>如果目标在宿主机，则要使用容器能够访问宿主机的地址，而不是机械地写 <code>127.0.0.1</code>。不同 Linux/Windows Docker 网络模式的宿主机地址不同，应先从 cloudflared 容器内部测试连通性。</p>
+<p>如果目标在宿主机，则要使用容器能够访问宿主机的地址，而不是机械地写 <code>127.0.0.1</code>。不同 Linux&#x2F;Windows Docker 网络模式的宿主机地址不同，应先从 cloudflared 容器内部测试连通性。</p>
 <p>调试命令可以用临时容器进入同一网络验证：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-v</span> http://web:80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>先证明 Docker 网络没问题，再排查 Cloudflare。</p>
 <h2 id="十六、让-Tunnel-开机自启：系统服务"><a href="#十六、让-Tunnel-开机自启：系统服务" class="headerlink" title="十六、让 Tunnel 开机自启：系统服务"></a>十六、让 Tunnel 开机自启：系统服务</h2><p>Cloudflare 官方建议长期运行时把 <code>cloudflared</code> 作为系统服务，而不是依赖一个打开的终端。</p>
 <h3 id="16-1-Remotely-managed-Tunnel"><a href="#16-1-Remotely-managed-Tunnel" class="headerlink" title="16.1 Remotely-managed Tunnel"></a>16.1 Remotely-managed Tunnel</h3><p>Dashboard 为不同系统生成的命令通常会包含 Token。按照 Dashboard 当前给出的命令安装最稳妥，例如 Linux 常见形式为：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> cloudflared <span class="token function">service</span> <span class="token function">install</span> <span class="token string">'&lt;TUNNEL_TOKEN&gt;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> cloudflared <span class="token function">service</span> <span class="token function">install</span> <span class="token string">'&lt;TUNNEL_TOKEN>'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装后检查：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status cloudflared
 journalctl <span class="token parameter variable">-u</span> cloudflared <span class="token parameter variable">-n</span> <span class="token number">100</span> --no-pager<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>Windows 则应在管理员终端按照 Dashboard/官方 Windows Service 指引安装并检查：</p>
+<p>Windows 则应在管理员终端按照 Dashboard&#x2F;官方 Windows Service 指引安装并检查：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">sc</span><span class="token punctuation">.</span>exe query cloudflared<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="16-2-Locally-managed-Tunnel"><a href="#16-2-Locally-managed-Tunnel" class="headerlink" title="16.2 Locally-managed Tunnel"></a>16.2 Locally-managed Tunnel</h3><p>如果使用本地 <code>config.yml</code>，Linux 可以：</p>
@@ -939,11 +1157,11 @@ cloudflared tunnel route <span class="token function">ip</span> show<span aria-h
 <h2 id="十八、Tunnel-传输协议与常用运行参数"><a href="#十八、Tunnel-传输协议与常用运行参数" class="headerlink" title="十八、Tunnel 传输协议与常用运行参数"></a>十八、Tunnel 传输协议与常用运行参数</h2><p>一般情况下不要为了“优化”而盲目强制协议，默认：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel <span class="token parameter variable">--protocol</span> auto run <span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><code>auto</code> 会优先尝试 QUIC；如果 UDP/7844 不可用，可以回退 HTTP/2。排错时才适合显式测试：</p>
+<p><code>auto</code> 会优先尝试 QUIC；如果 UDP&#x2F;7844 不可用，可以回退 HTTP&#x2F;2。排错时才适合显式测试：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel <span class="token parameter variable">--protocol</span> quic run <span class="token punctuation">..</span>.
 cloudflared tunnel <span class="token parameter variable">--protocol</span> http2 run <span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>如果 QUIC 必定失败而 HTTP/2 正常，重点检查 UDP/7844；如果两者都失败，则继续检查 TCP/7844、DNS、代理和防火墙。<br>几个值得知道的运行参数：</p>
+<p>如果 QUIC 必定失败而 HTTP&#x2F;2 正常，重点检查 UDP&#x2F;7844；如果两者都失败，则继续检查 TCP&#x2F;7844、DNS、代理和防火墙。<br>几个值得知道的运行参数：</p>
 <table>
 <thead>
 <tr>
@@ -995,7 +1213,7 @@ cloudflared tunnel <span class="token parameter variable">--protocol</span> http
 <tr>
 <td><code>--no-autoupdate</code></td>
 <td>禁止自身自动更新</td>
-<td>Docker/包管理安装常用</td>
+<td>Docker&#x2F;包管理安装常用</td>
 </tr>
 <tr>
 <td><code>--post-quantum</code></td>
@@ -1003,8 +1221,8 @@ cloudflared tunnel <span class="token parameter variable">--protocol</span> http
 <td>仅在明确需要时启用</td>
 </tr>
 </tbody></table>
-<p>Cloudflare 当前的 QUIC 已具备后量子能力并允许兼容回退；<code>--post-quantum</code> 的意义是<strong>强制</strong>后量子而不是“开启后量子”。它也不能与 HTTP/2 Tunnel 协议一起使用，因此普通部署不需要为了追新特性盲目加入此参数。</p>
-<h3 id="18-1-Debug-日志也可能泄密"><a href="#18-1-Debug-日志也可能泄密" class="headerlink" title="18.1 Debug 日志也可能泄密"></a>18.1 Debug 日志也可能泄密</h3><p><code>--loglevel debug</code> 会记录更多请求/响应信息。公开贴日志前应检查 Authorization、Cookie、Access Header、URL Query、内部 hostname 等敏感内容。</p>
+<p>Cloudflare 当前的 QUIC 已具备后量子能力并允许兼容回退；<code>--post-quantum</code> 的意义是<strong>强制</strong>后量子而不是“开启后量子”。它也不能与 HTTP&#x2F;2 Tunnel 协议一起使用，因此普通部署不需要为了追新特性盲目加入此参数。</p>
+<h3 id="18-1-Debug-日志也可能泄密"><a href="#18-1-Debug-日志也可能泄密" class="headerlink" title="18.1 Debug 日志也可能泄密"></a>18.1 Debug 日志也可能泄密</h3><p><code>--loglevel debug</code> 会记录更多请求&#x2F;响应信息。公开贴日志前应检查 Authorization、Cookie、Access Header、URL Query、内部 hostname 等敏感内容。</p>
 <p>生产环境不要长期把 debug 当默认日志等级。</p>
 <h2 id="十九、实例-12：给-Tunnel-做高可用"><a href="#十九、实例-12：给-Tunnel-做高可用" class="headerlink" title="十九、实例 12：给 Tunnel 做高可用"></a>十九、实例 12：给 Tunnel 做高可用</h2><p>单机 <code>cloudflared</code> 有一个明显问题：主机重启、进程崩溃、网络断开时，这条 Tunnel 就失去 Connector。</p>
 <p>Cloudflare 支持给同一条 Tunnel 运行多个 <strong>replica</strong>。对于 remotely-managed Tunnel，可以在第二台能够访问相同后端网络的主机上使用同一 Tunnel Token 启动另一个 <code>cloudflared</code>。</p>
@@ -1017,7 +1235,7 @@ cloudflared-A    cloudflared-B
             │
        app:8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>每个 <code>cloudflared</code> 副本自身会建立多条到不同 Cloudflare Edge 的连接。官方当前文档说明，一个副本通常建立 4 条连接，并跨至少两个数据中心；一条 Tunnel 最多可扩展到 25 个 replicas / 100 条连接。</p>
+<p>每个 <code>cloudflared</code> 副本自身会建立多条到不同 Cloudflare Edge 的连接。官方当前文档说明，一个副本通常建立 4 条连接，并跨至少两个数据中心；一条 Tunnel 最多可扩展到 25 个 replicas &#x2F; 100 条连接。</p>
 <p>家庭或小型实验室通常两台 Connector 已经足够，重点不是堆副本数量，而是确保：</p>
 <ul>
 <li>两台 Connector 都能访问同一个目标服务；</li>
@@ -1028,7 +1246,7 @@ cloudflared-A    cloudflared-B
 <p>Replica 解决的是 Connector 可用性，不会自动把一个只存在于 A 本机 <code>127.0.0.1</code> 的服务复制到 B。</p>
 <h2 id="二十、监控：日志、状态和-Prometheus-Metrics"><a href="#二十、监控：日志、状态和-Prometheus-Metrics" class="headerlink" title="二十、监控：日志、状态和 Prometheus Metrics"></a>二十、监控：日志、状态和 Prometheus Metrics</h2><h3 id="20-1-先看-Tunnel-状态"><a href="#20-1-先看-Tunnel-状态" class="headerlink" title="20.1 先看 Tunnel 状态"></a>20.1 先看 Tunnel 状态</h3><p>Dashboard 常见状态包括 Healthy、Inactive、Down、Degraded。状态的含义应结合 Connector 日志与真实业务探测判断，不能只看一个绿色图标。</p>
 <p>本地常用：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel info <span class="token operator">&lt;</span>TUNNEL_NAME_OR_UUID<span class="token operator">&gt;</span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel info <span class="token operator">&lt;</span>TUNNEL_NAME_OR_UUID<span class="token operator">></span>
 cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>systemd：</p>
@@ -1062,11 +1280,11 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 
 <p>再检查 7844：</p>
 <ul>
-<li>UDP/7844 是否允许 QUIC；</li>
-<li>TCP/7844 是否允许 HTTP/2 fallback；</li>
+<li>UDP&#x2F;7844 是否允许 QUIC；</li>
+<li>TCP&#x2F;7844 是否允许 HTTP&#x2F;2 fallback；</li>
 <li>DNS 是否正常；</li>
 <li>代理、防火墙、校园网出口是否拦截；</li>
-<li>Tunnel Token/credentials 是否属于正确 Tunnel。</li>
+<li>Tunnel Token&#x2F;credentials 是否属于正确 Tunnel。</li>
 </ul>
 <p>如果进程根本没运行，先修进程；如果进程在持续重连，再修网络。</p>
 <h3 id="21-2-Error-502：Tunnel-通了，但-Origin-不通"><a href="#21-2-Error-502：Tunnel-通了，但-Origin-不通" class="headerlink" title="21.2 Error 502：Tunnel 通了，但 Origin 不通"></a>21.2 Error 502：Tunnel 通了，但 Origin 不通</h3><p>这是最常见情况。先在 <strong>运行 cloudflared 的同一网络上下文</strong>里测试：</p>
@@ -1077,7 +1295,7 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 <ul>
 <li>服务是否真的启动；</li>
 <li>端口是否写错；</li>
-<li>HTTP/HTTPS 是否选反；</li>
+<li>HTTP&#x2F;HTTPS 是否选反；</li>
 <li><code>localhost</code> 是否指错网络命名空间；</li>
 <li>服务只绑定 <code>127.0.0.1</code>，但 Connector 在另一台机器；</li>
 <li>HTTPS 源站证书校验是否失败。</li>
@@ -1085,18 +1303,18 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 <h3 id="21-3-x509-certificate-signed-by-unknown-authority"><a href="#21-3-x509-certificate-signed-by-unknown-authority" class="headerlink" title="21.3 x509: certificate signed by unknown authority"></a>21.3 <code>x509: certificate signed by unknown authority</code></h3><p>这说明 <code>cloudflared</code> 连接 HTTPS Origin 时不信任证书链。</p>
 <p>正确解决方式优先是：修复证书链、导入私有 CA、配置正确的 Origin Server Name。<code>noTLSVerify</code> 可以快速确认“是不是证书验证导致”，但不应该成为默认永久修复。</p>
 <h3 id="21-4-cloudflared-service-is-already-installed"><a href="#21-4-cloudflared-service-is-already-installed" class="headerlink" title="21.4 cloudflared service is already installed"></a>21.4 <code>cloudflared service is already installed</code></h3><p>一台机器通常只需要一个 cloudflared 系统服务。已经安装服务后，不要为了每个 hostname 再重复 <code>service install</code>。</p>
-<p>更合理的是在现有 Tunnel/Connector 上增加路由，或者明确卸载/替换旧服务后再重新安装。</p>
+<p>更合理的是在现有 Tunnel&#x2F;Connector 上增加路由，或者明确卸载&#x2F;替换旧服务后再重新安装。</p>
 <h3 id="21-5-域名解析正常，但访问还是失败"><a href="#21-5-域名解析正常，但访问还是失败" class="headerlink" title="21.5 域名解析正常，但访问还是失败"></a>21.5 域名解析正常，但访问还是失败</h3><p>检查 DNS：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nslookup</span> app.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>命名 Tunnel 的 Published Application 最终会关联到 <code>&lt;UUID&gt;.cfargotunnel.com</code>。DNS 记录存在并不证明 Connector 在线，也不证明 Origin 正常。</p>
 <p>如果手工创建 CNAME，还要确认：</p>
 <ul>
-<li>hostname 没有与已有 A/AAAA/CNAME 冲突；</li>
+<li>hostname 没有与已有 A&#x2F;AAAA&#x2F;CNAME 冲突；</li>
 <li>Tunnel UUID 属于正确的 Cloudflare 账号；</li>
 <li>Published application 的 hostname 与实际访问域名一致。</li>
 </ul>
-<h3 id="21-6-IPv4-IPv6-的-localhost-不一致"><a href="#21-6-IPv4-IPv6-的-localhost-不一致" class="headerlink" title="21.6 IPv4/IPv6 的 localhost 不一致"></a>21.6 IPv4/IPv6 的 localhost 不一致</h3><p>某些程序只监听：</p>
+<h3 id="21-6-IPv4-IPv6-的-localhost-不一致"><a href="#21-6-IPv4-IPv6-的-localhost-不一致" class="headerlink" title="21.6 IPv4&#x2F;IPv6 的 localhost 不一致"></a>21.6 IPv4&#x2F;IPv6 的 localhost 不一致</h3><p>某些程序只监听：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>另一些只监听：</p>
@@ -1108,13 +1326,14 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 
 <p>在 Tunnel Service URL 中写 IPv6 literal 时必须使用方括号，例如：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">http://[2001:db8::1]:8000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h3 id="21-7-Private-network-路由建了，但客户端访问不了"><a href="#21-7-Private-network-路由建了，但客户端访问不了" class="headerlink" title="21.7 Private network 路由建了，但客户端访问不了"></a>21.7 Private network 路由建了，但客户端访问不了</h3><p>按顺序检查：</p>
 <ol>
 <li>Tunnel Connector 是否 Healthy；</li>
 <li>CIDR 是否真的路由到正确 Tunnel；</li>
 <li>Cloudflare One Client 是否登录正确组织并处于连接状态；</li>
 <li>Split Tunnel 是否把目标网段排除掉了；</li>
-<li>Gateway Network Policy 是否允许目标协议/端口；</li>
+<li>Gateway Network Policy 是否允许目标协议&#x2F;端口；</li>
 <li><code>cloudflared</code> 主机本身是否能访问目标 LAN IP；</li>
 <li>内网主机防火墙是否允许来自 Connector 所在网段的连接。</li>
 </ol>
@@ -1123,12 +1342,12 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 
 <p>这条命令应该在运行 <code>cloudflared</code> 的主机执行。连这里都失败，就还没有到 Cloudflare One Client 那一层。</p>
 <h3 id="21-8-Access-登录循环或非-HTTP-长连接不稳定"><a href="#21-8-Access-登录循环或非-HTTP-长连接不稳定" class="headerlink" title="21.8 Access 登录循环或非 HTTP 长连接不稳定"></a>21.8 Access 登录循环或非 HTTP 长连接不稳定</h3><p>先确认 Access Application 的 hostname、Policy、身份提供方和会话状态正确。</p>
-<p>对于自动化或长期非 HTTP 连接，Cloudflare 官方特别提醒：客户端侧 <code>cloudflared access</code> 依赖 WebSocket，持久连接存在意外关闭的可能。长期机器到机器流量应优先考虑 Service Auth 或 WARP/Private network 路由，而不是把交互式浏览器认证硬套在守护进程上。</p>
+<p>对于自动化或长期非 HTTP 连接，Cloudflare 官方特别提醒：客户端侧 <code>cloudflared access</code> 依赖 WebSocket，持久连接存在意外关闭的可能。长期机器到机器流量应优先考虑 Service Auth 或 WARP&#x2F;Private network 路由，而不是把交互式浏览器认证硬套在守护进程上。</p>
 <h2 id="二十二、安全硬化：Tunnel-不开公网端口，不代表可以不做安全"><a href="#二十二、安全硬化：Tunnel-不开公网端口，不代表可以不做安全" class="headerlink" title="二十二、安全硬化：Tunnel 不开公网端口，不代表可以不做安全"></a>二十二、安全硬化：Tunnel 不开公网端口，不代表可以不做安全</h2><p>推荐至少做到下面这些：</p>
 <ol>
-<li><strong>Origin 能只监听 localhost 就不要监听 <code>0.0.0.0</code>。</strong> 如果 <code>cloudflared</code> 与应用同机，Web/SSH 管理服务通常没必要再对整个 LAN 开放。</li>
+<li><strong>Origin 能只监听 localhost 就不要监听 <code>0.0.0.0</code>。</strong> 如果 <code>cloudflared</code> 与应用同机，Web&#x2F;SSH 管理服务通常没必要再对整个 LAN 开放。</li>
 <li><strong>管理后台叠加 Access。</strong> Tunnel 负责网络可达，Access 负责身份准入，两者不要混为一谈。</li>
-<li><strong>Tunnel Token 按密钥处理。</strong> 泄露后应立即在 Cloudflare 侧轮换/重新生成，不要只删 Git 里的那一行。</li>
+<li><strong>Tunnel Token 按密钥处理。</strong> 泄露后应立即在 Cloudflare 侧轮换&#x2F;重新生成，不要只删 Git 里的那一行。</li>
 <li><strong>不要公开 locally-managed credentials JSON 或 <code>cert.pem</code>。</strong> <code>cert.pem</code> 具有账户级管理能力，风险甚至高于单条 Tunnel Token。</li>
 <li><strong>SSH 继续使用密钥认证。</strong> Tunnel 不能替代 <code>sshd</code> 自身的最小权限、禁用弱口令等配置。</li>
 <li><strong>数据库仍要保留数据库鉴权。</strong> 不要因为入口在 Access 后面就创建无密码数据库用户。</li>
@@ -1149,7 +1368,7 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 <p>命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel <span class="token parameter variable">--url</span> http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="场景-B：长期发布个人网站-API"><a href="#场景-B：长期发布个人网站-API" class="headerlink" title="场景 B：长期发布个人网站/API"></a>场景 B：长期发布个人网站/API</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">Remotely-managed Tunnel + HTTP/HTTPS Published Application<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="场景-B：长期发布个人网站-API"><a href="#场景-B：长期发布个人网站-API" class="headerlink" title="场景 B：长期发布个人网站&#x2F;API"></a>场景 B：长期发布个人网站&#x2F;API</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">Remotely-managed Tunnel + HTTP/HTTPS Published Application<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>需要身份保护的后台再加 Access。</p>
 <h3 id="场景-C：没有公网-IP-的服务器需要-SSH"><a href="#场景-C：没有公网-IP-的服务器需要-SSH" class="headerlink" title="场景 C：没有公网 IP 的服务器需要 SSH"></a>场景 C：没有公网 IP 的服务器需要 SSH</h3><p>个人少量主机：</p>
@@ -1166,7 +1385,7 @@ cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span>
 <h3 id="场景-F：只开放一个数据库给少数管理员"><a href="#场景-F：只开放一个数据库给少数管理员" class="headerlink" title="场景 F：只开放一个数据库给少数管理员"></a>场景 F：只开放一个数据库给少数管理员</h3><p>可以使用：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">TCP Published Application + Access + cloudflared access tcp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>如果数据库连接需要长期保持，或者应用程序是无人值守服务，更适合 Private network/WARP 或 Service Auth 架构。</p>
+<p>如果数据库连接需要长期保持，或者应用程序是无人值守服务，更适合 Private network&#x2F;WARP 或 Service Auth 架构。</p>
 <h3 id="场景-G：Docker-里同时有多个应用"><a href="#场景-G：Docker-里同时有多个应用" class="headerlink" title="场景 G：Docker 里同时有多个应用"></a>场景 G：Docker 里同时有多个应用</h3><p>一条 Tunnel 就可以承载多个服务。让 <code>cloudflared</code> 与业务容器处于可互通的 Docker Network，Published application 使用容器服务名，例如：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">http://web:80
 http://grafana:3000
@@ -1176,20 +1395,21 @@ http://api:8080<span aria-hidden="true" class="line-numbers-rows"><span></span><
 <h2 id="二十四、cloudflared-常用命令速查"><a href="#二十四、cloudflared-常用命令速查" class="headerlink" title="二十四、cloudflared 常用命令速查"></a>二十四、cloudflared 常用命令速查</h2><h3 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared <span class="token parameter variable">--version</span>
 cloudflared <span class="token parameter variable">--help</span>
 cloudflared tunnel <span class="token parameter variable">--help</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h3 id="Quick-Tunnel"><a href="#Quick-Tunnel" class="headerlink" title="Quick Tunnel"></a>Quick Tunnel</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel <span class="token parameter variable">--url</span> http://127.0.0.1:8080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="连接诊断"><a href="#连接诊断" class="headerlink" title="连接诊断"></a>连接诊断</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel diag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="Locally-managed-Tunnel"><a href="#Locally-managed-Tunnel" class="headerlink" title="Locally-managed Tunnel"></a>Locally-managed Tunnel</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared tunnel login
-cloudflared tunnel create <span class="token operator">&lt;</span>NAME<span class="token operator">&gt;</span>
+cloudflared tunnel create <span class="token operator">&lt;</span>NAME<span class="token operator">></span>
 cloudflared tunnel list
-cloudflared tunnel info <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">&gt;</span>
+cloudflared tunnel info <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">></span>
 cloudflared tunnel ingress validate
 cloudflared tunnel ingress rule https://app.example.com
-cloudflared tunnel route dns <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">&gt;</span> app.example.com
-cloudflared tunnel route <span class="token function">ip</span> <span class="token function">add</span> <span class="token number">10.10</span>.0.0/16 <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">&gt;</span>
+cloudflared tunnel route dns <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">></span> app.example.com
+cloudflared tunnel route <span class="token function">ip</span> <span class="token function">add</span> <span class="token number">10.10</span>.0.0/16 <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">></span>
 cloudflared tunnel route <span class="token function">ip</span> show
-cloudflared tunnel run <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+cloudflared tunnel run <span class="token operator">&lt;</span>NAME_OR_UUID<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="客户端-Access"><a href="#客户端-Access" class="headerlink" title="客户端 Access"></a>客户端 Access</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared access <span class="token function">ssh</span> <span class="token parameter variable">--hostname</span> ssh.example.com
 cloudflared access tcp <span class="token parameter variable">--hostname</span> db.example.com <span class="token parameter variable">--url</span> localhost:15432
@@ -1198,6 +1418,7 @@ cloudflared access rdp <span class="token parameter variable">--hostname</span> 
 <h3 id="systemd"><a href="#systemd" class="headerlink" title="systemd"></a>systemd</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status cloudflared
 systemctl restart cloudflared
 journalctl <span class="token parameter variable">-u</span> cloudflared <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="二十五、版本升级与维护"><a href="#二十五、版本升级与维护" class="headerlink" title="二十五、版本升级与维护"></a>二十五、版本升级与维护</h2><p>Cloudflare 官方当前支持的是相对新的 <code>cloudflared</code> 版本，过旧版本可能错过功能、协议和安全修复。升级时不要只看“能不能启动”，还要考虑长连接会被重启中断。</p>
 <p>查看版本：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cloudflared <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1217,19 +1438,19 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <td>Quick Tunnel</td>
 </tr>
 <tr>
-<td>长期公开网站/API</td>
-<td>Remotely-managed + HTTP/HTTPS</td>
+<td>长期公开网站&#x2F;API</td>
+<td>Remotely-managed + HTTP&#x2F;HTTPS</td>
 </tr>
 <tr>
 <td>保护 Web 管理后台</td>
 <td>Tunnel + Access</td>
 </tr>
 <tr>
-<td>单台/少量 SSH</td>
+<td>单台&#x2F;少量 SSH</td>
 <td>SSH Published App + Access + client-side cloudflared</td>
 </tr>
 <tr>
-<td>大量 SSH/内网主机</td>
+<td>大量 SSH&#x2F;内网主机</td>
 <td>Private network + Cloudflare One Client</td>
 </tr>
 <tr>
@@ -1237,7 +1458,7 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <td>TCP Published App + Access</td>
 </tr>
 <tr>
-<td>长期数据库/机器连接</td>
+<td>长期数据库&#x2F;机器连接</td>
 <td>Private network 或合适的 Service Auth 架构</td>
 </tr>
 <tr>
@@ -1245,15 +1466,15 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <td>RDP Published App + Access，或 Private network</td>
 </tr>
 <tr>
-<td>整个家庭/实验室 LAN</td>
-<td>Private IP/CIDR routing</td>
+<td>整个家庭&#x2F;实验室 LAN</td>
+<td>Private IP&#x2F;CIDR routing</td>
 </tr>
 <tr>
 <td>多 Docker Web 服务</td>
 <td>一个 Tunnel + Docker 网络内多个 Service Route</td>
 </tr>
 <tr>
-<td>配置必须 GitOps/本地控制</td>
+<td>配置必须 GitOps&#x2F;本地控制</td>
 <td>Locally-managed + config.yml</td>
 </tr>
 <tr>
@@ -1279,11 +1500,12 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/monitor-tunnels/metrics/">Tunnel metrics</a></li>
 <li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/tunnel/advanced/local-management/as-a-service/">Run as a service</a></li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Cloudflare Tunnel 最值得掌握的不是某一条启动命令，而是它的分层模型：<strong>Connector 负责从内网主动接入 Cloudflare，Route 决定流量送到哪里，Access/Gateway 决定谁有资格访问，Origin 自己仍负责真实的应用安全。</strong></p>
-<p>如果只是临时分享页面，用 Quick Tunnel；如果是正式 Web 服务，用 remotely-managed Published Application；如果是 SSH/RDP/TCP 少量入口，可以配合 Access；如果要访问整段家庭、实验室或公司内网，则 Private network routing 往往比给每个端口创建公网域名更自然。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Cloudflare Tunnel 最值得掌握的不是某一条启动命令，而是它的分层模型：<strong>Connector 负责从内网主动接入 Cloudflare，Route 决定流量送到哪里，Access&#x2F;Gateway 决定谁有资格访问，Origin 自己仍负责真实的应用安全。</strong></p>
+<p>如果只是临时分享页面，用 Quick Tunnel；如果是正式 Web 服务，用 remotely-managed Published Application；如果是 SSH&#x2F;RDP&#x2F;TCP 少量入口，可以配合 Access；如果要访问整段家庭、实验室或公司内网，则 Private network routing 往往比给每个端口创建公网域名更自然。</p>
 <p>只要排错时始终沿着“客户端 → Cloudflare → Tunnel → Connector → Origin”逐层验证，Cloudflare Tunnel 的大多数问题都能快速定位，而不需要靠反复删除重建 Tunnel 碰运气。</p>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -1378,8 +1600,44 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -1404,10 +1662,10 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1675,27 +1933,17 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1709,188 +1957,87 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错">
-                        
-                        <span class="card-title">SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            从 SSH 客户端与服务端安装开始，完整讲清 Host Key、用户密钥、ssh-agent、~/.ssh/config、文件传输、VS Code Remote SSH、端口转发、跳板机、安全加固与系统化排错。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
-                    </a>
-                    
-                    <a href="/tags/windows/">
-                        <span class="chip bg-color">windows</span>
-                    </a>
-                    
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
-                    </a>
-                    
-                    <a href="/tags/openssh/">
-                        <span class="chip bg-color">openssh</span>
-                    </a>
-                    
-                    <a href="/tags/vscode/">
-                        <span class="chip bg-color">vscode</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/">
+            <span class="dream-related-reason">共同标签：ssh · tunnel</span><h3>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</h3>
+            <time datetime="2026-08-08">2026-08-08</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
+            <span class="dream-related-reason">共同标签：ssh · cloudflare</span><h3>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</h3>
+            <time datetime="2026-08-10">2026-08-10</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/40.jpg" class="responsive-img" alt="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程">
-                        
-                        <span class="card-title">Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-08-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
-                    </a>
-                    
-                    <a href="/tags/tunnel/">
-                        <span class="chip bg-color">tunnel</span>
-                    </a>
-                    
-                    <a href="/tags/cloudflare/">
-                        <span class="chip bg-color">cloudflare</span>
-                    </a>
-                    
-                    <a href="/tags/agent/">
-                        <span class="chip bg-color">agent</span>
-                    </a>
-                    
-                    <a href="/tags/qwen/">
-                        <span class="chip bg-color">qwen</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/09/25/vps-https-zheng-shu-shen-qing-wan-quan-zhi-nan-cloudflare-letsencrypt-acme/">
+            <span class="dream-related-reason">共同标签：cloudflare</span><h3>VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</h3>
+            <time datetime="2026-09-25">2026-09-25</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/" rel="prev"><span>较新的一篇</span><strong>SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</strong></a>
+        <a href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/" rel="next"><span>较早的一篇</span><strong>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1909,6 +2056,7 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -1921,9 +2069,10 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -1933,23 +2082,27 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -1974,7 +2127,6 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -1984,6 +2136,8 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1999,60 +2153,6 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -2063,27 +2163,30 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -2095,38 +2198,44 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -2137,107 +2246,209 @@ journalctl <span class="token parameter variable">-u</span> cloudflared <span cl
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -2248,35 +2459,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -2300,45 +2550,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

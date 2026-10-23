@@ -5,6 +5,7 @@
  *@url      https://github.com/yaseng/jquery.barrager.js
  */
 (function($) {
+	let sequence = 0;
 	$.fn.barrager = function(barrage) {
 		barrage = $.extend({
 			close: true,
@@ -14,7 +15,7 @@
 		}, barrage || {});
 
 		const time = new Date().getTime();
-		const barrager_id = 'barrage_' + time;
+		const barrager_id = 'barrage_' + time + '_' + (++sequence);
 		const id = '#' + barrager_id;
 		const div_barrager = $("<div class='barrage' id='" + barrager_id + "'></div>").appendTo($(this));
 		const this_height = $(window).height() * 0.35;
@@ -29,7 +30,7 @@
 		const bottom =array[Math.floor(Math.random()*5)];
 
 		div_barrager.css("bottom", bottom + "px");
-		div_barrager_box = $("<div class='barrage_box cl'></div>").appendTo(div_barrager);
+		const div_barrager_box = $("<div class='barrage_box cl'></div>").appendTo(div_barrager);
 		if(barrage.img){
 			div_barrager_box.append("<a class='portrait z' href='javascript:;'></a>");
 			const img = $("<img src='' >").appendTo(id + " .barrage_box .portrait");
@@ -43,8 +44,9 @@
 		const content = $("<a title='' href='' target='_blank'></a>").appendTo(id + " .barrage_box .p");
 		content.attr({
 			'href': barrage.href,
-			'id': barrage.id
-		}).empty().append(barrage.info);
+			'id': barrage.id,
+			'rel': 'noopener noreferrer'
+		}).text(String(barrage.info == null ? '' : barrage.info));
 		content.css('color', barrage.color);
 
 		const i = 0;
@@ -55,14 +57,14 @@
 			$(id).remove();
 		});
 
-		div_barrager_box.mouseover(function()
+		div_barrager_box.mouseenter(function()
 		{
 		     $(id).stop(true);
 		});
 
-		div_barrager_box.mouseout(function()
+		div_barrager_box.mouseleave(function()
 		{
-			$(id).animate({right:this_width},barrage.speed*1000,function()
+			$(id).stop(true).animate({right:this_width},barrage.speed*1000,function()
 			{
 				$(id).remove();
 			});
@@ -77,7 +79,7 @@
 
 	$.fn.barrager.removeAll=function()
 	{
-		 $('.barrage').remove();
+		 $('.barrage').stop(true).remove();
 	}
 
 })(jQuery);

@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程, 逐梦">
+    <meta name="keywords" content="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/">
+    <link rel="preload" as="image" href="/medias/featureimages/40.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程 | 逐梦">
+    <meta property="og:description" content="以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。">
+    <meta property="og:url" content="https://0xdadream.github.io/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程 | 逐梦">
+    <meta name="twitter:description" content="以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程 | 逐梦","headline":"Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程 | 逐梦","description":"以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。","url":"https://0xdadream.github.io/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2026-08-08T15:26:00.000Z","dateModified":"2026-10-21T16:07:25.465Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -436,7 +632,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-08-09
+                    2026-10-22
                 </div>
                 
 
@@ -455,9 +651,9 @@
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -465,15 +661,36 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程"><a href="#Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程" class="headerlink" title="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程"></a>Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</h1><p>本文记录一次真实可用的 Qwen Agent 实践：Qwen 提供的 Linux Agent/容器环境可以执行命令并主动访问公网，但<strong>没有公网 IP，也没有给用户开放 SSH 端口</strong>。目标是从自己的 Windows 11 电脑直接 SSH 进入这个 Agent 容器。</p>
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%80%E3%80%81%E6%9C%80%E7%BB%88%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C"><span class="dream-toc-list-text">一、最终实现效果</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88-Cloudflare-Tunnel-%E8%83%BD%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="dream-toc-list-text">二、为什么 Cloudflare Tunnel 能解决这个问题</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%A7%8B%E5%89%8D%E5%85%88%E6%A3%80%E6%9F%A5-Agent-%E7%8E%AF%E5%A2%83"><span class="dream-toc-list-text">三、开始前先检查 Agent 环境</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%9B%9B%E3%80%81%E5%9C%A8-Windows-%E7%94%9F%E6%88%90%E4%B8%80%E6%8A%8A-Agent-%E4%B8%93%E7%94%A8-SSH-%E5%AF%86%E9%92%A5"><span class="dream-toc-list-text">四、在 Windows 生成一把 Agent 专用 SSH 密钥</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%94%E3%80%81%E5%9C%A8-Agent-%E5%AE%89%E8%A3%85-OpenSSH-Server"><span class="dream-toc-list-text">五、在 Agent 安装 OpenSSH Server</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AD%E3%80%81%E6%8A%8A-Windows-%E5%85%AC%E9%92%A5%E5%8A%A0%E5%85%A5-Agent"><span class="dream-toc-list-text">六、把 Windows 公钥加入 Agent</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%83%E3%80%81%E5%9C%A8%E5%AE%B9%E5%99%A8%E9%87%8C%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%8F%AA%E7%9B%91%E5%90%AC-localhost-%E7%9A%84-SSH-Server"><span class="dream-toc-list-text">七、在容器里启动一个只监听 localhost 的 SSH Server</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%85%AB%E3%80%81%E9%AA%8C%E8%AF%81-sshd-%E6%98%AF%E5%90%A6%E7%9C%9F%E7%9A%84%E6%AD%A3%E5%B8%B8"><span class="dream-toc-list-text">八、验证 sshd 是否真的正常</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B9%9D%E3%80%81%E5%AE%89%E8%A3%85-cloudflared"><span class="dream-toc-list-text">九、安装 cloudflared</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E3%80%81%E5%9C%A8-Cloudflare-Dashboard-%E5%88%9B%E5%BB%BA-remotely-managed-Tunnel"><span class="dream-toc-list-text">十、在 Cloudflare Dashboard 创建 remotely-managed Tunnel</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%85%B3%E9%94%AE%E5%8C%BA%E5%88%AB%EF%BC%9A%E4%B8%8D%E8%A6%81%E8%AF%AF%E8%B5%B0-tunnel-login"><span class="dream-toc-list-text">关键区别：不要误走 tunnel login</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E7%94%A8-Token-%E6%96%87%E4%BB%B6%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C-Tunnel"><span class="dream-toc-list-text">十一、用 Token 文件后台运行 Tunnel</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%9C%A8-Tunnel-%E4%B8%AD%E6%B7%BB%E5%8A%A0-SSH-Published-Application"><span class="dream-toc-list-text">十二、在 Tunnel 中添加 SSH Published Application</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%89%E3%80%81Windows-%E5%AE%89%E8%A3%85-cloudflared"><span class="dream-toc-list-text">十三、Windows 安装 cloudflared</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE-Windows-OpenSSH"><span class="dream-toc-list-text">十四、配置 Windows OpenSSH</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#GUI-SSH-%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%9A%E4%B8%8D%E6%94%AF%E6%8C%81-ProxyCommand-%E6%97%B6%E6%80%8E%E4%B9%88%E8%BF%9E%E6%8E%A5"><span class="dream-toc-list-text">GUI SSH 客户端：不支持 ProxyCommand 时怎么连接</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%BF%9E%E6%8E%A5%E4%B8%8E-Host-Key"><span class="dream-toc-list-text">十五、第一次连接与 Host Key</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95"><span class="dream-toc-list-text">十六、常见问题与踩坑记录</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-curl-telnet-127-0-0-1-2222-%E4%B8%80%E7%9B%B4%E5%8D%A1%E4%BD%8F"><span class="dream-toc-list-text">1. curl telnet:&#x2F;&#x2F;127.0.0.1:2222 一直卡住</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-Permission-denied-publickey-keyboard-interactive"><span class="dream-toc-list-text">2. Permission denied (publickey,keyboard-interactive)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-Host-key-verification-failed"><span class="dream-toc-list-text">3. Host key verification failed</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-cloudflared-%E6%8F%90%E7%A4%BA%E7%BC%BA%E5%B0%91-cert-pem"><span class="dream-toc-list-text">4. cloudflared 提示缺少 cert.pem</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-Tunnel-%E5%B7%B2-Healthy%EF%BC%8C%E4%BD%86-SSH-%E4%BB%8D%E5%A4%B1%E8%B4%A5"><span class="dream-toc-list-text">5. Tunnel 已 Healthy，但 SSH 仍失败</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-Agent-%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA%E5%91%BD%E4%BB%A4%E4%B8%80%E7%9B%B4%E2%80%9C%E5%A4%84%E7%90%86%E4%B8%AD%E2%80%9D"><span class="dream-toc-list-text">6. Agent 界面显示命令一直“处理中”</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E4%B8%B4%E6%97%B6-Agent-%E5%AE%B9%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%97%AE%E9%A2%98"><span class="dream-toc-list-text">十七、临时 Agent 容器的生命周期问题</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#Qwen-Agent-%E5%AE%9E%E6%B5%8B%EF%BC%9A%E4%BD%BF%E7%94%A8-Supervisor-%E5%AE%9E%E7%8E%B0%E9%87%8D%E5%90%AF%E8%87%AA%E5%8A%A8%E6%81%A2%E5%A4%8D"><span class="dream-toc-list-text">Qwen Agent 实测：使用 Supervisor 实现重启自动恢复</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#1-%E6%8A%8A-SSH-%E9%85%8D%E7%BD%AE%E4%BB%8E-tmp-%E7%A7%BB%E5%88%B0%E6%8C%81%E4%B9%85%E4%BD%8D%E7%BD%AE"><span class="dream-toc-list-text">1. 把 SSH 配置从 &#x2F;tmp 移到持久位置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#2-Tunnel-Token-%E4%BD%BF%E7%94%A8%E7%8B%AC%E7%AB%8B%E6%96%87%E4%BB%B6%E4%BF%9D%E5%AD%98"><span class="dream-toc-list-text">2. Tunnel Token 使用独立文件保存</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#3-%E4%B8%BA-sshd-%E5%88%9B%E5%BB%BA%E5%90%AF%E5%8A%A8%E5%8C%85%E8%A3%85%E5%99%A8"><span class="dream-toc-list-text">3. 为 sshd 创建启动包装器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#4-%E5%A2%9E%E5%8A%A0-Supervisor-Program"><span class="dream-toc-list-text">4. 增加 Supervisor Program</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#5-%E4%B8%8D%E5%BB%BA%E8%AE%AE%E5%9C%A8%E7%BA%BF%E7%9B%B4%E6%8E%A5-HUP-PID-1%EF%BC%8C%E4%BC%98%E5%85%88%E9%87%8D%E5%90%AF%E9%AA%8C%E6%94%B6"><span class="dream-toc-list-text">5. 不建议在线直接 HUP PID 1，优先重启验收</span></a></li></ol></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%AE"><span class="dream-toc-list-text">十八、安全建议</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E4%B8%B4%E6%97%B6%E5%AE%B9%E5%99%A8%E5%BF%AB%E9%80%9F%E5%88%9D%E5%A7%8B%E5%8C%96%E8%84%9A%E6%9C%AC"><span class="dream-toc-list-text">十九、临时容器快速初始化脚本</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E5%AE%8C%E6%95%B4%E9%93%BE%E8%B7%AF%E7%9A%84%E5%88%A4%E6%96%AD%E6%A0%87%E5%87%86"><span class="dream-toc-list-text">二十、完整链路的判断标准</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%80%E3%80%81cloudflared-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E4%B8%8E%E8%A7%A3%E9%87%8A"><span class="dream-toc-list-text">二十一、cloudflared 常用命令速查与解释</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%8C%E3%80%81%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%B8%8E%E7%89%88%E6%9C%AC%E6%A0%A1%E9%AA%8C"><span class="dream-toc-list-text">二十二、官方文档与版本校验</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="dream-toc-list-text">总结</span></a></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
+                <h1 id="Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程"><a href="#Qwen-Agent-Cloudflare-Tunnel：无公网-IP-端口容器-SSH-远程访问完整教程" class="headerlink" title="Qwen Agent + Cloudflare Tunnel：无公网 IP&#x2F;端口容器 SSH 远程访问完整教程"></a>Qwen Agent + Cloudflare Tunnel：无公网 IP&#x2F;端口容器 SSH 远程访问完整教程</h1><p>本文记录一次真实可用的 Qwen Agent 实践：Qwen 提供的 Linux Agent&#x2F;容器环境可以执行命令并主动访问公网，但<strong>没有公网 IP，也没有给用户开放 SSH 端口</strong>。目标是从自己的 Windows 11 电脑直接 SSH 进入这个 Agent 容器。</p>
 <p>为了避免把真实入口长期暴露在公开文章中，下面统一使用 <code>qwen.example.com</code> 作为示例域名；实际使用时替换为你在 Cloudflare 中配置的真实子域名即可。这套方法并不只适用于 Qwen，只要其他 Agent、沙箱或临时容器允许主动出网并运行 <code>sshd</code> 与 <code>cloudflared</code>，同样可以复用。</p>
 <h2 id="一、最终实现效果"><a href="#一、最终实现效果" class="headerlink" title="一、最终实现效果"></a>一、最终实现效果</h2><p>最终链路如下：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Windows 11
@@ -504,7 +721,7 @@ Cloudflare Edge
 <h2 id="二、为什么-Cloudflare-Tunnel-能解决这个问题"><a href="#二、为什么-Cloudflare-Tunnel-能解决这个问题" class="headerlink" title="二、为什么 Cloudflare Tunnel 能解决这个问题"></a>二、为什么 Cloudflare Tunnel 能解决这个问题</h2><p>传统 SSH 需要客户端直接访问服务器的公网地址和 SSH 端口，例如：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">ssh → 公网IP:22 → sshd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>但厂商 Agent/沙箱通常处于 NAT、容器网络或内部集群中，没有公网 IP，也没有开放入站端口，因此外部无法直接连接。</p>
+<p>但厂商 Agent&#x2F;沙箱通常处于 NAT、容器网络或内部集群中，没有公网 IP，也没有开放入站端口，因此外部无法直接连接。</p>
 <p>Cloudflare Tunnel 的思路正好相反：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Agent 内的 cloudflared
         │
@@ -514,11 +731,11 @@ Cloudflare Edge
 <p>因此它不要求：</p>
 <ul>
 <li>Agent 拥有公网 IP</li>
-<li>厂商开放 TCP/22</li>
+<li>厂商开放 TCP&#x2F;22</li>
 <li>配置路由器端口映射</li>
 <li>自己购买 VPS 做 FRP 中转</li>
 </ul>
-<p>但仍然要求 Agent 至少能够主动访问公网，并且厂商没有禁止此类 Tunnel/后台进程。</p>
+<p>但仍然要求 Agent 至少能够主动访问公网，并且厂商没有禁止此类 Tunnel&#x2F;后台进程。</p>
 <h2 id="三、开始前先检查-Agent-环境"><a href="#三、开始前先检查-Agent-环境" class="headerlink" title="三、开始前先检查 Agent 环境"></a>三、开始前先检查 Agent 环境</h2><p>先让 Agent 执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">whoami</span>
 <span class="token function">uname</span> <span class="token parameter variable">-a</span>
@@ -536,13 +753,13 @@ Linux ... x86_64 GNU/Linux     # 常见容器架构
 <p>还应测试基本公网访问：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-I</span> --max-time <span class="token number">10</span> https://www.cloudflare.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>注意：HTTPS 能访问只说明 TCP/443 可用，并不能证明 Cloudflare Tunnel 一定能建链。当前 Cloudflare Tunnel 主要要求容器能够访问 Cloudflare Tunnel 边缘的 <strong>TCP/UDP 7844</strong>：UDP 用于 QUIC，TCP 用于 HTTP/2；<code>cloudflared</code> 默认会自动选择并在必要时回退。管理 API 与更新还会使用 TCP/443。</p>
+<p>注意：HTTPS 能访问只说明 TCP&#x2F;443 可用，并不能证明 Cloudflare Tunnel 一定能建链。当前 Cloudflare Tunnel 主要要求容器能够访问 Cloudflare Tunnel 边缘的 <strong>TCP&#x2F;UDP 7844</strong>：UDP 用于 QUIC，TCP 用于 HTTP&#x2F;2；<code>cloudflared</code> 默认会自动选择并在必要时回退。管理 API 与更新还会使用 TCP&#x2F;443。</p>
 <p>从 <code>cloudflared 2026.5.2</code> 开始，<code>cloudflared tunnel run</code> 与 <code>cloudflared tunnel diag</code> 会自动做连通性预检，包括：</p>
 <ul>
 <li>DNS：<code>region1.v2.argotunnel.com</code>、<code>region2.v2.argotunnel.com</code></li>
-<li>UDP/7844：QUIC</li>
-<li>TCP/7844：HTTP/2</li>
-<li>TCP/443：Cloudflare 管理 API</li>
+<li>UDP&#x2F;7844：QUIC</li>
+<li>TCP&#x2F;7844：HTTP&#x2F;2</li>
+<li>TCP&#x2F;443：Cloudflare 管理 API</li>
 </ul>
 <p>本次实际环境使用 <code>cloudflared 2026.7.3</code>，已经包含这套预检逻辑。因此如果后面 Tunnel 启动失败，优先直接运行 <code>cloudflared tunnel diag</code>，比只用 <code>curl https://www.cloudflare.com</code> 更有判断价值。</p>
 <h2 id="四、在-Windows-生成一把-Agent-专用-SSH-密钥"><a href="#四、在-Windows-生成一把-Agent-专用-SSH-密钥" class="headerlink" title="四、在 Windows 生成一把 Agent 专用 SSH 密钥"></a>四、在 Windows 生成一把 Agent 专用 SSH 密钥</h2><p>不要把长期用于其他服务器的老私钥到处复用。建议给这个 Agent 单独生成一把 Ed25519 密钥。</p>
@@ -560,13 +777,13 @@ C:\Users\你的用户名\.ssh\id_ed25519_qwen.pub   # 公钥，可以给远端<s
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>后面只需要把这一整行<strong>公钥</strong>放入 Agent，私钥始终保留在 Windows。</p>
-<h2 id="五、在-Agent-安装-OpenSSH-Server"><a href="#五、在-Agent-安装-OpenSSH-Server" class="headerlink" title="五、在 Agent 安装 OpenSSH Server"></a>五、在 Agent 安装 OpenSSH Server</h2><p>Debian/Ubuntu：</p>
+<h2 id="五、在-Agent-安装-OpenSSH-Server"><a href="#五、在-Agent-安装-OpenSSH-Server" class="headerlink" title="五、在 Agent 安装 OpenSSH Server"></a>五、在 Agent 安装 OpenSSH Server</h2><p>Debian&#x2F;Ubuntu：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt-get</span> update
 <span class="token assign-left variable">DEBIAN_FRONTEND</span><span class="token operator">=</span>noninteractive <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> openssh-server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>确认：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> sshd
-/usr/sbin/sshd <span class="token parameter variable">-V</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-1</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+/usr/sbin/sshd <span class="token parameter variable">-V</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-1</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>如果看到 <code>/usr/sbin/sshd</code>，说明安装完成。</p>
 <p>生成服务器 Host Key：</p>
@@ -578,7 +795,7 @@ C:\Users\你的用户名\.ssh\id_ed25519_qwen.pub   # 公钥，可以给远端<s
 <span class="token function">chmod</span> <span class="token number">700</span> /root/.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>然后把 Windows 的 <code>id_ed25519_qwen.pub</code> 整行加入：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">&gt;&gt;</span> /root/.ssh/authorized_keys <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">>></span> /root/.ssh/authorized_keys <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent
 EOF</span>
 
@@ -587,11 +804,12 @@ EOF</span>
 <p>注意：这里必须是 <code>.pub</code> 公钥，<strong>绝不能把 Windows 私钥上传到 Agent</strong>。</p>
 <p>如果担心重复添加，可以使用：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">PUB</span><span class="token operator">=</span><span class="token string">'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... qwen-agent'</span>
-<span class="token function">grep</span> <span class="token parameter variable">-qxF</span> <span class="token string">"<span class="token variable">$PUB</span>"</span> /root/.ssh/authorized_keys <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$PUB</span>"</span> <span class="token operator">&gt;&gt;</span> /root/.ssh/authorized_keys
+<span class="token function">grep</span> <span class="token parameter variable">-qxF</span> <span class="token string">"<span class="token variable">$PUB</span>"</span> /root/.ssh/authorized_keys <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$PUB</span>"</span> <span class="token operator">>></span> /root/.ssh/authorized_keys
 <span class="token function">chmod</span> <span class="token number">600</span> /root/.ssh/authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="七、在容器里启动一个只监听-localhost-的-SSH-Server"><a href="#七、在容器里启动一个只监听-localhost-的-SSH-Server" class="headerlink" title="七、在容器里启动一个只监听 localhost 的 SSH Server"></a>七、在容器里启动一个只监听 localhost 的 SSH Server</h2><p>临时 Agent 容器通常没有 systemd，所以不要依赖 <code>systemctl start ssh</code>。这里直接启动独立的 <code>sshd</code>。</p>
 <p>创建配置：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">&gt;</span>/tmp/agent_sshd_config <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">></span>/tmp/agent_sshd_config <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
 Port 2222
 ListenAddress 127.0.0.1
 HostKey /etc/ssh/ssh_host_ed25519_key
@@ -608,7 +826,7 @@ EOF</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/sbin/sshd <span class="token parameter variable">-t</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>没有输出通常就是通过。然后后台启动：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> /usr/sbin/sshd <span class="token parameter variable">-D</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config <span class="token operator">&gt;</span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> /usr/sbin/sshd <span class="token parameter variable">-D</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config <span class="token operator">></span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>只监听 <code>127.0.0.1:2222</code> 的好处是：即使容器网络中存在其他主机，也无法直接通过容器网卡访问 SSH；真正能访问它的是同一容器里的 <code>cloudflared</code>。</p>
 <h2 id="八、验证-sshd-是否真的正常"><a href="#八、验证-sshd-是否真的正常" class="headerlink" title="八、验证 sshd 是否真的正常"></a>八、验证 sshd 是否真的正常</h2><p>先看进程和日志：</p>
@@ -616,11 +834,11 @@ EOF</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span>
 <span class="token function">cat</span> /tmp/sshd.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>再看监听端口：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-lntp</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':2222'</span> <span class="token operator">||</span> <span class="token punctuation">\</span>
-<span class="token function">netstat</span> <span class="token parameter variable">-lntp</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':2222'</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ss <span class="token parameter variable">-lntp</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':2222'</span> <span class="token operator">||</span> <span class="token punctuation">\</span>
+<span class="token function">netstat</span> <span class="token parameter variable">-lntp</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">':2222'</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>最推荐的 SSH Banner 测试：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">timeout</span> <span class="token number">3</span> ssh-keyscan <span class="token parameter variable">-p</span> <span class="token number">2222</span> <span class="token number">127.0</span>.0.1 <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">timeout</span> <span class="token number">3</span> ssh-keyscan <span class="token parameter variable">-p</span> <span class="token number">2222</span> <span class="token number">127.0</span>.0.1 <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">||</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>正常会看到类似：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">127.0.0.1:2222 SSH-2.0-OpenSSH_9.2p1 Debian-...<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -665,7 +883,7 @@ cloudflared tunnel route dns xxx <span class="token punctuation">..</span>.<span
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /root/.cloudflared
 <span class="token function">chmod</span> <span class="token number">700</span> /root/.cloudflared
 
-<span class="token function">cat</span> <span class="token operator">&gt;</span>/root/.cloudflared/qwen-tunnel.token <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
+<span class="token function">cat</span> <span class="token operator">></span>/root/.cloudflared/qwen-tunnel.token <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
 eyJ...这里粘贴 Dashboard 给出的完整 Tunnel Token...
 EOF</span>
 
@@ -674,7 +892,7 @@ EOF</span>
 <p>然后后台启动：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> cloudflared tunnel run <span class="token punctuation">\</span>
   --token-file /root/.cloudflared/qwen-tunnel.token <span class="token punctuation">\</span>
-  <span class="token operator">&gt;</span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+  <span class="token operator">></span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>本文实测的 <code>cloudflared 2026.7.3</code> 已明确支持 <code>--token-file</code>；可以通过 <code>cloudflared tunnel run --help</code> 再确认当前版本是否包含该参数。<code>--token</code> 与 <code>--token-file</code> 同时存在时，<code>--token</code> 优先，因此不要同时配置两份来源。</p>
 <p>检查：</p>
@@ -682,7 +900,7 @@ EOF</span>
 pgrep <span class="token parameter variable">-af</span> cloudflared <span class="token operator">||</span> <span class="token boolean">true</span>
 <span class="token function">tail</span> <span class="token parameter variable">-n</span> <span class="token number">50</span> /tmp/cloudflared.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>如果日志出现 <code>Registered tunnel connection</code>，并且 Cloudflare Dashboard 显示 Connected/Healthy，说明 Tunnel Connector 已经成功建立。</p>
+<p>如果日志出现 <code>Registered tunnel connection</code>，并且 Cloudflare Dashboard 显示 Connected&#x2F;Healthy，说明 Tunnel Connector 已经成功建立。</p>
 <h2 id="十二、在-Tunnel-中添加-SSH-Published-Application"><a href="#十二、在-Tunnel-中添加-SSH-Published-Application" class="headerlink" title="十二、在 Tunnel 中添加 SSH Published Application"></a>十二、在 Tunnel 中添加 SSH Published Application</h2><p>Tunnel Connected 后，在 Cloudflare Dashboard 进入当前 Tunnel。按当前界面依次选择：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Networking → Tunnels → qwen-agent → Routes → Add route → Published application<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -722,9 +940,9 @@ where<span class="token punctuation">.</span>exe cloudflared<span aria-hidden="t
 <pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">Host qwen
     HostName qwen.example.com
     User root
-    IdentityFile C:/Users/你的用户名/.ssh/id_ed25519_qwen
+    IdentityFile C:&#x2F;Users&#x2F;你的用户名&#x2F;.ssh&#x2F;id_ed25519_qwen
     IdentitiesOnly yes
-    ProxyCommand "C:/Program Files (x86)/cloudflared/cloudflared.exe" access ssh --hostname %h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    ProxyCommand &quot;C:&#x2F;Program Files (x86)&#x2F;cloudflared&#x2F;cloudflared.exe&quot; access ssh --hostname %h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果 <code>cloudflared</code> 已正确加入 PATH，也可以把最后一行简化成：</p>
 <pre class="line-numbers language-sshconfig" data-language="sshconfig"><code class="language-sshconfig">ProxyCommand cloudflared access ssh --hostname %h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -758,7 +976,7 @@ where<span class="token punctuation">.</span>exe cloudflared<span aria-hidden="t
 <td><code>qwen</code></td>
 </tr>
 <tr>
-<td>地址 / Host</td>
+<td>地址 &#x2F; Host</td>
 <td><code>127.0.0.1</code></td>
 </tr>
 <tr>
@@ -771,7 +989,7 @@ where<span class="token punctuation">.</span>exe cloudflared<span aria-hidden="t
 </tr>
 <tr>
 <td>验证方式</td>
-<td>私钥 / Public Key / Key</td>
+<td>私钥 &#x2F; Public Key &#x2F; Key</td>
 </tr>
 <tr>
 <td>私钥</td>
@@ -870,11 +1088,11 @@ Are you sure you want to continue connecting?<span aria-hidden="true" class="lin
 <p>这个顺序可以快速判断问题在哪一层。</p>
 <h3 id="6-Agent-界面显示命令一直“处理中”"><a href="#6-Agent-界面显示命令一直“处理中”" class="headerlink" title="6. Agent 界面显示命令一直“处理中”"></a>6. Agent 界面显示命令一直“处理中”</h3><p><code>sshd -D</code> 和 <code>cloudflared tunnel run</code> 本身都是长期运行进程，直接前台执行当然不会退出。</p>
 <p>在<strong>临时测试阶段</strong>，可以使用 <code>nohup ... &amp;</code>：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> /usr/sbin/sshd <span class="token parameter variable">-D</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config <span class="token operator">&gt;</span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-<span class="token function">nohup</span> cloudflared tunnel run --token-file /root/.cloudflared/qwen-tunnel.token <span class="token operator">&gt;</span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> /usr/sbin/sshd <span class="token parameter variable">-D</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config <span class="token operator">></span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+<span class="token function">nohup</span> cloudflared tunnel run --token-file /root/.cloudflared/qwen-tunnel.token <span class="token operator">></span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>然后通过 <code>pgrep</code> 和日志判断状态，而不是等待命令返回。</p>
-<p>但要注意：<code>nohup</code> 只能保证关闭终端后进程继续运行，<strong>不能解决容器/服务器重启后的自动恢复</strong>。如果 Agent 的 PID 1 是 <code>supervisord</code>，应使用下面的 Supervisor 持久化方案。</p>
+<p>但要注意：<code>nohup</code> 只能保证关闭终端后进程继续运行，<strong>不能解决容器&#x2F;服务器重启后的自动恢复</strong>。如果 Agent 的 PID 1 是 <code>supervisord</code>，应使用下面的 Supervisor 持久化方案。</p>
 <h2 id="十七、临时-Agent-容器的生命周期问题"><a href="#十七、临时-Agent-容器的生命周期问题" class="headerlink" title="十七、临时 Agent 容器的生命周期问题"></a>十七、临时 Agent 容器的生命周期问题</h2><p>很多厂商 Agent 实际上是临时容器：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">任务开始 → 创建容器 → Agent 工作 → 会话结束 → 容器销毁<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -888,8 +1106,8 @@ Are you sure you want to continue connecting?<span aria-hidden="true" class="lin
 <li><code>/root/.cloudflared/qwen-tunnel.token</code></li>
 </ul>
 <p>但 Cloudflare Dashboard 中的 Tunnel、Published Application、DNS 记录以及 Windows 的 <code>~/.ssh/config</code> 可以继续保留。</p>
-<p>因此每次新容器出现后，只需要重新完成“安装 sshd/cloudflared → 写公钥 → 启动 sshd → 启动 Tunnel Connector”即可。</p>
-<p>如果容器频繁重建，建议把服务端初始化封装成脚本，并把 Tunnel Token 通过安全的 Secret/环境变量注入，而不是写死在公开脚本里。</p>
+<p>因此每次新容器出现后，只需要重新完成“安装 sshd&#x2F;cloudflared → 写公钥 → 启动 sshd → 启动 Tunnel Connector”即可。</p>
+<p>如果容器频繁重建，建议把服务端初始化封装成脚本，并把 Tunnel Token 通过安全的 Secret&#x2F;环境变量注入，而不是写死在公开脚本里。</p>
 <h3 id="Qwen-Agent-实测：使用-Supervisor-实现重启自动恢复"><a href="#Qwen-Agent-实测：使用-Supervisor-实现重启自动恢复" class="headerlink" title="Qwen Agent 实测：使用 Supervisor 实现重启自动恢复"></a>Qwen Agent 实测：使用 Supervisor 实现重启自动恢复</h3><p>本次 Qwen Agent 实际检查结果是：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ps</span> <span class="token parameter variable">-p</span> <span class="token number">1</span> <span class="token parameter variable">-o</span> <span class="token assign-left variable">comm</span><span class="token operator">=</span>
 <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> systemctl
@@ -900,7 +1118,7 @@ Are you sure you want to continue connecting?<span aria-hidden="true" class="lin
 /usr/bin/systemctl
 /usr/local/bin/cloudflared<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>这里最容易误判：<strong>系统里存在 <code>systemctl</code> 命令，不等于系统正在使用 systemd。</strong> 判断 init/进程管理器要看 PID 1；只要 <code>ps -p 1 -o comm=</code> 返回 <code>supervisord</code>，就应该使用 Supervisor，而不是 <code>systemctl enable ...</code>。</p>
+<p>这里最容易误判：<strong>系统里存在 <code>systemctl</code> 命令，不等于系统正在使用 systemd。</strong> 判断 init&#x2F;进程管理器要看 PID 1；只要 <code>ps -p 1 -o comm=</code> 返回 <code>supervisord</code>，就应该使用 Supervisor，而不是 <code>systemctl enable ...</code>。</p>
 <p>对于这种环境，推荐把 <code>sshd</code> 和 <code>cloudflared</code> 都交给 Supervisor 管理。</p>
 <h4 id="1-把-SSH-配置从-tmp-移到持久位置"><a href="#1-把-SSH-配置从-tmp-移到持久位置" class="headerlink" title="1. 把 SSH 配置从 /tmp 移到持久位置"></a>1. 把 SSH 配置从 <code>/tmp</code> 移到持久位置</h4><p>前面的 <code>/tmp/agent_sshd_config</code> 适合临时测试，长期运行改为：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">install</span> <span class="token parameter variable">-m</span> <span class="token number">600</span> /tmp/agent_sshd_config /etc/ssh/qwen_sshd_config
@@ -923,10 +1141,10 @@ PidFile /run/qwen-sshd.pid<span aria-hidden="true" class="line-numbers-rows"><sp
 
 <p>Supervisor 只通过 <code>--token-file</code> 引用它。</p>
 <h4 id="3-为-sshd-创建启动包装器"><a href="#3-为-sshd-创建启动包装器" class="headerlink" title="3. 为 sshd 创建启动包装器"></a>3. 为 sshd 创建启动包装器</h4><p>如果之前已经通过 <code>nohup</code> 启动过旧 sshd，第一次迁移时可能与新实例争抢 <code>127.0.0.1:2222</code>。可以创建一个包装器：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">&gt;</span>/usr/local/sbin/qwen-sshd-supervised <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> <span class="token operator">></span>/usr/local/sbin/qwen-sshd-supervised <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
 #!/bin/sh
 
-if pgrep -f -- '/usr/sbin/sshd -D -e -f /tmp/agent_sshd_config' &gt;/dev/null 2&gt;&amp;1; then
+if pgrep -f -- '/usr/sbin/sshd -D -e -f /tmp/agent_sshd_config' >/dev/null 2>&amp;1; then
     pkill -f -- '/usr/sbin/sshd -D -e -f /tmp/agent_sshd_config' || true
     sleep 1
 fi
@@ -983,7 +1201,7 @@ EOF</span>
 
 <p>当前 <code>supervisord.conf</code> 是由这个模板展开生成的，因此为了避免容器重启后配置被平台重新生成覆盖，**同样的 <code>[program:qwen-sshd]</code> 和 <code>[program:qwen-cloudflared]</code> 块也要同步写入 <code>.template</code>**。</p>
 <h4 id="5-不建议在线直接-HUP-PID-1，优先重启验收"><a href="#5-不建议在线直接-HUP-PID-1，优先重启验收" class="headerlink" title="5. 不建议在线直接 HUP PID 1，优先重启验收"></a>5. 不建议在线直接 HUP PID 1，优先重启验收</h4><p>在这种一整个 Agent 都由同一个 Supervisor 管理的容器里，不建议为了加载两条新配置直接对 PID 1 执行 <code>SIGHUP</code>，因为可能连 Qwen App、Xvfb、XFCE 等其他程序一起重启。</p>
-<p>更稳妥的方式是：先把配置全部写好并校验，再正常重启 Agent/容器。</p>
+<p>更稳妥的方式是：先把配置全部写好并校验，再正常重启 Agent&#x2F;容器。</p>
 <p>重启以后验证：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pgrep <span class="token parameter variable">-af</span> <span class="token string">'sshd|cloudflared'</span>
 
@@ -1008,17 +1226,17 @@ supervisord (PID 1)
              └── Cloudflare Tunnel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>至此，服务器端不再需要每次手动执行 <code>nohup sshd ...</code> 或 <code>nohup cloudflared tunnel run ...</code>。</p>
-<p>注意：这只能解决“<strong>同一个持久容器重启</strong>”后的自动恢复。如果平台是“销毁旧容器并重新创建一个全新容器”，那么 <code>/etc</code>、<code>/root/.ssh</code>、Tunnel Token 等仍可能一起消失，此时仍应使用后面的初始化脚本或平台提供的持久卷/Secret/启动钩子。</p>
+<p>注意：这只能解决“<strong>同一个持久容器重启</strong>”后的自动恢复。如果平台是“销毁旧容器并重新创建一个全新容器”，那么 <code>/etc</code>、<code>/root/.ssh</code>、Tunnel Token 等仍可能一起消失，此时仍应使用后面的初始化脚本或平台提供的持久卷&#x2F;Secret&#x2F;启动钩子。</p>
 <h2 id="十八、安全建议"><a href="#十八、安全建议" class="headerlink" title="十八、安全建议"></a>十八、安全建议</h2><p>这套方案虽然不需要开放公网 22 端口，但仍应把 SSH 和 Tunnel Token 当作高价值入口管理。</p>
 <p>建议至少做到：</p>
 <ol>
 <li><strong>SSH 禁止密码登录</strong>：保持 <code>PasswordAuthentication no</code>。</li>
-<li><strong>只使用公钥认证</strong>：每个设备/Agent 单独一把密钥，方便撤销。</li>
+<li><strong>只使用公钥认证</strong>：每个设备&#x2F;Agent 单独一把密钥，方便撤销。</li>
 <li><strong>sshd 只监听 localhost</strong>：例如 <code>127.0.0.1:2222</code>，避免容器网络中的其他主机直接访问。</li>
-<li><strong>保护 Tunnel Token</strong>：不要发到聊天记录、Git 仓库或博客；泄露后应立即在 Cloudflare 侧轮换/重置。</li>
+<li><strong>保护 Tunnel Token</strong>：不要发到聊天记录、Git 仓库或博客；泄露后应立即在 Cloudflare 侧轮换&#x2F;重置。</li>
 <li><strong>不要公开私钥</strong>：<code>id_ed25519_qwen</code> 永远只留在本地可信设备。</li>
 <li><strong>可选叠加 Cloudflare Access</strong>：需要更严格访问控制时，可再增加身份认证或 Service Token。</li>
-<li><strong>尊重厂商规则</strong>：有些 Agent/沙箱明确禁止反向 Tunnel、后台守护进程或远程 Shell，使用前应确认服务条款。</li>
+<li><strong>尊重厂商规则</strong>：有些 Agent&#x2F;沙箱明确禁止反向 Tunnel、后台守护进程或远程 Shell，使用前应确认服务条款。</li>
 </ol>
 <p>尤其要注意：Tunnel Token 和 SSH 私钥是两种完全不同的凭据。</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">Tunnel Token
@@ -1037,15 +1255,15 @@ SSH Private Key
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/usr/bin/env bash</span>
 <span class="token builtin class-name">set</span> <span class="token parameter variable">-euo</span> pipefail
 
-<span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${SSH_PUBLIC_KEY<span class="token operator">:?</span>请设置 SSH_PUBLIC_KEY}</span>"</span>
-<span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${TUNNEL_TOKEN<span class="token operator">:?</span>请设置 TUNNEL_TOKEN}</span>"</span>
+<span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">$&#123;SSH_PUBLIC_KEY<span class="token operator">:?</span>请设置 SSH_PUBLIC_KEY&#125;</span>"</span>
+<span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">$&#123;TUNNEL_TOKEN<span class="token operator">:?</span>请设置 TUNNEL_TOKEN&#125;</span>"</span>
 
-<span class="token keyword">if</span> <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> <span class="token function">apt-get</span> <span class="token operator">&gt;</span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> <span class="token function">apt-get</span> <span class="token operator">></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
   <span class="token function">apt-get</span> update
   <span class="token assign-left variable">DEBIAN_FRONTEND</span><span class="token operator">=</span>noninteractive <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> openssh-server <span class="token function">curl</span> procps
 <span class="token keyword">fi</span>
 
-<span class="token keyword">if</span> <span class="token operator">!</span> <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> cloudflared <span class="token operator">&gt;</span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token operator">!</span> <span class="token builtin class-name">command</span> <span class="token parameter variable">-v</span> cloudflared <span class="token operator">></span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
   <span class="token function">curl</span> <span class="token parameter variable">-L</span> <span class="token parameter variable">--fail</span> <span class="token parameter variable">--retry</span> <span class="token number">3</span> <span class="token punctuation">\</span>
     <span class="token parameter variable">-o</span> /usr/local/bin/cloudflared <span class="token punctuation">\</span>
     https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
@@ -1060,9 +1278,9 @@ ssh-keygen <span class="token parameter variable">-A</span>
 <span class="token function">touch</span> /root/.ssh/authorized_keys
 <span class="token function">chmod</span> <span class="token number">600</span> /root/.ssh/authorized_keys
 <span class="token function">grep</span> <span class="token parameter variable">-qxF</span> <span class="token string">"<span class="token variable">$SSH_PUBLIC_KEY</span>"</span> /root/.ssh/authorized_keys <span class="token operator">||</span> <span class="token punctuation">\</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$SSH_PUBLIC_KEY</span>"</span> <span class="token operator">&gt;&gt;</span> /root/.ssh/authorized_keys
+  <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$SSH_PUBLIC_KEY</span>"</span> <span class="token operator">>></span> /root/.ssh/authorized_keys
 
-<span class="token function">cat</span> <span class="token operator">&gt;</span>/tmp/agent_sshd_config <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
+<span class="token function">cat</span> <span class="token operator">></span>/tmp/agent_sshd_config <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'
 Port 2222
 ListenAddress 127.0.0.1
 HostKey /etc/ssh/ssh_host_ed25519_key
@@ -1076,21 +1294,21 @@ Subsystem sftp internal-sftp
 EOF</span>
 
 /usr/sbin/sshd <span class="token parameter variable">-t</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config
-<span class="token function">pkill</span> <span class="token parameter variable">-f</span> <span class="token string">'sshd -D -e -f /tmp/agent_sshd_config'</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">||</span> <span class="token boolean">true</span>
+<span class="token function">pkill</span> <span class="token parameter variable">-f</span> <span class="token string">'sshd -D -e -f /tmp/agent_sshd_config'</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">||</span> <span class="token boolean">true</span>
 <span class="token function">nohup</span> /usr/sbin/sshd <span class="token parameter variable">-D</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">-f</span> /tmp/agent_sshd_config <span class="token punctuation">\</span>
-  <span class="token operator">&gt;</span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+  <span class="token operator">></span>/tmp/sshd.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 
-<span class="token builtin class-name">printf</span> <span class="token string">'%s\n'</span> <span class="token string">"<span class="token variable">$TUNNEL_TOKEN</span>"</span> <span class="token operator">&gt;</span>/root/.cloudflared/qwen-tunnel.token
+<span class="token builtin class-name">printf</span> <span class="token string">'%s\n'</span> <span class="token string">"<span class="token variable">$TUNNEL_TOKEN</span>"</span> <span class="token operator">></span>/root/.cloudflared/qwen-tunnel.token
 <span class="token function">chmod</span> <span class="token number">600</span> /root/.cloudflared/qwen-tunnel.token
-<span class="token function">pkill</span> <span class="token parameter variable">-f</span> <span class="token string">'cloudflared tunnel run'</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">||</span> <span class="token boolean">true</span>
+<span class="token function">pkill</span> <span class="token parameter variable">-f</span> <span class="token string">'cloudflared tunnel run'</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token operator">||</span> <span class="token boolean">true</span>
 <span class="token function">nohup</span> cloudflared tunnel run <span class="token punctuation">\</span>
   --token-file /root/.cloudflared/qwen-tunnel.token <span class="token punctuation">\</span>
-  <span class="token operator">&gt;</span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+  <span class="token operator">></span>/tmp/cloudflared.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 
 <span class="token function">sleep</span> <span class="token number">3</span>
 <span class="token builtin class-name">echo</span> <span class="token string">'=== SSH ==='</span>
 <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'[s]shd'</span> <span class="token operator">||</span> <span class="token boolean">true</span>
-<span class="token function">timeout</span> <span class="token number">3</span> ssh-keyscan <span class="token parameter variable">-p</span> <span class="token number">2222</span> <span class="token number">127.0</span>.0.1 <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">||</span> <span class="token boolean">true</span>
+<span class="token function">timeout</span> <span class="token number">3</span> ssh-keyscan <span class="token parameter variable">-p</span> <span class="token number">2222</span> <span class="token number">127.0</span>.0.1 <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">||</span> <span class="token boolean">true</span>
 
 <span class="token builtin class-name">echo</span> <span class="token string">'=== CLOUDFLARED ==='</span>
 pgrep <span class="token parameter variable">-af</span> cloudflared <span class="token operator">||</span> <span class="token boolean">true</span>
@@ -1120,7 +1338,7 @@ Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证<spa
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">ssh qwen<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>就可以进入原本完全没有公网 SSH 入口的厂商 Agent 容器。</p>
-<h2 id="二十一、cloudflared-常用命令速查与解释"><a href="#二十一、cloudflared-常用命令速查与解释" class="headerlink" title="二十一、cloudflared 常用命令速查与解释"></a>二十一、cloudflared 常用命令速查与解释</h2><p><code>cloudflared</code> 不只是“SSH 工具”，它本质上是 Cloudflare 的 Tunnel/Access 客户端。最常用的命令可以分成四类：查看信息、运行 Tunnel、管理 Tunnel、作为客户端访问受 Cloudflare 保护的服务。</p>
+<h2 id="二十一、cloudflared-常用命令速查与解释"><a href="#二十一、cloudflared-常用命令速查与解释" class="headerlink" title="二十一、cloudflared 常用命令速查与解释"></a>二十一、cloudflared 常用命令速查与解释</h2><p><code>cloudflared</code> 不只是“SSH 工具”，它本质上是 Cloudflare 的 Tunnel&#x2F;Access 客户端。最常用的命令可以分成四类：查看信息、运行 Tunnel、管理 Tunnel、作为客户端访问受 Cloudflare 保护的服务。</p>
 <blockquote>
 <p>本文采用的是 Dashboard 创建的 <strong>remotely-managed Tunnel + Tunnel Token</strong>。下面表格中的 <code>tunnel list/info/route dns/cleanup/delete</code> 属于账户级 Tunnel 管理命令，通常需要 <code>cloudflared tunnel login</code> 产生的账户证书或其他管理凭据；它们不是本教程 Agent 端启动 Connector 的必需命令。不要因为这些管理命令提示缺少 <code>cert.pem</code>，就误以为 <code>tunnel run --token/--token-file</code> 也需要 <code>cert.pem</code>。</p>
 </blockquote>
@@ -1150,7 +1368,7 @@ Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证<spa
 <tr>
 <td><code>cloudflared tunnel run --token &lt;TOKEN&gt;</code></td>
 <td>使用 Dashboard Tunnel Token 启动 Connector</td>
-<td>Agent/服务器主动接入 Cloudflare</td>
+<td>Agent&#x2F;服务器主动接入 Cloudflare</td>
 </tr>
 <tr>
 <td><code>cloudflared tunnel run --token-file /path/token</code></td>
@@ -1159,7 +1377,7 @@ Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证<spa
 </tr>
 <tr>
 <td><code>cloudflared access ssh --hostname ssh.example.com</code></td>
-<td>通过 Cloudflare Access/Tunnel 访问 SSH</td>
+<td>通过 Cloudflare Access&#x2F;Tunnel 访问 SSH</td>
 <td>Windows <code>ProxyCommand</code> 的核心命令</td>
 </tr>
 <tr>
@@ -1179,7 +1397,7 @@ Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证<spa
 </tr>
 <tr>
 <td><code>cloudflared tunnel info &lt;NAME或UUID&gt;</code></td>
-<td>查看指定 Tunnel/Connector 状态</td>
+<td>查看指定 Tunnel&#x2F;Connector 状态</td>
 <td>排查当前连接情况</td>
 </tr>
 <tr>
@@ -1205,7 +1423,7 @@ Windows → 远端 SSH           ✅ 能完成 OpenSSH 握手和公钥认证<spa
 <tr>
 <td><code>cloudflared service install ...</code></td>
 <td>安装为系统服务</td>
-<td>正常 Linux/Windows 长期服务器；临时容器通常没必要</td>
+<td>正常 Linux&#x2F;Windows 长期服务器；临时容器通常没必要</td>
 </tr>
 <tr>
 <td><code>cloudflared update</code></td>
@@ -1241,6 +1459,7 @@ cloudflared access ssh --hostname ...
 <p>这套方法尤其适合可执行任意 Linux 命令、允许后台进程、但厂商没有提供 SSH 入口的开发 Agent、临时沙箱和容器环境。真正需要重点管理的是三件事：<strong>容器生命周期、Tunnel Token 和 SSH 私钥</strong>。</p>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -1331,8 +1550,44 @@ cloudflared access ssh --hostname ...
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -1357,10 +1612,10 @@ cloudflared access ssh --hostname ...
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1628,27 +1883,17 @@ cloudflared access ssh --hostname ...
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1662,176 +1907,87 @@ cloudflared access ssh --hostname ...
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/51.jpg" class="responsive-img" alt="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错">
-                        
-                        <span class="card-title">Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障排查。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-09
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
-                    </a>
-                    
-                    <a href="/tags/tunnel/">
-                        <span class="chip bg-color">tunnel</span>
-                    </a>
-                    
-                    <a href="/tags/cloudflare/">
-                        <span class="chip bg-color">cloudflare</span>
-                    </a>
-                    
-                    <a href="/tags/zero-trust/">
-                        <span class="chip bg-color">zero-trust</span>
-                    </a>
-                    
-                    <a href="/tags/rdp/">
-                        <span class="chip bg-color">rdp</span>
-                    </a>
-                    
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/">
+            <span class="dream-related-reason">共同标签：ssh · tunnel</span><h3>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</h3>
+            <time datetime="2026-08-09">2026-08-09</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/">
+            <span class="dream-related-reason">共同标签：ssh · cloudflare</span><h3>数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</h3>
+            <time datetime="2026-08-10">2026-08-10</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="Windows 11 句柄审查与泄漏定位教程">
-                        
-                        <span class="card-title">Windows 11 句柄审查与泄漏定位教程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Windows 11 句柄审查与泄漏定位教程
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2026-06-01
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
-                                    报错修复
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/windows/">
-                        <span class="chip bg-color">windows</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2026/09/25/vps-https-zheng-shu-shen-qing-wan-quan-zhi-nan-cloudflare-letsencrypt-acme/">
+            <span class="dream-related-reason">共同标签：cloudflare</span><h3>VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</h3>
+            <time datetime="2026-09-25">2026-09-25</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/" rel="prev"><span>较新的一篇</span><strong>Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</strong></a>
+        <a href="/2026/06/01/windows11-powershell-ju-bing-shen-cha-yu-xie-lou-ding-wei-jiao-cheng/" rel="next"><span>较早的一篇</span><strong>Windows 11 句柄审查与泄漏定位教程</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1850,6 +2006,7 @@ cloudflared access ssh --hostname ...
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -1862,9 +2019,10 @@ cloudflared access ssh --hostname ...
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -1874,23 +2032,27 @@ cloudflared access ssh --hostname ...
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -1915,7 +2077,6 @@ cloudflared access ssh --hostname ...
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -1925,6 +2086,8 @@ cloudflared access ssh --hostname ...
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1940,60 +2103,6 @@ cloudflared access ssh --hostname ...
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -2004,27 +2113,30 @@ cloudflared access ssh --hostname ...
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -2036,38 +2148,44 @@ cloudflared access ssh --hostname ...
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -2078,107 +2196,209 @@ cloudflared access ssh --hostname ...
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -2189,35 +2409,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -2241,45 +2500,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

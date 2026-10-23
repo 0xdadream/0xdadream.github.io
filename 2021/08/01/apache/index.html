@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Apache教程, 逐梦">
+    <meta name="keywords" content="Apache教程, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="Apache教程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2021/08/01/apache/">
+    <link rel="preload" as="image" href="/medias/featureimages/38.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="Apache教程 | 逐梦">
+    <meta property="og:description" content="Apache教程">
+    <meta property="og:url" content="https://0xdadream.github.io/2021/08/01/apache/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apache教程 | 逐梦">
+    <meta name="twitter:description" content="Apache教程">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Apache教程 | 逐梦","headline":"Apache教程 | 逐梦","description":"Apache教程","url":"https://0xdadream.github.io/2021/08/01/apache/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2021-07-31T18:25:00.000Z","dateModified":"2026-10-23T10:04:52.678Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>Apache教程 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -420,28 +616,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-07-29
+                    2026-10-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9k
+                    9.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    38 分
+                    42 分
                 </div>
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -449,14 +645,35 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%AE%89%E8%A3%85"><span class="dream-toc-list-text">安装</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%90%AF%E5%8A%A8%E3%80%81%E5%81%9C%E6%AD%A2%E3%80%81%E9%87%8D%E5%90%AF"><span class="dream-toc-list-text">启动、停止、重启</span></a></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E4%B8%BB%E8%A6%81%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="dream-toc-list-text">主要的配置文件</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">基本配置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="dream-toc-list-text">目录访问权限控制</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%AE%B9%E5%99%A8"><span class="dream-toc-list-text">虚拟主机容器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#VirtualHost"><span class="dream-toc-list-text">VirtualHost</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9C%A8%E5%8D%95%E4%B8%AA-IP-%E5%9C%B0%E5%9D%80%E4%B8%8A%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%9F%BA%E4%BA%8E%E5%90%8D%E7%A7%B0%E7%9A%84%E7%BD%91%E7%AB%99"><span class="dream-toc-list-text">在单个 IP 地址上运行多个基于名称的网站</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%A4%9A%E4%B8%AA-IP-%E5%9C%B0%E5%9D%80%E4%B8%8A%E7%9A%84%E5%9F%BA%E4%BA%8E%E5%90%8D%E7%A7%B0%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="dream-toc-list-text">多个 IP 地址上的基于名称的主机</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84-IP-%E5%9C%B0%E5%9D%80%EF%BC%88%E4%BE%8B%E5%A6%82%E5%86%85%E9%83%A8%E5%92%8C%E5%A4%96%E9%83%A8%E5%9C%B0%E5%9D%80%EF%BC%89%E4%B8%8A%E6%8F%90%E4%BE%9B%E7%9B%B8%E5%90%8C%E7%9A%84%E5%86%85%E5%AE%B9"><span class="dream-toc-list-text">在不同的 IP 地址（例如内部和外部地址）上提供相同的内容</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E7%AB%AF%E5%8F%A3%E4%B8%8A%E8%BF%90%E8%A1%8C%E4%B8%8D%E5%90%8C%E7%9A%84%E7%AB%99%E7%82%B9"><span class="dream-toc-list-text">在不同的端口上运行不同的站点</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9F%BA%E4%BA%8EIP%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="dream-toc-list-text">基于IP的虚拟主机</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9F%BA%E4%BA%8E%E7%AB%AF%E5%8F%A3%E5%92%8C%E5%9F%BA%E4%BA%8E-ip-%E7%9A%84%E6%B7%B7%E5%90%88%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="dream-toc-list-text">基于端口和基于 ip 的混合虚拟主机</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%B7%B7%E5%90%88%E5%9F%BA%E4%BA%8E%E5%90%8D%E7%A7%B0%E5%92%8C%E5%9F%BA%E4%BA%8E-IP-%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="dream-toc-list-text">混合基于名称和基于 IP 的虚拟主机</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8-Virtual-host-%E5%92%8C-mod-proxy"><span class="dream-toc-list-text">一起使用 Virtual_host 和 mod_proxy</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BD%BF%E7%94%A8-default-vhosts"><span class="dream-toc-list-text">使用_default_vhosts</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%B0%86%E5%9F%BA%E4%BA%8E%E5%90%8D%E7%A7%B0%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E8%BF%81%E7%A7%BB%E5%88%B0%E5%9F%BA%E4%BA%8E-IP-%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="dream-toc-list-text">将基于名称的虚拟主机迁移到基于 IP 的虚拟主机</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BD%BF%E7%94%A8-ServerPath-%E6%8C%87%E4%BB%A4"><span class="dream-toc-list-text">使用 ServerPath 指令</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%AE%B9%E5%99%A8"><span class="dream-toc-list-text">条件判断容器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#If"><span class="dream-toc-list-text">If</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#IfDefine"><span class="dream-toc-list-text">IfDefine</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#IfModule"><span class="dream-toc-list-text">IfModule</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#IfVersion"><span class="dream-toc-list-text">IfVersion</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%BD%91%E7%AB%99%E7%A9%BA%E9%97%B4%E5%AE%B9%E5%99%A8"><span class="dream-toc-list-text">网站空间容器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#Location"><span class="dream-toc-list-text">Location</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#Proxy%E5%AE%B9%E5%99%A8"><span class="dream-toc-list-text">Proxy容器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#Proxy"><span class="dream-toc-list-text">Proxy</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E6%9B%B4%E7%81%B5%E6%B4%BB%E7%9A%84%E5%8C%B9%E9%85%8D%E5%AE%B9%E5%99%A8"><span class="dream-toc-list-text">更灵活的匹配容器</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#DirectoryMatch"><span class="dream-toc-list-text">DirectoryMatch</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#FilesMatch"><span class="dream-toc-list-text">FilesMatch</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#LocationMatch"><span class="dream-toc-list-text">LocationMatch</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#ProxyMatch"><span class="dream-toc-list-text">ProxyMatch</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97"><span class="dream-toc-list-text">日志模块</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E9%80%9A%E7%94%A8%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F"><span class="dream-toc-list-text">通用日志格式</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E7%BB%84%E5%90%88%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F"><span class="dream-toc-list-text">组合日志格式</span></a></li></ol></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E9%99%84%E5%8A%A0%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="dream-toc-list-text">附加的配置文件</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">环境变量</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">设置环境变量</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BD%BF%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">使用环境变量</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E7%BC%93%E5%AD%98%E6%8C%87%E5%8D%97"><span class="dream-toc-list-text">缓存指南</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%86%85%E5%AE%B9%E5%8D%8F%E5%95%86"><span class="dream-toc-list-text">内容协商</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6"><span class="dream-toc-list-text">使用类型映射文件</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#Multiviews"><span class="dream-toc-list-text">Multiviews</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E4%BB%8E-URL-%E6%98%A0%E5%B0%84%E5%88%B0%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="dream-toc-list-text">从 URL 映射到文件系统</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">全局配置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#SSL-TLS-%E5%8A%A0%E5%AF%86"><span class="dream-toc-list-text">SSL&#x2F;TLS 加密</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#URL%E9%87%8D%E5%86%99"><span class="dream-toc-list-text">URL重写</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83"><span class="dream-toc-list-text">认证和授权</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C"><span class="dream-toc-list-text">如何工作</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B"><span class="dream-toc-list-text">简单示例</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E8%AE%A9%E4%B8%8D%E6%AD%A2%E4%B8%80%E4%B8%AA%E4%BA%BA%E8%BF%9B%E6%9D%A5"><span class="dream-toc-list-text">让不止一个人进来</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%A4%87%E7%94%A8%E5%AF%86%E7%A0%81%E5%AD%98%E5%82%A8"><span class="dream-toc-list-text">备用密码存储</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E6%8F%90%E4%BE%9B%E5%95%86"><span class="dream-toc-list-text">使用多个提供商</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#CGI%E4%B8%8E%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9"><span class="dream-toc-list-text">CGI与动态内容</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E7%BC%96%E5%86%99CGI"><span class="dream-toc-list-text">编写CGI</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="dream-toc-list-text">反向代理</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="dream-toc-list-text">简单的反向代理</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%9D%87%E8%A1%A1%E5%99%A8"><span class="dream-toc-list-text">集群和均衡器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9D%87%E8%A1%A1%E5%99%A8%E5%92%8C%E5%9D%87%E8%A1%A1%E5%99%A8%E6%88%90%E5%91%98%E9%85%8D%E7%BD%AE"><span class="dream-toc-list-text">均衡器和均衡器成员配置</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="dream-toc-list-text">故障转移</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%9D%87%E8%A1%A1%E5%99%A8%E5%90%AF%E7%94%A8"><span class="dream-toc-list-text">均衡器启用</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#htaccess%E6%96%87%E4%BB%B6"><span class="dream-toc-list-text">.htaccess文件</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E5%A4%84%E7%90%86%E5%99%A8"><span class="dream-toc-list-text">处理器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="dream-toc-list-text">过滤器</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">变量</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">二进制变量</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E7%BB%9F%E4%B8%80%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">统一变量</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%8A%9F%E8%83%BD%E5%8F%98%E9%87%8F"><span class="dream-toc-list-text">功能变量</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#%E6%A8%A1%E5%9D%97"><span class="dream-toc-list-text">模块</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E6%A0%B8%E5%BF%83%E4%B8%8E%E5%A4%9A%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97-MPM"><span class="dream-toc-list-text">核心与多处理模块(MPM)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#%E5%85%B6%E4%BB%96%E6%A8%A1%E5%9D%97"><span class="dream-toc-list-text">其他模块</span></a></li></ol></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
                 <h1 id="Apache教程"><a href="#Apache教程" class="headerlink" title="Apache教程"></a>Apache教程</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#安装Apache及其扩展包</span>
 yum <span class="token parameter variable">-y</span> <span class="token function">install</span> httpd httpd-manual mod_ssl mod_perl mod_auth_mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -474,7 +691,7 @@ yum <span class="token parameter variable">-y</span> <span class="token function
 </tr>
 </thead>
 <tbody><tr>
-<td><code>ServerRoot "/your/index"</code></td>
+<td><code>ServerRoot &quot;/your/index&quot;</code></td>
 <td>Apache安装的目录</td>
 </tr>
 <tr>
@@ -510,7 +727,7 @@ yum <span class="token parameter variable">-y</span> <span class="token function
 <td>主站点名称，可以是域名也能是IP，不写时自动配置</td>
 </tr>
 <tr>
-<td><code>DocumentRoot "/var/www/html"</code></td>
+<td><code>DocumentRoot &quot;/var/www/html&quot;</code></td>
 <td>主站点的网页存储位置</td>
 </tr>
 <tr>
@@ -542,16 +759,16 @@ yum <span class="token parameter variable">-y</span> <span class="token function
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="目录访问权限控制"><a href="#目录访问权限控制" class="headerlink" title="目录访问权限控制"></a>目录访问权限控制</h3><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/yourindex"&gt; 
-&amp;ltFiles "private.html"&gt;
+<h3 id="目录访问权限控制"><a href="#目录访问权限控制" class="headerlink" title="目录访问权限控制"></a>目录访问权限控制</h3><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Directory &quot;&#x2F;yourindex&quot;&gt; 
+&lt;Files &quot;private.html&quot;&gt;
         Require all denied
-    &amp;lt/Files&gt;
+    &lt;&#x2F;Files&gt;
 Options FollowSymLinks 
 AllowOverride None 
 Order allow,deny 
 Allow from all 
 #Require all granted #Apache2.2后替换Order
-&amp;lt/Directory&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Directory&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -665,16 +882,16 @@ Allow from all
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="虚拟主机容器"><a href="#虚拟主机容器" class="headerlink" title="虚拟主机容器"></a>虚拟主机容器</h3><h4 id="VirtualHost"><a href="#VirtualHost" class="headerlink" title="VirtualHost"></a>VirtualHost</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 10.1.2.3:80&gt;
+<h3 id="虚拟主机容器"><a href="#虚拟主机容器" class="headerlink" title="虚拟主机容器"></a>虚拟主机容器</h3><h4 id="VirtualHost"><a href="#VirtualHost" class="headerlink" title="VirtualHost"></a>VirtualHost</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;VirtualHost 10.1.2.3:80&gt;
   ServerAdmin webmaster@host.example.com
-  DocumentRoot "/www/docs/host.example.com"
+  DocumentRoot &quot;&#x2F;www&#x2F;docs&#x2F;host.example.com&quot;
   ServerName host.example.com
   ServerAlias server server2.example.com server2
   ServerAlias *.example.com
   UseCanonicalName Off
-  ErrorLog "logs/host.example.com-error_log"
-  TransferLog "logs/host.example.com-access_log"
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  ErrorLog &quot;logs&#x2F;host.example.com-error_log&quot;
+  TransferLog &quot;logs&#x2F;host.example.com-access_log&quot;
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -696,11 +913,11 @@ Allow from all
 <td>使用传入的主机 HTTP 请求标头进行代理请求</td>
 </tr>
 <tr>
-<td><code> ProxyPass "/" "http://192.168.111.2/"</code></td>
+<td><code> ProxyPass &quot;/&quot; &quot;http://192.168.111.2/&quot;</code></td>
 <td>将远程服务器映射到本地服务器 URL 空间</td>
 </tr>
 <tr>
-<td><code>ProxyPassReverse "/" "http://192.168.111.2/"</code></td>
+<td><code>ProxyPassReverse &quot;/&quot; &quot;http://192.168.111.2/&quot;</code></td>
 <td>调整从反向代理服务器发送的 HTTP 响应标头中的 URL</td>
 </tr>
 <tr>
@@ -718,196 +935,196 @@ Allow from all
 </tbody></table>
 <h4 id="在单个-IP-地址上运行多个基于名称的网站"><a href="#在单个-IP-地址上运行多个基于名称的网站" class="headerlink" title="在单个 IP 地址上运行多个基于名称的网站"></a>在单个 IP 地址上运行多个基于名称的网站</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config"># Ensure that Apache listens on port 80
 Listen 80
-&amp;ltVirtualHost *:80&gt;
-    DocumentRoot "/www/example1"
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1&quot;
     ServerName www.example.com
 
     # Other directives here
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost *:80&gt;
-    DocumentRoot "/www/example2"
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2&quot;
     ServerName www.example.org
 
     # Other directives here
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="多个-IP-地址上的基于名称的主机"><a href="#多个-IP-地址上的基于名称的主机" class="headerlink" title="多个 IP 地址上的基于名称的主机"></a>多个 IP 地址上的基于名称的主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
 
-# This is the "main" server running on 172.20.30.40
+# This is the &quot;main&quot; server running on 172.20.30.40
 ServerName server.example.com
-DocumentRoot "/www/mainserver"
+DocumentRoot &quot;&#x2F;www&#x2F;mainserver&quot;
 
-&amp;ltVirtualHost 172.20.30.50&gt;
-    DocumentRoot "/www/example1"
+&lt;VirtualHost 172.20.30.50&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1&quot;
     ServerName www.example.com
 
     # Other directives here ...
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.50&gt;
-    DocumentRoot "/www/example2"
+&lt;VirtualHost 172.20.30.50&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2&quot;
     ServerName www.example.org
 
     # Other directives here ...
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="在不同的-IP-地址（例如内部和外部地址）上提供相同的内容"><a href="#在不同的-IP-地址（例如内部和外部地址）上提供相同的内容" class="headerlink" title="在不同的 IP 地址（例如内部和外部地址）上提供相同的内容"></a>在不同的 IP 地址（例如内部和外部地址）上提供相同的内容</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 192.168.1.1 172.20.30.40&gt;
-    DocumentRoot "/www/server1"
+<h4 id="在不同的-IP-地址（例如内部和外部地址）上提供相同的内容"><a href="#在不同的-IP-地址（例如内部和外部地址）上提供相同的内容" class="headerlink" title="在不同的 IP 地址（例如内部和外部地址）上提供相同的内容"></a>在不同的 IP 地址（例如内部和外部地址）上提供相同的内容</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;VirtualHost 192.168.1.1 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;server1&quot;
     ServerName server.example.com
     ServerAlias server
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="在不同的端口上运行不同的站点"><a href="#在不同的端口上运行不同的站点" class="headerlink" title="在不同的端口上运行不同的站点"></a>在不同的端口上运行不同的站点</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
 Listen 8080
 
-&amp;ltVirtualHost 172.20.30.40:80&gt;
+&lt;VirtualHost 172.20.30.40:80&gt;
     ServerName www.example.com
-    DocumentRoot "/www/domain-80"
-&amp;lt/VirtualHost&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;domain-80&quot;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40:8080&gt;
+&lt;VirtualHost 172.20.30.40:8080&gt;
     ServerName www.example.com
-    DocumentRoot "/www/domain-8080"
-&amp;lt/VirtualHost&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;domain-8080&quot;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40:80&gt;
+&lt;VirtualHost 172.20.30.40:80&gt;
     ServerName www.example.org
-    DocumentRoot "/www/otherdomain-80"
-&amp;lt/VirtualHost&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;otherdomain-80&quot;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40:8080&gt;
+&lt;VirtualHost 172.20.30.40:8080&gt;
     ServerName www.example.org
-    DocumentRoot "/www/otherdomain-8080"
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    DocumentRoot &quot;&#x2F;www&#x2F;otherdomain-8080&quot;
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="基于IP的虚拟主机"><a href="#基于IP的虚拟主机" class="headerlink" title="基于IP的虚拟主机"></a>基于IP的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/example1"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1&quot;
     ServerName www.example.com
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.50&gt;
-    DocumentRoot "/www/example2"
+&lt;VirtualHost 172.20.30.50&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2&quot;
     ServerName www.example.org
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="基于端口和基于-ip-的混合虚拟主机"><a href="#基于端口和基于-ip-的混合虚拟主机" class="headerlink" title="基于端口和基于 ip 的混合虚拟主机"></a>基于端口和基于 ip 的混合虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 172.20.30.40:80
 Listen 172.20.30.40:8080
 Listen 172.20.30.50:80
 Listen 172.20.30.50:8080
 
-&amp;ltVirtualHost 172.20.30.40:80&gt;
-    DocumentRoot "/www/example1-80"
+&lt;VirtualHost 172.20.30.40:80&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1-80&quot;
     ServerName www.example.com
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40:8080&gt;
-    DocumentRoot "/www/example1-8080"
+&lt;VirtualHost 172.20.30.40:8080&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1-8080&quot;
     ServerName www.example.com
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.50:80&gt;
-    DocumentRoot "/www/example2-80"
+&lt;VirtualHost 172.20.30.50:80&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2-80&quot;
     ServerName www.example.org
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.50:8080&gt;
-    DocumentRoot "/www/example2-8080"
+&lt;VirtualHost 172.20.30.50:8080&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2-8080&quot;
     ServerName www.example.org
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="混合基于名称和基于-IP-的虚拟主机"><a href="#混合基于名称和基于-IP-的虚拟主机" class="headerlink" title="混合基于名称和基于 IP 的虚拟主机"></a>混合基于名称和基于 IP 的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/example1"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example1&quot;
     ServerName www.example.com
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/example2"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2&quot;
     ServerName www.example.org
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/example3"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example3&quot;
     ServerName www.example.net
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
 # IP-based
-&amp;ltVirtualHost 172.20.30.50&gt;
-    DocumentRoot "/www/example4"
+&lt;VirtualHost 172.20.30.50&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example4&quot;
     ServerName www.example.edu
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.60&gt;
-    DocumentRoot "/www/example5"
+&lt;VirtualHost 172.20.30.60&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example5&quot;
     ServerName www.example.gov
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="一起使用-Virtual-host-和-mod-proxy"><a href="#一起使用-Virtual-host-和-mod-proxy" class="headerlink" title="一起使用 Virtual_host 和 mod_proxy"></a>一起使用 Virtual_host 和 mod_proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost *:*&gt;
+<h4 id="一起使用-Virtual-host-和-mod-proxy"><a href="#一起使用-Virtual-host-和-mod-proxy" class="headerlink" title="一起使用 Virtual_host 和 mod_proxy"></a>一起使用 Virtual_host 和 mod_proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;VirtualHost *:*&gt;
     ProxyPreserveHost On
-    ProxyPass        "/" "http://192.168.111.2/"
-    ProxyPassReverse "/" "http://192.168.111.2/"
+    ProxyPass        &quot;&#x2F;&quot; &quot;http:&#x2F;&#x2F;192.168.111.2&#x2F;&quot;
+    ProxyPassReverse &quot;&#x2F;&quot; &quot;http:&#x2F;&#x2F;192.168.111.2&#x2F;&quot;
     ServerName hostname.example.com
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="使用-default-vhosts"><a href="#使用-default-vhosts" class="headerlink" title="使用_default_vhosts"></a>使用<code>_default_</code>vhosts</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost _default_:80&gt;
-    DocumentRoot "/www/default80"
+<h4 id="使用-default-vhosts"><a href="#使用-default-vhosts" class="headerlink" title="使用_default_vhosts"></a>使用<code>_default_</code>vhosts</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;VirtualHost _default_:80&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;default80&quot;
     # ...
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost _default_:*&gt;
-    DocumentRoot "/www/default"
+&lt;VirtualHost _default_:*&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;default&quot;
     # ...
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="将基于名称的虚拟主机迁移到基于-IP-的虚拟主机"><a href="#将基于名称的虚拟主机迁移到基于-IP-的虚拟主机" class="headerlink" title="将基于名称的虚拟主机迁移到基于 IP 的虚拟主机"></a>将基于名称的虚拟主机迁移到基于 IP 的虚拟主机</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">Listen 80
 ServerName www.example.com
-DocumentRoot "/www/example1"
+DocumentRoot &quot;&#x2F;www&#x2F;example1&quot;
 
-&amp;ltVirtualHost 172.20.30.40 172.20.30.50&gt;
-    DocumentRoot "/www/example2"
+&lt;VirtualHost 172.20.30.40 172.20.30.50&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example2&quot;
     ServerName www.example.org
     # ...
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/example3"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;example3&quot;
     ServerName www.example.net
     ServerAlias *.example.net
     # ...
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="使用-ServerPath-指令"><a href="#使用-ServerPath-指令" class="headerlink" title="使用 ServerPath 指令"></a>使用 ServerPath 指令</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltVirtualHost 172.20.30.40&gt;
+<h4 id="使用-ServerPath-指令"><a href="#使用-ServerPath-指令" class="headerlink" title="使用 ServerPath 指令"></a>使用 ServerPath 指令</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;VirtualHost 172.20.30.40&gt;
     # primary vhost
-    DocumentRoot "/www/subdomain"
+    DocumentRoot &quot;&#x2F;www&#x2F;subdomain&quot;
     RewriteEngine On
-    RewriteRule "." "/www/subdomain/index.html"
+    RewriteRule &quot;.&quot; &quot;&#x2F;www&#x2F;subdomain&#x2F;index.html&quot;
     # ...
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/subdomain/sub1"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;subdomain&#x2F;sub1&quot;
     ServerName www.sub1.domain.tld
-    ServerPath "/sub1/"
+    ServerPath &quot;&#x2F;sub1&#x2F;&quot;
     RewriteEngine On
-    RewriteRule "^(/sub1/.*)" "/www/subdomain$1"
+    RewriteRule &quot;^(&#x2F;sub1&#x2F;.*)&quot; &quot;&#x2F;www&#x2F;subdomain$1&quot;
     # ...
-&amp;lt/VirtualHost&gt;
+&lt;&#x2F;VirtualHost&gt;
 
-&amp;ltVirtualHost 172.20.30.40&gt;
-    DocumentRoot "/www/subdomain/sub2"
+&lt;VirtualHost 172.20.30.40&gt;
+    DocumentRoot &quot;&#x2F;www&#x2F;subdomain&#x2F;sub2&quot;
     ServerName www.sub2.domain.tld
-    ServerPath "/sub2/"
+    ServerPath &quot;&#x2F;sub2&#x2F;&quot;
     RewriteEngine On
-    RewriteRule "^(/sub2/.*)" "/www/subdomain$1"
+    RewriteRule &quot;^(&#x2F;sub2&#x2F;.*)&quot; &quot;&#x2F;www&#x2F;subdomain$1&quot;
     # ...
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="条件判断容器"><a href="#条件判断容器" class="headerlink" title="条件判断容器"></a>条件判断容器</h3><h4 id="If"><a href="#If" class="headerlink" title="If"></a>If</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIf "!(%{HTTP_REFERER} -strmatch 'http://www.example.com/*')"&gt;
+<h3 id="条件判断容器"><a href="#条件判断容器" class="headerlink" title="条件判断容器"></a>条件判断容器</h3><h4 id="If"><a href="#If" class="headerlink" title="If"></a>If</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;If &quot;!(%&#123;HTTP_REFERER&#125; -strmatch &#39;http:&#x2F;&#x2F;www.example.com&#x2F;*&#39;)&quot;&gt;
     Require all denied
-&amp;lt/If&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;If&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -921,7 +1138,7 @@ DocumentRoot "/www/example1"
 <td>条件满足则执行内部语句</td>
 </tr>
 <tr>
-<td><code>!(%{HTTP_REFERER} -strmatch 'http://www.example.com/*')</code></td>
+<td><code>!(%{HTTP_REFERER} -strmatch &#39;http://www.example.com/*&#39;)</code></td>
 <td>条件</td>
 </tr>
 <tr>
@@ -929,9 +1146,9 @@ DocumentRoot "/www/example1"
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="IfDefine"><a href="#IfDefine" class="headerlink" title="IfDefine"></a>IfDefine</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfDefine ClosedForNow&gt;
-    Redirect / http://otherserver.example.com/
-&amp;lt/IfDefine&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="IfDefine"><a href="#IfDefine" class="headerlink" title="IfDefine"></a>IfDefine</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;IfDefine ClosedForNow&gt;
+    Redirect &#x2F; http:&#x2F;&#x2F;otherserver.example.com&#x2F;
+&lt;&#x2F;IfDefine&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -957,9 +1174,9 @@ DocumentRoot "/www/example1"
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="IfModule"><a href="#IfModule" class="headerlink" title="IfModule"></a>IfModule</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfModule mod_mime_magic.c&gt;
-    MimeMagicFile conf/magic
-&amp;lt/IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="IfModule"><a href="#IfModule" class="headerlink" title="IfModule"></a>IfModule</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;IfModule mod_mime_magic.c&gt;
+    MimeMagicFile conf&#x2F;magic
+&lt;&#x2F;IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -985,10 +1202,10 @@ DocumentRoot "/www/example1"
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="IfVersion"><a href="#IfVersion" class="headerlink" title="IfVersion"></a>IfVersion</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltIfVersion &gt;= 2.1&gt;
+<h4 id="IfVersion"><a href="#IfVersion" class="headerlink" title="IfVersion"></a>IfVersion</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;IfVersion &gt;&#x3D; 2.1&gt;
     # this happens only in versions greater or
     # equal 2.1.0.
-&amp;lt/IfVersion&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;IfVersion&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1006,10 +1223,10 @@ DocumentRoot "/www/example1"
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="网站空间容器"><a href="#网站空间容器" class="headerlink" title="网站空间容器"></a>网站空间容器</h3><h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocation "/status"&gt;
+<h3 id="网站空间容器"><a href="#网站空间容器" class="headerlink" title="网站空间容器"></a>网站空间容器</h3><h4 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Location &quot;&#x2F;status&quot;&gt;
   SetHandler server-status
   Require host example.com
-&amp;lt/Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1031,31 +1248,31 @@ DocumentRoot "/www/example1"
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="Proxy容器"><a href="#Proxy容器" class="headerlink" title="Proxy容器"></a>Proxy容器</h3><h4 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy "http://example.com/foo/*"&gt;
+<h3 id="Proxy容器"><a href="#Proxy容器" class="headerlink" title="Proxy容器"></a>Proxy容器</h3><h4 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Proxy &quot;http:&#x2F;&#x2F;example.com&#x2F;foo&#x2F;*&quot;&gt;
   SetOutputFilter INCLUDES
-&amp;lt/Proxy&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Proxy&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="更灵活的匹配容器"><a href="#更灵活的匹配容器" class="headerlink" title="更灵活的匹配容器"></a>更灵活的匹配容器</h3><h4 id="DirectoryMatch"><a href="#DirectoryMatch" class="headerlink" title="DirectoryMatch"></a>DirectoryMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectoryMatch "^/www/(.+/)?[0-9]{3}/"&gt;
+<h3 id="更灵活的匹配容器"><a href="#更灵活的匹配容器" class="headerlink" title="更灵活的匹配容器"></a>更灵活的匹配容器</h3><h4 id="DirectoryMatch"><a href="#DirectoryMatch" class="headerlink" title="DirectoryMatch"></a>DirectoryMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;DirectoryMatch &quot;^&#x2F;www&#x2F;(.+&#x2F;)?[0-9]&#123;3&#125;&#x2F;&quot;&gt;
     # ...
-&amp;lt/DirectoryMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;DirectoryMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="FilesMatch"><a href="#FilesMatch" class="headerlink" title="FilesMatch"></a>FilesMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltFilesMatch ".+\.(gif|jpe?g|png)$"&gt;
+<h4 id="FilesMatch"><a href="#FilesMatch" class="headerlink" title="FilesMatch"></a>FilesMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;FilesMatch &quot;.+\.(gif|jpe?g|png)$&quot;&gt;
     # ...
-&amp;lt/FilesMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;FilesMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="LocationMatch"><a href="#LocationMatch" class="headerlink" title="LocationMatch"></a>LocationMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocationMatch "^/combined/(?&amp;ltsitename&gt;[^/]+)"&gt;
-    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
-&amp;lt/LocationMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="LocationMatch"><a href="#LocationMatch" class="headerlink" title="LocationMatch"></a>LocationMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;LocationMatch &quot;^&#x2F;combined&#x2F;(?&lt;sitename&gt;[^&#x2F;]+)&quot;&gt;
+    Require ldap-group cn&#x3D;%&#123;env:MATCH_SITENAME&#125;,ou&#x3D;combined,o&#x3D;Example
+&lt;&#x2F;LocationMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="ProxyMatch"><a href="#ProxyMatch" class="headerlink" title="ProxyMatch"></a>ProxyMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxyMatch "^http://(?&amp;ltsitename&gt;[^/]+)"&gt;
-    Require ldap-group cn=%{env:MATCH_SITENAME},ou=combined,o=Example
-&amp;lt/ProxyMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="ProxyMatch"><a href="#ProxyMatch" class="headerlink" title="ProxyMatch"></a>ProxyMatch</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;ProxyMatch &quot;^http:&#x2F;&#x2F;(?&lt;sitename&gt;[^&#x2F;]+)&quot;&gt;
+    Require ldap-group cn&#x3D;%&#123;env:MATCH_SITENAME&#125;,ou&#x3D;combined,o&#x3D;Example
+&lt;&#x2F;ProxyMatch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="日志模块"><a href="#日志模块" class="headerlink" title="日志模块"></a>日志模块</h3><h4 id="通用日志格式"><a href="#通用日志格式" class="headerlink" title="通用日志格式"></a>通用日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%h %l %u %t \"%r\" %&gt;s %b" common
-CustomLog logs/access_log.log common<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="日志模块"><a href="#日志模块" class="headerlink" title="日志模块"></a>日志模块</h3><h4 id="通用日志格式"><a href="#通用日志格式" class="headerlink" title="通用日志格式"></a>通用日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b&quot; common
+CustomLog logs&#x2F;access_log.log common<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h4 id="组合日志格式"><a href="#组合日志格式" class="headerlink" title="组合日志格式"></a>组合日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%h %l %u %t \"%r\" %&gt;s %b \"%{Referer}i\" \"%{User-agent}i\"" combined
-CustomLog log/access_log.log combined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="组合日志格式"><a href="#组合日志格式" class="headerlink" title="组合日志格式"></a>组合日志格式</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%&#123;Referer&#125;i\&quot; \&quot;%&#123;User-agent&#125;i\&quot;&quot; combined
+CustomLog log&#x2F;access_log.log combined<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ul>
 <li><code>%h</code>是远程主机</li>
@@ -1065,11 +1282,11 @@ CustomLog log/access_log.log combined<span aria-hidden="true" class="line-number
 <li><code>%r</code>是来自客户端的请求行GET、HTTP</li>
 <li><code>%&gt; s</code>是从服务器发送到客户端的状态代码</li>
 <li><code>%b</code>是客户端响应的大小(以字节为单位)</li>
-<li><code>"%{Referer}i</code>是链接到此URL的页面</li>
+<li><code>&quot;%{Referer}i</code>是链接到此URL的页面</li>
 <li><code>%{User-Agent}i</code> 是客户浏览器提供的浏览器识别信息</li>
 </ul>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat "%400,501{User-agent}i" browserlog
-LogFormat "%!200,304,302{Referer}i" refererlog
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">LogFormat &quot;%400,501&#123;User-agent&#125;i&quot; browserlog
+LogFormat &quot;%!200,304,302&#123;Referer&#125;i&quot; refererlog
 #前面的状态码是用来判断的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <table>
@@ -1096,11 +1313,11 @@ LogFormat "%!200,304,302{Referer}i" refererlog
 <td>创建和格式化日志文件<code>common</code></td>
 </tr>
 <tr>
-<td><code>LogFormat "%h %l %u %t "%r" %&gt;s %b "%{Referer}i" "%{User-agent}i"" common</code></td>
+<td><code>LogFormat &quot;%h %l %u %t &quot;%r&quot; %&gt;s %b &quot;%{Referer}i&quot; &quot;%{User-agent}i&quot;&quot; common</code></td>
 <td><code>common</code>为用户日志别名，中间为具体格式</td>
 </tr>
 <tr>
-<td><code>TransferLog "logs/host.example.com-access_log"</code></td>
+<td><code>TransferLog &quot;logs/host.example.com-access_log&quot;</code></td>
 <td>创建日志文件</td>
 </tr>
 <tr>
@@ -1132,7 +1349,7 @@ LogFormat "%!200,304,302{Referer}i" refererlog
 <td>从环境中删除变量</td>
 </tr>
 <tr>
-<td><code>SetEnvIf Request_URI "\.(.*)$" EXTENSION=$1</code></td>
+<td><code>SetEnvIf Request_URI &quot;\.(.*)$&quot; EXTENSION=$1</code></td>
 <td>根据请求的属性设置环境变量</td>
 </tr>
 <tr>
@@ -1180,11 +1397,11 @@ LogFormat "%!200,304,302{Referer}i" refererlog
 <td>定义外部过滤器</td>
 </tr>
 <tr>
-<td>`Header [condition] add</td>
+<td>&#96;Header [condition] add</td>
 <td>append</td>
 </tr>
 <tr>
-<td><code>Header set Content-Type "text/plain" "expr=-z %{CONTENT_TYPE}"</code></td>
+<td><code>Header set Content-Type &quot;text/plain&quot; &quot;expr=-z %{CONTENT_TYPE}&quot;</code></td>
 <td></td>
 </tr>
 <tr>
@@ -1204,19 +1421,19 @@ LogFormat "%!200,304,302{Referer}i" refererlog
 #
 # Sample Cache Configuration
 #
-LoadModule cache_module modules/mod_cache.so
-&amp;ltIfModule mod_cache.c&gt;
-    LoadModule cache_disk_module modules/mod_cache_disk.so
-    &amp;ltIfModule mod_cache_disk.c&gt;
-        CacheRoot "c:/cacheroot"
-        CacheEnable disk  "/"
+LoadModule cache_module modules&#x2F;mod_cache.so
+&lt;IfModule mod_cache.c&gt;
+    LoadModule cache_disk_module modules&#x2F;mod_cache_disk.so
+    &lt;IfModule mod_cache_disk.c&gt;
+        CacheRoot &quot;c:&#x2F;cacheroot&quot;
+        CacheEnable disk  &quot;&#x2F;&quot;
         CacheDirLevels 5
         CacheDirLength 3
-    &amp;lt/IfModule&gt;
+    &lt;&#x2F;IfModule&gt;
 
-    # When acting as a proxy, don't cache the list of security updates
-    CacheDisable "http://security.update.server/update-list/"
-&amp;lt/IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    # When acting as a proxy, don&#39;t cache the list of security updates
+    CacheDisable &quot;http:&#x2F;&#x2F;security.update.server&#x2F;update-list&#x2F;&quot;
+&lt;&#x2F;IfModule&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1272,36 +1489,36 @@ LoadModule cache_module modules/mod_cache.so
 <pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: foo
 
 URI: foo.en.html
-Content-type: text/html
+Content-type: text&#x2F;html
 Content-language: en
 
 URI: foo.fr.de.html
-Content-type: text/html;charset=iso-8859-2
+Content-type: text&#x2F;html;charset&#x3D;iso-8859-2
 Content-language: fr, de<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: foo
 
 URI: foo.jpeg
-Content-type: image/jpeg; qs=0.8
+Content-type: image&#x2F;jpeg; qs&#x3D;0.8
 
 URI: foo.gif
-Content-type: image/gif; qs=0.5
+Content-type: image&#x2F;gif; qs&#x3D;0.5
 
 URI: foo.txt
-Content-type: text/plain; qs=0.01<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Content-type: text&#x2F;plain; qs&#x3D;0.01<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-config" data-language="config"><code class="language-config">URI: document.html
 
 Content-language: en
-Content-type: text/html
+Content-type: text&#x2F;html
 URI: document.html.en
 
 Content-language: fr
-Content-type: text/html
+Content-type: text&#x2F;html
 URI: document.html.fr
 
 Content-language: de
-Content-type: text/html
+Content-type: text&#x2F;html
 URI: document.html.de<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这三段代码都是<code>type-map</code></p>
@@ -1343,10 +1560,10 @@ URI: document.html.de<span aria-hidden="true" class="line-numbers-rows"><span></
 </tbody></table>
 <h4 id="Multiviews"><a href="#Multiviews" class="headerlink" title="Multiviews"></a>Multiviews</h4><p>如果服务器收到<code>/some/dir/foo</code>的请求，如果<code>/some/dir</code>启用了MultiViews，并且<code>/some/dir/foo</code>不存在，那么服务器会读取寻找的目录名为<code>foo.*</code>的文件</p>
 <h3 id="从-URL-映射到文件系统"><a href="#从-URL-映射到文件系统" class="headerlink" title="从 URL 映射到文件系统"></a>从 URL 映射到文件系统</h3><p>Apache HTTP Server 使用请求的 URL 来确定提供文件的文件系统位置</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass         "/mirror/foo/" "http://backend.example.com/"
-ProxyPassReverse  "/mirror/foo/" "http://backend.example.com/"
-ProxyPassReverseCookieDomain  "backend.example.com"  "public.example.com"
-ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass         &quot;&#x2F;mirror&#x2F;foo&#x2F;&quot; &quot;http:&#x2F;&#x2F;backend.example.com&#x2F;&quot;
+ProxyPassReverse  &quot;&#x2F;mirror&#x2F;foo&#x2F;&quot; &quot;http:&#x2F;&#x2F;backend.example.com&#x2F;&quot;
+ProxyPassReverseCookieDomain  &quot;backend.example.com&quot;  &quot;public.example.com&quot;
+ProxyPassReverseCookiePath  &quot;&#x2F;&quot;  &quot;&#x2F;mirror&#x2F;foo&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1356,24 +1573,24 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 </tr>
 </thead>
 <tbody><tr>
-<td>`Alias [URL-path] file-path</td>
-<td>directory-path`</td>
+<td>&#96;Alias [URL-path] file-path</td>
+<td>directory-path&#96;</td>
 </tr>
 <tr>
-<td><code>Alias "/docs" "/var/web"</code></td>
+<td><code>Alias &quot;/docs&quot; &quot;/var/web&quot;</code></td>
 <td>网址 <code>http://www.example.com/docs/dir/file.html</code> 将从<code>/var/web/dir/file.html</code>提供</td>
 </tr>
 <tr>
-<td>`AliasMatch regex file-path</td>
-<td>directory-path`</td>
+<td>&#96;AliasMatch regex file-path</td>
+<td>directory-path&#96;</td>
 </tr>
 <tr>
-<td><code>AliasMatch "^/icons(/$)(.*)" "/usr/local/apache/icons$1$2"</code></td>
+<td><code>AliasMatch &quot;^/icons(/$)(.*)&quot; &quot;/usr/local/apache/icons$1$2&quot;</code></td>
 <td></td>
 </tr>
 <tr>
-<td>`CheckSpelling on</td>
-<td>off`</td>
+<td>&#96;CheckSpelling on</td>
+<td>off&#96;</td>
 </tr>
 <tr>
 <td><code>DirectoryIndex disabled local-url [local-url] ...</code></td>
@@ -1392,7 +1609,7 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td></td>
 </tr>
 <tr>
-<td><code>ProxyPass "/mirror/foo/" "http://backend.example.com/"</code></td>
+<td><code>ProxyPass &quot;/mirror/foo/&quot; &quot;http://backend.example.com/&quot;</code></td>
 <td>将远程服务器映射到本地服务器 URL 空间</td>
 </tr>
 <tr>
@@ -1412,7 +1629,7 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td>发送外部重定向请求客户端获取不同的 URL</td>
 </tr>
 <tr>
-<td><code>Redirect 303 "/three" "http://example.com/other"</code></td>
+<td><code>Redirect 303 &quot;/three&quot; &quot;http://example.com/other&quot;</code></td>
 <td></td>
 </tr>
 <tr>
@@ -1428,12 +1645,12 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td>定义重写引擎的规则</td>
 </tr>
 <tr>
-<td>`ScriptAlias [URL-path] file-path</td>
-<td>directory-path`</td>
+<td>&#96;ScriptAlias [URL-path] file-path</td>
+<td>directory-path&#96;</td>
 </tr>
 <tr>
-<td>`ScriptAliasMatch regex file-path</td>
-<td>directory-path`</td>
+<td>&#96;ScriptAliasMatch regex file-path</td>
+<td>directory-path&#96;</td>
 </tr>
 <tr>
 <td><code>UserDir directory-filename [directory-filename] ...</code></td>
@@ -1452,28 +1669,28 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 </tr>
 </thead>
 <tbody><tr>
-<td>`ServerName [scheme://]domain-name</td>
-<td>ip-address[:port]`</td>
+<td>&#96;ServerName [scheme:&#x2F;&#x2F;]domain-name</td>
+<td>ip-address[:port]&#96;</td>
 </tr>
 <tr>
-<td>`ServerAdmin email-address</td>
-<td>URL`</td>
+<td>&#96;ServerAdmin email-address</td>
+<td>URL&#96;</td>
 </tr>
 <tr>
-<td>`ServerSignature On</td>
+<td>&#96;ServerSignature On</td>
 <td>Off</td>
 </tr>
 <tr>
-<td>`ServerTokens Major</td>
+<td>&#96;ServerTokens Major</td>
 <td>Minor</td>
 </tr>
 <tr>
-<td>`UseCanonicalName On</td>
+<td>&#96;UseCanonicalName On</td>
 <td>Off</td>
 </tr>
 <tr>
-<td>`UseCanonicalPhysicalPort On</td>
-<td>Off`</td>
+<td>&#96;UseCanonicalPhysicalPort On</td>
+<td>Off&#96;</td>
 </tr>
 <tr>
 <td><code>CoreDumpDirectory directory</code></td>
@@ -1484,12 +1701,12 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td>构成 Web 上可见的主文档树的目录</td>
 </tr>
 <tr>
-<td>`ErrorLog file-path</td>
-<td>syslog[:[facility]`</td>
+<td>&#96;ErrorLog file-path</td>
+<td>syslog[:[facility]&#96;</td>
 </tr>
 <tr>
-<td>`Mutex mechanism [default</td>
-<td>mutex-name] … [OmitPID]`</td>
+<td>&#96;Mutex mechanism [default</td>
+<td>mutex-name] … [OmitPID]&#96;</td>
 </tr>
 <tr>
 <td><code>PidFile filename</code></td>
@@ -1520,15 +1737,15 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td>限制将从客户端接受的 HTTP 请求行的大小</td>
 </tr>
 <tr>
-<td>`RLimitCPU seconds</td>
+<td>&#96;RLimitCPU seconds</td>
 <td>max [seconds</td>
 </tr>
 <tr>
-<td>`RLimitMEM bytes</td>
+<td>&#96;RLimitMEM bytes</td>
 <td>max [bytes</td>
 </tr>
 <tr>
-<td>`RLimitNPROC number</td>
+<td>&#96;RLimitNPROC number</td>
 <td>max [number</td>
 </tr>
 <tr>
@@ -1540,16 +1757,16 @@ ProxyPassReverseCookiePath  "/"  "/mirror/foo/"<span aria-hidden="true" class="l
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="SSL-TLS-加密"><a href="#SSL-TLS-加密" class="headerlink" title="SSL/TLS 加密"></a>SSL/TLS 加密</h3><p>an example</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">LoadModule ssl_module modules/mod_ssl.so
+<h3 id="SSL-TLS-加密"><a href="#SSL-TLS-加密" class="headerlink" title="SSL&#x2F;TLS 加密"></a>SSL&#x2F;TLS 加密</h3><p>an example</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">LoadModule ssl_module modules&#x2F;mod_ssl.so
 
 Listen 443
-&amp;ltVirtualHost *:443&gt;
+&lt;VirtualHost *:443&gt;
     ServerName www.example.com
     SSLEngine on
-    SSLCertificateFile "/path/to/www.example.com.cert"
-    SSLCertificateKeyFile "/path/to/www.example.com.key"
-&amp;lt/VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    SSLCertificateFile &quot;&#x2F;path&#x2F;to&#x2F;www.example.com.cert&quot;
+    SSLCertificateKeyFile &quot;&#x2F;path&#x2F;to&#x2F;www.example.com.key&quot;
+&lt;&#x2F;VirtualHost&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1563,12 +1780,12 @@ Listen 443
 <td>SSL 引擎操作开关</td>
 </tr>
 <tr>
-<td>`SSLCertificateFile file-path</td>
-<td>certid`</td>
+<td>&#96;SSLCertificateFile file-path</td>
+<td>certid&#96;</td>
 </tr>
 <tr>
-<td>`SSLCertificateKeyFile file-path</td>
-<td>keyid`</td>
+<td>&#96;SSLCertificateKeyFile file-path</td>
+<td>keyid&#96;</td>
 </tr>
 <tr>
 <td><code>SSLCipherSuite [protocol] cipher-spec</code></td>
@@ -1579,15 +1796,15 @@ Listen 443
 <td></td>
 </tr>
 <tr>
-<td>`SSLHonorCipherOrder on</td>
-<td>off`</td>
+<td>&#96;SSLHonorCipherOrder on</td>
+<td>off&#96;</td>
 </tr>
 <tr>
 <td><code>SSLUseStapling off</code></td>
 <td>在 TLS 握手中启用 OCSP 响应的装订</td>
 </tr>
 <tr>
-<td><code>SSLStaplingCache "shmcb:logs/ssl_stapling(32768)"</code></td>
+<td><code>SSLStaplingCache &quot;shmcb:logs/ssl_stapling(32768)&quot;</code></td>
 <td>配置 OCSP 装订缓存</td>
 </tr>
 <tr>
@@ -1603,8 +1820,8 @@ Listen 443
 <td>用于客户端身份验证的串联 PEM 编码 CA 证书文件</td>
 </tr>
 <tr>
-<td>`SSLOptions [+</td>
-<td>-]option …`</td>
+<td>&#96;SSLOptions [+</td>
+<td>-]option …&#96;</td>
 </tr>
 <tr>
 <td><code>SSLRequire expression</code></td>
@@ -1663,7 +1880,7 @@ Listen 443
 <td>.htaccess 文件中允许的指令类型</td>
 </tr>
 <tr>
-<td>`AuthType None</td>
+<td>&#96;AuthType None</td>
 <td>Basic</td>
 </tr>
 <tr>
@@ -1695,7 +1912,7 @@ Listen 443
 <td>设置包含授权用户组列表的文本文件的名称</td>
 </tr>
 <tr>
-<td>`AuthLDAPURL url [NONE</td>
+<td>&#96;AuthLDAPURL url [NONE</td>
 <td>SSL</td>
 </tr>
 <tr>
@@ -1742,39 +1959,39 @@ htpasswd /usr/local/apache/passwd/passwords dpitts
 
 <h4 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h4><p>能放在<code>.htaccess</code>中或者<code>Directory</code>中</p>
 <pre class="line-numbers language-config" data-language="config"><code class="language-config">AuthType Basic
-AuthName "Restricted Files"
+AuthName &quot;Restricted Files&quot;
 # (Following line optional)
 AuthBasicProvider file
-AuthUserFile "/usr/local/apache/passwd/passwords"
+AuthUserFile &quot;&#x2F;usr&#x2F;local&#x2F;apache&#x2F;passwd&#x2F;passwords&quot;
 Require user rbowen<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="让不止一个人进来"><a href="#让不止一个人进来" class="headerlink" title="让不止一个人进来"></a>让不止一个人进来</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">AuthType Basic
-AuthName "By Invitation Only"
+AuthName &quot;By Invitation Only&quot;
 # Optional line:
 AuthBasicProvider file
-AuthUserFile "/usr/local/apache/passwd/passwords"
-AuthGroupFile "/usr/local/apache/passwd/groups"
+AuthUserFile &quot;&#x2F;usr&#x2F;local&#x2F;apache&#x2F;passwd&#x2F;passwords&quot;
+AuthGroupFile &quot;&#x2F;usr&#x2F;local&#x2F;apache&#x2F;passwd&#x2F;groups&quot;
 Require group GroupName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="备用密码存储"><a href="#备用密码存储" class="headerlink" title="备用密码存储"></a>备用密码存储</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/www/docs/private"&gt;
-    AuthName "Private"
+<h4 id="备用密码存储"><a href="#备用密码存储" class="headerlink" title="备用密码存储"></a>备用密码存储</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Directory &quot;&#x2F;www&#x2F;docs&#x2F;private&quot;&gt;
+    AuthName &quot;Private&quot;
     AuthType Basic
     AuthBasicProvider dbm
-    AuthDBMUserFile "/www/passwords/passwd.dbm"
+    AuthDBMUserFile &quot;&#x2F;www&#x2F;passwords&#x2F;passwd.dbm&quot;
     Require valid-user
-&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="使用多个提供商"><a href="#使用多个提供商" class="headerlink" title="使用多个提供商"></a>使用多个提供商</h4><p>使用文件组授权和 LDAP 组授权</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/www/docs/private"&gt;
-    AuthName "Private"
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Directory &quot;&#x2F;www&#x2F;docs&#x2F;private&quot;&gt;
+    AuthName &quot;Private&quot;
     AuthType Basic
     AuthBasicProvider file
-    AuthUserFile "/usr/local/apache/passwd/passwords"
-    AuthLDAPURL ldap://ldaphost/o=yourorg
-    AuthGroupFile "/usr/local/apache/passwd/groups"
+    AuthUserFile &quot;&#x2F;usr&#x2F;local&#x2F;apache&#x2F;passwd&#x2F;passwords&quot;
+    AuthLDAPURL ldap:&#x2F;&#x2F;ldaphost&#x2F;o&#x3D;yourorg
+    AuthGroupFile &quot;&#x2F;usr&#x2F;local&#x2F;apache&#x2F;passwd&#x2F;groups&quot;
     Require group GroupName
-    Require ldap-group cn=mygroup,o=yourorg
-&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    Require ldap-group cn&#x3D;mygroup,o&#x3D;yourorg
+&lt;&#x2F;Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="CGI与动态内容"><a href="#CGI与动态内容" class="headerlink" title="CGI与动态内容"></a>CGI与动态内容</h3><table>
 <thead>
@@ -1792,15 +2009,15 @@ Require group GroupName<span aria-hidden="true" class="line-numbers-rows"><span>
 <td></td>
 </tr>
 <tr>
-<td>`ScriptAlias [URL-path] file-path</td>
-<td>directory-path`</td>
+<td>&#96;ScriptAlias [URL-path] file-path</td>
+<td>directory-path&#96;</td>
 </tr>
 <tr>
 <td><code>LoadModule cgi_module modules/mod_cgi.so</code></td>
 <td>配置 Apache 以允许 CGI 执行</td>
 </tr>
 <tr>
-<td>`SetHandler handler-name</td>
+<td>&#96;SetHandler handler-name</td>
 <td>none</td>
 </tr>
 <tr>
@@ -1809,66 +2026,66 @@ Require group GroupName<span aria-hidden="true" class="line-numbers-rows"><span>
 </tr>
 </tbody></table>
 <p>要允许CGI程序执行用户目录中结束的任何文件。<code>.cgi</code></p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/home/*/public_html"&gt;
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Directory &quot;&#x2F;home&#x2F;*&#x2F;public_html&quot;&gt;
     Options +ExecCGI
     AddHandler cgi-script .cgi
-&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>如果您希望指定用户目录的子目录，其中所有内容都将被视为 CGI 程序。cgi-bin`</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltDirectory "/home/*/public_html/cgi-bin"&gt;
+<p>如果您希望指定用户目录的子目录，其中所有内容都将被视为 CGI 程序。cgi-bin&#96;</p>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Directory &quot;&#x2F;home&#x2F;*&#x2F;public_html&#x2F;cgi-bin&quot;&gt;
     Options ExecCGI
     SetHandler cgi-script
-&amp;lt/Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Directory&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="编写CGI"><a href="#编写CGI" class="headerlink" title="编写CGI"></a>编写CGI</h4><p>保存到名为<code>first.pl</code>的文件中，并将其放在<code>cgi-bin</code>目录中</p>
-<pre class="line-numbers language-none"><code class="language-none">#!/usr/bin/perl
-print "Content-type: text/html\n\n";
-print "Hello, World.";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">#!&#x2F;usr&#x2F;bin&#x2F;perl
+print &quot;Content-type: text&#x2F;html\n\n&quot;;
+print &quot;Hello, World.&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>浏览器输入URL地址</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">http://www.example.com/cgi-bin/first.pl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">http:&#x2F;&#x2F;www.example.com&#x2F;cgi-bin&#x2F;first.pl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><h4 id="简单的反向代理"><a href="#简单的反向代理" class="headerlink" title="简单的反向代理"></a>简单的反向代理</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass "/images"  "http://www.example.com/"
-ProxyPassReverse "/images"  "http://www.example.com/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><h4 id="简单的反向代理"><a href="#简单的反向代理" class="headerlink" title="简单的反向代理"></a>简单的反向代理</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">ProxyPass &quot;&#x2F;images&quot;  &quot;http:&#x2F;&#x2F;www.example.com&#x2F;&quot;
+ProxyPassReverse &quot;&#x2F;images&quot;  &quot;http:&#x2F;&#x2F;www.example.com&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>任何以<code>/images</code>路径开头的请求都被代理到指定的后端，否则它将在本地处理</p>
 <h4 id="集群和均衡器"><a href="#集群和均衡器" class="headerlink" title="集群和均衡器"></a>集群和均衡器</h4><p>负载均衡和故障转移</p>
-<pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
-    BalancerMember http://www2.example.com:8080
-    BalancerMember http://www3.example.com:8080
-    ProxySet lbmethod=bytraffic
-&amp;lt/Proxy&gt;
+<pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Proxy balancer:&#x2F;&#x2F;myset&gt;
+    BalancerMember http:&#x2F;&#x2F;www2.example.com:8080
+    BalancerMember http:&#x2F;&#x2F;www3.example.com:8080
+    ProxySet lbmethod&#x3D;bytraffic
+&lt;&#x2F;Proxy&gt;
 
-ProxyPass "/images/"  "balancer://myset/"
-ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ProxyPass &quot;&#x2F;images&#x2F;&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;
+ProxyPassReverse &quot;&#x2F;images&#x2F;&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="均衡器和均衡器成员配置"><a href="#均衡器和均衡器成员配置" class="headerlink" title="均衡器和均衡器成员配置"></a>均衡器和均衡器成员配置</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
-    BalancerMember http://www2.example.com:8080
-    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
-    ProxySet lbmethod=bytraffic
-&amp;lt/Proxy&gt;
+<h4 id="均衡器和均衡器成员配置"><a href="#均衡器和均衡器成员配置" class="headerlink" title="均衡器和均衡器成员配置"></a>均衡器和均衡器成员配置</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Proxy balancer:&#x2F;&#x2F;myset&gt;
+    BalancerMember http:&#x2F;&#x2F;www2.example.com:8080
+    BalancerMember http:&#x2F;&#x2F;www3.example.com:8080 loadfactor&#x3D;3 timeout&#x3D;1
+    ProxySet lbmethod&#x3D;bytraffic
+&lt;&#x2F;Proxy&gt;
 
-ProxyPass "/images"  "balancer://myset/"
-ProxyPassReverse "/images"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ProxyPass &quot;&#x2F;images&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;
+ProxyPassReverse &quot;&#x2F;images&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltProxy balancer://myset&gt;
-    BalancerMember http://www2.example.com:8080
-    BalancerMember http://www3.example.com:8080 loadfactor=3 timeout=1
-    BalancerMember http://spare1.example.com:8080 status=+R
-    BalancerMember http://spare2.example.com:8080 status=+R
-    BalancerMember http://hstandby.example.com:8080 status=+H
-    BalancerMember http://bkup1.example.com:8080 lbset=1
-    BalancerMember http://bkup2.example.com:8080 lbset=1
-    ProxySet lbmethod=byrequests
-&amp;lt/Proxy&gt;
+<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Proxy balancer:&#x2F;&#x2F;myset&gt;
+    BalancerMember http:&#x2F;&#x2F;www2.example.com:8080
+    BalancerMember http:&#x2F;&#x2F;www3.example.com:8080 loadfactor&#x3D;3 timeout&#x3D;1
+    BalancerMember http:&#x2F;&#x2F;spare1.example.com:8080 status&#x3D;+R
+    BalancerMember http:&#x2F;&#x2F;spare2.example.com:8080 status&#x3D;+R
+    BalancerMember http:&#x2F;&#x2F;hstandby.example.com:8080 status&#x3D;+H
+    BalancerMember http:&#x2F;&#x2F;bkup1.example.com:8080 lbset&#x3D;1
+    BalancerMember http:&#x2F;&#x2F;bkup2.example.com:8080 lbset&#x3D;1
+    ProxySet lbmethod&#x3D;byrequests
+&lt;&#x2F;Proxy&gt;
 
-ProxyPass "/images/"  "balancer://myset/"
-ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ProxyPass &quot;&#x2F;images&#x2F;&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;
+ProxyPassReverse &quot;&#x2F;images&#x2F;&quot;  &quot;balancer:&#x2F;&#x2F;myset&#x2F;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="均衡器启用"><a href="#均衡器启用" class="headerlink" title="均衡器启用"></a>均衡器启用</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&amp;ltLocation "/balancer-manager"&gt;
+<h4 id="均衡器启用"><a href="#均衡器启用" class="headerlink" title="均衡器启用"></a>均衡器启用</h4><pre class="line-numbers language-config" data-language="config"><code class="language-config">&lt;Location &quot;&#x2F;balancer-manager&quot;&gt;
     SetHandler balancer-manager
     Require host localhost
-&amp;lt/Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;&#x2F;Location&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -1878,8 +2095,8 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 </tr>
 </thead>
 <tbody><tr>
-<td>`ProxyPass [path] !</td>
-<td>url [key=value [key=value …]] [nocanon] [interpolate] [noquery]`</td>
+<td>&#96;ProxyPass [path] !</td>
+<td>url [key&#x3D;value [key&#x3D;value …]] [nocanon] [interpolate] [noquery]&#96;</td>
 </tr>
 <tr>
 <td><code>BalancerMember [balancerurl] url [key=value [key=value ...]]</code></td>
@@ -2136,7 +2353,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 </tr>
 <tr>
 <td><code>HTTP2</code></td>
-<td>如果请求使用http/2<code>on</code>，否则<code>off</code></td>
+<td>如果请求使用http&#x2F;2<code>on</code>，否则<code>off</code></td>
 </tr>
 <tr>
 <td><code>HTTPS</code></td>
@@ -2448,7 +2665,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpm_netware.html">mpm_netware</a></p>
 <p>实现专为 Novell NetWare 优化的线程 Web 服务器的多处理模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpmt_os2.html">mpmt_os2</a></p>
-<p>用于 OS/2 的混合多进程、多线程 MPM</p>
+<p>用于 OS&#x2F;2 的混合多进程、多线程 MPM</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/prefork.html">prefork</a></p>
 <p>实现一个非线程的、预分叉的 Web 服务器</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mpm_winnt.html">mpm_winnt</a></p>
@@ -2538,7 +2755,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dir.html">mod_dir</a></p>
 <p>提供”跟踪斜线”重定向和服务目录索引文件</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_dumpio.html">mod_dumpio</a></p>
-<p>根据需要将所有 I/O 转储到错误日志</p>
+<p>根据需要将所有 I&#x2F;O 转储到错误日志</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_echo.html">mod_echo</a></p>
 <p>一个简单的回显服务器来说明协议模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_env.html">mod_env</a></p>
@@ -2560,7 +2777,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_heartmonitor.html">mod_heartmonitor</a></p>
 <p>mod_heartbeat源服务器的集中监视器</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_http2.html">mod_http2</a></p>
-<p>支持 HTTP/2 运输层</p>
+<p>支持 HTTP&#x2F;2 运输层</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_ident.html">mod_ident</a></p>
 <p>RFC 1413 标识查找</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_imagemap.html">mod_imagemap</a></p>
@@ -2606,7 +2823,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_privileges.html">mod_privileges</a></p>
 <p>支持 Solaris 特权和在不同用户 ID 下运行虚拟主机</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy.html">mod_proxy</a></p>
-<p>多协议代理/网关服务器</p>
+<p>多协议代理&#x2F;网关服务器</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_ajp.html">mod_proxy_ajp</a></p>
 <p>mod_proxy 的 AJP 支持模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html">mod_proxy_balancer</a></p>
@@ -2628,7 +2845,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html">mod_proxy_http</a></p>
 <p>mod_proxy 的 HTTP 支持模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_http2.html">mod_proxy_http2</a></p>
-<p>mod_proxy 的 HTTP/2 支持模块</p>
+<p>mod_proxy 的 HTTP&#x2F;2 支持模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html">mod_proxy_scgi</a></p>
 <p>用于 mod_proxy 的 SCGI 网关模块</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html">mod_proxy_uwsgi</a></p>
@@ -2656,7 +2873,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session_crypto.html">mod_session_crypto</a></p>
 <p>会话加密支持</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_session_dbd.html">mod_session_dbd</a></p>
-<p>基于 DBD/SQL 的会话支持</p>
+<p>基于 DBD&#x2F;SQL 的会话支持</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_setenvif.html">mod_setenvif</a></p>
 <p>允许根据请求的特征设置环境变量</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_slotmem_plain.html">mod_slotmem_plain</a></p>
@@ -2702,10 +2919,11 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_watchdog.html">mod_watchdog</a></p>
 <p>为其他模块提供基础设施以定期运行任务</p>
 <p><a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/mod/mod_xml2enc.html">mod_xml2enc</a></p>
-<p>增强了对基于 libxml2 的过滤器模块的字符集/国际化支持</p>
-<p>[^更多请参考]: <a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/zh-cn/">Apache HTTP 服务器 2.4 文档 - Apache HTTP 服务器 版本 2.4</a></p>
+<p>增强了对基于 libxml2 的过滤器模块的字符集&#x2F;国际化支持</p>
+<p>更多请参考：<a target="_blank" rel="noopener" href="https://httpd.apache.org/docs/2.4/zh-cn/">Apache HTTP 服务器 2.4 文档</a></p>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -2780,8 +2998,44 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -2806,10 +3060,10 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -3077,27 +3331,17 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -3111,160 +3355,87 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2021/08/02/guo-nei-jing-xiang-yuan/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/53.jpg" class="responsive-img" alt="国内镜像源">
-                        
-                        <span class="card-title">国内镜像源</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            国内镜像源
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/linux/" class="post-category">
-                                    linux
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/tip/">
-                        <span class="chip bg-color">tip</span>
-                    </a>
-                    
-                    <a href="/tags/linux/">
-                        <span class="chip bg-color">linux</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2021/08/10/a-li-yun-bu-shu-apache-er-ji-yu-ming/">
+            <span class="dream-related-reason">共同标签：server</span><h3>阿里云部署apache二级域名</h3>
+            <time datetime="2021-08-10">2021-08-10</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2021/08/12/jiang-hexo-bu-shu-dao-fu-wu-qi/">
+            <span class="dream-related-reason">共同标签：server</span><h3>将hexo部署到服务器</h3>
+            <time datetime="2021-08-12">2021-08-12</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/07/21/vulhub-an-zhuang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/38.jpg" class="responsive-img" alt="vulhub安装">
-                        
-                        <span class="card-title">vulhub安装</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            vulhub安装
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-21
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/tip/" class="post-category">
-                                    tip
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/tip/">
-                        <span class="chip bg-color">tip</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2021/08/11/apache-bu-shu-ssl/">
+            <span class="dream-related-reason">共同标签：server</span><h3>apache部署ssl</h3>
+            <time datetime="2021-08-11">2021-08-11</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2021/08/02/guo-nei-jing-xiang-yuan/" rel="prev"><span>较新的一篇</span><strong>国内镜像源</strong></a>
+        <a href="/2021/07/21/vulhub-an-zhuang/" rel="next"><span>较早的一篇</span><strong>vulhub安装</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -3283,6 +3454,7 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -3295,9 +3467,10 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -3307,23 +3480,27 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -3348,7 +3525,6 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -3358,6 +3534,8 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -3373,60 +3551,6 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -3437,27 +3561,30 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -3469,38 +3596,44 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -3511,107 +3644,209 @@ ProxyPassReverse "/images/"  "balancer://myset/"<span aria-hidden="true" class="
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -3622,35 +3857,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -3674,45 +3948,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

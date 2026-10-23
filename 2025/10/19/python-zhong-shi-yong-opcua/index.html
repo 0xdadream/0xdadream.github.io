@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="OPC-UA 与 Python 详细使用教程, 逐梦">
+    <meta name="keywords" content="OPC-UA 与 Python 详细使用教程, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="OPC-UA 与 Python 详细使用教程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/">
+    <link rel="preload" as="image" href="/medias/featureimages/7.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="OPC-UA 与 Python 详细使用教程 | 逐梦">
+    <meta property="og:description" content="OPC-UA 与 Python 详细使用教程">
+    <meta property="og:url" content="https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OPC-UA 与 Python 详细使用教程 | 逐梦">
+    <meta name="twitter:description" content="OPC-UA 与 Python 详细使用教程">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"OPC-UA 与 Python 详细使用教程 | 逐梦","headline":"OPC-UA 与 Python 详细使用教程 | 逐梦","description":"OPC-UA 与 Python 详细使用教程","url":"https://0xdadream.github.io/2025/10/19/python-zhong-shi-yong-opcua/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2025-10-19T04:25:00.000Z","dateModified":"2026-10-21T16:07:25.561Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>OPC-UA 与 Python 详细使用教程 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -420,28 +616,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-25
+                    2026-10-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    11 分
                 </div>
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -449,14 +645,35 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#OPC-UA-%E4%B8%8E-Python-%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="dream-toc-list-text">OPC-UA 与 Python 详细使用教程</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-OPC-UA%EF%BC%9F"><span class="dream-toc-list-text">1. 什么是 OPC-UA？</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-%E5%AE%89%E8%A3%85-python-opcua"><span class="dream-toc-list-text">2. 安装 python-opcua</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-OPC-UA-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="dream-toc-list-text">3. 第一部分：创建一个简单的 OPC-UA 服务器</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-OPC-UA-%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%88%E8%AF%BB%E5%86%99%EF%BC%89"><span class="dream-toc-list-text">4. 第二部分：创建一个 OPC-UA 客户端（读写）</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E8%AE%A2%E9%98%85%E6%95%B0%E6%8D%AE%E5%8F%98%E5%8C%96"><span class="dream-toc-list-text">5. 第三部分：订阅数据变化</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9A%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="dream-toc-list-text">6. 第四部分：在服务器上创建并调用方法</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#%E6%80%BB%E7%BB%93"><span class="dream-toc-list-text">总结</span></a></li></ol></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
                 <h2 id="OPC-UA-与-Python-详细使用教程"><a href="#OPC-UA-与-Python-详细使用教程" class="headerlink" title="OPC-UA 与 Python 详细使用教程"></a>OPC-UA 与 Python 详细使用教程</h2><h3 id="1-什么是-OPC-UA？"><a href="#1-什么是-OPC-UA？" class="headerlink" title="1. 什么是 OPC-UA？"></a>1. 什么是 OPC-UA？</h3><p>OPC-UA (Open Platform Communications Unified Architecture) 是一种独立于平台、面向服务的机器对机器（M2M）通信协议。它被广泛应用于工业自动化领域，用于在不同厂商的设备、控制器和软件应用之间实现安全、可靠的数据交换。</p>
 <p><strong>核心概念：</strong></p>
 <ul>
@@ -467,46 +684,42 @@
 <li><strong>变量 (Variable):</strong> 存放实际数据的节点，例如温度、压力、开关状态等。</li>
 </ul>
 <h3 id="2-安装-python-opcua"><a href="#2-安装-python-opcua" class="headerlink" title="2. 安装 python-opcua"></a>2. 安装 <code>python-opcua</code></h3><p>安装非常简单，使用 pip 即可：</p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">pip install opcua<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">python -m pip install opcua<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<p>本文使用同步的 <code>python-opcua</code>（导入名 <code>opcua</code>），后续示例应使用同一套 API。</p>
 <h3 id="3-第一部分：创建一个简单的-OPC-UA-服务器"><a href="#3-第一部分：创建一个简单的-OPC-UA-服务器" class="headerlink" title="3. 第一部分：创建一个简单的 OPC-UA 服务器"></a>3. 第一部分：创建一个简单的 OPC-UA 服务器</h3><p>我们将创建一个服务器，它会暴露一个模拟的温度传感器变量。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import time
 from opcua import ua, Server
 
 # 1. 创建服务器实例
-server = Server()
+server &#x3D; Server()
 
 # 2. 设置服务器端点 (Endpoint)
 #    客户端将通过这个 URL 连接
-url = "opc.tcp://0.0.0.0:4840/freeopcua/server/"
+url &#x3D; &quot;opc.tcp:&#x2F;&#x2F;127.0.0.1:4840&#x2F;freeopcua&#x2F;server&#x2F;&quot;
 server.set_endpoint(url)
 
 # 3. 设置服务器名称（可选）
-server.set_server_name("Python OPC-UA 示例服务器")
+server.set_server_name(&quot;Python OPC-UA 示例服务器&quot;)
 
-# 4. 设置安全策略（这里使用最不安全的，方便测试）
-#    实际应用中应使用更安全的策略
-server.set_security_policy([
-    ua.SecurityPolicyType.NoSecurity,
-    ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt,
-    ua.SecurityPolicyType.Basic256Sha256_Sign
-])
+# 4. 本机入门示例使用 NoSecurity，不宣称提供加密连接
+server.set_security_policy([ua.SecurityPolicyType.NoSecurity])
 
 # 5. 注册一个唯一的命名空间 (Namespace)
 #    命名空间用于组织你自己的节点，防止与标准节点冲突
-ns_name = "http://examples.freeopcua.github.io"
-idx = server.register_namespace(ns_name)
+ns_name &#x3D; &quot;http:&#x2F;&#x2F;examples.freeopcua.github.io&quot;
+idx &#x3D; server.register_namespace(ns_name)
 
 # 6. 在服务器的 Objects 节点下创建一个“MyObjects”文件夹
-objects = server.get_objects_node()
-my_folder = objects.add_object(idx, "MyObjects")
+objects &#x3D; server.get_objects_node()
+my_folder &#x3D; objects.add_object(idx, &quot;MyObjects&quot;)
 
 # 7. 在“MyObjects”文件夹下创建变量
 #    idx: 命名空间索引
-#    "MyVariable": 节点的浏览名称 (BrowseName)
+#    &quot;MyVariable&quot;: 节点的浏览名称 (BrowseName)
 #    0: 变量的初始值
-my_var = my_folder.add_variable(idx, "MyVariable", 0)
-my_temp_sensor = my_folder.add_variable(idx, "TemperatureSensor", 20.0)
+my_var &#x3D; my_folder.add_variable(idx, &quot;MyVariable&quot;, 0.0, ua.VariantType.Double)
+my_temp_sensor &#x3D; my_folder.add_variable(idx, &quot;TemperatureSensor&quot;, 20.0, ua.VariantType.Double)
 
 # 8. 使变量可被客户端写入
 #    默认情况下，变量是只读的
@@ -515,102 +728,100 @@ my_temp_sensor.set_writable()
 
 # 9. 启动服务器
 try:
-    print(f"启动服务器于 {url}")
+    print(f&quot;启动服务器于 &#123;url&#125;&quot;)
     server.start()
     
     # 让服务器持续运行，并模拟温度变化
-    temperature = 20.0
-    delta = 0.5
+    temperature &#x3D; 20.0
+    delta &#x3D; 0.5
     
     while True:
         time.sleep(2)  # 每2秒更新一次
         
-        temperature += delta
+        temperature +&#x3D; delta
         if temperature &gt; 30 or temperature &lt; 19:
-            delta = -delta # 调转方向
+            delta &#x3D; -delta # 调转方向
             
-        print(f"设置新温度值为: {temperature:.1f}")
+        print(f&quot;设置新温度值为: &#123;temperature:.1f&#125;&quot;)
         my_temp_sensor.set_value(temperature)
 
 except KeyboardInterrupt:
-    print("\n服务器正在停止...")
+    print(&quot;\n服务器正在停止...&quot;)
 finally:
     # 10. 关闭服务器
     server.stop()
-    print("服务器已关闭")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(&quot;服务器已关闭&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>运行：</strong> 将以上代码保存为 <code>server.py</code> 并运行 <code>python server.py</code>。你现在就有了一个正在运行的 OPC-UA 服务器。</p>
+<p><strong>运行：</strong> 将以上代码保存为 <code>server.py</code> 并运行 <code>python server.py</code>。本例仅监听本机 <code>127.0.0.1:4840</code>，下文客户端也在同一台机器运行。跨机器连接时才改为指定的局域网地址；仅列出加密策略不等于已完成证书、私钥和信任配置。</p>
+<p><code>add_variable(idx, &quot;TemperatureSensor&quot;, ...)</code> 的字符串是 BrowseName，不保证 NodeId 也是同名字符串。下文通过命名空间 URI 和浏览路径查找节点，避免写死 <code>ns=2</code> 或猜测 NodeId。</p>
 <h3 id="4-第二部分：创建一个-OPC-UA-客户端（读写）"><a href="#4-第二部分：创建一个-OPC-UA-客户端（读写）" class="headerlink" title="4. 第二部分：创建一个 OPC-UA 客户端（读写）"></a>4. 第二部分：创建一个 OPC-UA 客户端（读写）</h3><p>现在我们创建另一个脚本来连接服务器、读取和写入数据。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import time
 from opcua import Client, ua
 
 # 服务器的 URL，与 server.py 中设置的保持一致
-url = "opc.tcp://localhost:4840/freeopcua/server/"
+url &#x3D; &quot;opc.tcp:&#x2F;&#x2F;localhost:4840&#x2F;freeopcua&#x2F;server&#x2F;&quot;
 
 # 1. 创建客户端实例
-client = Client(url)
+client &#x3D; Client(url)
 
 try:
     # 2. 连接到服务器
-    print(f"正在连接到 {url} ...")
+    print(f&quot;正在连接到 &#123;url&#125; ...&quot;)
     client.connect()
-    print("连接成功！")
+    print(&quot;连接成功！&quot;)
 
     # 3. 浏览节点 (可选, 但有助于理解结构)
     #    获取根节点
-    root = client.get_root_node()
-    print(f"根节点: {root}")
-    print(f"根节点的子节点: {root.get_children()}")
+    root &#x3D; client.get_root_node()
+    print(f&quot;根节点: &#123;root&#125;&quot;)
+    print(f&quot;根节点的子节点: &#123;root.get_children()&#125;&quot;)
 
-    # 4. 获取我们感兴趣的特定节点
-    #    方法a: 通过浏览路径 (Browse Path)
-    #    路径: Root -&gt; Objects (0:Objects) -&gt; 命名空间2 (2:MyObjects) -&gt; 变量 (2:TemperatureSensor)
-    #    '2' 是我们自己注册的命名空间的索引 (idx)
-    #    注意: 命名空间索引 (ns) 可能会变化，通常 0 是标准，1 是服务器内部，我们注册的从 2 开始
-    temp_node = client.get_node("ns=2;s=TemperatureSensor")
-    my_var_node = client.get_node("ns=2;s=MyVariable")
+    # 4. 按命名空间 URI 查询索引，再沿 BrowseName 路径找节点
+    idx &#x3D; client.get_namespace_index(&quot;http:&#x2F;&#x2F;examples.freeopcua.github.io&quot;)
+    my_folder_node &#x3D; client.get_objects_node().get_child(f&quot;&#123;idx&#125;:MyObjects&quot;)
+    temp_node &#x3D; my_folder_node.get_child(f&quot;&#123;idx&#125;:TemperatureSensor&quot;)
+    my_var_node &#x3D; my_folder_node.get_child(f&quot;&#123;idx&#125;:MyVariable&quot;)
 
-    #    方法b: 通过 NodeId (如果已知)
-    #    node_id_str = "ns=2;i=2" # 假设你知道它的 NodeId
-    #    temp_node = client.get_node(node_id_str)
-    
-    print("-" * 30)
+    # 若服务器提供了明确的 NodeId，也可以 client.get_node(实际的 NodeId)。
+    # BrowseName 和 NodeId 是不同概念，不应由名称猜出 NodeId。
+
+    print(&quot;-&quot; * 30)
     
     # 5. 读取节点的值
-    current_temp = temp_node.get_value()
-    print(f"读取到当前温度: {current_temp}")
+    current_temp &#x3D; temp_node.get_value()
+    print(f&quot;读取到当前温度: &#123;current_temp&#125;&quot;)
     
-    current_var = my_var_node.get_value()
-    print(f"读取到 MyVariable: {current_var}")
+    current_var &#x3D; my_var_node.get_value()
+    print(f&quot;读取到 MyVariable: &#123;current_var&#125;&quot;)
     
-    print("-" * 30)
+    print(&quot;-&quot; * 30)
 
     # 6. 写入节点的值
-    new_value = 99.9
-    print(f"正在向 MyVariable 写入新值: {new_value}")
+    new_value &#x3D; 99.9
+    print(f&quot;正在向 MyVariable 写入新值: &#123;new_value&#125;&quot;)
     
     # 构造 ua.DataValue 和 ua.Variant
-    data_value = ua.DataValue(ua.Variant(new_value, ua.VariantType.Double))
+    data_value &#x3D; ua.DataValue(ua.Variant(new_value, ua.VariantType.Double))
     my_var_node.set_value(data_value)
     
     # 验证写入
     time.sleep(1)
-    read_back = my_var_node.get_value()
-    print(f"回读 MyVariable 的值: {read_back}")
+    read_back &#x3D; my_var_node.get_value()
+    print(f&quot;回读 MyVariable 的值: &#123;read_back&#125;&quot;)
     
     # 尝试写入只读节点（如果 TemperatureSensor 没设置 set_writable()，这里会报错）
     try:
-        temp_node.set_value(ua.DataValue(ua.Variant(100.0, ua.VariantType.Float)))
-        print("成功写入温度值 (服务器端允许写入)")
+        temp_node.set_value(ua.DataValue(ua.Variant(100.0, ua.VariantType.Double)))
+        print(&quot;成功写入温度值 (服务器端允许写入)&quot;)
     except ua.UaError as e:
-        print(f"写入温度值失败 (可能是只读): {e}")
+        print(f&quot;写入温度值失败，请检查写权限、数据类型和状态码: &#123;e&#125;&quot;)
 
 
 finally:
     # 7. 断开连接
     if client:
         client.disconnect()
-        print("客户端已断开连接")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        print(&quot;客户端已断开连接&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>运行：</strong> 保持 <code>server.py</code> 运行，打开一个新的终端，运行 <code>python client.py</code>。你将看到客户端连接、读取、写入并断开连接的过程。</p>
 <hr>
@@ -621,62 +832,65 @@ from opcua import Client
 
 # 1. 定义一个订阅处理器类 (Handler)
 class SubHandler(object):
-    """
+    &quot;&quot;&quot;
     订阅处理器，用于处理来自服务器的数据变更通知。
-    """
+    &quot;&quot;&quot;
     def datachange_notification(self, node, val, data):
-        """
+        &quot;&quot;&quot;
         当订阅的节点数据发生变化时，此方法被调用。
-        """
-        print(f"[订阅] 节点 {node} 的值变为: {val}")
+        &quot;&quot;&quot;
+        print(f&quot;[订阅] 节点 &#123;node&#125; 的值变为: &#123;val&#125;&quot;)
 
     def event_notification(self, event):
-        """
+        &quot;&quot;&quot;
         处理事件通知 (本例中未使用)
-        """
-        print(f"[订阅] 收到新事件: {event}")
+        &quot;&quot;&quot;
+        print(f&quot;[订阅] 收到新事件: &#123;event&#125;&quot;)
 
 # --- 主程序 ---
-url = "opc.tcp://localhost:4840/freeopcua/server/"
-client = Client(url)
+url &#x3D; &quot;opc.tcp:&#x2F;&#x2F;localhost:4840&#x2F;freeopcua&#x2F;server&#x2F;&quot;
+client &#x3D; Client(url)
 
 try:
     client.connect()
-    print("客户端已连接")
+    print(&quot;客户端已连接&quot;)
 
     # 2. 获取要订阅的节点
-    temp_node = client.get_node("ns=2;s=TemperatureSensor")
-    print(f"将要订阅的节点: {temp_node}")
+    idx &#x3D; client.get_namespace_index(&quot;http:&#x2F;&#x2F;examples.freeopcua.github.io&quot;)
+    my_folder_node &#x3D; client.get_objects_node().get_child(f&quot;&#123;idx&#125;:MyObjects&quot;)
+    temp_node &#x3D; my_folder_node.get_child(f&quot;&#123;idx&#125;:TemperatureSensor&quot;)
+    print(f&quot;将要订阅的节点: &#123;temp_node&#125;&quot;)
 
     # 3. 创建订阅处理器实例
-    handler = SubHandler()
+    handler &#x3D; SubHandler()
 
     # 4. 在客户端上创建订阅 (Subscription)
-    #    参数 1000: 订阅的发布间隔 (ms)。服务器将每1000ms检查一次是否有变化。
-    subscription = client.create_subscription(1000, handler)
-    print("已创建订阅")
+    #    参数 1000: 请求的发布间隔 (ms)，服务器可修订该值。
+    #    发布间隔不同于 MonitoredItem 的采样间隔，也不会改变示例的 2 秒更新周期。
+    subscription &#x3D; client.create_subscription(1000, handler)
+    print(&quot;已创建订阅&quot;)
 
     # 5. 告诉订阅要监控哪个节点 (MonitoredItem)
     #    参数 10: 队列大小 (QueueSize)
-    handle = subscription.subscribe_data_change(temp_node, queuesize=10)
-    print(f"已订阅节点 {temp_node} 的数据变化")
+    handle &#x3D; subscription.subscribe_data_change(temp_node, queuesize&#x3D;10)
+    print(f&quot;已订阅节点 &#123;temp_node&#125; 的数据变化&quot;)
 
     # 6. 让客户端保持运行以接收通知
-    print("正在等待数据变化 (按 Ctrl+C 停止)...")
+    print(&quot;正在等待数据变化 (按 Ctrl+C 停止)...&quot;)
     while True:
         time.sleep(1)
 
 except KeyboardInterrupt:
-    print("\n正在停止订阅...")
+    print(&quot;\n正在停止订阅...&quot;)
 finally:
     # 7. 删除订阅 (可选, 但良好实践)
-    if 'subscription' in locals():
+    if &#39;subscription&#39; in locals():
         subscription.delete()
-        print("订阅已删除")
+        print(&quot;订阅已删除&quot;)
     
     # 8. 断开连接
     client.disconnect()
-    print("客户端已断开")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(&quot;客户端已断开&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>运行：</strong> 确保 <code>server.py</code> 正在运行（它会每2秒更新一次温度）。然后运行这个新的订阅客户端脚本 <code>subscriber.py</code>。你将看到它每2秒（或根据服务器的更新频率）打印一次 <code>[订阅] ...</code> 的消息。</p>
 <hr>
@@ -687,38 +901,38 @@ finally:
 
 # 定义一个 Python 函数作为方法的实现
 def multiply_by_two(parent, variant_x):
-    """
+    &quot;&quot;&quot;
     一个简单的 OPC-UA 方法，接收一个输入参数并返回其两倍。
-    """
-    x = variant_x.Value
-    print(f"服务器方法 'multiply_by_two' 被调用，输入: {x}")
+    &quot;&quot;&quot;
+    x &#x3D; variant_x.Value
+    print(f&quot;服务器方法 &#39;multiply_by_two&#39; 被调用，输入: &#123;x&#125;&quot;)
     
-    result = x * 2
+    result &#x3D; x * 2
     
     # 返回值必须是 ua.Variant
     return [ua.Variant(result, ua.VariantType.Double)]
 
-# 9. 在 "MyObjects" 文件夹下注册这个方法
+# 9. 在 &quot;MyObjects&quot; 文件夹下注册这个方法
 #    输入参数定义
-in_arg = ua.Argument()
-in_arg.Name = "InputX"
-in_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-in_arg.ValueRank = -1
-in_arg.ArrayDimensions = []
-in_arg.Description = ua.LocalizedText("一个浮点数输入")
+in_arg &#x3D; ua.Argument()
+in_arg.Name &#x3D; &quot;InputX&quot;
+in_arg.DataType &#x3D; ua.NodeId(ua.ObjectIds.Double)
+in_arg.ValueRank &#x3D; -1
+in_arg.ArrayDimensions &#x3D; []
+in_arg.Description &#x3D; ua.LocalizedText(&quot;一个浮点数输入&quot;)
 
 # 输出参数定义
-out_arg = ua.Argument()
-out_arg.Name = "ResultY"
-out_arg.DataType = ua.NodeId(ua.ObjectIds.Double)
-out_arg.ValueRank = -1
-out_arg.ArrayDimensions = []
-out_arg.Description = ua.LocalizedText("返回 InputX * 2")
+out_arg &#x3D; ua.Argument()
+out_arg.Name &#x3D; &quot;ResultY&quot;
+out_arg.DataType &#x3D; ua.NodeId(ua.ObjectIds.Double)
+out_arg.ValueRank &#x3D; -1
+out_arg.ArrayDimensions &#x3D; []
+out_arg.Description &#x3D; ua.LocalizedText(&quot;返回 InputX * 2&quot;)
 
 # 将方法添加到地址空间
 my_folder.add_method(
     idx,                          # 命名空间
-    "MultiplyByTwo",              # 方法名称
+    &quot;MultiplyByTwo&quot;,              # 方法名称
     multiply_by_two,              # 绑定的 Python 函数
     [in_arg],                     # 输入参数列表
     [out_arg]                     # 输出参数列表
@@ -728,28 +942,30 @@ my_folder.add_method(
 <p>在 <code>client.disconnect()</code> 之前，添加以下代码来调用该方法：</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python"># --- (接第 6 步之后, client.disconnect() 之前) ---
 
-print("-" * 30)
+print(&quot;-&quot; * 30)
 # 7. 调用服务器上的方法
-print("正在调用服务器方法 'MultiplyByTwo'...")
+print(&quot;正在调用服务器方法 &#39;MultiplyByTwo&#39;...&quot;)
 
-# 获取方法节点
-method_node = my_folder_node.get_child("2:MultiplyByTwo")
+# 先取得父对象，再沿浏览路径获取方法节点
+idx &#x3D; client.get_namespace_index(&quot;http:&#x2F;&#x2F;examples.freeopcua.github.io&quot;)
+my_folder_node &#x3D; client.get_objects_node().get_child(f&quot;&#123;idx&#125;:MyObjects&quot;)
+method_node &#x3D; my_folder_node.get_child(f&quot;&#123;idx&#125;:MultiplyByTwo&quot;)
 
 # 准备输入参数
-input_value = 10.5
-print(f"输入参数为: {input_value}")
+input_value &#x3D; 10.5
+print(f&quot;输入参数为: &#123;input_value&#125;&quot;)
 
 # 调用方法 (父节点, 方法节点, 输入参数)
-# 父节点是 'MyObjects'
-my_folder_node = client.get_node("ns=2;s=MyObjects") 
-result = my_folder_node.call_method(method_node, input_value)
-# 或者: result = client.call_method(method_node, input_value) 
+# 父节点是 &#39;MyObjects&#39;
+result &#x3D; my_folder_node.call_method(
+    method_node, ua.Variant(input_value, ua.VariantType.Double)
+)
 
-print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+print(f&quot;服务器返回结果: &#123;result&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><em>注意：</em> 你需要先在客户端代码中获取 <code>my_folder_node</code>，例如 <code>my_folder_node = client.get_node("ns=2;s=MyObjects")</code>。</p>
+<p><em>注意：</em> 客户端调用代码放在连接成功后的 <code>try</code> 内、<code>finally</code> 之前。<code>call_method</code> 在父对象节点上调用，传入的方法节点和参数类型应与服务器声明一致。</p>
 <p><strong>运行：</strong> 重启服务器 <code>server.py</code>（现在它包含了方法）。运行 <code>client.py</code>，你将看到客户端成功调用了服务器上的 <code>MultiplyByTwo</code> 方法并获得了 <code>21.0</code> 的返回结果。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本教程涵盖了 <code>python-opcua</code> 最核心的三个功能：</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本教程涵盖了 <code>python-opcua</code> 以下四个功能：</p>
 <ol>
 <li><strong>创建服务器</strong> 并暴露变量。</li>
 <li><strong>创建客户端</strong> 以读取和写入变量。</li>
@@ -765,6 +981,7 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 </ul>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -839,8 +1056,44 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -865,10 +1118,10 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1136,27 +1389,17 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1170,160 +1413,87 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="psycopg2 详细使用教程：从入门到精通">
-                        
-                        <span class="card-title">psycopg2 详细使用教程：从入门到精通</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            psycopg2 详细使用教程：从入门到精通
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-20
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="chip bg-color">数据库</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2025/11/23/python-de-or-shi-yong/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Python or 运算符 —— 完整深入教程</h3>
+            <time datetime="2025-11-23">2025-11-23</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2025/11/12/shi-yong-python-shi-xian-she-xiang-tou-jian-ce/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Network Camera Scanner — 完整使用与原理教程</h3>
+            <time datetime="2025-11-12">2025-11-12</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/53.jpg" class="responsive-img" alt="从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战">
-                        
-                        <span class="card-title">从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-14
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/plc/">
-                        <span class="chip bg-color">plc</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2025/11/12/python-da-bao-exe/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Python 程序打包成 EXE 全面教程</h3>
+            <time datetime="2025-11-12">2025-11-12</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/" rel="prev"><span>较新的一篇</span><strong>psycopg2 详细使用教程：从入门到精通</strong></a>
+        <a href="/2025/10/14/cong-plc-du-qu-zi-fu-chuan-ucs-2-he-gbk-xiang-jie/" rel="next"><span>较早的一篇</span><strong>从 PLC 读取 STRING / WSTRING：UCS-2、GBK 与 Python 实战</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1342,6 +1512,7 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -1354,9 +1525,10 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -1366,23 +1538,27 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -1407,7 +1583,6 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -1417,6 +1592,8 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1432,60 +1609,6 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1496,27 +1619,30 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -1528,38 +1654,44 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -1570,107 +1702,209 @@ print(f"服务器返回结果: {result}")<span aria-hidden="true" class="line-nu
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -1681,35 +1915,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -1733,45 +2006,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

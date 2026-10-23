@@ -4,7 +4,7 @@ $(function () {
      */
     let articleCardHover = function () {
         let animateClass = 'animated pulse';
-        $('article .article').hover(function () {
+        $('article:not(.dream-articles) .article').hover(function () {
             $(this).addClass(animateClass);
         }, function () {
             $(this).removeClass(animateClass);
@@ -58,23 +58,55 @@ $(function () {
     });
 
     /*初始化瀑布流布局*/
-    $('#articles').masonry({
-        itemSelector: '.article'
-    });
+    if ($.fn.masonry && $('#articles:not(.dream-articles)').length) {
+        $('#articles:not(.dream-articles)').masonry({
+            itemSelector: '.article'
+        });
+    }
 
-    AOS.init({
-        easing: 'ease-in-out-sine',
-        duration: 700,
-        delay: 100
-    });
+    if (window.AOS) {
+        AOS.init({
+            easing: 'ease-in-out-sine',
+            duration: 700,
+            delay: 100
+        });
+    }
 
     /*文章内容详情的一些初始化特性*/
     let articleInit = function () {
-        $('#articleContent a').attr('target', '_blank');
+        $('#articleContent a[href]').each(function () {
+            if (this.hasAttribute('download')) {
+                return;
+            }
+            let linkUrl;
+            try {
+                linkUrl = new URL(this.getAttribute('href'), window.location.href);
+            } catch (error) {
+                return;
+            }
+            if (!/^https?:$/.test(linkUrl.protocol)) {
+                return;
+            }
+            if (linkUrl.origin === window.location.origin) {
+                this.removeAttribute('target');
+                return;
+            }
+            this.target = '_blank';
+            let rel = (this.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+            ['noopener', 'noreferrer'].forEach(function (value) {
+                if (rel.indexOf(value) === -1) {
+                    rel.push(value);
+                }
+            });
+            this.setAttribute('rel', rel.join(' '));
+        });
 
         $('#articleContent img').each(function () {
             let imgPath = $(this).attr('src');
-            $(this).wrap('<div class="img-item" data-src="' + imgPath + '" data-sub-html=".caption"></div>');
+            $(this).wrap($('<div>').addClass('img-item').attr({
+                'data-src': imgPath || '',
+                'data-sub-html': '.caption'
+            }));
             // 图片添加阴影
             $(this).addClass("img-shadow img-margin");
             // 图片添加字幕
@@ -100,11 +132,13 @@ $(function () {
                 this.insertAdjacentElement('afterend', captionDiv)
             }
         });
-        $('#articleContent, #myGallery').lightGallery({
-            selector: '.img-item',
+        if ($.fn.lightGallery && $('#articleContent, #myGallery').length) {
+            $('#articleContent, #myGallery').lightGallery({
+                selector: '.img-item',
             // 启用字幕
-            subHtmlSelectorRelative: true
-        });
+                subHtmlSelectorRelative: true
+            });
+        }
 
         // progress bar init
         const progressElement = window.document.querySelector('.progress-bar');
@@ -116,17 +150,33 @@ $(function () {
     };
     articleInit();
 
-    $('.modal').modal();
+    $('.modal').modal({
+        onOpenEnd: function (modal) {
+            if (modal.id === 'searchModal') {
+                $('#searchInput').trigger('focus');
+            }
+        }
+    });
+    // Keep keyboard entry in the field if the dialog container regains focus.
+    $('#searchModal').on('focus', function (event) {
+        if (event.target === this) {
+            let input = this.querySelector('#searchInput');
+            if (input) {
+                input.focus({ preventScroll: true });
+            }
+        }
+    });
 
     /*回到顶部*/
     $('#backTop').click(function () {
-        $('body,html').animate({scrollTop: 0}, 400);
+        $('body,html').stop(true).animate({scrollTop: 0}, 400);
         return false;
     });
 
     /*监听滚动条位置*/
     let $nav = $('#headNav');
     let $backTop = $('.top-scroll');
+    let backTopVisible = null;
     // 当页面处于文章中部的时候刷新页面，因为此时无滚动，所以需要判断位置,给导航加上绿色。
     showOrHideNavBg($(window).scrollTop());
     $(window).scroll(function () {
@@ -137,12 +187,17 @@ $(function () {
 
     function showOrHideNavBg(position) {
         let showPosition = 100;
-        if (position < showPosition) {
-            $nav.addClass('nav-transparent');
-            $backTop.slideUp(300);
-        } else {
-            $nav.removeClass('nav-transparent');
+        let shouldShow = position >= showPosition;
+        $nav.toggleClass('nav-transparent', !shouldShow);
+        if (backTopVisible === shouldShow) {
+            return;
+        }
+        backTopVisible = shouldShow;
+        $backTop.stop(true, true);
+        if (shouldShow) {
             $backTop.slideDown(300);
+        } else {
+            $backTop.slideUp(300);
         }
     }
 
@@ -173,17 +228,8 @@ $(function () {
 
 //黑夜模式提醒开启功能
 setTimeout(function () {
-    if ((new Date().getHours() >= 19 || new Date().getHours() < 7) && !$('body').hasClass('DarkMode')) {
-        let toastHTML = '<span style="color:#97b8b2;border-radius: 10px;>' + '<i class="fa fa-bellaria-hidden="true"></i>晚上使用深色模式阅读更好哦。(ﾟ▽ﾟ)</span>'
-        M.toast({ html: toastHTML })
+    if (!document.body.classList.contains('dream-ui') && (new Date().getHours() >= 19 || new Date().getHours() < 7) && !$('body').hasClass('DarkMode')) {
+        M.toast({ text: '晚上使用深色模式阅读更好哦。(ﾟ▽ﾟ)' })
     }
 }, 2200);
 
-//黑夜模式判断
-if (localStorage.getItem('isDark') === '1') {
-    document.body.classList.add('DarkMode');
-    $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')
-} else {
-    document.body.classList.remove('DarkMode');
-    $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')
-}

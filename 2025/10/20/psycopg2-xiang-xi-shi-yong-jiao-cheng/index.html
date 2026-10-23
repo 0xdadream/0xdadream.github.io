@@ -4,21 +4,34 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="psycopg2 详细使用教程：从入门到精通, 逐梦">
+    <meta name="keywords" content="psycopg2 详细使用教程：从入门到精通, 网络安全, Linux, Windows, 开发工具, Hexo">
     <meta name="description" content="psycopg2 详细使用教程：从入门到精通">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="canonical" href="https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/">
+    <link rel="preload" as="image" href="/medias/featureimages/19.jpg" fetchpriority="high">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="逐梦">
+    <meta property="og:title" content="psycopg2 详细使用教程：从入门到精通 | 逐梦">
+    <meta property="og:description" content="psycopg2 详细使用教程：从入门到精通">
+    <meta property="og:url" content="https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/">
+    <meta property="og:image" content="https://0xdadream.github.io/medias/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="psycopg2 详细使用教程：从入门到精通 | 逐梦">
+    <meta name="twitter:description" content="psycopg2 详细使用教程：从入门到精通">
+    <meta name="twitter:image" content="https://0xdadream.github.io/medias/logo.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"psycopg2 详细使用教程：从入门到精通 | 逐梦","headline":"psycopg2 详细使用教程：从入门到精通 | 逐梦","description":"psycopg2 详细使用教程：从入门到精通","url":"https://0xdadream.github.io/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/","image":"https://0xdadream.github.io/medias/logo.png","author":{"@type":"Person","name":"0xdadream"},"publisher":{"@type":"Person","name":"0xdadream"},"datePublished":"2025-10-20T04:25:00.000Z","dateModified":"2026-10-21T16:07:25.552Z"}</script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
     <title>psycopg2 详细使用教程：从入门到精通 | 逐梦</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon-64.png">
     
     <style>
         body{
@@ -35,14 +48,44 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css"></noscript>
 <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" href="/libs/aos/aos.css">
+<link rel="stylesheet" href="/libs/animate/animate.min.css">
+
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"></noscript>
+
 <link rel="stylesheet" type="text/css" href="/css/matery.css">
 <link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+<script>
+    (function () {
+        var darkStylesheetUrl = '/css/dark.css';
+        window.ensureDarkStylesheet = function () {
+            if (document.getElementById('dark-mode-stylesheet')) {
+                return;
+            }
+            var link = document.createElement('link');
+            link.id = 'dark-mode-stylesheet';
+            link.rel = 'stylesheet';
+            link.href = darkStylesheetUrl;
+            // Keep the personal theme overrides after the legacy dark palette,
+            // including when dark mode is enabled after the page has loaded.
+            document.head.insertBefore(link, document.getElementById('dream-theme-stylesheet'));
+        };
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                window.ensureDarkStylesheet();
+            }
+        } catch (error) {
+            // Browsing can continue when storage is unavailable.
+        }
+    }());
+</script>
+<noscript><link rel="stylesheet" type="text/css" href="/css/dark.css"></noscript>
+<noscript><style>[data-aos] { opacity: 1 !important; transform: none !important; }</style></noscript>
+
 
 
 
@@ -53,35 +96,164 @@
 
 
 
+
     
         <link rel="stylesheet" type="text/css" href="/css/reward.css">
     
 
 
 
+<link id="dream-theme-stylesheet" rel="stylesheet" href="/css/dream.css">
+
+
+
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
 </head>
 
 
-<body>
+<body class="dream-ui">
+    
+    <a class="dream-skip-link" href="#articleContent">跳到主要内容</a>
+    
+    <script>
+        try {
+            if (localStorage.getItem('isDark') === '1') {
+                document.body.classList.add('DarkMode');
+            }
+        } catch (error) {
+            // Keep the default theme when storage is unavailable.
+        }
+    </script>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo-192.webp" class="logo-img"
+                         alt="逐梦" width="192" height="192">
                     
                     <span class="logo-span">逐梦</span>
                 </a>
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"
+   aria-label="打开导航菜单" aria-controls="mobile-nav"><i class="fas fa-bars" aria-hidden="true"></i></a>
 <ul class="right nav-menu">
   
   <li class="hide-on-med-and-down nav-item">
@@ -91,6 +263,17 @@
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
       <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/topics/" class="waves-effect waves-light">
+      
+      <i class="fas fa-compass" style="zoom: 0.6;"></i>
+      
+      <span>专题</span>
     </a>
     
   </li>
@@ -162,14 +345,15 @@
   </li>
   
   <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light" aria-label="搜索">
+      <i id="searchIcon" class="fas fa-search" aria-hidden="true" style="zoom: 0.85;"></i>
     </a>
   </li>
   <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
+    <button type="button" class="theme-toggle waves-effect waves-light" onclick="switchNightMode()"
+            title="深色/浅色模式" aria-label="切换深色或浅色模式" aria-pressed="false">
+      <i id="sum-moon-icon" class="fas fa-moon" aria-hidden="true" style="zoom: 0.85;"></i>
+    </button>
   </li>
 </ul>
 
@@ -178,12 +362,13 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo-192.webp" class="logo-img circle responsive-img"
+             alt="逐梦" width="192" height="192">
         
         <div class="logo-name">逐梦</div>
         <div class="logo-desc">
             
-            Welcome to my blog
+            记录网络安全、Linux、Windows、开发工具与个人实践的技术博客。
             
         </div>
     </div>
@@ -197,6 +382,17 @@
 			    <i class="fa-fw fas fa-home"></i>
 			
 			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/topics/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-compass"></i>
+			
+			专题
 		</a>
           
         </li>
@@ -424,28 +620,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-25
+                    2026-10-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    16 分
                 </div>
                 
 
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <div id="vercount_container_page_pv" class="info-break-policy">
                         <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                        <span id="vercount_value_page_pv">--</span>
                     </div>
 				
             </div>
@@ -453,30 +649,45 @@
         <hr class="clearfix">
 
         
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!-- Hexo 7+ PrismJS 样式；服务端预处理时不需要浏览器再次高亮。 -->
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         
 
         <div class="card-content article-card-content">
-            <div id="articleContent">
+            <div class="dream-reading-body">
+            
+            <div class="dream-reader" data-dream-reader>
+    <span class="dream-reading-status"><span class="dream-reading-label">已读 </span><output id="dream-reading-progress" aria-label="正文阅读进度">0%</output></span>
+    
+    
+    
+    <details class="dream-mobile-toc"><summary>本篇目录 <span aria-hidden="true">⌄</span></summary><nav aria-label="本篇目录"><ol class="dream-toc-list"><li class="dream-toc-list-item dream-toc-list-level-2"><a class="dream-toc-list-link" href="#psycopg2-%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A"><span class="dream-toc-list-text">psycopg2 详细使用教程：从入门到精通</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-psycopg2%EF%BC%9F"><span class="dream-toc-list-text">1. 什么是 psycopg2？</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#2-%E5%AE%89%E8%A3%85"><span class="dream-toc-list-text">2. 安装</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#3-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%9A%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%B8%B8%E6%A0%87-Cursor"><span class="dream-toc-list-text">3. 核心工作流：连接与游标 (Cursor)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#4-%E3%80%90%E9%87%8D%E8%A6%81%E3%80%91%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%EF%BC%9A%E4%BD%BF%E7%94%A8-with-%E8%AF%AD%E5%8F%A5"><span class="dream-toc-list-text">4. 【重要】最佳实践：使用 with 语句</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#5-%E3%80%90%E6%9E%81%E5%85%B6%E9%87%8D%E8%A6%81%E3%80%91%E9%98%B2%E6%AD%A2-SQL-%E6%B3%A8%E5%85%A5%EF%BC%9A%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2"><span class="dream-toc-list-text">5. 【极其重要】防止 SQL 注入：参数化查询</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#6-CRUD-%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3"><span class="dream-toc-list-text">6. CRUD 操作详解</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#A-%E5%88%9B%E5%BB%BA%E8%A1%A8-CREATE"><span class="dream-toc-list-text">A. 创建表 (CREATE)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#B-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE-INSERT"><span class="dream-toc-list-text">B. 插入数据 (INSERT)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#C-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE-SELECT"><span class="dream-toc-list-text">C. 查询数据 (SELECT)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#D-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE-UPDATE"><span class="dream-toc-list-text">D. 更新数据 (UPDATE)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#E-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE-DELETE"><span class="dream-toc-list-text">E. 删除数据 (DELETE)</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#7-%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86-Transaction"><span class="dream-toc-list-text">7. 事务管理 (Transaction)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#8-%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="dream-toc-list-text">8. 高级技巧</span></a><ol class="dream-toc-list-child"><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#A-%E5%B0%86%E7%BB%93%E6%9E%9C%E4%BD%9C%E4%B8%BA%E5%AD%97%E5%85%B8%E8%8E%B7%E5%8F%96-RealDictCursor"><span class="dream-toc-list-text">A. 将结果作为字典获取 (RealDictCursor)</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#B-%E5%A4%84%E7%90%86-NULL-%E5%80%BC"><span class="dream-toc-list-text">B. 处理 NULL 值</span></a></li><li class="dream-toc-list-item dream-toc-list-level-4"><a class="dream-toc-list-link" href="#C-%E5%A4%84%E7%90%86-JSON-JSONB-%E6%95%B0%E6%8D%AE"><span class="dream-toc-list-text">C. 处理 JSON&#x2F;JSONB 数据</span></a></li></ol></li><li class="dream-toc-list-item dream-toc-list-level-3"><a class="dream-toc-list-link" href="#9-%E6%80%BB%E7%BB%93%EF%BC%9A%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%B8%85%E5%8D%95"><span class="dream-toc-list-text">9. 总结：最佳实践清单</span></a></li></ol></li></ol></nav></details>
+    
+    
+    <details class="dream-reading-settings">
+        <summary>阅读设置 <span aria-hidden="true">Aa</span></summary>
+        <div class="dream-reader-panel">
+            <div class="dream-font-setting"><span>正文字号</span><div><button type="button" data-reader-action="smaller" aria-label="减小正文字号">A−</button><output id="dream-font-size" aria-live="polite">18</output><button type="button" data-reader-action="larger" aria-label="增大正文字号">A＋</button></div></div>
+            <button type="button" class="dream-focus-toggle" data-reader-action="focus" aria-pressed="false">专注阅读</button>
+            <p>设置仅保存在当前浏览器。</p>
+        </div>
+    </details>
+</div>
+
+            
+            <div id="articleContent" tabindex="-1">
                 <h2 id="psycopg2-详细使用教程：从入门到精通"><a href="#psycopg2-详细使用教程：从入门到精通" class="headerlink" title="psycopg2 详细使用教程：从入门到精通"></a>psycopg2 详细使用教程：从入门到精通</h2><h3 id="1-什么是-psycopg2？"><a href="#1-什么是-psycopg2？" class="headerlink" title="1. 什么是 psycopg2？"></a>1. 什么是 psycopg2？</h3><ul>
 <li><strong>PostgreSQL:</strong> 一款功能极其强大的开源对象-关系型数据库系统。</li>
 <li><strong>psycopg2:</strong> 一个 Python 库，充当 Python 应用程序和 PostgreSQL 数据库之间的“驱动”或“适配器”。它实现了 Python DB-API 2.0 规范，允许你使用标准的 Python 代码来执行 SQL 命令。</li>
 </ul>
 <h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h3><p>安装 <code>psycopg2</code> 有两种常见方式：</p>
 <ol>
-<li><p><strong>推荐 (用于开发和学习):</strong></p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">pip install psycopg2-binary<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这个包预编译了所有必需的库，安装最简单，开箱即用。</p>
-</li>
-<li><p><strong>用于生产环境 (需要编译):</strong></p>
-<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">pip install psycopg2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这需要你在系统上安装了 <code>libpq</code>（PostgreSQL 的 C 库）和相关的开发工具。它性能更好，但安装更复杂。</p>
-</li>
+<li><strong>推荐 (用于开发和学习):</strong><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">pip install psycopg2-binary<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这个包预编译了所有必需的库，安装最简单，开箱即用。</li>
+<li><strong>用于生产环境 (需要编译):</strong><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">pip install psycopg2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这需要你在系统上安装了 <code>libpq</code>（PostgreSQL 的 C 库）和相关的开发工具。两者主要是构建、依赖和维护方式不同，不能直接断言源码安装性能更好。</li>
 </ol>
 <p><strong>对于本教程，我们假设你已使用 <code>psycopg2-binary</code>。</strong></p>
 <hr>
@@ -489,61 +700,63 @@
 <li><strong>提交 (Commit):</strong> (如果是 <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) 提交事务，使更改永久生效。</li>
 <li><strong>关闭 (Close):</strong> 关闭游标和连接，释放资源。</li>
 </ol>
-<h3 id="4-【重要】最佳实践：使用-with-语句"><a href="#4-【重要】最佳实践：使用-with-语句" class="headerlink" title="4. 【重要】最佳实践：使用 with 语句"></a>4. 【重要】最佳实践：使用 <code>with</code> 语句</h3><p>手动管理 <code>connect()</code> 和 <code>close()</code> 非常容易出错（比如程序崩溃时连接未关闭）。<code>psycopg2</code> 的连接和游标对象都是<strong>上下文管理器</strong>，必须使用 <code>with</code> 语句来自动管理资源。</p>
+<h3 id="4-【重要】最佳实践：使用-with-语句"><a href="#4-【重要】最佳实践：使用-with-语句" class="headerlink" title="4. 【重要】最佳实践：使用 with 语句"></a>4. 【重要】最佳实践：使用 <code>with</code> 语句</h3><p>psycopg2 的两个上下文管理器职责不同：<code>with conn:</code> 处理事务提交或回滚，但不会关闭连接；<code>with conn.cursor()</code> 会关闭游标。下面用 contextlib.closing 在最外层关闭连接，内层用 with conn 管理事务。后续片段复用这里的导入和 DB_PARAMS。</p>
 <p><strong>这是本教程推荐的标准模式：</strong></p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">import psycopg2
+from contextlib import closing
 import sys
 
 # 数据库连接参数
 # 强烈建议使用环境变量或配置文件，不要硬编码
-DB_PARAMS = {
-    'host': 'localhost',      # 数据库主机
-    'port': 5432,             # 端口 (默认 5432)
-    'user': 'postgres',       # 你的用户名
-    'password': 'your_password', # 你的密码
-    'dbname': 'test_db'       # 你要连接的数据库
-}
+DB_PARAMS &#x3D; &#123;
+    &#39;host&#39;: &#39;localhost&#39;,      # 数据库主机
+    &#39;port&#39;: 5432,             # 端口 (默认 5432)
+    &#39;user&#39;: &#39;postgres&#39;,       # 你的用户名
+    &#39;password&#39;: &#39;your_password&#39;, # 你的密码
+    &#39;dbname&#39;: &#39;test_db&#39;       # 你要连接的数据库
+&#125;
 
 try:
     # 1. 建立连接
-    # with 语句确保连接在使用后自动关闭
-    with psycopg2.connect(**DB_PARAMS) as conn:
+    # 最外层 closing 确保使用后关闭连接
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
         
-        # 2. 创建游标
-        # with 语句确保游标在使用后自动关闭
-        with conn.cursor() as cur:
+            # 2. 创建游标
+            # with 语句确保游标在使用后自动关闭
+            with conn.cursor() as cur:
             
-            # 3. 执行 SQL
-            cur.execute("SELECT version();")
+                # 3. 执行 SQL
+                cur.execute(&quot;SELECT version();&quot;)
             
-            # 4. 获取结果
-            db_version = cur.fetchone() # fetchone() 获取一条结果
-            print(f"数据库版本: {db_version[0]}")
+                # 4. 获取结果
+                db_version &#x3D; cur.fetchone() # fetchone() 获取一条结果
+                print(f&quot;数据库版本: &#123;db_version[0]&#125;&quot;)
 
-            # 5. 提交 (对于 SELECT 不是必需的, 但对于 DML 是必需的)
-            # conn.commit() # 在这里，with conn 会自动处理
+                # 5. 提交 (对于 SELECT 不是必需的, 但对于 DML 是必需的)
+                # conn.commit() # 在这里，with conn 会自动处理
             
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"连接数据库时出错: {error}")
+    print(f&quot;连接数据库时出错: &#123;error&#125;&quot;)
     sys.exit(1)
     
 # 6. 关闭
-# 在 'with' 块结束时，cur.close() 和 conn.close() 已自动调用
-print("连接已自动关闭。")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# cursor 的 with 关闭游标，closing 关闭连接；连接自身的 with 只管理事务
+print(&quot;事务已结束，游标和连接已关闭。&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h3 id="5-【极其重要】防止-SQL-注入：参数化查询"><a href="#5-【极其重要】防止-SQL-注入：参数化查询" class="headerlink" title="5. 【极其重要】防止 SQL 注入：参数化查询"></a>5. 【极其重要】防止 SQL 注入：参数化查询</h3><p><strong>永远不要</strong>使用 Python 的字符串格式化（如 <code>f-string</code> 或 <code>%</code>）来构建 SQL 查询。这会导致严重的安全漏洞（SQL 注入）。</p>
 <p><strong>错误的方式 (危险!)：</strong></p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python"># 千万不要这样做！
-user_id = "105 OR 1=1"
-cur.execute(f"SELECT * FROM users WHERE id = {user_id}") <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+user_id &#x3D; &quot;105 OR 1&#x3D;1&quot;
+cur.execute(f&quot;SELECT * FROM users WHERE id &#x3D; &#123;user_id&#125;&quot;) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>正确的方式 (安全)：</strong> <code>psycopg2</code> 会自动为你处理所有特殊字符的转义。你需要在 SQL 语句中使用 <code>%s</code> 作为占位符，然后将一个<strong>元组 (tuple)</strong> 作为第二个参数传递给 <code>execute()</code>。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python"># 正确的方式：使用占位符
-user_id = "105"
-query = "SELECT * FROM users WHERE id = %s"
+user_id &#x3D; &quot;105&quot;
+query &#x3D; &quot;SELECT * FROM users WHERE id &#x3D; %s&quot;
 
-# 注意：即使只有一个参数，也必须将其放在元组中 (user_id,)
+# 单参数也需要序列，例如元组 (user_id,)；列表同样可以
 cur.execute(query, (user_id,))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
@@ -551,7 +764,7 @@ cur.execute(query, (user_id,))<span aria-hidden="true" class="line-numbers-rows"
 </ul>
 <hr>
 <h3 id="6-CRUD-操作详解"><a href="#6-CRUD-操作详解" class="headerlink" title="6. CRUD 操作详解"></a>6. CRUD 操作详解</h3><p>让我们创建一个 <code>employees</code> 表并对其进行操作。</p>
-<h4 id="A-创建表-CREATE"><a href="#A-创建表-CREATE" class="headerlink" title="A. 创建表 (CREATE)"></a>A. 创建表 (CREATE)</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">create_table_query = """
+<h4 id="A-创建表-CREATE"><a href="#A-创建表-CREATE" class="headerlink" title="A. 创建表 (CREATE)"></a>A. 创建表 (CREATE)</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">create_table_query &#x3D; &quot;&quot;&quot;
 CREATE TABLE IF NOT EXISTS employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -559,272 +772,297 @@ CREATE TABLE IF NOT EXISTS employees (
     salary NUMERIC(10, 2),
     hire_date DATE
 );
-"""
+&quot;&quot;&quot;
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(create_table_query)
-            # DDL (如 CREATE TABLE) 语句也需要提交
-            conn.commit() 
-            print("表 'employees' 创建成功 (如果它不存在的话)。")
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(create_table_query)
+                # DDL (如 CREATE TABLE) 语句也需要提交
+    print(&quot;表 &#39;employees&#39; 已就绪，事务已提交。&quot;)
 except (Exception, psycopg2.DatabaseError) as error:
     print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>**<code>conn.commit()</code>*<em>：这是关键。任何修改数据库结构 (DDL) 或数据 (DML) 的操作，都必须调用 <code>conn.commit()</code> 才能生效。<code>with conn:</code> 块在</em>成功退出时*会自动提交。</li>
+<li><strong>事务提交</strong>：普通事务中的 DDL &#x2F; DML 需要提交。with conn 成功退出时自动提交，异常退出时回滚；该模式下通常不需要在块内重复手动提交。</li>
 </ul>
-<h4 id="B-插入数据-INSERT"><a href="#B-插入数据-INSERT" class="headerlink" title="B. 插入数据 (INSERT)"></a>B. 插入数据 (INSERT)</h4><h5 id="插入单行"><a href="#插入单行" class="headerlink" title="插入单行"></a>插入单行</h5><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query = "INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)"
-data = ("Alice Green", "Engineering", 75000.00, "2023-01-15")
+<h4 id="B-插入数据-INSERT"><a href="#B-插入数据-INSERT" class="headerlink" title="B. 插入数据 (INSERT)"></a>B. 插入数据 (INSERT)</h4><h5 id="插入单行"><a href="#插入单行" class="headerlink" title="插入单行"></a>插入单行</h5><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query &#x3D; &quot;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&quot;
+data &#x3D; (&quot;Alice Green&quot;, &quot;Engineering&quot;, 75000.00, &quot;2023-01-15&quot;)
 
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-            # conn.commit() 在 with 块结束时自动调用
-    print("单行插入成功。")
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(query, data)
+                # conn.commit() 在 with 块结束时自动调用
+    print(&quot;单行插入成功。&quot;)
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"插入失败: {error}")
-    # 如果出错，with conn 块会引发异常，自动执行 conn.rollback()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;插入失败: &#123;error&#125;&quot;)
+    # 如果出错，with conn 块会引发异常，自动执行 conn.rollback()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="插入多行-高效"><a href="#插入多行-高效" class="headerlink" title="插入多行 (高效)"></a>插入多行 (高效)</h5><p>使用 <code>cur.executemany()</code> 来批量插入，这比在 <code>for</code> 循环中调用 <code>execute()</code> 高效得多。</p>
-<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query = "INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)"
-data_list = [
-    ("Bob White", "Sales", 60000.00, "2023-03-01"),
-    ("Charlie Black", "Engineering", 80000.00, "2022-11-20"),
-    ("David Brown", "Marketing", 55000.00, "2023-05-10")
+<h5 id="插入多行"><a href="#插入多行" class="headerlink" title="插入多行"></a>插入多行</h5><p>executemany 简化了多组参数的执行，但 psycopg2 的这个实现不保证比循环 execute 更快。大批量写入可按数据规模考虑 extras.execute_values、execute_batch 或 COPY，并结合事务边界选择。</p>
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query &#x3D; &quot;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&quot;
+data_list &#x3D; [
+    (&quot;Bob White&quot;, &quot;Sales&quot;, 60000.00, &quot;2023-03-01&quot;),
+    (&quot;Charlie Black&quot;, &quot;Engineering&quot;, 80000.00, &quot;2022-11-20&quot;),
+    (&quot;David Brown&quot;, &quot;Marketing&quot;, 55000.00, &quot;2023-05-10&quot;)
 ]
 
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.executemany(query, data_list)
-            # 自动提交
-    print("批量插入成功。")
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.executemany(query, data_list)
+                # 自动提交
+    print(&quot;批量插入成功。&quot;)
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"批量插入失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;批量插入失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="获取插入的-ID-RETURNING"><a href="#获取插入的-ID-RETURNING" class="headerlink" title="获取插入的 ID (RETURNING)"></a>获取插入的 ID (RETURNING)</h5><p>插入后经常需要获取新生成的 <code>PRIMARY KEY</code>。</p>
-<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query = "INSERT INTO employees (name, department) VALUES (%s, %s) RETURNING id"
-data = ("Eva Blue", "HR")
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">query &#x3D; &quot;INSERT INTO employees (name, department) VALUES (%s, %s) RETURNING id&quot;
+data &#x3D; (&quot;Eva Blue&quot;, &quot;HR&quot;)
 
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-            new_id = cur.fetchone()[0] # 获取 RETURNING 的值
-            print(f"成功插入新员工，ID: {new_id}")
-            # 自动提交
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(query, data)
+                new_id &#x3D; cur.fetchone()[0] # 获取 RETURNING 的值
+                # 正常退出事务块后自动提交
+    print(f&quot;成功插入新员工，ID: &#123;new_id&#125;&quot;)
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"插入失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;插入失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="C-查询数据-SELECT"><a href="#C-查询数据-SELECT" class="headerlink" title="C. 查询数据 (SELECT)"></a>C. 查询数据 (SELECT)</h4><h5 id="获取单条记录-fetchone"><a href="#获取单条记录-fetchone" class="headerlink" title="获取单条记录 fetchone()"></a>获取单条记录 <code>fetchone()</code></h5><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute("SELECT * FROM employees WHERE department = %s", ("Engineering",))
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(&quot;SELECT * FROM employees WHERE department &#x3D; %s&quot;, (&quot;Engineering&quot;,))
             
-            print("正在获取一名工程师:")
-            record = cur.fetchone() # 获取第一条
-            if record:
-                print(record) # (1, 'Alice Green', 'Engineering', 75000.00, datetime.date(2023, 1, 15))
+                print(&quot;正在获取一名工程师:&quot;)
+                record &#x3D; cur.fetchone() # 获取第一条
+                if record:
+                    print(record) # (1, &#39;Alice Green&#39;, &#39;Engineering&#39;, 75000.00, datetime.date(2023, 1, 15))
 
-            # 再次调用 fetchone() 会获取下一条
-            record2 = cur.fetchone()
-            if record2:
-                print(record2)
+                # 再次调用 fetchone() 会获取下一条
+                record2 &#x3D; cur.fetchone()
+                if record2:
+                    print(record2)
 
-            # 如果没有更多数据，fetchone() 返回 None
-            record3 = cur.fetchone()
-            print(f"第三条记录: {record3}") # None
+                # 如果没有更多数据，fetchone() 返回 None
+                record3 &#x3D; cur.fetchone()
+                print(f&quot;第三条记录: &#123;record3&#125;&quot;) # None
 
 except (Exception, psycopg2.DatabaseError) as error:
-    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><strong>结果格式：</strong> 默认情况下，<code>psycopg2</code> 返回的数据是**元组 (tuple)**。</li>
 </ul>
 <h5 id="获取所有记录-fetchall"><a href="#获取所有记录-fetchall" class="headerlink" title="获取所有记录 fetchall()"></a>获取所有记录 <code>fetchall()</code></h5><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute("SELECT name, salary FROM employees WHERE salary &gt; %s", (58000,))
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(&quot;SELECT name, salary FROM employees WHERE salary &gt; %s&quot;, (58000,))
             
-            print("\n薪水 &gt; 58000 的所有员工:")
-            records = cur.fetchall() # 获取所有剩余结果
+                print(&quot;\n薪水 &gt; 58000 的所有员工:&quot;)
+                records &#x3D; cur.fetchall() # 获取所有剩余结果
             
-            if records:
-                for row in records:
-                    print(f"姓名: {row[0]}, 薪水: {row[1]}")
-            else:
-                print("未找到记录。")
+                if records:
+                    for row in records:
+                        print(f&quot;姓名: &#123;row[0]&#125;, 薪水: &#123;row[1]&#125;&quot;)
+                else:
+                    print(&quot;未找到记录。&quot;)
                 
 except (Exception, psycopg2.DatabaseError) as error:
-    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><strong>注意：</strong> 如果结果集非常大，<code>fetchall()</code> 可能会消耗大量内存。</li>
 </ul>
-<h5 id="迭代游标-内存高效"><a href="#迭代游标-内存高效" class="headerlink" title="迭代游标 (内存高效)"></a>迭代游标 (内存高效)</h5><p>对于大数据集，最好的方式是直接迭代游标：</p>
+<h5 id="迭代游标-内存高效"><a href="#迭代游标-内存高效" class="headerlink" title="迭代游标 (内存高效)"></a>迭代游标 (内存高效)</h5><p>普通游标仍可能在客户端缓冲整个结果集，直接 for 循环不等于流式取数。大结果集可以使用命名的服务端游标，在事务范围内分批获取：</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            # 游标充当了迭代器
-            cur.execute("SELECT * FROM employees")
-            print("\n--- 迭代所有员工 ---")
-            for row in cur:
-                print(f"ID: {row[0]}, 姓名: {row[1]}")
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor(name&#x3D;&quot;employees_stream&quot;) as cur:
+                cur.itersize &#x3D; 2000  # 命名游标每批获取的行数
+                cur.execute(&quot;SELECT * FROM employees&quot;)
+                print(&quot;\n--- 迭代所有员工 ---&quot;)
+                for row in cur:
+                    print(f&quot;ID: &#123;row[0]&#125;, 姓名: &#123;row[1]&#125;&quot;)
                 
 except (Exception, psycopg2.DatabaseError) as error:
-    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="D-更新数据-UPDATE"><a href="#D-更新数据-UPDATE" class="headerlink" title="D. 更新数据 (UPDATE)"></a>D. 更新数据 (UPDATE)</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            query = "UPDATE employees SET salary = salary * 1.10 WHERE department = %s"
-            cur.execute(query, ("Engineering",))
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                query &#x3D; &quot;UPDATE employees SET salary &#x3D; salary * 1.10 WHERE department &#x3D; %s&quot;
+                cur.execute(query, (&quot;Engineering&quot;,))
             
-            # cur.rowcount 包含受影响的行数
-            updated_rows = cur.rowcount
-            print(f"Engineering 部门 {updated_rows} 名员工已加薪。")
-            # 自动提交
+                # cur.rowcount 包含受影响的行数
+                updated_rows &#x3D; cur.rowcount
+                # 正常退出事务块后自动提交
+    print(f&quot;Engineering 部门 &#123;updated_rows&#125; 名员工已加薪。&quot;)
             
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"更新失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;更新失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="E-删除数据-DELETE"><a href="#E-删除数据-DELETE" class="headerlink" title="E. 删除数据 (DELETE)"></a>E. 删除数据 (DELETE)</h4><pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            query = "DELETE FROM employees WHERE name = %s"
-            cur.execute(query, ("David Brown",))
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                query &#x3D; &quot;DELETE FROM employees WHERE name &#x3D; %s&quot;
+                cur.execute(query, (&quot;David Brown&quot;,))
             
-            deleted_rows = cur.rowcount
-            print(f"成功删除 {deleted_rows} 名员工。")
-            # 自动提交
+                deleted_rows &#x3D; cur.rowcount
+                # 正常退出事务块后自动提交
+    print(f&quot;成功删除 &#123;deleted_rows&#125; 名员工。&quot;)
             
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"删除失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;删除失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <hr>
 <h3 id="7-事务管理-Transaction"><a href="#7-事务管理-Transaction" class="headerlink" title="7. 事务管理 (Transaction)"></a>7. 事务管理 (Transaction)</h3><p>数据库事务是一组“要么全做，要么全不做”的操作。</p>
-<p><code>with psycopg2.connect(...) as conn:</code> 块本身就构成了一个事务：</p>
+<p>下面的 with conn 管理事务，外层 closing 负责关闭连接：</p>
 <ul>
 <li>如果 <code>with</code> 块中的代码<strong>成功执行完毕</strong>（没有抛出异常），<code>conn.commit()</code> 会在块退出时自动调用。</li>
 <li>如果 <code>with</code> 块中的代码<strong>抛出了异常</strong>，<code>conn.rollback()</code> 会自动调用，撤销块中已执行的所有 SQL 操作。</li>
 </ul>
-<p><strong>示例：转账（原子操作）</strong> 假设 Alice 给 Bob 转账 1000。</p>
-<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">def transfer_money(from_id, to_id, amount):
-    try:
-        with psycopg2.connect(**DB_PARAMS) as conn:
-            # conn 现在处于一个事务中
-            with conn.cursor() as cur:
-                
-                # 1. 从 Alice 账户扣款
-                cur.execute(
-                    "UPDATE employees SET salary = salary - %s WHERE id = %s", 
-                    (amount, from_id)
-                )
-                
-                # (模拟一个错误)
-                # if from_id == 1:
-                #     raise Exception("网络故障!")
+<p><strong>示例：将两条金额更新放进同一事务。</strong> 沿用 employees 表的数值列演示。UPDATE 匹配 0 行不会自动报错，因此要核对 rowcount，否则可能只更新一边。</p>
+<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">from decimal import Decimal
 
-                # 2. 向 Bob 账户加款
-                cur.execute(
-                    "UPDATE employees SET salary = salary + %s WHERE id = %s",
-                    (amount, to_id)
-                )
+def transfer_money(from_id, to_id, amount):
+    try:
+        amount &#x3D; Decimal(str(amount))
+        if not amount.is_finite() or amount &lt;&#x3D; 0:
+            raise ValueError(&quot;amount 必须是正的有限数值&quot;)
+        if from_id &#x3D;&#x3D; to_id:
+            raise ValueError(&quot;来源和目标不能相同&quot;)
+        with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+            with conn:
+                # conn 现在处于一个事务中
+                with conn.cursor() as cur:
+                
+                    # 1. 从 Alice 账户扣款
+                    cur.execute(
+                        &quot;UPDATE employees SET salary &#x3D; salary - %s WHERE id &#x3D; %s AND salary &gt;&#x3D; %s&quot;,
+                        (amount, from_id, amount)
+                    )
+                
+                    if cur.rowcount !&#x3D; 1:
+                        raise ValueError(&quot;来源记录不存在、金额为空或余额不足&quot;)
+
+                    # (模拟一个错误)
+                    # if from_id &#x3D;&#x3D; 1:
+                    #     raise Exception(&quot;网络故障!&quot;)
+
+                    # 2. 向 Bob 账户加款
+                    cur.execute(
+                        &quot;UPDATE employees SET salary &#x3D; salary + %s WHERE id &#x3D; %s AND salary IS NOT NULL&quot;,
+                        (amount, to_id)
+                    )
+                    if cur.rowcount !&#x3D; 1:
+                        raise ValueError(&quot;目标记录不存在或金额为空&quot;)
             
-            # 3. 退出 with conn 块，自动 commit
-            print("转账成功！")
+        # 退出事务并关闭连接后才报告成功
+        print(&quot;两条更新已提交。&quot;)
             
     except (Exception, psycopg2.DatabaseError) as error:
         # 4. 发生异常，自动 rollback
-        print(f"转账失败! 错误: {error}")
-        print("事务已回滚。")
+        print(f&quot;转账失败! 错误: &#123;error&#125;&quot;)
+        print(&quot;本次事务中的修改不提交。&quot;)
 
-# 假设 Alice (id=1) 给 Bob (id=2) 转账 1000
-transfer_money(1, 2, 1000.00) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# 假设 Alice (id&#x3D;1) 给 Bob (id&#x3D;2) 转账 1000
+transfer_money(1, 2, 1000.00) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>如果你取消上面“模拟一个错误”的注释，Alice 的扣款和 Bob 的加款 <em>都不会</em> 发生，数据库将保持原样。这就是事务的威力。</p>
+<p>如果你取消上面“模拟一个错误”的注释，Alice 的扣款和 Bob 的加款 <em>都不会</em> 发生，数据库将保持原样。异常应传播出事务块；在块内捕获后正常退出，不能再依赖异常退出触发回滚。实际应用还需自己的金额约束、并发规则和重试策略。</p>
 <hr>
-<h3 id="8-高级技巧"><a href="#8-高级技巧" class="headerlink" title="8. 高级技巧"></a>8. 高级技巧</h3><h4 id="A-将结果作为字典获取-RealDictCursor"><a href="#A-将结果作为字典获取-RealDictCursor" class="headerlink" title="A. 将结果作为字典获取 (RealDictCursor)"></a>A. 将结果作为字典获取 (RealDictCursor)</h4><p>默认返回元组 <code>(1, 'Alice')</code> 不太方便。我们通常想要字典 <code>{'id': 1, 'name': 'Alice'}</code>。</p>
+<h3 id="8-高级技巧"><a href="#8-高级技巧" class="headerlink" title="8. 高级技巧"></a>8. 高级技巧</h3><h4 id="A-将结果作为字典获取-RealDictCursor"><a href="#A-将结果作为字典获取-RealDictCursor" class="headerlink" title="A. 将结果作为字典获取 (RealDictCursor)"></a>A. 将结果作为字典获取 (RealDictCursor)</h4><p>默认返回元组 <code>(1, &#39;Alice&#39;)</code> 不太方便。我们通常想要字典 <code>{&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice&#39;}</code>。</p>
 <p>你需要导入 <code>psycopg2.extras</code> 并指定 <code>cursor_factory</code>。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">from psycopg2.extras import RealDictCursor
 
 try:
     # 1. 在 connect 时指定 cursor_factory
-    with psycopg2.connect(**DB_PARAMS, cursor_factory=RealDictCursor) as conn:
+    with closing(psycopg2.connect(**DB_PARAMS, cursor_factory&#x3D;RealDictCursor)) as conn:
+        with conn:
         
-        # 2. 也可以在创建 cursor 时指定
-        # with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            # 2. 也可以在创建 cursor 时指定
+            # with conn.cursor(cursor_factory&#x3D;RealDictCursor) as cur:
         
-        with conn.cursor() as cur: # cur 现在是 RealDictCursor
-            cur.execute("SELECT id, name, salary FROM employees WHERE id = %s", (1,))
-            record = cur.fetchone()
+            with conn.cursor() as cur: # cur 现在是 RealDictCursor
+                cur.execute(&quot;SELECT id, name, salary FROM employees WHERE id &#x3D; %s&quot;, (1,))
+                record &#x3D; cur.fetchone()
             
-            if record:
-                print("\n--- 字典游标结果 ---")
-                print(record)
-                # 输出: {'id': 1, 'name': 'Alice Green', 'salary': 82500.00}
-                print(f"姓名: {record['name']}") # 可以通过键名访问
+                if record:
+                    print(&quot;\n--- 字典游标结果 ---&quot;)
+                    print(record)
+                    # 输出: &#123;&#39;id&#39;: 1, &#39;name&#39;: &#39;Alice Green&#39;, &#39;salary&#39;: 82500.00&#125;
+                    print(f&quot;姓名: &#123;record[&#39;name&#39;]&#125;&quot;) # 可以通过键名访问
             
 except (Exception, psycopg2.DatabaseError) as error:
-    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(error)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="B-处理-NULL-值"><a href="#B-处理-NULL-值" class="headerlink" title="B. 处理 NULL 值"></a>B. 处理 <code>NULL</code> 值</h4><p><code>psycopg2</code> 会自动处理 Python 的 <code>None</code> 和 SQL 的 <code>NULL</code> 之间的转换。</p>
-<p><strong>这是你之前（在聊天记录中）遇到 <code>invalid input syntax for "None"</code> 错误的原因：</strong> 如果你使用 <code>f-string</code> (错误方式)，<code>None</code> 会被转成字符串 <code>"None"</code>。 <code>INSERT ... VALUES ('None')</code> -&gt; 数据库试图将字符串 “None” 存入 <code>double precision</code> 字段，导致失败。</p>
+<p><strong>这是你之前（在聊天记录中）遇到 <code>invalid input syntax for &quot;None&quot;</code> 错误的原因：</strong> 如果你使用 <code>f-string</code> (错误方式)，<code>None</code> 会被转成字符串 <code>&quot;None&quot;</code>。 <code>INSERT ... VALUES (&#39;None&#39;)</code> -&gt; 数据库试图将字符串 “None” 存入 <code>double precision</code> 字段，导致失败。</p>
 <p><strong>正确方式 (使用参数化):</strong> <code>psycopg2</code> 会将 Python 的 <code>None</code> 正确转换为 SQL 的 <code>NULL</code>。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python"># 插入一个 hire_date 为 NULL 的记录
-query = "INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)"
-data = ("Frank Nullman", "IT", 62000.00, None) # Python 的 None
+query &#x3D; &quot;INSERT INTO employees (name, department, salary, hire_date) VALUES (%s, %s, %s, %s)&quot;
+data &#x3D; (&quot;Frank Nullman&quot;, &quot;IT&quot;, 62000.00, None) # Python 的 None
 
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            cur.execute(query, data)
-    print("成功插入带 NULL 值的记录。")
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute(query, data)
+    print(&quot;成功插入带 NULL 值的记录。&quot;)
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"插入 NULL 失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;插入 NULL 失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="C-处理-JSON-JSONB-数据"><a href="#C-处理-JSON-JSONB-数据" class="headerlink" title="C. 处理 JSON/JSONB 数据"></a>C. 处理 <code>JSON/JSONB</code> 数据</h4><p>PostgreSQ 对 <code>JSON</code> 有很好的支持。<code>psycopg2</code> 可以自动序列化和反序列化 Python 的 <code>dict</code> 和 <code>list</code>。</p>
+<h4 id="C-处理-JSON-JSONB-数据"><a href="#C-处理-JSON-JSONB-数据" class="headerlink" title="C. 处理 JSON/JSONB 数据"></a>C. 处理 <code>JSON/JSONB</code> 数据</h4><p>PostgreSQL 支持 JSON &#x2F; JSONB。读取通常可转换为 Python 对象；写入 dict &#x2F; list 时，下面显式使用 extras.Json 包装，不应认定任意字典都会自动适配为 JSON。</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">from psycopg2.extras import Json
 
 # 假设表有
 # ALTER TABLE employees ADD COLUMN metadata JSONB;
 
 # 写入 JSON
-meta_data = {
-    'skills': ['Python', 'SQL', 'OPC-UA'],
-    'manager_id': 10
-}
+meta_data &#x3D; &#123;
+    &#39;skills&#39;: [&#39;Python&#39;, &#39;SQL&#39;, &#39;OPC-UA&#39;],
+    &#39;manager_id&#39;: 10
+&#125;
 
 try:
-    with psycopg2.connect(**DB_PARAMS) as conn:
-        with conn.cursor() as cur:
-            # 使用 extras.Json 包装一下
-            query = "UPDATE employees SET metadata = %s WHERE name = %s"
-            cur.execute(query, (Json(meta_data), "Alice Green"))
+    with closing(psycopg2.connect(**DB_PARAMS)) as conn:
+        with conn:
+            with conn.cursor() as cur:
+                # 使用 extras.Json 包装一下
+                query &#x3D; &quot;UPDATE employees SET metadata &#x3D; %s WHERE name &#x3D; %s&quot;
+                cur.execute(query, (Json(meta_data), &quot;Alice Green&quot;))
             
-            # 读取 JSON
-            cur.execute("SELECT metadata FROM employees WHERE name = %s", ("Alice Green",))
-            result = cur.fetchone()[0]
+                # 读取 JSON
+                cur.execute(&quot;SELECT metadata FROM employees WHERE name &#x3D; %s&quot;, (&quot;Alice Green&quot;,))
+                result &#x3D; cur.fetchone()[0]
             
-            print(f"\n读取到的 JSONB 数据: {result}")
-            print(f"数据类型: {type(result)}") # &lt;class 'dict'&gt;
-            print(f"技能: {result['skills'][0]}") # 'Python'
+                print(f&quot;\n读取到的 JSONB 数据: &#123;result&#125;&quot;)
+                print(f&quot;数据类型: &#123;type(result)&#125;&quot;) # &lt;class &#39;dict&#39;&gt;
+                print(f&quot;技能: &#123;result[&#39;skills&#39;][0]&#125;&quot;) # &#39;Python&#39;
             
 except (Exception, psycopg2.DatabaseError) as error:
-    print(f"JSON 操作失败: {error}")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(f&quot;JSON 操作失败: &#123;error&#125;&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="9-总结：最佳实践清单"><a href="#9-总结：最佳实践清单" class="headerlink" title="9. 总结：最佳实践清单"></a>9. 总结：最佳实践清单</h3><ol>
-<li><strong>始终使用 <code>with</code> 语句</strong> 管理连接 (<code>conn</code>) 和游标 (<code>cur</code>)。</li>
-<li><strong>永远使用参数化查询</strong> (<code>cur.execute(query, (params,))</code>) 来防止 SQL 注入。<code>%s</code> 是唯一的占位符。</li>
-<li><strong>使用 <code>conn.commit()</code></strong> 提交更改。依赖 <code>with conn:</code> 块的自动提交/回滚功能是最安全的方式。</li>
-<li><strong>使用 <code>cur.executemany()</code></strong> 进行批量插入。</li>
+<li><strong>分清生命周期</strong>：连接的 with 管事务，游标的 with 关闭游标，closing 或 finally 负责关闭连接。</li>
+<li><strong>永远使用参数化查询</strong> (<code>cur.execute(query, (params,))</code>) 来防止 SQL 注入。位置参数使用 <code>%s</code>，命名参数也可使用 <code>%(name)s</code>。</li>
+<li><strong>统一事务边界</strong>：使用 with conn 时由它提交或回滚，避免在事务中途无意手动提交。</li>
+<li><strong>按规模选择批量写入方式</strong>：executemany 简化调用，性能需求另看 execute_values、execute_batch 或 COPY。</li>
 <li><strong>使用 <code>psycopg2.extras.RealDictCursor</code></strong> 来获取字典形式的结果。</li>
 <li>**正确处理 <code>None</code>**：参数化查询会自动将 <code>None</code> 转为 <code>NULL</code>。</li>
 <li><strong>捕获 <code>psycopg2.DatabaseError</code></strong> 来处理数据库相关的特定异常。</li>
 </ol>
 
                 
+            </div>
             </div>
             <hr/>
 
@@ -903,8 +1141,44 @@ except (Exception, psycopg2.DatabaseError) as error:
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <div class="social-share" data-sites="twitter,facebook,qq,qzone,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
+    <script>
+        (function () {
+            var labels = {
+                twitter: '分享到 Twitter',
+                facebook: '分享到 Facebook',
+                qq: '分享到 QQ',
+                qzone: '分享到 QQ 空间',
+                wechat: '分享到微信',
+                weibo: '分享到微博',
+                linkedin: '分享到 LinkedIn'
+            };
+
+            function improveShareLinks() {
+                Object.keys(labels).forEach(function (site) {
+                    document.querySelectorAll('.social-share .icon-' + site).forEach(function (link) {
+                        link.setAttribute('aria-label', labels[site]);
+                        link.setAttribute('title', labels[site]);
+                        if (link.target === '_blank') {
+                            link.setAttribute('rel', 'noopener noreferrer');
+                        }
+                        if (/^http:\/\/(connect\.qq\.com|sns\.qzone\.qq\.com|www\.linkedin\.com)\//.test(link.href)) {
+                            link.href = link.href.replace(/^http:\/\//, 'https://');
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.setTimeout(improveShareLinks, 0);
+                }, { once: true });
+            } else {
+                improveShareLinks();
+            }
+        }());
+    </script>
     
 
     
@@ -929,10 +1203,10 @@ except (Exception, psycopg2.DatabaseError) as error:
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码" loading="lazy" decoding="async">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -1200,27 +1474,17 @@ except (Exception, psycopg2.DatabaseError) as error:
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="vcomments" class="card-content" style="display: grid">
+    <div id="vcomments" class="card-content" style="display: grid; min-height: 260px" data-status="idle">
+        <div id="comment-loader">
+            <p id="comment-load-status" role="status">评论将在接近此处时加载，也可点击立即加载。</p>
+            <button id="comment-load-button" type="button" class="btn">加载评论</button>
+        </div>
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz',
-        appKey: 'TlwBq6NRJV9V5XcmP3fAXKls',
-        serverURLs: 'https://8bnilper.lc-cn-n1-shared.com',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: 'just go go'
-    });
-</script>
+
+<script id="comment-config" type="application/json">{"sdk":"/libs/valine/av-min.js","script":"/libs/valine/Valine.min.js","options":{"el":"#vcomments","appId":"8bNIlpEr08g4V4XysfF9PwEx-gzGzoHsz","appKey":"TlwBq6NRJV9V5XcmP3fAXKls","serverURLs":"https://8bnilper.lc-cn-n1-shared.com","notify":false,"verify":false,"visitor":true,"avatar":"mm","pageSize":10,"lang":"zh-cn","placeholder":"just go go"}}</script>
+<script defer src="/js/comments-loader.js"></script>
 
 <!--酷Q推送-->
 
@@ -1234,156 +1498,87 @@ except (Exception, psycopg2.DatabaseError) as error:
     
 
     
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
+    
+<section class="dream-related" aria-label="继续阅读">
+    
+    <h2 id="dream-related-title">继续阅读</h2>
+    <div class="dream-related-grid">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2025/10/22/windows-qi-dong-zi-dong-yun-xing-duo-ge-python-jiao-ben/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/53.jpg" class="responsive-img" alt="Windows — 极其完整的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）">
-                        
-                        <span class="card-title">Windows — 极其完整的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Windows — 极其完整的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/windows/">
-                        <span class="chip bg-color">windows</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2025/11/23/python-de-or-shi-yong/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Python or 运算符 —— 完整深入教程</h3>
+            <time datetime="2025-11-23">2025-11-23</time>
+        </a>
         
+        <a class="card dream-related-card" href="/2025/11/12/shi-yong-python-shi-xian-she-xiang-tou-jian-ce/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Network Camera Scanner — 完整使用与原理教程</h3>
+            <time datetime="2025-11-12">2025-11-12</time>
+        </a>
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/10/19/python-zhong-shi-yong-opcua/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="OPC-UA 与 Python 详细使用教程">
-                        
-                        <span class="card-title">OPC-UA 与 Python 详细使用教程</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            OPC-UA 与 Python 详细使用教程
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
+        <a class="card dream-related-card" href="/2025/11/12/python-da-bao-exe/">
+            <span class="dream-related-reason">共同标签：python</span><h3>Python 程序打包成 EXE 全面教程</h3>
+            <time datetime="2025-11-12">2025-11-12</time>
+        </a>
         
     </div>
-</article>
+    
+    <nav class="dream-post-navigation" aria-label="按发布时间阅读">
+        <a href="/2025/10/22/windows-qi-dong-zi-dong-yun-xing-duo-ge-python-jiao-ben/" rel="prev"><span>较新的一篇</span><strong>Windows — 极其完整的：开机 / 启动时自动运行多个 Python 脚本（详细逐步教程）</strong></a>
+        <a href="/2025/10/19/python-zhong-shi-yong-opcua/" rel="next"><span>较早的一篇</span><strong>OPC-UA 与 Python 详细使用教程</strong></a>
+    </nav>
+</section>
 
+    
 </div>
 
 
 <script>
     $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
         if (typeof window.getSelection === 'undefined') return;
 
         var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        var clipboard = e.originalEvent && e.originalEvent.clipboardData;
+        if (!selection || !selection.rangeCount || !clipboard) return;
+
+        var range = selection.getRangeAt(0);
+        var ancestor = range.commonAncestorContainer;
+        var element = ancestor.nodeType === 1 ? ancestor : ancestor.parentElement;
+        // Code must remain directly usable when copied, including highlighted spans.
+        if (element && element.closest('pre, code')) return;
+
+        var text = selection.toString();
+        if (text.length < Number.parseInt('120')) {
             return;
         }
 
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
         var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: 逐梦<br />'
-            + '文章作者: 0xdadream<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+        var attribution = ["来源: 逐梦","文章作者: 0xdadream","文章链接: ","本文章著作权归作者所有，任何形式的转载都请注明出处。"];
+        var content = document.createElement('div');
+        content.appendChild(range.cloneContents());
+        var notice = document.createElement('div');
+        notice.appendChild(document.createElement('br'));
+        attribution.forEach(function (line, index) {
+            notice.appendChild(document.createTextNode(line));
+            if (index === 2) {
+                var link = document.createElement('a');
+                link.href = url;
+                link.textContent = url;
+                notice.appendChild(link);
+            }
+            notice.appendChild(document.createElement('br'));
+        });
+        content.appendChild(notice);
+        clipboard.setData('text/plain', text + '\n\n' + attribution[0] + '\n' +
+            attribution[1] + '\n' + attribution[2] + url + '\n' + attribution[3]);
+        clipboard.setData('text/html', content.innerHTML);
+        e.preventDefault();
     });
 </script>
+
 
 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1402,6 +1597,7 @@ except (Exception, psycopg2.DatabaseError) as error:
 
 
 
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
@@ -1414,9 +1610,10 @@ except (Exception, psycopg2.DatabaseError) as error:
 <!-- TOC 悬浮按钮. -->
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
+    <button type="button" class="btn-floating btn-large bg-color" aria-label="展开或收起文章目录"
+            aria-controls="toc-aside" aria-expanded="true">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+    </button>
 </div>
 
 
@@ -1426,23 +1623,27 @@ except (Exception, psycopg2.DatabaseError) as error:
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
+            hasInnerContainers: true,
+            headingsOffset: 150,
             collapseDepth: Number('0'),
+            scrollSmoothOffset: -150,
             headingSelector: 'h2, h3, h4'
         });
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        // Keep the fixed card inside its column, including after a resize.
         let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
+        let $tocAside = $('#toc-aside');
+        function updateTocLayout() {
+            let isFixed = $(window).width() > 992 && $tocAside.hasClass('expanded') &&
+                $(window).scrollTop() > $tocAside.offset().top - 64;
+            if (isFixed) {
+                $tocWidget.addClass('toc-fixed').width($tocAside.width());
             } else {
-                $tocWidget.removeClass('toc-fixed');
+                $tocWidget.removeClass('toc-fixed').css('width', '');
             }
-        });
+        }
+        $(window).on('load.toc resize.toc scroll.toc', updateTocLayout);
+        updateTocLayout();
 
         
         /* 修复文章卡片 div 的宽度. */
@@ -1467,7 +1668,6 @@ except (Exception, psycopg2.DatabaseError) as error:
 
         // 切换TOC目录展开收缩的相关操作.
         const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
@@ -1477,6 +1677,8 @@ except (Exception, psycopg2.DatabaseError) as error:
                 $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
+            $(this).attr('aria-expanded', String($tocAside.hasClass(expandedClass)));
+            updateTocLayout();
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
@@ -1492,60 +1694,6 @@ except (Exception, psycopg2.DatabaseError) as error:
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1556,27 +1704,30 @@ except (Exception, psycopg2.DatabaseError) as error:
             
             <a href="/about" target="_blank">0xdadream</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            |&nbsp;Theme&nbsp;<span class="dream-theme-name">Dream</span>
+            <span class="dream-theme-base"> / based on <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener noreferrer">Matery</a></span>
+            
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">392.6k</span>
+                        class="white-color">441.6k</span>
             
             
             
                 
             
             
-                <span id="busuanzi_container_site_pv">
+                <span id="vercount_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    <span id="vercount_value_site_pv" class="white-color">--</span>
             </span>
             
             
-                <span id="busuanzi_container_site_uv">
+                <span id="vercount_container_site_uv">
                 &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+                    <span id="vercount_value_site_uv" class="white-color">--</span>
             </span>
             
             <br>
@@ -1588,38 +1739,44 @@ except (Exception, psycopg2.DatabaseError) as error:
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
+    <a href="https://github.com/0xdadream" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的 GitHub" data-tooltip="访问我的 GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="mailto:320088413@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 320088413" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
+    <a href="mailto:320088413@qq.com" class="tooltipped"
+       aria-label="邮件联系我" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open" aria-hidden="true"></i>
     </a>
 
 
 
 
 
-    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/zhu-meng-16-1" data-position="top" data-delay="50">
-        <i class="fab fa-zhihu1">知</i>
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=320088413"
+       class="tooltipped" aria-label="通过 QQ 联系我" data-tooltip="通过 QQ 联系我"
+       data-position="top" data-delay="50">
+        <i class="fab fa-qq" aria-hidden="true"></i>
     </a>
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
+
+
+    <a href="https://www.zhihu.com/people/zhu-meng-16-1" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="访问我的知乎" data-tooltip="访问我的知乎" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu" aria-hidden="true"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" rel="noopener noreferrer"
+       aria-label="RSS 订阅" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss" aria-hidden="true"></i>
     </a>
 
 </div>
@@ -1630,107 +1787,209 @@ except (Exception, psycopg2.DatabaseError) as error:
 
 
     <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
+<div id="searchModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <span class="title" id="searchModalTitle"><i class="fas fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索</span>
             <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
+                   class="search-input" aria-label="搜索" autocomplete="off">
         </div>
+        <p class="dream-search-hint">输入标题、标签或正文关键词，多个词用空格分隔。</p>
+        <p id="searchStatus" class="dream-search-status" role="status" aria-live="polite"></p>
         <div id="searchResult"></div>
     </div>
 </div>
 
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
+<script defer src="/js/dream-search.js"></script>
+<script>
+(function () {
+    'use strict';
 
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
+    function onReady(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        } else {
+            callback();
+        }
+    }
+
+    onReady(function () {
+        var input = document.getElementById('searchInput');
+        var result = document.getElementById('searchResult');
+        var status = document.getElementById('searchStatus');
+        var triggers = document.querySelectorAll('a[href="#searchModal"]');
+        var searchPath = '/search.xml';
+        var entries = null;
+        var loadingPromise = null;
+        var searchTimer = null;
+        var resultLimit = 80;
+
+        function getText(parent, selector) {
+            var node = parent.querySelector(selector);
+            return node ? node.textContent : '';
+        }
+
+        function decodeText(text) {
+            var decoder = document.createElement('textarea');
+            // Decode entities once without allowing literal markup to become elements.
+            decoder.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return decoder.value;
+        }
+
+        function getSearchContent(html) {
+            var text = html
+                .replace(/<\/?(?:p|div|h[1-6]|li|tr|pre|blockquote)\b[^>]*>|<br\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, '');
+            return decodeText(text).replace(/\s+/g, ' ').trim();
+        }
+
+        function normalizeUrl(url) {
+            if (/^(?:https?:)?\/\//i.test(url) || url.charAt(0) === '/') {
+                return url;
             }
-        });
-    };
+            return '/' + url;
+        }
 
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
+        function loadSearchData() {
+            if (entries) {
+                return Promise.resolve(entries);
+            }
+            if (loadingPromise) {
+                return loadingPromise;
+            }
+
+            status.textContent = '正在加载搜索索引…';
+            input.setAttribute('aria-busy', 'true');
+
+            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (xmlText) {
+                    var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+                    if (xml.querySelector('parsererror')) {
+                        throw new Error('搜索索引 XML 解析失败');
+                    }
+                    entries = Array.prototype.map.call(xml.querySelectorAll('entry'), function (entry) {
+                        return {
+                            title: decodeText(getText(entry, 'title')).trim(),
+                            content: getSearchContent(getText(entry, 'content')),
+                            tags: Array.from(entry.querySelectorAll('tags tag')).map(function (tag) { return decodeText(tag.textContent).trim(); }),
+                            categories: Array.from(entry.querySelectorAll('categories category')).map(function (category) { return decodeText(category.textContent).trim(); }),
+                            url: normalizeUrl(getText(entry, 'url').trim())
+                        };
+                    });
+                    input.removeAttribute('aria-busy');
+                    result.textContent = '';
+                    renderResults();
+                    return entries;
+                })
+                .catch(function (error) {
+                    input.removeAttribute('aria-busy');
+                    loadingPromise = null;
+                    status.textContent = '搜索索引加载失败，请稍后重试。';
+                    console.error('[search]', error);
+                    throw error;
+                });
+
+            return loadingPromise;
+        }
+
+        function appendHighlightedText(parent, text, keywords) {
+            if (!text) {
+                return;
+            }
+            var escaped = keywords.map(function (keyword) {
+                return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            });
+            var matcher = new RegExp('(' + escaped.join('|') + ')', 'gi');
+            text.split(matcher).forEach(function (part) {
+                if (keywords.indexOf(part.toLowerCase()) !== -1) {
+                    var emphasis = document.createElement('em');
+                    emphasis.className = 'search-keyword';
+                    emphasis.textContent = part;
+                    parent.appendChild(emphasis);
+                } else {
+                    parent.appendChild(document.createTextNode(part));
+                }
+            });
+        }
+
+        function renderResults() {
+            var query = input.value.trim().toLowerCase();
+            result.replaceChildren();
+            status.textContent = '';
+            if (!query || !entries) {
+                return;
+            }
+
+            var keywords = DreamSearch.keywords(query);
+            if (keywords.length === 0) {
+                status.textContent = '请输入有效的搜索关键词。';
+                return;
+            }
+            var list = document.createElement('ul');
+            list.className = 'search-result-list';
+            var matches = DreamSearch.rank(entries, query);
+            matches.slice(0, resultLimit).forEach(function (match) {
+                var entry = match.entry;
+
+                var item = document.createElement('li');
+                var link = document.createElement('a');
+                link.href = entry.url;
+                link.className = 'search-result-title';
+                appendHighlightedText(link, entry.title, keywords);
+                item.appendChild(link);
+                var meta = document.createElement('p');
+                meta.className = 'dream-search-meta';
+                meta.textContent = [match.type, entry.categories.join(' / '), entry.tags.slice(0, 3).join(' · ')].filter(Boolean).join(' ｜ ');
+                item.appendChild(meta);
+                var snippet = DreamSearch.snippet(entry.content, keywords);
+                if (snippet) {
+                    var paragraph = document.createElement('p');
+                    paragraph.className = 'search-result';
+                    appendHighlightedText(paragraph, snippet, keywords);
+                    item.appendChild(paragraph);
+                }
+
+                list.appendChild(item);
+            });
+
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                return;
+            }
+            result.appendChild(list);
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+        }
+
+        input.addEventListener('focus', function () {
+            loadSearchData().catch(function () {});
+        });
+
+        input.addEventListener('input', function () {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(function () {
+                if (entries) {
+                    renderResults();
+                } else {
+                    loadSearchData().catch(function () {});
+                }
+            }, 120);
+        });
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                window.setTimeout(function () {
+                    input.focus();
+                }, 0);
+            });
+        });
+    });
+}());
 </script>
 
     <!-- 白天和黑夜主题 -->
@@ -1741,35 +2000,74 @@ $(function () {
 </div>
 
 <script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
+    (function () {
+        let skyTimer;
+
+        function applyNightMode(isDark) {
+            if (isDark && window.ensureDarkStylesheet) {
+                window.ensureDarkStylesheet();
+            }
+            document.body.classList.toggle('DarkMode', isDark);
+            $('#sum-moon-icon').toggleClass('fa-sun', isDark).toggleClass('fa-moon', !isDark);
+            $('.theme-toggle').attr('aria-pressed', String(isDark));
+        }
+
+        let isDark = document.body.classList.contains('DarkMode');
+        try {
+            isDark = localStorage.getItem('isDark') === '1';
+        } catch (error) {
+            // The switch still works for this page when storage is blocked.
+        }
+        applyNightMode(isDark);
+
+        window.switchNightMode = function () {
+            let nextIsDark = !document.body.classList.contains('DarkMode');
+            let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            clearTimeout(skyTimer);
+            $('.Cuteen_DarkSky').stop(true, true).remove();
+            if (!reduceMotion) {
+                if (window.ensureDarkStylesheet) {
+                    window.ensureDarkStylesheet();
+                }
+                $('<div class="Cuteen_DarkSky" aria-hidden="true"><div class="Cuteen_DarkPlanet"></div></div>')
+                    .appendTo(document.body);
+                skyTimer = setTimeout(function () {
+                    $('.Cuteen_DarkSky').fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+            applyNightMode(nextIsDark);
+            try {
+                localStorage.setItem('isDark', nextIsDark ? '1' : '0');
+            } catch (error) {
+                // Applying the mode and removing the overlay do not depend on storage.
+            }
+        };
+    }());
 </script>
 
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!" aria-label="返回顶部">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
 
+    
+    <script defer src="/js/dream.js"></script>
+    
+
     <script src="/libs/materialize/materialize.min.js"></script>
+    
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    
     <script src="/js/matery.js"></script>
 
     
@@ -1793,45 +2091,18 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?60ba8127252096f2c85afea30efed9e2";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
     <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
 
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <!-- Vercount is a maintained, drop-in replacement for the unavailable Busuanzi endpoint. -->
+    <script defer src="https://events.vercount.one/js"></script>
     
 
     

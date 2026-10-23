@@ -1,57 +1,74 @@
-// 代码块一键复制
-
+// Accessible one-click copy control for code blocks.
 $(function () {
-    var $copyIcon = $('<i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i>')
-    var $notice = $('<div class="codecopy_notice"></div>')
-    $('.code-area').prepend($copyIcon)
-    $('.code-area').prepend($notice)
-    // “复制成功”字出现
-    function copy(text, ctx) {
-        if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-            try {
-                document.execCommand('copy') // Security exception may be thrown by some browsers.
-                $(ctx).prev('.codecopy_notice')
-                    .text("复制成功")
-                    .animate({
-                        opacity: 1,
-                        top: 30
-                    }, 450, function () {
-                        setTimeout(function () {
-                            $(ctx).prev('.codecopy_notice').animate({
-                                opacity: 0,
-                                top: 0
-                            }, 650)
-                        }, 400)
-                    })
-            } catch (ex) {
-                $(ctx).prev('.codecopy_notice')
-                    .text("复制失败")
-                    .animate({
-                        opacity: 1,
-                        top: 30
-                    }, 650, function () {
-                        setTimeout(function () {
-                            $(ctx).prev('.codecopy_notice').animate({
-                                opacity: 0,
-                                top: 0
-                            }, 650)
-                        }, 400)
-                    })
-                return false
+    var $copyButton = $('<button type="button" class="code_copy" title="复制代码" aria-label="复制代码"><i class="fas fa-copy" aria-hidden="true"></i></button>');
+    var $notice = $('<div class="codecopy_notice" role="status" aria-live="polite"></div>');
+
+    $('.code-area').prepend($copyButton);
+    $('.code-area').prepend($notice);
+
+    function showNotice(ctx, message) {
+        $(ctx).prev('.codecopy_notice')
+            .stop(true, true)
+            .text(message)
+            .animate({ opacity: 1, top: 30 }, 300)
+            .delay(500)
+            .animate({ opacity: 0, top: 0 }, 450);
+    }
+
+    function fallbackCopy(text, ctx) {
+        var activeElement = document.activeElement;
+        var selection = window.getSelection();
+        var ranges = [];
+        if (selection) {
+            for (var i = 0; i < selection.rangeCount; i++) {
+                ranges.push(selection.getRangeAt(i).cloneRange());
             }
-        } else {
-            $(ctx).prev('.codecopy_notice').text("浏览器不支持复制")
+        }
+        // Copy outside the article so its prose attribution handler cannot alter code.
+        // A textarea also works when the code block is collapsed.
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.readOnly = true;
+        textarea.tabIndex = -1;
+        textarea.style.cssText = 'position:fixed;top:0;left:-9999px;';
+        document.body.appendChild(textarea);
+        try {
+            textarea.focus({ preventScroll: true });
+            textarea.select();
+            var copied = document.execCommand('copy');
+            showNotice(ctx, copied ? '复制成功' : '复制失败，请手动选择代码复制');
+        } catch (error) {
+            showNotice(ctx, '复制失败');
+        } finally {
+            textarea.remove();
+            if (activeElement && activeElement.isConnected) {
+                activeElement.focus({ preventScroll: true });
+            }
+            if (selection) {
+                selection.removeAllRanges();
+                ranges.forEach(function (range) {
+                    selection.addRange(range);
+                });
+            }
         }
     }
-    // 复制
-    $('.code-area .fa-copy').on('click', function () {
-        var selection = window.getSelection()
-        var range = document.createRange()
-        range.selectNodeContents($(this).siblings('pre').find('code')[0])
-        selection.removeAllRanges()
-        selection.addRange(range)
-        var text = selection.toString()
-        copy(text, this)
-        selection.removeAllRanges()
-    })
+
+    $('.code-area .code_copy').on('click', function () {
+        var button = this;
+        var code = $(button).siblings('pre').find('code')[0];
+        if (!code) {
+            showNotice(button, '没有可复制的代码');
+            return;
+        }
+        var text = code.textContent;
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(function () {
+                showNotice(button, '复制成功');
+            }).catch(function () {
+                fallbackCopy(text, button);
+            });
+        } else {
+            fallbackCopy(text, button);
+        }
+    });
 });
