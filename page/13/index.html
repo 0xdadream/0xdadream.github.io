@@ -170,10 +170,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -215,6 +222,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -243,6 +257,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -340,6 +361,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -348,6 +370,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -382,6 +407,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -397,8 +423,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -510,7 +535,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -881,6 +907,12 @@ mjx-container[display="true"] + br {
 
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles dream-articles" aria-label="文章列表" tabindex="-1">
+        
+        <div class="dream-section-heading dream-feed-heading">
+            <div><h2>继续探索</h2><p>231 篇记录 · 第 13 页，找到这次想读的内容。</p></div>
+            <div class="dream-feed-actions"><a class="modal-trigger dream-search-entry" href="#searchModal"><i class="fas fa-search" aria-hidden="true"></i> 搜索文章</a><a href="/atom.xml" aria-label="通过 RSS 订阅文章更新"><i class="fas fa-rss" aria-hidden="true"></i> 订阅更新</a></div>
+        </div>
+        
         <div class="row article-row">
             
              <!-- 隐藏某个文章 -->
@@ -897,11 +929,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                archlinux设置中文
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/17/archlinux-she-zhi-zhong-wen/" aria-label="阅读：archlinux设置中文"><span class="summary">执行vim /etc/locale.gen将下面字符前的#去掉 先执行 sudo locale-gen 生成已启用的 locale，再用 locale -a 查看当前可用 locale。 vim /etc/locale.conf添加LANG…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/17/archlinux-she-zhi-zhong-wen/" aria-label="阅读全文：archlinux设置中文">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-17
@@ -949,11 +984,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux设置root密码
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/17/linux-she-zhi-root-mi-ma/" aria-label="阅读：linux设置root密码"><span class="summary">打开文章，查看完整内容。</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/17/linux-she-zhi-root-mi-ma/" aria-label="阅读全文：linux设置root密码">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-17
@@ -1001,11 +1039,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux开启ssh
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/17/linux-kai-qi-ssh/" aria-label="阅读：linux开启ssh"><span class="summary">以下以 Kali / Ubuntu 的 OpenSSH Server 为例。客户端能执行 ssh，不代表服务器已安装并启动 sshd。 在目标 Linux 机器的终端执行： 确认 SSH 监听的地址和端口，默认端口通常是 22。采用 soc…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/17/linux-kai-qi-ssh/" aria-label="阅读全文：linux开启ssh">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-17
@@ -1053,11 +1094,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                ubuntu22.04LTS不能运行Appimage
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/17/ubuntu22.04lts-bu-neng-yun-xing-appimage/" aria-label="阅读：ubuntu22.04LTS不能运行Appimage"><span class="summary">先从终端运行实际文件，查看完整报错。本文只处理常见的 FUSE 2 依赖问题，不是所有 AppImage 启动失败的通用修复。 将 YourApp.AppImage 替换为实际文件名。文件架构需要与系统匹配；Permission denie…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/17/ubuntu22.04lts-bu-neng-yun-xing-appimage/" aria-label="阅读全文：ubuntu22.04LTS不能运行Appimage">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-17
@@ -1105,11 +1149,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                ubuntu虚拟机进入initramfs模式
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/12/ubuntu-xu-ni-ji-jin-ru-initramfs-mo-shi/" aria-label="阅读：ubuntu虚拟机进入initramfs模式"><span class="summary">可能是某个分区的出现了问题 查看你的命令行，查看是否有如/dev/sda5分区信息 如果有，执行 然后重启，其他分区也相同</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/12/ubuntu-xu-ni-ji-jin-ru-initramfs-mo-shi/" aria-label="阅读全文：ubuntu虚拟机进入initramfs模式">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
@@ -1157,11 +1204,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                编译libpcap时报错Neither flex nor lex was found
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/05/06/neither-flex-nor-lex-was-found/" aria-label="阅读：Neither flex nor lex was found"><span class="summary">编译libpcap时报错Neither flex nor lex was found</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/05/06/neither-flex-nor-lex-was-found/" aria-label="阅读全文：Neither flex nor lex was found">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-05-06
@@ -1209,11 +1259,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                配置WSUS连接时HTTP错误
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/" aria-label="阅读：配置WSUS连接时HTTP错误"><span class="summary">先记录实际的 HTTP 状态码、报错时间和 WSUS 地址。ping microsoft.com 测的是 ICMP，不是 Windows Update / WSUS 的 HTTP 服务；不能仅凭 ping 不通就判断更新服务不可用。 客户端…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/04/30/pei-zhi-wsus-lian-jie-shi-http-cuo-wu/" aria-label="阅读全文：配置WSUS连接时HTTP错误">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
@@ -1261,11 +1314,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                发生系统错误6118此工作组的服务器列表当前无法使用
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/" aria-label="阅读：发生系统错误6118"><span class="summary">发生系统错误6118此工作组的服务器列表当前无法使用</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/04/30/fa-sheng-xi-tong-cuo-wu-6118/" aria-label="阅读全文：发生系统错误6118">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-04-30
@@ -1313,11 +1369,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                windows监听端口失败
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/02/08/windows-jian-ting-duan-kou-shi-bai/" aria-label="阅读：windows监听端口失败"><span class="summary">当你在某些情况需要用到监听端口时，会出现端口监听失败，获得类似信息An attempt was made to access a socket in a way forbidden by its access permissions.，这时…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/02/08/windows-jian-ting-duan-kou-shi-bai/" aria-label="阅读全文：windows监听端口失败">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-02-08
@@ -1365,11 +1424,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                windows中netstat命令
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/02/08/windows-zhong-netstat-ming-ling/" aria-label="阅读：windows中netstat命令"><span class="summary">NETSTAT [-a] [-b] [-e] [-f] [-i] [-n] [-o] [-p proto] [-r] [-s] [-t] [-x] [-y] [interval] 选项 常用 Proto Local Address Fore…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2022/02/08/windows-zhong-netstat-ming-ling/" aria-label="阅读全文：windows中netstat命令">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-02-08
@@ -1417,11 +1479,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                自定义鼠标右键新建文件
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/" aria-label="阅读：自定义鼠标右键新建文件"><span class="summary">win+R 打开运行窗口，输入regedit进入注册表 进入计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostS…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/01/15/zi-ding-yi-shu-biao-you-jian-xin-jian-wen-jian/" aria-label="阅读全文：自定义鼠标右键新建文件">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-01-15
@@ -1469,11 +1534,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                powershell导入一个自己写的模块
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/" aria-label="阅读：powershell导入一个自己写的模块"><span class="summary">想把你写的模块name.psm1放在C:\Users\yourname\Documents\PowerShell\Modules\name目录下 name为你的模块名 编辑文件‪C:\Users\yourname\Documents\Pow…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2022/01/03/powershell-dao-ru-yi-ge-zi-ji-xie-de-mo-kuai/" aria-label="阅读全文：powershell导入一个自己写的模块">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-01-03

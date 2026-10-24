@@ -170,10 +170,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -215,6 +222,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -243,6 +257,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -340,6 +361,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -348,6 +370,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -382,6 +407,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -397,8 +423,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -510,7 +535,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -881,6 +907,12 @@ mjx-container[display="true"] + br {
 
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles dream-articles" aria-label="文章列表" tabindex="-1">
+        
+        <div class="dream-section-heading dream-feed-heading">
+            <div><h2>继续探索</h2><p>231 篇记录 · 第 15 页，找到这次想读的内容。</p></div>
+            <div class="dream-feed-actions"><a class="modal-trigger dream-search-entry" href="#searchModal"><i class="fas fa-search" aria-hidden="true"></i> 搜索文章</a><a href="/atom.xml" aria-label="通过 RSS 订阅文章更新"><i class="fas fa-rss" aria-hidden="true"></i> 订阅更新</a></div>
+        </div>
+        
         <div class="row article-row">
             
              <!-- 隐藏某个文章 -->
@@ -897,11 +929,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                python学习
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/10/10/python-study/" aria-label="阅读：python学习"><span class="summary">本文以 Python 3 为主。各节示例按主题独立阅读；带尖括号、方括号可选项或中文占位的语法示意需要替换为实际代码，不能原样执行。终端命令和程序输出也与 Python 代码分开理解。 首字母必须是字母或者下划线_ 其他部分由字母、数字、下…</span></a>
+<div class="dream-card-invitation">
+    <span>约 147 分钟</span>
+    <a href="/2021/10/10/python-study/" aria-label="阅读全文：python学习">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-10-10
@@ -949,11 +984,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux命令
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/09/08/linux-ming-ling/" aria-label="阅读：linux命令"><span class="summary">选项 chmod 命令在 Unix 和类 Unix 操作系统中用于更改文件和目录的权限。 chmod 命令的一般语法是： 模式：指定要设置的权限。 文件：指定要更改权限的文件或目录。 权限可以用符号或数字来表示。 权限由三组三个字符表示：…</span></a>
+<div class="dream-card-invitation">
+    <span>约 5 分钟</span>
+    <a href="/2021/09/08/linux-ming-ling/" aria-label="阅读全文：linux命令">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-09-08
@@ -1001,11 +1039,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux系统目录功能
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/09/08/linux-xi-tong-mu-lu-gong-neng/" aria-label="阅读：linux系统目录功能"><span class="summary">打开文章，查看完整内容。</span></a>
+<div class="dream-card-invitation">
+    <span>约 5 分钟</span>
+    <a href="/2021/09/08/linux-xi-tong-mu-lu-gong-neng/" aria-label="阅读全文：linux系统目录功能">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-09-08
@@ -1053,11 +1094,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                部署hexo到coding
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/13/bu-shu-hexo-dao-coding/" aria-label="阅读：部署hexo到coding"><span class="summary">创建账号登录 新建项目，名为团队域名 点击代码仓库新建一个仓库 名为团队域名，勾选readme，公有 之后便可以通过团队域名.coding.me来访问博客 c/Users/youuser/.ssh/id_rsa.pub里面的内容即是双方通信…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/08/13/bu-shu-hexo-dao-coding/" aria-label="阅读全文：部署hexo到coding">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-13
@@ -1103,11 +1147,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                部署hexo到github
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/13/bu-shu-hexo-dao-github/" aria-label="阅读：部署hexo到github"><span class="summary">我的本地机器是win10 登录github账号，尽量一个你喜欢的用户名 创建一个仓库，仓库名为 用户名.github.io，设置公有，添加readme 待会通过hexo将静态页面部署到https://用户名.github.io 这个url就…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2021/08/13/bu-shu-hexo-dao-github/" aria-label="阅读全文：部署hexo到github">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-13
@@ -1153,11 +1200,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                解决kali字体太小
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/13/jie-jue-kali-zi-ti-tai-xiao/" aria-label="阅读：解决kali字体太小"><span class="summary">桌面右键-&gt;应用程序-&gt;设置-&gt;外观-&gt;设置-&gt; 窗口缩放x2 强制光标变大 桌面右键-&gt;应用程序-&gt;设置-&gt;外观-&gt;字体-&gt;DPI=180 调字体大小 以上如果不成功 左上角搜索Kali HiDPI Mode点击一下即可切换缩放 多尝试，…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/08/13/jie-jue-kali-zi-ti-tai-xiao/" aria-label="阅读全文：解决kali字体太小">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-13
@@ -1205,11 +1255,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                将hexo部署到服务器
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/12/jiang-hexo-bu-shu-dao-fu-wu-qi/" aria-label="阅读：将hexo部署到服务器"><span class="summary">我以前是部署在github上的，本机的部署都是完成了的，本机部署请看其他教程 下面服务器端的用户创建和目录准备由管理员执行，日常推送使用 git 用户。 先切换到刚创建的用户，后续仓库操作也在这个用户下完成： 接上面继续操作 文件内容： 保…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2021/08/12/jiang-hexo-bu-shu-dao-fu-wu-qi/" aria-label="阅读全文：将hexo部署到服务器">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-12
@@ -1257,11 +1310,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                apache部署ssl
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/11/apache-bu-shu-ssl/" aria-label="阅读：apache部署ssl"><span class="summary">以下以 Apache HTTP Server 2.4 为例。先确认使用发行版软件包还是源码安装，两者的模块管理、配置目录和服务名称不同。 Debian / Ubuntu 的软件包安装通常使用： 源码安装则检查 httpd.conf 中是否已…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2021/08/11/apache-bu-shu-ssl/" aria-label="阅读全文：apache部署ssl">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
@@ -1309,11 +1365,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Apache安装
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/11/apache-an-zhuang/" aria-label="阅读：Apache安装"><span class="summary">先区分发行版软件包安装与源码编译。普通 Ubuntu / Debian 站点可以使用发行版维护的软件包： 不要在同一个实例中混用软件包和源码安装的配置路径。以下保留原文的源码编译记录，版本属于历史示例，不是当前部署推荐；新部署从 Apach…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2021/08/11/apache-an-zhuang/" aria-label="阅读全文：Apache安装">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
@@ -1361,11 +1420,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                阿里云部署apache二级域名
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/10/a-li-yun-bu-shu-apache-er-ji-yu-ming/" aria-label="阅读：阿里云部署apache二级域名"><span class="summary">到阿里云控制台-&gt;云解析DNS-&gt;域名解析-&gt;解析设置-&gt;添加记录 主机记录就是你的二级域名 记录类型为A——指向IPV4 解析路线默认 记录值为你的外网IP 编辑httpd.conf 注释掉虚拟目录外的DocumentRoot 添加</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/08/10/a-li-yun-bu-shu-apache-er-ji-yu-ming/" aria-label="阅读全文：阿里云部署apache二级域名">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-10
@@ -1411,11 +1473,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Linux安装软件包
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/02/linux-an-zhuang-ruan-jian-bao/" aria-label="阅读：Linux安装软件包"><span class="summary">安装都是在root权限下执行的 先从开源镜像站下载源码，例如：欢迎访问网易开源镜像站 (163.com) 有两种源码包 二进制包，一般会有版本号、操作系统之类的，名字比较长，里面的程序是已经编译果的，直接解压就可运行程序 cd 到下载的包的…</span></a>
+<div class="dream-card-invitation">
+    <span>约 5 分钟</span>
+    <a href="/2021/08/02/linux-an-zhuang-ruan-jian-bao/" aria-label="阅读全文：Linux安装软件包">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
@@ -1463,11 +1528,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                国内镜像源
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2021/08/02/guo-nei-jing-xiang-yuan/" aria-label="阅读：国内镜像源"><span class="summary">欢迎访问网易开源镜像站 (163.com) 阿里巴巴开源镜像站-OPSX镜像站-阿里云开发者社区 (aliyun.com) 华为开源镜像站_软件开发服务_华为云 (huaweicloud.com) 腾讯软件源 (tencent.com) 清…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/08/02/guo-nei-jing-xiang-yuan/" aria-label="阅读全文：国内镜像源">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-08-02

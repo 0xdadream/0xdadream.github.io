@@ -174,10 +174,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -219,6 +226,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -247,6 +261,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -344,6 +365,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -352,6 +374,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -386,6 +411,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -401,8 +427,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -514,7 +539,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -888,7 +914,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书"><span class="dream-card-title-text">数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflar</div>
+                    <a class="dream-card-excerpt" href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/" aria-label="阅读：数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书"><span class="summary">从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflar…</span></a>
+<div class="dream-card-invitation">
+    <span>约 37 分钟</span>
+    <a href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/" aria-label="阅读全文：数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-08-10">2026-08-10</time></div>
                 </div>
                 
@@ -917,7 +948,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错"><span class="dream-card-title-text">SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">从 SSH 客户端与服务端安装开始，完整讲清 Host Key、用户密钥、ssh-agent、~/.ssh/config、文件传输、VS Code Remote SSH、端口转发、跳板机、安全加固与系统化排错。</div>
+                    <a class="dream-card-excerpt" href="/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/" aria-label="阅读：SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错"><span class="summary">从 SSH 客户端与服务端安装开始，完整讲清 Host Key、用户密钥、ssh-agent、~/.ssh/config、文件传输、VS Code Remote SSH、端口转发、跳板机、安全加固与系统化排错。</span></a>
+<div class="dream-card-invitation">
+    <span>约 23 分钟</span>
+    <a href="/2026/08/09/ssh-wan-zheng-gong-zuo-liu-cheng-cong-an-zhuang-mi-yao-ren-zheng-dao-config-sui-dao-yu-pai-cuo/" aria-label="阅读全文：SSH 完整工作流程：从安装、密钥认证到 Config、隧道与排错">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-08-09">2026-08-09</time></div>
                 </div>
                 
@@ -946,7 +982,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错"><span class="dream-card-title-text">Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障</div>
+                    <a class="dream-card-excerpt" href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/" aria-label="阅读：Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错"><span class="summary">从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障…</span></a>
+<div class="dream-card-invitation">
+    <span>约 35 分钟</span>
+    <a href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/" aria-label="阅读全文：Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-08-09">2026-08-09</time></div>
                 </div>
                 
@@ -975,7 +1016,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程"><span class="dream-card-title-text">Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。</div>
+                    <a class="dream-card-excerpt" href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/" aria-label="阅读：Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程"><span class="summary">以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。</span></a>
+<div class="dream-card-invitation">
+    <span>约 30 分钟</span>
+    <a href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/" aria-label="阅读全文：Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-08-08">2026-08-08</time></div>
                 </div>
                 
@@ -1004,7 +1050,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程"><span class="dream-card-title-text">WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程</div>
+                    <a class="dream-card-excerpt" href="/2026/05/29/wsl2-ci-pan-zhan-yong/" aria-label="阅读：WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程"><span class="summary">本文适用于这种情况：Windows 里看到某个 WSL2 的 ext4.vhdx 文件很大，比如 90GB、100GB，但进入 WSL 后用 df -h 查看，Linux 内部实际只用了十几 GB。出现这种情况并不是 WSL 坏了，而是因为…</span></a>
+<div class="dream-card-invitation">
+    <span>约 8 分钟</span>
+    <a href="/2026/05/29/wsl2-ci-pan-zhan-yong/" aria-label="阅读全文：WSL2 虚拟磁盘 ext4.vhdx 占用过大缩减教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-05-29">2026-05-29</time></div>
                 </div>
                 
@@ -1027,7 +1078,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="CentOS 8 源失效修复教程"><span class="dream-card-title-text">CentOS 8 源失效修复教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">CentOS 8 源失效修复教程</div>
+                    <a class="dream-card-excerpt" href="/2026/04/25/centos-xiu-fu/" aria-label="阅读：CentOS 8 源失效修复教程"><span class="summary">适用情况： CentOS 8 已停止维护，默认源经常失效，需要切换到 CentOS Vault 归档源。 如果显示类似： 可以继续下面的步骤。 这一步会把原来的 .repo 文件移走，避免 remi、epel、旧 CentOS 源继续干扰。…</span></a>
+<div class="dream-card-invitation">
+    <span>约 5 分钟</span>
+    <a href="/2026/04/25/centos-xiu-fu/" aria-label="阅读全文：CentOS 8 源失效修复教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-04-25">2026-04-25</time></div>
                 </div>
                 
@@ -1050,7 +1106,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Linux 包管理换源 + v2rayN 代理完整备忘录"><span class="dream-card-title-text">Linux 包管理换源 + v2rayN 代理完整备忘录</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Linux 包管理换源 + v2rayN 代理完整备忘录</div>
+                    <a class="dream-card-excerpt" href="/2026/04/19/linux-proxy/" aria-label="阅读：Linux 包管理换源 + v2rayN 代理完整备忘录"><span class="summary">换源与代理解决的是不同问题：镜像站影响包下载来源，代理影响采用它的工具如何连接网络。先在当前终端测试，确认有效后再持久保存。 记录发行版、版本代号及架构。原文的 HTTP 10809、SOCKS5 10808 只是端口示例，以代理软件实际监…</span></a>
+<div class="dream-card-invitation">
+    <span>约 6 分钟</span>
+    <a href="/2026/04/19/linux-proxy/" aria-label="阅读全文：Linux 包管理换源 + v2rayN 代理完整备忘录">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2026-04-19">2026-04-19</time></div>
                 </div>
                 
@@ -1077,7 +1138,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="GCP开启SSH登录"><span class="dream-card-title-text">GCP开启SSH登录</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">GCP开启SSH登录</div>
+                    <a class="dream-card-excerpt" href="/2025/12/13/gcp-kai-qi-ssh-deng-lu/" aria-label="阅读：GCP开启SSH登录"><span class="summary">先区分“网络连接失败”与“身份认证失败”。原文记录了 root 密码登录的配置经验，但开启 root 密码并不是所有 GCP SSH 问题的通用修复。 在 Compute Engine 实例页面 检查实例状态、连接地址、VPC 防火墙及实际…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2025/12/13/gcp-kai-qi-ssh-deng-lu/" aria-label="阅读全文：GCP开启SSH登录">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-12-13">2025-12-13</time></div>
                 </div>
                 
@@ -1100,7 +1166,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="AutoDL服务器SSH免密登录及VS Code配置完整教程"><span class="dream-card-title-text">AutoDL服务器SSH免密登录及VS Code配置完整教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">AutoDL服务器SSH免密登录及VS Code配置完整教程</div>
+                    <a class="dream-card-excerpt" href="/2025/08/15/autodl-fu-wu-qi-ssh-mian-mi-deng-lu-ji-vs-code-pei-zhi-wan-zheng-jiao-cheng/" aria-label="阅读：AutoDL服务器SSH免密登录及VS Code配置完整教程"><span class="summary">在开始之前，请确保您已准备好： 一台本地电脑（Windows, macOS 或 Linux 系统）。 已安装 Visual Studio Code。 在 VS Code 中，从扩展商店安装微软官方插件 **Remote - SSH**。 这…</span></a>
+<div class="dream-card-invitation">
+    <span>约 4 分钟</span>
+    <a href="/2025/08/15/autodl-fu-wu-qi-ssh-mian-mi-deng-lu-ji-vs-code-pei-zhi-wan-zheng-jiao-cheng/" aria-label="阅读全文：AutoDL服务器SSH免密登录及VS Code配置完整教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-08-15">2025-08-15</time></div>
                 </div>
                 
@@ -1123,7 +1194,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Linux 常用命令详解教程"><span class="dream-card-title-text">Linux 常用命令详解教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Linux 常用命令详解教程</div>
+                    <a class="dream-card-excerpt" href="/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/" aria-label="阅读：Linux 常用命令详解教程"><span class="summary">本教程旨在提供一份全面的 Linux 常用命令列表，涵盖文件管理、系统信息获取、高级系统监控、文本处理、用户与权限管理、网络配置与诊断以及端口和防火墙管理等多个方面。每个命令都将包含其用途、常用语法、重要选项及示例，力求内容完整且实用。 文…</span></a>
+<div class="dream-card-invitation">
+    <span>约 91 分钟</span>
+    <a href="/2025/06/02/linux-chang-yong-ming-ling-xiang-xi-jiao-cheng/" aria-label="阅读全文：Linux 常用命令详解教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-06-02">2025-06-02</time></div>
                 </div>
                 
@@ -1146,7 +1222,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="杀死具体进程"><span class="dream-card-title-text">杀死具体进程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">杀死具体进程</div>
+                    <a class="dream-card-excerpt" href="/2025/05/25/sha-si-ju-ti-jin-cheng/" aria-label="阅读：杀死具体进程"><span class="summary">执行了 systemctl stop httpd 来关闭 httpd（Apache）服务，但仍然看到类似： 表示进程还在运行，说明 httpd 没有被完全停止。 示例输出： 或者使用 killall： 如果仍然存在僵尸进程，可以手动 kil…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2025/05/25/sha-si-ju-ti-jin-cheng/" aria-label="阅读全文：杀死具体进程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-05-25">2025-05-25</time></div>
                 </div>
                 
@@ -1169,7 +1250,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="安装WSL子系统教程"><span class="dream-card-title-text">安装WSL子系统教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">安装WSL子系统教程</div>
+                    <a class="dream-card-excerpt" href="/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/" aria-label="阅读：安装WSL子系统教程"><span class="summary">操作系统要求： Windows 10：要求版本 2004 及 Build 19041 以上，或 Windows 11 网络环境：部分地区需要设置代理。 管理员权限：安装及部分配置需要以管理员身份运行 PowerShell 或 CMD。 存储…</span></a>
+<div class="dream-card-invitation">
+    <span>约 8 分钟</span>
+    <a href="/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/" aria-label="阅读全文：安装WSL子系统教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-04-10">2025-04-10</time></div>
                 </div>
                 

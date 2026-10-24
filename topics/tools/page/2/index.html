@@ -174,10 +174,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -219,6 +226,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -247,6 +261,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -344,6 +365,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -352,6 +374,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -386,6 +411,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -401,8 +427,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -514,7 +539,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -888,7 +914,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="psycopg2 详细使用教程：从入门到精通"><span class="dream-card-title-text">psycopg2 详细使用教程：从入门到精通</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">psycopg2 详细使用教程：从入门到精通</div>
+                    <a class="dream-card-excerpt" href="/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/" aria-label="阅读：psycopg2 详细使用教程：从入门到精通"><span class="summary">PostgreSQL: 一款功能极其强大的开源对象-关系型数据库系统。 psycopg2: 一个 Python 库，充当 Python 应用程序和 PostgreSQL 数据库之间的“驱动”或“适配器”。它实现了 Python DB-API…</span></a>
+<div class="dream-card-invitation">
+    <span>约 16 分钟</span>
+    <a href="/2025/10/20/psycopg2-xiang-xi-shi-yong-jiao-cheng/" aria-label="阅读全文：psycopg2 详细使用教程：从入门到精通">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-10-20">2025-10-20</time></div>
                 </div>
                 
@@ -913,7 +944,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="OPC-UA 与 Python 详细使用教程"><span class="dream-card-title-text">OPC-UA 与 Python 详细使用教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">OPC-UA 与 Python 详细使用教程</div>
+                    <a class="dream-card-excerpt" href="/2025/10/19/python-zhong-shi-yong-opcua/" aria-label="阅读：OPC-UA 与 Python 详细使用教程"><span class="summary">OPC-UA (Open Platform Communications Unified Architecture) 是一种独立于平台、面向服务的机器对机器（M2M）通信协议。它被广泛应用于工业自动化领域，用于在不同厂商的设备、控制器和软件…</span></a>
+<div class="dream-card-invitation">
+    <span>约 11 分钟</span>
+    <a href="/2025/10/19/python-zhong-shi-yong-opcua/" aria-label="阅读全文：OPC-UA 与 Python 详细使用教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-10-19">2025-10-19</time></div>
                 </div>
                 
@@ -936,7 +972,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="在WSL中将python3命令别名为python"><span class="dream-card-title-text">在WSL中将python3命令别名为python</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">在WSL中将python3命令别名为python</div>
+                    <a class="dream-card-excerpt" href="/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/" aria-label="阅读：在WSL中将python3命令别名为python"><span class="summary">在 Windows Subsystem for Linux (WSL) 环境中，默认情况下，Python 3.x 版本通常通过 python3 命令调用，而 python 命令可能未定义或指向老旧的 Python 2.x 版本。为了方便起见…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2025/06/26/zai-wsl-zhong-jiang-python3-ming-ling-bie-ming-wei-python/" aria-label="阅读全文：在WSL中将python3命令别名为python">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-06-26">2025-06-26</time></div>
                 </div>
                 
@@ -959,7 +1000,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Python 包管理与导入全方位教程"><span class="dream-card-title-text">Python 包管理与导入全方位教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Python 包管理与导入全方位教程</div>
+                    <a class="dream-card-excerpt" href="/2025/06/17/python-bao-guan-li/" aria-label="阅读：Python 包管理与导入全方位教程"><span class="summary">在 Python 开发中，代码的组织、复用和分发都离不开模块（Module）和包（Package）。掌握好它们的导入机制以及如何管理项目依赖，是从新手走向专业的必经之路。 本教程将涵盖四个核心部分： 模块与导入：基础篇 - 理解 Pytho…</span></a>
+<div class="dream-card-invitation">
+    <span>约 9 分钟</span>
+    <a href="/2025/06/17/python-bao-guan-li/" aria-label="阅读全文：Python 包管理与导入全方位教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-06-17">2025-06-17</time></div>
                 </div>
                 
@@ -982,7 +1028,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="whl文件名后缀"><span class="dream-card-title-text">whl文件名后缀</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">whl文件名后缀</div>
+                    <a class="dream-card-excerpt" href="/2025/05/02/whl-wen-jian-ming-hou-zhui/" aria-label="阅读：whl文件名后缀"><span class="summary">Wheel 名称遵循 PEP 427 规范，通用格式为： distribution：包名 version：包版本 build tag（可选）：构建号 python tag：支持的 Python 解释器及版本 abi tag：二进制兼容的 A…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2025/05/02/whl-wen-jian-ming-hou-zhui/" aria-label="阅读全文：whl文件名后缀">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-05-02">2025-05-02</time></div>
                 </div>
                 
@@ -1005,7 +1056,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Linux安装Conda教程"><span class="dream-card-title-text">Linux安装Conda教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Linux安装Conda教程</div>
+                    <a class="dream-card-excerpt" href="/2025/04/10/linux-an-zhuang-conda-jiao-cheng/" aria-label="阅读：Linux安装Conda教程"><span class="summary">使用普通用户安装和管理个人 Conda 环境。先确认 CPU 架构与发行版，老系统还应核对所选安装器的 glibc 等系统要求： 以 Ubuntu/Debian 为例，缺少下载工具时执行： Fedora/RHEL 系统应改用其包管理器和对应…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2025/04/10/linux-an-zhuang-conda-jiao-cheng/" aria-label="阅读全文：Linux安装Conda教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-04-10">2025-04-10</time></div>
                 </div>
                 
@@ -1028,7 +1084,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="解决报错jinja2.exceptions.TemplateNotFound_index.html"><span class="dream-card-title-text">解决报错jinja2.exceptions.TemplateNotFound_index.html</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">解决报错jinja2.exceptions.TemplateNotFound_index.html</div>
+                    <a class="dream-card-excerpt" href="/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/" aria-label="阅读：解决报错jinja2.exceptions.TemplateNotFound_index.html"><span class="summary">在 Flask 中，render_template(&#34;index.html&#34;) 会在应用配置的模板目录里查找文件。默认目录是应用 root_path 下的 templates，不一定是当前工作目录，也不一定是编写路由函数的文件旁边。 目录安…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/" aria-label="阅读全文：解决报错jinja2.exceptions.TemplateNotFound_index.html">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-04-03">2025-04-03</time></div>
                 </div>
                 
@@ -1051,7 +1112,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="pycharm显示显示表格"><span class="dream-card-title-text">pycharm显示显示表格</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">pycharm显示显示表格</div>
+                    <a class="dream-card-excerpt" href="/2025/02/21/pycharm-xian-shi-xian-shi-biao-ge/" aria-label="阅读：pycharm显示显示表格"><span class="summary">当以pycharm打开.csv文件时，可能不能显示表格，在文件中右键，选择关联文件，找到csv关联即可</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2025/02/21/pycharm-xian-shi-xian-shi-biao-ge/" aria-label="阅读全文：pycharm显示显示表格">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-02-21">2025-02-21</time></div>
                 </div>
                 
@@ -1074,7 +1140,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="conda换源"><span class="dream-card-title-text">conda换源</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">conda换源</div>
+                    <a class="dream-card-excerpt" href="/2025/02/19/conda-huan-yuan/" aria-label="阅读：conda换源"><span class="summary">由于网络连接原因，使用 Anaconda 或 Miniconda 时，默认的官方源速度较慢。为提高下载速度，您可以将 Conda 的源更换为国内的镜像源。以下是详细的操作步骤： 1. 生成 .condarc 配置文件： 在 Windows…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2025/02/19/conda-huan-yuan/" aria-label="阅读全文：conda换源">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-02-19">2025-02-19</time></div>
                 </div>
                 
@@ -1099,7 +1170,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="python库报错汇总"><span class="dream-card-title-text">python库报错汇总</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">python库报错汇总</div>
+                    <a class="dream-card-excerpt" href="/2025/02/18/python-ku-bao-cuo-hui-zong/" aria-label="阅读：python库报错汇总"><span class="summary">形如ModuleNotFoundError: No module named &#39;xxx&#39;的报错 先确认报错来自哪个 Python 环境，再查项目依赖。导入名不一定等于安装包名，也可能被项目里的同名文件遮蔽。下方统一使用 python -m…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2025/02/18/python-ku-bao-cuo-hui-zong/" aria-label="阅读全文：python库报错汇总">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-02-18">2025-02-18</time></div>
                 </div>
                 
@@ -1122,7 +1198,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="conda在powershell7.5执行出现问题"><span class="dream-card-title-text">conda在powershell7.5执行出现问题</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">conda在powershell7.5执行出现问题</div>
+                    <a class="dream-card-excerpt" href="/2025/02/15/conda-zai-powershell7.5-zhi-xing-chu-xian-wen-ti/" aria-label="阅读：conda在powershell7.5执行出现问题"><span class="summary">执行命令结果如下，不能达到预期 这是原文记录的 PowerShell 7.5 与旧版 Conda 集成脚本兼容问题。不要只凭相似报错就降级整个 PowerShell；先记录实际的 PowerShell 与 Conda 版本，确认是否仍属于同…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2025/02/15/conda-zai-powershell7.5-zhi-xing-chu-xian-wen-ti/" aria-label="阅读全文：conda在powershell7.5执行出现问题">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2025-02-15">2025-02-15</time></div>
                 </div>
                 
@@ -1147,7 +1228,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="更改 Windows PowerShell 的执行策略"><span class="dream-card-title-text">更改 Windows PowerShell 的执行策略</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">更改 Windows PowerShell 的执行策略</div>
+                    <a class="dream-card-excerpt" href="/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/" aria-label="阅读：更改 Windows PowerShell 的执行策略"><span class="summary">遇到“系统禁止运行脚本”时，先确认当前使用的是 Windows PowerShell 还是 PowerShell 7，并在同一个终端中检查策略。修改当前用户或当前进程的策略通常不需要管理员权限。 前者显示最终生效值，后者显示各作用域。优先级…</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2024/12/21/geng-gai-windows-powershell-de-zhi-xing-ce-lue/" aria-label="阅读全文：更改 Windows PowerShell 的执行策略">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2024-12-21">2024-12-21</time></div>
                 </div>
                 

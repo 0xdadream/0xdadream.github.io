@@ -174,10 +174,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -219,6 +226,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -247,6 +261,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -344,6 +365,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -352,6 +374,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -386,6 +411,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -401,8 +427,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -514,7 +539,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -888,7 +914,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="SUCTF_2019 EasySQL"><span class="dream-card-title-text">SUCTF_2019 EasySQL</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">EasySQL</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/suctf-2019-easysql/" aria-label="阅读：SUCTF_2019 EasySQL"><span class="summary">EasySQL</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2021/03/01/suctf-2019-easysql/" aria-label="阅读全文：SUCTF_2019 EasySQL">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -915,7 +946,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="极客大挑战_2019 EasySQL"><span class="dream-card-title-text">极客大挑战_2019 EasySQL</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">EasySQL</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/ji-ke-da-tiao-zhan-2019-easysql/" aria-label="阅读：极客大挑战_2019 EasySQL"><span class="summary">EasySQL</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2021/03/01/ji-ke-da-tiao-zhan-2019-easysql/" aria-label="阅读全文：极客大挑战_2019 EasySQL">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -942,7 +978,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="极客大挑战_2019 Knife"><span class="dream-card-title-text">极客大挑战_2019 Knife</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Knife</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/ji-ke-da-tiao-zhan-2019-knife/" aria-label="阅读：极客大挑战_2019 Knife"><span class="summary">Knife</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/03/01/ji-ke-da-tiao-zhan-2019-knife/" aria-label="阅读全文：极客大挑战_2019 Knife">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -969,7 +1010,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="极客大挑战_2019 LoveSQL"><span class="dream-card-title-text">极客大挑战_2019 LoveSQL</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">LoveSQL</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/ji-ke-da-tiao-zhan-2019-lovesql/" aria-label="阅读：极客大挑战_2019 LoveSQL"><span class="summary">LoveSQL</span></a>
+<div class="dream-card-invitation">
+    <span>约 2 分钟</span>
+    <a href="/2021/03/01/ji-ke-da-tiao-zhan-2019-lovesql/" aria-label="阅读全文：极客大挑战_2019 LoveSQL">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -996,7 +1042,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="极客大挑战_2019 Secret File"><span class="dream-card-title-text">极客大挑战_2019 Secret File</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">Secret File</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/ji-ke-da-tiao-zhan-2019-secret-file/" aria-label="阅读：极客大挑战_2019 Secret File"><span class="summary">Secret File</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/03/01/ji-ke-da-tiao-zhan-2019-secret-file/" aria-label="阅读全文：极客大挑战_2019 Secret File">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -1023,7 +1074,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="强网杯_2019 随便注"><span class="dream-card-title-text">强网杯_2019 随便注</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">随便注</div>
+                    <a class="dream-card-excerpt" href="/2021/03/01/qiang-wang-bei-2019-sui-bian-zhu/" aria-label="阅读：强网杯_2019 随便注"><span class="summary">随便注</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/03/01/qiang-wang-bei-2019-sui-bian-zhu/" aria-label="阅读全文：强网杯_2019 随便注">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-03-01">2021-03-01</time></div>
                 </div>
                 
@@ -1050,7 +1106,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="Training_WWW_Robots"><span class="dream-card-title-text">Training_WWW_Robots</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">robots.txt</div>
+                    <a class="dream-card-excerpt" href="/2021/02/01/training-www-robots/" aria-label="阅读：Training_WWW_Robots"><span class="summary">robots.txt</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/02/01/training-www-robots/" aria-label="阅读全文：Training_WWW_Robots">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-02-01">2021-02-01</time></div>
                 </div>
                 
@@ -1077,7 +1138,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="baby_web"><span class="dream-card-title-text">baby_web</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">一道web入门题</div>
+                    <a class="dream-card-excerpt" href="/2021/02/01/baby-web/" aria-label="阅读：baby_web"><span class="summary">一道web入门题</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/02/01/baby-web/" aria-label="阅读全文：baby_web">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-02-01">2021-02-01</time></div>
                 </div>
                 
@@ -1104,7 +1170,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="爆破-1"><span class="dream-card-title-text">爆破-1</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">全局变量GLOBALS</div>
+                    <a class="dream-card-excerpt" href="/2021/02/01/bao-po-1/" aria-label="阅读：爆破-1"><span class="summary">全局变量GLOBALS</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2021/02/01/bao-po-1/" aria-label="阅读全文：爆破-1">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2021-02-01">2021-02-01</time></div>
                 </div>
                 
@@ -1131,7 +1202,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="利用PHP的字符串解析特性Bypass"><span class="dream-card-title-text">利用PHP的字符串解析特性Bypass</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">利用PHP的字符串解析特性Bypass</div>
+                    <a class="dream-card-excerpt" href="/2020/09/05/php-de-zi-fu-chuan-jie-xi-te-xing/" aria-label="阅读：利用PHP的字符串解析特性Bypass"><span class="summary">我们知道PHP将查询字符串（在URL或正文中）转换为内部$_GET或的关联数组$_POST。例如：/?foo=bar变成Array([foo] =&gt; “bar”)。值得注意的是，查询字符串在解析的过程中会将某些字符删除或用下划线代替。例如，…</span></a>
+<div class="dream-card-invitation">
+    <span>约 7 分钟</span>
+    <a href="/2020/09/05/php-de-zi-fu-chuan-jie-xi-te-xing/" aria-label="阅读全文：利用PHP的字符串解析特性Bypass">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2020-09-05">2020-09-05</time></div>
                 </div>
                 
@@ -1154,7 +1230,12 @@ mjx-container[display="true"] + br {
                     <span class="card-title" title="sqlmap"><span class="dream-card-title-text">sqlmap</span></span>
                 </div></a>
                 <div class="card-content article-content">
-                    <div class="summary">sqlmap自带脚本的使用</div>
+                    <a class="dream-card-excerpt" href="/2020/02/01/sqlmap-tamper/" aria-label="阅读：sqlmap"><span class="summary">sqlmap自带脚本的使用</span></a>
+<div class="dream-card-invitation">
+    <span>约 12 分钟</span>
+    <a href="/2020/02/01/sqlmap-tamper/" aria-label="阅读全文：sqlmap">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
                     <div class="publish-info"><time class="publish-date" datetime="2020-02-01">2020-02-01</time></div>
                 </div>
                 

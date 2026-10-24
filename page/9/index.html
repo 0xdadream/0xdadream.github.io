@@ -170,10 +170,17 @@ body.dream-ui .dream-filter-summary p { margin: 0; color: var(--dream-muted); }
 body.dream-ui .dream-filter-summary strong { margin-right: 12px; color: var(--dream-ink); }
 body.dream-ui .dream-filter-summary > div { display: flex; flex-wrap: wrap; gap: 18px; }
 body.dream-ui .dream-filter-summary a { color: var(--dream-accent); }
-body.dream-ui nav.dream-topic-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; height: auto; max-width: 900px; margin: 0 auto 28px; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
-body.dream-ui .dream-topic-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--dream-line); border-radius: 10px; color: var(--dream-ink); font-size: 13px; }
+body.dream-ui .dream-discovery { margin: 0 0 32px; }
+body.dream-ui .dream-discovery-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+body.dream-ui .dream-discovery-heading h2 { margin: 0; font-size: 18px; font-weight: 650; line-height: 1.6; }
+body.dream-ui .dream-discovery-heading > a { padding: 10px 0; color: var(--dream-accent); font-size: 13px; white-space: nowrap; }
+body.dream-ui nav.dream-topic-links { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; height: auto; margin: 0; padding: 0; background: transparent; box-shadow: none; line-height: 1.5; }
+body.dream-ui .dream-topic-links a { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 18px; border: 1px solid var(--dream-line); border-radius: 12px; background: var(--dream-tag-surface); color: var(--dream-ink); font-size: 14px; transition: border-color .2s, background-color .2s; }
 body.dream-ui .dream-topic-links a:hover { border-color: var(--dream-accent); background: var(--dream-accent-soft); }
-body.dream-ui .dream-topic-links a span { color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-discovery-name { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
+body.dream-ui .dream-discovery-name strong { font-weight: 650; }
+body.dream-ui .dream-discovery-name > span { color: var(--dream-muted); font-size: 11px; white-space: nowrap; }
+body.dream-ui .dream-discovery-description { color: var(--dream-muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 body.dream-ui .dream-topics-page { position: relative; margin-top: -60px; padding-bottom: 24px; }
 body.dream-ui .dream-topic-introduction .card-content { padding: 28px; }
 body.dream-ui .dream-topic-introduction h1 { margin: 12px 0; font-size: clamp(25px, 4vw, 34px); line-height: 1.5; }
@@ -215,6 +222,13 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-feed-heading { align-items: center; flex-wrap: wrap; }
+body.dream-ui .dream-feed-heading h2 { margin: 0; font-size: 23px; }
+body.dream-ui .dream-feed-heading p { margin: 6px 0 0; color: var(--dream-muted); font-size: 13px; line-height: 1.8; }
+body.dream-ui .dream-feed-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+body.dream-ui .dream-feed-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-feed-actions .dream-search-entry { padding: 0 14px; border: 1px solid var(--dream-line); border-radius: 9px; background: var(--dream-surface); color: var(--dream-accent); }
+body.dream-ui .dream-feed-actions a:hover { color: var(--dream-accent); }
 body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
 body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
@@ -243,6 +257,13 @@ body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); 
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
 body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt { display: block; color: inherit; }
+body.dream-ui #articles.dream-articles .dream-card-excerpt:hover .summary { color: var(--dream-ink); }
+body.dream-ui .dream-card-invitation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; margin-bottom: 14px; font-size: 12px; }
+body.dream-ui .dream-card-invitation > span { color: var(--dream-muted); }
+body.dream-ui .dream-card-invitation > a { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; color: var(--dream-accent); }
+body.dream-ui .dream-card-invitation > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+body.dream-ui #articles.dream-articles .dream-card-invitation + .publish-info { margin-top: 0; }
 body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
@@ -340,6 +361,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 992px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
     body.dream-ui .dream-home-intro { gap: 32px; }
@@ -348,6 +370,9 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui .dream-feed-heading { padding: 18px; gap: 10px; }
+    body.dream-ui .dream-discovery-name { gap: 3px 6px; }
+    body.dream-ui .dream-topic-links a { padding: 14px 12px; }
     body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
@@ -382,6 +407,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui #canvas_sakura { display: none; }
 }
 @media (max-width: 360px) {
+    body.dream-ui nav.dream-topic-links { grid-template-columns: 1fr; }
     body.dream-ui .dream-reader[data-reader-ready] { gap: 6px; padding-right: 8px; padding-left: 8px; }
     body.dream-ui .dream-reading-label { display: none; }
     body.dream-ui .dream-reading-status output { margin-left: 0; }
@@ -397,8 +423,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -510,7 +535,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+</head>
 
 
 <body class="dream-ui">
@@ -881,6 +907,12 @@ mjx-container[display="true"] + br {
 
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles dream-articles" aria-label="文章列表" tabindex="-1">
+        
+        <div class="dream-section-heading dream-feed-heading">
+            <div><h2>继续探索</h2><p>231 篇记录 · 第 9 页，找到这次想读的内容。</p></div>
+            <div class="dream-feed-actions"><a class="modal-trigger dream-search-entry" href="#searchModal"><i class="fas fa-search" aria-hidden="true"></i> 搜索文章</a><a href="/atom.xml" aria-label="通过 RSS 订阅文章更新"><i class="fas fa-rss" aria-hidden="true"></i> 订阅更新</a></div>
+        </div>
+        
         <div class="row article-row">
             
              <!-- 隐藏某个文章 -->
@@ -897,11 +929,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                动态链接库
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/24/dong-tai-lian-jie-ku/" aria-label="阅读：动态链接库"><span class="summary">动态库路径管理：系统会读取该目录下的 .conf 文件，这些文件指定了动态链接库的额外搜索路径。 配置动态库缓存：在运行程序时，动态链接器会从这些路径中查找所需的库。 默认加载的路径（视系统配置而定）： /lib /usr/lib /usr…</span></a>
+<div class="dream-card-invitation">
+    <span>约 4 分钟</span>
+    <a href="/2024/11/24/dong-tai-lian-jie-ku/" aria-label="阅读全文：动态链接库">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-24
@@ -951,11 +986,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux文件操作命令
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/24/linux-wen-jian-cao-zuo-ming-ling/" aria-label="阅读：linux文件操作命令"><span class="summary">以下是 Linux 系统中与文件操作相关的命令，附带常用参数的详细解释。 常用选项： -l：以详细列表形式显示，包括权限、所有者、文件大小、修改时间等。 -a：显示所有文件，包括以 . 开头的隐藏文件。 -h：配合 -l，以人类可读的文件大…</span></a>
+<div class="dream-card-invitation">
+    <span>约 9 分钟</span>
+    <a href="/2024/11/24/linux-wen-jian-cao-zuo-ming-ling/" aria-label="阅读全文：linux文件操作命令">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-24
@@ -1005,11 +1043,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Vim 编辑器详细教程
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/23/vim-bian-ji-qi/" aria-label="阅读：Vim 编辑器详细教程"><span class="summary">Vim 是一个强大的文本编辑器，以其高效的编辑能力和强大的功能著称，特别适合程序员和文字处理工作者。以下是一个详细的 Vim 教程，从基础操作到高级用法。 正常模式（Normal Mode）：默认进入的模式，用于浏览、操作和执行命令。 插入…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2024/11/23/vim-bian-ji-qi/" aria-label="阅读全文：Vim 编辑器详细教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-23
@@ -1055,11 +1096,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                编译教程
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/23/bian-yi-shi-yong/" aria-label="阅读：编译教程"><span class="summary">下面是一个完整的从源码编译安装软件的教程，涵盖了从环境准备到配置、编译、安装的所有可能会用到的步骤和细节，适用于各种类型的软件包。 在开始编译源码之前，确保系统满足以下条件： 在 Linux 环境下，通常需要以下工具： 编译器: gcc 或…</span></a>
+<div class="dream-card-invitation">
+    <span>约 13 分钟</span>
+    <a href="/2024/11/23/bian-yi-shi-yong/" aria-label="阅读全文：编译教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-23
@@ -1109,11 +1153,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux编译charm库
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/20/linux-bian-yi-charm-ku/" aria-label="阅读：linux编译charm库"><span class="summary">在 Windows 的 Linux 子系统 (WSL) 中使用 Ubuntu 编译安装 Charm 库的步骤如下： 应用商店下载linux后执行wsl --update 在 WSL Ubuntu 中，运行以下命令安装必要的编译工具和库： 这…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2024/11/20/linux-bian-yi-charm-ku/" aria-label="阅读全文：linux编译charm库">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-20
@@ -1165,11 +1212,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux防火墙规则
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/10/linux-fang-huo-qiang-gui-ze/" aria-label="阅读：linux防火墙规则"><span class="summary">使用 iptables 查看规则： 这将列出所有的链和规则。-L 参数代表列出（List）。 查看详细信息： -v 参数代表详细（Verbose），-n 参数代表不解析服务名称（Numeric）。 查看特定链的规则： 添加规则允许 SSH：…</span></a>
+<div class="dream-card-invitation">
+    <span>约 5 分钟</span>
+    <a href="/2024/11/10/linux-fang-huo-qiang-gui-ze/" aria-label="阅读全文：linux防火墙规则">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-10
@@ -1215,11 +1265,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                flask教程
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/06/flask-jiao-cheng/" aria-label="阅读：flask教程"><span class="summary">在 __init__.py 中创建并初始化 Flask 应用，加载配置，并从 routes.py 注册路由。 说明：create_app 函数用于创建和配置应用实例。app.app_context() 确保在应用上下文中导入路由。 定义项目…</span></a>
+<div class="dream-card-invitation">
+    <span>约 22 分钟</span>
+    <a href="/2024/11/06/flask-jiao-cheng/" aria-label="阅读全文：flask教程">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-06
@@ -1267,11 +1320,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                pip换源
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/11/03/pip-huan-yuan/" aria-label="阅读：pip换源"><span class="summary">以下用 python -m pip 操作目标 Python 环境。多环境并存时，先确认解释器： 只为本次安装指定主索引： 不会因此修改持久配置；若已有 extra-index-url，额外索引仍可能参与查找。 pip 可能同时读取系统、用户…</span></a>
+<div class="dream-card-invitation">
+    <span>约 3 分钟</span>
+    <a href="/2024/11/03/pip-huan-yuan/" aria-label="阅读全文：pip换源">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-11-03
@@ -1317,11 +1373,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/" aria-label="阅读：以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台"><span class="summary">看我这篇node.js版本问题 | 逐梦 (0xdadream.github.io) Downloads | go-ethereum 下载 64 位https://gethstore.blob.core.windows.net/builds…</span></a>
+<div class="dream-card-invitation">
+    <span>约 33 分钟</span>
+    <a href="/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/" aria-label="阅读全文：以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-10-16
@@ -1369,11 +1428,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                dev c++安装外部库
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/10/10/devc-an-zhuang-wai-bu-ku/" aria-label="阅读：dev c++安装外部库"><span class="summary">先去下载一个外部库压缩包，例如Releases · libtom/libtommath (github.com) 得到一个压缩包不要解压，打开DEV C++ -&gt;工具-&gt;package manager-&gt;install(找到你刚才的安装包)…</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2024/10/10/devc-an-zhuang-wai-bu-ku/" aria-label="阅读全文：dev c++安装外部库">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-10-10
@@ -1419,11 +1481,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                文件名含义
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/10/10/wen-jian-ming-han-yi/" aria-label="阅读：文件名含义"><span class="summary">安装文件名通常包含软件的版本号，用来表示该版本相对于其他版本的更新程度。 示例：software_1.0.0.exe 含义：软件版本为1.0.0，版本号通常采用三段式：主版本号.次版本号.修订号。主版本号表示重大更新，次版本号表示功能增加，…</span></a>
+<div class="dream-card-invitation">
+    <span>约 15 分钟</span>
+    <a href="/2024/10/10/wen-jian-ming-han-yi/" aria-label="阅读全文：文件名含义">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-10-10
@@ -1469,11 +1534,14 @@ mjx-container[display="true"] + br {
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                windows显示异常
-                            
-                        </div>
+                        
+                        <a class="dream-card-excerpt" href="/2024/10/03/windows-xian-shi-yi-chang/" aria-label="阅读：windows显示异常"><span class="summary">windows中显示不完整，或者遮挡等不正常显示时，如下修改 进入软件的exe执行文件，右键-&gt;属性-&gt;兼容性-&gt;更改所有用户的设置-&gt;更改高DPI设置-&gt;高DPI缩放替代-&gt;勾选替代高DPI的缩放行为指定系统，从上到下依次尝试</span></a>
+<div class="dream-card-invitation">
+    <span>约 1 分钟</span>
+    <a href="/2024/10/03/windows-xian-shi-yi-chang/" aria-label="阅读全文：windows显示异常">阅读全文 <span aria-hidden="true">→</span></a>
+</div>
+
+                        
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2024-10-03
