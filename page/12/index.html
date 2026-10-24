@@ -194,16 +194,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -307,6 +310,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -326,13 +332,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -853,32 +859,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/09/21/windows-an-zhuang-ruan-jian-shi-zhong-wen-luan-ma/">
+                    <a href="/2024/01/20/npm-jian-jie/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/56.jpg" class="responsive-img" alt="windows安装软件时中文乱码" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="NPM简介" loading="lazy" decoding="async">
                             
-                            <span class="card-title">windows安装软件时中文乱码</span>
+                            <span class="card-title" title="NPM简介"><span class="dream-card-title-text">NPM简介</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                windows安装软件时中文乱码
+                                NPM简介
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/bug/" class="post-category">
-                                    bug
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
                                 </a>
                                 
                                 
@@ -889,8 +895,12 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                        <a href="/tags/tools/">
+                            <span class="chip bg-color">tools</span>
                         </a>
                         
                     </div>
@@ -902,32 +912,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/18/finalshell-gai-zi-ti/">
+                    <a href="/2024/01/20/node.js-ban-ben-wen-ti/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="finalshell改字体" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="node.js版本问题" loading="lazy" decoding="async">
                             
-                            <span class="card-title">finalshell改字体</span>
+                            <span class="card-title" title="node.js版本问题"><span class="dream-card-title-text">node.js版本问题</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                finalshell改字体
+                                node.js版本问题
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/tips/" class="post-category">
-                                    tips
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
                                 </a>
                                 
                                 
@@ -938,8 +948,12 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                        <a href="/tags/tools/">
+                            <span class="chip bg-color">tools</span>
                         </a>
                         
                     </div>
@@ -951,32 +965,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/15/sdkman-jiao-cheng/">
+                    <a href="/2024/01/14/hexo-sheng-ji/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/37.jpg" class="responsive-img" alt="SDKMAN教程" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/36.jpg" class="responsive-img" alt="hexo升级及升级后的问题" loading="lazy" decoding="async">
                             
-                            <span class="card-title">SDKMAN教程</span>
+                            <span class="card-title" title="hexo升级及升级后的问题"><span class="dream-card-title-text">hexo升级及升级后的问题</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                SDKMAN教程
+                                hexo升级及升级后的问题
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-14
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/windows/" class="post-category">
-                                    windows
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
                                 </a>
                                 
                                 
@@ -987,8 +1001,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
                         </a>
                         
                     </div>
@@ -1000,32 +1014,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/15/java-ban-ben/">
+                    <a href="/2023/05/15/stable-diffusion-bu-shu-zai-ubuntu/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Java版本" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/51.jpg" class="responsive-img" alt="stable-diffusion部署在ubuntu" loading="lazy" decoding="async">
                             
-                            <span class="card-title">Java版本</span>
+                            <span class="card-title" title="stable-diffusion部署在ubuntu"><span class="dream-card-title-text">stable-diffusion部署在ubuntu</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Java版本
+                                stable-diffusion部署在ubuntu
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-15
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    语言
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
                                 </a>
                                 
                                 
@@ -1036,8 +1050,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
                         </a>
                         
                     </div>
@@ -1049,32 +1063,36 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/12/windows-chuang-jian-wen-jian/">
+                    <a href="/2023/03/23/python-diao-yong-datetime.now-ti-shi-wei-zhao-dao-mo-kuai/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/41.jpg" class="responsive-img" alt="windows创建文件" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="python调用datetime.now()提示未找到模块" loading="lazy" decoding="async">
                             
-                            <span class="card-title">windows创建文件</span>
+                            <span class="card-title" title="python调用datetime.now()提示未找到模块"><span class="dream-card-title-text">python调用datetime.now()提示未找到模块</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                windows创建文件
+                                python调用datetime.now()提示未找到模块
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-23
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E5%91%BD%E4%BB%A4/" class="post-category">
-                                    命令
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                <a href="/categories/tip/python/" class="post-category">
+                                    python
                                 </a>
                                 
                                 
@@ -1084,6 +1102,161 @@ mjx-container[display="true"] + br {
 
                     
                     <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2023/03/23/jia-gu-wen-yun-chong-zhi-shi-li/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="甲骨文云重置实例" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="甲骨文云重置实例"><span class="dream-card-title-text">甲骨文云重置实例</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                甲骨文云重置实例
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2023/03/08/linux-dao-shou-shi-xu-yao-an-zhuang/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="linux到手时需要安装" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="linux到手时需要安装"><span class="dream-card-title-text">linux到手时需要安装</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                linux到手时需要安装
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                        <a href="/tags/linux/">
+                            <span class="chip bg-color">linux</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2023/03/04/json.decoder.jsondecodeerror/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/39.jpg" class="responsive-img" alt="json.decoder.JSONDecodeError" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="json.decoder.JSONDecodeError"><span class="dream-card-title-text">json.decoder.JSONDecodeError</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                json.decoder.JSONDecodeError
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-04
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
                         
                         <a href="/tags/windows/">
                             <span class="chip bg-color">windows</span>
@@ -1098,25 +1271,25 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/12/conda-an-zhuang-ji-shi-yong/">
+                    <a href="/2022/12/20/pip-de-shi-yong/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/37.jpg" class="responsive-img" alt="conda安装及使用" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="pip的使用" loading="lazy" decoding="async">
                             
-                            <span class="card-title">conda安装及使用</span>
+                            <span class="card-title" title="pip的使用"><span class="dream-card-title-text">pip的使用</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                conda安装及使用
+                                pip的使用
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-20
                             </span>
                             <span class="publish-author">
                                 
@@ -1134,8 +1307,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E7%8E%AF%E5%A2%83/">
-                            <span class="chip bg-color">环境</span>
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
                         </a>
                         
                     </div>
@@ -1147,25 +1320,78 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/10/ruan-lian-jie-he-ying-lian-jie/">
+                    <a href="/2022/05/24/cobalt-strike-an-zhuang-he-po-jie/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/44.jpg" class="responsive-img" alt="软链接和硬链接" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Cobalt Strike安装和破解" loading="lazy" decoding="async">
                             
-                            <span class="card-title">软链接和硬链接</span>
+                            <span class="card-title" title="Cobalt Strike安装和破解"><span class="dream-card-title-text">Cobalt Strike安装和破解</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                软链接和硬链接
+                                Cobalt Strike安装和破解
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%AE%89%E8%A3%85/">
+                            <span class="chip bg-color">安装</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2022/05/24/linux-zhong-echo-xie-ru-wen-jian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/54.jpg" class="responsive-img" alt="linux中echo写入文件" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="linux中echo写入文件"><span class="dream-card-title-text">linux中echo写入文件</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                linux中echo写入文件
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
                             </span>
                             <span class="publish-author">
                                 
@@ -1183,103 +1409,9 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E5%91%BD%E4%BB%A4/">
-                            <span class="chip bg-color">命令</span>
+                        <a href="/tags/linux/">
+                            <span class="chip bg-color">linux</span>
                         </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/09/git-shi-yong/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/45.jpg" class="responsive-img" alt="git使用" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">git使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                git使用
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/git/">
-                            <span class="chip bg-color">git</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/08/03/shell/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="shell" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">shell</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                shell
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-08-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/linux/" class="post-category">
-                                    linux
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
                         
                         <a href="/tags/%E5%91%BD%E4%BB%A4/">
                             <span class="chip bg-color">命令</span>
@@ -1294,32 +1426,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/07/27/shi-yong-cloudflare-de-r2-chuang-jian-tu-chuang/">
+                    <a href="/2022/05/20/win7-bu-neng-an-zhuang-vm-tools/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/29.jpg" class="responsive-img" alt="使用cloudflare的R2创建图床" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/44.jpg" class="responsive-img" alt="win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者" loading="lazy" decoding="async">
                             
-                            <span class="card-title">使用cloudflare的R2创建图床</span>
+                            <span class="card-title" title="win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者"><span class="dream-card-title-text">win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                使用cloudflare的R2创建图床
+                                win7中安装vm-tools时Windows 无法验证此驱动程序软件的发布者
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-20
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
                                 </a>
                                 
                                 
@@ -1330,8 +1462,12 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                        <a href="/tags/windows/">
+                            <span class="chip bg-color">windows</span>
                         </a>
                         
                     </div>
@@ -1350,7 +1486,7 @@ mjx-container[display="true"] + br {
 
 <nav class="container dream-pagination" aria-label="文章分页">
     <div class="dream-pagination-panel">
-        <p class="dream-page-status">第 <strong>12</strong> 页，共 24 页</p>
+        <p class="dream-page-status">第 <strong>12</strong> 页，共 20 页</p>
         <div class="dream-pager-row">
             
             <a class="dream-page-step" href="/page/11/#articles" rel="prev" aria-label="上一页">
@@ -1381,7 +1517,7 @@ mjx-container[display="true"] + br {
                 
                 <span class="dream-page-gap" aria-hidden="true">…</span>
                 
-                <a class="dream-page-number" href="/page/24/#articles" aria-label="第 24 页">24</a>
+                <a class="dream-page-number" href="/page/20/#articles" aria-label="第 20 页">20</a>
                 
                 
             </div>

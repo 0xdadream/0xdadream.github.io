@@ -198,16 +198,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -311,6 +314,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -330,13 +336,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -852,7 +858,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/09/25/vps-https-zheng-shu-shen-qing-wan-quan-zhi-nan-cloudflare-letsencrypt-acme/"><div class="card-image">
                     <img src="/medias/featureimages/0.jpg" alt="VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录" loading="lazy" decoding="async">
-                    <span class="card-title">VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</span>
+                    <span class="card-title" title="VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录"><span class="dream-card-title-text">VPS 申请 HTTPS 证书：Cloudflare + acme.sh 实际配置记录</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">使用 Cloudflare DNS API 与 acme.sh 在 VPS 上申请和自动续期 Let&#39;s Encrypt HTTPS 证书，记录 API Token 权限、通配符证书、DNS-01、安装证书、续期与 Authenticati</div>
@@ -868,7 +874,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/29/v2rayn-lian-shi-dai-li-shi-zhan-ben-di-qian-zhi-dai-li-socks5-zhu-zhai-ip-luo-di/"><div class="card-image">
                     <img src="/medias/featureimages/1.jpg" alt="v2rayN 链式代理实战：本地完成 VPS 中转 + SOCKS5 住宅 IP 落地" loading="lazy" decoding="async">
-                    <span class="card-title">v2rayN 链式代理实战：本地完成 VPS 中转 + SOCKS5 住宅 IP 落地</span>
+                    <span class="card-title" title="v2rayN 链式代理实战：本地完成 VPS 中转 + SOCKS5 住宅 IP 落地"><span class="dream-card-title-text">v2rayN 链式代理实战：本地完成 VPS 中转 + SOCKS5 住宅 IP 落地</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">使用 v2rayN 的前置代理与落地代理功能，把普通 VPS 节点与 SOCKS5 住宅 IP 串成链式代理，解释数据流向、别名规则、Xray/sing-box 兼容性、出口验证和常见故障。</div>
@@ -884,7 +890,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/29/windows-duo-dai-li-fen-liu-shi-zhan-hiddify-v2rayn-proxifier-telegram/"><div class="card-image">
                     <img src="/medias/featureimages/2.jpg" alt="Windows 多代理分流实战：Telegram 固定走 Hiddify，其他软件走 v2rayN，Proxifier 接管不支持代理的程序" loading="lazy" decoding="async">
-                    <span class="card-title">Windows 多代理分流实战：Telegram 固定走 Hiddify，其他软件走 v2rayN，Proxifier 接管不支持代理的程序</span>
+                    <span class="card-title" title="Windows 多代理分流实战：Telegram 固定走 Hiddify，其他软件走 v2rayN，Proxifier 接管不支持代理的程序"><span class="dream-card-title-text">Windows 多代理分流实战：Telegram 固定走 Hiddify，其他软件走 v2rayN，Proxifier 接管不支持代理的程序</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">在 Windows 上同时运行 Hiddify、v2rayN 与 Proxifier，通过应用自带 SOCKS5、系统代理和按程序分流，让 Telegram 固定走 Hiddify，其它软件继续走 v2rayN，并避免 TUN、系统代理与本</div>
@@ -900,7 +906,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/18/cloudflare-pages-edgetunnel-cfnew-deploy-guide/"><div class="card-image">
                     <img src="/medias/featureimages/3.jpg" alt="Cloudflare Pages 部署 EdgeTunnel 与 CFNew：KV、环境变量、自定义域名完整教程" loading="lazy" decoding="async">
-                    <span class="card-title">Cloudflare Pages 部署 EdgeTunnel 与 CFNew：KV、环境变量、自定义域名完整教程</span>
+                    <span class="card-title" title="Cloudflare Pages 部署 EdgeTunnel 与 CFNew：KV、环境变量、自定义域名完整教程"><span class="dream-card-title-text">Cloudflare Pages 部署 EdgeTunnel 与 CFNew：KV、环境变量、自定义域名完整教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">从零部署 cmliu/edgetunnel 与 byJoey/cfnew 到 Cloudflare Pages，详细说明 Direct Upload、环境变量、KV 命名空间、Binding、重新部署、管理后台、自定义域名、更新与排错。</div>
@@ -916,7 +922,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/10/shu-zi-zheng-shu-ti-xi-da-quan-cong-gong-si-yao-pki-dao-tls-ssh-yu-dai-ma-qian-ming/"><div class="card-image">
                     <img src="/medias/featureimages/4.jpg" alt="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书" loading="lazy" decoding="async">
-                    <span class="card-title">数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</span>
+                    <span class="card-title" title="数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书"><span class="dream-card-title-text">数字证书体系大全：从公私钥、PKI 到 TLS、SSH、代码签名与设备证书</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">从“公钥为什么需要身份证”开始，系统讲清数字签名、X.509、CA/PKI、证书链、PEM/DER/PFX/JKS、TLS/mTLS、SSH Certificate、代码签名、S/MIME、VPN、802.1X、设备证书、Cloudflar</div>
@@ -932,7 +938,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/09/chatgpt-wang-ye-duan-tong-guo-openai-secure-mcp-tunnel-cao-kong-windows-11-ben-di-dian-nao-wan-zheng-jiao-cheng/"><div class="card-image">
                     <img src="/medias/featureimages/5.jpg" alt="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程" loading="lazy" decoding="async">
-                    <span class="card-title">ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</span>
+                    <span class="card-title" title="ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程"><span class="dream-card-title-text">ChatGPT 网页端通过 OpenAI Secure MCP Tunnel 操控 Windows 11 本地电脑完整教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">使用 OpenAI Secure MCP Tunnel 将 ChatGPT 网页端与 Windows 11 本机 Desktop Commander MCP 安全连接，实现文件读写、PowerShell、Python、Node.js、Git</div>
@@ -948,7 +954,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/09/cloudflare-tunnel-quan-gong-neng-shi-zhan-zhi-nan/"><div class="card-image">
                     <img src="/medias/featureimages/6.jpg" alt="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错" loading="lazy" decoding="async">
-                    <span class="card-title">Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</span>
+                    <span class="card-title" title="Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错"><span class="dream-card-title-text">Cloudflare Tunnel 全功能实战指南：公网发布、SSH/RDP、私有网络、Access、高可用与排错</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">从零理解并部署 Cloudflare Tunnel，系统覆盖 Quick Tunnel、远程管理与本地管理 Tunnel、HTTP/HTTPS、SSH、TCP、RDP、私有 IP/域名、Access、Docker、自启动、高可用、监控和故障</div>
@@ -964,7 +970,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/08/08/cloudflare-tunnel-chuan-tou-wu-gong-wang-duan-kou-agent-rong-qi-shi-xian-ssh-fang-wen-wan-zheng-jiao-cheng/"><div class="card-image">
                     <img src="/medias/featureimages/7.jpg" alt="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程" loading="lazy" decoding="async">
-                    <span class="card-title">Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</span>
+                    <span class="card-title" title="Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程"><span class="dream-card-title-text">Qwen Agent + Cloudflare Tunnel：无公网 IP/端口容器 SSH 远程访问完整教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">以 Qwen Agent 临时容器为实战对象，使用 Cloudflare Tunnel 将本地 SSH 服务安全暴露出来，在没有公网 IP、没有开放入站端口的情况下从 Windows 11 直接 SSH 登录。</div>
@@ -980,7 +986,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2026/04/19/linux-proxy/"><div class="card-image">
                     <img src="/medias/featureimages/8.jpg" alt="Linux 包管理换源 + v2rayN 代理完整备忘录" loading="lazy" decoding="async">
-                    <span class="card-title">Linux 包管理换源 + v2rayN 代理完整备忘录</span>
+                    <span class="card-title" title="Linux 包管理换源 + v2rayN 代理完整备忘录"><span class="dream-card-title-text">Linux 包管理换源 + v2rayN 代理完整备忘录</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">Linux 包管理换源 + v2rayN 代理完整备忘录</div>
@@ -996,7 +1002,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2025/06/01/ji-yu-x-ui-yu-cloudflare-da-jian-jie-dian/"><div class="card-image">
                     <img src="/medias/featureimages/9.jpg" alt="科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南" loading="lazy" decoding="async">
-                    <span class="card-title">科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</span>
+                    <span class="card-title" title="科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南"><span class="dream-card-title-text">科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">科学上网节点技术与实践：基于 X-UI 与 Cloudflare 的全面指南</div>
@@ -1012,7 +1018,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2025/05/31/cloudflare-dai-li-pei-zhi-duan-kou/"><div class="card-image">
                     <img src="/medias/featureimages/10.jpg" alt="Cloudflare代理配置端口" loading="lazy" decoding="async">
-                    <span class="card-title">Cloudflare代理配置端口</span>
+                    <span class="card-title" title="Cloudflare代理配置端口"><span class="dream-card-title-text">Cloudflare代理配置端口</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">Cloudflare代理配置端口</div>
@@ -1028,7 +1034,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2025/05/31/sing-box-da-jian-jie-dian/"><div class="card-image">
                     <img src="/medias/featureimages/11.jpg" alt="Sing-box 搭建您的专属科学上网节点实用指南" loading="lazy" decoding="async">
-                    <span class="card-title">Sing-box 搭建您的专属科学上网节点实用指南</span>
+                    <span class="card-title" title="Sing-box 搭建您的专属科学上网节点实用指南"><span class="dream-card-title-text">Sing-box 搭建您的专属科学上网节点实用指南</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">Sing-box 搭建您的专属科学上网节点实用指南</div>

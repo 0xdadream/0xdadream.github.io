@@ -198,16 +198,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -311,6 +314,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -330,13 +336,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -852,7 +858,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2025/03/24/bian-yi-shi-bao-cuo-rootminiconda3compiler-compatld/"><div class="card-image">
                     <img src="/medias/featureimages/0.jpg" alt="编译时报错rootminiconda3compiler_compatld" loading="lazy" decoding="async">
-                    <span class="card-title">编译时报错rootminiconda3compiler_compatld</span>
+                    <span class="card-title" title="编译时报错rootminiconda3compiler_compatld"><span class="dream-card-title-text">编译时报错rootminiconda3compiler_compatld</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">编译时报错rootminiconda3compiler_compatld</div>
@@ -868,7 +874,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/27/an-zhuang-pypbc/"><div class="card-image">
                     <img src="/medias/featureimages/1.jpg" alt="python安装pypbc" loading="lazy" decoding="async">
-                    <span class="card-title">python安装pypbc</span>
+                    <span class="card-title" title="python安装pypbc"><span class="dream-card-title-text">python安装pypbc</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">python安装pypbc</div>
@@ -884,7 +890,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/24/dong-tai-lian-jie-ku/"><div class="card-image">
                     <img src="/medias/featureimages/2.jpg" alt="动态链接库" loading="lazy" decoding="async">
-                    <span class="card-title">动态链接库</span>
+                    <span class="card-title" title="动态链接库"><span class="dream-card-title-text">动态链接库</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">动态链接库</div>
@@ -900,7 +906,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/24/linux-wen-jian-cao-zuo-ming-ling/"><div class="card-image">
                     <img src="/medias/featureimages/3.jpg" alt="linux文件操作命令" loading="lazy" decoding="async">
-                    <span class="card-title">linux文件操作命令</span>
+                    <span class="card-title" title="linux文件操作命令"><span class="dream-card-title-text">linux文件操作命令</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux文件操作命令</div>
@@ -916,7 +922,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/23/bian-yi-shi-yong/"><div class="card-image">
                     <img src="/medias/featureimages/4.jpg" alt="编译教程" loading="lazy" decoding="async">
-                    <span class="card-title">编译教程</span>
+                    <span class="card-title" title="编译教程"><span class="dream-card-title-text">编译教程</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">编译教程</div>
@@ -932,7 +938,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/20/linux-bian-yi-charm-ku/"><div class="card-image">
                     <img src="/medias/featureimages/5.jpg" alt="linux编译charm库" loading="lazy" decoding="async">
-                    <span class="card-title">linux编译charm库</span>
+                    <span class="card-title" title="linux编译charm库"><span class="dream-card-title-text">linux编译charm库</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux编译charm库</div>
@@ -948,7 +954,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/11/10/linux-fang-huo-qiang-gui-ze/"><div class="card-image">
                     <img src="/medias/featureimages/6.jpg" alt="linux防火墙规则" loading="lazy" decoding="async">
-                    <span class="card-title">linux防火墙规则</span>
+                    <span class="card-title" title="linux防火墙规则"><span class="dream-card-title-text">linux防火墙规则</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux防火墙规则</div>
@@ -964,7 +970,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/08/10/ruan-lian-jie-he-ying-lian-jie/"><div class="card-image">
                     <img src="/medias/featureimages/7.jpg" alt="软链接和硬链接" loading="lazy" decoding="async">
-                    <span class="card-title">软链接和硬链接</span>
+                    <span class="card-title" title="软链接和硬链接"><span class="dream-card-title-text">软链接和硬链接</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">软链接和硬链接</div>
@@ -980,7 +986,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/08/03/shell/"><div class="card-image">
                     <img src="/medias/featureimages/8.jpg" alt="shell" loading="lazy" decoding="async">
-                    <span class="card-title">shell</span>
+                    <span class="card-title" title="shell"><span class="dream-card-title-text">shell</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">shell</div>
@@ -996,7 +1002,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2024/07/20/linux-mei-hua-ming-ling-xing/"><div class="card-image">
                     <img src="/medias/featureimages/9.jpg" alt="linux美化命令行" loading="lazy" decoding="async">
-                    <span class="card-title">linux美化命令行</span>
+                    <span class="card-title" title="linux美化命令行"><span class="dream-card-title-text">linux美化命令行</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux美化命令行</div>
@@ -1012,7 +1018,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2023/03/08/linux-dao-shou-shi-xu-yao-an-zhuang/"><div class="card-image">
                     <img src="/medias/featureimages/10.jpg" alt="linux到手时需要安装" loading="lazy" decoding="async">
-                    <span class="card-title">linux到手时需要安装</span>
+                    <span class="card-title" title="linux到手时需要安装"><span class="dream-card-title-text">linux到手时需要安装</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux到手时需要安装</div>
@@ -1028,7 +1034,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/24/linux-zhong-echo-xie-ru-wen-jian/"><div class="card-image">
                     <img src="/medias/featureimages/11.jpg" alt="linux中echo写入文件" loading="lazy" decoding="async">
-                    <span class="card-title">linux中echo写入文件</span>
+                    <span class="card-title" title="linux中echo写入文件"><span class="dream-card-title-text">linux中echo写入文件</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux中echo写入文件</div>

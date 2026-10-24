@@ -198,16 +198,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -311,6 +314,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -330,13 +336,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -852,7 +858,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/17/archlinux-she-zhi-zhong-wen/"><div class="card-image">
                     <img src="/medias/featureimages/0.jpg" alt="archlinux设置中文" loading="lazy" decoding="async">
-                    <span class="card-title">archlinux设置中文</span>
+                    <span class="card-title" title="archlinux设置中文"><span class="dream-card-title-text">archlinux设置中文</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">archlinux设置中文</div>
@@ -868,7 +874,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/17/linux-she-zhi-root-mi-ma/"><div class="card-image">
                     <img src="/medias/featureimages/1.jpg" alt="linux设置root密码" loading="lazy" decoding="async">
-                    <span class="card-title">linux设置root密码</span>
+                    <span class="card-title" title="linux设置root密码"><span class="dream-card-title-text">linux设置root密码</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux设置root密码</div>
@@ -884,7 +890,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/17/linux-kai-qi-ssh/"><div class="card-image">
                     <img src="/medias/featureimages/2.jpg" alt="linux开启ssh" loading="lazy" decoding="async">
-                    <span class="card-title">linux开启ssh</span>
+                    <span class="card-title" title="linux开启ssh"><span class="dream-card-title-text">linux开启ssh</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux开启ssh</div>
@@ -900,7 +906,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/17/ubuntu22.04lts-bu-neng-yun-xing-appimage/"><div class="card-image">
                     <img src="/medias/featureimages/3.jpg" alt="ubuntu22.04LTS不能运行Appimage" loading="lazy" decoding="async">
-                    <span class="card-title">ubuntu22.04LTS不能运行Appimage</span>
+                    <span class="card-title" title="ubuntu22.04LTS不能运行Appimage"><span class="dream-card-title-text">ubuntu22.04LTS不能运行Appimage</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">ubuntu22.04LTS不能运行Appimage</div>
@@ -916,7 +922,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/12/ubuntu-xu-ni-ji-jin-ru-initramfs-mo-shi/"><div class="card-image">
                     <img src="/medias/featureimages/4.jpg" alt="ubuntu虚拟机进入initramfs模式" loading="lazy" decoding="async">
-                    <span class="card-title">ubuntu虚拟机进入initramfs模式</span>
+                    <span class="card-title" title="ubuntu虚拟机进入initramfs模式"><span class="dream-card-title-text">ubuntu虚拟机进入initramfs模式</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">ubuntu虚拟机进入initramfs模式</div>
@@ -932,7 +938,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2022/05/06/neither-flex-nor-lex-was-found/"><div class="card-image">
                     <img src="/medias/featureimages/5.jpg" alt="Neither flex nor lex was found" loading="lazy" decoding="async">
-                    <span class="card-title">Neither flex nor lex was found</span>
+                    <span class="card-title" title="Neither flex nor lex was found"><span class="dream-card-title-text">Neither flex nor lex was found</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">编译libpcap时报错Neither flex nor lex was found</div>
@@ -948,7 +954,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/09/08/linux-ming-ling/"><div class="card-image">
                     <img src="/medias/featureimages/6.jpg" alt="linux命令" loading="lazy" decoding="async">
-                    <span class="card-title">linux命令</span>
+                    <span class="card-title" title="linux命令"><span class="dream-card-title-text">linux命令</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux命令</div>
@@ -964,7 +970,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/09/08/linux-xi-tong-mu-lu-gong-neng/"><div class="card-image">
                     <img src="/medias/featureimages/7.jpg" alt="linux系统目录功能" loading="lazy" decoding="async">
-                    <span class="card-title">linux系统目录功能</span>
+                    <span class="card-title" title="linux系统目录功能"><span class="dream-card-title-text">linux系统目录功能</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux系统目录功能</div>
@@ -980,7 +986,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/08/13/jie-jue-kali-zi-ti-tai-xiao/"><div class="card-image">
                     <img src="/medias/featureimages/8.jpg" alt="解决kali字体太小" loading="lazy" decoding="async">
-                    <span class="card-title">解决kali字体太小</span>
+                    <span class="card-title" title="解决kali字体太小"><span class="dream-card-title-text">解决kali字体太小</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">解决kali字体太小</div>
@@ -996,7 +1002,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/08/02/linux-an-zhuang-ruan-jian-bao/"><div class="card-image">
                     <img src="/medias/featureimages/9.jpg" alt="Linux安装软件包" loading="lazy" decoding="async">
-                    <span class="card-title">Linux安装软件包</span>
+                    <span class="card-title" title="Linux安装软件包"><span class="dream-card-title-text">Linux安装软件包</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">Linux安装软件包</div>
@@ -1012,7 +1018,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/08/02/guo-nei-jing-xiang-yuan/"><div class="card-image">
                     <img src="/medias/featureimages/10.jpg" alt="国内镜像源" loading="lazy" decoding="async">
-                    <span class="card-title">国内镜像源</span>
+                    <span class="card-title" title="国内镜像源"><span class="dream-card-title-text">国内镜像源</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">国内镜像源</div>
@@ -1028,7 +1034,7 @@ mjx-container[display="true"] + br {
             <div class="card">
                 <a href="/2021/04/11/linux-an-zhuang-vm-tools/"><div class="card-image">
                     <img src="/medias/featureimages/11.jpg" alt="linux(kali)安装vm-tools" loading="lazy" decoding="async">
-                    <span class="card-title">linux(kali)安装vm-tools</span>
+                    <span class="card-title" title="linux(kali)安装vm-tools"><span class="dream-card-title-text">linux(kali)安装vm-tools</span></span>
                 </div></a>
                 <div class="card-content article-content">
                     <div class="summary">linux(kali)安装vm-tools</div>

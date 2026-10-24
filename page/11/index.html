@@ -194,16 +194,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -307,6 +310,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -326,13 +332,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -853,36 +859,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/11/20/linux-bian-yi-charm-ku/">
+                    <a href="/2024/07/27/powershell-ti-quan/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="linux编译charm库" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/36.jpg" class="responsive-img" alt="powershell提权" loading="lazy" decoding="async">
                             
-                            <span class="card-title">linux编译charm库</span>
+                            <span class="card-title" title="powershell提权"><span class="dream-card-title-text">powershell提权</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                linux编译charm库
+                                powershell提权
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/bug/" class="post-category">
-                                    bug
-                                </a>
-                                
-                                <a href="/categories/bug/linux/" class="post-category">
-                                    linux
+                                <a href="/categories/tools/" class="post-category">
+                                    tools
                                 </a>
                                 
                                 
@@ -893,409 +895,9 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
+                        <a href="/tags/windows/">
+                            <span class="chip bg-color">windows</span>
                         </a>
-                        
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/11/10/linux-fang-huo-qiang-gui-ze/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="linux防火墙规则" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">linux防火墙规则</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux防火墙规则
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/11/06/flask-jiao-cheng/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/34.jpg" class="responsive-img" alt="flask教程" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">flask教程</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                flask教程
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
-                        </a>
-                        
-                        <a href="/tags/python/">
-                            <span class="chip bg-color">python</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/11/03/pip-huan-yuan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/36.jpg" class="responsive-img" alt="pip换源" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">pip换源</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                pip换源
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/tips/" class="post-category">
-                                    tips
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/10/16/yi-tai-fang-dapp-kai-fa-geth-si-lian-huan-jing-da-jian-windows-ping-tai/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                以太坊 DApp 开发-Geth 私链环境搭建-Windows 平台
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-16
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/">
-                            <span class="chip bg-color">区块链</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/10/10/devc-an-zhuang-wai-bu-ku/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="dev c++安装外部库" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">dev c++安装外部库</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                dev c++安装外部库
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/tips/" class="post-category">
-                                    tips
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/10/10/wen-jian-ming-han-yi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="文件名含义" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">文件名含义</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                文件名含义
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/10/03/windows-xian-shi-yi-chang/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/47.jpg" class="responsive-img" alt="windows显示异常" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">windows显示异常</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                windows显示异常
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/bug/" class="post-category">
-                                    bug
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2024/09/28/zotero-7-an-zhuang-yi-ji-shi-yong/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="zotero 7安装以及使用" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">zotero 7安装以及使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                zotero 7安装以及使用
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-28
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
                         
                         <a href="/tags/tools/">
                             <span class="chip bg-color">tools</span>
@@ -1310,32 +912,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2024/09/28/word-cha-ru-ye-ma-bu-bao-gua-feng-mian-mu-lu/">
+                    <a href="/2024/07/27/ming-ling-xing-shu-ru-python-tiao-zhuan-wei-ruan-shang-dian/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/34.jpg" class="responsive-img" alt="word插入页码不包括封面目录" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/33.jpg" class="responsive-img" alt="命令行输入python跳转微软商店" loading="lazy" decoding="async">
                             
-                            <span class="card-title">word插入页码不包括封面目录</span>
+                            <span class="card-title" title="命令行输入python跳转微软商店"><span class="dream-card-title-text">命令行输入python跳转微软商店</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                word插入页码不包括封面目录
+                                命令行输入python跳转微软商店
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-27
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/tips/" class="post-category">
-                                    tips
+                                <a href="/categories/bug/" class="post-category">
+                                    bug
                                 </a>
                                 
                                 
@@ -1346,8 +948,506 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
+                        <a href="/tags/bug/">
+                            <span class="chip bg-color">bug</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/07/20/linux-mei-hua-ming-ling-xing/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/50.jpg" class="responsive-img" alt="linux美化命令行" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="linux美化命令行"><span class="dream-card-title-text">linux美化命令行</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                linux美化命令行
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                <a href="/categories/tip/linux/" class="post-category">
+                                    linux
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/07/03/centos8-guan-fang-yuan-shi-xiao/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="centos8官方源失效" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="centos8官方源失效"><span class="dream-card-title-text">centos8官方源失效</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                centos8官方源失效
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/bug/" class="post-category">
+                                    bug
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/bug/">
+                            <span class="chip bg-color">bug</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/07/03/msys2-jiao-cheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/38.jpg" class="responsive-img" alt="MSYS2教程" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="MSYS2教程"><span class="dream-card-title-text">MSYS2教程</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                MSYS2教程
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%95%99%E7%A8%8B/">
+                            <span class="chip bg-color">教程</span>
+                        </a>
+                        
+                        <a href="/tags/%E7%8E%AF%E5%A2%83/">
+                            <span class="chip bg-color">环境</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/06/27/powershell-mei-hua/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/43.jpg" class="responsive-img" alt="powershell美化" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="powershell美化"><span class="dream-card-title-text">powershell美化</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                powershell美化
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-27
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/06/27/hexo-shang-chuan-tu-pian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="hexo上传图片" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="hexo上传图片"><span class="dream-card-title-text">hexo上传图片</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                hexo上传图片
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-27
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/06/23/githubpage-tian-jia-yu-ming/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/54.jpg" class="responsive-img" alt="githubpage添加域名" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="githubpage添加域名"><span class="dream-card-title-text">githubpage添加域名</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                githubpage添加域名
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/06/23/hexo-qian-yi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="hexo迁移" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="hexo迁移"><span class="dream-card-title-text">hexo迁移</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                hexo迁移
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/01/28/x-ui-mian-ban-bu-shu-jie-dian-tao-cf/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="x-ui面板部署代理+套CF" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="x-ui面板部署代理+套CF"><span class="dream-card-title-text">x-ui面板部署代理+套CF</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                x-ui面板部署代理+套CF
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/01/20/ssh-lian-jie-bao-cuo/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/52.jpg" class="responsive-img" alt="SSH连接报错" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="SSH连接报错"><span class="dream-card-title-text">SSH连接报错</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                SSH连接报错
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2024/01/20/shi-yong-zhu-ti-matery-jiang-ji-hexo-ban-ben/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="使用主题matery而降级hexo版本" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="使用主题matery而降级hexo版本"><span class="dream-card-title-text">使用主题matery而降级hexo版本</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                使用主题matery而降级hexo版本
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/tip/" class="post-category">
+                                    tip
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/tip/">
+                            <span class="chip bg-color">tip</span>
                         </a>
                         
                     </div>
@@ -1366,7 +1466,7 @@ mjx-container[display="true"] + br {
 
 <nav class="container dream-pagination" aria-label="文章分页">
     <div class="dream-pagination-panel">
-        <p class="dream-page-status">第 <strong>11</strong> 页，共 24 页</p>
+        <p class="dream-page-status">第 <strong>11</strong> 页，共 20 页</p>
         <div class="dream-pager-row">
             
             <a class="dream-page-step" href="/page/10/#articles" rel="prev" aria-label="上一页">
@@ -1397,7 +1497,7 @@ mjx-container[display="true"] + br {
                 
                 <span class="dream-page-gap" aria-hidden="true">…</span>
                 
-                <a class="dream-page-number" href="/page/24/#articles" aria-label="第 24 页">24</a>
+                <a class="dream-page-number" href="/page/20/#articles" aria-label="第 20 页">20</a>
                 
                 
             </div>

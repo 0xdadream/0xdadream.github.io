@@ -194,16 +194,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -307,6 +310,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -326,13 +332,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -853,131 +859,25 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2025/05/15/shen-qing-mian-fei-zheng-shu/">
+                    <a href="/2025/02/21/pycharm-xian-shi-xian-shi-biao-ge/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="申请免费证书" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/45.jpg" class="responsive-img" alt="pycharm显示显示表格" loading="lazy" decoding="async">
                             
-                            <span class="card-title">申请免费证书</span>
+                            <span class="card-title" title="pycharm显示显示表格"><span class="dream-card-title-text">pycharm显示显示表格</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                申请免费证书
+                                pycharm显示显示表格
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-category">
-                                    服务器
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AF%81%E4%B9%A6/">
-                            <span class="chip bg-color">证书</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2025/05/15/lun-wen-yin-yong-xia-biao/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/43.jpg" class="responsive-img" alt="论文引用下标" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">论文引用下标</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                论文引用下标
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-15
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
-                                    教程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/word/">
-                            <span class="chip bg-color">word</span>
-                        </a>
-                        
-                        <a href="/tags/%E8%AE%BA%E6%96%87/">
-                            <span class="chip bg-color">论文</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%BC%95%E7%94%A8/">
-                            <span class="chip bg-color">引用</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2025/05/02/whl-wen-jian-ming-hou-zhui/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/39.jpg" class="responsive-img" alt="whl文件名后缀" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">whl文件名后缀</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                whl文件名后缀
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-21
                             </span>
                             <span class="publish-author">
                                 
@@ -1008,25 +908,74 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/10/linux-an-zhuang-conda-jiao-cheng/">
+                    <a href="/2025/02/20/arc-zai-comfyui-bao-cuo/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/56.jpg" class="responsive-img" alt="Linux安装Conda教程" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/47.jpg" class="responsive-img" alt="Arc在comfyui报错" loading="lazy" decoding="async">
                             
-                            <span class="card-title">Linux安装Conda教程</span>
+                            <span class="card-title" title="Arc在comfyui报错"><span class="dream-card-title-text">Arc在comfyui报错</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Linux安装Conda教程
+                                Arc在comfyui报错
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
+                                    报错修复
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/intel/">
+                            <span class="chip bg-color">intel</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/19/conda-huan-yuan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="conda换源" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="conda换源"><span class="dream-card-title-text">conda换源</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                conda换源
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-19
                             </span>
                             <span class="publish-author">
                                 
@@ -1048,6 +997,10 @@ mjx-container[display="true"] + br {
                             <span class="chip bg-color">conda</span>
                         </a>
                         
+                        <a href="/tags/tools/">
+                            <span class="chip bg-color">tools</span>
+                        </a>
+                        
                     </div>
                     
                 </div>
@@ -1057,25 +1010,180 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/10/an-zhuang-wsl-zi-xi-tong-jiao-cheng/">
+                    <a href="/2025/02/18/arca770-shi-yong-comfyui-jiao-cheng/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/41.jpg" class="responsive-img" alt="安装WSL子系统教程" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="ArcA770使用comfyui教程" loading="lazy" decoding="async">
                             
-                            <span class="card-title">安装WSL子系统教程</span>
+                            <span class="card-title" title="ArcA770使用comfyui教程"><span class="dream-card-title-text">ArcA770使用comfyui教程</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                安装WSL子系统教程
+                                ArcA770使用comfyui教程
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/intel/">
+                            <span class="chip bg-color">intel</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/18/intel-xian-qia-pao-ai-pei-zhi-jiao-cheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/43.jpg" class="responsive-img" alt="Intel显卡运行AI配置教程" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="Intel显卡运行AI配置教程"><span class="dream-card-title-text">Intel显卡运行AI配置教程</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Intel显卡运行AI配置教程
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/intel/">
+                            <span class="chip bg-color">intel</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/18/python-ku-bao-cuo-hui-zong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="python库报错汇总" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="python库报错汇总"><span class="dream-card-title-text">python库报错汇总</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                python库报错汇总
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
+                                    报错修复
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/15/powershell-pei-zhi-mu-lu/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="powershell配置目录" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="powershell配置目录"><span class="dream-card-title-text">powershell配置目录</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                powershell配置目录
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-15
                             </span>
                             <span class="publish-author">
                                 
@@ -1093,8 +1201,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
+                        <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+                            <span class="chip bg-color">命令行</span>
                         </a>
                         
                     </div>
@@ -1106,25 +1214,25 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/08/pycharm-bao-cun-xu-ke-zheng-shu-ju-shi-chu-cuo/">
+                    <a href="/2025/02/15/conda-zai-powershell7.5-zhi-xing-chu-xian-wen-ti/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/33.jpg" class="responsive-img" alt="pycharm保存许可证数据时出错" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="conda在powershell7.5执行出现问题" loading="lazy" decoding="async">
                             
-                            <span class="card-title">pycharm保存许可证数据时出错</span>
+                            <span class="card-title" title="conda在powershell7.5执行出现问题"><span class="dream-card-title-text">conda在powershell7.5执行出现问题</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                pycharm保存许可证数据时出错
+                                conda在powershell7.5执行出现问题
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-15
                             </span>
                             <span class="publish-author">
                                 
@@ -1132,6 +1240,157 @@ mjx-container[display="true"] + br {
                                 
                                 <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
                                     报错修复
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/conda/">
+                            <span class="chip bg-color">conda</span>
+                        </a>
+                        
+                        <a href="/tags/powershell/">
+                            <span class="chip bg-color">powershell</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/12/emby-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/37.jpg" class="responsive-img" alt="emby使用" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="emby使用"><span class="dream-card-title-text">emby使用</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                emby使用
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-12
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/emby/">
+                            <span class="chip bg-color">emby</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/02/11/google-hacking-shi-yong-gai-jin-ban/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="google hacking使用-改进版" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="google hacking使用-改进版"><span class="dream-card-title-text">google hacking使用-改进版</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                google hacking使用-改进版
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/google/">
+                            <span class="chip bg-color">google</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4">
+                <div class="card" data-aos="zoom-in">
+                    <a href="/2025/01/17/linux-she-zhi-matplotlib-zhong-wen-zi-ti/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="linux设置matplotlib中文字体" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="linux设置matplotlib中文字体"><span class="dream-card-title-text">linux设置matplotlib中文字体</span></span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                linux设置matplotlib中文字体
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
                                 </a>
                                 
                                 
@@ -1155,32 +1414,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/07/google-nei-rong-zai-xin-biao-qian-ye-da-kai/">
+                    <a href="/2025/01/12/pandas-shi-yong/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Google内容在新标签页打开" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="pandas使用" loading="lazy" decoding="async">
                             
-                            <span class="card-title">Google内容在新标签页打开</span>
+                            <span class="card-title" title="pandas使用"><span class="dream-card-title-text">pandas使用</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Google内容在新标签页打开
+                                pandas使用
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-12
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/tips/" class="post-category">
-                                    tips
+                                <a href="/categories/%E6%95%99%E7%A8%8B/" class="post-category">
+                                    教程
                                 </a>
                                 
                                 
@@ -1191,155 +1450,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/05/clash-verge-jie-dian-quan-bu-chao-shi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="clash_verge节点全部超时" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">clash_verge节点全部超时</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                clash_verge节点全部超时
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
-                                    报错修复
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/wall/">
-                            <span class="chip bg-color">wall</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2025/04/03/jie-jue-bao-cuo-jinja2.exceptions.templatenotfound-index.html/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="解决报错jinja2.exceptions.TemplateNotFound_index.html" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">解决报错jinja2.exceptions.TemplateNotFound_index.html</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                解决报错jinja2.exceptions.TemplateNotFound_index.html
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-03
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
-                                    报错修复
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/python/">
-                            <span class="chip bg-color">python</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2025/03/24/bian-yi-shi-bao-cuo-rootminiconda3compiler-compatld/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="编译时报错rootminiconda3compiler_compatld" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">编译时报错rootminiconda3compiler_compatld</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                编译时报错rootminiconda3compiler_compatld
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D/" class="post-category">
-                                    报错修复
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
+                        <a href="/tags/tools/">
+                            <span class="chip bg-color">tools</span>
                         </a>
                         
                     </div>
@@ -1358,7 +1470,7 @@ mjx-container[display="true"] + br {
 
 <nav class="container dream-pagination" aria-label="文章分页">
     <div class="dream-pagination-panel">
-        <p class="dream-page-status">第 <strong>7</strong> 页，共 24 页</p>
+        <p class="dream-page-status">第 <strong>7</strong> 页，共 20 页</p>
         <div class="dream-pager-row">
             
             <a class="dream-page-step" href="/page/6/#articles" rel="prev" aria-label="上一页">
@@ -1389,7 +1501,7 @@ mjx-container[display="true"] + br {
                 
                 <span class="dream-page-gap" aria-hidden="true">…</span>
                 
-                <a class="dream-page-number" href="/page/24/#articles" aria-label="第 24 页">24</a>
+                <a class="dream-page-number" href="/page/20/#articles" aria-label="第 20 页">20</a>
                 
                 
             </div>

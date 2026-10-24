@@ -194,16 +194,19 @@ body.dream-ui .dream-topic-count span { margin-left: 5px; }
 body.dream-ui .dream-section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin: 2px 0 24px; padding: 18px 24px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); }
 body.dream-ui .dream-section-heading h2 { margin: 7px 0 0; color: var(--dream-ink); font-size: 25px; line-height: 1.4; letter-spacing: -.03em; }
 body.dream-ui .dream-section-heading > a { padding: 8px 0; color: var(--dream-muted); font-size: 13px; white-space: nowrap; }
+body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-width: none; }
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
-body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; height: auto !important; }
+body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 8px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
 body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
-body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: 220px; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
+body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
 body.dream-ui #articles.dream-articles .card-image .card-title { z-index: 1; padding: 18px 20px; color: #fff; font-size: 20px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; text-shadow: 0 1px 5px rgba(0, 0, 0, .65); }
+body.dream-ui #articles.dream-articles .dream-card-title-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 body.dream-ui .recommend > .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 body.dream-ui .recommend > .row > .col { float: none; width: auto; min-width: 0; margin-left: 0; padding: 0; }
 body.dream-ui .recommend > .row > .col:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
@@ -307,6 +310,9 @@ body.dream-ui #searchModal { border: 1px solid var(--dream-line); border-radius:
 body.dream-ui #searchModal .search-header .title, body.dream-ui #searchModal .search-input, body.dream-ui #searchModal .search-result { color: var(--dream-ink); }
 body.dream-ui #searchModal .search-result-title { color: var(--dream-accent); }
 body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-line); }
+@media (min-width: 1440px) {
+    body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @media (max-width: 992px) {
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     body.dream-ui .archive-calendar .card::before { content: "左右滑动查看完整年份"; display: block; padding: 12px 16px 0; color: var(--dream-muted); font-size: 12px; }
@@ -326,13 +332,13 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-page-step > span { display: none; }
     body.dream-ui .recommend > .row { grid-template-columns: 1fr; gap: 18px; }
     body.dream-ui .dream-home-intro { grid-template-columns: 1fr; gap: 28px; width: 90%; padding: 34px 0 30px; }
-    body.dream-ui #articles.dream-articles { width: 90%; }
+    body.dream-ui .dream-home-content > #indexCard > .container, body.dream-ui #articles.dream-articles, body.dream-ui .dream-topics-page { width: calc(100% - 32px); }
     body.dream-ui .dream-section-heading { margin-bottom: 20px; }
     body.dream-ui .dream-section-heading h2 { font-size: 23px; }
     body.dream-ui #articles.dream-articles .article-row { grid-template-columns: 1fr; gap: 22px; }
     body.dream-ui #articles.dream-articles .card-content { padding: 21px 20px 17px; }
     body.dream-ui #articles.dream-articles .card-action { padding: 0 20px 20px; }
-    body.dream-ui #articles.dream-articles .card-image img { height: 185px; }
+    body.dream-ui #articles.dream-articles .card-image img { height: auto; }
     body.dream-ui #articles.dream-articles .card-image .card-title { padding: 16px 18px; font-size: 19px; }
     body.dream-ui #articles .dream-post-title { font-size: 20px; }
     body.dream-ui #artDetail .article-info { padding: 23px 20px 10px; }
@@ -853,32 +859,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2021/05/16/win10-you-jian-tian-jia-cmd/">
+                    <a href="/2020/09/05/php-de-zi-fu-chuan-jie-xi-te-xing/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="win10右键添加cmd和powershell" loading="lazy" decoding="async">
+                            <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="利用PHP的字符串解析特性Bypass" loading="lazy" decoding="async">
                             
-                            <span class="card-title">win10右键添加cmd和powershell</span>
+                            <span class="card-title" title="利用PHP的字符串解析特性Bypass"><span class="dream-card-title-text">利用PHP的字符串解析特性Bypass</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                win10右键添加cmd和powershell
+                                利用PHP的字符串解析特性Bypass
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-05
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/tip/" class="post-category">
-                                    tip
+                                <a href="/categories/web/" class="post-category">
+                                    web
                                 </a>
                                 
                                 
@@ -889,8 +895,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/tip/">
-                            <span class="chip bg-color">tip</span>
+                        <a href="/tags/php/">
+                            <span class="chip bg-color">php</span>
                         </a>
                         
                     </div>
@@ -902,31 +908,32 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/23/http-xue-xi/">
+                    <a href="/2020/02/01/sqlmap-tamper/">
                         <div class="card-image">
                             
-                            <img src="/images/3.jpg" class="responsive-img" alt="HTTP学习" loading="lazy" decoding="async">
                             
-                            <span class="card-title">HTTP学习</span>
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="sqlmap" loading="lazy" decoding="async">
+                            
+                            <span class="card-title" title="sqlmap"><span class="dream-card-title-text">sqlmap</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                HTTP学习
+                                sqlmap自带脚本的使用
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-01
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
-                                    网络
+                                <a href="/categories/web/" class="post-category">
+                                    web
                                 </a>
                                 
                                 
@@ -937,8 +944,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E5%AD%A6%E4%B9%A0/">
-                            <span class="chip bg-color">学习</span>
+                        <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                            <span class="chip bg-color">工具</span>
                         </a>
                         
                     </div>
@@ -950,32 +957,31 @@ mjx-container[display="true"] + br {
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4">
                 <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/21/guan-yu-hexo-cha-ru-tu-pian/">
+                    <a href="/2019/09/07/0xdadream/">
                         <div class="card-image">
                             
+                            <img src="/images/0.jpg" class="responsive-img" alt="逐梦" loading="lazy" decoding="async">
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="关于hexo插入图片" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">关于hexo插入图片</span>
+                            <span class="card-title" title="逐梦"><span class="dream-card-title-text">逐梦</span></span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                hexo 博文中图片部署
+                                我来自远方，为了遇见你……
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-07
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/bug/" class="post-category">
-                                    bug
+                                <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                                 
                                 
@@ -986,387 +992,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/11/linux-an-zhuang-vm-tools/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/51.jpg" class="responsive-img" alt="linux(kali)安装vm-tools" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">linux(kali)安装vm-tools</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                linux(kali)安装vm-tools
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/tip/" class="post-category">
-                                    tip
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tip/">
-                            <span class="chip bg-color">tip</span>
-                        </a>
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/05/wu-li-ji-ssh-lian-jie-bu-shang-xu-ni-ji/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="物理机ssh连接不上虚拟机" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">物理机ssh连接不上虚拟机</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                物理机ssh连接不上虚拟机
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/bug/" class="post-category">
-                                    bug
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/01/suctf-2019-checkin/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/46.jpg" class="responsive-img" alt="SUCTF_2019 CheckIn" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">SUCTF_2019 CheckIn</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                checkin
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web/">
-                            <span class="chip bg-color">web</span>
-                        </a>
-                        
-                        <a href="/tags/wp/">
-                            <span class="chip bg-color">wp</span>
-                        </a>
-                        
-                        <a href="/tags/BUUCTF/">
-                            <span class="chip bg-color">BUUCTF</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/04/01/zjctf-2019-nizhuansiwei/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ZJCTF_2019 NiZhuanSiWei" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">ZJCTF_2019 NiZhuanSiWei</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                伪协议
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web/">
-                            <span class="chip bg-color">web</span>
-                        </a>
-                        
-                        <a href="/tags/wp/">
-                            <span class="chip bg-color">wp</span>
-                        </a>
-                        
-                        <a href="/tags/BUUCTF/">
-                            <span class="chip bg-color">BUUCTF</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/03/31/ha-xi-peng-zhuang/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="哈希碰撞表" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">哈希碰撞表</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                MD5
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/tip/" class="post-category">
-                                    tip
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tip/">
-                            <span class="chip bg-color">tip</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/03/31/bjdctf2020-easy-md5/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="BJDCTF2020 Easy MD5" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">BJDCTF2020 Easy MD5</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                MD5
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web/">
-                            <span class="chip bg-color">web</span>
-                        </a>
-                        
-                        <a href="/tags/wp/">
-                            <span class="chip bg-color">wp</span>
-                        </a>
-                        
-                        <a href="/tags/BUUCTF/">
-                            <span class="chip bg-color">BUUCTF</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4">
-                <div class="card" data-aos="zoom-in">
-                    <a href="/2021/03/31/ji-ke-da-tiao-zhan-2019-buyflag/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="极客大挑战 2019BuyFlag" loading="lazy" decoding="async">
-                            
-                            <span class="card-title">极客大挑战 2019BuyFlag</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                BuyFlag
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/CTF/" class="post-category">
-                                    CTF
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/web/">
-                            <span class="chip bg-color">web</span>
-                        </a>
-                        
-                        <a href="/tags/wp/">
-                            <span class="chip bg-color">wp</span>
-                        </a>
-                        
-                        <a href="/tags/BUUCTF/">
-                            <span class="chip bg-color">BUUCTF</span>
+                        <a href="/tags/%E4%B8%AA%E4%BA%BA/">
+                            <span class="chip bg-color">个人</span>
                         </a>
                         
                     </div>
@@ -1385,7 +1012,7 @@ mjx-container[display="true"] + br {
 
 <nav class="container dream-pagination" aria-label="文章分页">
     <div class="dream-pagination-panel">
-        <p class="dream-page-status">第 <strong>20</strong> 页，共 24 页</p>
+        <p class="dream-page-status">第 <strong>20</strong> 页，共 20 页</p>
         <div class="dream-pager-row">
             
             <a class="dream-page-step" href="/page/19/#articles" rel="prev" aria-label="上一页">
@@ -1401,6 +1028,11 @@ mjx-container[display="true"] + br {
                 
                 <span class="dream-page-gap" aria-hidden="true">…</span>
                 
+                <a class="dream-page-number" href="/page/18/#articles" aria-label="第 18 页">18</a>
+                
+                
+                
+                
                 <a class="dream-page-number" href="/page/19/#articles" aria-label="第 19 页">19</a>
                 
                 
@@ -1409,21 +1041,9 @@ mjx-container[display="true"] + br {
                 <span class="dream-page-number current" aria-current="page" aria-label="第 20 页，当前页">20</span>
                 
                 
-                
-                
-                <a class="dream-page-number" href="/page/21/#articles" aria-label="第 21 页">21</a>
-                
-                
-                <span class="dream-page-gap" aria-hidden="true">…</span>
-                
-                <a class="dream-page-number" href="/page/24/#articles" aria-label="第 24 页">24</a>
-                
-                
             </div>
             
-            <a class="dream-page-step" href="/page/21/#articles" rel="next" aria-label="下一页">
-                <span>下一页</span><i class="fas fa-angle-right" aria-hidden="true"></i>
-            </a>
+            <span class="dream-page-step" aria-disabled="true"><span>下一页</span><i class="fas fa-angle-right" aria-hidden="true"></i></span>
             
         </div>
     </div>
