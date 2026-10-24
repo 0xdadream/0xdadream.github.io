@@ -99,6 +99,11 @@ body.dream-ui {
     --dream-muted: #66738a;
     --dream-line: #e5e9f1;
     --dream-shadow: 0 8px 32px rgba(30, 42, 66, .045);
+    --dream-card-radius: 16px;
+    --dream-tag-surface: #f2eff9;
+    --dream-tag-ink: #625282;
+    --dream-hover-shadow: 0 16px 40px rgba(30, 25, 60, .12);
+    --dream-nav-surface: rgba(20, 24, 40, .92);
     --dream-reading-font: 18px;
     background-color: var(--dream-ground);
     color: var(--dream-ink);
@@ -115,22 +120,38 @@ body.dream-ui.DarkMode {
     --dream-muted: #a5b0c2;
     --dream-line: #333e50;
     --dream-shadow: 0 8px 32px rgba(0, 0, 0, .1);
+    --dream-tag-surface: #2c2b40;
+    --dream-tag-ink: #c6b9ed;
+    --dream-hover-shadow: 0 18px 40px rgba(0, 0, 0, .24);
 }
 body.dream-ui :is(a, button, summary):focus-visible { outline: 3px solid var(--dream-accent); outline-offset: 4px; }
 body.dream-ui .dream-skip-link { position: fixed; top: -80px; left: 18px; z-index: 2000; padding: 12px 18px; border-radius: 8px; background: var(--dream-surface); color: var(--dream-ink); }
 body.dream-ui .dream-skip-link:focus { top: 12px; }
 body.dream-ui .dream-home-content { padding: 8px 0 30px; background: transparent; }
 body.dream-ui :is(#indexCard, #recommend-sections, #articles) { scroll-margin-top: 80px; }
-body.dream-ui .card { border: 1px solid var(--dream-line); border-radius: 18px; background: var(--dream-surface); box-shadow: var(--dream-shadow); color: var(--dream-ink); }
+body.dream-ui .card { border: 1px solid var(--dream-line); border-radius: var(--dream-card-radius); background: var(--dream-surface); box-shadow: var(--dream-shadow); color: var(--dream-ink); }
 body.dream-ui .card :is(h1, h2, h3, h4, h5, h6, p, li, td, th) { color: var(--dream-ink); }
 body.dream-ui .archive-container, body.dream-ui header .side-nav { filter: none; background-color: var(--dream-surface); }
 body.dream-ui.DarkMode .card, body.dream-ui.DarkMode #searchModal { background: var(--dream-surface); }
 body.dream-ui.DarkMode .archive-container, body.dream-ui.DarkMode header .side-nav { filter: none; background-color: var(--dream-surface); }
 body.dream-ui header .side-nav .menu-list a, body.dream-ui header .side-nav .menu-list a i { color: var(--dream-ink) !important; }
 body.dream-ui #headNav i { color: inherit; }
+body.dream-ui #headNav { isolation: isolate; border-bottom: 1px solid transparent; box-sizing: border-box; opacity: 1; transition: background-color .25s, box-shadow .25s, border-color .25s; }
+body.dream-ui #headNav::before { content: ""; position: absolute; inset: 0; z-index: -1; clip-path: inset(0); pointer-events: none; }
+body.dream-ui #navContainer { width: calc(100% - clamp(32px, 5vw, 96px)); max-width: 1600px; }
+body.dream-ui #headNav:not(.nav-transparent) { background-color: var(--dream-nav-surface); background-image: linear-gradient(110deg, rgba(115, 92, 181, .18), rgba(47, 62, 87, .08)); border-bottom-color: rgba(207, 197, 248, .16); box-shadow: 0 4px 18px rgba(9, 12, 24, .12); color: #f1effa; }
+body.dream-ui #headNav:not(.nav-transparent)::before { -webkit-backdrop-filter: blur(16px) saturate(130%); backdrop-filter: blur(16px) saturate(130%); }
+body.dream-ui #headNav.nav-transparent { background-image: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+body.dream-ui #headNav .brand-logo .logo-span { font-weight: 650; letter-spacing: .025em; }
+body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { height: 40px; margin: 12px 0; padding: 0 12px; border-radius: 9px; color: inherit; font-size: 14px; line-height: 40px; transition: background-color .2s; }
+body.dream-ui #headNav .nav-menu > li > a:hover, body.dream-ui #headNav .theme-toggle:hover { background-color: rgba(211, 198, 255, .13); }
+body.dream-ui #headNav .nav-menu > li > a[aria-current] { background-color: rgba(211, 198, 255, .1); }
+body.dream-ui #headNav .nav-menu > li > a i, body.dream-ui #headNav .theme-toggle i { height: auto; line-height: inherit; }
+body.dream-ui #headNav .github-corner svg { color: #d2c4f6; fill: #25283e; }
+body.dream-ui footer.page-footer { background-color: #22263d; background-image: linear-gradient(115deg, #20263b, #2c2541); border-top: 1px solid rgba(207, 197, 248, .16); opacity: 1; }
 body.dream-ui header .brand-logo .logo-img { display: inline-block; filter: none !important; }
 body.dream-ui #headNav .nav-menu a[aria-current] { position: relative; }
-body.dream-ui #headNav .nav-menu a[aria-current]::after { content: ""; position: absolute; height: 3px; border-radius: 2px; background: currentColor; bottom: 9px; left: 18px; right: 18px; opacity: .75; }
+body.dream-ui #headNav .nav-menu a[aria-current]::after { content: ""; position: absolute; height: 2px; border-radius: 2px; background: #c5b5ff; bottom: 3px; left: 12px; right: 12px; opacity: .95; }
 body.dream-ui header .side-nav .menu-list a[aria-current] { border-left: 3px solid var(--dream-accent); background: var(--dream-accent-soft); font-weight: 650; }
 body.dream-ui nav.dream-pagination { height: auto; max-width: 620px; margin-top: 24px; margin-bottom: 30px; background: transparent; box-shadow: none; color: var(--dream-ink); line-height: 1.5; }
 body.dream-ui .dream-pagination-panel { padding: 16px; border: 1px solid var(--dream-line); border-radius: 14px; background: var(--dream-panel); box-shadow: var(--dream-shadow); }
@@ -199,9 +220,9 @@ body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; max-wid
 body.dream-ui #articles.dream-articles { margin-bottom: 48px; }
 body.dream-ui #articles.dream-articles .article-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 1.7vw, 28px); height: auto !important; }
 body.dream-ui #articles.dream-articles .article { position: static; min-width: 0; width: auto; padding: 0; margin: 0; float: none; }
-body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: 12px; overflow: hidden; transition: box-shadow .25s, border-color .25s; }
-body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
-body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: 0 12px 32px rgba(43, 36, 75, .09); }
+body.dream-ui #articles.dream-articles .card { display: flex; flex-direction: column; height: 100%; margin: 0; border-radius: var(--dream-card-radius); overflow: hidden; transition: box-shadow .25s, border-color .25s; }
+body.dream-ui #articles.dream-articles .card:hover { border-color: var(--dream-accent); box-shadow: var(--dream-hover-shadow); }
+body.dream-ui #articles.dream-articles .card:focus-within { border-color: var(--dream-accent); box-shadow: var(--dream-hover-shadow); }
 body.dream-ui #articles.dream-articles .card-image { border-radius: 0; overflow: hidden; }
 body.dream-ui #articles.dream-articles .card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 15%, rgba(0, 0, 0, .18) 40%, rgba(0, 0, 0, .82) 100%); pointer-events: none; }
 body.dream-ui #articles.dream-articles .card-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; opacity: 1; border-radius: 0; transition: transform .4s; }
@@ -214,17 +235,22 @@ body.dream-ui .recommend .post-card { margin: 0; }
 body.dream-ui .recommend .post-card::before { background: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .62)); }
 body.dream-ui .recommend .post-card .post-title { color: #fff; }
 body.dream-ui #articles.dream-articles .card:hover .card-image img { transform: scale(1.025); }
-body.dream-ui #articles.dream-articles .card-content { flex: 1; padding: 18px; }
+body.dream-ui #articles.dream-articles .card-content { display: flex; flex-direction: column; flex: 1; padding: 20px 20px 12px; }
 body.dream-ui .dream-post-kicker { display: flex; justify-content: space-between; gap: 12px; color: var(--dream-muted); font-size: 12px; line-height: 1.5; }
 body.dream-ui #articles .dream-post-title { margin: 13px 0 12px; font-size: 21px; font-weight: 650; line-height: 1.55; letter-spacing: -.025em; overflow-wrap: anywhere; }
 body.dream-ui #articles .dream-post-title a { color: var(--dream-ink); font-weight: inherit; }
 body.dream-ui #articles .dream-post-title a:hover { color: var(--dream-accent); text-decoration: none; }
 body.dream-ui #articles.dream-articles .summary { height: auto; min-height: 0; max-height: none; margin-right: 0; padding: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; color: var(--dream-muted); font-size: 14px; line-height: 1.8; text-align: left; word-break: normal; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .summary::before, body.dream-ui #articles.dream-articles .summary::after { display: none; }
-body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: 18px; color: var(--dream-muted); font-size: 12px; }
+body.dream-ui #articles.dream-articles .summary { margin-bottom: 16px; flex-shrink: 0; }
+body.dream-ui #articles.dream-articles .publish-info { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 12px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--dream-line); color: var(--dream-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 body.dream-ui #articles.dream-articles .publish-author { float: none; overflow-wrap: anywhere; }
 body.dream-ui #articles.dream-articles .publish-author a { color: var(--dream-muted); }
-body.dream-ui #articles.dream-articles .card-action { padding: 0 18px 16px; border: 0; background: transparent; }
+body.dream-ui #articles.dream-articles .card-action { display: flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 20px 16px; border: 0; background: transparent; }
+body.dream-ui #articles.dream-articles .article-tags > a { display: flex; align-items: center; flex: 0 1 auto; min-width: 0; min-height: 32px; max-width: 100%; }
+body.dream-ui #articles.dream-articles .article-tags .chip { display: block; min-width: 0; height: 26px; margin: 0; padding: 0 9px; overflow: hidden; border: 1px solid var(--dream-line); border-radius: 7px; background-color: var(--dream-tag-surface); background-image: none; color: var(--dream-tag-ink); font-size: 11px; line-height: 24px; text-overflow: ellipsis; white-space: nowrap; opacity: 1; transition: border-color .2s, background-color .2s; }
+body.dream-ui #articles.dream-articles .article-tags a:hover .chip { border-color: var(--dream-accent); background-color: var(--dream-accent-soft); }
+body.dream-ui .dream-tag-overflow { flex: 0 0 auto; margin-left: auto; color: var(--dream-muted); font-size: 11px; line-height: 26px; cursor: help; }
 body.dream-ui #artDetail > .card { overflow: visible; }
 body.dream-ui #artDetail .article-info { padding: 28px 36px 12px; }
 body.dream-ui #artDetail .article-card-content { padding: 22px 36px 36px; }
@@ -232,7 +258,7 @@ body.dream-ui #artDetail .post-info, body.dream-ui #artDetail .post-info .info-b
 body.dream-ui #artDetail hr { border-color: var(--dream-line); }
 body.dream-ui #articleContent { max-width: 800px; margin: 0 auto; color: var(--dream-ink); font-size: var(--dream-reading-font); line-height: 1.95; overflow-wrap: break-word; }
 /* Native fragment focus must not frame the entire long article. Child controls keep their focus ring. */
-body.dream-ui #articleContent:focus { outline: none; }
+body.dream-ui #articleContent:focus, body.dream-ui #articles:focus { outline: none; }
 body.dream-ui #articleContent :is(p, li, td, th, dd, dt) { color: var(--dream-ink); font-size: inherit; line-height: inherit; }
 body.dream-ui #articleContent p { margin: 1em 0; }
 body.dream-ui #articleContent strong { filter: none; }
@@ -322,6 +348,7 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
     body.dream-ui .dream-reader[data-reader-ready] { top: 64px; }
 }
 @media (max-width: 600px) {
+    body.dream-ui #headNav .nav-menu > li > a, body.dream-ui #headNav .theme-toggle { margin-top: 8px; margin-bottom: 8px; }
     body.dream-ui .dream-topic-grid, body.dream-ui .dream-related-grid, body.dream-ui nav.dream-post-navigation { grid-template-columns: 1fr; }
     body.dream-ui .dream-topics-page #articles.dream-articles { width: 100%; }
     body.dream-ui .dream-topic-introduction .card-content, body.dream-ui a.dream-topic-card { padding: 22px; }
@@ -370,7 +397,8 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -482,8 +510,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-</head>
+</style></head>
 
 
 <body class="dream-ui">
@@ -893,14 +920,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tools/">
-                            <span class="chip bg-color">tools</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/tools/" title="tools"><span class="chip bg-color">tools</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -942,14 +970,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/tips/" title="tips"><span class="chip bg-color">tips</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -991,14 +1020,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/bug/">
-                            <span class="chip bg-color">bug</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/bug/" title="bug"><span class="chip bg-color">bug</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1040,14 +1070,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/tips/">
-                            <span class="chip bg-color">tips</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/tips/" title="tips"><span class="chip bg-color">tips</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1089,14 +1120,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/%E6%95%99%E7%A8%8B/" title="教程"><span class="chip bg-color">教程</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1138,14 +1170,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/java/" title="java"><span class="chip bg-color">java</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1187,14 +1220,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/windows/">
-                            <span class="chip bg-color">windows</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/windows/" title="windows"><span class="chip bg-color">windows</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1236,14 +1270,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E7%8E%AF%E5%A2%83/">
-                            <span class="chip bg-color">环境</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/%E7%8E%AF%E5%A2%83/" title="环境"><span class="chip bg-color">环境</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1285,14 +1320,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%91%BD%E4%BB%A4/">
-                            <span class="chip bg-color">命令</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/%E5%91%BD%E4%BB%A4/" title="命令"><span class="chip bg-color">命令</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1334,14 +1370,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/git/">
-                            <span class="chip bg-color">git</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/git/" title="git"><span class="chip bg-color">git</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1383,14 +1420,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%91%BD%E4%BB%A4/">
-                            <span class="chip bg-color">命令</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/%E5%91%BD%E4%BB%A4/" title="命令"><span class="chip bg-color">命令</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
@@ -1432,14 +1470,15 @@ mjx-container[display="true"] + br {
                     </div>
 
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">
-                            <span class="chip bg-color">教程</span>
-                        </a>
-                        
-                    </div>
-                    
+
+<div class="card-action article-tags">
+    
+    <a href="/tags/%E6%95%99%E7%A8%8B/" title="教程"><span class="chip bg-color">教程</span></a>
+    
+    
+</div>
+
+
                 </div>
             </div>
               <!-- 隐藏某个文章 -->
