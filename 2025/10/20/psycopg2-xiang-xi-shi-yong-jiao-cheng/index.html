@@ -299,12 +299,14 @@ body.dream-ui .dream-reader-panel .dream-focus-toggle { width: 100%; margin-top:
 body.dream-ui .dream-focus-toggle[aria-pressed="true"] { border-color: var(--dream-accent); background: var(--dream-accent-soft); color: var(--dream-accent); }
 body.dream-ui .dream-reader-panel p { margin: 12px 0 0; color: var(--dream-muted); font-size: 11px; }
 body.dream-ui .dream-mobile-toc { display: none; color: var(--dream-ink); font-size: 12px; }
+body.dream-ui .dream-reader-panel, body.dream-ui .dream-mobile-toc nav { box-sizing: border-box; }
 body.dream-ui .dream-mobile-toc summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; cursor: pointer; list-style: none; }
 body.dream-ui .dream-mobile-toc nav { height: auto; max-height: 300px; background: var(--dream-surface); box-shadow: none; color: inherit; line-height: 1.8; overflow-y: auto; overscroll-behavior: contain; }
 body.dream-ui .dream-reader[data-reader-ready] .dream-mobile-toc nav { position: absolute; top: calc(100% + 6px); left: 0; width: 100%; max-height: min(360px, calc(100vh - 180px)); max-height: min(360px, calc(100dvh - 180px)); padding: 14px 18px; border: 1px solid var(--dream-line); border-radius: 10px; box-shadow: 0 12px 36px rgba(20, 26, 50, .16); }
 body.dream-ui .dream-mobile-toc ol { margin: 0; padding-left: 16px; list-style: none; }
 body.dream-ui .dream-mobile-toc nav > ol { padding-left: 0; }
 body.dream-ui .dream-mobile-toc a { display: block; padding: 6px 0; color: var(--dream-muted); font-size: 13px; overflow-wrap: anywhere; }
+body.dream-ui .dream-mobile-toc a[aria-current="location"] { padding-left: 10px; border-left: 3px solid var(--dream-accent); border-radius: 4px; background: var(--dream-accent-soft); color: var(--dream-accent); font-weight: 650; }
 body.dream-ui.dream-focus #toc-aside, body.dream-ui.dream-focus #floating-toc-btn { display: none !important; }
 body.dream-ui.dream-focus #main-content { width: 100%; }
 body.dream-ui.dream-focus .post-container { max-width: 1000px; }
@@ -377,7 +379,8 @@ body.dream-ui #searchModal .search-result-list li { border-color: var(--dream-li
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -489,8 +492,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="逐梦" type="application/atom+xml">
-</head>
+</style></head>
 
 
 <body class="dream-ui">
@@ -1543,14 +1545,14 @@ except (Exception, psycopg2.DatabaseError) as error:
     }
 
     #vcomments ol,
-    ul {
+    #vcomments ul {
         display: block;
         padding-left: 2em;
         word-spacing: 0.05rem;
     }
 
     #vcomments ul li,
-    ol li {
+    #vcomments ol li {
         display: list-item;
         line-height: 1.8rem;
         font-size: 1rem;
@@ -1564,16 +1566,16 @@ except (Exception, psycopg2.DatabaseError) as error:
         list-style-type: circle;
     }
 
-    #vcomments table, th, td {
+    #vcomments table, #vcomments th, #vcomments td {
         padding: 12px 13px;
         border: 1px solid #dfe2e5;
     }
 
-    #vcomments table, th, td {
+    #vcomments table, #vcomments th, #vcomments td {
         border: 0;
     }
 
-    table tr:nth-child(2n), thead {
+    #vcomments table tr:nth-child(2n), #vcomments thead {
         background-color: #fafafa;
     }
 
@@ -1672,11 +1674,11 @@ except (Exception, psycopg2.DatabaseError) as error:
     }
 
     #vcomments code[class*="language-"],
-    pre[class*="language-"] {
+    #vcomments pre[class*="language-"] {
         color: #e8eaf6;
     }
 
-    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    #vcomments [type="checkbox"]:not(:checked), #vcomments [type="checkbox"]:checked {
         position: inherit;
         margin-left: -1.3rem;
         margin-right: 0.4rem;
@@ -1687,7 +1689,7 @@ except (Exception, psycopg2.DatabaseError) as error:
     }
 
     #vcomments b,
-    strong {
+    #vcomments strong {
         font-weight: bold;
     }
 
@@ -1708,12 +1710,12 @@ except (Exception, psycopg2.DatabaseError) as error:
         padding: .2em;
     }
 
-    #vcomments table, th, td {
+    #vcomments table, #vcomments th, #vcomments td {
         padding: 12px 13px;
         border: 1px solid #dfe2e5;
     }
 
-    table tr:nth-child(2n), thead {
+    #vcomments table tr:nth-child(2n), #vcomments thead {
         background-color: #fafafa;
     }
 
@@ -1726,7 +1728,7 @@ except (Exception, psycopg2.DatabaseError) as error:
         min-width: 80px;
     }
 
-    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    #vcomments [type="checkbox"]:not(:checked), #vcomments [type="checkbox"]:checked {
         position: inherit;
         margin-left: -1.3rem;
         margin-right: 0.4rem;

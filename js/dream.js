@@ -69,6 +69,46 @@
     var larger = reader.querySelector('[data-reader-action="larger"]');
     var focus = reader.querySelector('[data-reader-action="focus"]');
     var panels = reader.querySelectorAll('details');
+    var mobileToc = reader.querySelector('.dream-mobile-toc');
+    var currentSection = null;
+    var mobileSections = mobileToc ? Array.from(mobileToc.querySelectorAll('a[href]')).map(function (link) {
+        var heading;
+        try { heading = document.getElementById(decodeURIComponent(link.hash.slice(1))); } catch (error) { return null; }
+        return heading && article.contains(heading) ? { link: link, heading: heading } : null;
+    }).filter(Boolean) : [];
+    function readingLine() {
+        return Math.max(96, Math.min(150, reader.getBoundingClientRect().bottom + 16));
+    }
+    function updateCurrentSection() {
+        var low = 0, high = mobileSections.length - 1, match = null;
+        // Match the 150px native heading offset, including an exact anchor jump.
+        var line = 150;
+        while (low <= high) {
+            var middle = Math.floor((low + high) / 2);
+            if (mobileSections[middle].heading.getBoundingClientRect().top <= line + 2) {
+                match = mobileSections[middle];
+                low = middle + 1;
+            } else {
+                high = middle - 1;
+            }
+        }
+        if (match !== currentSection) {
+            if (currentSection) currentSection.link.removeAttribute('aria-current');
+            currentSection = match;
+            if (currentSection) currentSection.link.setAttribute('aria-current', 'location');
+        }
+    }
+    function revealCurrentSection() {
+        if (!mobileToc || !mobileToc.open) return;
+        updateCurrentSection();
+        if (!currentSection) return;
+        var nav = mobileToc.querySelector('nav');
+        var viewport = nav.getBoundingClientRect();
+        var target = currentSection.link.getBoundingClientRect();
+        // Scroll only the directory panel, preserving the article's reading position.
+        if (target.top < viewport.top) nav.scrollTop += target.top - viewport.top;
+        else if (target.bottom > viewport.bottom) nav.scrollTop += target.bottom - viewport.bottom;
+    }
     function applySettings() {
         body.style.setProperty('--dream-reading-font', settings.font + 'px');
         body.classList.toggle('dream-focus', settings.focus);
@@ -96,6 +136,7 @@
     panels.forEach(function (panel) {
         panel.addEventListener('toggle', function () {
             if (panel.open) panels.forEach(function (other) { if (other !== panel) other.open = false; });
+            if (panel === mobileToc && panel.open) requestAnimationFrame(revealCurrentSection);
         });
     });
     document.addEventListener('pointerdown', function (event) {
@@ -112,7 +153,6 @@
             }
         });
     });
-    var mobileToc = reader.querySelector('.dream-mobile-toc');
     if (mobileToc) mobileToc.addEventListener('click', function (event) {
         var link = event.target.closest('a[href]');
         if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -133,11 +173,12 @@
     function updateProgress() {
         scheduled = false;
         var rect = article.getBoundingClientRect();
-        var readingLine = Math.max(96, Math.min(150, reader.getBoundingClientRect().bottom + 16));
-        var distance = Math.max(1, rect.height - window.innerHeight + readingLine);
-        var progress = rect.bottom <= window.innerHeight ? 100 : Math.max(0, Math.min(100, Math.round((readingLine - rect.top) / distance * 100)));
+        var line = readingLine();
+        var distance = Math.max(1, rect.height - window.innerHeight + line);
+        var progress = rect.bottom <= window.innerHeight ? 100 : Math.max(0, Math.min(100, Math.round((line - rect.top) / distance * 100)));
         progressOutput.textContent = progress + '%';
         reader.style.setProperty('--dream-reading-progress', String(progress / 100));
+        updateCurrentSection();
     }
     function scheduleProgress() {
         if (!scheduled) { scheduled = true; requestAnimationFrame(updateProgress); }
