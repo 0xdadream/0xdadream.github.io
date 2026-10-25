@@ -1335,7 +1335,7 @@ query<span class="token operator">=</span><span class="token number">1</span><sp
 
     
         <style>
-    .dream-comments-card { margin: 1.5rem auto; }
+    .dream-comments-card { margin: 1.5rem auto; scroll-margin-top: 84px; }
     .dream-comments-card .dream-comments-heading { padding: 24px 24px 0; font-size: 1.2rem; font-weight: 700; }
     .dream-comments-card .card-content { padding: 20px 24px 24px; }
     .dream-comments-card #tcomments { min-width: 0; min-height: 240px; }
@@ -1349,9 +1349,80 @@ query<span class="token operator">=</span><span class="token number">1</span><sp
     .dream-comments-card #tcomments pre { max-width: 100%; overflow-x: auto; }
     .dream-comments-card #tcomments .tk-content { overflow-wrap: anywhere; }
     .DarkMode .dream-comments-card #twikoo-load-status { color: #b3bac9; }
+    /* Keep the upstream admin UI inside the same light/dark palette as Dream. */
+    .dream-comments-card #tcomments .twikoo:has(.tk-admin.__show) { min-height: 620px; }
+    .dream-comments-card #tcomments .tk-admin {
+        color: var(--dream-ink, #243047);
+        background: var(--dream-ground, #f4f5f9);
+        border: 1px solid var(--dream-line, #e5e9f1);
+        border-radius: 12px;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        scrollbar-color: var(--dream-muted, #66738a) transparent;
+        overscroll-behavior: contain;
+    }
+    .dream-comments-card #tcomments .tk-admin::-webkit-scrollbar-thumb { background: var(--dream-muted, #66738a); border-radius: 6px; }
+    .dream-comments-card #tcomments .tk-admin :is(.tk-panel, .tk-login-title, .tk-password, .tk-login-msg, .tk-panel-logout, .tk-admin-close, .tk-input-group__prepend, .tk-input-group__append, .tk-content, .tk-admin-config-title) { color: var(--dream-ink, #243047); }
+    .dream-comments-card #tcomments .tk-admin :is(h1, h2, h3, h4, h5, h6, p, li, td, th, label) { color: inherit; }
+    .dream-comments-card #tcomments .tk-admin :is(.tk-time, .tk-admin-config-desc, .tk-admin-config-email-test-desc) { color: var(--dream-muted, #66738a); }
+    .dream-comments-card #tcomments .tk-admin a { color: var(--dream-accent, #6554c0); }
+    .dream-comments-card #tcomments .tk-panel { padding: 32px 24px 24px; }
+    .dream-comments-card #tcomments .tk-panel-title { gap: 16px; font-size: 1.3rem; font-weight: 700; }
+    .dream-comments-card #tcomments .tk-panel-logout { flex-shrink: 0; font-size: 14px; }
+    .dream-comments-card #tcomments .tk-panel .tk-tabs { gap: 20px; margin-top: 18px; border-color: var(--dream-line, #e5e9f1); overflow-x: auto; overflow-y: hidden; }
+    .dream-comments-card #tcomments .tk-panel .tk-tab { flex-shrink: 0; margin-right: 0; margin-bottom: 0; padding: 4px 0; color: var(--dream-muted, #66738a); }
+    .dream-comments-card #tcomments .tk-panel .tk-tab.__active { color: var(--dream-accent, #6554c0); border-color: var(--dream-accent, #6554c0); font-weight: 700; }
+    .dream-comments-card #tcomments .tk-admin > .tk-admin-close { top: 8px; left: calc(100% - 40px); width: 32px; height: 32px; padding: 0; border-radius: 8px; font-size: 18px; }
+    .dream-comments-card #tcomments .tk-admin-comment-filter { justify-content: stretch; gap: 10px; }
+    .dream-comments-card #tcomments .tk-admin-comment-filter-keyword { min-width: 0; }
+    .dream-comments-card #tcomments .tk-admin select {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        position: static;
+        pointer-events: auto;
+        width: auto;
+        min-width: 110px;
+        height: 40px;
+        margin: 0;
+        padding: 0 10px;
+        border: 1px solid var(--dream-line, #e5e9f1);
+        border-radius: 8px;
+        background: var(--dream-surface, #fff);
+        color: var(--dream-ink, #243047);
+        appearance: auto;
+    }
+    .dream-comments-card #tcomments .tk-admin .tk-admin-config-select { width: 100%; }
+    .dream-comments-card #tcomments .tk-admin select option { background: var(--dream-surface, #fff); color: var(--dream-ink, #243047); }
+    .dream-comments-card #tcomments .tk-admin :is(input.tk-input__inner, textarea.tk-input__inner) { box-sizing: border-box; margin: 0; border: 1px solid var(--dream-line, #e5e9f1); border-radius: 8px; background: var(--dream-surface, #fff); color: var(--dream-ink, #243047); box-shadow: none; font-size: 14px; }
+    .dream-comments-card #tcomments .tk-admin input.tk-input__inner { height: 40px; padding: 0 12px; }
+    .dream-comments-card #tcomments .tk-admin textarea.tk-input__inner { padding: 10px 12px; }
+    .dream-comments-card #tcomments .tk-admin :is(input, textarea)::placeholder { color: var(--dream-muted, #66738a); opacity: 1; }
+    .dream-comments-card #tcomments .tk-admin :is(input, textarea, select):focus { border-color: var(--dream-accent, #6554c0); outline: 2px solid var(--dream-accent, #6554c0); outline-offset: 2px; }
+    .dream-comments-card #tcomments .tk-admin input:invalid { border-color: #c43e4f; }
+    .dream-comments-card #tcomments .tk-admin .tk-button--primary { min-height: 40px; padding: 0 16px; border: 1px solid #6554c0; border-radius: 8px; background: #6554c0; color: #fff; font-size: 14px; }
+    .dream-comments-card #tcomments .tk-admin .tk-button--primary.is-disabled { opacity: .55; }
+    .dream-comments-card #tcomments .tk-admin .tk-button--text { color: var(--dream-accent, #6554c0); }
+    .dream-comments-card #tcomments .tk-admin-comment-item { box-sizing: border-box; margin: 0 0 12px; padding: 16px; border: 1px solid var(--dream-line, #e5e9f1); border-radius: 10px; background: var(--dream-surface, #fff); }
+    .dream-comments-card #tcomments .tk-admin-comment-meta { gap: 4px; overflow-wrap: anywhere; }
+    .dream-comments-card #tcomments .tk-admin .tk-content p { margin: 10px 0; }
+    .dream-comments-card #tcomments .tk-admin-actions { flex-wrap: wrap; gap: 4px; }
+    .dream-comments-card #tcomments .tk-admin-actions .tk-button { min-height: 32px; padding: 6px 4px; font-size: 13px; }
+    .dream-comments-card #tcomments .tk-login-title { margin-top: 72px; }
     @media (max-width: 600px) {
         .dream-comments-card .dream-comments-heading { padding: 20px 18px 0; }
         .dream-comments-card .card-content { padding: 16px 18px 20px; }
+        .dream-comments-card #tcomments .twikoo:has(.tk-admin.__show) { min-height: 600px; }
+        .dream-comments-card #tcomments .tk-panel { padding: 36px 14px 18px; }
+        .dream-comments-card #tcomments .tk-panel-title { align-items: center; font-size: 1.1rem; }
+        .dream-comments-card #tcomments .tk-panel .tk-tabs { gap: 16px; font-size: 13px; }
+        .dream-comments-card #tcomments .tk-admin-comment-filter { flex-wrap: wrap; }
+        .dream-comments-card #tcomments .tk-admin-comment-filter-keyword { flex-basis: 100%; }
+        .dream-comments-card #tcomments .tk-admin-comment-filter-type { flex: 1; }
+        .dream-comments-card #tcomments .tk-admin-comment-item { padding: 12px; }
+        .dream-comments-card #tcomments .tk-password { width: 100%; }
+        .dream-comments-card #tcomments .tk-admin-config-item { grid-template-columns: 1fr; gap: 6px; }
+        .dream-comments-card #tcomments .tk-admin-config-title { text-align: left; margin-right: 0; white-space: normal; overflow-wrap: anywhere; }
     }
 </style>
 <div id="vcomments" class="card dream-comments-card" data-aos="fade-up">
