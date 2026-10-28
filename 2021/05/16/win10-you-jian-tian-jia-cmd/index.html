@@ -348,6 +348,9 @@ body.dream-ui .dream-reader button:hover:not(:disabled) { border-color: var(--dr
 body.dream-ui .dream-reader-panel .dream-focus-toggle { width: 100%; margin-top: 14px; }
 body.dream-ui .dream-focus-toggle[aria-pressed="true"] { border-color: var(--dream-accent); background: var(--dream-accent-soft); color: var(--dream-accent); }
 body.dream-ui .dream-reader-panel p { margin: 12px 0 0; color: var(--dream-muted); font-size: 11px; }
+body.dream-ui .dream-reading-resume { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 800px; margin: 0 auto 20px; color: var(--dream-muted); font-size: 13px; }
+body.dream-ui .dream-reading-resume[hidden] { display: none; }
+body.dream-ui .dream-reading-resume button { min-height: 40px; padding: 0 12px; border: 1px solid var(--dream-line); border-radius: 8px; background: var(--dream-surface); color: var(--dream-accent); font: inherit; cursor: pointer; }
 body.dream-ui .dream-mobile-toc { display: none; color: var(--dream-ink); font-size: 12px; }
 body.dream-ui .dream-reader-panel, body.dream-ui .dream-mobile-toc nav { box-sizing: border-box; }
 body.dream-ui .dream-mobile-toc summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; cursor: pointer; list-style: none; }
@@ -398,7 +401,9 @@ body.dream-ui .dream-search-explore a { display: flex; flex-direction: column; g
 body.dream-ui .dream-search-explore a:hover { border-color: var(--dream-accent); }
 body.dream-ui .dream-search-explore a > span { color: var(--dream-muted); font-size: 12px; }
 body.dream-ui #searchResult { margin: 0; }
+body.dream-ui #searchModal .dream-search-more { display: block; min-height: 44px; width: 100%; margin-top: 18px; border: 1px solid var(--dream-line); color: var(--dream-accent); }
 body.dream-ui #searchResult .search-result-list { margin: 0; }
+body.dream-ui #searchModal .search-result-list li { min-width: 0; overflow-wrap: anywhere; }
 body.dream-ui #searchModal .search-result-title { font-size: 18px; }
 body.dream-ui #searchModal .search-result { margin: 10px 0 0; font-size: 14px; line-height: 1.8; }
 body.dream-ui #searchModal .search-keyword { margin: 0; padding: 0 2px; background: var(--dream-accent-soft); color: var(--dream-accent); }
@@ -1035,6 +1040,11 @@ mjx-container[display="true"] + br {
         </div>
     </details>
 </div>
+<div class="dream-reading-resume" data-reading-position hidden>
+    <span></span><button type="button" data-reading-resume>继续阅读</button><button type="button" data-reading-forget>清除记录</button>
+</div>
+<script defer src="/js/dream-reading-position.js?v=06c6f15fefcd3bac"></script>
+
 
             
             <div id="articleContent" tabindex="-1">
@@ -1759,6 +1769,7 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
             <div id="searchExplore" class="dream-search-explore"><p>也可以从一个专题开始</p><nav aria-label="搜索中的专题入口"><a href="/topics/linux/"><strong>Linux 与服务器</strong><span>36 篇 <span aria-hidden="true">↗</span></span></a><a href="/topics/network/"><strong>网络与代理</strong><span>13 篇 <span aria-hidden="true">↗</span></span></a><a href="/topics/tools/"><strong>开发与工具</strong><span>73 篇 <span aria-hidden="true">↗</span></span></a><a href="/topics/security/"><strong>CTF 与安全</strong><span>35 篇 <span aria-hidden="true">↗</span></span></a></nav></div>
             
             <div id="searchResult"></div>
+            <button type="button" id="searchMore" class="dream-search-more" hidden>显示更多结果</button>
         </div>
     </div>
 </div>
@@ -1782,6 +1793,7 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
         var status = document.getElementById('searchStatus');
         var clear = document.getElementById('searchClear');
         var retry = document.getElementById('searchRetry');
+        var more = document.getElementById('searchMore');
         var explore = document.getElementById('searchExplore');
         var viewport = document.querySelector('#searchModal .dream-search-scroll');
         var returnFocus = null;
@@ -1793,6 +1805,9 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
         var loadingPromise = null;
         var searchTimer = null;
         var resultLimit = 80;
+        var matches = [];
+        var displayed = 0;
+        var activeQuery = '';
 
         function getText(parent, selector) {
             var node = parent.querySelector(selector);
@@ -1832,13 +1847,23 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
             retry.hidden = true;
             input.setAttribute('aria-busy', 'true');
 
-            loadingPromise = fetch(searchPath, { credentials: 'same-origin' })
+            var controller = new AbortController();
+            var timeout;
+            var request = fetch(searchPath, { credentials: 'same-origin', signal: controller.signal })
                 .then(function (response) {
                     if (!response.ok) {
                         throw new Error('HTTP ' + response.status);
                     }
                     return response.text();
-                })
+                });
+            // Bound both connection and body download; an expired request cannot replace a retry.
+            var deadline = new Promise(function (_, reject) {
+                timeout = window.setTimeout(function () {
+                    reject(new Error('搜索索引请求超时'));
+                    controller.abort();
+                }, 12000);
+            });
+            loadingPromise = Promise.race([request, deadline])
                 .then(function (xmlText) {
                     var xml = new DOMParser().parseFromString(xmlText, 'application/xml');
                     if (xml.querySelector('parsererror')) {
@@ -1865,6 +1890,9 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
                     retry.hidden = false;
                     console.error('[search]', error);
                     throw error;
+                })
+                .finally(function () {
+                    window.clearTimeout(timeout);
                 });
 
             return loadingPromise;
@@ -1892,9 +1920,13 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
 
         function renderResults() {
             var query = input.value.trim().toLowerCase();
+            activeQuery = query;
             clear.hidden = !input.value.length;
             if (explore) explore.hidden = !!query;
             result.replaceChildren();
+            matches = [];
+            displayed = 0;
+            more.hidden = true;
             viewport.scrollTop = 0;
             status.textContent = '';
             if (!query || !entries) {
@@ -1906,16 +1938,29 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
                 status.textContent = '请输入有效的搜索关键词。';
                 return;
             }
+            matches = DreamSearch.rank(entries, query);
+            if (matches.length === 0) {
+                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
+                if (explore) explore.hidden = false;
+                return;
+            }
             var list = document.createElement('ul');
             list.className = 'search-result-list';
-            var matches = DreamSearch.rank(entries, query);
-            matches.slice(0, resultLimit).forEach(function (match) {
+            result.appendChild(list);
+            appendResults(keywords);
+        }
+
+        function appendResults(keywords) {
+            var list = result.querySelector('ul');
+            var firstNewLink;
+            matches.slice(displayed, displayed + resultLimit).forEach(function (match) {
                 var entry = match.entry;
 
                 var item = document.createElement('li');
                 var link = document.createElement('a');
                 link.href = entry.url;
                 link.className = 'search-result-title';
+                if (!firstNewLink) firstNewLink = link;
                 appendHighlightedText(link, entry.title, keywords);
                 item.appendChild(link);
                 var meta = document.createElement('p');
@@ -1932,15 +1977,20 @@ Set-Location <span class="token parameter variable">-literalPath</span> <span cl
 
                 list.appendChild(item);
             });
-
-            if (matches.length === 0) {
-                status.textContent = '没有找到匹配的内容，可以试试更短的关键词或标签。';
-                if (explore) explore.hidden = false;
-                return;
-            }
-            result.appendChild(list);
-            status.textContent = '找到 ' + matches.length + ' 篇文章' + (matches.length > resultLimit ? '，显示前 ' + resultLimit + ' 篇' : '') + '，优先显示标题匹配。';
+            displayed = Math.min(matches.length, displayed + resultLimit);
+            more.hidden = displayed === matches.length;
+            more.textContent = '显示更多结果（还有 ' + (matches.length - displayed) + ' 篇）';
+            status.textContent = '找到 ' + matches.length + ' 篇文章' + (displayed < matches.length ? '，已显示 ' + displayed + ' 篇' : '') + '，优先显示标题匹配。';
+            return firstNewLink;
         }
+
+        more.addEventListener('click', function () {
+            // A query being edited must not append the previous query's results.
+            window.clearTimeout(searchTimer);
+            if (input.value.trim().toLowerCase() !== activeQuery) { renderResults(); return; }
+            var link = appendResults(DreamSearch.keywords(input.value));
+            if (link) link.focus();
+        });
 
         input.addEventListener('focus', function () {
             loadSearchData().catch(function () {});
